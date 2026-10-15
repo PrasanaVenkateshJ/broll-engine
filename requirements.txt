@@ -1,0 +1,11 @@
+# Core web/API + job system (installed locally AND in Docker).
+# Versions are pinned so every machine (my PC, CI, Docker) gets the same code.
+fastapi==0.143.2
+uvicorn==0.54.0
+pydantic==2.14.1
+pydantic-settings==2.16.0
+python-multipart==0.0.32
+sqlalchemy==2.1.4
+httpx==0.28.1
+boto3==1.43.114
+pytest==9.1.1

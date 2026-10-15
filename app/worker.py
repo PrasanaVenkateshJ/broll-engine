@@ -1,0 +1,97 @@
+"""The worker: a separate process that does the slow work.
+
+Loop: claim a queued job -> run the pipeline -> save the result -> send the callback.
+WORKER_CONCURRENCY threads run this loop side by side, so N jobs can run at once.
+
+Run it with:  python -m app.worker
+"""
+import logging
+import os
+import signal
+import socket
+import threading
+
+from app.config import get_settings
+from app.db import init_db, new_session
+from app.errors import AppError, ErrorCode
+from app.jobs import claim_next_job, finish_job, send_callback
+from app.logging_setup import correlation_id_var, job_id_var, setup_logging
+from app.models import Job
+from app.pipeline.fake import run_fake_pipeline
+
+log = logging.getLogger("app.worker")
+
+
+def process_job(job_id: str) -> None:
+    """Run one claimed job from start to end. Never raises: every failure is saved on the job."""
+    token = job_id_var.set(job_id)  # every log line from here on carries this job_id
+    cid_token = correlation_id_var.set(None)
+    try:
+        with new_session() as db:
+            job = db.get(Job, job_id)
+            request, input_type = job.request, job.input_type
+            correlation_id_var.set(job.correlation_id)  # ...and the id of the request that created it
+        log.info("job started")
+        try:
+            files = run_fake_pipeline(job_id, request, input_type)
+            finish_job(job_id, files=files)
+        except AppError as e:
+            finish_job(job_id, error=e)
+        except Exception:
+            log.exception("job crashed")
+            finish_job(job_id, error=AppError(ErrorCode.INTERNAL_ERROR, "Unexpected error while processing the job",
+                                              500, retryable=True))
+        try:
+            send_callback(job_id)
+        except Exception:
+            log.exception("callback crashed")
+    finally:
+        job_id_var.reset(token)
+        correlation_id_var.reset(cid_token)
+
+
+def worker_loop(worker_id: str, stop: threading.Event) -> None:
+    poll = get_settings().WORKER_POLL_SECONDS
+    while not stop.is_set():
+        try:
+            job_id = claim_next_job(worker_id)
+        except Exception:
+            log.exception("claim failed; retrying")
+            job_id = None
+        if job_id:
+            process_job(job_id)
+        else:
+            stop.wait(poll)  # nothing to do: wait a moment (wakes early on shutdown)
+
+
+def start_workers(stop: threading.Event) -> list[threading.Thread]:
+    """Start WORKER_CONCURRENCY threads. Used by main() and by the integration tests."""
+    n = max(1, get_settings().WORKER_CONCURRENCY)
+    base = f"{socket.gethostname()}-{os.getpid()}"
+    threads = []
+    for i in range(n):
+        t = threading.Thread(target=worker_loop, args=(f"{base}-{i}", stop), name=f"worker-{i}", daemon=True)
+        t.start()
+        threads.append(t)
+    return threads
+
+
+def main() -> None:
+    s = get_settings()
+    setup_logging(s.LOG_LEVEL)
+    init_db()
+    stop = threading.Event()
+    # Ctrl+C or "docker stop" -> finish the current job, then exit.
+    signal.signal(signal.SIGINT, lambda *_: stop.set())
+    signal.signal(signal.SIGTERM, lambda *_: stop.set())
+    threads = start_workers(stop)
+    log.info("worker started", extra={"fields": {"concurrency": len(threads), "storage": s.STORAGE_BACKEND}})
+    while not stop.is_set():
+        stop.wait(1)
+    for t in threads:
+        t.join()
+    log.info("worker stopped")
+
+
+if __name__ == "__main__":
+    main()

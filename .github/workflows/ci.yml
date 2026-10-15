@@ -1,0 +1,45 @@
+# On every push: build with docker compose, start the whole stack, run ALL tests in the
+# api container (against real MinIO), then run a smoke test through api + worker + MinIO.
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  docker-compose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use the example settings (no real API keys needed)
+        run: cp .env.example .env
+
+      - name: Build images
+        run: docker compose build
+
+      - name: Start the stack (minio, minio-init, api, worker)
+        run: docker compose up -d
+
+      - name: Wait until /ready says OK
+        run: |
+          for i in $(seq 1 60); do
+            if curl -fsS http://localhost:8000/ready; then echo; exit 0; fi
+            sleep 2
+          done
+          echo "API never became ready"; exit 1
+
+      - name: Run all tests inside the api container
+        run: docker compose run --rm api pytest -v
+
+      - name: Smoke test the running stack (real worker + MinIO)
+        run: docker compose exec -T api python scripts/smoke_test.py
+
+      - name: Show logs if something failed
+        if: failure()
+        run: docker compose logs --no-color
+
+      - name: Stop the stack
+        if: always()
+        run: docker compose down -v

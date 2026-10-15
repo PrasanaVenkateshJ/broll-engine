@@ -1,0 +1,6 @@
+# Heavy AI models (used from Phase 3 on). Installed in Docker after torch CPU.
+# torch itself is installed in the Dockerfile from https://download.pytorch.org/whl/cpu
+torch==2.14.1
+faster-whisper==1.2.1
+kokoro==0.9.4
+open_clip_torch==3.3.0

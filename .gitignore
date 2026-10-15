@@ -1,8 +1,17 @@
+# Secrets and personal files - never commit
 .env
 *.xlsx
+
+# Local runtime data (SQLite DB, local storage, temp files)
 data/
+
+# Python
 __pycache__/
 *.pyc
 .venv/
 .pytest_cache/
+
+# Large generated test outputs (keep small json/srt/csv, drop big media)
 testpack/outputs/**/*.mp4
+testpack/outputs/**/*.wav
+testpack/outputs/**/*.mp3
