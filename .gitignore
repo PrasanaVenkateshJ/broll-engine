@@ -1,0 +1,8 @@
+.env
+*.xlsx
+data/
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+testpack/outputs/**/*.mp4
