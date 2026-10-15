@@ -17,7 +17,7 @@ from app.errors import AppError, ErrorCode
 from app.jobs import claim_next_job, finish_job, send_callback
 from app.logging_setup import correlation_id_var, job_id_var, setup_logging
 from app.models import Job
-from app.pipeline.fake import run_fake_pipeline
+from app.pipeline.runner import run_pipeline
 
 log = logging.getLogger("app.worker")
 
@@ -29,11 +29,11 @@ def process_job(job_id: str) -> None:
     try:
         with new_session() as db:
             job = db.get(Job, job_id)
-            request, input_type = job.request, job.input_type
+            request, input_type, stored_input = job.request, job.input_type, job.input_key
             correlation_id_var.set(job.correlation_id)  # ...and the id of the request that created it
         log.info("job started")
         try:
-            files = run_fake_pipeline(job_id, request, input_type)
+            files = run_pipeline(job_id, request, input_type, stored_input)
             finish_job(job_id, files=files)
         except AppError as e:
             finish_job(job_id, error=e)

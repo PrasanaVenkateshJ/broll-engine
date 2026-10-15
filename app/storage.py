@@ -24,6 +24,7 @@ class Storage:
 
     def put_file(self, key: str, local_path: str | Path) -> None: ...
     def put_bytes(self, key: str, data: bytes) -> None: ...
+    def get_file(self, key: str, local_path: str | Path) -> None: ...  # copy a stored file to disk
     def open_stream(self, key: str) -> tuple[Iterator[bytes], int]: ...  # (chunks, size in bytes)
     def exists(self, key: str) -> bool: ...
     def delete(self, key: str) -> None: ...
@@ -52,6 +53,12 @@ class LocalStorage(Storage):
         dest = self._path(key)
         dest.parent.mkdir(parents=True, exist_ok=True)
         dest.write_bytes(data)
+
+    def get_file(self, key, local_path):
+        path = self._path(key)
+        if not path.is_file():
+            raise StorageNotFound(key)
+        shutil.copyfile(path, local_path)
 
     def open_stream(self, key):
         path = self._path(key)
@@ -103,6 +110,16 @@ class S3Storage(Storage):
 
     def put_bytes(self, key, data):
         self.client.put_object(Bucket=self.bucket, Key=key, Body=data)
+
+    def get_file(self, key, local_path):
+        from botocore.exceptions import ClientError
+
+        try:
+            self.client.download_file(self.bucket, key, str(local_path))
+        except ClientError as e:
+            if e.response.get("Error", {}).get("Code") in ("NoSuchKey", "404"):
+                raise StorageNotFound(key) from e
+            raise
 
     def open_stream(self, key):
         from botocore.exceptions import ClientError

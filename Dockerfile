@@ -11,9 +11,10 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     TORCH_HOME=/models/torch \
     XDG_CACHE_HOME=/models/cache
 
-# ffmpeg = all audio/video work; espeak-ng = pronunciation helper used by Kokoro TTS.
+# ffmpeg = all audio/video work; espeak-ng = pronunciation helper used by Kokoro TTS;
+# fonts-dejavu-core = a font for the captions burned into the videos.
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends ffmpeg espeak-ng \
+    && apt-get install -y --no-install-recommends ffmpeg espeak-ng fonts-dejavu-core \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app

@@ -7,6 +7,7 @@ from app.jobs import claim_next_job, send_callback
 from app.models import Job
 from app.security import verify_hmac
 from tests.conftest import AUTH, OTHER_AUTH
+from tests.media_helpers import tone_bytes
 from tests.unit.test_errors import assert_error_format
 
 URL = "/api/v1/broll/jobs"
@@ -59,7 +60,7 @@ def test_invalid_json_body(client):
 
 
 def test_upload_rules(client):
-    ok = client.post(URL, files={"audio": ("v.m4a", b"abc", "audio/mp4")}, headers=AUTH)
+    ok = client.post(URL, files={"audio": ("v.m4a", tone_bytes(".m4a"), "audio/mp4")}, headers=AUTH)
     assert ok.status_code == 202
 
     bad_type = client.post(URL, files={"audio": ("v.txt", b"abc", "text/plain")}, headers=AUTH)

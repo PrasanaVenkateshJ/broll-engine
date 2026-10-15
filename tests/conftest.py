@@ -46,8 +46,21 @@ def test_env(tmp_path, monkeypatch):
         "CALLBACK_TIMEOUT_SECONDS": "2",
         "WORKER_CONCURRENCY": "2",
         "WORKER_POLL_SECONDS": "0.05",
-        "FAKE_STAGE_SECONDS": "0.05",
         "MAX_UPLOAD_MB": "5",
+        # Pipeline: mock adapters only (no models, no keys), fastest video encoding.
+        # Set here so a real .env on the PC (e.g. TTS_PROVIDER=kokoro) never leaks into tests.
+        "TTS_PROVIDER": "mock",
+        "TRANSCRIBE_PROVIDER": "mock",
+        "VIDEO_PRESET": "ultrafast",
+        "KEEP_WORK_FILES": "false",
+        "MAX_AUDIO_SECONDS": "600",
+        "MAX_DOWNLOAD_MB": "5",
+        "DOWNLOAD_TIMEOUT_SECONDS": "5",
+        "MIN_SCENE_SECONDS": "2.0",
+        "MAX_SCENE_SECONDS": "8.0",
+        "PAUSE_SECONDS": "0.35",
+        "CAPTION_MAX_CHARS_PER_LINE": "42",
+        "CAPTION_MAX_LINES": "2",
     }
     for key, value in env.items():
         monkeypatch.setenv(key, value)

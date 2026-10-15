@@ -26,6 +26,8 @@ from app.errors import AppError, ErrorCode, error_body, register_error_handlers,
 from app.jobs import body_hash, create_job, find_existing_job, job_to_dict, new_job_id
 from app.logging_setup import correlation_id_var, setup_logging
 from app.models import Job, JobStatus
+from app.pipeline.intake import check_audio_file, check_scene_texts, check_script
+from app.pipeline.tts import check_voice
 from app.schemas import JobCreate, JobOptions
 from app.security import check_file_link, require_client
 from app.storage import StorageNotFound, get_storage, input_key, output_key
@@ -163,7 +165,24 @@ async def _read_multipart(request: Request) -> tuple[dict, Path, str, str]:
         raise _validation_error(e) from None
 
     tmp, sha = await _save_upload(upload, max_bytes)
+    try:
+        # Look INSIDE the file now (ffprobe), so a wrong / broken / too long file gets a 4xx
+        # straight away instead of a job that fails later.
+        await run_in_threadpool(check_audio_file, tmp)
+    except BaseException:
+        tmp.unlink(missing_ok=True)
+        raise
     return options.model_dump(mode="json"), tmp, sha, ext
+
+
+def _precheck_json_job(job_req: JobCreate) -> None:
+    """Errors we can find without doing slow work -> answer 4xx now, before queuing."""
+    if job_req.script is not None:
+        check_script(job_req.script)
+    if job_req.scenes is not None:
+        check_scene_texts([sc.model_dump() for sc in job_req.scenes])
+    if job_req.script is not None or job_req.scenes is not None:
+        check_voice(job_req.voice)  # the voice only matters when we make the narration
 
 
 def _create_job_sync(db: Session, client_id: str, idem_key: str | None, req_hash: str, input_type: str,
@@ -208,6 +227,7 @@ async def create_broll_job(
             job_req = JobCreate.model_validate_json(await request.body() or b"{}")
         except ValidationError as e:
             raise _validation_error(e) from None
+        _precheck_json_job(job_req)
         payload = job_req.model_dump(mode="json")
         input_type = job_req.input_type
         req_hash = body_hash(payload)

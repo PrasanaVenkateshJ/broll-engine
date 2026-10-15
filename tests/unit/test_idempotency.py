@@ -7,6 +7,7 @@ from app.db import new_session
 from app.jobs import body_hash
 from app.models import Job
 from tests.conftest import AUTH, OTHER_AUTH
+from tests.media_helpers import tone_bytes
 from tests.unit.test_errors import assert_error_format
 
 URL = "/api/v1/broll/jobs"
@@ -65,11 +66,11 @@ def test_keys_are_per_client(client):
 def test_upload_idempotency_uses_file_content(client):
     headers = {**AUTH, "Idempotency-Key": "upload-1"}
     opts = {"options": json.dumps({"aspect_ratios": ["16:9"]})}
-    a = client.post(URL, files={"audio": ("voice.mp3", b"fake-mp3-bytes", "audio/mpeg")}, data=opts, headers=headers)
-    b = client.post(URL, files={"audio": ("voice.mp3", b"fake-mp3-bytes", "audio/mpeg")}, data=opts, headers=headers)
+    a = client.post(URL, files={"audio": ("voice.mp3", tone_bytes(".mp3", 2.0), "audio/mpeg")}, data=opts, headers=headers)
+    b = client.post(URL, files={"audio": ("voice.mp3", tone_bytes(".mp3", 2.0), "audio/mpeg")}, data=opts, headers=headers)
     assert a.status_code == b.status_code == 202
     assert a.json()["job_id"] == b.json()["job_id"]
 
-    c = client.post(URL, files={"audio": ("voice.mp3", b"OTHER-bytes", "audio/mpeg")}, data=opts, headers=headers)
+    c = client.post(URL, files={"audio": ("voice.mp3", tone_bytes(".mp3", 3.0), "audio/mpeg")}, data=opts, headers=headers)
     assert c.status_code == 409
     assert count_jobs() == 1

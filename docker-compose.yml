@@ -32,7 +32,22 @@ x-app: &app
     CALLBACK_TIMEOUT_SECONDS: ${CALLBACK_TIMEOUT_SECONDS:-10.0}
     WORKER_CONCURRENCY: ${WORKER_CONCURRENCY:-2}
     WORKER_POLL_SECONDS: ${WORKER_POLL_SECONDS:-1.0}
-    FAKE_STAGE_SECONDS: ${FAKE_STAGE_SECONDS:-0.5}
+    # Pipeline. Defaults = mock adapters, so Docker/CI need no models or keys.
+    # Put TTS_PROVIDER=kokoro / TRANSCRIBE_PROVIDER=whisper in .env for real voices + transcripts.
+    KEEP_WORK_FILES: ${KEEP_WORK_FILES:-false}
+    MAX_AUDIO_SECONDS: ${MAX_AUDIO_SECONDS:-600}
+    MAX_DOWNLOAD_MB: ${MAX_DOWNLOAD_MB:-100}
+    DOWNLOAD_TIMEOUT_SECONDS: ${DOWNLOAD_TIMEOUT_SECONDS:-60}
+    TTS_PROVIDER: ${TTS_PROVIDER:-mock}
+    KOKORO_SPEED: ${KOKORO_SPEED:-1.0}
+    TRANSCRIBE_PROVIDER: ${TRANSCRIBE_PROVIDER:-mock}
+    WHISPER_MODEL: ${WHISPER_MODEL:-small}
+    WHISPER_COMPUTE_TYPE: ${WHISPER_COMPUTE_TYPE:-int8}
+    WHISPER_LANGUAGE: ${WHISPER_LANGUAGE:-}
+    MIN_SCENE_SECONDS: ${MIN_SCENE_SECONDS:-2.0}
+    MAX_SCENE_SECONDS: ${MAX_SCENE_SECONDS:-8.0}
+    VIDEO_PRESET: ${VIDEO_PRESET:-veryfast}
+    VIDEO_CRF: ${VIDEO_CRF:-23}
   volumes:
     - app-data:/app/data       # SQLite file + temp work files, shared by api and worker
     - model-cache:/models      # downloaded AI models, kept between runs
