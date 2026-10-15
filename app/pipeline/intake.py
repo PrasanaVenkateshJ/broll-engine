@@ -2,20 +2,18 @@
 
 - Script / scene texts: must contain real text            -> EMPTY_SCRIPT
 - audio_url: download with a size and a time limit         -> DOWNLOAD_FAILED, FILE_TOO_LARGE
+  (private / local addresses are refused: SSRF guard)       -> INVALID_INPUT
 - Any audio: ffprobe looks INSIDE the file (the extension can lie)
                                                            -> UNSUPPORTED_FILE_TYPE, CORRUPTED_MEDIA
 - Longer than MAX_AUDIO_SECONDS                            -> FILE_TOO_LONG
 - Then convert to WAV, 48 kHz, mono, so every later step gets the same kind of file.
 """
-import time
 from dataclasses import dataclass
 from pathlib import Path
 
-import httpx
-
 from app.config import get_settings
 from app.errors import AppError, ErrorCode
-from app.pipeline import media
+from app.pipeline import media, net
 
 MB = 1024 * 1024
 
@@ -61,41 +59,31 @@ def check_scene_texts(scenes: list[dict]) -> None:
 # ---------- Download ----------
 
 def download_audio(url: str, dest: Path) -> Path:
-    """Download url to dest, stopping at MAX_DOWNLOAD_MB and DOWNLOAD_TIMEOUT_SECONDS."""
+    """Download url to dest, stopping at MAX_DOWNLOAD_MB and DOWNLOAD_TIMEOUT_SECONDS.
+
+    The SSRF guard in net.fetch_to_file refuses private / local addresses (INVALID_INPUT).
+    """
     s = get_settings()
     max_bytes = s.MAX_DOWNLOAD_MB * MB
-    deadline = time.monotonic() + s.DOWNLOAD_TIMEOUT_SECONDS
-    too_large = AppError(ErrorCode.FILE_TOO_LARGE, f"The audio file is larger than {s.MAX_DOWNLOAD_MB} MB", 413,
-                         details={"max_bytes": max_bytes})
-    size = 0
     try:
-        with httpx.stream("GET", url, timeout=s.DOWNLOAD_TIMEOUT_SECONDS, follow_redirects=True) as resp:
-            if resp.status_code != 200:
-                raise AppError(ErrorCode.DOWNLOAD_FAILED, f"Download failed with HTTP {resp.status_code}", 422,
-                               retryable=resp.status_code >= 500, details={"http_status": resp.status_code})
-            declared = resp.headers.get("content-length", "")
-            if declared.isdigit() and int(declared) > max_bytes:
-                raise too_large  # the server told us the size: stop before downloading anything
-            with dest.open("wb") as out:
-                for chunk in resp.iter_bytes(MB):
-                    size += len(chunk)
-                    if size > max_bytes:
-                        raise too_large  # no (or wrong) size header: stop as soon as we pass the limit
-                    if time.monotonic() > deadline:
-                        raise AppError(ErrorCode.DOWNLOAD_FAILED,
-                                       f"Download took longer than {s.DOWNLOAD_TIMEOUT_SECONDS:g} s", 422, retryable=True)
-                    out.write(chunk)
-    except httpx.HTTPError as e:
-        dest.unlink(missing_ok=True)
-        raise AppError(ErrorCode.DOWNLOAD_FAILED, f"Could not download the audio ({type(e).__name__})", 422,
+        return net.fetch_to_file(url, dest, max_bytes, s.DOWNLOAD_TIMEOUT_SECONDS)
+    except net.DownloadError as e:
+        if e.reason == "blocked":
+            raise AppError(ErrorCode.INVALID_INPUT, f"audio_url is not allowed: {e}", 422,
+                           details={"reason": "private_or_local_address"}) from None
+        if e.reason == "too_large":
+            raise AppError(ErrorCode.FILE_TOO_LARGE, f"The audio file is larger than {s.MAX_DOWNLOAD_MB} MB", 413,
+                           details={"max_bytes": max_bytes}) from None
+        if e.reason == "http_status":
+            raise AppError(ErrorCode.DOWNLOAD_FAILED, f"Download failed with HTTP {e.status}", 422,
+                           retryable=e.retryable, details={"http_status": e.status}) from None
+        if e.reason == "timeout":
+            raise AppError(ErrorCode.DOWNLOAD_FAILED,
+                           f"Download took longer than {s.DOWNLOAD_TIMEOUT_SECONDS:g} s", 422, retryable=True) from None
+        if e.reason == "empty":
+            raise AppError(ErrorCode.DOWNLOAD_FAILED, "The downloaded file is empty", 422) from None
+        raise AppError(ErrorCode.DOWNLOAD_FAILED, f"Could not download the audio ({e})", 422,
                        retryable=True) from None
-    except AppError:
-        dest.unlink(missing_ok=True)
-        raise
-    if size == 0:
-        dest.unlink(missing_ok=True)
-        raise AppError(ErrorCode.DOWNLOAD_FAILED, "The downloaded file is empty", 422)
-    return dest
 
 
 # ---------- Real file type ----------

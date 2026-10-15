@@ -61,9 +61,30 @@ def test_env(tmp_path, monkeypatch):
         "PAUSE_SECONDS": "0.35",
         "CAPTION_MAX_CHARS_PER_LINE": "42",
         "CAPTION_MAX_LINES": "2",
+        # Phases 5-7: mock understanding, mock footage + generated cards, mock scorer, no keys.
+        "UNDERSTAND_PROVIDER": "mock",
+        "GROQ_API_KEY": "",
+        "PIXABAY_API_KEY": "",
+        "PEXELS_API_KEY": "",
+        "PROVIDER_ORDER": "mock,generated",
+        "PROVIDERS_DISABLED": "",
+        "PROVIDERS_OVERRIDE_FILE": str(tmp_path / "providers_override.json"),
+        "RANK_SCORER": "mock",
+        "STOCK_MIN_SCORE": "0.22",
+        "GENERATED_FOR_STATISTICS": "true",
+        "QA_RETRIES": "1",
+        "SEED": "1234",
+        # Tests use small local web servers (127.0.0.1); the SSRF test switches this back off.
+        "ALLOW_PRIVATE_URLS": "true",
     }
     for key, value in env.items():
         monkeypatch.setenv(key, value)
+    # Mock footage provider back to normal (tests switch on "down" / "corrupted" behaviour).
+    from app.pipeline.providers.mock import MockProvider
+
+    monkeypatch.setattr(MockProvider, "fail", False)
+    monkeypatch.setattr(MockProvider, "corrupt_ids", set())
+    monkeypatch.setattr(MockProvider, "clip_seconds", 6.0)
     _reset_singletons()
     init_db()
     yield

@@ -46,7 +46,8 @@ app/
     scenes.py        split words into scenes on sentence/phrase boundaries
     understand.py    adapters: groq | rules | mock -> visual queries + flags
     safety.py        named people, brands, sensitive topics, avoid-list rules
-    providers/       footage adapters: pexels | pixabay | generated | mock
+    providers/       footage adapters: pixabay_video | pixabay_image_motion | wikimedia |
+                     generated | mock (+ pexels, skipped while PEXELS_API_KEY is empty)
     rank.py          scoring + selection rule + no-repeat
     render.py        normalise, crop per ratio, colour, captions, concat, mux
     qa.py            black / frozen frames, duration drift checks
@@ -87,7 +88,7 @@ Generic HTTP: NOT_FOUND (unknown URL/file), METHOD_NOT_ALLOWED, NOT_READY (/read
 - Cut only at sentence ends, then commas/phrase pauses. Target 2.5-7 s per scene;
   merge anything < MIN_SCENE_SECONDS (default 2.0), split > MAX_SCENE_SECONDS (default 8.0).
 - Each scene gets: a visual query that means the SENSE of the line (e.g. "cloud computing"
-  -> "data center server racks"), flags: abstract, number, named_person, brand, sensitive.
+  -> "data center server racks"), flags: abstract, statistic, named_person, brand, sensitive.
 - Safety: never generate faces; for named people/brands use generic related footage and
   add a warning; sensitive topics -> calm, respectful footage, no graphic content;
   honour the `avoid` list as negative filters.
@@ -95,7 +96,8 @@ Generic HTTP: NOT_FOUND (unknown URL/file), METHOD_NOT_ALLOWED, NOT_READY (/read
   use the best stock clip if its CLIP score >= STOCK_MIN_SCORE (default 0.22) and it is
   not already used; otherwise use the next provider; if nothing passes, use the
   `generated` source (FFmpeg motion card, e.g. animated "40%" for statistics), flagged
-  generated=true, ai_generated=false.
+  generated=true, ai_generated=false. Lines with a number/percentage go straight to an
+  animated number card (GENERATED_FOR_STATISTICS=true).
 - No clip id is used twice in one video.
 - A provider error or timeout never fails the job: log a warning, try the next provider.
 - Corrupted downloads (ffprobe fails) -> try the next candidate.
@@ -115,7 +117,19 @@ Generic HTTP: NOT_FOUND (unknown URL/file), METHOD_NOT_ALLOWED, NOT_READY (/read
 - Only MIT / Apache / BSD / similar permissive code and models in the default path.
   No CC BY-NC or research-only models/media. Avoid AGPL (MinIO is allowed only as the
   compose storage service). Record every dependency in SOURCES.md.
-- Footage only from Pexels / Pixabay (commercial use allowed, no watermark) or generated.
+- Footage sources (PROVIDER_ORDER, default order):
+  a) pixabay_video - Pixabay Videos API (PIXABAY_API_KEY). Pixabay Content License:
+     commercial use allowed, no attribution required, no watermark on API downloads.
+  b) pixabay_image_motion - Pixabay Images API (same key), still photo turned into a clip
+     with a slow Ken Burns zoom/pan in FFmpeg.
+  c) wikimedia - Wikimedia Commons API (no key; User-Agent MUST contain a contact email/URL).
+     ONLY CC0, Public Domain, CC BY (any version). Reject CC BY-SA, NC, ND, GFDL-only, unknown.
+     Record author + licence URL as attribution.
+  d) generated - FFmpeg motion card (number/keyword on a moving gradient, no faces, no logos);
+     generated=true, ai_generated=false. Used for statistics and as the last fallback.
+  e) mock - local test clips for tests/CI.
+  Pexels has paused new API keys: do NOT depend on it. The pexels adapter stays but is
+  skipped when PEXELS_API_KEY is empty.
 - API keys only in `.env` (git-ignored). Never print keys in logs. Never commit `.env`,
   the filled Submission Form, or personal details.
 

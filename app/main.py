@@ -29,7 +29,7 @@ from app.models import Job, JobStatus
 from app.pipeline.intake import check_audio_file, check_scene_texts, check_script
 from app.pipeline.tts import check_voice
 from app.schemas import JobCreate, JobOptions
-from app.security import check_file_link, require_client
+from app.security import BlockedURL, check_file_link, check_public_url, require_client
 from app.storage import StorageNotFound, get_storage, input_key, output_key
 
 log = logging.getLogger("app.main")
@@ -183,6 +183,12 @@ def _precheck_json_job(job_req: JobCreate) -> None:
         check_scene_texts([sc.model_dump() for sc in job_req.scenes])
     if job_req.script is not None or job_req.scenes is not None:
         check_voice(job_req.voice)  # the voice only matters when we make the narration
+    if job_req.audio_url is not None:
+        try:  # SSRF guard: never fetch private / local addresses for a user
+            check_public_url(str(job_req.audio_url))
+        except BlockedURL as e:
+            raise AppError(ErrorCode.INVALID_INPUT, f"audio_url is not allowed: {e}", 422,
+                           details={"reason": "private_or_local_address"}) from None
 
 
 def _create_job_sync(db: Session, client_id: str, idem_key: str | None, req_hash: str, input_type: str,
@@ -227,7 +233,7 @@ async def create_broll_job(
             job_req = JobCreate.model_validate_json(await request.body() or b"{}")
         except ValidationError as e:
             raise _validation_error(e) from None
-        _precheck_json_job(job_req)
+        await run_in_threadpool(_precheck_json_job, job_req)  # may look up a host name
         payload = job_req.model_dump(mode="json")
         input_type = job_req.input_type
         req_hash = body_hash(payload)

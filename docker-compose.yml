@@ -48,6 +48,21 @@ x-app: &app
     MAX_SCENE_SECONDS: ${MAX_SCENE_SECONDS:-8.0}
     VIDEO_PRESET: ${VIDEO_PRESET:-veryfast}
     VIDEO_CRF: ${VIDEO_CRF:-23}
+    # Understanding + footage + ranking. Defaults = mock (no keys, no network) for Docker/CI.
+    # For real footage put the real values in .env (see .env.example).
+    UNDERSTAND_PROVIDER: ${UNDERSTAND_PROVIDER:-mock}
+    GROQ_API_KEY: ${GROQ_API_KEY:-}
+    LLM_MODEL: ${LLM_MODEL:-openai/gpt-oss-120b}
+    PROVIDER_ORDER: ${PROVIDER_ORDER:-mock,generated}
+    PROVIDERS_DISABLED: ${PROVIDERS_DISABLED:-}
+    PROVIDERS_OVERRIDE_FILE: /app/data/providers_override.json
+    PIXABAY_API_KEY: ${PIXABAY_API_KEY:-}
+    PEXELS_API_KEY: ${PEXELS_API_KEY:-}
+    WIKIMEDIA_USER_AGENT: ${WIKIMEDIA_USER_AGENT:-broll-engine/0.3 (set WIKIMEDIA_USER_AGENT to include your email or project URL)}
+    RANK_SCORER: ${RANK_SCORER:-mock}
+    STOCK_MIN_SCORE: ${STOCK_MIN_SCORE:-0.22}
+    SEED: ${SEED:-1234}
+    ALLOW_PRIVATE_URLS: "false"
   volumes:
     - app-data:/app/data       # SQLite file + temp work files, shared by api and worker
     - model-cache:/models      # downloaded AI models, kept between runs

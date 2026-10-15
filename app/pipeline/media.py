@@ -60,3 +60,27 @@ def duration_of(path: str | Path) -> float:
         return float(info.get("format", {}).get("duration") or 0.0)
     except ValueError:
         return 0.0
+
+
+def ffmpeg_bytes(*args: str) -> bytes:
+    """ffmpeg that writes raw data to stdout (e.g. small grey frames); returns those bytes."""
+    s = get_settings()
+    cmd = [s.FFMPEG_BIN, "-hide_banner", "-nostdin", "-loglevel", "error", *args]
+    try:
+        result = subprocess.run(cmd, capture_output=True, timeout=s.FFMPEG_TIMEOUT_SECONDS, stdin=subprocess.DEVNULL)
+    except subprocess.TimeoutExpired as e:
+        raise MediaError("ffmpeg timed out") from e
+    except FileNotFoundError as e:
+        raise MediaError(f"{cmd[0]} is not installed or not on PATH") from e
+    if result.returncode != 0:
+        raise MediaError(f"ffmpeg failed (exit {result.returncode})", result.stderr.decode(errors="replace")[-2000:])
+    return result.stdout
+
+
+def ffmpeg_version() -> str:
+    """First line of `ffmpeg -version`, e.g. "ffmpeg version 7.1.1-1 Copyright ..." (for the manifest)."""
+    try:
+        first = run([get_settings().FFMPEG_BIN, "-hide_banner", "-version"], timeout=30).stdout.splitlines()[0]
+    except (MediaError, IndexError):
+        return "unknown"
+    return first.split(" Copyright")[0].strip()

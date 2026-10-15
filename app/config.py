@@ -139,6 +139,83 @@ class Settings(BaseSettings):
     VIDEO_CRF: int = 23
     AUDIO_BITRATE: str = "192k"
 
+    # --- Reproducibility ---
+    # One seed for everything random-ish: LLM sampling, mock providers, card colours.
+    SEED: int = 1234
+
+    # --- Network safety (SSRF) ---
+    # false = refuse audio_url / footage URLs that point to private, loopback or link-local
+    # addresses (e.g. 127.0.0.1, 10.x, 169.254.169.254). Only tests set this to true.
+    ALLOW_PRIVATE_URLS: bool = False
+
+    # --- Scene understanding (meaning -> search queries + flags) ---
+    UNDERSTAND_PROVIDER: Literal["groq", "rules", "mock"] = "mock"
+    GROQ_API_KEY: str = ""
+    GROQ_BASE_URL: str = "https://api.groq.com/openai/v1"
+    # gpt-oss is Apache-2.0 licensed; any Groq chat model that supports JSON mode works.
+    LLM_MODEL: str = "openai/gpt-oss-120b"
+    LLM_TIMEOUT_SECONDS: float = 30.0
+    LLM_TEMPERATURE: float = 0.2
+    # Extra tries after the first failed LLM call.
+    LLM_RETRIES: int = 1
+
+    # --- Footage providers ---
+    # Tried in this order for every scene. Names: pixabay_video, pixabay_image_motion,
+    # wikimedia, pexels, generated, mock. A provider without its API key is skipped.
+    PROVIDER_ORDER: str = "pixabay_video,pixabay_image_motion,wikimedia,generated"
+    # Comma-separated providers to switch off (e.g. "pixabay_video").
+    PROVIDERS_DISABLED: str = ""
+    # JSON file re-read before every search, so a provider can be switched off DURING a job:
+    # {"disabled": ["pixabay_video"]}
+    PROVIDERS_OVERRIDE_FILE: str = "./data/providers_override.json"
+    PROVIDER_TIMEOUT_SECONDS: float = 15.0
+    # Results asked for per search query.
+    PROVIDER_RESULTS_PER_QUERY: int = 8
+    PIXABAY_API_KEY: str = ""
+    PIXABAY_VIDEO_API_URL: str = "https://pixabay.com/api/videos/"
+    PIXABAY_IMAGE_API_URL: str = "https://pixabay.com/api/"
+    PEXELS_API_KEY: str = ""
+    PEXELS_VIDEO_API_URL: str = "https://api.pexels.com/videos/search"
+    WIKIMEDIA_API_URL: str = "https://commons.wikimedia.org/w/api.php"
+    # Wikimedia requires a contact (email or URL) here, or it answers 403 (provider is then skipped).
+    WIKIMEDIA_USER_AGENT: str = "broll-engine/0.3 (set WIKIMEDIA_USER_AGENT to include your email or project URL)"
+    # Largest footage file we download, and how long one download may take.
+    MAX_CLIP_DOWNLOAD_MB: int = 80
+    CLIP_DOWNLOAD_TIMEOUT_SECONDS: float = 60.0
+
+    # --- Ranking ---
+    # "clip" = open_clip scores preview images against the scene meaning; "mock" = word overlap (tests).
+    RANK_SCORER: Literal["clip", "mock"] = "mock"
+    CLIP_MODEL: str = "ViT-B-32"
+    CLIP_PRETRAINED: str = "laion2b_s34b_b79k"
+    # Use a stock clip only if its CLIP score is at least this.
+    STOCK_MIN_SCORE: float = 0.22
+    # Small extra points (only used to order candidates, never to pass the threshold).
+    DURATION_BONUS: float = 0.02
+    ORIENTATION_BONUS: float = 0.02
+    # Lines with a number/percentage get an animated number card instead of stock footage.
+    GENERATED_FOR_STATISTICS: bool = True
+
+    # --- Clip fitting + look ---
+    # A clip shorter than its scene may be slowed down by up to this fraction, then it loops.
+    MAX_SLOWDOWN: float = 0.25
+    # Ken Burns (slow zoom) on still images: final zoom factor.
+    KEN_BURNS_ZOOM: float = 1.12
+    # Frames sampled per clip to find the most interesting region for cropping.
+    SALIENCY_SAMPLE_FRAMES: int = 5
+    # Brightness / colour normalisation targets (signalstats YAVG 0-255, SATAVG) and limits.
+    # Real Pixabay clips measured YAVG 102-107 and SATAVG 15-17 in the first real run.
+    TARGET_LUMA: float = 110.0
+    MAX_BRIGHTNESS_SHIFT: float = 0.12
+    TARGET_SATURATION: float = 18.0
+
+    # --- Quality checks after render ---
+    QA_BLACK_SECONDS: float = 0.5
+    QA_FREEZE_SECONDS: float = 2.0
+    QA_MAX_DRIFT_SECONDS: float = 0.1
+    # How many other clips we try for a scene whose segment fails QA.
+    QA_RETRIES: int = 1
+
     # Small helpers so other code does not split strings itself.
     @property
     def api_tokens(self) -> list[str]:
@@ -147,6 +224,14 @@ class Settings(BaseSettings):
     @property
     def allowed_audio_extensions(self) -> set[str]:
         return {e.strip().lower().lstrip(".") for e in self.ALLOWED_AUDIO_EXTENSIONS.split(",") if e.strip()}
+
+    @property
+    def provider_order(self) -> list[str]:
+        return [p.strip().lower() for p in self.PROVIDER_ORDER.split(",") if p.strip()]
+
+    @property
+    def providers_disabled(self) -> set[str]:
+        return {p.strip().lower() for p in self.PROVIDERS_DISABLED.split(",") if p.strip()}
 
     @property
     def tts_voices(self) -> dict[str, tuple[str, str]]:

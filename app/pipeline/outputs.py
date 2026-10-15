@@ -105,3 +105,97 @@ def write_srt(cues: list[Cue], path: Path) -> Path:
 def write_json(data: dict, path: Path) -> Path:
     path.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
     return path
+
+
+# ---------- timeline.json + manifest.json ----------
+
+def build_timeline(job_id: str, input_type: str, duration: float, language: str, scenes: list[Scene],
+                   meanings: list, plans: list, selections: list, segments: dict, videos: list[dict]) -> dict:
+    """One entry per scene: what was said, when, what we searched for, what we used, and why."""
+    out = []
+    for scene, meaning, plan, selection in zip(scenes, meanings, plans, selections):
+        clip = selection.to_dict()
+        out.append({
+            "index": scene.index, "text": scene.text, "start": scene.start, "end": scene.end,
+            "duration": scene.duration, "visual_hint": scene.visual_hint,
+            "query": clip["query"] or (plan.queries[0] if plan.queries else ""), "queries": plan.queries,
+            "flags": meaning.flags,
+            "provider": clip["provider"], "clip_id": clip["clip_id"], "page_url": clip["page_url"],
+            "licence": clip["licence"], "licence_url": clip["licence_url"], "attribution": clip["attribution"],
+            "commercial_use": clip["commercial_use"], "watermark": clip["watermark"],
+            "ai_generated": clip["ai_generated"], "generated": clip["generated"], "reason": clip["reason"],
+            "relevance_score": clip["relevance_score"],
+            "clip_details": {k: clip[k] for k in ("uid", "kind", "title", "source_url", "final_score", "width",
+                                                   "height", "duration")},
+            "understanding": {"source": meaning.source, "reason": meaning.reason, "number": meaning.number},
+            "safety": plan.to_dict(),
+            "segments": segments.get(scene.index, {}),
+            "words": [{"text": w.text, "start": w.start, "end": w.end} for w in scene.words],
+        })
+    return {"job_id": job_id, "input_type": input_type, "duration": round(duration, 3), "language": language,
+            "scenes": out, "videos": videos}
+
+
+def rights_summary(selections: list) -> dict:
+    """Licence / rights facts for the whole video."""
+    licences: dict[str, int] = {}
+    for sel in selections:
+        licences[sel.candidate.licence_name] = licences.get(sel.candidate.licence_name, 0) + 1
+    return {
+        "licences": licences,
+        "all_commercial_use": all(sel.candidate.commercial_use for sel in selections),
+        "any_watermark": any(sel.candidate.watermark for sel in selections),
+        "attribution_required": [
+            {"scene": sel.scene_index, "attribution": sel.candidate.attribution,
+             "licence": sel.candidate.licence_name, "licence_url": sel.candidate.licence_url}
+            for sel in selections if sel.candidate.licence_name.startswith("CC BY")],
+        "credits": [{"scene": sel.scene_index, "provider": sel.candidate.provider,
+                     "attribution": sel.candidate.attribution, "page_url": sel.candidate.page_url}
+                    for sel in selections if sel.candidate.attribution],
+    }
+
+
+MANIFEST_SETTINGS = (
+    "SEED", "MIN_SCENE_SECONDS", "MAX_SCENE_SECONDS", "PAUSE_SECONDS", "UNDERSTAND_PROVIDER", "LLM_MODEL",
+    "PROVIDER_ORDER", "PROVIDERS_DISABLED", "RANK_SCORER", "CLIP_MODEL", "CLIP_PRETRAINED", "STOCK_MIN_SCORE",
+    "DURATION_BONUS", "ORIENTATION_BONUS", "GENERATED_FOR_STATISTICS", "MAX_SLOWDOWN", "KEN_BURNS_ZOOM",
+    "TARGET_LUMA", "TARGET_SATURATION", "QA_BLACK_SECONDS", "QA_FREEZE_SECONDS", "QA_MAX_DRIFT_SECONDS",
+    "QA_RETRIES", "RENDER_FPS", "VIDEO_PRESET", "VIDEO_CRF", "AUDIO_SAMPLE_RATE", "AUDIO_BITRATE",
+    "CAPTION_MAX_CHARS_PER_LINE", "CAPTION_MAX_LINES")
+
+COST_METHOD = ("0 USD: every service used here is free - Groq free tier for the LLM (tokens counted in "
+               "llm_tokens), Pixabay and Wikimedia Commons APIs are free, and Kokoro, Whisper, open_clip and "
+               "FFmpeg run locally on the CPU. On paid plans: cost = llm_tokens x the LLM price per token + "
+               "compute time (timings_seconds) x the server price.")
+
+
+def build_manifest(*, job_id: str, created_at: str, app: dict, input_facts: dict, models: dict, providers: dict,
+                   speech_check: dict, timings: dict, warnings: list[str], selections: list, videos: list[dict],
+                   qa: dict) -> dict:
+    """Everything needed to understand (and repeat) how this job was made."""
+    s = get_settings()
+    llm_tokens = int((models.get("understand") or {}).get("tokens_used") or 0)
+    return {
+        "job_id": job_id,
+        "created_at": created_at,
+        "app": app,
+        "input": input_facts,
+        "models": models,
+        "providers": providers,
+        "settings": {k: getattr(s, k) for k in MANIFEST_SETTINGS},
+        "seed": s.SEED,
+        "speech_check": speech_check,
+        "timings_seconds": timings,
+        "timings_note": "seconds per stage, measured up to the moment this file was written (upload not included)",
+        "cost_estimate": {"total_usd": 0.0, "llm_tokens": llm_tokens, "method": COST_METHOD},
+        "warnings": warnings,
+        "rights": rights_summary(selections),
+        "ai_generated": {
+            "narration": "tts" in models,
+            "visuals": any(sel.candidate.ai_generated for sel in selections),
+            "generated_cards": sum(sel.candidate.generated for sel in selections),
+            "note": "generated cards are drawn by FFmpeg (gradient + text), not by an AI model",
+        },
+        "qa": qa,
+        "outputs": videos,
+    }

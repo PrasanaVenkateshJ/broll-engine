@@ -6,8 +6,11 @@ and was not changed.
 """
 import hashlib
 import hmac
+import ipaddress
+import socket
 import threading
 import time
+from urllib.parse import urlsplit
 
 from fastapi import Request
 
@@ -113,3 +116,43 @@ def require_client(request: Request) -> str:
                            details={"limit_per_minute": s.RATE_LIMIT_PER_MINUTE},
                            headers={"Retry-After": str(retry_after)})
     return client
+
+
+# ---------- SSRF guard ----------
+# SSRF = "server-side request forgery": a user gives us a URL like http://169.254.169.254/
+# (cloud secrets) or http://localhost:9000 (our own MinIO), and our server fetches it for
+# them. So before fetching any URL we did not choose ourselves, we look up its IP
+# addresses and refuse private / loopback / link-local ones.
+
+class BlockedURL(Exception):
+    """The URL is not allowed (bad scheme, or it points into a private network)."""
+
+
+def _is_public_ip(ip: ipaddress.IPv4Address | ipaddress.IPv6Address) -> bool:
+    if isinstance(ip, ipaddress.IPv6Address) and ip.ipv4_mapped:  # ::ffff:127.0.0.1 is really 127.0.0.1
+        ip = ip.ipv4_mapped
+    return not (ip.is_private or ip.is_loopback or ip.is_link_local or ip.is_multicast
+                or ip.is_reserved or ip.is_unspecified)
+
+
+def check_public_url(url: str) -> None:
+    """Raise BlockedURL unless url is http(s) and every address its host resolves to is public.
+
+    ALLOW_PRIVATE_URLS=true switches the address check off (tests use local servers).
+    Limitation: the host is looked up again when we connect, so a DNS server that changes
+    its answer in between ("DNS rebinding") is not stopped by this check alone.
+    """
+    parts = urlsplit(url)
+    if parts.scheme not in ("http", "https") or not parts.hostname:
+        raise BlockedURL("only http and https URLs are allowed")
+    if get_settings().ALLOW_PRIVATE_URLS:
+        return
+    try:
+        infos = socket.getaddrinfo(parts.hostname, parts.port or (443 if parts.scheme == "https" else 80),
+                                   type=socket.SOCK_STREAM)
+    except (socket.gaierror, UnicodeError) as e:
+        raise BlockedURL(f"host {parts.hostname} could not be resolved") from e
+    for info in infos:
+        ip = ipaddress.ip_address(info[4][0].split("%")[0])  # drop an IPv6 zone like "%eth0"
+        if not _is_public_ip(ip):
+            raise BlockedURL(f"host {parts.hostname} points to a private or local address")

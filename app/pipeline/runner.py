@@ -1,6 +1,7 @@
 """The whole pipeline for one job, stage by stage. The worker calls run_pipeline().
 
-intake -> (tts) -> transcribe -> scenes -> captions -> render (each ratio) -> upload
+intake -> (tts) -> transcribe -> scenes + captions -> understand + safety -> footage
+       -> render (segments + QA, then one video per ratio) -> upload
 
 Each stage updates the job's progress (0-100) and stage name, and its time is recorded
 for manifest.json. Everything happens in WORK_DIR/<job_id>, which is deleted at the end.
@@ -15,12 +16,17 @@ from typing import Any
 from app.config import get_settings
 from app.errors import AppError, ErrorCode
 from app.jobs import add_warning, set_progress
-from app.pipeline import intake, media
-from app.pipeline.outputs import build_cues, write_json, write_srt
-from app.pipeline.render import placeholder_color, render_video, video_filename
+from app.pipeline import intake, media, qa
+from app.pipeline.outputs import build_cues, build_manifest, build_timeline, write_json, write_srt
+from app.pipeline.providers import get_provider, provider_status
+from app.pipeline.rank import SelectionContext, get_scorer, select_clip
+from app.pipeline.render import (RESOLUTIONS, analyse_source, concat_segments, frame_counts, orientation_of,
+                                 ratio_slug, render_failed, render_segment, video_filename)
+from app.pipeline.safety import plan_search
 from app.pipeline.scenes import scenes_from_list, split_into_scenes
 from app.pipeline.transcribe import check_sound, check_speech, get_transcriber
 from app.pipeline.tts import get_tts
+from app.pipeline.understand import understand_scenes
 from app.storage import get_storage, output_key
 
 
@@ -44,6 +50,8 @@ class Run:
             self.timings[name] = round(self.timings.get(name, 0.0) + time.perf_counter() - start, 3)
 
     def warn(self, message: str) -> None:
+        if message in self.warnings:  # e.g. "provider X failed" for every scene: say it once
+            return
         self.warnings.append(message)
         add_warning(self.job_id, message)
 
@@ -139,18 +147,45 @@ def run_pipeline(job_id: str, request: dict[str, Any], input_type: str, input_ke
             cues = build_cues(scenes)
             write_srt(cues, work / "captions.srt")
 
-        # 4. One video per aspect ratio.
-        ratios = request.get("aspect_ratios") or ["16:9"]
-        videos = []
-        for i, ratio in enumerate(ratios):
-            with run.stage("render", 50 + round(40 * i / len(ratios))):
-                videos.append(render_video(scenes, cues, audio.path, ratio, work, work / video_filename(ratio),
-                                           burn_captions=request.get("captions", True)))
+        # 4. What should each scene show? (meaning + safety rules)
+        with run.stage("understand", 48):
+            full_text = text if input_type == "script" else " ".join(sc.text for sc in scenes)
+            meanings, understand_info, understand_warnings = understand_scenes(scenes, full_text,
+                                                                               request.get("style"))
+            run.models["understand"] = understand_info
+            for message in understand_warnings:
+                run.warn(message)
+            plans = [plan_search(m, sc.text, request.get("avoid")) for m, sc in zip(meanings, scenes)]
+            for plan in plans:
+                for message in plan.warnings:
+                    run.warn(message)
 
-        # 5. timeline.json + manifest.json, then upload everything.
+        # 5. Find one clip per scene (search, score, select, download, verify).
+        ratios = request.get("aspect_ratios") or ["16:9"]
+        ctx = SelectionContext(work=work, orientation=orientation_of(ratios[0]), warn=run.warn,
+                               scorer=get_scorer())
+        with run.stage("footage", 52):
+            selections = []
+            for i, (scene, meaning, plan) in enumerate(zip(scenes, meanings, plans)):
+                selections.append(select_clip(scene, meaning, plan, ctx))
+                set_progress(job_id, 52 + round(18 * (i + 1) / len(scenes)), "footage")
+            run.models["ranker"] = ctx.scorer.info()
+
+        # 6. Render every scene segment (with QA), then one video per aspect ratio.
+        with run.stage("render", 70):
+            segments = _render_segments(run, scenes, cues, ratios, selections, meanings, plans, ctx,
+                                        burn_captions=request.get("captions", True))
+            videos, qa_report = [], {}
+            for ratio in ratios:
+                videos.append(_join_video(run, scenes, segments, ratio, audio))
+                qa_report[ratio] = videos[-1].pop("qa")
+
+        # 7. timeline.json + manifest.json, then upload everything.
         with run.stage("upload", 92):
-            write_json(_timeline(job_id, input_type, audio, transcript, scenes, videos), work / "timeline.json")
-            write_json(_manifest(run, request, input_type, audio, sound, transcript, videos), work / "manifest.json")
+            write_json(build_timeline(job_id, input_type, audio.duration, transcript.language, scenes, meanings,
+                                      plans, selections, segments, videos), work / "timeline.json")
+            write_json(_manifest(run, request, input_type, audio, sound, transcript, selections, videos,
+                                 qa_report), work / "manifest.json")
             files = [v["file"] for v in videos] + ["captions.srt", "timeline.json", "manifest.json"]
             storage = get_storage()
             for name in files:
@@ -161,37 +196,89 @@ def run_pipeline(job_id: str, request: dict[str, Any], input_type: str, input_ke
             shutil.rmtree(work, ignore_errors=True)
 
 
-def _timeline(job_id, input_type, audio, transcript, scenes, videos) -> dict:
-    return {
-        "job_id": job_id,
-        "input_type": input_type,
-        "duration": round(audio.duration, 3),
-        "language": transcript.language,
-        "scenes": [{**sc.to_dict(), "clip": {
-            "provider": "placeholder", "color": placeholder_color(sc.index), "generated": True,
-            "ai_generated": False, "reason": "placeholder colour (footage search is not built yet)"}}
-            for sc in scenes],
-        "videos": videos,
-    }
+def _render_segments(run: Run, scenes, cues, ratios, selections, meanings, plans, ctx, burn_captions) -> dict:
+    """Render each scene for every ratio and check it. A segment that fails QA gets another clip
+    (up to QA_RETRIES times); if it still fails, we keep it and add a warning.
 
-
-def _manifest(run: Run, request, input_type, audio, sound, transcript, videos) -> dict:
+    Returns {scene index: {ratio: facts about the segment}} and updates `selections` in place.
+    """
     s = get_settings()
-    return {
-        "job_id": run.job_id,
-        "created_at": datetime.now(timezone.utc).isoformat(),
-        "app": {"name": s.APP_NAME, "version": s.APP_VERSION},
-        "input": {"type": input_type, "source_kind": audio.source_kind, "source_codec": audio.source_codec,
-                  "duration": round(audio.duration, 3), "voice": request.get("voice") if "tts" in run.models else None},
-        "models": run.models,
-        "settings": {k: getattr(s, k) for k in (
-            "MIN_SCENE_SECONDS", "MAX_SCENE_SECONDS", "PAUSE_SECONDS", "RENDER_FPS", "VIDEO_PRESET", "VIDEO_CRF",
-            "AUDIO_SAMPLE_RATE", "AUDIO_BITRATE", "CAPTION_MAX_CHARS_PER_LINE", "CAPTION_MAX_LINES")},
-        "speech_check": {"max_volume_db": sound.max_volume_db, "sound_seconds": sound.sound_seconds,
-                         "words": len(transcript.words), "no_speech_prob": transcript.no_speech_prob,
-                         "language": transcript.language, "language_probability": transcript.language_probability},
-        "timings_seconds": run.timings,
-        "warnings": run.warnings,
-        "ai_generated": {"narration": "tts" in run.models, "visuals": False},
-        "outputs": videos,
-    }
+    counts = frame_counts(scenes, s.RENDER_FPS)
+    folders = {}
+    for ratio in ratios:
+        if ratio not in RESOLUTIONS:
+            raise AppError(ErrorCode.UNSUPPORTED_ASPECT_RATIO, f"Unsupported aspect ratio {ratio}", 422)
+        folders[ratio] = run.work / f"render_{ratio_slug(ratio)}"
+        folders[ratio].mkdir(parents=True, exist_ok=True)
+
+    segments: dict[int, dict] = {}
+    for i, (scene, frames) in enumerate(zip(scenes, counts)):
+        retries = 0
+        while True:
+            selection = selections[i]
+            rendered, problems = {}, []
+            try:
+                info = analyse_source(selection, frames / s.RENDER_FPS)
+                for ratio in ratios:
+                    path, facts = render_segment(info, scene, ratio, cues, folders[ratio], frames, burn_captions)
+                    found = qa.check_segment(path, frames)
+                    rendered[ratio] = {**facts, "qa_problems": found}
+                    problems += [f"{ratio}: {p}" for p in found]
+            except media.MediaError as e:
+                if selection.candidate.generated:
+                    raise render_failed(ratios[0], e) from None
+                problems.append(f"could not be rendered ({e})")
+            if not problems:
+                break
+            if selection.candidate.generated or retries >= s.QA_RETRIES:
+                if len(rendered) < len(ratios):  # some ratio has no segment at all
+                    raise render_failed(ratios[0], media.MediaError("; ".join(problems)))
+                run.warn(f"Scene {scene.index}: quality check found {'; '.join(problems)} "
+                         f"(kept clip {selection.candidate.uid})")
+                break
+            retries += 1
+            run.warn(f"Scene {scene.index}: clip {selection.candidate.uid} failed the quality check "
+                     f"({problems[0]}); trying another clip")
+            selections[i] = select_clip(scene, meanings[i], plans[i], ctx)  # the failed clip is in ctx.used
+        segments[scene.index] = rendered
+        set_progress(run.job_id, 70 + round(20 * (i + 1) / len(scenes)), "render")
+    return segments
+
+
+def _join_video(run: Run, scenes, segments: dict, ratio: str, audio) -> dict:
+    """Concat this ratio's segments + narration, then check the final file."""
+    width, height = RESOLUTIONS[ratio]
+    folder = run.work / f"render_{ratio_slug(ratio)}"
+    out_path = run.work / video_filename(ratio)
+    try:
+        concat_segments([folder / segments[sc.index][ratio]["file"] for sc in scenes], audio.path, folder, out_path)
+    except media.MediaError as e:
+        raise render_failed(ratio, e) from None
+    problems, facts = qa.check_video(out_path, audio.duration, width, height)
+    for problem in problems:
+        run.warn(f"{ratio} video: {problem}")
+    return {"aspect_ratio": ratio, "file": out_path.name, "width": width, "height": height,
+            "fps": get_settings().RENDER_FPS, "duration": facts["video_seconds"],
+            "qa": {**facts, "problems": problems}}
+
+
+def _manifest(run: Run, request, input_type, audio, sound, transcript, selections, videos, qa_report) -> dict:
+    s = get_settings()
+    providers = {}
+    for name in s.provider_order:
+        status = provider_status(name)
+        info = get_provider(name).info() if status != "unknown provider name" else {"name": name}
+        providers[name] = {**info, "status": status or "on",
+                           "scenes_used": sum(sel.candidate.provider == name for sel in selections)}
+    return build_manifest(
+        job_id=run.job_id, created_at=datetime.now(timezone.utc).isoformat(),
+        app={"name": s.APP_NAME, "version": s.APP_VERSION},
+        input_facts={"type": input_type, "source_kind": audio.source_kind, "source_codec": audio.source_codec,
+                     "duration": round(audio.duration, 3),
+                     "voice": request.get("voice") if "tts" in run.models else None,
+                     "style": request.get("style"), "avoid": request.get("avoid") or []},
+        models={**run.models, "ffmpeg": media.ffmpeg_version()}, providers=providers,
+        speech_check={"max_volume_db": sound.max_volume_db, "sound_seconds": sound.sound_seconds,
+                      "words": len(transcript.words), "no_speech_prob": transcript.no_speech_prob,
+                      "language": transcript.language, "language_probability": transcript.language_probability},
+        timings=run.timings, warnings=run.warnings, selections=selections, videos=videos, qa=qa_report)
