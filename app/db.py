@@ -32,6 +32,7 @@ def get_engine() -> Engine:
     global _engine, _session_factory
     if _engine is None:
         url = get_settings().DATABASE_URL
+        journal_mode = get_settings().SQLITE_JOURNAL_MODE
         connect_args = {}
         if url.startswith("sqlite"):
             _make_sqlite_folder(url)
@@ -43,7 +44,7 @@ def get_engine() -> Engine:
             @event.listens_for(_engine, "connect")
             def _sqlite_pragmas(dbapi_conn, _record):
                 cur = dbapi_conn.cursor()
-                cur.execute("PRAGMA journal_mode=WAL")
+                cur.execute(f"PRAGMA journal_mode={journal_mode}")  # WAL or DELETE (a Literal setting)
                 cur.execute("PRAGMA busy_timeout=30000")
                 cur.close()
 
@@ -62,7 +63,8 @@ def reset_engine() -> None:
 
 # Columns added after the first release: (table, column, SQL type). create_all() only makes
 # NEW tables, so an existing database file gets these with ALTER TABLE (a tiny migration).
-ADDED_COLUMNS = [("jobs", "parent_job_id", "VARCHAR(32)"), ("jobs", "active_swap_id", "VARCHAR(32)")]
+ADDED_COLUMNS = [("jobs", "parent_job_id", "VARCHAR(32)"), ("jobs", "active_swap_id", "VARCHAR(32)"),
+                 ("jobs", "requeue_count", "INTEGER NOT NULL DEFAULT 0")]
 
 
 def init_db() -> None:

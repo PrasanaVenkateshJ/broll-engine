@@ -1,7 +1,9 @@
-"""Check a running B-roll API (e.g. the Hugging Face Space) from the outside, like a reviewer would.
+"""Check a running B-roll API (e.g. the Modal demo) from the outside, like a reviewer would.
 
 1. (--cold) how long until GET /ready answers 200 = cold start, measured from when this tool starts.
-   For a real cold-start number, start it right after a restart / while the Space is asleep.
+   For a real cold-start number, run it when NO container is up: on Modal, at least
+   MODAL_SCALEDOWN_SECONDS (600 s) after the last request (the Modal dashboard shows 0 containers).
+   Modal holds that first request open while the container starts, so it may take a minute or more.
 2. GET /health and GET /ready (status + answer time).
 3. POST one short script job (fresh Idempotency-Key per run), poll it politely (growing pause,
    honours Retry-After), download every output file (same code as tools/batch_run.py).
@@ -10,7 +12,7 @@
 
 The token comes from --token, $BROLL_API_TOKEN, or a hidden prompt. It is never printed or saved.
 
-    python tools/live_check.py --url https://<hf-username>-broll-studio.hf.space --cold
+    python tools/live_check.py --url https://<workspace>--broll-studio.modal.run --cold
     python tools/live_check.py --url http://localhost:8000 --token dev-token --ratios 1:1
 Exit code 0 = every check passed.
 """
@@ -32,13 +34,19 @@ DEFAULT_SCRIPT = ("Saving money is not about earning more. It is about spending 
                   "Small daily habits can cut your monthly costs by 40 percent.")
 
 
-def wait_until_ready(client: httpx.Client, timeout: float, interval: float = 5.0) -> float | None:
-    """Seconds until /ready answered 200 (None = not within timeout). A sleeping or building Space
-    answers with errors or an HTML page first; every such answer just means "not yet"."""
+def wait_until_ready(client: httpx.Client, timeout: float, interval: float = 5.0,
+                     request_timeout: float = 150.0) -> float | None:
+    """Seconds until /ready answered 200 (None = not within timeout). A starting server may hold the
+    request open (Modal: up to 150 s, then a 303 redirect that httpx follows) or answer with errors /
+    an HTML page first; every such answer just means "not yet"."""
     start = time.perf_counter()
+    first = True
     while time.perf_counter() - start < timeout:
         try:
-            resp = client.get("/ready", timeout=30)
+            resp = client.get("/ready", timeout=request_timeout)
+            if first:
+                print(f"first /ready answer: HTTP {resp.status_code} after {time.perf_counter() - start:.1f} s")
+                first = False
             if resp.status_code == 200:
                 return round(time.perf_counter() - start, 1)
             wait = retry_after_seconds(resp, interval) if resp.status_code == 429 else interval
@@ -105,7 +113,7 @@ def run_check(client: httpx.Client, out: Path, script: str, ratios: list[str], t
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Check a live B-roll API: health, ready, one job, turnaround.")
     parser.add_argument("--url", default=os.environ.get("BROLL_API_URL", ""),
-                        help="base URL, e.g. https://<hf-username>-broll-studio.hf.space (default: $BROLL_API_URL)")
+                        help="base URL, e.g. https://<workspace>--broll-studio.modal.run (default: $BROLL_API_URL)")
     parser.add_argument("--token", default=os.environ.get("BROLL_API_TOKEN", ""),
                         help="bearer token (default: $BROLL_API_TOKEN, else a hidden prompt)")
     parser.add_argument("--cold", action="store_true", help="first measure the time until /ready answers")

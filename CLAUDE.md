@@ -56,10 +56,12 @@ app/
     outputs.py       timeline.json, manifest.json, captions.srt
     swap.py          clip swap: re-render only one scene's segment
   studio/            B-roll Studio web UI (plain HTML + CSS + JS, served at GET /)
-deploy/hf-space/     Hugging Face Docker Space (the ONLY folder pushed to the Space)
+deploy/modal/        LIVE DEMO: Modal app (API + worker thread in one container, Volume, cost guards)
+deploy/hf-space/     Hugging Face Docker Space - NOT USED (Docker Spaces became paid, July 2026)
 tools/batch_run.py   CLI batch runner
 tools/deploy_hf.py   upload deploy/hf-space/ to the Space
 tools/live_check.py  health / ready / one job / turnaround against a live URL
+scripts/tunnel.ps1   fallback demo: local API + worker behind a Cloudflare quick tunnel
 tests/               unit/, integration/, e2e/ (all run with mocks, no keys)
 testpack/            inputs/, outputs/, logs/, ratings.csv, INDEX.md
 
@@ -87,7 +89,8 @@ INVALID_INPUT, EMPTY_SCRIPT, UNSUPPORTED_FILE_TYPE, FILE_TOO_LONG, FILE_TOO_LARG
 CORRUPTED_MEDIA, DOWNLOAD_FAILED, NO_SPEECH_DETECTED, MUSIC_ONLY_AUDIO,
 UNSUPPORTED_ASPECT_RATIO, JOB_NOT_FOUND, SCENE_NOT_FOUND, JOB_NOT_READY, NO_ALTERNATIVE_CLIP,
 SWAP_IN_PROGRESS, IDEMPOTENCY_KEY_REUSED,
-UNAUTHORIZED, RATE_LIMITED, PROVIDER_UNAVAILABLE, RENDER_FAILED, INTERNAL_ERROR
+UNAUTHORIZED, RATE_LIMITED, PROVIDER_UNAVAILABLE, RENDER_FAILED, DAILY_LIMIT_REACHED,
+JOB_INTERRUPTED, INTERNAL_ERROR
 Generic HTTP: NOT_FOUND (unknown URL/file), METHOD_NOT_ALLOWED, NOT_READY (/ready fails),
 RANGE_NOT_SATISFIABLE (download Range starts past the end of the file)
 

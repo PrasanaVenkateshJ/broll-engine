@@ -47,6 +47,9 @@ class Job(Base):
     error_json: Mapped[str | None] = mapped_column(Text, nullable=True)
     result_files_json: Mapped[str] = mapped_column(Text, default="[]")  # list of output filenames
     worker_id: Mapped[str | None] = mapped_column(String(64), nullable=True)
+    # How often this job was put back in the queue because the server stopped while it ran (see
+    # jobs.recover_interrupted_jobs). After one re-queue it fails with JOB_INTERRUPTED instead.
+    requeue_count: Mapped[int] = mapped_column(Integer, default=0)
     # X-Correlation-Id of the request that created the job; the worker logs it too.
     correlation_id: Mapped[str | None] = mapped_column(String(128), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, index=True)

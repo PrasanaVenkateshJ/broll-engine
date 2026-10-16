@@ -32,6 +32,9 @@
 | python:3.11-slim image | 3.11 | container base | PSF + Debian licences |
 | git, curl (Debian packages, Space image only) | distro | clone the code at build time; health checks in start.sh | GPL-2.0 / curl licence (separate programs) |
 | huggingface_hub | 2.2.0 (installed with faster-whisper / Kokoro) | model downloads; `tools/deploy_hf.py` uploads the Space folder | Apache-2.0 |
+| modal (Python client, NOT in requirements.txt; only on the deploying PC) | 1.6.2 | deploys the live demo (`deploy/modal/modal_app.py`) | Apache-2.0 |
+| debian_slim image (Modal) | Python 3.11 | base of the Modal demo image | PSF + Debian licences |
+| cloudflared (downloaded on demand by `scripts/tunnel.ps1`, not committed) | latest release | fallback demo: Cloudflare quick tunnel | Apache-2.0 |
 
 ## External APIs and media (footage + understanding)
 
@@ -43,6 +46,8 @@
 | `generated` motion cards | statistics / abstract lines / last fallback | Made locally by FFmpeg (gradient + text). No third-party media, no AI model: generated=true, ai_generated=false. |
 | Pexels Videos API (`pexels`) | optional only | Pexels License. Pexels paused new API keys, so the project does not depend on it; skipped while `PEXELS_API_KEY` is empty. |
 | Groq API (`UNDERSTAND_PROVIDER=groq`) | scene meaning -> search queries + flags | Groq free tier. Default model `openai/gpt-oss-120b` (Apache-2.0 weights). Falls back to offline rules if it fails. Key in `.env` only. |
+| Modal (modal.com) | hosting of the live demo | Paid-per-second cloud service (free monthly credit); our code stays under our control. Secrets only in the Modal secret `broll-secrets`. |
+| Cloudflare quick tunnels (trycloudflare.com) | fallback demo URL, no account | Cloudflare's free quick-tunnel service (for testing/demos, no uptime guarantee). |
 
 ## Hosting (live demo)
 

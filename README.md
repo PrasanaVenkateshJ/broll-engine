@@ -184,26 +184,48 @@ the public API above, so everything it shows comes from the job, `timeline.json`
 
 ## Live demo
 
-**URL:** `https://<hf-username>-broll-studio.hf.space` *(placeholder; the real link is in the Submission Form)*
+**URL:** `https://<workspace>--broll-studio.modal.run` *(placeholder; the real link is in the Submission Form)*
 
-- **Access:** open the URL, paste the API token from the Submission Form into the Studio's top bar. For the API,
-  send `Authorization: Bearer <token>` (`/health` and `/ready` need no token). No token is in this repository.
-- **Hardware:** free Hugging Face CPU basic Space (2 vCPU, 16 GB RAM). One job runs at a time
-  (`WORKER_CONCURRENCY=1`, `FOOTAGE_WORKERS=2`); a short script takes a few minutes, a 10-minute voiceover much longer.
-- **Cold start:** after a restart or a sleep the Space takes a few minutes until `/ready` answers. All models
-  (Whisper small, Kokoro + voices, open_clip ViT-B-32, spaCy) are baked into the image, so nothing is downloaded at
-  start. `.github/workflows/keepalive.yml` calls `/health` every 6 hours so it does not fall asleep.
-- **Storage is temporary:** MinIO and the SQLite database run inside the container (`/tmp`), so jobs and output
-  files are lost when the Space restarts. Download what you want to keep. Links expire after `FILE_LINK_TTL_SECONDS`.
-- **Rate limits are on** (per token): `RATE_LIMIT_POST_PER_MINUTE=10` new jobs / swaps and
-  `RATE_LIMIT_GET_PER_MINUTE=600` status checks + downloads per minute; above that `429 RATE_LIMITED` + `Retry-After`.
-- **Real adapters:** Kokoro TTS, faster-whisper, Groq understanding, Pixabay video / photo, Wikimedia, generated
-  cards, CLIP ranking.
-- **How it is deployed:** only [deploy/hf-space/](deploy/hf-space/) is pushed to the Space (`tools/deploy_hf.py`).
-  Its Dockerfile clones this private repo with a build secret (`GH_TOKEN`), and `start.sh` starts MinIO, the
-  worker and the API on port 7860 in one container. Check it from outside with
-  `python tools/live_check.py --url <space-url> --cold` (health, ready, one job, downloads, a Range request,
-  turnaround).
+- **Access:** open the URL and paste the API token from the **Submission Form** into the Studio's top bar. For the
+  API, send `Authorization: Bearer <token>` (`/health` and `/ready` need no token). No token is in this repository;
+  the demo reads `API_TOKENS`, `FILE_LINK_SECRET`, `CALLBACK_SECRET`, `PIXABAY_API_KEY`, `GROQ_API_KEY` and
+  `WIKIMEDIA_USER_AGENT` from the Modal secret `broll-secrets` and refuses to start without the first three.
+- **Where it runs:** [Modal](https://modal.com), [deploy/modal/modal_app.py](deploy/modal/modal_app.py). ONE container
+  (`max_containers=1`, 2 CPU cores, 3 GiB memory request / 6 GiB limit) runs the API and the worker as a background
+  thread (`WORKER_CONCURRENCY=1`, `FOOTAGE_WORKERS=2`). Real adapters: Kokoro, faster-whisper small, Groq, Pixabay
+  video / photo, Wikimedia, generated cards, CLIP.
+- **Cold start:** it scales to zero (`min_containers=0`): with no traffic there is no container and no cost. The first
+  request after a quiet time waits until a container has started (the request is held open, about a minute is
+  expected; measure it with `tools/live_check.py --cold`). All models are baked into the image at build time and
+  `HF_HUB_OFFLINE=1` is set, so a cold start downloads nothing. A container stays up 600 s after the last request
+  (`MODAL_SCALEDOWN_SECONDS`), long enough to finish a job while nobody polls.
+- **Cost guards** (the account has about $1/month of credit; estimate in
+  [testpack/notes/cost_modal.md](testpack/notes/cost_modal.md)): at most `DEMO_MAX_JOBS_PER_DAY=40` new jobs + swaps
+  per UTC day for all tokens together (then `429 DAILY_LIMIT_REACHED`, retryable, `Retry-After` until midnight UTC);
+  narration at most 300 s (`DEMO_MAX_AUDIO_SECONDS` -> `MAX_AUDIO_SECONDS`; the product limit is 10 min);
+  `RATE_LIMIT_POST_PER_MINUTE=4` and `RATE_LIMIT_GET_PER_MINUTE=300` per token. All are deploy-time knobs (see the
+  top of `modal_app.py`). Note: 40 jobs in 40 separate visits would cost about the whole month's credit in one day,
+  so for a review period deploy with a lower cap (e.g. 5).
+- **No keepalive:** `.github/workflows/keepalive.yml` has no schedule any more and refuses `*.modal.run` URLs. On
+  Modal a ping does not "keep it awake for free": every ping starts a paid container for 600 s, and a container is
+  started on the first real request anyway.
+- **Storage (differs from docker compose):** on Modal the SQLite database and the output files live on the Modal
+  Volume `broll-data` (`STORAGE_BACKEND=local`, `/data`), with `SQLITE_JOURNAL_MODE=DELETE`. docker compose keeps
+  MinIO (S3) as required by the brief; the API, signed links and Range downloads behave the same. The Volume is
+  committed after every job and at shutdown, so jobs and files survive scale-down. Temp files and the footage cache
+  are on the container's own disk and are lost on scale-down. Links expire after `FILE_LINK_TTL_SECONDS`.
+- **Jobs are never silently lost:** when a container starts, jobs a previous container left `running` (it was
+  stopped mid-job) are queued once more (with a warning); if that happens a second time they fail with
+  `JOB_INTERRUPTED` (retryable). Safe only because there is exactly one container.
+- **Deploy:** `.venv\Scripts\modal deploy deploy/modal/modal_app.py` (the URL is printed at the end and shown in
+  the Modal dashboard). Check from outside: `python tools/live_check.py --url <modal-url> --cold`.
+- **Fallback (no account needed):** `.\scripts	unnel.ps1` starts the API + worker on this PC and a Cloudflare quick
+  tunnel (cloudflared is downloaded on demand into the git-ignored `toolsin\`, and its code signature is checked),
+  then prints a public `https://<words>.trycloudflare.com` URL. It refuses `dev-token` (set a long random
+  `API_TOKENS` in `.env` first), uses the same cost guards, and lives only while the window is open.
+- **Hugging Face Space: not used.** [deploy/hf-space/](deploy/hf-space/) and `tools/deploy_hf.py` stay in the repo
+  unchanged, but Hugging Face made Docker Spaces paid in July 2026, so the demo moved to Modal. The Modal image
+  reuses `deploy/hf-space/preload_models.py` to check, offline, that every model loads.
 
 ## Tests
 
@@ -252,12 +274,14 @@ comments in [.env.example](.env.example). "Code default" is used when the variab
 | `RATE_LIMIT_POST_PER_MINUTE` | `30` | `30` | Max POST requests (new jobs + clip swaps) per token per minute (0 = no limit). Over the limit -&gt; 429 RATE_LIMITED with a `Retry-After` header (seconds to wait). |
 | `RATE_LIMIT_GET_PER_MINUTE` | `600` | `600` | Max GET requests (job status + file downloads) per token per minute (0 = no limit). Same 429 rule. File downloads count against the job owner's GET limit. |
 | `JOBS_LIST_MAX` | `100` | `100` | Most jobs `GET /api/v1/jobs` may return in one answer (`?limit=1..this`). |
+| `DEMO_MAX_JOBS_PER_DAY` | `0` | `0` | Cost guard for a paid live demo: at most this many NEW jobs (incl. clip swaps) per UTC day, all tokens together; then 429 DAILY_LIMIT_REACHED until midnight UTC. An idempotent replay is still answered. 0 = no cap (the Modal demo uses 40). |
 | **Studio (web UI)** | | | |
 | `STUDIO_ENABLED` | `true` | `true` | true = serve the B-roll Studio web page at `GET /` (its files under `/studio/`). false = API only. |
 | `STUDIO_DIR` | *(empty)* | *(empty)* | Folder with the Studio files. Empty = `app/studio` next to the code. |
 | `STUDIO_FRAME_ANCESTORS` | *(empty)* | *(empty)* | Sites allowed to show the Studio in a frame (CSP `frame-ancestors`), space-separated, e.g. `https://huggingface.co`. Empty = none. |
 | **Database** | | | |
 | `DATABASE_URL` | `sqlite:///./data/broll.db` | `sqlite:///./data/broll.db` | SQLite file for jobs + idempotency keys. (Docker overrides this to /app/data/broll.db.) |
+| `SQLITE_JOURNAL_MODE` | `WAL` | `WAL` | `WAL` (readers + a writer at once; needs a normal local disk) or `DELETE` (plain journal file; used on the Modal Volume). |
 | **Storage** | | | |
 | `STORAGE_BACKEND` | `local` | `local` | "local" = save files in LOCAL_STORAGE_DIR (my PC). "s3" = MinIO / S3 (Docker, CI, deployment). |
 | `LOCAL_STORAGE_DIR` | `./data/storage` | `./data/storage` | Folder used when STORAGE_BACKEND=local. |
@@ -407,7 +431,7 @@ Every error has the same shape: `{"error": {"code", "message", "retryable", "det
 | `INVALID_INPUT` | Request 422 (415 for a wrong Content-Type); Job | The request is not valid (fields, exactly-one-input rule, private URL, missing Idempotency-Key on a swap, clip already used, chosen clip not found / licence not allowed / shows a logo). | no |
 | `EMPTY_SCRIPT` | Request 422; Job | The script or a scene text is empty or only whitespace. | no |
 | `UNSUPPORTED_FILE_TYPE` | Request 415; Job | The file is not mp3 / wav / m4a audio (checked with ffprobe, not the extension). | no |
-| `FILE_TOO_LONG` | Request 422; Job | The narration is longer than `MAX_AUDIO_SECONDS` (10 min). | no |
+| `FILE_TOO_LONG` | Request 422; Job | The narration is longer than `MAX_AUDIO_SECONDS` (10 min; 5 min on the Modal demo). | no |
 | `FILE_TOO_LARGE` | Request 413; Job | Upload larger than `MAX_UPLOAD_MB`, `audio_url` larger than `MAX_DOWNLOAD_MB`, or a swap clip larger than `MAX_CLIP_DOWNLOAD_MB`. | no |
 | `CORRUPTED_MEDIA` | Request 422; Job | The audio (or a chosen swap clip) cannot be decoded. | no |
 | `DOWNLOAD_FAILED` | Job | `audio_url` (or a swap `clip_url`) could not be downloaded. | yes for timeouts, network errors and HTTP 5xx; no for HTTP 4xx / empty files |
@@ -424,6 +448,8 @@ Every error has the same shape: `{"error": {"code", "message", "retryable", "det
 | `RATE_LIMITED` | Request 429 | More than `RATE_LIMIT_POST_PER_MINUTE` POSTs or `RATE_LIMIT_GET_PER_MINUTE` GETs this minute for this token; wait the `Retry-After` seconds. | yes |
 | `PROVIDER_UNAVAILABLE` | Request 503 (swap); Job | TTS / transcription model failed, or a footage source named in a swap is off or failed. (A footage source failing during a normal job is only a warning.) | yes when a model / source failed; no when the source is switched off |
 | `RENDER_FAILED` | Job | FFmpeg could not render a video. | yes |
+| `DAILY_LIMIT_REACHED` | Request 429 | Cost guard of the live demo: `DEMO_MAX_JOBS_PER_DAY` new jobs + swaps were already created today (UTC, all tokens). `Retry-After` = seconds until midnight UTC; `details`: limit_per_day, used_today, resets_at. | yes |
+| `JOB_INTERRUPTED` | Job | The server stopped while the job was running, and again after it was queued once more (only the single-container Modal demo re-queues). Send the job again. | yes |
 | `INTERNAL_ERROR` | Request 500; Job | Unexpected error (details are only in the logs). | yes |
 | `NOT_FOUND` | Request 404 | Unknown URL, or no such result file. | no |
 | `METHOD_NOT_ALLOWED` | Request 405 | Wrong HTTP method for this URL. | no |
@@ -437,8 +463,11 @@ Every error has the same shape: `{"error": {"code", "message", "retryable", "det
 - [app/studio/](app/studio/) - the B-roll Studio web UI (index.html, studio.css, app.js, api.js, create.js,
   result.js, presets.js, dom.js).
 - [openapi.yaml](openapi.yaml) - the API contract. [tools/batch_run.py](tools/batch_run.py) - batch runner.
-- [deploy/hf-space/](deploy/hf-space/) - the Hugging Face Space (Dockerfile, start.sh, model preload);
-  [tools/deploy_hf.py](tools/deploy_hf.py) uploads it, [tools/live_check.py](tools/live_check.py) checks the live URL.
+- [deploy/modal/](deploy/modal/) - the live demo on Modal (modal_app.py, download_models.py);
+  [tools/live_check.py](tools/live_check.py) checks the live URL; [scripts/tunnel.ps1](scripts/tunnel.ps1) is the
+  no-account fallback; [testpack/notes/cost_modal.md](testpack/notes/cost_modal.md) is the cost estimate.
+- [deploy/hf-space/](deploy/hf-space/) - the Hugging Face Space (not used any more; see Live demo) and
+  [tools/deploy_hf.py](tools/deploy_hf.py).
 - [tests/](tests/) - unit, integration and e2e tests (mock adapters).
 - [SOURCES.md](SOURCES.md) - every library, model, API and media source with its licence.
 - [AI_USE.md](AI_USE.md) - how AI tools were used.

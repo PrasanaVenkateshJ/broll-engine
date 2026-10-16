@@ -38,6 +38,8 @@ class ErrorCode(str, Enum):
     RATE_LIMITED = "RATE_LIMITED"
     PROVIDER_UNAVAILABLE = "PROVIDER_UNAVAILABLE"
     RENDER_FAILED = "RENDER_FAILED"
+    DAILY_LIMIT_REACHED = "DAILY_LIMIT_REACHED"  # cost guard: DEMO_MAX_JOBS_PER_DAY new jobs already today (UTC)
+    JOB_INTERRUPTED = "JOB_INTERRUPTED"          # the server restarted twice while this job was running
     INTERNAL_ERROR = "INTERNAL_ERROR"
     # Generic HTTP cases that are not about jobs:
     NOT_FOUND = "NOT_FOUND"

@@ -15,3 +15,6 @@ __pycache__/
 testpack/outputs/**/*.mp4
 testpack/outputs/**/*.wav
 testpack/outputs/**/*.mp3
+
+# Tools downloaded on demand (scripts/tunnel.ps1 puts cloudflared.exe here)
+tools/bin/

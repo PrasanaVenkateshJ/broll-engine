@@ -42,6 +42,8 @@ def test_env(tmp_path, monkeypatch):
         # rate-limit tests in tests/unit/test_security.py switch it back on with small limits.
         "RATE_LIMIT_POST_PER_MINUTE": "0",
         "RATE_LIMIT_GET_PER_MINUTE": "0",
+        "DEMO_MAX_JOBS_PER_DAY": "0",  # no daily cap (tests/unit/test_cost_guards.py switches it on)
+        "SQLITE_JOURNAL_MODE": "WAL",
         "PUBLIC_BASE_URL": "",
         "FILE_LINK_SECRET": "test-link-secret",
         "FILE_LINK_TTL_SECONDS": "3600",

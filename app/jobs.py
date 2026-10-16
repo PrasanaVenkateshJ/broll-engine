@@ -6,11 +6,11 @@ import json
 import logging
 import time
 import uuid
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from typing import Any
 
 import httpx
-from sqlalchemy import or_, select, update
+from sqlalchemy import func, or_, select, update
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session, aliased
 
@@ -63,6 +63,31 @@ def find_existing_job(db: Session, client_id: str, idem_key: str | None, req_has
                        "This Idempotency-Key was already used with a different request body", 409,
                        details={"idempotency_key": idem_key, "job_id": row.job_id})
     return db.get(Job, row.job_id)
+
+
+# ---------- Cost guard: jobs per day ----------
+
+def check_daily_limit(db: Session, now: datetime | None = None) -> None:
+    """Refuse a NEW job when DEMO_MAX_JOBS_PER_DAY jobs (all tokens, clip swaps included) were already
+    created today (UTC). Call it only when a job would really be created: an idempotent replay of an
+    old job costs nothing and is always answered.
+
+    Two requests at the very same moment can both pass the count, so the cap may be passed by one or
+    two jobs; that is fine for a cost guard (the rate limit stops bursts).
+    """
+    limit = get_settings().DEMO_MAX_JOBS_PER_DAY
+    if limit <= 0:  # 0 = no cap
+        return
+    now = now or utcnow()
+    day_start = now.replace(hour=0, minute=0, second=0, microsecond=0)
+    used = db.scalar(select(func.count()).select_from(Job).where(Job.created_at >= day_start))
+    if used >= limit:
+        resets_at = day_start + timedelta(days=1)
+        retry_after = max(1, int((resets_at - now).total_seconds()))
+        raise AppError(ErrorCode.DAILY_LIMIT_REACHED,
+                       f"The demo's daily limit of {limit} jobs is reached; try again after {iso(resets_at)}",
+                       429, retryable=True, headers={"Retry-After": str(retry_after)},
+                       details={"limit_per_day": limit, "used_today": used, "resets_at": iso(resets_at)})
 
 
 def create_job(db: Session, *, job_id: str, client_id: str, idem_key: str | None, req_hash: str,
@@ -172,6 +197,39 @@ def claim_next_job(worker_id: str) -> str | None:
             if result.rowcount == 1:
                 return job_id
     return None
+
+
+def recover_interrupted_jobs(max_requeues: int = 1) -> dict[str, list[str]]:
+    """Jobs still "running" when the server starts were cut off by a stop (scale-down, crash, redeploy).
+
+    Each one goes back to the queue ONCE (progress 0, a warning on the job); a job that was already
+    re-queued max_requeues times fails with JOB_INTERRUPTED (retryable: the client may send it again).
+    So no job stays "running" forever and none is silently lost.
+
+    ONLY call this before this process starts its workers, and only when no other worker process uses
+    the same database (the Modal demo: max_containers=1). Otherwise it would steal running jobs.
+    """
+    requeued, failed = [], []
+    with new_session() as db:
+        stale = db.scalars(select(Job).where(Job.status == JobStatus.RUNNING).order_by(Job.created_at)).all()
+        for job in stale:
+            if (job.requeue_count or 0) < max_requeues:
+                job.status, job.progress, job.stage = JobStatus.QUEUED, 0, "queued"
+                job.worker_id, job.started_at, job.updated_at = None, None, utcnow()
+                job.requeue_count = (job.requeue_count or 0) + 1
+                job.warnings_json = json.dumps(job.warnings + ["The server restarted while this job was running; "
+                                                               "it was queued again and started from the beginning."])
+                requeued.append(job.id)
+            else:
+                failed.append(job.id)
+        db.commit()
+    for job_id in failed:  # finish_job also frees a clip swap's lock
+        finish_job(job_id, error=AppError(
+            ErrorCode.JOB_INTERRUPTED, "The server restarted while this job was running, also after one retry; "
+            "please send the job again", 503, retryable=True, details={"requeue_count": max_requeues}))
+    if requeued or failed:
+        log.warning("recovered interrupted jobs", extra={"fields": {"requeued": requeued, "failed": failed}})
+    return {"requeued": requeued, "failed": failed}
 
 
 def set_progress(job_id: str, progress: int, stage: str) -> None:

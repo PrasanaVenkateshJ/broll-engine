@@ -10,6 +10,7 @@ import os
 import signal
 import socket
 import threading
+from collections.abc import Callable
 
 from app.config import get_settings
 from app.db import init_db, new_session
@@ -55,7 +56,8 @@ def process_job(job_id: str) -> None:
         correlation_id_var.reset(cid_token)
 
 
-def worker_loop(worker_id: str, stop: threading.Event) -> None:
+def worker_loop(worker_id: str, stop: threading.Event, after_job: Callable[[str], None] | None = None) -> None:
+    """after_job(job_id) runs after every finished job (the Modal demo saves its Volume there)."""
     poll = get_settings().WORKER_POLL_SECONDS
     while not stop.is_set():
         try:
@@ -65,17 +67,22 @@ def worker_loop(worker_id: str, stop: threading.Event) -> None:
             job_id = None
         if job_id:
             process_job(job_id)
+            if after_job is not None:
+                try:
+                    after_job(job_id)
+                except Exception:
+                    log.exception("after_job hook failed")  # never stops the worker
         else:
             stop.wait(poll)  # nothing to do: wait a moment (wakes early on shutdown)
 
 
-def start_workers(stop: threading.Event) -> list[threading.Thread]:
-    """Start WORKER_CONCURRENCY threads. Used by main() and by the integration tests."""
+def start_workers(stop: threading.Event, after_job: Callable[[str], None] | None = None) -> list[threading.Thread]:
+    """Start WORKER_CONCURRENCY threads. Used by main(), the Modal demo and the integration tests."""
     n = max(1, get_settings().WORKER_CONCURRENCY)
     base = f"{socket.gethostname()}-{os.getpid()}"
     threads = []
     for i in range(n):
-        t = threading.Thread(target=worker_loop, args=(f"{base}-{i}", stop), name=f"worker-{i}", daemon=True)
+        t = threading.Thread(target=worker_loop, args=(f"{base}-{i}", stop, after_job), name=f"worker-{i}", daemon=True)
         t.start()
         threads.append(t)
     return threads

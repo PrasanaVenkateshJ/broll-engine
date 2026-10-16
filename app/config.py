@@ -31,6 +31,9 @@ class Settings(BaseSettings):
     RATE_LIMIT_GET_PER_MINUTE: int = 600
     # Most jobs GET /api/v1/jobs may return in one answer (?limit=1..this).
     JOBS_LIST_MAX: int = 100
+    # Cost guard for a paid-per-second live demo: at most this many NEW jobs (incl. clip swaps) per UTC day,
+    # for all tokens together. Over it -> 429 DAILY_LIMIT_REACHED until midnight UTC. 0 = no cap.
+    DEMO_MAX_JOBS_PER_DAY: int = 0
 
     # --- Studio (the web UI at GET /, files under /studio/) ---
     STUDIO_ENABLED: bool = True
@@ -42,6 +45,10 @@ class Settings(BaseSettings):
 
     # --- Database ---
     DATABASE_URL: str = "sqlite:///./data/broll.db"
+    # SQLite journal: WAL lets readers and a writer work at the same time (it needs shared memory, so a
+    # normal local disk). DELETE = classic journal file: the cautious choice on a network-style disk such
+    # as a Modal Volume (Modal does not document WAL support there).
+    SQLITE_JOURNAL_MODE: Literal["WAL", "DELETE"] = "WAL"
 
     # --- Storage ---
     STORAGE_BACKEND: Literal["local", "s3"] = "local"

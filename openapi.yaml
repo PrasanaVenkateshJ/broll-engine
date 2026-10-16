@@ -155,7 +155,7 @@ paths:
           content:
             application/json:
               schema: {$ref: '#/components/schemas/Error'}
-        '429': {$ref: '#/components/responses/RateLimited'}
+        '429': {$ref: '#/components/responses/TooManyJobs'}
         '500': {$ref: '#/components/responses/InternalError'}
       callbacks:
         jobFinished:
@@ -247,7 +247,7 @@ paths:
           content:
             application/json:
               schema: {$ref: '#/components/schemas/Error'}
-        '429': {$ref: '#/components/responses/RateLimited'}
+        '429': {$ref: '#/components/responses/TooManyJobs'}
         '500': {$ref: '#/components/responses/InternalError'}
         '503':
           description: '`PROVIDER_UNAVAILABLE` - the named footage source is switched off or has no API key.'
@@ -495,6 +495,21 @@ components:
       content:
         application/json:
           schema: {$ref: '#/components/schemas/Error'}
+    TooManyJobs:
+      description: >-
+        `RATE_LIMITED` - more than RATE_LIMIT_POST_PER_MINUTE POSTs this minute for this token; or
+        `DAILY_LIMIT_REACHED` - the cost guard DEMO_MAX_JOBS_PER_DAY (live demo only; 0 = off): that many new
+        jobs + swaps were already created today (UTC, all tokens together). An idempotent replay of an
+        existing job is still answered. Both are retryable: wait `Retry-After` seconds (for the daily cap:
+        until midnight UTC; `details` has limit_per_day, used_today and resets_at).
+      headers:
+        X-Correlation-Id: {$ref: '#/components/headers/X-Correlation-Id'}
+        Retry-After:
+          description: Seconds to wait.
+          schema: {type: integer}
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/Error'}
     InternalError:
       description: '`INTERNAL_ERROR` - unexpected; retryable.'
       headers:
@@ -528,6 +543,8 @@ components:
         - RATE_LIMITED
         - PROVIDER_UNAVAILABLE
         - RENDER_FAILED
+        - DAILY_LIMIT_REACHED
+        - JOB_INTERRUPTED
         - INTERNAL_ERROR
         - NOT_FOUND
         - METHOD_NOT_ALLOWED

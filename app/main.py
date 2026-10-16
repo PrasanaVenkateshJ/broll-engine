@@ -24,7 +24,8 @@ from starlette.datastructures import UploadFile
 from app.config import get_settings
 from app.db import check_db, get_db, init_db
 from app.errors import AppError, ErrorCode, error_body, register_error_handlers, validation_details
-from app.jobs import body_hash, create_job, find_existing_job, job_summary, job_to_dict, new_job_id
+from app.jobs import (body_hash, check_daily_limit, create_job, find_existing_job, job_summary, job_to_dict,
+                      new_job_id)
 from app.logging_setup import correlation_id_var, setup_logging
 from app.models import Job, JobStatus
 from app.pipeline.intake import check_audio_file, check_scene_texts, check_script
@@ -213,6 +214,7 @@ def _create_job_sync(db: Session, client_id: str, idem_key: str | None, req_hash
         existing = find_existing_job(db, client_id, idem_key, req_hash)
         if existing is not None:
             return existing, False
+        check_daily_limit(db)  # cost guard (DEMO_MAX_JOBS_PER_DAY); a replay above never counts
         job_id = new_job_id()
         stored_key = None
         if upload:
@@ -274,6 +276,7 @@ def _create_swap_job_sync(db: Session, client_id: str, idem_key: str, job_id: st
     existing = find_existing_job(db, client_id, idem_key, req_hash)
     if existing is not None:  # same key + same body: the same swap job, no new work
         return existing, False
+    check_daily_limit(db)  # a swap re-renders, so it counts as a job too
     job = db.get(Job, job_id)
     if job is None or job.client_id != client_id:
         raise AppError(ErrorCode.JOB_NOT_FOUND, f"Job {job_id} not found", 404)
