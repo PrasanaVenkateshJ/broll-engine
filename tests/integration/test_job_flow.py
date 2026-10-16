@@ -6,22 +6,10 @@ from urllib.parse import urlsplit
 from app.errors import AppError, ErrorCode
 from app.security import verify_hmac
 from tests.conftest import AUTH
+from tests.helpers import wait_for_job
 from tests.media_helpers import tone_bytes
 
 URL = "/api/v1/broll/jobs"
-
-
-def wait_for_job(client, job_id, timeout=90):
-    """Poll GET /jobs/{id} until it ends. Returns (final body, list of seen (status, progress))."""
-    seen = []
-    deadline = time.time() + timeout
-    while time.time() < deadline:
-        body = client.get(f"/api/v1/jobs/{job_id}", headers=AUTH).json()
-        seen.append((body["status"], body["progress"]))
-        if body["status"] in ("succeeded", "failed"):
-            return body, seen
-        time.sleep(0.02)
-    raise AssertionError(f"job did not finish in {timeout}s; last={seen[-1]}")
 
 
 def path_of(url):

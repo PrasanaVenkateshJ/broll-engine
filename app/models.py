@@ -35,6 +35,9 @@ class Job(Base):
     input_type: Mapped[str] = mapped_column(String(16))  # audio_url | upload | script | scenes | swap
     # Clip swap jobs only: the ORIGINAL B-roll job whose video they change (None for normal jobs).
     parent_job_id: Mapped[str | None] = mapped_column(String(32), nullable=True, index=True)
+    # Original jobs only: the swap job that currently holds this video's "one swap at a time" lock
+    # (None = free). Taken and released with conditional UPDATEs in jobs.py, so it is atomic.
+    active_swap_id: Mapped[str | None] = mapped_column(String(32), nullable=True)
     request_json: Mapped[str] = mapped_column(Text)  # the validated request
     input_key: Mapped[str | None] = mapped_column(String(255), nullable=True)  # storage key of an upload
     callback_url: Mapped[str | None] = mapped_column(Text, nullable=True)

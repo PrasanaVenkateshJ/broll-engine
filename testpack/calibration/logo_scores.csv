@@ -1,0 +1,83 @@
+pixabay_video_id,query,label,logo_prob
+121994,times square,logo,0.9994
+19454,macbook,logo,0.9992
+3576,laptop,logo,0.9648
+3626,shopping,no_logo,0.961
+122848,times square,logo,0.9427
+273921,office,logo,0.8908
+137799,times square,logo,0.8897
+1295,car,logo,0.7933
+1643,city street,logo,0.7266
+87592,office,no_logo,0.5851
+6590,phone,no_logo,0.4994
+51592,money,no_logo,0.4308
+3188,office,no_logo,0.305
+19627,city street,logo,0.2681
+202987,phone,no_logo,0.2234
+318026,handshake,no_logo,0.211
+22355,macbook,no_logo,0.2035
+2343,sneakers,no_logo,0.1667
+84885,sneakers,no_logo,0.1654
+172892,money,no_logo,0.1345
+28544,car,no_logo,0.132
+197,macbook,no_logo,0.1302
+2340,office,no_logo,0.1033
+1046,office,no_logo,0.0974
+24114,shopping,logo,0.0891
+307864,nature,no_logo,0.0873
+21118,city street,no_logo,0.072
+1044,city street,logo,0.0605
+5631,food,no_logo,0.0601
+1887,shopping,logo,0.0571
+26533,macbook,no_logo,0.0567
+10822,laptop,no_logo,0.0561
+323513,money,no_logo,0.0434
+2165,car,no_logo,0.0317
+208442,city street,no_logo,0.0311
+209424,takeaway coffee,no_logo,0.0284
+318027,handshake,no_logo,0.0277
+184734,car,no_logo,0.0255
+200157,food,logo,0.0213
+211204,handshake,no_logo,0.0198
+62216,handshake,no_logo,0.0164
+38084,phone,no_logo,0.0155
+203260,laptop,logo,0.0134
+3735,shopping,no_logo,0.0134
+1058,laptop,no_logo,0.0126
+2339,food,no_logo,0.0105
+202134,laptop,logo,0.0094
+1006,shopping,no_logo,0.0089
+377884,server room,no_logo,0.0083
+377882,server room,no_logo,0.007
+1028,laptop,no_logo,0.0066
+53902,city street,no_logo,0.0061
+8625,money,no_logo,0.0054
+5635,soda can,no_logo,0.0054
+172894,money,no_logo,0.0052
+120177,money,no_logo,0.0052
+47743,phone,no_logo,0.0043
+46989,takeaway coffee,no_logo,0.0032
+140111,nature,no_logo,0.0027
+142641,phone,no_logo,0.0024
+153976,nature,no_logo,0.0024
+14900,server room,no_logo,0.0023
+199623,office,no_logo,0.0018
+12876,shopping,no_logo,0.0016
+12060,nature,no_logo,0.0015
+377880,server room,no_logo,0.0015
+174003,phone,no_logo,0.0014
+8257,sneakers,no_logo,0.0012
+1192,food,no_logo,0.0011
+377885,server room,no_logo,0.0009
+79908,soda can,no_logo,0.0007
+83436,times square,no_logo,0.0005
+28190,soda can,no_logo,0.0003
+377883,server room,no_logo,0.0002
+25094,soda can,no_logo,0.0002
+3171,sneakers,no_logo,0.0002
+4948,takeaway coffee,no_logo,0.0002
+149935,food,no_logo,0.0001
+203923,nature,no_logo,0.0001
+45358,takeaway coffee,no_logo,0.0001
+240531,food,no_logo,0.0
+228847,nature,no_logo,0.0

@@ -10,15 +10,20 @@ THE SELECTION RULE (its result and reason are written to timeline.json):
 3. Score each candidate's preview picture with CLIP against the scene's meaning
    (average similarity to the 3 queries). Add small bonuses for a good length / orientation
    - the bonus only changes the ORDER, never whether a clip passes.
-   Logo check (LOGO_CHECK): the same picture is also scored against "logo / brand text /
-   watermark" prompts (LOGO_PROMPTS). logo gap = logo score - scene score:
-   - gap >= LOGO_REJECT_MARGIN  -> rejected (the picture looks more like a logo than the scene),
-   - gap >= LOGO_PENALTY_MARGIN -> kept, but LOGO_PENALTY is taken off its ORDER score, so a
+   Logo check (LOGO_CHECK, only for candidates that pass STOCK_MIN_SCORE): a calibrated LOGO
+   PROBABILITY of the same picture = CLIP softmax over logo prompts (LOGO_PROMPTS: "a photo of a
+   laptop with an apple logo", ...) and neutral prompts (LOGO_NEUTRAL_PROMPTS: "a photo of a
+   laptop", ...), summed over the logo prompts; the highest of the whole picture and its
+   LOGO_CROP_GRID x LOGO_CROP_GRID crops counts:
+   - probability > LOGO_REJECT_PROB  -> rejected,
+   - probability > LOGO_PENALTY_PROB -> kept, but LOGO_PENALTY is taken off its ORDER score, so a
      candidate without readable brand text wins a near tie.
+   It does not compare against the scene score (that old margin rule rejected most real clips).
 4. If the best CLIP score >= STOCK_MIN_SCORE: download the best candidate, check it with
    ffprobe; if it is corrupted, take the next passing one.
    Frame logo check: the thumbnail is only ONE picture, so LOGO_FRAME_COUNT frames of the
-   DOWNLOADED clip get the same logo test; if any frame is "rejected", so is the clip (next one).
+   DOWNLOADED clip get the same logo test; if any frame is above LOGO_REJECT_PROB, the clip is
+   rejected (next one).
    Done. Otherwise (or if the source failed) go to the next source.
 5. Nothing passed anywhere -> a `generated` motion card.
 
@@ -55,14 +60,14 @@ class Scorer:
     def score(self, candidates: list[Candidate], previews: list[Path | None], texts: list[str]) -> list[float]:
         raise NotImplementedError
 
-    def logo_scores(self, candidates: list[Candidate], previews: list[Path | None]) -> list[float]:
-        """How much each picture looks like a logo / brand text / watermark (same scale as score())."""
+    def logo_probs(self, candidates: list[Candidate], previews: list[Path | None]) -> list[float]:
+        """Probability 0..1 that each picture shows a visible logo / brand text / watermark."""
         raise NotImplementedError
 
     def frame_scores(self, candidate: Candidate, frames: list[Path], texts: list[str]) -> list[tuple[float, float]]:
-        """(scene score, logo score) for each frame of the downloaded clip (same scale as score())."""
+        """(scene score, logo probability) for each frame of the downloaded clip."""
         same = [candidate] * len(frames)
-        return list(zip(self.score(same, frames, texts), self.logo_scores(same, frames)))
+        return list(zip(self.score(same, frames, texts), self.logo_probs(same, frames)))
 
     def score_images(self, images: list, texts: list[str]) -> list[float] | None:
         """Score raw RGB pictures (numpy arrays) against texts - used by the subject-aware crop.
@@ -75,19 +80,19 @@ class Scorer:
 
 class MockScorer(Scorer):
     """No model: share of a query's words found in the clip's tags (0.15 .. 0.30).
-    Logo score: the candidate's extra["logo_score"] if a test set one, else a low 0.05.
-    Frame logo scores: extra["frame_logo_scores"] (one per frame) if a test set them, else the
-    same value as the thumbnail."""
+    Logo probability: the candidate's extra["logo_prob"] if a test set one, else a low 0.05.
+    Frame logo probabilities: extra["frame_logo_probs"] (one per frame) if a test set them, else
+    the same value as the thumbnail."""
     name = "mock"
     needs_images = False
 
-    def logo_scores(self, candidates, previews):
-        return [float(c.extra.get("logo_score", 0.05)) for c in candidates]
+    def logo_probs(self, candidates, previews):
+        return [float(c.extra.get("logo_prob", 0.05)) for c in candidates]
 
     def frame_scores(self, candidate, frames, texts):
         scene = self.score([candidate], [None], texts)[0]
-        per_frame = candidate.extra.get("frame_logo_scores") or []
-        default = float(candidate.extra.get("logo_score", 0.05))
+        per_frame = candidate.extra.get("frame_logo_probs") or []
+        default = float(candidate.extra.get("logo_prob", 0.05))
         return [(scene, float(per_frame[i]) if i < len(per_frame) else default) for i in range(len(frames))]
 
     def score(self, candidates, previews, texts):
@@ -157,13 +162,27 @@ class ClipScorer(Scorer):
             sims = (self._preview_embeddings(previews) @ text.T).mean(dim=1)
         return [round(float(x), 4) for x in sims]
 
-    def logo_scores(self, candidates, previews):
-        torch = self._load()[3]
+    def logo_probs(self, candidates, previews):
+        """CLIP zero-shot classification "logo" vs "no logo" for each picture.
+
+        For each VIEW of the picture (the whole picture + a LOGO_CROP_GRID x LOGO_CROP_GRID grid
+        of crops, because a shop sign or a laptop logo is often a small part of the frame):
+        softmax over all logo + neutral prompts (with CLIP's own logit scale, about 100), then the
+        logo prompts' shares added up. The picture's logo probability = its highest view.
+        """
+        from PIL import Image
+
+        s = get_settings()
+        model, _, _, torch = self._load()
+        logo, neutral = s.logo_prompts, s.logo_neutral_prompts
+        out = []
         with self._lock, torch.no_grad():
-            text = self._encode_texts(get_settings().logo_prompts)
-            # Similarity to the logo prompt the picture is MOST like.
-            sims = (self._preview_embeddings(previews) @ text.T).max(dim=1).values
-        return [round(float(x), 4) for x in sims]
+            text = self._encode_texts(logo + neutral)
+            for path in previews:
+                views = logo_views(Image.open(path).convert("RGB"), s.LOGO_CROP_GRID)
+                logits = model.logit_scale.exp() * (self._encode_pictures(views) @ text.T)
+                out.append(round(float(logits.softmax(dim=-1)[:, :len(logo)].sum(dim=1).max()), 4))
+        return out
 
     def score_images(self, images, texts):
         from PIL import Image
@@ -173,6 +192,17 @@ class ClipScorer(Scorer):
             text = self._encode_texts([f"a photo of {t}" for t in texts])
             sims = (self._encode_pictures([Image.fromarray(a) for a in images]) @ text.T).mean(dim=1)
         return [round(float(x), 4) for x in sims]
+
+
+def logo_views(picture, grid: int) -> list:
+    """The whole PIL picture + a grid x grid set of crops (grid <= 1: the whole picture only)."""
+    views = [picture]
+    if grid > 1:
+        w, h = picture.size
+        for i in range(grid):
+            for j in range(grid):
+                views.append(picture.crop((w * i // grid, h * j // grid, w * (i + 1) // grid, h * (j + 1) // grid)))
+    return views
 
 
 def get_scorer() -> Scorer:
@@ -282,7 +312,7 @@ def _search(provider, queries: list[str], ctx: SelectionContext, scene_seconds: 
 
 
 def _score(provider, candidates: list[Candidate], texts: list[str], ctx: SelectionContext):
-    """[(candidate, score, logo score or None)] for the candidates whose preview could be loaded."""
+    """[(candidate, score, logo probability or None)] for the candidates whose preview could be loaded."""
     previews: list[Path | None] = [None] * len(candidates)
     if ctx.scorer.needs_images:
         folder = ctx.work / "previews"
@@ -301,30 +331,35 @@ def _score(provider, candidates: list[Candidate], texts: list[str], ctx: Selecti
         candidates, previews = [c for c, _ in pairs], [p for _, p in pairs]
     if not candidates:
         return []
+    s = get_settings()
     try:
         scores = ctx.scorer.score(candidates, previews, texts)
-        logos = ctx.scorer.logo_scores(candidates, previews) if get_settings().LOGO_CHECK else [None] * len(scores)
+        logos: list[float | None] = [None] * len(scores)
+        if s.LOGO_CHECK:  # only candidates that pass STOCK_MIN_SCORE can be chosen: check just those
+            idx = [i for i, score in enumerate(scores) if score >= s.STOCK_MIN_SCORE]
+            if idx:
+                probs = ctx.scorer.logo_probs([candidates[i] for i in idx], [previews[i] for i in idx])
+                for i, p in zip(idx, probs):
+                    logos[i] = p
     except Exception as e:  # a broken preview image must not fail the job
         log.warning("scoring failed: %s", e)
         return []
     return list(zip(candidates, scores, logos))
 
 
-def logo_decision(score: float, logo: float | None) -> tuple[str, float, dict | None]:
+def logo_decision(logo_prob: float | None) -> tuple[str, float, dict | None]:
     """("ok" | "penalised" | "rejected", order-score penalty, facts for timeline.json)."""
     s = get_settings()
-    if logo is None:
+    if logo_prob is None:
         return "ok", 0.0, None
-    gap = round(logo - score, 4)
-    if gap >= s.LOGO_REJECT_MARGIN:
+    if logo_prob > s.LOGO_REJECT_PROB:
         result, penalty = "rejected", 0.0
-    elif gap >= s.LOGO_PENALTY_MARGIN:
+    elif logo_prob > s.LOGO_PENALTY_PROB:
         result, penalty = "penalised", s.LOGO_PENALTY
     else:
         result, penalty = "ok", 0.0
-    return result, penalty, {"logo_score": logo, "scene_score": score, "gap": gap, "result": result,
-                             "reject_margin": s.LOGO_REJECT_MARGIN, "penalty_margin": s.LOGO_PENALTY_MARGIN,
-                             "penalty": penalty}
+    return result, penalty, {"logo_prob": logo_prob, "result": result, "reject_prob": s.LOGO_REJECT_PROB,
+                             "penalty_prob": s.LOGO_PENALTY_PROB, "penalty": penalty}
 
 
 def grab_check_frames(path: Path, kind: str, folder: Path, uid: str, count: int) -> list[tuple[float | None, Path]]:
@@ -349,14 +384,14 @@ def grab_check_frames(path: Path, kind: str, folder: Path, uid: str, count: int)
 def frame_logo_check(candidate: Candidate, path: Path, texts: list[str], scorer: Scorer,
                      folder: Path) -> tuple[bool, list[dict]]:
     """Run the logo test on frames of the downloaded clip. Returns (rejected?, facts per frame).
-    The same rule as the thumbnail: logo score - scene score >= LOGO_REJECT_MARGIN -> rejected."""
+    The same rule as the thumbnail: logo probability > LOGO_REJECT_PROB -> rejected."""
     s = get_settings()
     frames = grab_check_frames(path, candidate.kind, folder, candidate.uid, s.LOGO_FRAME_COUNT)
     scores = scorer.frame_scores(candidate, [p for _, p in frames], texts)
     facts = []
     for (t, _), (scene, logo) in zip(frames, scores):
-        result, _, details = logo_decision(scene, logo)
-        facts.append({"time": t, "logo_score": logo, "scene_score": scene, "gap": details["gap"], "result": result})
+        result, _, _ = logo_decision(logo)
+        facts.append({"time": t, "logo_prob": logo, "scene_score": scene, "result": result})
     return any(f["result"] == "rejected" for f in facts), facts
 
 
@@ -409,9 +444,9 @@ def select_clip(scene, meaning: SceneMeaning, plan: SearchPlan, ctx: SelectionCo
             continue
         rows, logo_rejected = [], []
         for c, score, logo in scored:
-            result, penalty, facts = logo_decision(score, logo)
+            result, penalty, facts = logo_decision(logo)
             if result == "rejected":
-                logo_rejected.append((score, f"{c.uid} (logo {logo:.3f} vs scene {score:.3f})"))
+                logo_rejected.append((score, f"{c.uid} (logo prob {logo:.2f}, scene {score:.3f})"))
                 continue
             rows.append((c, score, round(score + fit_bonus(c, seconds, ctx.orientation) - penalty, 4), facts))
         if logo_rejected:  # best-scoring rejected ones first: those are the ones that mattered
@@ -451,21 +486,21 @@ def select_clip(scene, meaning: SceneMeaning, plan: SearchPlan, ctx: SelectionCo
                     where = f"at {bad['time']:.1f} s" if bad["time"] is not None else "in the picture"
                     ctx.used.add(cand.uid)  # never try it again in this video
                     ctx.warn(f"Scene {scene.index}: clip {cand.uid} shows a logo {where} of the downloaded clip "
-                             f"(logo {bad['logo_score']:.3f} vs scene {bad['scene_score']:.3f}); "
+                             f"(logo prob {bad['logo_prob']:.2f} > {s.LOGO_REJECT_PROB:.2f}); "
                              "tried the next candidate")
-                    notes.append(f"{cand.uid} rejected by the frame logo check ({where}, gap {bad['gap']:+.3f})")
+                    notes.append(f"{cand.uid} rejected by the frame logo check ({where}, "
+                                 f"logo prob {bad['logo_prob']:.2f})")
                     continue
                 logo_report = {"thumbnail": logo_facts, "frames": frame_facts,
                                "result": (logo_facts or {}).get("result", "ok")}
                 if frame_facts:
                     frame_note = (f"; {len(frame_facts)} clip frame(s) passed the logo check "
-                                  f"(max gap {max(f['gap'] for f in frame_facts):+.3f})")
+                                  f"(max logo prob {max(f['logo_prob'] for f in frame_facts):.2f})")
             ctx.used.add(cand.uid)
             reason = (f"{name}: score {score:.3f} >= {s.STOCK_MIN_SCORE:.2f} for query '{cand.query}' "
                       f"(best of {len(ranked)} candidates, order bonus {final - score:+.2f})")
             if logo_facts:
-                reason += (f"; logo check {logo_facts['result']} (logo {logo_facts['logo_score']:.3f}, "
-                           f"gap {logo_facts['gap']:+.3f})")
+                reason += f"; logo check {logo_facts['result']} (logo prob {logo_facts['logo_prob']:.2f})"
             reason += frame_note
             if notes:
                 reason += "; earlier: " + "; ".join(notes)

@@ -74,3 +74,22 @@ def test_line_wrapping_helpers():
     assert len(lines) == 2 and all(len(line) <= 42 for line in lines)
     assert abs(len(lines[0]) - len(lines[1])) <= 10  # balanced, not one long + one tiny
     assert wrap(["supercalifragilisticexpialidocious" * 2], 42) == ["supercalifragilisticexpialidocious" * 2]
+
+
+def test_footage_mix_counts_video_photo_and_cards():
+    from app.pipeline.outputs import footage_mix
+    from app.pipeline.providers.base import Candidate
+    from app.pipeline.rank import Selection
+
+    def sel(i, kind, generated=False, reason="mock: score 0.300"):
+        c = Candidate(provider="generated" if generated else "x", id=str(i), kind=kind, generated=generated)
+        return Selection(i, c, None, None, None, reason)
+
+    mix = footage_mix([sel(0, "video"), sel(1, "video"), sel(2, "image"),
+                       sel(3, "generated", True, "statistic line: animated number card '40%'"),
+                       sel(4, "generated", True, "no stock source passed the rule")])
+    assert mix["counts"] == {"video": 2, "photo_motion": 1, "generated_card": 2}
+    assert mix["share"] == {"video": 0.4, "photo_motion": 0.2, "generated_card": 0.4}
+    assert mix["statistic_cards"] == 1  # the number card is on purpose, so the fair share leaves it out
+    assert mix["share_without_statistic_cards"] == {"video": 0.5, "photo_motion": 0.25, "generated_card": 0.25}
+    assert footage_mix([])["share"] == {"video": 0.0, "photo_motion": 0.0, "generated_card": 0.0}

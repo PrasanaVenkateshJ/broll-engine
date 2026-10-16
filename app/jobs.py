@@ -10,9 +10,9 @@ from datetime import datetime, timezone
 from typing import Any
 
 import httpx
-from sqlalchemy import select, update
+from sqlalchemy import or_, select, update
 from sqlalchemy.exc import IntegrityError
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, aliased
 
 from app.config import get_settings
 from app.db import new_session
@@ -77,6 +77,18 @@ def create_job(db: Session, *, job_id: str, client_id: str, idem_key: str | None
     if existing is not None:
         return existing, False
 
+    if parent_job_id and not take_swap_lock(db, parent_job_id, job_id):
+        db.rollback()
+        # Same key + same body sent twice at once: the other request won the lock AND saved the
+        # key (it committed before our UPDATE could run), so this is its job, not a second swap.
+        existing = find_existing_job(db, client_id, idem_key, req_hash)
+        if existing is not None:
+            return existing, False
+        holder = db.scalar(select(Job.active_swap_id).where(Job.id == parent_job_id))
+        raise AppError(ErrorCode.SWAP_IN_PROGRESS, f"Another clip swap ({holder}) is still queued or running for "
+                       "this video; one swap at a time, try again when it has finished", 409, retryable=True,
+                       details={"swap_job_id": holder, "root_job_id": parent_job_id})
+
     job = Job(
         id=job_id,
         client_id=client_id,
@@ -105,6 +117,34 @@ def create_job(db: Session, *, job_id: str, client_id: str, idem_key: str | None
         return existing, False
     log.info("job created", extra={"job_id": job_id, "fields": {"input_type": input_type}})
     return job, True
+
+
+# ---------- One clip swap at a time per video ----------
+
+def take_swap_lock(db: Session, root_job_id: str, swap_job_id: str) -> bool:
+    """Try to make swap_job_id the ONLY active swap of this video. True = we got the lock.
+
+    One conditional UPDATE: "set active_swap_id = me WHERE it is free". The database runs one
+    write at a time, so when two swaps arrive at the same moment only ONE update finds the lock
+    free (rowcount 1); the other finds it taken (rowcount 0). A check-then-insert in Python could
+    let both through. "Free" also covers a holder that has already finished (a lock left behind
+    by a crash), so a stuck lock heals itself. Not committed here: create_job() commits the lock
+    together with the new swap job, so either both are saved or neither.
+    """
+    holder = aliased(Job)
+    finished = select(holder.id).where(holder.status.in_([JobStatus.SUCCEEDED, JobStatus.FAILED]))
+    result = db.execute(
+        update(Job)
+        .where(Job.id == root_job_id, or_(Job.active_swap_id.is_(None), Job.active_swap_id.in_(finished)))
+        .values(active_swap_id=swap_job_id)
+    )
+    return result.rowcount == 1
+
+
+def release_swap_lock(db: Session, root_job_id: str, swap_job_id: str) -> None:
+    """Free the lock - only if this swap still holds it (never frees someone else's lock)."""
+    db.execute(update(Job).where(Job.id == root_job_id, Job.active_swap_id == swap_job_id)
+               .values(active_swap_id=None))
 
 
 # ---------- Worker side ----------
@@ -165,6 +205,8 @@ def finish_job(job_id: str, *, files: list[str] | None = None, error: AppError |
             job.status = JobStatus.FAILED
             job.stage = "failed"
             job.error_json = json.dumps(error.to_dict()["error"])
+        if job.parent_job_id:  # a clip swap ended (either way): the next swap of this video may start
+            release_swap_lock(db, job.parent_job_id, job_id)
         db.commit()
     log.info("job finished", extra={"job_id": job_id,
                                      "fields": {"status": "failed" if error else "succeeded"}})

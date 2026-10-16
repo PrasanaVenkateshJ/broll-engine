@@ -61,6 +61,37 @@ def test_batch_run_downloads_everything_and_writes_the_summary(client, worker, t
     assert [r.job_id for r in again] == [r.job_id for r in results]
 
 
+def test_batch_run_backs_off_and_respects_retry_after(tmp_path, monkeypatch):
+    """A fake API (httpx.MockTransport) that answers 429 + Retry-After first: the runner must wait
+    exactly that long and try again, and its pauses between status checks must grow."""
+    import httpx
+
+    import tools.batch_run as batch
+
+    sleeps, calls = [], []
+    monkeypatch.setattr(batch.time, "sleep", sleeps.append)
+    answers = {"POST": [httpx.Response(429, headers={"Retry-After": "7"}, json={"error": {"code": "RATE_LIMITED"}}),
+                        httpx.Response(202, json={"job_id": "j1"})],
+               "GET": [httpx.Response(200, json={"status": "running"}),
+                       httpx.Response(200, json={"status": "running"}),
+                       httpx.Response(429, headers={"Retry-After": "9"}, json={"error": {"code": "RATE_LIMITED"}}),
+                       httpx.Response(200, json={"status": "running"}),
+                       httpx.Response(200, json={"status": "succeeded", "warnings": [], "result": {"files": {}}})]}
+
+    def handler(request):
+        calls.append(request.method)
+        return answers[request.method].pop(0)
+
+    with httpx.Client(base_url="http://api.test", transport=httpx.MockTransport(handler)) as client:
+        item = batch.Item(name="one", source="test", body={"script": "Hi."})
+        result = batch.run_one(client, item, tmp_path, None, timeout=600, poll=2.0, max_poll=15.0)
+
+    assert result.status == "succeeded" and result.job_id == "j1"
+    assert calls == ["POST", "POST", "GET", "GET", "GET", "GET", "GET"]
+    # 7 s = the POST's Retry-After; then 2 s, 3 s growing pauses; the 429 lifts the pause to 9 s; then x1.5.
+    assert sleeps == [7.0, 2.0, 3.0, 9.0, 13.5]
+
+
 def test_cli_without_inputs_exits_with_code_2(tmp_path):
     (tmp_path / "empty").mkdir()
     assert main([str(tmp_path / "empty"), "--out", str(tmp_path / "out")]) == 2

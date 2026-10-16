@@ -14,6 +14,9 @@ info:
       The clip swap REQUIRES the header.
     - **Correlation id**: send `X-Correlation-Id` (or one is generated); it is echoed on every response
       and written into every log line of the request and of the job.
+    - **Rate limit**: per token and minute, POSTs (new jobs + clip swaps) and GETs (status + file
+      downloads) are counted separately (`RATE_LIMIT_POST_PER_MINUTE`, `RATE_LIMIT_GET_PER_MINUTE`).
+      Over the limit -> 429 `RATE_LIMITED` with `Retry-After` (seconds). Poll with a growing pause.
     - **Errors** always use the `Error` schema; `code` is one of the listed UPPER_SNAKE_CASE codes.
     - **Callbacks**: with `callback_url`, the finished job is POSTed there, signed with
       `X-IncuBrix-Signature` = hex HMAC-SHA256(raw body, `CALLBACK_SECRET`).
@@ -222,8 +225,10 @@ paths:
               schema: {$ref: '#/components/schemas/Error'}
         '409':
           description: >-
-            `JOB_NOT_READY` (the original job is queued / running / failed, has no swap cache, or another
-            swap of the same video is still running) or `IDEMPOTENCY_KEY_REUSED`.
+            `JOB_NOT_READY` (the original job is queued / running / failed, or has no swap cache),
+            `SWAP_IN_PROGRESS` (another swap of the same video is queued or running; one swap at a time
+            per video, enforced atomically in the database - retry when it ends) or
+            `IDEMPOTENCY_KEY_REUSED`.
           headers:
             X-Correlation-Id: {$ref: '#/components/headers/X-Correlation-Id'}
           content:
@@ -334,6 +339,7 @@ paths:
           content:
             application/json:
               schema: {$ref: '#/components/schemas/Error'}
+        '429': {$ref: '#/components/responses/RateLimited'}
 
 components:
   securitySchemes:
@@ -390,7 +396,10 @@ components:
         application/json:
           schema: {$ref: '#/components/schemas/Error'}
     RateLimited:
-      description: '`RATE_LIMITED` - more than RATE_LIMIT_PER_MINUTE requests this minute for this token.'
+      description: >-
+        `RATE_LIMITED` - more than RATE_LIMIT_POST_PER_MINUTE POSTs (new jobs, clip swaps) or
+        RATE_LIMIT_GET_PER_MINUTE GETs (status, file downloads) this minute for this token.
+        Wait `Retry-After` seconds; `details` has bucket, limit_per_minute and retry_after_seconds.
       headers:
         X-Correlation-Id: {$ref: '#/components/headers/X-Correlation-Id'}
         Retry-After:
@@ -426,6 +435,7 @@ components:
         - SCENE_NOT_FOUND
         - JOB_NOT_READY
         - NO_ALTERNATIVE_CLIP
+        - SWAP_IN_PROGRESS
         - IDEMPOTENCY_KEY_REUSED
         - UNAUTHORIZED
         - RATE_LIMITED

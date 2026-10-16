@@ -11,6 +11,8 @@ A body may hold "name": "my-test" (used as the output folder name; removed befor
 For each input: POST with an Idempotency-Key (made from the input itself, so running the batch
 again never makes duplicate jobs), poll GET /api/v1/jobs/{id} until it ends, then download every
 output file into --out/<input-name>/ together with job.json (the final job answer).
+Polite polling: the pause between status checks grows from --poll up to --max-poll, and a
+429 RATE_LIMITED answer is retried after the server's Retry-After seconds.
 At the end: --out/summary.csv and --out/summary.md.
 
     python tools/batch_run.py testpack/inputs --out testpack/outputs/run1
@@ -34,6 +36,7 @@ AUDIO_EXTENSIONS = {".mp3", ".wav", ".m4a"}
 CSV_FIELDS = ["input", "job_id", "status", "error_code", "narration_seconds", "turnaround_seconds", "scenes",
               "warnings_count"]
 TERMINAL = ("succeeded", "failed")
+MAX_RATE_LIMIT_RETRIES = 5   # 429 answers in a row before we give up on one request
 
 
 @dataclass
@@ -130,8 +133,28 @@ def _error_code(resp: httpx.Response) -> str:
         return f"HTTP_{resp.status_code}"
 
 
+def retry_after_seconds(resp: httpx.Response, default: float) -> float:
+    """Seconds the server asked us to wait (Retry-After header), else `default`."""
+    try:
+        return max(0.0, float(resp.headers.get("Retry-After", "")))
+    except ValueError:
+        return default
+
+
+def send(request) -> httpx.Response:
+    """Run request() (one HTTP call); on 429 wait Retry-After seconds and try again (a few times)."""
+    for _ in range(MAX_RATE_LIMIT_RETRIES):
+        resp = request()
+        if resp.status_code != 429:
+            return resp
+        wait = retry_after_seconds(resp, default=5.0)
+        print(f"rate limited (429): waiting {wait:.0f} s as the server asked", file=sys.stderr)
+        time.sleep(wait)
+    return request()
+
+
 def run_one(client: httpx.Client, item: Item, out: Path, ratios: list[str] | None, timeout: float,
-            poll: float) -> Result:
+            poll: float, max_poll: float = 15.0) -> Result:
     result = Result(input=item.name)
     folder = out / item.name
     folder.mkdir(parents=True, exist_ok=True)
@@ -140,18 +163,22 @@ def run_one(client: httpx.Client, item: Item, out: Path, ratios: list[str] | Non
     try:
         if item.audio is not None:
             options = {"aspect_ratios": ratios} if ratios else {}
-            with item.audio.open("rb") as f:
-                resp = client.post("/api/v1/broll/jobs", headers=headers, data={"options": json.dumps(options)},
-                                   files={"audio": (item.audio.name, f, "application/octet-stream")})
+
+            def post():  # opens the file again on every try (a retry needs the bytes from the start)
+                with item.audio.open("rb") as f:
+                    return client.post("/api/v1/broll/jobs", headers=headers, data={"options": json.dumps(options)},
+                                       files={"audio": (item.audio.name, f, "application/octet-stream")})
+            resp = send(post)
         else:
             body = {**item.body, "aspect_ratios": ratios} if ratios else item.body
-            resp = client.post("/api/v1/broll/jobs", headers=headers, json=body)
+            resp = send(lambda: client.post("/api/v1/broll/jobs", headers=headers, json=body))
         if resp.status_code != 202:  # refused straight away (e.g. EMPTY_SCRIPT, UNSUPPORTED_FILE_TYPE)
             result.status, result.error_code = "rejected", _error_code(resp)
             (folder / "job.json").write_text(resp.text, encoding="utf-8")
             return result
         result.job_id = resp.json()["job_id"]
         job = {}
+        pause = poll
         deadline = time.monotonic() + timeout
         while time.monotonic() < deadline:
             r = client.get(f"/api/v1/jobs/{result.job_id}")
@@ -159,7 +186,10 @@ def run_one(client: httpx.Client, item: Item, out: Path, ratios: list[str] | Non
                 job = r.json()
                 if job["status"] in TERMINAL:
                     break
-            time.sleep(poll)
+            elif r.status_code == 429:  # too fast: wait as long as the server says, then poll slower
+                pause = max(pause, retry_after_seconds(r, default=max_poll))
+            time.sleep(min(pause, max(0.0, deadline - time.monotonic())))
+            pause = min(pause * 1.5, max(max_poll, poll))  # backoff: 2 s, 3 s, 4.5 s ... up to max_poll
         result.turnaround_seconds = round(time.perf_counter() - started, 2)
         (folder / "job.json").write_text(json.dumps(job, indent=2), encoding="utf-8")
         result.status = job.get("status") if job.get("status") in TERMINAL else "timeout"
@@ -167,7 +197,7 @@ def run_one(client: httpx.Client, item: Item, out: Path, ratios: list[str] | Non
         if job.get("error"):
             result.error_code = job["error"].get("code", "")
         for name, url in ((job.get("result") or {}).get("files") or {}).items():
-            data = client.get(url)  # signed link: works without the bearer token too
+            data = send(lambda: client.get(url))  # signed link: works without the bearer token too
             if data.status_code == 200:
                 (folder / name).write_bytes(data.content)
                 result.files.append(name)
@@ -211,10 +241,11 @@ def write_summary(results: list[Result], out: Path, api: str) -> None:
 
 
 def run_batch(items: list[Item], out: Path, client: httpx.Client, ratios: list[str] | None = None,
-              concurrency: int = 2, timeout: float = 1800, poll: float = 2.0, api: str = "") -> list[Result]:
+              concurrency: int = 2, timeout: float = 1800, poll: float = 2.0, api: str = "",
+              max_poll: float = 15.0) -> list[Result]:
     out.mkdir(parents=True, exist_ok=True)
     with ThreadPoolExecutor(max_workers=max(1, concurrency)) as pool:
-        results = list(pool.map(lambda it: run_one(client, it, out, ratios, timeout, poll), items))
+        results = list(pool.map(lambda it: run_one(client, it, out, ratios, timeout, poll, max_poll), items))
     write_summary(results, out, api or str(client.base_url))
     return results
 
@@ -230,7 +261,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--ratios", default="", help="e.g. 16:9,9:16 (overrides each input's aspect_ratios)")
     parser.add_argument("--concurrency", type=int, default=2, help="inputs running at the same time (default 2)")
     parser.add_argument("--timeout", type=float, default=1800, help="max seconds to wait for one job")
-    parser.add_argument("--poll", type=float, default=2.0, help="seconds between status checks")
+    parser.add_argument("--poll", type=float, default=2.0, help="first pause between status checks (seconds)")
+    parser.add_argument("--max-poll", type=float, default=15.0,
+                        help="the pause grows x1.5 per check up to this (seconds, default 15)")
     args = parser.parse_args(argv)
 
     items = collect_inputs(args.input)
@@ -241,7 +274,8 @@ def main(argv: list[str] | None = None) -> int:
     headers = {"Authorization": f"Bearer {args.token}"} if args.token else {}
     print(f"{len(items)} input(s) -> {args.api} (concurrency {args.concurrency})")
     with httpx.Client(base_url=args.api, headers=headers, timeout=120, follow_redirects=True) as client:
-        results = run_batch(items, args.out, client, ratios, args.concurrency, args.timeout, args.poll, args.api)
+        results = run_batch(items, args.out, client, ratios, args.concurrency, args.timeout, args.poll, args.api,
+                            args.max_poll)
     for r in results:
         print(f"{r.input:30} {r.status:10} {r.error_code:24} {r.turnaround_seconds or '':>8} s  job {r.job_id}")
     print(f"summary: {args.out / 'summary.csv'} and {args.out / 'summary.md'}")

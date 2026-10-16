@@ -24,7 +24,11 @@ class Settings(BaseSettings):
     # --- Auth + rate limit ---
     # Comma-separated list of allowed bearer tokens. Empty = auth switched OFF.
     API_TOKENS: str = ""
-    RATE_LIMIT_PER_MINUTE: int = 120
+    # Requests per token per minute, counted separately (0 = no limit):
+    # POST = job creation + clip swaps (each one starts slow work); GET = job status + file downloads
+    # (cheap, and clients poll while they wait).
+    RATE_LIMIT_POST_PER_MINUTE: int = 30
+    RATE_LIMIT_GET_PER_MINUTE: int = 600
 
     # --- Database ---
     DATABASE_URL: str = "sqlite:///./data/broll.db"
@@ -196,21 +200,29 @@ class Settings(BaseSettings):
     ORIENTATION_BONUS: float = 0.02
     # Lines with a number/percentage get an animated number card instead of stock footage.
     GENERATED_FOR_STATISTICS: bool = True
-    # Logo check: each preview is also scored against "logo / brand text / watermark" prompts.
-    # logo gap = logo score - scene score. Gap >= LOGO_REJECT_MARGIN -> candidate rejected.
-    # Gap >= LOGO_PENALTY_MARGIN -> it stays, but LOGO_PENALTY is taken off its ORDER score
-    # (like the bonuses, it never changes whether a clip passes STOCK_MIN_SCORE).
-    # Calibrated on 31 hand-labelled real Pixabay previews (2026-10-16): -0.04 rejected 9 of 11
-    # logo pictures and no clean one; the other 2 logo pictures fall in the penalty band.
+    # Logo check: logo probability = CLIP softmax over LOGO_PROMPTS + LOGO_NEUTRAL_PROMPTS ("|"-separated),
+    # summed over the logo prompts (0 = surely clean, 1 = surely a logo), taken as the MAX over the whole
+    # picture and a LOGO_CROP_GRID x LOGO_CROP_GRID grid of crops (small signs / laptop logos).
+    # It does not depend on the scene text, so it means the same for every scene. Only candidates that
+    # pass STOCK_MIN_SCORE are checked. prob > LOGO_REJECT_PROB -> rejected; prob > LOGO_PENALTY_PROB ->
+    # kept, but LOGO_PENALTY is taken off its ORDER score (never changes whether it passes STOCK_MIN_SCORE).
+    # Each neutral prompt is the same subject WITHOUT the logo ("a photo of a laptop" vs "a photo of a
+    # laptop with an apple logo"); prompts that only say "no logos" did not work (CLIP ignores "no").
+    # Calibrated on 82 + 40 (held-out) hand-labelled real Pixabay video thumbnails, see
+    # testpack/calibration/logo_report.md (tools/logo_calibration.py repeats it).
     LOGO_CHECK: bool = True
-    LOGO_PROMPTS: str = ("a product with a printed brand logo|a famous company logo|"
-                         "a brand name printed on a can, cup or bottle|a glowing apple logo on a laptop lid|"
-                         "a sports brand logo on shoes or clothes|readable brand name text|a text watermark")
-    LOGO_REJECT_MARGIN: float = -0.04
-    LOGO_PENALTY_MARGIN: float = -0.06
+    LOGO_PROMPTS: str = ("a photo of a laptop with an apple logo|a photo of a shop sign with a brand name|"
+                         "a photo of advertising billboards|a photo of a car covered in sponsor logos|"
+                         "a photo of a product with a printed brand name")
+    LOGO_NEUTRAL_PROMPTS: str = ("a photo of a laptop|a photo of a shop|a photo of a city street|a photo of a car|"
+                                 "a photo of a product|a photo of a phone|a photo of people|a photo of nature|"
+                                 "a photo of food|a close-up photo")
+    LOGO_CROP_GRID: int = 3
+    LOGO_REJECT_PROB: float = 0.6
+    LOGO_PENALTY_PROB: float = 0.4
     LOGO_PENALTY: float = 0.03
     # After download, this many frames of the REAL clip (spread over its length) get the same
-    # logo test; one "rejected" frame rejects the clip. (Margins were calibrated on thumbnails.)
+    # logo test; one frame above LOGO_REJECT_PROB rejects the clip.
     LOGO_FRAME_COUNT: int = 3
 
     # --- Clip fitting + look ---
@@ -262,6 +274,10 @@ class Settings(BaseSettings):
     @property
     def logo_prompts(self) -> list[str]:
         return [p.strip() for p in self.LOGO_PROMPTS.split("|") if p.strip()]
+
+    @property
+    def logo_neutral_prompts(self) -> list[str]:
+        return [p.strip() for p in self.LOGO_NEUTRAL_PROMPTS.split("|") if p.strip()]
 
     @property
     def tts_voices(self) -> dict[str, tuple[str, str]]:

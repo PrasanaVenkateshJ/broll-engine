@@ -158,13 +158,44 @@ def rights_summary(selections: list) -> dict:
     }
 
 
+def clip_type(selection) -> str:
+    """"video" (a real video clip), "photo_motion" (still photo + Ken Burns) or "generated_card"."""
+    c = selection.candidate
+    if c.generated:
+        return "generated_card"
+    return "photo_motion" if c.kind == "image" else "video"
+
+
+def footage_mix(selections: list) -> dict:
+    """How many scenes use real stock video vs photo-motion vs generated cards (the goal: mostly video).
+
+    Statistic lines get a number card ON PURPOSE (GENERATED_FOR_STATISTICS), so the shares are also
+    given without them: that is the fair measure of how often a good video clip was found.
+    """
+    types = ("video", "photo_motion", "generated_card")
+    counts = {t: 0 for t in types}
+    for sel in selections:
+        counts[clip_type(sel)] += 1
+    stat_cards = sum(1 for sel in selections if sel.candidate.generated and sel.reason.startswith("statistic line"))
+    others = {**counts, "generated_card": counts["generated_card"] - stat_cards}
+    n, n_others = len(selections), len(selections) - stat_cards
+    return {
+        "scenes": n,
+        "counts": counts,
+        "share": {t: round(counts[t] / n, 3) if n else 0.0 for t in types},
+        "statistic_cards": stat_cards,
+        "share_without_statistic_cards": {t: round(others[t] / n_others, 3) if n_others else 0.0 for t in types},
+    }
+
+
 MANIFEST_SETTINGS = (
     "SEED", "MIN_SCENE_SECONDS", "MAX_SCENE_SECONDS", "PAUSE_SECONDS", "UNDERSTAND_PROVIDER", "LLM_MODEL",
     "PROVIDER_ORDER", "PROVIDERS_DISABLED", "RANK_SCORER", "CLIP_MODEL", "CLIP_PRETRAINED", "STOCK_MIN_SCORE",
     "DURATION_BONUS", "ORIENTATION_BONUS", "GENERATED_FOR_STATISTICS", "MAX_SLOWDOWN", "KEN_BURNS_ZOOM",
     "TARGET_LUMA", "TARGET_SATURATION", "QA_BLACK_SECONDS", "QA_FREEZE_SECONDS", "QA_MAX_DRIFT_SECONDS",
     "QA_RETRIES", "RENDER_FPS", "VIDEO_PRESET", "VIDEO_CRF", "AUDIO_SAMPLE_RATE", "AUDIO_BITRATE",
-    "CAPTION_MAX_CHARS_PER_LINE", "CAPTION_MAX_LINES")
+    "CAPTION_MAX_CHARS_PER_LINE", "CAPTION_MAX_LINES", "LOGO_CHECK", "LOGO_CROP_GRID", "LOGO_REJECT_PROB",
+    "LOGO_PENALTY_PROB", "LOGO_PENALTY", "LOGO_FRAME_COUNT")
 
 COST_METHOD = ("0 USD: every service used here is free - Groq free tier for the LLM (tokens counted in "
                "llm_tokens), Pixabay and Wikimedia Commons APIs are free, and Kokoro, Whisper, open_clip and "
@@ -193,6 +224,7 @@ def build_manifest(*, job_id: str, created_at: str, app: dict, input_facts: dict
         "cost_estimate": {"total_usd": 0.0, "llm_tokens": llm_tokens, "method": COST_METHOD},
         "warnings": warnings,
         "rights": rights_summary(selections),
+        "footage_mix": footage_mix(selections),
         "ai_generated": {
             "narration": "tts" in models,
             "visuals": any(sel.candidate.ai_generated for sel in selections),

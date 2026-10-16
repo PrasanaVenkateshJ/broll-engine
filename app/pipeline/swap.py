@@ -142,7 +142,7 @@ def _check_chosen(cand: Candidate, path: Path, plan: SearchPlan, ctx: SelectionC
     reason = (f"swap: clip chosen by the user ({how}); relevance score {score:.3f} measured on "
               f"{len(frames)} frame(s) (STOCK_MIN_SCORE {s.STOCK_MIN_SCORE:.2f} is not applied to a user's choice)")
     if logo:
-        reason += f"; frame logo check ok (max gap {max(f['gap'] for f in frames):+.3f})"
+        reason += f"; frame logo check ok (max logo prob {max(f['logo_prob'] for f in frames):.2f})"
     return Selection(scene_index, cand, path, score, None, reason, "", logo)
 
 

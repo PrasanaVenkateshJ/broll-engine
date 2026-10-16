@@ -32,6 +32,7 @@ class ErrorCode(str, Enum):
     SCENE_NOT_FOUND = "SCENE_NOT_FOUND"
     JOB_NOT_READY = "JOB_NOT_READY"              # clip swap: the original job has not finished (or failed)
     NO_ALTERNATIVE_CLIP = "NO_ALTERNATIVE_CLIP"  # clip swap: no other usable clip exists for the scene
+    SWAP_IN_PROGRESS = "SWAP_IN_PROGRESS"        # clip swap: another swap of the same video is queued / running
     IDEMPOTENCY_KEY_REUSED = "IDEMPOTENCY_KEY_REUSED"
     UNAUTHORIZED = "UNAUTHORIZED"
     RATE_LIMITED = "RATE_LIMITED"

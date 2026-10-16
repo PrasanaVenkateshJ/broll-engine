@@ -9,7 +9,8 @@ from fractions import Fraction
 from app.pipeline import media
 from app.pipeline.providers.mock import MockProvider
 from tests.conftest import AUTH
-from tests.integration.test_job_flow import path_of, wait_for_job
+from tests.helpers import wait_for_job
+from tests.integration.test_job_flow import path_of
 
 URL = "/api/v1/broll/jobs"
 SCRIPT = ("Saving money is not about earning more. It is about spending wisely. In 2025, household savings grew by "
@@ -77,6 +78,10 @@ def test_full_job_all_ratios_with_mocks(client, worker, tmp_path):
     assert {"tts", "transcribe", "scenes", "understand", "footage", "render"} <= set(manifest["timings_seconds"])
     assert manifest["cost_estimate"]["total_usd"] == 0.0 and "free" in manifest["cost_estimate"]["method"]
     assert manifest["rights"]["all_commercial_use"] is True and manifest["rights"]["any_watermark"] is False
+    mix = manifest["footage_mix"]
+    assert mix["scenes"] == len(scenes) and sum(mix["counts"].values()) == len(scenes)
+    assert mix["counts"]["video"] >= 1 and mix["statistic_cards"] == 1  # mock clips are videos; "40%" is a card
+    assert manifest["settings"]["LOGO_REJECT_PROB"] == 0.6
     assert manifest["ai_generated"]["visuals"] is False and manifest["ai_generated"]["generated_cards"] >= 1
     assert all(q["problems"] == [] and q["drift_seconds"] < 0.1 for q in manifest["qa"].values())
     assert fetch(client, final, "captions.srt", tmp_path).read_text(encoding="utf-8").startswith("1\n00:00:00")

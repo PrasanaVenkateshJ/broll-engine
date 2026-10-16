@@ -8,7 +8,8 @@ from app.pipeline import media
 from app.pipeline.providers.mock import MockProvider
 from tests.conftest import AUTH, OTHER_AUTH
 from tests.fake_api import FakeAPI
-from tests.integration.test_job_flow import path_of, wait_for_job
+from tests.helpers import wait_for_job
+from tests.integration.test_job_flow import path_of
 
 URL = "/api/v1/broll/jobs"
 SCRIPT = ("Saving money is not about earning more. It is about spending wisely. In 2025, household savings grew by "
@@ -153,7 +154,7 @@ def test_swap_with_provider_and_clip_id_and_frame_logo_check(client, worker, mon
     assert "chosen by the user" in scene["reason"] and len(scene["logo_check"]["frames"]) == 3
 
     # A clean id the user picks, but a frame of the downloaded clip shows a logo -> the swap is refused.
-    monkeypatch.setattr(MockProvider, "frame_logo_scores", {"abcdef0124": [0.05, 0.9, 0.05]})
+    monkeypatch.setattr(MockProvider, "frame_logo_probs", {"abcdef0124": [0.05, 0.9, 0.05]})
     bad = run_swap(client, job_id, 0, {"provider": "mock", "clip_id": "abcdef0124"}, "pc-2")
     assert bad["status"] == "failed" and bad["error"]["code"] == "INVALID_INPUT"
     assert bad["error"]["details"]["reason"] == "logo_check_failed"
@@ -185,6 +186,94 @@ def test_swap_with_a_user_supplied_clip_url(client, worker, clip_server):
     # The same file again (now in the video) is refused before any work starts.
     again = swap(client, final["job_id"], 0, body, "url-2")
     assert again.status_code == 422 and again.json()["error"]["details"]["reason"] == "clip_already_used"
+
+
+def test_two_swaps_at_the_same_moment_only_one_starts(client, monkeypatch):
+    """The race: two swap requests both pass every check, then both try to create their job.
+    A barrier holds both requests at the last check (swap_precheck) until BOTH have arrived, so they
+    hit the database at the same moment every run. Only one may get the video's swap lock."""
+    import threading
+
+    import app.main
+    from app.errors import AppError, ErrorCode
+    from app.jobs import finish_job
+    from app.models import Job
+    from app.db import new_session
+    from app.worker import start_workers
+
+    stop = threading.Event()  # own worker: stopped after the full job, so the swap jobs stay queued
+    threads = start_workers(stop)
+    try:
+        original = finished_job(client, "Small shops open early. Cloud computing helps them grow.", ["1:1"])
+    finally:
+        stop.set()
+        for t in threads:
+            t.join(timeout=30)
+    job_id = original["job_id"]
+
+    barrier = threading.Barrier(2, timeout=20)
+    real_precheck = app.main.swap_precheck
+
+    def precheck_together(*args):
+        real_precheck(*args)
+        barrier.wait()  # both requests are now past every check (the old code's "busy" query included)
+
+    monkeypatch.setattr(app.main, "swap_precheck", precheck_together)
+    responses = [None, None]
+
+    def fire(i):
+        responses[i] = swap(client, job_id, 0, {"mode": "next_best"}, f"race-{i}")
+
+    shots = [threading.Thread(target=fire, args=(i,)) for i in range(2)]
+    for t in shots:
+        t.start()
+    for t in shots:
+        t.join(timeout=60)
+
+    codes = sorted(r.status_code for r in responses)
+    assert codes == [202, 409], [r.json() for r in responses]
+    winner = next(r for r in responses if r.status_code == 202).json()["job_id"]
+    loser = next(r for r in responses if r.status_code == 409).json()["error"]
+    assert loser["code"] == "SWAP_IN_PROGRESS" and loser["retryable"] is True
+    assert loser["details"] == {"swap_job_id": winner, "root_job_id": job_id}
+    with new_session() as db:  # exactly ONE swap job exists, and it holds the lock
+        swaps = db.query(Job).filter(Job.parent_job_id == job_id).all()
+        assert [j.id for j in swaps] == [winner]
+        assert db.get(Job, job_id).active_swap_id == winner
+
+    monkeypatch.setattr(app.main, "swap_precheck", real_precheck)
+    busy = swap(client, job_id, 0, {"mode": "next_best"}, "race-later")
+    assert busy.status_code == 409 and busy.json()["error"]["code"] == "SWAP_IN_PROGRESS"
+
+    # When the swap ends (here: it fails), the lock is released and the next swap may start.
+    finish_job(winner, error=AppError(ErrorCode.RENDER_FAILED, "boom", 500))
+    with new_session() as db:
+        assert db.get(Job, job_id).active_swap_id is None
+    assert swap(client, job_id, 0, {"mode": "next_best"}, "race-after").status_code == 202
+
+
+def test_a_lock_left_by_a_finished_swap_heals_itself(client):
+    """If a swap finished without releasing the lock (e.g. a crash between the two steps), the
+    finished holder does not block the video forever."""
+    from app.db import new_session
+    from app.jobs import create_job, take_swap_lock
+    from app.models import Job, JobStatus
+
+    with new_session() as db:
+        for jid, status in (("root1", JobStatus.SUCCEEDED), ("oldswap", JobStatus.SUCCEEDED),
+                            ("runswap", JobStatus.RUNNING)):
+            create_job(db, job_id=jid, client_id="c", idem_key=None, req_hash="h", input_type="script",
+                       request_data={})
+            db.get(Job, jid).status = status
+        db.get(Job, "root1").active_swap_id = "runswap"
+        db.commit()
+        assert take_swap_lock(db, "root1", "new1") is False  # holder still running -> taken
+        db.rollback()
+        db.get(Job, "root1").active_swap_id = "oldswap"
+        db.commit()
+        assert take_swap_lock(db, "root1", "new1") is True   # holder already finished -> free
+        db.commit()
+        assert db.get(Job, "root1").active_swap_id == "new1"
 
 
 def test_swap_of_a_queued_or_failed_job_is_job_not_ready(client):

@@ -6,9 +6,9 @@ Tests change the class settings to simulate trouble:
     fail = True          -> every search raises ProviderError ("provider is down")
     corrupt_ids = {...}  -> fetch() writes garbage bytes for these ids ("corrupted download")
     clip_seconds = 6.0   -> length of every mock clip
-    logo_scores = {id: 0.4} -> the mock scorer's logo score for these ids ("a logo is visible")
-    frame_logo_scores = {id: [0.05, 0.4, 0.05]} -> logo score per frame of the DOWNLOADED clip
-                                                   ("the thumbnail is clean, but frame 2 shows a logo")
+    logo_probs = {id: 0.9} -> the mock scorer's logo probability for these ids ("a logo is visible")
+    frame_logo_probs = {id: [0.05, 0.9, 0.05]} -> logo probability per frame of the DOWNLOADED clip
+                                                  ("the thumbnail is clean, but frame 2 shows a logo")
 """
 import hashlib
 from pathlib import Path
@@ -26,8 +26,8 @@ class MockProvider(Provider):
     fail = False
     corrupt_ids: set[str] = set()
     clip_seconds = 6.0
-    logo_scores: dict[str, float] = {}
-    frame_logo_scores: dict[str, list[float]] = {}
+    logo_probs: dict[str, float] = {}
+    frame_logo_probs: dict[str, list[float]] = {}
 
     def search(self, query, orientation, min_duration):
         if self.fail:
@@ -41,10 +41,10 @@ class MockProvider(Provider):
 
     def _candidate(self, clip_id: str, query: str, rank: int) -> Candidate:
         extra = {"rank_in_query": rank}
-        if clip_id in self.logo_scores:
-            extra["logo_score"] = self.logo_scores[clip_id]
-        if clip_id in self.frame_logo_scores:
-            extra["frame_logo_scores"] = list(self.frame_logo_scores[clip_id])
+        if clip_id in self.logo_probs:
+            extra["logo_prob"] = self.logo_probs[clip_id]
+        if clip_id in self.frame_logo_probs:
+            extra["frame_logo_probs"] = list(self.frame_logo_probs[clip_id])
         return Candidate(
             provider=self.name, id=clip_id, kind="video", preview_url=f"mock://preview/{clip_id}",
             download_url=f"mock://clip/{clip_id}", duration=self.clip_seconds, width=640, height=360,

@@ -1,0 +1,41 @@
+pixabay_video_id,query,label,logo_prob
+21116,street at night,logo,0.9843
+21117,supermarket,logo,0.9093
+39892,computer,no_logo,0.6631
+19258,drink bottle,no_logo,0.3749
+2121,store,logo,0.2169
+1735,supermarket,no_logo,0.2166
+208387,football,no_logo,0.2094
+43559,typing keyboard,logo,0.1875
+236221,football,no_logo,0.1665
+1156,street at night,no_logo,0.1215
+3586,airport,logo,0.0974
+36510,airport,no_logo,0.0931
+205193,football,no_logo,0.0754
+7263,drink bottle,logo,0.073
+4315,drink bottle,no_logo,0.0719
+3593,airport,no_logo,0.0699
+168343,smartphone,no_logo,0.0619
+12794,typing keyboard,no_logo,0.0434
+215189,computer,no_logo,0.0406
+27091,computer,no_logo,0.0344
+3174,computer,no_logo,0.0274
+4730,supermarket,no_logo,0.0264
+140587,store,no_logo,0.0252
+1656,typing keyboard,no_logo,0.0226
+130720,smartphone,no_logo,0.0221
+276047,airport,no_logo,0.0131
+126805,coffee shop,no_logo,0.0107
+158633,football,no_logo,0.0095
+140595,store,no_logo,0.0094
+133507,drink bottle,no_logo,0.0082
+180776,typing keyboard,no_logo,0.0065
+299279,street at night,no_logo,0.0052
+204527,smartphone,no_logo,0.0044
+140593,store,no_logo,0.0044
+299280,street at night,no_logo,0.0028
+204526,smartphone,no_logo,0.0009
+32246,coffee shop,no_logo,0.0007
+126803,coffee shop,no_logo,0.0004
+126804,coffee shop,no_logo,0.0002
+137365,supermarket,no_logo,0.0002

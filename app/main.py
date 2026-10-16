@@ -16,7 +16,6 @@ from pathlib import Path
 from fastapi import APIRouter, Depends, FastAPI, Header, Query, Request
 from fastapi.responses import JSONResponse, StreamingResponse
 from pydantic import ValidationError
-from sqlalchemy import select
 from sqlalchemy.orm import Session
 from starlette.concurrency import run_in_threadpool
 from starlette.datastructures import UploadFile
@@ -32,7 +31,7 @@ from app.pipeline.swap import precheck as swap_precheck
 from app.pipeline.swap import read_state
 from app.pipeline.tts import check_voice
 from app.schemas import JobCreate, JobOptions, SwapRequest
-from app.security import BlockedURL, check_file_link, check_public_url, require_client
+from app.security import BlockedURL, check_file_link, check_public_url, check_rate_limit, require_client
 from app.storage import StorageNotFound, get_storage, input_key, output_key
 
 log = logging.getLogger("app.main")
@@ -272,13 +271,11 @@ def _create_swap_job_sync(db: Session, client_id: str, idem_key: str, job_id: st
     if root.status == JobStatus.FAILED:
         raise AppError(ErrorCode.JOB_NOT_READY, f"Job {root.id} failed, so it has no video to change", 409,
                        details={"status": root.status})
-    busy = db.scalars(select(Job.id).where(Job.parent_job_id == root.id,
-                                           Job.status.in_([JobStatus.QUEUED, JobStatus.RUNNING]))).first()
-    if busy:  # one swap at a time per video: each swap builds on the previous one
-        raise AppError(ErrorCode.JOB_NOT_READY, f"Another clip swap ({busy}) is still running for this video", 409,
-                       retryable=True, details={"swap_job_id": busy})
     swap_precheck(read_state(root.id), scene_index, swap)
     payload["root_job_id"] = root.id
+    # One swap at a time per video (each swap builds on the previous one). create_job() takes the
+    # video's swap lock with ONE conditional UPDATE in the same transaction as the insert, so two
+    # swaps sent at the same moment cannot both get in: the loser gets 409 SWAP_IN_PROGRESS.
     return create_job(db, job_id=new_job_id(), client_id=client_id, idem_key=idem_key, req_hash=req_hash,
                       input_type="swap", request_data=payload, parent_job_id=root.id)
 
@@ -342,6 +339,7 @@ def download_file(job_id: str, filename: str, expires: int = Query(...), sig: st
     job = db.get(Job, job_id)
     if job is None:
         raise AppError(ErrorCode.JOB_NOT_FOUND, f"Job {job_id} not found", 404)
+    check_rate_limit(job.client_id, "get")  # no token here: downloads count for the job's owner
     if job.status != JobStatus.SUCCEEDED or filename not in job.result_files:
         raise AppError(ErrorCode.NOT_FOUND, "File not found", 404)
     try:

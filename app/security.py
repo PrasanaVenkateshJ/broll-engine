@@ -59,9 +59,10 @@ def client_id_for(token: str | None) -> str:
 
 
 class RateLimiter:
-    """Fixed window: each client may make N requests per calendar minute.
+    """Fixed window: each key may make N requests per calendar minute.
 
-    Kept in memory, so it is per API process (fine for one api container).
+    The key is "<client>:<bucket>", so job creation (POST) and status checks (GET) are
+    counted separately. Kept in memory, so it is per API process (fine for one api container).
     """
 
     def __init__(self):
@@ -109,13 +110,27 @@ def require_client(request: Request) -> str:
                            headers={"WWW-Authenticate": "Bearer"})
 
     client = client_id_for(token)
-    if s.RATE_LIMIT_PER_MINUTE > 0:
-        retry_after = rate_limiter.hit(client, s.RATE_LIMIT_PER_MINUTE)
-        if retry_after is not None:
-            raise AppError(ErrorCode.RATE_LIMITED, "Too many requests; slow down", 429, retryable=True,
-                           details={"limit_per_minute": s.RATE_LIMIT_PER_MINUTE},
-                           headers={"Retry-After": str(retry_after)})
+    check_rate_limit(client, "post" if request.method == "POST" else "get")
     return client
+
+
+def check_rate_limit(client: str, bucket: str) -> None:
+    """Count one request of `client` in `bucket` ("post" = new jobs + swaps, "get" = status + files).
+
+    Two limits because the work behind them is so different: a POST can start minutes of
+    rendering, a GET is a cheap database read that clients repeat while they wait.
+    Over the limit -> 429 RATE_LIMITED with a Retry-After header (seconds to wait).
+    """
+    s = get_settings()
+    limit = s.RATE_LIMIT_POST_PER_MINUTE if bucket == "post" else s.RATE_LIMIT_GET_PER_MINUTE
+    if limit <= 0:  # 0 = no limit
+        return
+    retry_after = rate_limiter.hit(f"{client}:{bucket}", limit)
+    if retry_after is not None:
+        raise AppError(ErrorCode.RATE_LIMITED, f"Too many {bucket.upper()} requests; retry after {retry_after} s",
+                       429, retryable=True,
+                       details={"bucket": bucket, "limit_per_minute": limit, "retry_after_seconds": retry_after},
+                       headers={"Retry-After": str(retry_after)})
 
 
 # ---------- SSRF guard ----------

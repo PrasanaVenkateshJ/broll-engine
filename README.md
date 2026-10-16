@@ -47,9 +47,13 @@ flowchart LR
   card; otherwise the best stock candidate whose CLIP score is `>= STOCK_MIN_SCORE` and that is not used yet
   in this video, trying sources in `PROVIDER_ORDER`; if none passes, a `generated` motion card. A provider
   error never fails the job (warning + next source); a corrupted download is skipped.
-- **Logo check**: every candidate's thumbnail AND `LOGO_FRAME_COUNT` frames of the downloaded clip are scored
-  against "logo / brand text" prompts; one rejected frame rejects the clip (recorded as `logo_check` in
-  `timeline.json`).
+- **Logo check**: every passing candidate's thumbnail AND `LOGO_FRAME_COUNT` frames of the downloaded clip get
+  a calibrated *logo probability* (CLIP softmax, logo prompts vs. matched neutral prompts, whole picture + 3x3
+  crops); above `LOGO_REJECT_PROB` the clip is rejected (recorded as `logo_check` in `timeline.json`). Measured
+  precision / recall on hand-labelled Pixabay thumbnails, including where it fails:
+  [testpack/calibration/logo_report.md](testpack/calibration/logo_report.md).
+- **Footage mix**: `manifest.json` → `footage_mix` counts how many scenes use stock video, photo-motion and
+  generated cards (with shares of all scenes and of the non-statistic scenes).
 - **Clip swap**: the full job saves a *swap cache* (narration, every rendered segment, scenes, captions,
   saved understanding, chosen clips). A swap downloads it, picks the new clip, renders **only that scene** for
   each ratio, joins all segments again with stream copy, re-runs QA and writes new `timeline.json` /
@@ -136,7 +140,8 @@ Body (exactly one way to choose; an empty body means `next_best`):
 - A clip already in the video is refused (`INVALID_INPUT`, `details.reason = clip_already_used`); a chosen
   clip whose frames show a logo is refused (`details.reason = logo_check_failed`).
 - The swap job's `result.files` hold the new versions; the original job's files are not changed. Swapping
-  again (with the original or the swap job id) builds on the latest version; one swap per video at a time.
+  again (with the original or the swap job id) builds on the latest version; one swap per video at a time
+  (a second swap while one is queued / running gets 409 `SWAP_IN_PROGRESS`).
 
 ## Tests
 
@@ -182,7 +187,8 @@ comments in [.env.example](.env.example). "Code default" is used when the variab
 | `PUBLIC_BASE_URL` | *(empty)* | `http://localhost:8000` | Public address of the API, used in links inside callbacks. Empty = use the request's own address. |
 | **Auth + rate limit** | | | |
 | `API_TOKENS` | *(empty)* | `dev-token` | Comma-separated bearer tokens allowed to call /api/v1. EMPTY = auth OFF (local dev only!). |
-| `RATE_LIMIT_PER_MINUTE` | `120` | `120` | Max requests per token per minute (0 = no limit). Over the limit -&gt; 429 RATE_LIMITED. |
+| `RATE_LIMIT_POST_PER_MINUTE` | `30` | `30` | Max POST requests (new jobs + clip swaps) per token per minute (0 = no limit). Over the limit -&gt; 429 RATE_LIMITED with a `Retry-After` header (seconds to wait). |
+| `RATE_LIMIT_GET_PER_MINUTE` | `600` | `600` | Max GET requests (job status + file downloads) per token per minute (0 = no limit). Same 429 rule. File downloads count against the job owner's GET limit. |
 | **Database** | | | |
 | `DATABASE_URL` | `sqlite:///./data/broll.db` | `sqlite:///./data/broll.db` | SQLite file for jobs + idempotency keys. (Docker overrides this to /app/data/broll.db.) |
 | **Storage** | | | |
@@ -292,12 +298,14 @@ comments in [.env.example](.env.example). "Code default" is used when the variab
 | `DURATION_BONUS` | `0.02` | `0.02` | Small extra points that only change the ORDER of candidates (never pass/fail). |
 | `ORIENTATION_BONUS` | `0.02` | `0.02` | Small extra points that only change the ORDER of candidates (never pass/fail). |
 | `GENERATED_FOR_STATISTICS` | `true` | `true` | true = lines with a number/percentage get an animated number card instead of stock footage. |
-| `LOGO_CHECK` | `true` | `true` | Logo check: every preview is also scored with CLIP against LOGO_PROMPTS ("/"-separated). gap = logo score - scene score. gap &gt;= LOGO_REJECT_MARGIN -&gt; candidate rejected; gap &gt;= LOGO_PENALTY_MARGIN -&gt; kept, but LOGO_PENALTY is taken off its order score. false = off. |
-| `LOGO_PROMPTS` | `a product with a printed brand logo\|a famous company log...` | `a product with a printed brand logo\|a famous company log...` | Logo check: every preview is also scored with CLIP against LOGO_PROMPTS ("/"-separated). gap = logo score - scene score. gap &gt;= LOGO_REJECT_MARGIN -&gt; candidate rejected; gap &gt;= LOGO_PENALTY_MARGIN -&gt; kept, but LOGO_PENALTY is taken off its order score. false = off. |
-| `LOGO_REJECT_MARGIN` | `-0.04` | `-0.04` | Logo check: every preview is also scored with CLIP against LOGO_PROMPTS ("/"-separated). gap = logo score - scene score. gap &gt;= LOGO_REJECT_MARGIN -&gt; candidate rejected; gap &gt;= LOGO_PENALTY_MARGIN -&gt; kept, but LOGO_PENALTY is taken off its order score. false = off. |
-| `LOGO_PENALTY_MARGIN` | `-0.06` | `-0.06` | Logo check: every preview is also scored with CLIP against LOGO_PROMPTS ("/"-separated). gap = logo score - scene score. gap &gt;= LOGO_REJECT_MARGIN -&gt; candidate rejected; gap &gt;= LOGO_PENALTY_MARGIN -&gt; kept, but LOGO_PENALTY is taken off its order score. false = off. |
-| `LOGO_PENALTY` | `0.03` | `0.03` | Logo check: every preview is also scored with CLIP against LOGO_PROMPTS ("/"-separated). gap = logo score - scene score. gap &gt;= LOGO_REJECT_MARGIN -&gt; candidate rejected; gap &gt;= LOGO_PENALTY_MARGIN -&gt; kept, but LOGO_PENALTY is taken off its order score. false = off. |
-| `LOGO_FRAME_COUNT` | `3` | `3` | Frames of the DOWNLOADED clip (spread over its length) that get the same logo test; one rejected frame rejects the clip and the next candidate is tried. A still image has one picture, so it is checked once. |
+| `LOGO_CHECK` | `true` | `true` | Logo check (only candidates that pass STOCK_MIN_SCORE): logo probability 0..1 = CLIP softmax over LOGO_PROMPTS + LOGO_NEUTRAL_PROMPTS, summed over the logo prompts, highest of the whole picture and its LOGO_CROP_GRID x LOGO_CROP_GRID crops. prob &gt; LOGO_REJECT_PROB -&gt; rejected; prob &gt; LOGO_PENALTY_PROB -&gt; kept, but LOGO_PENALTY is taken off its order score. Calibration: [logo_report.md](testpack/calibration/logo_report.md). false = off. |
+| `LOGO_PROMPTS` | `a photo of a laptop with an apple logo\|a photo of a shop...` | `a photo of a laptop with an apple logo\|a photo of a shop...` | Logo prompts ("\|"-separated): pictures that SHOW a logo / brand name. |
+| `LOGO_NEUTRAL_PROMPTS` | `a photo of a laptop\|a photo of a shop\|a photo of a city...` | `a photo of a laptop\|a photo of a shop\|a photo of a city...` | Neutral prompts: the same kinds of subjects WITHOUT a logo. (Prompts that only say "no logos" do not work: CLIP ignores the "no".) |
+| `LOGO_CROP_GRID` | `3` | `3` | Crop grid for the logo check: 3 = whole picture + 3x3 crops (small signs, laptop logos); 0 or 1 = whole picture only. |
+| `LOGO_REJECT_PROB` | `0.6` | `0.6` | Logo probability above this -&gt; candidate (or a downloaded clip frame) rejected. |
+| `LOGO_PENALTY_PROB` | `0.4` | `0.4` | Logo probability above this (and not above LOGO_REJECT_PROB) -&gt; kept, but LOGO_PENALTY is taken off its order score. |
+| `LOGO_PENALTY` | `0.03` | `0.03` | Order-score penalty for a candidate in the logo penalty band (never changes whether it passes STOCK_MIN_SCORE). |
+| `LOGO_FRAME_COUNT` | `3` | `3` | Frames of the DOWNLOADED clip (spread over its length) that get the same logo test; one frame above LOGO_REJECT_PROB rejects the clip and the next candidate is tried. A still image has one picture, so it is checked once. |
 | **Clip fitting + look** | | | |
 | `MAX_SLOWDOWN` | `0.25` | `0.25` | A short clip may be slowed by up to this fraction (0.25 = 25 %), then it loops forward/backward. |
 | `KEN_BURNS_ZOOM` | `1.12` | `1.12` | Ken Burns zoom on still images (1.12 = 12 % closer by the end of the scene). |
@@ -334,11 +342,12 @@ Every error has the same shape: `{"error": {"code", "message", "retryable", "det
 | `UNSUPPORTED_ASPECT_RATIO` | Request 422 | `aspect_ratios` holds something other than 16:9, 9:16, 1:1. | no |
 | `JOB_NOT_FOUND` | Request 404 | No such job for this token (other clients' jobs look "not found"). | no |
 | `SCENE_NOT_FOUND` | Request 404 | Swap: `scene_index` is not a scene of this video. | no |
-| `JOB_NOT_READY` | Request 409 | Swap: the original job is still queued / running, or another swap of it is running (retryable); or it failed / has no swap cache (not retryable). | depends (see meaning) |
+| `JOB_NOT_READY` | Request 409 | Swap: the original job is still queued / running (retryable); or it failed / has no swap cache (not retryable). | depends (see meaning) |
 | `NO_ALTERNATIVE_CLIP` | Job | Swap `next_best`: every candidate is already used in the video or fails the selection rule. | no |
+| `SWAP_IN_PROGRESS` | Request 409 | Swap: another swap of the same video is still queued or running (one at a time; enforced by one conditional UPDATE in the database, so two swaps sent at the same moment cannot both start). `details.swap_job_id` names it. | yes |
 | `IDEMPOTENCY_KEY_REUSED` | Request 409 | The Idempotency-Key was used before with a different body. | no |
 | `UNAUTHORIZED` | Request 401 | Bearer token missing or wrong, or a download link with a bad signature / expired. | no |
-| `RATE_LIMITED` | Request 429 | More than `RATE_LIMIT_PER_MINUTE` requests this minute (see `Retry-After`). | yes |
+| `RATE_LIMITED` | Request 429 | More than `RATE_LIMIT_POST_PER_MINUTE` POSTs or `RATE_LIMIT_GET_PER_MINUTE` GETs this minute for this token; wait the `Retry-After` seconds. | yes |
 | `PROVIDER_UNAVAILABLE` | Request 503 (swap); Job | TTS / transcription model failed, or a footage source named in a swap is off or failed. (A footage source failing during a normal job is only a warning.) | yes when a model / source failed; no when the source is switched off |
 | `RENDER_FAILED` | Job | FFmpeg could not render a video. | yes |
 | `INTERNAL_ERROR` | Request 500; Job | Unexpected error (details are only in the logs). | yes |

@@ -36,7 +36,10 @@ def test_env(tmp_path, monkeypatch):
         "LOCAL_STORAGE_DIR": str(tmp_path / "storage"),
         "WORK_DIR": str(tmp_path / "work"),
         "API_TOKENS": f"{TOKEN},{OTHER_TOKEN}",
-        "RATE_LIMIT_PER_MINUTE": "1000",
+        # Rate limit OFF (0) so polling tests never get 429 on a slow machine. The dedicated
+        # rate-limit tests in tests/unit/test_security.py switch it back on with small limits.
+        "RATE_LIMIT_POST_PER_MINUTE": "0",
+        "RATE_LIMIT_GET_PER_MINUTE": "0",
         "PUBLIC_BASE_URL": "",
         "FILE_LINK_SECRET": "test-link-secret",
         "FILE_LINK_TTL_SECONDS": "3600",
@@ -76,8 +79,9 @@ def test_env(tmp_path, monkeypatch):
         "SEED": "1234",
         "LLM_TEMPERATURE": "0",
         "LOGO_CHECK": "true",
-        "LOGO_REJECT_MARGIN": "-0.04",
-        "LOGO_PENALTY_MARGIN": "-0.06",
+        "LOGO_REJECT_PROB": "0.6",
+        "LOGO_PENALTY_PROB": "0.4",
+        "LOGO_CROP_GRID": "3",
         "LOGO_PENALTY": "0.03",
         "LOGO_FRAME_COUNT": "3",
         "CROP_SAMPLE_FRAMES": "3",
@@ -94,8 +98,8 @@ def test_env(tmp_path, monkeypatch):
     monkeypatch.setattr(MockProvider, "fail", False)
     monkeypatch.setattr(MockProvider, "corrupt_ids", set())
     monkeypatch.setattr(MockProvider, "clip_seconds", 6.0)
-    monkeypatch.setattr(MockProvider, "logo_scores", {})
-    monkeypatch.setattr(MockProvider, "frame_logo_scores", {})
+    monkeypatch.setattr(MockProvider, "logo_probs", {})
+    monkeypatch.setattr(MockProvider, "frame_logo_probs", {})
     _reset_singletons()
     init_db()
     yield

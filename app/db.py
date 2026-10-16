@@ -62,7 +62,7 @@ def reset_engine() -> None:
 
 # Columns added after the first release: (table, column, SQL type). create_all() only makes
 # NEW tables, so an existing database file gets these with ALTER TABLE (a tiny migration).
-ADDED_COLUMNS = [("jobs", "parent_job_id", "VARCHAR(32)")]
+ADDED_COLUMNS = [("jobs", "parent_job_id", "VARCHAR(32)"), ("jobs", "active_swap_id", "VARCHAR(32)")]
 
 
 def init_db() -> None:

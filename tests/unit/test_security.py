@@ -2,7 +2,7 @@
 import time
 
 from app.security import RateLimiter, check_file_link, hmac_sha256_hex, sign_file_link, verify_hmac
-from tests.conftest import AUTH
+from tests.conftest import AUTH, OTHER_AUTH
 from tests.unit.test_errors import assert_error_format
 
 
@@ -75,13 +75,48 @@ def test_rate_limiter_counts_per_client_per_minute():
     assert rl.hit("a", 2, now=t + 61) is None  # next minute -> allowed again
 
 
-def test_rate_limit_returns_429(client, monkeypatch):
+def set_limits(monkeypatch, post, get):
+    """The test fixture switches the rate limit off; these tests switch it back on with small limits."""
     from app.config import get_settings
 
-    monkeypatch.setenv("RATE_LIMIT_PER_MINUTE", "3")
+    monkeypatch.setenv("RATE_LIMIT_POST_PER_MINUTE", str(post))
+    monkeypatch.setenv("RATE_LIMIT_GET_PER_MINUTE", str(get))
     get_settings.cache_clear()
+
+
+def test_rate_limit_returns_429_with_retry_after(client, monkeypatch):
+    set_limits(monkeypatch, post=0, get=3)
     codes = [client.get("/api/v1/jobs/abc", headers=AUTH).status_code for _ in range(4)]
     assert codes == [404, 404, 404, 429]
     resp = client.get("/api/v1/jobs/abc", headers=AUTH)
     assert_error_format(resp, "RATE_LIMITED")
-    assert int(resp.headers["Retry-After"]) > 0
+    assert resp.json()["error"]["retryable"] is True
+    assert 0 < int(resp.headers["Retry-After"]) <= 61
+    assert resp.json()["error"]["details"]["bucket"] == "get"
+
+
+def test_post_and_get_limits_are_counted_separately(client, monkeypatch):
+    set_limits(monkeypatch, post=2, get=3)
+    posts = [client.post("/api/v1/broll/jobs", json={"script": f"Hi {i}."}, headers=AUTH) for i in range(3)]
+    assert [r.status_code for r in posts] == [202, 202, 429]
+    assert posts[2].json()["error"]["details"] == {"bucket": "post", "limit_per_minute": 2,
+                                                    "retry_after_seconds": int(posts[2].headers["Retry-After"])}
+    # POSTs used up, but status checks still work (their own, larger budget).
+    job_id = posts[0].json()["job_id"]
+    assert [client.get(f"/api/v1/jobs/{job_id}", headers=AUTH).status_code for _ in range(3)] == [200, 200, 200]
+    assert client.get(f"/api/v1/jobs/{job_id}", headers=AUTH).status_code == 429
+    # Another token has its own budgets.
+    assert client.get(f"/api/v1/jobs/{job_id}", headers=OTHER_AUTH).status_code == 404
+
+
+def test_file_downloads_count_against_the_owners_get_limit(client, monkeypatch):
+    from app.jobs import finish_job, sign_file_link
+
+    set_limits(monkeypatch, post=0, get=1)
+    job_id = client.post("/api/v1/broll/jobs", json={"script": "Hi."}, headers=AUTH).json()["job_id"]
+    finish_job(job_id, files=["timeline.json"])
+    expires, sig = sign_file_link(job_id, "timeline.json")
+    link = f"/api/v1/jobs/{job_id}/files/timeline.json?expires={expires}&sig={sig}"
+    assert client.get(link).status_code == 404  # 1st GET allowed (the file itself is not in storage)
+    resp = client.get(link)                      # 2nd GET of the same owner this minute
+    assert resp.status_code == 429 and int(resp.headers["Retry-After"]) > 0
