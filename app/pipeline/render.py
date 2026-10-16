@@ -7,9 +7,15 @@ For every scene and every aspect ratio we render ONE segment (a short mp4):
    - much too short    -> slow down 25 % and play it forward-then-backward in a loop
                           ("ping-pong": no jump, and never a frozen frame).
 2. Fit the frame: scale + crop to 1920x1080 / 1080x1920 / 1080x1080.
-   The crop is placed around the most "interesting" region (edge + motion energy of a few
-   sample frames). If the interesting part is wider than the crop (e.g. two people at both
-   edges), we show the whole clip on a blurred copy of itself instead ("blurred fit").
+   Subject-aware crop (when the scorer can look at pictures, i.e. RANK_SCORER=clip):
+   sample CROP_SAMPLE_FRAMES colour frames, cut out several candidate windows (left /
+   centre / right, plus the "salient" window from edge + motion energy), score each window
+   with CLIP against the scene meaning and keep the best. If even the best window scores
+   CROP_BLUR_MARGIN below the WHOLE frame, no window keeps the subject -> we show the whole
+   clip on a blurred copy of itself ("blurred fit").
+   Without CLIP (mock scorer, tests) the saliency window alone decides, and a subject wider
+   than the crop (e.g. two people at both edges) also gives the blurred fit.
+   The choice and its scores are recorded per segment ("crop" in timeline.json).
 3. Look: measure mean brightness (YAVG) + colour (SATAVG) with signalstats, then pull them
    toward TARGET_LUMA / TARGET_SATURATION with the eq filter, so clips match each other.
 4. Burn that scene's captions. 30 fps, yuv420p, H.264.
@@ -23,7 +29,7 @@ import hashlib
 import json
 import logging
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 import numpy as np
@@ -39,6 +45,7 @@ log = logging.getLogger("app.pipeline.render")
 
 RESOLUTIONS = {"16:9": (1920, 1080), "9:16": (1080, 1920), "1:1": (1080, 1080)}
 ANALYSIS_WIDTH = 192  # sample frames are shrunk to this width (enough to find the subject)
+CROP_ANALYSIS_WIDTH = 640  # colour frames for the CLIP crop check (a 9:16 window is then ~200 px wide)
 
 
 def ratio_slug(ratio: str) -> str:
@@ -157,6 +164,10 @@ class SourceInfo:
     saturation: float | None = None  # mean colour strength (signalstats SATAVG)
     card: dict | None = None
     uid: str = ""
+    # Subject-aware crop: small colour frames + the scene meaning + a scorer that can look at pictures.
+    crop_frames: list[np.ndarray] | None = None
+    crop_texts: list[str] = field(default_factory=list)
+    scorer: object | None = None
 
 
 def _start_offset(duration: float, seconds: float) -> float:
@@ -166,26 +177,34 @@ def _start_offset(duration: float, seconds: float) -> float:
     return 0.0
 
 
-def _sample_frames(info: SourceInfo, seconds: float) -> np.ndarray:
-    """A few small grey frames from the part of the clip we will use: array (frames, rows, cols)."""
-    s = get_settings()
-    w = ANALYSIS_WIDTH
+def _grab_frames(info: SourceInfo, seconds: float, width: int, count: int, colour: bool) -> np.ndarray:
+    """`count` small frames spread over the part of the clip we will use.
+    Array (frames, rows, cols) for grey, (frames, rows, cols, 3) for colour (RGB)."""
+    w = width
     h = max(2, round(w * info.height / max(1, info.width)))
-    scale = f"scale={w}:{h},format=gray"
+    channels = 3 if colour else 1
+    scale = f"scale={w}:{h},format={'rgb24' if colour else 'gray'}"
     if info.kind == "image":
         raw = media.ffmpeg_bytes("-i", str(info.path), "-vf", scale, "-frames:v", "1", "-f", "rawvideo", "pipe:1")
-        count = 1
     else:
         span = max(0.5, min(seconds, (info.duration or seconds) - info.start))
-        count = max(1, s.SALIENCY_SAMPLE_FRAMES)
+        count = max(1, count)
         raw = media.ffmpeg_bytes("-ss", f"{info.start:.3f}", "-t", f"{span:.3f}", "-i", str(info.path),
                                  "-vf", f"fps={count / span:.4f},{scale}", "-frames:v", str(count),
                                  "-f", "rawvideo", "pipe:1")
     frames = np.frombuffer(raw, dtype=np.uint8)
-    got = len(frames) // (w * h)
+    size = w * h * channels
+    got = len(frames) // size
     if got == 0:
         raise media.MediaError("no frames could be sampled")
-    return frames[: got * w * h].reshape(got, h, w).astype(np.float32)
+    shape = (got, h, w, 3) if colour else (got, h, w)
+    return frames[: got * size].reshape(shape)
+
+
+def _sample_frames(info: SourceInfo, seconds: float) -> np.ndarray:
+    """A few small grey frames for the edge + motion energy: array (frames, rows, cols)."""
+    count = get_settings().SALIENCY_SAMPLE_FRAMES
+    return _grab_frames(info, seconds, ANALYSIS_WIDTH, count, colour=False).astype(np.float32)
 
 
 def energy_profiles(frames: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
@@ -217,7 +236,10 @@ def _signal_stats(info: SourceInfo, seconds: float) -> tuple[float | None, float
     return (sum(lumas) / len(lumas) if lumas else None), (sum(sats) / len(sats) if sats else None)
 
 
-def analyse_source(selection: Selection, seconds: float) -> SourceInfo:
+def analyse_source(selection: Selection, seconds: float, texts: list[str] | None = None,
+                   scorer=None) -> SourceInfo:
+    """Look at the clip once (shared by all aspect ratios). With `texts` (the scene meaning) and a
+    scorer that can look at pictures (CLIP), colour frames are kept for the subject-aware crop."""
     c = selection.candidate
     if c.kind == "generated":
         return SourceInfo(kind="generated", path=None, card=c.extra, uid=c.uid)
@@ -232,6 +254,13 @@ def analyse_source(selection: Selection, seconds: float) -> SourceInfo:
         info.col_energy, info.row_energy = energy_profiles(_sample_frames(info, seconds))
     except media.MediaError as e:
         log.warning("saliency analysis failed for %s: %s", c.uid, e)
+    if texts and scorer is not None and getattr(scorer, "needs_images", False):
+        try:
+            info.crop_frames = list(_grab_frames(info, seconds, CROP_ANALYSIS_WIDTH,
+                                                 get_settings().CROP_SAMPLE_FRAMES, colour=True))
+            info.crop_texts, info.scorer = list(texts), scorer
+        except media.MediaError as e:
+            log.warning("crop frames could not be sampled for %s: %s", c.uid, e)
     try:
         info.luma, info.saturation = _signal_stats(info, seconds)
     except media.MediaError as e:
@@ -268,13 +297,86 @@ def choose_window(profile: np.ndarray | None, fraction: float) -> tuple[float, f
 
 @dataclass
 class Framing:
-    mode: str           # fit | center | salient | blur
+    mode: str           # fit | center | salient | subject | blur
     x: float = 0.0      # crop box as fractions of the source frame
     y: float = 0.0
     w: float = 1.0
     h: float = 1.0
     focus_x: float = 0.5  # subject centre inside the cropped picture (for Ken Burns)
     focus_y: float = 0.5
+    crop: dict | None = None  # how the crop was chosen (for timeline.json)
+
+
+def pick_crop(window_scores: dict[str, float], full_frame_score: float, blur_margin: float,
+              tie_margin: float = 0.0) -> str:
+    """The best-scoring window's name, or "blur" when even the best window scores more than
+    blur_margin below the whole frame (= every window cuts the subject away).
+    Near-ties (within tie_margin of the best) go to the window listed FIRST (salient, then centre):
+    the crop only moves to an edge when CLIP clearly prefers it."""
+    top = max(window_scores.values())
+    if top < full_frame_score - blur_margin:
+        return "blur"
+    return next(name for name, score in window_scores.items() if score >= top - tie_margin)
+
+
+def _pad_square(picture: np.ndarray) -> np.ndarray:
+    """Pad to a square with the picture's mean colour. CLIP cuts the middle square out of
+    every picture; padding first means it sees the WHOLE window (or the whole frame)."""
+    h, w = picture.shape[:2]
+    side = max(h, w)
+    out = np.empty((side, side, 3), dtype=np.uint8)
+    out[:] = picture.reshape(-1, 3).mean(axis=0).astype(np.uint8)
+    top, left = (side - h) // 2, (side - w) // 2
+    out[top:top + h, left:left + w] = picture
+    return out
+
+
+def _clip_crop(info: SourceInfo, axis: str, frac: float, salient_start: float | None):
+    """Score each candidate window (and the whole frame) with CLIP against the scene meaning.
+    Returns (choice, window start, facts) or None if scoring was not possible."""
+    s = get_settings()
+    first, middle, last = ("left", "centre", "right") if axis == "x" else ("top", "centre", "bottom")
+    windows: dict[str, float] = {}
+    if salient_start is not None:
+        windows["salient"] = salient_start
+    for name, start in ((middle, (1 - frac) / 2), (first, 0.0), (last, 1 - frac)):
+        if all(abs(start - other) > 0.02 for other in windows.values()):  # skip near-duplicates
+            windows[name] = start
+    pictures, owners = [], []
+    for frame in info.crop_frames or []:
+        pictures.append(_pad_square(frame))
+        owners.append("whole frame")
+        length = frame.shape[1] if axis == "x" else frame.shape[0]
+        size = max(1, round(length * frac))
+        for name, start in windows.items():
+            a = min(round(start * length), length - size)
+            pictures.append(_pad_square(frame[:, a:a + size] if axis == "x" else frame[a:a + size, :]))
+            owners.append(name)
+    if not pictures:
+        return None
+    try:
+        scores = info.scorer.score_images(pictures, info.crop_texts)
+    except Exception as e:  # a crop check problem must never fail the render
+        log.warning("crop scoring failed for %s: %s", info.uid, e)
+        return None
+    if not scores:
+        return None  # this scorer cannot look at pictures
+    average = {name: round(float(np.mean([sc for o, sc in zip(owners, scores) if o == name])), 4)
+               for name in ["whole frame", *windows]}
+    full = average.pop("whole frame")
+    choice = pick_crop(average, full, s.CROP_BLUR_MARGIN, s.CROP_TIE_MARGIN)
+    best = max(average, key=average.get)
+    if choice == "blur":
+        reason = (f"best window '{best}' {average[best]:.3f} is more than {s.CROP_BLUR_MARGIN:g} below the whole "
+                  f"frame {full:.3f}: every window cuts the subject -> blurred fit")
+    else:
+        reason = (f"window '{choice}' chosen ({average[choice]:.3f}; best window {average[best]:.3f}; whole "
+                  f"frame {full:.3f}; near-ties within {s.CROP_TIE_MARGIN:g} go to salient / centre)")
+    facts = {"method": "clip", "choice": "blurred fit" if choice == "blur" else choice, "axis": axis,
+             "window_fraction": round(frac, 4), "full_frame_score": full,
+             "windows": {name: {"start": round(start, 4), "score": average[name]} for name, start in windows.items()},
+             "blur_margin": s.CROP_BLUR_MARGIN, "tie_margin": s.CROP_TIE_MARGIN, "frames": len(info.crop_frames or []), "reason": reason}
+    return choice, windows.get(choice, (1 - frac) / 2), facts
 
 
 def plan_framing(info: SourceInfo, width: int, height: int) -> Framing:
@@ -282,20 +384,29 @@ def plan_framing(info: SourceInfo, width: int, height: int) -> Framing:
     target = width / height
     source = info.width / info.height if info.width and info.height else target
     if abs(source - target) / target < 0.02:
-        return Framing("fit")
-    if source > target:  # clip is wider: cut away left/right
-        frac = target / source
-        x, cx, mode = choose_window(info.col_energy, frac)
+        return Framing("fit", crop={"method": "none", "choice": "fit (same shape)"})
+    axis = "x" if source > target else "y"  # x: clip is wider, cut away left/right; y: cut top/bottom
+    frac = target / source if axis == "x" else source / target
+    profile, other = (info.col_energy, info.row_energy) if axis == "x" else (info.row_energy, info.col_energy)
+    start, centre, mode = choose_window(profile, frac)
+    _, other_centre, _ = choose_window(other, 1.0)
+    clip = _clip_crop(info, axis, frac, start if mode == "salient" else None) if info.scorer else None
+    if clip:
+        choice, start, facts = clip
+        if choice == "blur":
+            return Framing("blur", crop=facts)
+        mode = "subject"
+        if not start <= centre <= start + frac:  # the energy centre is outside the chosen window
+            centre = start + frac / 2
+    else:
+        facts = {"method": "saliency", "choice": {"blur": "blurred fit"}.get(mode, mode),
+                 "window_fraction": round(frac, 4), "start": round(start, 4)}
         if mode == "blur":
-            return Framing("blur")
-        _, cy, _ = choose_window(info.row_energy, 1.0)
-        return Framing(mode, x=round(x, 4), w=round(frac, 4), focus_x=(cx - x) / frac, focus_y=cy)
-    frac = source / target  # clip is taller: cut away top/bottom
-    y, cy, mode = choose_window(info.row_energy, frac)
-    if mode == "blur":
-        return Framing("blur")
-    _, cx, _ = choose_window(info.col_energy, 1.0)
-    return Framing(mode, y=round(y, 4), h=round(frac, 4), focus_x=cx, focus_y=(cy - y) / frac)
+            return Framing("blur", crop=facts)
+    focus = min(max((centre - start) / frac, 0.0), 1.0)
+    if axis == "x":
+        return Framing(mode, x=round(start, 4), w=round(frac, 4), focus_x=focus, focus_y=other_centre, crop=facts)
+    return Framing(mode, y=round(start, 4), h=round(frac, 4), focus_x=other_centre, focus_y=focus, crop=facts)
 
 
 # ---------- Look (brightness / colour) ----------
@@ -328,7 +439,10 @@ def segment_key(info: SourceInfo, scene: Scene, ratio: str, cues: list[Cue], bur
     s = get_settings()
     caption_text = [(c.start, c.end, c.lines) for c in cues if c.scene_index == scene.index] if burn_captions else []
     data = [info.uid, scene.start, scene.end, ratio, caption_text, s.RENDER_FPS, s.VIDEO_PRESET, s.VIDEO_CRF,
-            s.TARGET_LUMA, s.TARGET_SATURATION, s.KEN_BURNS_ZOOM, s.MAX_SLOWDOWN, s.CAPTION_FONT]
+            s.TARGET_LUMA, s.TARGET_SATURATION, s.KEN_BURNS_ZOOM, s.MAX_SLOWDOWN, s.CAPTION_FONT,
+            # The crop depends on the scene meaning and on whether CLIP looked at it.
+            info.crop_texts, getattr(info.scorer, "name", None), s.CROP_SAMPLE_FRAMES, s.CROP_BLUR_MARGIN,
+            s.CROP_TIE_MARGIN]
     return hashlib.sha1(json.dumps(data, default=str).encode()).hexdigest()[:16]
 
 
@@ -372,7 +486,8 @@ def _frame_chain(framing: Framing, width: int, height: int) -> tuple[str, str]:
                 f"decrease[fg];[bg][fg]overlay=(W-w)/2:(H-h)/2[f]", "blurred fit")
     crop = "" if framing.mode == "fit" else \
         f"crop=w=iw*{framing.w}:h=ih*{framing.h}:x=iw*{framing.x}:y=ih*{framing.y},"
-    return f"[t]{crop}scale={width}:{height}:flags=lanczos[f]", framing.mode
+    described = f"subject crop ({framing.crop['choice']})" if framing.mode == "subject" else framing.mode
+    return f"[t]{crop}scale={width}:{height}:flags=lanczos[f]", described
 
 
 def render_segment(info: SourceInfo, scene: Scene, ratio: str, cues: list[Cue], folder: Path, frames: int,
@@ -384,6 +499,9 @@ def render_segment(info: SourceInfo, scene: Scene, ratio: str, cues: list[Cue], 
     seconds = frames / fps
     key = segment_key(info, scene, ratio, cues, burn_captions)
     name = f"seg_{scene.index:03d}_{key}.mp4"
+    facts_file = folder / f"seg_{scene.index:03d}_{key}.json"  # the facts, so a cached segment keeps them
+    if (folder / name).exists() and facts_file.exists():
+        return folder / name, {**json.loads(facts_file.read_text(encoding="utf-8")), "cached": True}
     facts = {"file": name, "cache_key": key, "frames": frames}
     finish = []  # filters after framing: look, captions, pixel format
     if info.kind != "generated" and (look := look_filter(info)):
@@ -400,10 +518,6 @@ def render_segment(info: SourceInfo, scene: Scene, ratio: str, cues: list[Cue], 
     finish.append("setsar=1,scale=out_range=tv,format=yuv420p")
     tail = ",".join(finish)
 
-    if (folder / name).exists():
-        facts["cached"] = True
-        return folder / name, facts
-
     if info.kind == "generated":
         c0, c1 = (info.card or {}).get("palette", ["0x355C7D", "0x6C5B7B"])
         source = (f"gradients=s={width}x{height}:r={fps}:c0={c0}:c1={c1}:x0=0:y0=0:x1={width}:y1={height}:"
@@ -413,6 +527,7 @@ def render_segment(info: SourceInfo, scene: Scene, ratio: str, cues: list[Cue], 
     elif info.kind == "image":
         framing = plan_framing(info, width, height)
         frame_graph, facts["framing"] = _frame_chain(framing, width * 2, height * 2)  # 2x canvas: smooth zoom
+        facts["crop"] = framing.crop
         z, n = s.KEN_BURNS_ZOOM, max(1, frames - 1)
         fx, fy = min(max(framing.focus_x, 0.0), 1.0), min(max(framing.focus_y, 0.0), 1.0)
         # Zoom from 1.0 to KEN_BURNS_ZOOM while drifting from the centre toward the subject.
@@ -425,6 +540,7 @@ def render_segment(info: SourceInfo, scene: Scene, ratio: str, cues: list[Cue], 
         mode, factor = time_plan(info.duration or 0.0, seconds, s.MAX_SLOWDOWN)
         framing = plan_framing(info, width, height)
         frame_graph, facts["framing"] = _frame_chain(framing, width, height)
+        facts["crop"] = framing.crop
         if mode == "loop":
             inputs = ["-stream_loop", "-1", "-i", str(_pingpong(info, folder).resolve())]
             time_filters = f"fps={fps}"
@@ -436,6 +552,7 @@ def render_segment(info: SourceInfo, scene: Scene, ratio: str, cues: list[Cue], 
         graph = f"[0:v]{time_filters}[t];{frame_graph};[f]{tail}[v]"
     media.ffmpeg(*inputs, "-filter_complex", graph, "-map", "[v]", "-frames:v", str(frames), *_encode_args(),
                  "-an", name, cwd=folder)
+    facts_file.write_text(json.dumps(facts), encoding="utf-8")
     return folder / name, facts
 
 

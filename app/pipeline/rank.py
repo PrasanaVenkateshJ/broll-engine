@@ -10,6 +10,11 @@ THE SELECTION RULE (its result and reason are written to timeline.json):
 3. Score each candidate's preview picture with CLIP against the scene's meaning
    (average similarity to the 3 queries). Add small bonuses for a good length / orientation
    - the bonus only changes the ORDER, never whether a clip passes.
+   Logo check (LOGO_CHECK): the same picture is also scored against "logo / brand text /
+   watermark" prompts (LOGO_PROMPTS). logo gap = logo score - scene score:
+   - gap >= LOGO_REJECT_MARGIN  -> rejected (the picture looks more like a logo than the scene),
+   - gap >= LOGO_PENALTY_MARGIN -> kept, but LOGO_PENALTY is taken off its ORDER score, so a
+     candidate without readable brand text wins a near tie.
 4. If the best CLIP score >= STOCK_MIN_SCORE: download the best candidate, check it with
    ffprobe; if it is corrupted, take the next passing one. Done.
    Otherwise (or if the source failed) go to the next source.
@@ -47,14 +52,27 @@ class Scorer:
     def score(self, candidates: list[Candidate], previews: list[Path | None], texts: list[str]) -> list[float]:
         raise NotImplementedError
 
+    def logo_scores(self, candidates: list[Candidate], previews: list[Path | None]) -> list[float]:
+        """How much each picture looks like a logo / brand text / watermark (same scale as score())."""
+        raise NotImplementedError
+
+    def score_images(self, images: list, texts: list[str]) -> list[float] | None:
+        """Score raw RGB pictures (numpy arrays) against texts - used by the subject-aware crop.
+        None = this scorer cannot look at pictures (render.py then uses the saliency crop)."""
+        return None
+
     def info(self) -> dict:
         return {"scorer": self.name}
 
 
 class MockScorer(Scorer):
-    """No model: share of a query's words found in the clip's tags (0.15 .. 0.30)."""
+    """No model: share of a query's words found in the clip's tags (0.15 .. 0.30).
+    Logo score: the candidate's extra["logo_score"] if a test set one, else a low 0.05."""
     name = "mock"
     needs_images = False
+
+    def logo_scores(self, candidates, previews):
+        return [float(c.extra.get("logo_score", 0.05)) for c in candidates]
 
     def score(self, candidates, previews, texts):
         out = []
@@ -68,7 +86,7 @@ class MockScorer(Scorer):
 class ClipScorer(Scorer):
     """open_clip (MIT): how well does the picture match the text? Cosine similarity, about 0.1-0.4."""
     name = "clip"
-    _lock = threading.Lock()
+    _lock = threading.RLock()  # re-entrant: score() holds it while helpers call _load()
     _model = None
 
     @classmethod
@@ -91,18 +109,53 @@ class ClipScorer(Scorer):
         return {"scorer": self.name, "library": "open_clip_torch", "version": version("open_clip_torch"),
                 "model": s.CLIP_MODEL, "pretrained": s.CLIP_PRETRAINED}
 
-    def score(self, candidates, previews, texts):
+    def __init__(self):
+        self._embeddings: dict[str, object] = {}  # preview path -> picture embedding (scored twice: scene + logo)
+
+    def _encode_texts(self, texts: list[str]):
+        model, _, tokenizer, _ = self._load()
+        text = model.encode_text(tokenizer(texts))
+        return text / text.norm(dim=-1, keepdim=True)
+
+    def _encode_pictures(self, pictures):
+        """PIL pictures -> normalised CLIP embeddings."""
+        model, preprocess, _, torch = self._load()
+        image = model.encode_image(torch.stack([preprocess(p) for p in pictures]))
+        return image / image.norm(dim=-1, keepdim=True)
+
+    def _preview_embeddings(self, previews: list[Path]):
         from PIL import Image
 
-        model, preprocess, tokenizer, torch = self._load()
+        torch = self._load()[3]
+        missing = [p for p in previews if str(p) not in self._embeddings]
+        if missing:
+            for p, emb in zip(missing, self._encode_pictures([Image.open(p).convert("RGB") for p in missing])):
+                self._embeddings[str(p)] = emb
+        return torch.stack([self._embeddings[str(p)] for p in previews])
+
+    def score(self, candidates, previews, texts):
+        torch = self._load()[3]
         with self._lock, torch.no_grad():
-            text = model.encode_text(tokenizer([f"a photo of {t}" for t in texts]))
-            text = text / text.norm(dim=-1, keepdim=True)
-            images = torch.stack([preprocess(Image.open(p).convert("RGB")) for p in previews])
-            image = model.encode_image(images)
-            image = image / image.norm(dim=-1, keepdim=True)
+            text = self._encode_texts([f"a photo of {t}" for t in texts])
             # Average cosine similarity of each picture to the queries = "how well it shows the meaning".
-            sims = (image @ text.T).mean(dim=1)
+            sims = (self._preview_embeddings(previews) @ text.T).mean(dim=1)
+        return [round(float(x), 4) for x in sims]
+
+    def logo_scores(self, candidates, previews):
+        torch = self._load()[3]
+        with self._lock, torch.no_grad():
+            text = self._encode_texts(get_settings().logo_prompts)
+            # Similarity to the logo prompt the picture is MOST like.
+            sims = (self._preview_embeddings(previews) @ text.T).max(dim=1).values
+        return [round(float(x), 4) for x in sims]
+
+    def score_images(self, images, texts):
+        from PIL import Image
+
+        torch = self._load()[3]
+        with self._lock, torch.no_grad():
+            text = self._encode_texts([f"a photo of {t}" for t in texts])
+            sims = (self._encode_pictures([Image.fromarray(a) for a in images]) @ text.T).mean(dim=1)
         return [round(float(x), 4) for x in sims]
 
 
@@ -121,6 +174,7 @@ class Selection:
     final_score: float | None  # clip_score + fit bonus
     reason: str
     query: str = ""
+    logo_check: dict | None = None  # logo score, gap and decision; None = not checked (e.g. generated)
 
     def to_dict(self) -> dict:
         c = self.candidate
@@ -129,7 +183,8 @@ class Selection:
                 "licence": c.licence_name, "licence_url": c.licence_url, "attribution": c.attribution,
                 "commercial_use": c.commercial_use, "watermark": c.watermark, "ai_generated": c.ai_generated,
                 "generated": c.generated, "reason": self.reason, "relevance_score": self.clip_score,
-                "final_score": self.final_score, "width": c.width, "height": c.height, "duration": c.duration}
+                "final_score": self.final_score, "logo_check": self.logo_check, "width": c.width,
+                "height": c.height, "duration": c.duration}
 
 
 @dataclass
@@ -199,7 +254,7 @@ def _search(provider, queries: list[str], ctx: SelectionContext, scene_seconds: 
 
 
 def _score(provider, candidates: list[Candidate], texts: list[str], ctx: SelectionContext):
-    """[(candidate, score)] for the candidates whose preview could be loaded."""
+    """[(candidate, score, logo score or None)] for the candidates whose preview could be loaded."""
     previews: list[Path | None] = [None] * len(candidates)
     if ctx.scorer.needs_images:
         folder = ctx.work / "previews"
@@ -220,10 +275,28 @@ def _score(provider, candidates: list[Candidate], texts: list[str], ctx: Selecti
         return []
     try:
         scores = ctx.scorer.score(candidates, previews, texts)
+        logos = ctx.scorer.logo_scores(candidates, previews) if get_settings().LOGO_CHECK else [None] * len(scores)
     except Exception as e:  # a broken preview image must not fail the job
         log.warning("scoring failed: %s", e)
         return []
-    return list(zip(candidates, scores))
+    return list(zip(candidates, scores, logos))
+
+
+def logo_decision(score: float, logo: float | None) -> tuple[str, float, dict | None]:
+    """("ok" | "penalised" | "rejected", order-score penalty, facts for timeline.json)."""
+    s = get_settings()
+    if logo is None:
+        return "ok", 0.0, None
+    gap = round(logo - score, 4)
+    if gap >= s.LOGO_REJECT_MARGIN:
+        result, penalty = "rejected", 0.0
+    elif gap >= s.LOGO_PENALTY_MARGIN:
+        result, penalty = "penalised", s.LOGO_PENALTY
+    else:
+        result, penalty = "ok", 0.0
+    return result, penalty, {"logo_score": logo, "scene_score": score, "gap": gap, "result": result,
+                             "reject_margin": s.LOGO_REJECT_MARGIN, "penalty_margin": s.LOGO_PENALTY_MARGIN,
+                             "penalty": penalty}
 
 
 def _card(scene_index: int, meaning: SceneMeaning) -> Candidate:
@@ -273,14 +346,25 @@ def select_clip(scene, meaning: SceneMeaning, plan: SearchPlan, ctx: SelectionCo
         if not scored:
             notes.append(f"{name}: previews could not be scored")
             continue
-        ranked = sorted(((c, score, score + fit_bonus(c, seconds, ctx.orientation)) for c, score in scored),
-                        key=lambda x: x[2], reverse=True)
-        best = max(score for _, score, _ in ranked)
+        rows, logo_rejected = [], []
+        for c, score, logo in scored:
+            result, penalty, facts = logo_decision(score, logo)
+            if result == "rejected":
+                logo_rejected.append((score, f"{c.uid} (logo {logo:.3f} vs scene {score:.3f})"))
+                continue
+            rows.append((c, score, round(score + fit_bonus(c, seconds, ctx.orientation) - penalty, 4), facts))
+        if logo_rejected:  # best-scoring rejected ones first: those are the ones that mattered
+            top = [text for _, text in sorted(logo_rejected, reverse=True)[:3]]
+            notes.append(f"{name}: logo check rejected {len(logo_rejected)}, best: " + ", ".join(top))
+        if not rows:
+            continue
+        ranked = sorted(rows, key=lambda x: x[2], reverse=True)
+        best = max(r[1] for r in ranked)
         passing = [r for r in ranked if r[1] >= s.STOCK_MIN_SCORE]
         if not passing:
             notes.append(f"{name}: best score {best:.3f} < {s.STOCK_MIN_SCORE:.2f}")
             continue
-        for cand, score, final in passing[:MAX_DOWNLOAD_TRIES]:
+        for cand, score, final, logo_facts in passing[:MAX_DOWNLOAD_TRIES]:
             folder = ctx.work / "clips"
             folder.mkdir(parents=True, exist_ok=True)
             try:
@@ -296,10 +380,13 @@ def select_clip(scene, meaning: SceneMeaning, plan: SearchPlan, ctx: SelectionCo
                 continue
             ctx.used.add(cand.uid)
             reason = (f"{name}: score {score:.3f} >= {s.STOCK_MIN_SCORE:.2f} for query '{cand.query}' "
-                      f"(best of {len(ranked)} candidates, fit bonus +{final - score:.2f})")
+                      f"(best of {len(ranked)} candidates, order bonus {final - score:+.2f})")
+            if logo_facts:
+                reason += (f"; logo check {logo_facts['result']} (logo {logo_facts['logo_score']:.3f}, "
+                           f"gap {logo_facts['gap']:+.3f})")
             if notes:
                 reason += "; earlier: " + "; ".join(notes)
-            return Selection(scene.index, cand, path, score, round(final, 4), reason, cand.query)
+            return Selection(scene.index, cand, path, score, round(final, 4), reason, cand.query, logo_facts)
         notes.append(f"{name}: no passing candidate could be downloaded")
 
     card = _card(scene.index, meaning)

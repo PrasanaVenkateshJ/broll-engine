@@ -174,3 +174,69 @@ def test_groq_without_key_falls_back_without_calling_the_network(monkeypatch):
     meanings, _, warnings = understand_scenes(SCENES, "x")
     assert meanings[0].source == "rules"
     assert "GROQ_API_KEY is empty" in warnings[0]
+
+
+# ---------- Repeatable Groq answers: temperature 0 + stored in timeline.json + reused ----------
+
+GOOD_ANSWER = {"scenes": [
+    {"index": 0, "queries": ["data center server racks", "network cables", "laptop in office"],
+     "flags": {}, "reason": "cloud means computing here"},
+    {"index": 1, "queries": ["rising sales chart", "busy shop counter", "coins stacking"],
+     "flags": {"statistic": True}, "reason": "sales growth"}]}
+SCRIPT = " ".join(s.text for s in SCENES)
+
+
+def as_timeline(meanings):
+    """What build_timeline() stores per scene (only the part reuse needs)."""
+    return {"scenes": [{"index": m.index, "understanding": m.to_dict()} for m in meanings]}
+
+
+def test_groq_request_is_deterministic(monkeypatch):
+    server = FakeAPI(groq_answer(GOOD_ANSWER))
+    try:
+        use_groq(monkeypatch, server.url)
+        understand_scenes(SCENES, SCRIPT)
+        understand_scenes(SCENES, SCRIPT)
+    finally:
+        server.close()
+    first, second = (json.loads(c["body"]) for c in server.calls)
+    assert first == second                                   # same script -> exactly the same request
+    assert first["temperature"] == 0.0 and first["seed"] == get_settings().SEED
+
+
+def test_stored_understanding_is_reused_without_asking_groq_again(monkeypatch):
+    server = FakeAPI(groq_answer(GOOD_ANSWER))
+    try:
+        use_groq(monkeypatch, server.url)
+        first, info, _ = understand_scenes(SCENES, SCRIPT)
+        again, again_info, warnings = understand_scenes(SCENES, SCRIPT, previous_timeline=as_timeline(first))
+    finally:
+        server.close()
+    assert len(server.calls) == 1                            # the re-render did NOT call the LLM
+    assert [m.to_dict() for m in again] == [m.to_dict() for m in first]
+    assert again_info["reused_from_timeline"] is True and warnings == []
+    assert info["prompt_version"] and len(first[0].fingerprint) == 16
+
+
+def test_stored_understanding_is_not_reused_when_the_script_changed(monkeypatch):
+    server = FakeAPI(groq_answer(GOOD_ANSWER))
+    try:
+        use_groq(monkeypatch, server.url)
+        first, _, _ = understand_scenes(SCENES, SCRIPT)
+        changed = [Scene(0, 0.0, 3.0, "Cloud storage keeps family photos safe."), SCENES[1]]
+        understand_scenes(changed, " ".join(s.text for s in changed), previous_timeline=as_timeline(first))
+    finally:
+        server.close()
+    assert len(server.calls) == 2                            # different question -> asked again
+
+
+def test_a_rules_fallback_is_never_reused_as_a_groq_answer(monkeypatch):
+    server = FakeAPI(groq_answer({}, status=500))
+    try:
+        use_groq(monkeypatch, server.url)
+        fallback, _, _ = understand_scenes(SCENES, SCRIPT)
+        understand_scenes(SCENES, SCRIPT, previous_timeline=as_timeline(fallback))
+    finally:
+        server.close()
+    assert fallback[0].source == "rules"
+    assert len(server.calls) == 4                            # Groq is tried again (2 tries each time)

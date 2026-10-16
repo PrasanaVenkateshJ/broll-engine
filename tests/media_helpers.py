@@ -61,3 +61,12 @@ def make_image(path: Path, size: str = "1280x720") -> Path:
     """One frame of the test pattern as an image (jpg/png from the suffix)."""
     _ffmpeg("-f", "lavfi", "-i", f"testsrc2=s={size}:r=1:d=1", "-frames:v", "1", str(path))
     return path
+
+
+def make_subjects_at_both_edges(path: Path, seconds: float = 3.0) -> Path:
+    """A grey 640x360 video with one busy pattern at the far left AND one at the far right."""
+    _ffmpeg("-f", "lavfi", "-i", f"color=c=gray:s=640x360:r=30:d={seconds}",
+            "-f", "lavfi", "-i", f"testsrc2=s=110x200:r=30:d={seconds}",
+            "-filter_complex", "[1]split[l][r];[0][l]overlay=10:80[a];[a][r]overlay=520:80",
+            "-c:v", "libx264", "-preset", "ultrafast", "-pix_fmt", "yuv420p", str(path))
+    return path

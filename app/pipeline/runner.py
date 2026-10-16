@@ -95,8 +95,13 @@ def _narration_from_scene_list(run: Run, items: list[dict], voice: str) -> tuple
                             source_codec=found.codec), durations
 
 
-def run_pipeline(job_id: str, request: dict[str, Any], input_type: str, input_key: str | None = None) -> list[str]:
-    """Run every stage. Returns the output file names saved in storage. Raises AppError on failure."""
+def run_pipeline(job_id: str, request: dict[str, Any], input_type: str, input_key: str | None = None,
+                 previous_timeline: dict | None = None) -> list[str]:
+    """Run every stage. Returns the output file names saved in storage. Raises AppError on failure.
+
+    previous_timeline: an earlier timeline.json of this job (re-render / clip swap); its stored scene
+    understanding is reused when it still matches, so the LLM is not asked again.
+    """
     s = get_settings()
     work = Path(s.WORK_DIR) / job_id
     work.mkdir(parents=True, exist_ok=True)
@@ -151,7 +156,8 @@ def run_pipeline(job_id: str, request: dict[str, Any], input_type: str, input_ke
         with run.stage("understand", 48):
             full_text = text if input_type == "script" else " ".join(sc.text for sc in scenes)
             meanings, understand_info, understand_warnings = understand_scenes(scenes, full_text,
-                                                                               request.get("style"))
+                                                                               request.get("style"),
+                                                                               previous_timeline)
             run.models["understand"] = understand_info
             for message in understand_warnings:
                 run.warn(message)
@@ -218,7 +224,7 @@ def _render_segments(run: Run, scenes, cues, ratios, selections, meanings, plans
             selection = selections[i]
             rendered, problems = {}, []
             try:
-                info = analyse_source(selection, frames / s.RENDER_FPS)
+                info = analyse_source(selection, frames / s.RENDER_FPS, plans[i].queries, ctx.scorer)
                 for ratio in ratios:
                     path, facts = render_segment(info, scene, ratio, cues, folders[ratio], frames, burn_captions)
                     found = qa.check_segment(path, frames)

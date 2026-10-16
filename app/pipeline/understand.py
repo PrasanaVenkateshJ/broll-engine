@@ -16,7 +16,13 @@ Adapters (picked by UNDERSTAND_PROVIDER), same idea as tts.py:
 
 The detectors for numbers, names, brands and sensitive topics are plain code and run for
 EVERY adapter, so safety never depends on the LLM getting it right.
+
+Repeatable: Groq is called with temperature LLM_TEMPERATURE (default 0), a fixed seed and a
+fixed prompt. Every scene's answer is stored in timeline.json with a fingerprint (hash of the
+text, script, style, provider, model and prompt). A re-render (or a clip swap) passes that
+timeline back and gets the SAME understanding without asking the LLM again.
 """
+import hashlib
 import json
 import logging
 import re
@@ -50,10 +56,18 @@ class SceneMeaning:
     names: list[str] = field(default_factory=list)    # people / brands found in the text
     number: str | None = None                          # headline figure for a statistic, e.g. "40%"
     keyword: str = ""                                  # short label for a generated card
+    fingerprint: str = ""                              # what this answer depends on (see fingerprint())
 
     def to_dict(self) -> dict:
         return {"queries": self.queries, "flags": self.flags, "reason": self.reason, "source": self.source,
-                "names": self.names, "number": self.number, "keyword": self.keyword}
+                "names": self.names, "number": self.number, "keyword": self.keyword,
+                "fingerprint": self.fingerprint}
+
+    @classmethod
+    def from_dict(cls, index: int, data: dict) -> "SceneMeaning":
+        return cls(index=index, queries=list(data["queries"]), flags=dict(data["flags"]), reason=data["reason"],
+                   source=data["source"], names=list(data.get("names") or []), number=data.get("number"),
+                   keyword=data.get("keyword") or "", fingerprint=data.get("fingerprint") or "")
 
 
 class UnderstandError(Exception):
@@ -515,9 +529,13 @@ Respect the avoid list. Flags (true/false): abstract = an idea with no obvious p
 statistic = contains a number, percentage or amount; named_person = mentions a specific real person;
 brand = mentions a company or product brand; sensitive = death, illness, violence, disaster, abuse,
 tragedy or similar. reason = one short sentence on why these queries fit the meaning.
+Prefer the most common, concrete stock-footage wording; list the scenes in index order.
 Answer with JSON only, in this shape:
 {"scenes": [{"index": 0, "queries": ["...", "...", "..."], "flags": {"abstract": false, "statistic": false,
 "named_person": false, "brand": false, "sensitive": false}, "reason": "..."}]}"""
+# Changes whenever the prompt text changes, so an answer stored in timeline.json is only reused
+# for the exact same prompt.
+PROMPT_VERSION = hashlib.sha1(GROQ_SYSTEM_PROMPT.encode()).hexdigest()[:10]
 
 
 class GroqUnderstander(Understander):
@@ -529,7 +547,8 @@ class GroqUnderstander(Understander):
     def info(self):
         s = get_settings()
         return {"provider": self.name, "model": s.LLM_MODEL, "endpoint": s.GROQ_BASE_URL,
-                "temperature": s.LLM_TEMPERATURE, "seed": s.SEED, "tokens_used": self.tokens_used}
+                "temperature": s.LLM_TEMPERATURE, "seed": s.SEED, "prompt_version": PROMPT_VERSION,
+                "tokens_used": self.tokens_used}
 
     def _call(self, payload: dict) -> dict:
         s = get_settings()
@@ -550,10 +569,12 @@ class GroqUnderstander(Understander):
             raise UnderstandError("GROQ_API_KEY is empty")
         user = {"full_script": full_text, "style": style,
                 "scenes": [{"index": sc.index, "text": sc.text, "visual_hint": sc.visual_hint} for sc in scenes]}
+        # Deterministic request: fixed prompt, keys always in the same order, temperature 0
+        # (LLM_TEMPERATURE) and a fixed seed -> the same script gives the same request every time.
         payload = {"model": s.LLM_MODEL, "temperature": s.LLM_TEMPERATURE, "seed": s.SEED,
                    "response_format": {"type": "json_object"},
                    "messages": [{"role": "system", "content": GROQ_SYSTEM_PROMPT},
-                                {"role": "user", "content": json.dumps(user, ensure_ascii=False)}]}
+                                {"role": "user", "content": json.dumps(user, ensure_ascii=False, sort_keys=True)}]}
         last_error: Exception | None = None
         for attempt in range(1 + max(0, s.LLM_RETRIES)):
             try:
@@ -597,15 +618,56 @@ class GroqUnderstander(Understander):
 ADAPTERS = {"groq": GroqUnderstander, "rules": RulesUnderstander, "mock": MockUnderstander}
 
 
-def understand_scenes(scenes: list, full_text: str, style: str | None = None) -> tuple[list[SceneMeaning], dict, list[str]]:
-    """Returns (one meaning per scene, info for the manifest, warnings). Never raises for LLM trouble."""
+def fingerprint(provider: str, scene, full_text: str, style: str | None) -> str:
+    """A short hash of everything an answer depends on. Same fingerprint = the same question,
+    so a stored answer can be reused instead of asking again."""
+    s = get_settings()
+    data = {"provider": provider, "text": scene.text, "visual_hint": scene.visual_hint, "script": full_text,
+            "style": style}
+    if provider == "groq":
+        data.update(model=s.LLM_MODEL, prompt=PROMPT_VERSION, temperature=s.LLM_TEMPERATURE, seed=s.SEED)
+    return hashlib.sha1(json.dumps(data, sort_keys=True, ensure_ascii=False).encode()).hexdigest()[:16]
+
+
+def reuse_from_timeline(previous: dict | None, scenes: list, full_text: str,
+                        style: str | None) -> list[SceneMeaning] | None:
+    """The meanings stored in an earlier timeline.json, if EVERY scene's fingerprint still matches
+    (same text, script, style, provider, model, prompt). Otherwise None = ask again."""
+    old = (previous or {}).get("scenes") or []
+    if len(old) != len(scenes):
+        return None
     provider = get_settings().UNDERSTAND_PROVIDER
+    out = []
+    for sc, item in zip(scenes, old):
+        stored = item.get("understanding") or {}
+        if not stored.get("queries") or stored.get("fingerprint") != fingerprint(provider, sc, full_text, style):
+            return None
+        out.append(SceneMeaning.from_dict(sc.index, stored))
+    return out
+
+
+def understand_scenes(scenes: list, full_text: str, style: str | None = None,
+                      previous_timeline: dict | None = None) -> tuple[list[SceneMeaning], dict, list[str]]:
+    """Returns (one meaning per scene, info for the manifest, warnings). Never raises for LLM trouble.
+
+    previous_timeline: an earlier timeline.json of the same job (re-render / clip swap). If its stored
+    understanding still matches, it is reused and the LLM is NOT asked again.
+    """
+    provider = get_settings().UNDERSTAND_PROVIDER
+    reused = reuse_from_timeline(previous_timeline, scenes, full_text, style)
+    if reused is not None:
+        return reused, {"provider": provider, "reused_from_timeline": True, "tokens_used": 0}, []
     adapter = ADAPTERS[provider]()
     try:
-        return adapter.understand(scenes, full_text, style), adapter.info(), []
+        meanings, info, warnings = adapter.understand(scenes, full_text, style), adapter.info(), []
     except UnderstandError as e:
         if provider != "groq":
             raise
         rules = RulesUnderstander()
         warning = f"Scene understanding with Groq failed ({e}); used the offline rules instead"
-        return rules.understand(scenes, full_text, style), {**adapter.info(), "fallback": "rules"}, [warning]
+        meanings, info, warnings = (rules.understand(scenes, full_text, style), {**adapter.info(), "fallback": "rules"},
+                                    [warning])
+    for meaning, sc in zip(meanings, scenes):
+        # Uses the provider that REALLY answered: a rules fallback is never reused as a Groq answer.
+        meaning.fingerprint = fingerprint(meaning.source, sc, full_text, style)
+    return meanings, info, warnings

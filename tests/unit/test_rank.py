@@ -137,3 +137,69 @@ def test_verify_media_rejects_garbage(tmp_path):
     bad = tmp_path / "bad.mp4"
     bad.write_bytes(b"not a video" * 100)
     assert verify_media(bad, "video") == "ffprobe cannot read it"
+
+
+# ---------- Logo check (mock scorer: MockProvider.logo_scores sets a clip's logo score) ----------
+
+def all_mock_ids(plan):
+    return [c.id for q in plan.queries for c in MockProvider().search(q, "landscape", 4.0)]
+
+
+def test_logo_decision_thresholds():
+    from app.pipeline.rank import logo_decision
+
+    assert logo_decision(0.25, 0.30)[0] == "rejected"     # gap +0.05: more logo than scene
+    assert logo_decision(0.25, 0.22)[0] == "rejected"     # gap -0.03 >= LOGO_REJECT_MARGIN (-0.04)
+    assert logo_decision(0.25, 0.20)[:2] == ("penalised", get_settings().LOGO_PENALTY)  # gap -0.05
+    result, penalty, facts = logo_decision(0.25, 0.10)    # gap -0.15: clearly not a logo
+    assert (result, penalty) == ("ok", 0.0) and facts["gap"] == -0.15
+    assert logo_decision(0.25, None) == ("ok", 0.0, None)  # LOGO_CHECK off
+
+
+def test_candidate_that_looks_like_a_logo_is_rejected_with_the_reason(tmp_path, monkeypatch):
+    scenes, meanings, plans = make(["Small shops open early every morning."])
+    best = select_clip(scenes[0], meanings[0], plans[0], context(tmp_path / "a"))
+    monkeypatch.setattr(MockProvider, "logo_scores", {best.candidate.id: 0.40})  # logo beats the scene score
+    sel = select_clip(scenes[0], meanings[0], plans[0], context(tmp_path / "b"))
+    assert sel.candidate.provider == "mock" and sel.candidate.id != best.candidate.id
+    assert f"logo check rejected 1, best: {best.candidate.uid} (logo 0.400 vs scene" in sel.reason
+    assert sel.logo_check["result"] == "ok" and sel.to_dict()["logo_check"] == sel.logo_check
+
+
+def test_near_logo_candidates_are_penalised_but_still_usable(tmp_path, monkeypatch):
+    scenes, meanings, plans = make(["Small shops open early every morning."])
+    # Every clip has a logo score just under its scene score (mock scores are 0.15-0.30).
+    monkeypatch.setattr(MockProvider, "logo_scores", {i: 0.14 for i in all_mock_ids(plans[0])})
+    monkeypatch.setenv("LOGO_PENALTY_MARGIN", "-0.20")
+    get_settings.cache_clear()
+    sel = select_clip(scenes[0], meanings[0], plans[0], context(tmp_path))
+    assert sel.candidate.provider == "mock"
+    assert sel.logo_check["result"] == "penalised" and sel.logo_check["penalty"] == get_settings().LOGO_PENALTY
+    assert sel.final_score < sel.clip_score + 0.05  # the penalty was taken off the order score
+    assert "logo check penalised" in sel.reason
+
+
+def test_clean_candidate_beats_a_penalised_one_with_a_slightly_higher_score(tmp_path, monkeypatch):
+    scenes, meanings, plans = make(["Small shops open early every morning."])
+    best = select_clip(scenes[0], meanings[0], plans[0], context(tmp_path / "a"))
+    # Some readable brand text: logo score 0.05 below the scene score -> penalised, not rejected.
+    monkeypatch.setattr(MockProvider, "logo_scores", {best.candidate.id: round(best.clip_score - 0.05, 4)})
+    sel = select_clip(scenes[0], meanings[0], plans[0], context(tmp_path / "b"))
+    assert sel.candidate.id != best.candidate.id and sel.logo_check["result"] == "ok"
+
+
+def test_when_every_candidate_shows_a_logo_the_scene_gets_a_generated_card(tmp_path, monkeypatch):
+    scenes, meanings, plans = make(["Apple launched a new laptop for its fans."])
+    monkeypatch.setattr(MockProvider, "logo_scores", {i: 0.9 for i in all_mock_ids(plans[0])})
+    sel = select_clip(scenes[0], meanings[0], plans[0], context(tmp_path))
+    assert sel.candidate.provider == "generated" and sel.logo_check is None
+    assert "logo check rejected" in sel.reason
+
+
+def test_logo_check_can_be_switched_off(tmp_path, monkeypatch):
+    scenes, meanings, plans = make(["Small shops open early every morning."])
+    monkeypatch.setattr(MockProvider, "logo_scores", {i: 0.9 for i in all_mock_ids(plans[0])})
+    monkeypatch.setenv("LOGO_CHECK", "false")
+    get_settings.cache_clear()
+    sel = select_clip(scenes[0], meanings[0], plans[0], context(tmp_path))
+    assert sel.candidate.provider == "mock" and sel.logo_check is None and "logo" not in sel.reason

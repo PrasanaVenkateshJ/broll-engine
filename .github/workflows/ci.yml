@@ -1,5 +1,6 @@
-# On every push: build with docker compose, start the whole stack, run ALL tests in the
-# api container (against real MinIO), then run a smoke test through api + worker + MinIO.
+# On every push: build the image ONCE, start the whole stack, run ALL tests in the api
+# container (against real MinIO), then run a smoke test through api + worker + MinIO.
+# Mock adapters only (from .env.example): no API keys, no model downloads.
 name: ci
 
 on:
@@ -16,11 +17,22 @@ jobs:
       - name: Use the example settings (no real API keys needed)
         run: cp .env.example .env
 
-      - name: Build images
-        run: docker compose build
+      - name: Set up Docker Buildx (needed for the layer cache)
+        uses: docker/setup-buildx-action@v3
 
-      - name: Start the stack (minio, minio-init, api, worker)
-        run: docker compose up -d
+      # One build of broll-engine:local. Layers are cached in GitHub Actions, so the slow
+      # torch / pip layer is only rebuilt when requirements*.txt or the Dockerfile change.
+      - name: Build the image once (broll-engine:local)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          tags: broll-engine:local
+          load: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Start the stack (minio, minio-init, api, worker) - no rebuild
+        run: docker compose up -d --no-build
 
       - name: Wait until /ready says OK
         run: |
@@ -31,7 +43,7 @@ jobs:
           echo "API never became ready"; exit 1
 
       - name: Run all tests inside the api container
-        run: docker compose run --rm api pytest -v
+        run: docker compose run --rm --no-deps api pytest -v
 
       - name: Smoke test the running stack (real worker + MinIO)
         run: docker compose exec -T api python scripts/smoke_test.py

@@ -11,6 +11,7 @@
 | boto3 | 1.43.114 | S3 / MinIO client | Apache-2.0 |
 | pytest | 9.1.1 | tests | MIT |
 | PyTorch (CPU) | 2.14.1 | model runtime (from Phase 3) | BSD-3-Clause |
+| torchvision (CPU) | 0.29.1 | image transforms used by open_clip (must match torch 2.14.1) | BSD-3-Clause |
 | faster-whisper | 1.2.1 | transcription (from Phase 4) | MIT |
 | Kokoro | 0.9.4 | text-to-speech (from Phase 3) | Apache-2.0 |
 | Kokoro-82M model weights (`hexgrad/Kokoro-82M`) | downloaded at first use | TTS voices | Apache-2.0 |

@@ -43,6 +43,12 @@ def test_script_job_makes_correct_videos_srt_and_timeline(client, worker, tmp_pa
     scenes = timeline["scenes"]
     assert scenes[0]["start"] == 0 and scenes[-1]["end"] == timeline["duration"]
     assert all(a["end"] == b["start"] for a, b in zip(scenes, scenes[1:]))
+    # Every scene stores its full understanding (for re-renders) and every segment its crop choice.
+    for sc in scenes:
+        assert sc["understanding"]["queries"] and len(sc["understanding"]["fingerprint"]) == 16
+        if not sc["generated"]:
+            assert sc["segments"]["9:16"]["crop"]["method"] == "saliency"  # mock scorer: no CLIP
+            assert sc["clip_details"]["logo_check"]["result"] == "ok"
 
     for name, (w, h) in {"video_16x9.mp4": (1920, 1080), "video_9x16.mp4": (1080, 1920)}.items():
         info = media.probe(download(client, final, name, tmp_path))

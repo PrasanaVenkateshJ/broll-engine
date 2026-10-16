@@ -9,11 +9,11 @@ from app.pipeline import media, qa
 from app.pipeline.providers.base import Candidate
 from app.pipeline.providers.generated import GeneratedProvider
 from app.pipeline.rank import Selection
-from app.pipeline.render import (SourceInfo, analyse_source, choose_window, look_filter, plan_framing,
-                                 render_segment, time_plan)
+from app.pipeline.render import (SourceInfo, analyse_source, choose_window, look_filter, pick_crop,
+                                 plan_framing, render_segment, time_plan)
 from app.pipeline.scenes import Scene
 from app.pipeline.transcribe import Word
-from tests.media_helpers import make_image, make_subject_on_right, make_video
+from tests.media_helpers import make_image, make_subject_on_right, make_subjects_at_both_edges, make_video
 
 
 def selection_for(path, kind="video", width=640, height=360, uid="t"):
@@ -133,3 +133,69 @@ def test_segments_are_cached(tmp_path):
     first, facts1 = render_segment(info, scene(2.0), "1:1", [], tmp_path, 60, burn_captions=False)
     second, facts2 = render_segment(info, scene(2.0), "1:1", [], tmp_path, 60, burn_captions=False)
     assert first == second and facts2.get("cached") is True and "cached" not in facts1
+
+
+# ---------- Subject-aware crop (a stand-in scorer instead of CLIP) ----------
+
+class SubjectPixelScorer:
+    """Stands in for CLIP: a picture's score = how many "subject" (colourful, non-grey) pixels it
+    shows. So a window that cuts the subject away scores lower than the whole frame."""
+    name = "subject-pixels"
+    needs_images = True
+
+    def __init__(self):
+        self.calls = 0
+
+    def score_images(self, images, texts):
+        self.calls += 1
+        out = []
+        for img in images:
+            grey = np.median(img.reshape(-1, 3), axis=0)
+            out.append(float((np.abs(img.astype(int) - grey).max(axis=2) > 40).sum()) / 1e5)
+        return out
+
+
+def test_pick_crop_rule():
+    assert pick_crop({"salient": 0.30, "centre": 0.25}, 0.29, 0.02) == "salient"
+    assert pick_crop({"left": 0.24, "right": 0.27}, 0.28, 0.02) == "right"   # 0.01 below the frame: still crop
+    assert pick_crop({"left": 0.20, "right": 0.21}, 0.28, 0.02) == "blur"    # every window loses the subject
+    assert pick_crop({"salient": 0.25, "right": 0.25}, 0.25, 0.02) == "salient"  # tie: first listed wins
+    # Real run: the centred hand-with-coins scored 0.223, an edge window 0.247 (CLIP noise) -> keep salient.
+    assert pick_crop({"salient": 0.2231, "left": 0.2468, "right": 0.2439}, 0.2296, 0.02, tie_margin=0.03) == "salient"
+    # A subject really at the edge wins clearly (real run: 0.236 vs 0.181 the other way round).
+    assert pick_crop({"centre": 0.181, "right": 0.236}, 0.232, 0.02, tie_margin=0.03) == "right"
+
+
+def test_9x16_subject_aware_crop_keeps_the_subject_at_the_edge(tmp_path):
+    clip = make_subject_on_right(tmp_path / "subject.mp4", 3.0)
+    scorer = SubjectPixelScorer()
+    info = analyse_source(selection_for(clip), 2.0, ["a busy test pattern"], scorer)
+    framing = plan_framing(info, 1080, 1920)
+    assert framing.mode == "subject" and framing.x > 0.5          # window moved right, onto the subject
+    crop = framing.crop
+    assert crop["method"] == "clip" and crop["choice"] in ("salient", "right")
+    assert crop["windows"][crop["choice"]]["score"] > crop["windows"]["centre"]["score"]
+    assert crop["frames"] == get_settings().CROP_SAMPLE_FRAMES and f"window '{crop['choice']}' chosen" in crop["reason"]
+    # The choice is written into the segment facts (-> timeline.json), also for a cached segment.
+    path, facts = render_segment(info, scene(2.0), "9:16", [], tmp_path, 60, burn_captions=False)
+    assert facts["crop"] == crop and facts["framing"].startswith("subject crop")
+    _, again = render_segment(info, scene(2.0), "9:16", [], tmp_path, 60, burn_captions=False)
+    assert again["cached"] is True and again["crop"] == crop
+
+
+def test_crop_falls_back_to_blurred_fit_when_no_window_keeps_the_subject(tmp_path):
+    clip = make_subjects_at_both_edges(tmp_path / "edges.mp4", 3.0)
+    info = analyse_source(selection_for(clip), 2.0, ["two busy test patterns"], SubjectPixelScorer())
+    framing = plan_framing(info, 1080, 1920)
+    assert framing.mode == "blur"
+    assert framing.crop["choice"] == "blurred fit" and "every window cuts the subject" in framing.crop["reason"]
+    best = max(w["score"] for w in framing.crop["windows"].values())
+    assert best < framing.crop["full_frame_score"] - get_settings().CROP_BLUR_MARGIN
+
+
+def test_without_a_picture_scorer_the_saliency_crop_is_used_and_recorded(tmp_path):
+    clip = make_subject_on_right(tmp_path / "subject.mp4", 3.0)
+    info = analyse_source(selection_for(clip), 2.0, ["a busy test pattern"], scorer=None)
+    framing = plan_framing(info, 1080, 1920)
+    assert framing.mode == "salient" and framing.crop["method"] == "saliency"
+    assert plan_framing(info, 1920, 1080).crop == {"method": "none", "choice": "fit (same shape)"}

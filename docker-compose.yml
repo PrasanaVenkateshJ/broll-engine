@@ -3,8 +3,9 @@
 #
 # Values like ${API_TOKENS:-dev-token} come from your .env file (or the default after ":-").
 
+# The image is built ONCE, by the api service. worker and minio-init use the same
+# image by its name, so there is one build instead of three.
 x-app: &app
-  build: .
   image: broll-engine:local
   environment: &app-env
     # Fixed for containers: storage is MinIO, database is in the shared volume.
@@ -91,6 +92,7 @@ services:
 
   api:
     <<: *app
+    build: .          # the only service with build: it makes broll-engine:local
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000
     ports:
       - "8000:8000"

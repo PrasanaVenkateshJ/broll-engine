@@ -155,7 +155,8 @@ class Settings(BaseSettings):
     # gpt-oss is Apache-2.0 licensed; any Groq chat model that supports JSON mode works.
     LLM_MODEL: str = "openai/gpt-oss-120b"
     LLM_TIMEOUT_SECONDS: float = 30.0
-    LLM_TEMPERATURE: float = 0.2
+    # 0 = always pick the most likely words, so the same script gives (nearly) the same answer.
+    LLM_TEMPERATURE: float = 0.0
     # Extra tries after the first failed LLM call.
     LLM_RETRIES: int = 1
 
@@ -195,6 +196,19 @@ class Settings(BaseSettings):
     ORIENTATION_BONUS: float = 0.02
     # Lines with a number/percentage get an animated number card instead of stock footage.
     GENERATED_FOR_STATISTICS: bool = True
+    # Logo check: each preview is also scored against "logo / brand text / watermark" prompts.
+    # logo gap = logo score - scene score. Gap >= LOGO_REJECT_MARGIN -> candidate rejected.
+    # Gap >= LOGO_PENALTY_MARGIN -> it stays, but LOGO_PENALTY is taken off its ORDER score
+    # (like the bonuses, it never changes whether a clip passes STOCK_MIN_SCORE).
+    # Calibrated on 31 hand-labelled real Pixabay previews (2026-10-16): -0.04 rejected 9 of 11
+    # logo pictures and no clean one; the other 2 logo pictures fall in the penalty band.
+    LOGO_CHECK: bool = True
+    LOGO_PROMPTS: str = ("a product with a printed brand logo|a famous company logo|"
+                         "a brand name printed on a can, cup or bottle|a glowing apple logo on a laptop lid|"
+                         "a sports brand logo on shoes or clothes|readable brand name text|a text watermark")
+    LOGO_REJECT_MARGIN: float = -0.04
+    LOGO_PENALTY_MARGIN: float = -0.06
+    LOGO_PENALTY: float = 0.03
 
     # --- Clip fitting + look ---
     # A clip shorter than its scene may be slowed down by up to this fraction, then it loops.
@@ -203,6 +217,15 @@ class Settings(BaseSettings):
     KEN_BURNS_ZOOM: float = 1.12
     # Frames sampled per clip to find the most interesting region for cropping.
     SALIENCY_SAMPLE_FRAMES: int = 5
+    # Subject-aware crop (only with RANK_SCORER=clip): CROP_SAMPLE_FRAMES colour frames, each
+    # candidate crop window (left / centre / right / salient) is scored with CLIP against the
+    # scene meaning. If the best window scores CROP_BLUR_MARGIN or more BELOW the whole frame,
+    # no window keeps the subject -> blurred-background fit instead of a crop.
+    CROP_SAMPLE_FRAMES: int = 3
+    CROP_BLUR_MARGIN: float = 0.02
+    # Leave the salient / centre window only if another window scores more than this above it.
+    # (Real run 2026-10-16: an edge window beat the correct centred subject by 0.024 - CLIP noise.)
+    CROP_TIE_MARGIN: float = 0.03
     # Brightness / colour normalisation targets (signalstats YAVG 0-255, SATAVG) and limits.
     # Real Pixabay clips measured YAVG 102-107 and SATAVG 15-17 in the first real run.
     TARGET_LUMA: float = 110.0
@@ -232,6 +255,10 @@ class Settings(BaseSettings):
     @property
     def providers_disabled(self) -> set[str]:
         return {p.strip().lower() for p in self.PROVIDERS_DISABLED.split(",") if p.strip()}
+
+    @property
+    def logo_prompts(self) -> list[str]:
+        return [p.strip() for p in self.LOGO_PROMPTS.split("|") if p.strip()]
 
     @property
     def tts_voices(self) -> dict[str, tuple[str, str]]:

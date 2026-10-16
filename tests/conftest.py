@@ -74,6 +74,14 @@ def test_env(tmp_path, monkeypatch):
         "GENERATED_FOR_STATISTICS": "true",
         "QA_RETRIES": "1",
         "SEED": "1234",
+        "LLM_TEMPERATURE": "0",
+        "LOGO_CHECK": "true",
+        "LOGO_REJECT_MARGIN": "-0.04",
+        "LOGO_PENALTY_MARGIN": "-0.06",
+        "LOGO_PENALTY": "0.03",
+        "CROP_SAMPLE_FRAMES": "3",
+        "CROP_BLUR_MARGIN": "0.02",
+        "CROP_TIE_MARGIN": "0.03",
         # Tests use small local web servers (127.0.0.1); the SSRF test switches this back off.
         "ALLOW_PRIVATE_URLS": "true",
     }
@@ -85,6 +93,7 @@ def test_env(tmp_path, monkeypatch):
     monkeypatch.setattr(MockProvider, "fail", False)
     monkeypatch.setattr(MockProvider, "corrupt_ids", set())
     monkeypatch.setattr(MockProvider, "clip_seconds", 6.0)
+    monkeypatch.setattr(MockProvider, "logo_scores", {})
     _reset_singletons()
     init_db()
     yield

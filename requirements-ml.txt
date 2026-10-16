@@ -1,6 +1,9 @@
 # Heavy AI models (used from Phase 3 on). Installed in Docker after torch CPU.
-# torch itself is installed in the Dockerfile from https://download.pytorch.org/whl/cpu
+# torch + torchvision are installed FIRST in the Dockerfile from https://download.pytorch.org/whl/cpu.
+# They are pinned here too, so nothing below can swap them for other versions.
+# torchvision must match torch (2.14.1 <-> 0.29.1); open_clip needs torchvision.
 torch==2.14.1
+torchvision==0.29.1
 faster-whisper==1.2.1
 kokoro==0.9.4
 open_clip_torch==3.3.0

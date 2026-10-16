@@ -6,6 +6,7 @@ Tests change the class settings to simulate trouble:
     fail = True          -> every search raises ProviderError ("provider is down")
     corrupt_ids = {...}  -> fetch() writes garbage bytes for these ids ("corrupted download")
     clip_seconds = 6.0   -> length of every mock clip
+    logo_scores = {id: 0.4} -> the mock scorer's logo score for these ids ("a logo is visible")
 """
 import hashlib
 from pathlib import Path
@@ -23,6 +24,7 @@ class MockProvider(Provider):
     fail = False
     corrupt_ids: set[str] = set()
     clip_seconds = 6.0
+    logo_scores: dict[str, float] = {}
 
     def search(self, query, orientation, min_duration):
         if self.fail:
@@ -37,7 +39,8 @@ class MockProvider(Provider):
                 tags=query.lower().split() + ["mock"], title=f"mock clip {i} for {query}",
                 licence_name="Mock licence (tests only)", licence_url="https://example.com/mock-licence",
                 attribution="mock", page_url=f"https://example.com/mock/{clip_id}", query=query,
-                extra={"rank_in_query": i}))
+                extra={"rank_in_query": i,
+                       **({"logo_score": self.logo_scores[clip_id]} if clip_id in self.logo_scores else {})}))
         return out
 
     def fetch(self, candidate, dest_dir: Path) -> Path:
