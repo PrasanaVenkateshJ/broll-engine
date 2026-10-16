@@ -25,7 +25,7 @@ from app.jobs import add_warning, set_progress
 from app.pipeline import intake, media, qa
 from app.pipeline.outputs import build_cues, build_manifest, build_timeline, write_json, write_srt
 from app.pipeline.providers import get_provider, provider_status
-from app.pipeline.rank import SelectionContext, get_scorer, select_clip
+from app.pipeline.rank import SelectionContext, get_scorer, select_clip, select_clips
 from app.pipeline.render import (RESOLUTIONS, analyse_source, concat_segments, frame_counts, orientation_of,
                                  ratio_slug, render_failed, render_segment, save_thumbnail, thumbnail_filename,
                                  video_filename)
@@ -180,11 +180,11 @@ def run_pipeline(job_id: str, request: dict[str, Any], input_type: str, input_ke
         ctx = SelectionContext(work=work, orientation=orientation_of(ratios[0]), warn=run.warn,
                                scorer=get_scorer())
         with run.stage("footage", 52):
-            selections = []
-            for i, (scene, meaning, plan) in enumerate(zip(scenes, meanings, plans)):
-                selections.append(select_clip(scene, meaning, plan, ctx))
-                set_progress(job_id, 52 + round(18 * (i + 1) / len(scenes)), "footage")
-            run.models["ranker"] = ctx.scorer.info()
+            # Pass 1 (parallel) searches + scores every scene; pass 2 picks one clip per scene, in order.
+            selections, footage_facts = select_clips(
+                scenes, meanings, plans, ctx,
+                on_scene_done=lambda i: set_progress(job_id, 60 + round(10 * (i + 1) / len(scenes)), "footage"))
+            run.models["ranker"] = {**ctx.scorer.info(), **footage_facts}
 
         # 6. Render every scene segment (with QA), then one video per aspect ratio.
         with run.stage("render", 70):

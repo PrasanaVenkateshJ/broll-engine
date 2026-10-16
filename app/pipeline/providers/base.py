@@ -80,6 +80,9 @@ class Provider:
     name = "base"
     key_setting: str | None = None   # e.g. "PIXABAY_API_KEY": no key -> provider is skipped
     api_info = ""                    # what we call, for manifest.json
+    # May search results + previews be reused by LATER jobs (FOOTAGE_CACHE_SECONDS)? True for real APIs;
+    # False for test sources whose answers change on purpose between tests.
+    cache_across_jobs = True
 
     def not_ready(self) -> str | None:
         """None if the provider has what it needs (e.g. its API key), else the reason it cannot run."""
@@ -105,10 +108,10 @@ class Provider:
                                  s.CLIP_DOWNLOAD_TIMEOUT_SECONDS, headers=self.download_headers())
 
     def fetch_preview(self, candidate: Candidate, dest_dir: Path) -> Path:
-        """Download the small preview picture that CLIP scores."""
+        """Download the small preview picture that CLIP scores (PREVIEW_TIMEOUT_SECONDS at most)."""
         s = get_settings()
         dest = dest_dir / f"{self.name}_{safe_name(candidate.id)}.jpg"
-        return net.fetch_to_file(candidate.preview_url, dest, 10 * net.MB, s.PROVIDER_TIMEOUT_SECONDS,
+        return net.fetch_to_file(candidate.preview_url, dest, 10 * net.MB, s.PREVIEW_TIMEOUT_SECONDS,
                                  headers=self.download_headers())
 
     def download_headers(self) -> dict:
@@ -123,7 +126,7 @@ def get_json(url: str, params: dict, headers: dict | None = None) -> dict:
     s = get_settings()
     try:
         check_public_url(url)
-        resp = httpx.get(url, params=params, headers=headers, timeout=s.PROVIDER_TIMEOUT_SECONDS)
+        resp = net.shared_client().get(url, params=params, headers=headers, timeout=s.PROVIDER_TIMEOUT_SECONDS)
     except BlockedURL as e:
         raise ProviderError(f"blocked URL: {e}") from None
     except httpx.TimeoutException:

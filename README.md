@@ -46,10 +46,20 @@ flowchart LR
 - **api** and **worker** are separate processes sharing one SQLite file. The API only validates and queues
   (`202 + job_id`); the worker claims queued jobs with an atomic `UPDATE ... WHERE status='queued'`, so two
   workers never take the same job.
-- **Selection rule** (stored per scene in `timeline.json` as `reason`): statistic lines get an animated number
+- **Selection rule** (stored per scene in `timeline.json` as `reason`): statistic lines get a number
   card; otherwise the best stock candidate whose CLIP score is `>= STOCK_MIN_SCORE` and that is not used yet
   in this video, trying sources in `PROVIDER_ORDER`; if none passes, a `generated` motion card. A provider
   error never fails the job (warning + next source); a corrupted download is skipped.
+- **Card text comes only from the narration** (`app/pipeline/cards.py`): code reads every figure in the scene's
+  own words (`40%`, `40 percent`, `forty percent`, `$1.2 million` -> `$1.2M`, `Rs 500`, `3x`, `2025`), shows the
+  main one (a percentage or money before a year) and a short phrase from the same sentence. An LLM suggestion is
+  dropped with a warning if it holds any number the narration does not say. No count-up animation (it used to
+  show in-between numbers like `21%`). `timeline.json` records `card_text`, `card_subtitle`, `card_source`
+  (`narration`) and `card_numbers` per scene.
+- **Footage speed** (same choices): pass 1 searches + scores `FOOTAGE_WORKERS` scenes at the same time (queries
+  in parallel, previews over one pooled connection, CLIP in batches, logo check only until the winner is certain);
+  pass 2 picks one clip per scene in scene order, so the no-repeat rule is unchanged. Searches and previews are
+  cached per job and for `FOOTAGE_CACHE_SECONDS` across jobs; the worker loads CLIP once at start.
 - **Logo check**: every passing candidate's thumbnail AND `LOGO_FRAME_COUNT` frames of the downloaded clip get
   a calibrated *logo probability* (CLIP softmax, logo prompts vs. matched neutral prompts, whole picture + 3x3
   crops); above `LOGO_REJECT_PROB` the clip is rejected (recorded as `logo_check` in `timeline.json`). Measured
@@ -313,6 +323,13 @@ comments in [.env.example](.env.example). "Code default" is used when the variab
 | `PROVIDERS_OVERRIDE_FILE` | `./data/providers_override.json` | `./data/providers_override.json` | JSON file re-read before every search, to switch a provider off DURING a job: {"disabled": ["pixabay_video"]} |
 | `PROVIDER_TIMEOUT_SECONDS` | `15.0` | `15` | Seconds to wait for one provider search. |
 | `PROVIDER_RESULTS_PER_QUERY` | `8` | `8` | Results asked for per search query. |
+| `FOOTAGE_WORKERS` | `4` | `4` | Scenes whose footage is searched + scored at the same time (pass 1). The choice (pass 2) is always made one scene at a time, in scene order, so the no-repeat rule and the result do not change. 1 = one after the other. |
+| `PREVIEW_WORKERS` | `8` | `8` | Preview pictures downloaded at the same time (per scene). |
+| `PREVIEW_TIMEOUT_SECONDS` | `8.0` | `8` | Time limit for one preview picture download. |
+| `FOOTAGE_CACHE_SECONDS` | `900` | `900` | Search results + preview pictures are reused by later jobs with the same query for this long (always within one job). 0 = off. |
+| `FOOTAGE_CACHE_DIR` | `./data/footage_cache` | `./data/footage_cache` | Folder for the cached preview pictures. |
+| `CLIP_BATCH_SIZE` | `32` | `32` | Pictures CLIP looks at in one go. |
+| `CLIP_PRELOAD` | `true` | `true` | Load the CLIP model when the worker starts, not inside the first job. |
 | `PIXABAY_API_KEY` | *(empty)* | *(empty)* | Pixabay key (pixabay.com/api/docs) - used by pixabay_video AND pixabay_image_motion. Only in .env. |
 | `PIXABAY_VIDEO_API_URL` | `https://pixabay.com/api/videos/` | `https://pixabay.com/api/videos/` | Pixabay key (pixabay.com/api/docs) - used by pixabay_video AND pixabay_image_motion. Only in .env. |
 | `PIXABAY_IMAGE_API_URL` | `https://pixabay.com/api/` | `https://pixabay.com/api/` | Pixabay key (pixabay.com/api/docs) - used by pixabay_video AND pixabay_image_motion. Only in .env. |
@@ -329,7 +346,7 @@ comments in [.env.example](.env.example). "Code default" is used when the variab
 | `STOCK_MIN_SCORE` | `0.22` | `0.22` | A stock clip is used only if its CLIP score is at least this. |
 | `DURATION_BONUS` | `0.02` | `0.02` | Small extra points that only change the ORDER of candidates (never pass/fail). |
 | `ORIENTATION_BONUS` | `0.02` | `0.02` | Small extra points that only change the ORDER of candidates (never pass/fail). |
-| `GENERATED_FOR_STATISTICS` | `true` | `true` | true = lines with a number/percentage get an animated number card instead of stock footage. |
+| `GENERATED_FOR_STATISTICS` | `true` | `true` | true = lines with a number/percentage get a number card (text from the narration only) instead of stock footage. |
 | `LOGO_CHECK` | `true` | `true` | Logo check (only candidates that pass STOCK_MIN_SCORE): logo probability 0..1 = CLIP softmax over LOGO_PROMPTS + LOGO_NEUTRAL_PROMPTS, summed over the logo prompts, highest of the whole picture and its LOGO_CROP_GRID x LOGO_CROP_GRID crops. prob &gt; LOGO_REJECT_PROB -&gt; rejected; prob &gt; LOGO_PENALTY_PROB -&gt; kept, but LOGO_PENALTY is taken off its order score. Calibration: [logo_report.md](testpack/calibration/logo_report.md). false = off. |
 | `LOGO_PROMPTS` | `a photo of a laptop with an apple logo\|a photo of a shop...` | `a photo of a laptop with an apple logo\|a photo of a shop...` | Logo prompts ("\|"-separated): pictures that SHOW a logo / brand name. |
 | `LOGO_NEUTRAL_PROMPTS` | `a photo of a laptop\|a photo of a shop\|a photo of a city...` | `a photo of a laptop\|a photo of a shop\|a photo of a city...` | Neutral prompts: the same kinds of subjects WITHOUT a logo. (Prompts that only say "no logos" do not work: CLIP ignores the "no".) |

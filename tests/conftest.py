@@ -12,6 +12,7 @@ from fastapi.testclient import TestClient
 
 from app.config import get_settings
 from app.db import init_db, reset_engine
+from app.pipeline import footage_cache
 from app.security import rate_limiter
 from app.storage import reset_storage
 
@@ -26,6 +27,7 @@ def _reset_singletons():
     reset_engine()
     reset_storage()
     rate_limiter.reset()
+    footage_cache.reset()
 
 
 @pytest.fixture(autouse=True)
@@ -73,6 +75,8 @@ def test_env(tmp_path, monkeypatch):
         "PROVIDERS_DISABLED": "",
         "PROVIDERS_OVERRIDE_FILE": str(tmp_path / "providers_override.json"),
         "RANK_SCORER": "mock",
+        # Footage cache in this test's own folder (never ./data), fresh for every test.
+        "FOOTAGE_CACHE_DIR": str(tmp_path / "footage_cache"),
         "STOCK_MIN_SCORE": "0.22",
         "GENERATED_FOR_STATISTICS": "true",
         "QA_RETRIES": "1",

@@ -73,7 +73,7 @@ def old_rule_rejects(scorer, paths: list[Path], queries: list[str]) -> list[bool
     with torch.no_grad():
         logo_text = scorer._encode_texts(OLD_PROMPTS)
         for path, query in zip(paths, queries):
-            image = scorer._encode_pictures([Image.open(path).convert("RGB")])
+            image = scorer._encode_pictures(scorer._prepare([Image.open(path).convert("RGB")]))
             scene = float((image @ scorer._encode_texts([f"a photo of {query}"]).T).mean())
             logo = float((image @ logo_text.T).max())
             out.append(logo - scene >= OLD_REJECT_MARGIN)

@@ -183,6 +183,23 @@ class Settings(BaseSettings):
     PROVIDER_TIMEOUT_SECONDS: float = 15.0
     # Results asked for per search query.
     PROVIDER_RESULTS_PER_QUERY: int = 8
+
+    # --- Footage speed (same choices, less waiting) ---
+    # Scenes whose footage is searched + scored at the same time (pass 1). The choice itself (pass 2)
+    # is always made one scene at a time, in scene order, so the no-repeat rule and the result stay
+    # the same. 1 = one scene after the other.
+    FOOTAGE_WORKERS: int = 4
+    # Preview pictures downloaded at the same time (per scene), and the time limit for one.
+    PREVIEW_WORKERS: int = 8
+    PREVIEW_TIMEOUT_SECONDS: float = 8.0
+    # Search results + preview pictures are kept this long and reused by later jobs with the same
+    # query (Pixabay asks API users to cache results). Within one job they are always reused. 0 = off.
+    FOOTAGE_CACHE_SECONDS: int = 900
+    FOOTAGE_CACHE_DIR: str = "./data/footage_cache"
+    # Pictures CLIP looks at in one go.
+    CLIP_BATCH_SIZE: int = 32
+    # Load the CLIP model when the worker starts (not inside the first job).
+    CLIP_PRELOAD: bool = True
     PIXABAY_API_KEY: str = ""
     PIXABAY_VIDEO_API_URL: str = "https://pixabay.com/api/videos/"
     PIXABAY_IMAGE_API_URL: str = "https://pixabay.com/api/"
@@ -205,7 +222,7 @@ class Settings(BaseSettings):
     # Small extra points (only used to order candidates, never to pass the threshold).
     DURATION_BONUS: float = 0.02
     ORIENTATION_BONUS: float = 0.02
-    # Lines with a number/percentage get an animated number card instead of stock footage.
+    # Lines with a number/percentage get a number card (text from the narration only) instead of stock footage.
     GENERATED_FOR_STATISTICS: bool = True
     # Logo check: logo probability = CLIP softmax over LOGO_PROMPTS + LOGO_NEUTRAL_PROMPTS ("|"-separated),
     # summed over the logo prompts (0 = surely clean, 1 = surely a logo), taken as the MAX over the whole

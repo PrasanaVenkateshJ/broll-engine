@@ -113,7 +113,10 @@ def write_segment_ass(cues: list[Cue], scene: Scene, width: int, height: int, pa
 
 
 def write_card_ass(card: dict, width: int, height: int, seconds: float, path: Path) -> Path:
-    """The text of a generated card: a big headline (a number counts up from 0) + a small label."""
+    """The text of a generated card: a big headline + a small label, both exactly as given.
+
+    The headline fades in and grows very slightly. There is NO count-up animation: counting 0% -> 40%
+    drew numbers the narration never says (a poster frame at 0.4 s showed "21%")."""
     s = get_settings()
     head_size = round(min(width, height) * 0.2)
     label_size = round(min(width, height) * 0.065)
@@ -126,21 +129,8 @@ def write_card_ass(card: dict, width: int, height: int, seconds: float, path: Pa
         f"2,0,1,0,2,5,0,0,0,1"])
     end = _ass_time(seconds + 1)
     headline = str(card.get("headline") or "")
-    match = re.fullmatch(r"(\D*?)(\d[\d,]*(?:\.\d+)?)(.*)", headline)
-    count_seconds, steps = 0.9, 15
-    if match and seconds > count_seconds + 0.5:  # count up: 0% ... 40%
-        prefix, number, suffix = match.groups()
-        value = float(number.replace(",", ""))
-        decimals = len(number.split(".")[1]) if "." in number else 0
-        for i in range(steps):
-            shown = value * (i + 1) / steps
-            text = f"{shown:,.{decimals}f}" if "," in number else f"{shown:.{decimals}f}"
-            t0, t1 = count_seconds * i / steps, count_seconds * (i + 1) / steps if i < steps - 1 else seconds + 1
-            lines.append(f"Dialogue: 0,{_ass_time(t0)},{_ass_time(t1)},Head,,0,0,0,,"
-                         f"{{\\pos({cx},{head_y})}}{_ass_text([prefix + text + suffix])}")
-    else:  # a word: fade in and grow very slightly
-        lines.append(f"Dialogue: 0,0:00:00.00,{end},Head,,0,0,0,,{{\\pos({cx},{head_y})\\fad(400,0)"
-                     f"\\t(0,{round(seconds * 1000)},\\fscx106\\fscy106)}}{_ass_text([headline])}")
+    lines.append(f"Dialogue: 0,0:00:00.00,{end},Head,,0,0,0,,{{\\pos({cx},{head_y})\\fad(300,0)"
+                 f"\\t(0,{round(seconds * 1000)},\\fscx106\\fscy106)}}{_ass_text([headline])}")
     if card.get("label"):
         lines.append(f"Dialogue: 0,0:00:00.30,{end},Label,,0,0,0,,{{\\pos({cx},{label_y})\\fad(500,0)}}"
                      f"{_ass_text([str(card['label'])])}")

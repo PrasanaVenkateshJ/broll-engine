@@ -50,7 +50,7 @@ def test_apple_company_is_flagged_as_brand_and_fruit_is_not():
 @pytest.mark.parametrize("text, number", [
     ("Sales grew 40% in 2025.", "40%"),
     ("In 2025, household savings grew by 40 percent.", "40%"),
-    ("The company raised $5 million last year.", "$5 million"),
+    ("The company raised $5 million last year.", "$5M"),
     ("Prices doubled in a decade.", "doubled"),
     ("We now serve 300 customers.", "300"),
 ])

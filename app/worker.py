@@ -17,6 +17,7 @@ from app.errors import AppError, ErrorCode
 from app.jobs import claim_next_job, finish_job, send_callback
 from app.logging_setup import correlation_id_var, job_id_var, setup_logging
 from app.models import Job
+from app.pipeline.rank import ClipScorer
 from app.pipeline.runner import run_pipeline
 from app.pipeline.swap import run_swap
 
@@ -88,6 +89,9 @@ def main() -> None:
     # Ctrl+C or "docker stop" -> finish the current job, then exit.
     signal.signal(signal.SIGINT, lambda *_: stop.set())
     signal.signal(signal.SIGTERM, lambda *_: stop.set())
+    if s.RANK_SCORER == "clip" and s.CLIP_PRELOAD:
+        # Load CLIP once for this process, in the background; a job that needs it first just waits for it.
+        threading.Thread(target=ClipScorer.preload, name="clip-preload", daemon=True).start()
     threads = start_workers(stop)
     log.info("worker started", extra={"fields": {"concurrency": len(threads), "storage": s.STORAGE_BACKEND}})
     while not stop.is_set():

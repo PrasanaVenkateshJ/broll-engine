@@ -127,6 +127,7 @@ def build_timeline(job_id: str, input_type: str, duration: float, language: str,
             "commercial_use": clip["commercial_use"], "watermark": clip["watermark"],
             "ai_generated": clip["ai_generated"], "generated": clip["generated"], "reason": clip["reason"],
             "relevance_score": clip["relevance_score"],
+            **card_facts(selection),
             "thumbnail": (thumbnails or {}).get(scene.index),
             # Thumbnail + downloaded-clip-frame logo test (None for generated cards / LOGO_CHECK=false).
             "logo_check": clip["logo_check"],
@@ -140,6 +141,16 @@ def build_timeline(job_id: str, input_type: str, duration: float, language: str,
         })
     return {"job_id": job_id, "input_type": input_type, "duration": round(duration, 3), "language": language,
             "scenes": out, "videos": videos}
+
+
+def card_facts(selection) -> dict:
+    """What a generated card shows and where its text came from (all None for stock footage).
+    card_source is always "narration": card text is built by code from the scene's own words."""
+    c = selection.candidate
+    if not c.generated:
+        return {"card_text": None, "card_subtitle": None, "card_source": None, "card_numbers": None}
+    return {"card_text": c.extra.get("headline", ""), "card_subtitle": c.extra.get("label", ""),
+            "card_source": c.extra.get("card_source", "narration"), "card_numbers": c.extra.get("numbers_shown", [])}
 
 
 def rights_summary(selections: list) -> dict:

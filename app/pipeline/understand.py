@@ -32,6 +32,7 @@ from dataclasses import dataclass, field
 import httpx
 
 from app.config import get_settings
+from app.pipeline import cards
 
 log = logging.getLogger("app.pipeline.understand")
 
@@ -57,17 +58,20 @@ class SceneMeaning:
     number: str | None = None                          # headline figure for a statistic, e.g. "40%"
     keyword: str = ""                                  # short label for a generated card
     fingerprint: str = ""                              # what this answer depends on (see fingerprint())
+    # The generated card's text, built by code from the narration ONLY (cards.build_card).
+    card: dict = field(default_factory=dict)
 
     def to_dict(self) -> dict:
         return {"queries": self.queries, "flags": self.flags, "reason": self.reason, "source": self.source,
-                "names": self.names, "number": self.number, "keyword": self.keyword,
+                "names": self.names, "number": self.number, "keyword": self.keyword, "card": self.card,
                 "fingerprint": self.fingerprint}
 
     @classmethod
     def from_dict(cls, index: int, data: dict) -> "SceneMeaning":
         return cls(index=index, queries=list(data["queries"]), flags=dict(data["flags"]), reason=data["reason"],
                    source=data["source"], names=list(data.get("names") or []), number=data.get("number"),
-                   keyword=data.get("keyword") or "", fingerprint=data.get("fingerprint") or "")
+                   keyword=data.get("keyword") or "", fingerprint=data.get("fingerprint") or "",
+                   card=dict(data.get("card") or {}))
 
 
 class UnderstandError(Exception):
@@ -97,33 +101,14 @@ def _singular(word: str) -> str:
 
 # ---------- Detector 1: numbers -> statistic ----------
 
-_NUM = r"\d[\d,]*(?:\.\d+)?"
-_PERCENT = re.compile(rf"({_NUM})\s*(%|percent\b|per cent\b)", re.I)
-_MONEY = re.compile(rf"([$€£₹])\s?({_NUM})(\s*(?:million|billion|thousand|trillion|bn|m|k)\b)?", re.I)
-_UNIT = re.compile(rf"\b({_NUM})\s*(million|billion|thousand|trillion|times|x)\b", re.I)
-_PLAIN = re.compile(rf"\b({_NUM})\b")
-_CHANGE = re.compile(r"\b(doubled|tripled|halved|quadrupled)\b", re.I)
-
-
-def _is_year(number: str) -> bool:
-    return bool(re.fullmatch(r"(19|20)\d\d", number))
-
-
 def detect_statistic(text: str) -> str | None:
-    """The headline figure of a line, or None. A year on its own ("In 2025") is not a statistic."""
-    if m := _PERCENT.search(text):
-        return f"{m.group(1)}%"
-    if m := _MONEY.search(text):
-        return f"{m.group(1)}{m.group(2)}{(m.group(3) or '').rstrip()}"
-    if m := _UNIT.search(text):
-        unit = m.group(2).lower()
-        return f"{m.group(1)}x" if unit in ("times", "x") else f"{m.group(1)} {unit}"
-    for m in _PLAIN.finditer(text):
-        if not _is_year(m.group(1)):
-            return m.group(1)
-    if m := _CHANGE.search(text):
-        return m.group(1).lower()
-    return None
+    """The headline figure of a line ("40%", "$1.2M", "3x", "300", "doubled"), or None.
+    Read by cards.find_figures (plain code). A year on its own ("In 2025") is not a statistic."""
+    figure = cards.main_figure([f for f in cards.find_figures(text) if f.kind != "year"])
+    if figure:
+        return figure.display
+    change = cards.change_word(text)
+    return change.text.lower() if change else None
 
 
 # ---------- Detector 2: named people and brands ----------
@@ -409,6 +394,11 @@ def card_keyword(text: str, number: str | None, names: list[str] | tuple = ()) -
     return " ".join(words[:2]) or "keep watching"
 
 
+def scene_card(text: str, number: str | None, names: list[str] | tuple = ()) -> dict:
+    """The generated card for a line, from its narration only (see cards.py)."""
+    return cards.build_card(text, card_keyword(text, number, names), names).to_dict()
+
+
 def safety_facts(text: str) -> dict:
     """Run the code detectors (all adapters use these)."""
     people, brands = detect_names(text)
@@ -485,7 +475,8 @@ class RulesUnderstander(Understander):
             reasons.append("keywords of the line")
         return SceneMeaning(index=index, queries=_three(queries), flags=flags, reason="rules: " + "; ".join(reasons),
                             source=self.name, names=facts["people"] + brands, number=facts["number"],
-                            keyword=card_keyword(text, facts["number"], facts["people"] + brands))
+                            keyword=card_keyword(text, facts["number"], facts["people"] + brands),
+                            card=scene_card(text, facts["number"], facts["people"] + brands))
 
     def understand(self, scenes, full_text, style=None):
         return [self.understand_one(sc.index, sc.text, full_text, sc.visual_hint) for sc in scenes]
@@ -515,7 +506,8 @@ class MockUnderstander(Understander):
                        "named_person": bool(facts["people"]), "brand": bool(facts["brands"]),
                        "sensitive": bool(facts["sensitive"])},
                 names=facts["people"] + facts["brands"], number=facts["number"],
-                keyword=card_keyword(sc.text, facts["number"], facts["people"] + facts["brands"])))
+                keyword=card_keyword(sc.text, facts["number"], facts["people"] + facts["brands"]),
+                card=scene_card(sc.text, facts["number"], facts["people"] + facts["brands"])))
         return out
 
 
@@ -529,6 +521,8 @@ Respect the avoid list. Flags (true/false): abstract = an idea with no obvious p
 statistic = contains a number, percentage or amount; named_person = mentions a specific real person;
 brand = mentions a company or product brand; sensitive = death, illness, violence, disaster, abuse,
 tragedy or similar. reason = one short sentence on why these queries fit the meaning.
+Optional "card" (only for a statistic line): {"headline": the figure exactly as said in the line,
+"subtitle": 2-5 words copied from the same sentence}. Never write a number the line does not say.
 Prefer the most common, concrete stock-footage wording; list the scenes in index order.
 Answer with JSON only, in this shape:
 {"scenes": [{"index": 0, "queries": ["...", "...", "..."], "flags": {"abstract": false, "statistic": false,
@@ -543,6 +537,7 @@ class GroqUnderstander(Understander):
 
     def __init__(self):
         self.tokens_used = 0
+        self.warnings: list[str] = []  # e.g. a card suggestion with a number the narration does not say
 
     def info(self):
         s = get_settings()
@@ -613,11 +608,38 @@ class GroqUnderstander(Understander):
             flags["named_person"] |= bool(facts["people"])
             flags["brand"] |= bool(facts["brands"])
             flags["sensitive"] |= bool(facts["sensitive"])
+            names = facts["people"] + facts["brands"]
+            card = scene_card(sc.text, facts["number"], names)  # ALWAYS from the narration, by code
+            subtitle, warning = check_card_suggestion(item.get("card"), sc.text, names)
+            if warning:
+                self.warnings.append(f"Scene {sc.index}: {warning}")
+            if subtitle and card["number"]:  # a checked LLM subtitle may replace ours; the figure never changes
+                card = {**card, "subtitle": subtitle, "subtitle_from": "llm, every word checked against the line"}
             out.append(SceneMeaning(index=sc.index, queries=_three(queries), flags=flags, source=self.name,
-                                    reason=reason,
-                                    names=facts["people"] + facts["brands"], number=facts["number"],
-                                    keyword=card_keyword(sc.text, facts["number"], facts["people"] + facts["brands"])))
+                                    reason=reason, names=names, number=facts["number"],
+                                    keyword=card_keyword(sc.text, facts["number"], names), card=card))
         return out
+
+
+def check_card_suggestion(suggestion, scene_text: str, names: list[str]) -> tuple[str, str | None]:
+    """An LLM's card idea {"headline", "subtitle"} -> (subtitle we may use or "", warning or None).
+
+    The LLM never decides which number is shown. Its whole suggestion is dropped, with a warning, if
+    it holds ANY number the narration does not say ("21%" for a line that says 40%). Its subtitle is
+    used only if every word of it is in the scene's own text and it names no person or brand."""
+    if not isinstance(suggestion, dict):
+        return "", None
+    shown = f"{str(suggestion.get('headline') or '')[:40]} {str(suggestion.get('subtitle') or '')[:60]}".strip()
+    bad = cards.unverified_numbers(shown, scene_text)
+    if bad:
+        return "", (f"the LLM suggested card text '{shown}' with {', '.join(repr(b) for b in bad)}, which the "
+                    "narration does not say; ignored (a card shows only figures from the narration)")
+    subtitle = str(suggestion.get("subtitle") or "").strip()[:60]
+    words, said = tokens(subtitle), set(tokens(scene_text))
+    name_words = {w.lower() for n in names for w in n.split()}
+    if not words or len(words) > cards.MAX_SUBTITLE_WORDS or any(w not in said or w in name_words for w in words):
+        return "", None  # not a phrase from the line: keep the code's own subtitle
+    return subtitle, None
 
 
 ADAPTERS = {"groq": GroqUnderstander, "rules": RulesUnderstander, "mock": MockUnderstander}
@@ -628,7 +650,7 @@ def fingerprint(provider: str, scene, full_text: str, style: str | None) -> str:
     so a stored answer can be reused instead of asking again."""
     s = get_settings()
     data = {"provider": provider, "text": scene.text, "visual_hint": scene.visual_hint, "script": full_text,
-            "style": style}
+            "style": style, "card_rules": cards.CARD_RULES_VERSION}
     if provider == "groq":
         data.update(model=s.LLM_MODEL, prompt=PROMPT_VERSION, temperature=s.LLM_TEMPERATURE, seed=s.SEED)
     return hashlib.sha1(json.dumps(data, sort_keys=True, ensure_ascii=False).encode()).hexdigest()[:16]
@@ -664,7 +686,8 @@ def understand_scenes(scenes: list, full_text: str, style: str | None = None,
         return reused, {"provider": provider, "reused_from_timeline": True, "tokens_used": 0}, []
     adapter = ADAPTERS[provider]()
     try:
-        meanings, info, warnings = adapter.understand(scenes, full_text, style), adapter.info(), []
+        meanings, info = adapter.understand(scenes, full_text, style), adapter.info()
+        warnings = list(getattr(adapter, "warnings", []))
     except UnderstandError as e:
         if provider != "groq":
             raise

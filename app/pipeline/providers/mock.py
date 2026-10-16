@@ -23,6 +23,7 @@ PER_QUERY = 3
 class MockProvider(Provider):
     name = "mock"
     api_info = "local test clips (FFmpeg testsrc2)"
+    cache_across_jobs = False  # tests change its answers on purpose
     fail = False
     corrupt_ids: set[str] = set()
     clip_seconds = 6.0
