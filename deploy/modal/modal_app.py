@@ -7,9 +7,11 @@ container runs - see testpack/notes/cost_modal.md):
 - min_containers=0: no container (and no cost) while nobody uses the demo. The first request after a
   quiet time waits for a cold start.
 - max_containers=1: never two containers, so ONE process owns the SQLite file (SQLite has no locking
-  across machines) and the daily job cap is counted in one place.
-- scaledown_window: an idle container stays up this long after the LAST request, long enough for a job
-  to finish while nobody polls. Every visit costs at least this much idle time, so it is a cost knob.
+  across machines) and the daily / monthly job caps are counted in one place.
+- scaledown_window (180 s): an idle container stays up this long after the LAST request. Every visit costs
+  at least this much idle time, so it is the biggest cost knob. While a job runs, its client (Studio,
+  batch runner, live_check) keeps polling, which keeps the container up. If a container still stops
+  mid-job, the next one re-queues that job once (recover_interrupted_jobs in start()).
 - @modal.concurrent: one container answers many requests at once (polling, downloads, the Studio page)
   while the worker thread renders.
 - Data on the Modal Volume "broll-data" (/data): SQLite database + output files (STORAGE_BACKEND=local).
@@ -18,7 +20,7 @@ container runs - see testpack/notes/cost_modal.md):
 
 Deploy-time knobs (read from YOUR PowerShell when you run "modal deploy"; unset = the default below):
   MODAL_CPU, MODAL_MEMORY_MB, MODAL_MEMORY_LIMIT_MB, MODAL_SCALEDOWN_SECONDS,
-  DEMO_MAX_JOBS_PER_DAY, DEMO_MAX_AUDIO_SECONDS, DEMO_RATE_LIMIT_POST_PER_MINUTE,
+  DEMO_MAX_JOBS_PER_DAY, DEMO_MAX_JOBS_PER_MONTH, DEMO_MAX_AUDIO_SECONDS, DEMO_RATE_LIMIT_POST_PER_MINUTE,
   DEMO_RATE_LIMIT_GET_PER_MINUTE, MODAL_PUBLIC_URL
 """
 import logging
@@ -47,7 +49,7 @@ CPU = float(knob("MODAL_CPU", "2"))  # physical cores (Modal bills per core-seco
 # against a runaway job. Measured locally: see testpack/notes/cost_modal.md.
 MEMORY_MB = int(knob("MODAL_MEMORY_MB", "3072"))
 MEMORY_LIMIT_MB = int(knob("MODAL_MEMORY_LIMIT_MB", "6144"))
-SCALEDOWN_SECONDS = int(knob("MODAL_SCALEDOWN_SECONDS", "600"))
+SCALEDOWN_SECONDS = int(knob("MODAL_SCALEDOWN_SECONDS", "180"))
 
 # The models, in ONE place: the image downloads exactly these and the app is told to use exactly these.
 MODELS = {
@@ -111,8 +113,9 @@ DEMO_ENV = {
     "FOOTAGE_WORKERS": "2",
     "OMP_NUM_THREADS": "2",
     "MKL_NUM_THREADS": "2",
-    # Cost guards.
-    "DEMO_MAX_JOBS_PER_DAY": knob("DEMO_MAX_JOBS_PER_DAY", "40"),
+    # Cost guards (sized for about $1/month of credit, see testpack/notes/cost_modal.md).
+    "DEMO_MAX_JOBS_PER_DAY": knob("DEMO_MAX_JOBS_PER_DAY", "12"),
+    "DEMO_MAX_JOBS_PER_MONTH": knob("DEMO_MAX_JOBS_PER_MONTH", "35"),
     "MAX_AUDIO_SECONDS": knob("DEMO_MAX_AUDIO_SECONDS", "300"),
     "RATE_LIMIT_POST_PER_MINUTE": knob("DEMO_RATE_LIMIT_POST_PER_MINUTE", "4"),
     "RATE_LIMIT_GET_PER_MINUTE": knob("DEMO_RATE_LIMIT_GET_PER_MINUTE", "300"),

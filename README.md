@@ -197,17 +197,20 @@ the public API above, so everything it shows comes from the job, `timeline.json`
 - **Cold start:** it scales to zero (`min_containers=0`): with no traffic there is no container and no cost. The first
   request after a quiet time waits until a container has started (the request is held open, about a minute is
   expected; measure it with `tools/live_check.py --cold`). All models are baked into the image at build time and
-  `HF_HUB_OFFLINE=1` is set, so a cold start downloads nothing. A container stays up 600 s after the last request
-  (`MODAL_SCALEDOWN_SECONDS`), long enough to finish a job while nobody polls.
+  `HF_HUB_OFFLINE=1` is set, so a cold start downloads nothing. A container stays up 180 s after the last request
+  (`MODAL_SCALEDOWN_SECONDS`). While a job runs, the Studio, `tools/batch_run.py` and `tools/live_check.py` keep
+  polling it, and every poll keeps the container up. If a container still stops mid-job, the job is queued again
+  when the next container starts (see "Jobs are never silently lost" below).
 - **Cost guards** (the account has about $1/month of credit; estimate in
-  [testpack/notes/cost_modal.md](testpack/notes/cost_modal.md)): at most `DEMO_MAX_JOBS_PER_DAY=40` new jobs + swaps
-  per UTC day for all tokens together (then `429 DAILY_LIMIT_REACHED`, retryable, `Retry-After` until midnight UTC);
-  narration at most 300 s (`DEMO_MAX_AUDIO_SECONDS` -> `MAX_AUDIO_SECONDS`; the product limit is 10 min);
-  `RATE_LIMIT_POST_PER_MINUTE=4` and `RATE_LIMIT_GET_PER_MINUTE=300` per token. All are deploy-time knobs (see the
-  top of `modal_app.py`). Note: 40 jobs in 40 separate visits would cost about the whole month's credit in one day,
-  so for a review period deploy with a lower cap (e.g. 5).
+  [testpack/notes/cost_modal.md](testpack/notes/cost_modal.md)): at most `DEMO_MAX_JOBS_PER_DAY=12` and
+  `DEMO_MAX_JOBS_PER_MONTH=35` new jobs + swaps for all tokens together (then `429 DAILY_LIMIT_REACHED` with
+  `Retry-After` until midnight UTC, or `429 MONTHLY_LIMIT_REACHED` with `Retry-After` until the 1st of next month
+  UTC; both retryable); narration at most 300 s (`DEMO_MAX_AUDIO_SECONDS` -> `MAX_AUDIO_SECONDS`; the product
+  limit is 10 min); `RATE_LIMIT_POST_PER_MINUTE=4` and `RATE_LIMIT_GET_PER_MINUTE=300` per token. All are
+  deploy-time knobs (see the top of `modal_app.py`). Estimate (not measured on Modal): one cold visit with one
+  job is about $0.012, so even 35 jobs in 35 separate visits is about $0.41 of the $1 monthly credit.
 - **No keepalive:** `.github/workflows/keepalive.yml` has no schedule any more and refuses `*.modal.run` URLs. On
-  Modal a ping does not "keep it awake for free": every ping starts a paid container for 600 s, and a container is
+  Modal a ping does not "keep it awake for free": every ping starts a paid container for 180 s, and a container is
   started on the first real request anyway.
 - **Storage (differs from docker compose):** on Modal the SQLite database and the output files live on the Modal
   Volume `broll-data` (`STORAGE_BACKEND=local`, `/data`), with `SQLITE_JOURNAL_MODE=DELETE`. docker compose keeps
@@ -274,7 +277,8 @@ comments in [.env.example](.env.example). "Code default" is used when the variab
 | `RATE_LIMIT_POST_PER_MINUTE` | `30` | `30` | Max POST requests (new jobs + clip swaps) per token per minute (0 = no limit). Over the limit -&gt; 429 RATE_LIMITED with a `Retry-After` header (seconds to wait). |
 | `RATE_LIMIT_GET_PER_MINUTE` | `600` | `600` | Max GET requests (job status + file downloads) per token per minute (0 = no limit). Same 429 rule. File downloads count against the job owner's GET limit. |
 | `JOBS_LIST_MAX` | `100` | `100` | Most jobs `GET /api/v1/jobs` may return in one answer (`?limit=1..this`). |
-| `DEMO_MAX_JOBS_PER_DAY` | `0` | `0` | Cost guard for a paid live demo: at most this many NEW jobs (incl. clip swaps) per UTC day, all tokens together; then 429 DAILY_LIMIT_REACHED until midnight UTC. An idempotent replay is still answered. 0 = no cap (the Modal demo uses 40). |
+| `DEMO_MAX_JOBS_PER_DAY` | `0` | `0` | Cost guard for a paid live demo: at most this many NEW jobs (incl. clip swaps) per UTC day, all tokens together; then 429 DAILY_LIMIT_REACHED until midnight UTC. An idempotent replay is still answered. 0 = no cap (the Modal demo uses 12). |
+| `DEMO_MAX_JOBS_PER_MONTH` | `0` | `0` | Same cost guard per UTC calendar month; then 429 MONTHLY_LIMIT_REACHED until the 1st of next month (UTC). 0 = no cap (the Modal demo uses 35). |
 | **Studio (web UI)** | | | |
 | `STUDIO_ENABLED` | `true` | `true` | true = serve the B-roll Studio web page at `GET /` (its files under `/studio/`). false = API only. |
 | `STUDIO_DIR` | *(empty)* | *(empty)* | Folder with the Studio files. Empty = `app/studio` next to the code. |
@@ -449,6 +453,7 @@ Every error has the same shape: `{"error": {"code", "message", "retryable", "det
 | `PROVIDER_UNAVAILABLE` | Request 503 (swap); Job | TTS / transcription model failed, or a footage source named in a swap is off or failed. (A footage source failing during a normal job is only a warning.) | yes when a model / source failed; no when the source is switched off |
 | `RENDER_FAILED` | Job | FFmpeg could not render a video. | yes |
 | `DAILY_LIMIT_REACHED` | Request 429 | Cost guard of the live demo: `DEMO_MAX_JOBS_PER_DAY` new jobs + swaps were already created today (UTC, all tokens). `Retry-After` = seconds until midnight UTC; `details`: limit_per_day, used_today, resets_at. | yes |
+| `MONTHLY_LIMIT_REACHED` | Request 429 | Cost guard of the live demo: `DEMO_MAX_JOBS_PER_MONTH` new jobs + swaps were already created this calendar month (UTC, all tokens). `Retry-After` = seconds until the 1st of next month, 00:00 UTC; `details`: limit_per_month, used_this_month, resets_at. `tools/batch_run.py` does not wait for it (nor for the daily cap). | yes |
 | `JOB_INTERRUPTED` | Job | The server stopped while the job was running, and again after it was queued once more (only the single-container Modal demo re-queues). Send the job again. | yes |
 | `INTERNAL_ERROR` | Request 500; Job | Unexpected error (details are only in the logs). | yes |
 | `NOT_FOUND` | Request 404 | Unknown URL, or no such result file. | no |

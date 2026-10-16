@@ -499,9 +499,11 @@ components:
       description: >-
         `RATE_LIMITED` - more than RATE_LIMIT_POST_PER_MINUTE POSTs this minute for this token; or
         `DAILY_LIMIT_REACHED` - the cost guard DEMO_MAX_JOBS_PER_DAY (live demo only; 0 = off): that many new
-        jobs + swaps were already created today (UTC, all tokens together). An idempotent replay of an
-        existing job is still answered. Both are retryable: wait `Retry-After` seconds (for the daily cap:
-        until midnight UTC; `details` has limit_per_day, used_today and resets_at).
+        jobs + swaps were already created today (UTC, all tokens together); or `MONTHLY_LIMIT_REACHED` - the
+        same for DEMO_MAX_JOBS_PER_MONTH in this UTC calendar month. An idempotent replay of an
+        existing job is still answered. All are retryable: wait `Retry-After` seconds (daily cap: until
+        midnight UTC, `details` has limit_per_day, used_today, resets_at; monthly cap: until the 1st of
+        next month 00:00 UTC, `details` has limit_per_month, used_this_month, resets_at).
       headers:
         X-Correlation-Id: {$ref: '#/components/headers/X-Correlation-Id'}
         Retry-After:
@@ -544,6 +546,7 @@ components:
         - PROVIDER_UNAVAILABLE
         - RENDER_FAILED
         - DAILY_LIMIT_REACHED
+        - MONTHLY_LIMIT_REACHED
         - JOB_INTERRUPTED
         - INTERNAL_ERROR
         - NOT_FOUND

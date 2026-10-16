@@ -65,7 +65,7 @@ def find_existing_job(db: Session, client_id: str, idem_key: str | None, req_has
     return db.get(Job, row.job_id)
 
 
-# ---------- Cost guard: jobs per day ----------
+# ---------- Cost guards: jobs per day and per month ----------
 
 def check_daily_limit(db: Session, now: datetime | None = None) -> None:
     """Refuse a NEW job when DEMO_MAX_JOBS_PER_DAY jobs (all tokens, clip swaps included) were already
@@ -88,6 +88,33 @@ def check_daily_limit(db: Session, now: datetime | None = None) -> None:
                        f"The demo's daily limit of {limit} jobs is reached; try again after {iso(resets_at)}",
                        429, retryable=True, headers={"Retry-After": str(retry_after)},
                        details={"limit_per_day": limit, "used_today": used, "resets_at": iso(resets_at)})
+
+
+def check_monthly_limit(db: Session, now: datetime | None = None) -> None:
+    """Like check_daily_limit, but for DEMO_MAX_JOBS_PER_MONTH jobs in this UTC calendar month.
+    Refused until the 1st of next month, 00:00 UTC."""
+    limit = get_settings().DEMO_MAX_JOBS_PER_MONTH
+    if limit <= 0:  # 0 = no cap
+        return
+    now = now or utcnow()
+    month_start = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+    used = db.scalar(select(func.count()).select_from(Job).where(Job.created_at >= month_start))
+    if used >= limit:
+        if month_start.month == 12:
+            resets_at = month_start.replace(year=month_start.year + 1, month=1)
+        else:
+            resets_at = month_start.replace(month=month_start.month + 1)
+        retry_after = max(1, int((resets_at - now).total_seconds()))
+        raise AppError(ErrorCode.MONTHLY_LIMIT_REACHED,
+                       f"The demo's monthly limit of {limit} jobs is reached; try again after {iso(resets_at)}",
+                       429, retryable=True, headers={"Retry-After": str(retry_after)},
+                       details={"limit_per_month": limit, "used_this_month": used, "resets_at": iso(resets_at)})
+
+
+def check_job_limits(db: Session, now: datetime | None = None) -> None:
+    """Both cost guards. The monthly one first: when both are reached, its (longer) wait is the true one."""
+    check_monthly_limit(db, now)
+    check_daily_limit(db, now)
 
 
 def create_job(db: Session, *, job_id: str, client_id: str, idem_key: str | None, req_hash: str,

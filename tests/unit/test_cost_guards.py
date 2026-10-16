@@ -1,4 +1,4 @@
-"""Live-demo guards: the daily job cap, re-queueing jobs cut off by a restart, the worker's after_job hook
+"""Live-demo guards: the daily and monthly job caps, re-queueing jobs cut off by a restart, the worker's after_job hook
 and the SQLite journal setting. Mock adapters, no keys."""
 import threading
 from datetime import datetime, timezone
@@ -9,7 +9,7 @@ from sqlalchemy import text
 from app.config import get_settings
 from app.db import get_engine, new_session
 from app.errors import AppError
-from app.jobs import check_daily_limit, claim_next_job, recover_interrupted_jobs
+from app.jobs import check_daily_limit, check_job_limits, check_monthly_limit, claim_next_job, recover_interrupted_jobs
 from app.models import Job
 from tests.conftest import AUTH, OTHER_AUTH
 from tests.unit.test_errors import assert_error_format
@@ -62,6 +62,62 @@ def test_only_todays_jobs_count(monkeypatch):
             check_daily_limit(db, now=datetime(2026, 10, 15, 23, 59, 30, tzinfo=timezone.utc))
     assert e.value.headers["Retry-After"] == "30"  # seconds until midnight UTC
     assert e.value.details["resets_at"] == "2026-10-16T00:00:00+00:00"
+
+
+def month_cap(monkeypatch, n: int):
+    monkeypatch.setenv("DEMO_MAX_JOBS_PER_MONTH", str(n))
+    get_settings.cache_clear()
+
+
+def test_monthly_cap_answers_429_until_the_first_of_next_month(client, monkeypatch):
+    month_cap(monkeypatch, 1)
+    assert client.post(URL, json={"script": "One."}, headers=AUTH).status_code == 202
+    resp = client.post(URL, json={"script": "Two."}, headers=OTHER_AUTH)  # all tokens count
+    assert resp.status_code == 429
+    assert_error_format(resp, "MONTHLY_LIMIT_REACHED")
+    err = resp.json()["error"]
+    assert err["retryable"] is True
+    assert err["details"]["limit_per_month"] == 1 and err["details"]["used_this_month"] == 1
+    assert 0 < int(resp.headers["Retry-After"]) <= 31 * 86400
+    with new_session() as db:
+        assert db.query(Job).count() == 1  # nothing was queued
+
+
+def test_monthly_cap_also_stops_clip_swaps(client, monkeypatch):
+    with new_session() as db:
+        db.add(Job(id="done", client_id="c", status="succeeded", input_type="script", request_json="{}"))
+        db.commit()
+    month_cap(monkeypatch, 1)
+    resp = client.post(f"{URL}/done/scenes/0/swap", json={"mode": "next_best"},
+                       headers={**AUTH, "Idempotency-Key": "s1"})
+    assert resp.status_code == 429
+    assert_error_format(resp, "MONTHLY_LIMIT_REACHED")
+
+
+def test_only_this_months_jobs_count_and_december_resets_in_january(monkeypatch):
+    month_cap(monkeypatch, 1)
+    with new_session() as db:
+        db.add(Job(id="old", client_id="c", input_type="script", request_json="{}",
+                   created_at=datetime(2026, 12, 31, 23, 59, tzinfo=timezone.utc)))
+        db.commit()
+        check_monthly_limit(db, now=datetime(2027, 1, 1, 0, 1, tzinfo=timezone.utc))  # last month's job: ok
+        with pytest.raises(AppError) as e:
+            check_monthly_limit(db, now=datetime(2026, 12, 31, 23, 59, 30, tzinfo=timezone.utc))
+    assert e.value.headers["Retry-After"] == "30"  # seconds until 2027-01-01 00:00 UTC
+    assert e.value.details["resets_at"] == "2027-01-01T00:00:00+00:00"
+
+
+def test_when_both_caps_are_reached_the_monthly_answer_wins(monkeypatch):
+    cap(monkeypatch, 1)
+    month_cap(monkeypatch, 1)
+    with new_session() as db:
+        db.add(Job(id="j", client_id="c", input_type="script", request_json="{}",
+                   created_at=datetime(2026, 10, 16, 9, 0, tzinfo=timezone.utc)))
+        db.commit()
+        with pytest.raises(AppError) as e:
+            check_job_limits(db, now=datetime(2026, 10, 16, 10, 0, tzinfo=timezone.utc))
+    assert e.value.code == "MONTHLY_LIMIT_REACHED"
+    assert e.value.details["resets_at"] == "2026-11-01T00:00:00+00:00"
 
 
 def test_a_job_cut_off_by_a_restart_is_queued_once_then_failed(client):

@@ -92,6 +92,29 @@ def test_batch_run_backs_off_and_respects_retry_after(tmp_path, monkeypatch):
     assert sleeps == [7.0, 2.0, 3.0, 9.0, 13.5]
 
 
+def test_batch_run_does_not_wait_for_a_job_cap(tmp_path, monkeypatch):
+    """429 MONTHLY_LIMIT_REACHED has a Retry-After of days or weeks: the runner must not sleep, it reports
+    the input as rejected with that code."""
+    import httpx
+
+    import tools.batch_run as batch
+
+    sleeps, calls = [], []
+    monkeypatch.setattr(batch.time, "sleep", sleeps.append)
+
+    def handler(request):
+        calls.append(request.method)
+        return httpx.Response(429, headers={"Retry-After": "1209600"},
+                              json={"error": {"code": "MONTHLY_LIMIT_REACHED"}})
+
+    with httpx.Client(base_url="http://api.test", transport=httpx.MockTransport(handler)) as client:
+        item = batch.Item(name="one", source="test", body={"script": "Hi."})
+        result = batch.run_one(client, item, tmp_path, None, timeout=600, poll=2.0, max_poll=15.0)
+
+    assert result.status == "rejected" and result.error_code == "MONTHLY_LIMIT_REACHED"
+    assert calls == ["POST"] and sleeps == []
+
+
 def test_cli_without_inputs_exits_with_code_2(tmp_path):
     (tmp_path / "empty").mkdir()
     assert main([str(tmp_path / "empty"), "--out", str(tmp_path / "out")]) == 2

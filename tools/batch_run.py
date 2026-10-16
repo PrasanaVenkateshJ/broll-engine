@@ -12,7 +12,8 @@ For each input: POST with an Idempotency-Key (made from the input itself, so run
 again never makes duplicate jobs), poll GET /api/v1/jobs/{id} until it ends, then download every
 output file into --out/<input-name>/ together with job.json (the final job answer).
 Polite polling: the pause between status checks grows from --poll up to --max-poll, and a
-429 RATE_LIMITED answer is retried after the server's Retry-After seconds.
+429 RATE_LIMITED answer is retried after the server's Retry-After seconds. A 429 for a demo job cap
+(DAILY_LIMIT_REACHED / MONTHLY_LIMIT_REACHED) is NOT waited for (hours or weeks): the input is "rejected".
 At the end: --out/summary.csv and --out/summary.md.
 
     python tools/batch_run.py testpack/inputs --out testpack/outputs/run1
@@ -142,10 +143,11 @@ def retry_after_seconds(resp: httpx.Response, default: float) -> float:
 
 
 def send(request) -> httpx.Response:
-    """Run request() (one HTTP call); on 429 wait Retry-After seconds and try again (a few times)."""
+    """Run request() (one HTTP call); on 429 RATE_LIMITED wait Retry-After seconds and try again (a few times).
+    Any other 429 (a daily / monthly job cap) is returned at once: its wait can be hours or weeks."""
     for _ in range(MAX_RATE_LIMIT_RETRIES):
         resp = request()
-        if resp.status_code != 429:
+        if resp.status_code != 429 or _error_code(resp) != "RATE_LIMITED":
             return resp
         wait = retry_after_seconds(resp, default=5.0)
         print(f"rate limited (429): waiting {wait:.0f} s as the server asked", file=sys.stderr)

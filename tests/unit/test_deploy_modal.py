@@ -44,9 +44,11 @@ def test_one_container_scale_to_zero_and_the_volume():
 
 
 def test_cost_guard_defaults():
-    assert 'knob("DEMO_MAX_JOBS_PER_DAY", "40")' in MODAL_APP
+    assert 'knob("DEMO_MAX_JOBS_PER_DAY", "12")' in MODAL_APP
+    assert 'knob("DEMO_MAX_JOBS_PER_MONTH", "35")' in MODAL_APP
     assert 'knob("DEMO_MAX_AUDIO_SECONDS", "300")' in MODAL_APP
-    assert 'knob("MODAL_SCALEDOWN_SECONDS", "600")' in MODAL_APP
+    assert 'knob("MODAL_SCALEDOWN_SECONDS", "180")' in MODAL_APP
+    assert "scaledown_window=SCALEDOWN_SECONDS" in MODAL_APP
 
 
 def test_image_rules():
@@ -70,6 +72,7 @@ def test_modal_definitions_build_locally():
     assert m.app.name == "broll-studio"
     assert m.CPU == 2.0 and m.MEMORY_MB <= m.MEMORY_LIMIT_MB
     assert m.DEMO_ENV["DEMO_MAX_JOBS_PER_DAY"] and m.DEMO_ENV["MAX_AUDIO_SECONDS"]
+    assert m.DEMO_ENV["DEMO_MAX_JOBS_PER_MONTH"] and m.SCALEDOWN_SECONDS == 180
 
 
 def test_volume_commit_holds_the_database_write_lock(tmp_path):

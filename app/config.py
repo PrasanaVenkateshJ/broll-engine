@@ -34,6 +34,8 @@ class Settings(BaseSettings):
     # Cost guard for a paid-per-second live demo: at most this many NEW jobs (incl. clip swaps) per UTC day,
     # for all tokens together. Over it -> 429 DAILY_LIMIT_REACHED until midnight UTC. 0 = no cap.
     DEMO_MAX_JOBS_PER_DAY: int = 0
+    # Same, per UTC calendar month. Over it -> 429 MONTHLY_LIMIT_REACHED until the 1st of next month. 0 = no cap.
+    DEMO_MAX_JOBS_PER_MONTH: int = 0
 
     # --- Studio (the web UI at GET /, files under /studio/) ---
     STUDIO_ENABLED: bool = True
