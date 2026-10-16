@@ -36,6 +36,9 @@ class Settings(BaseSettings):
     STUDIO_ENABLED: bool = True
     # Folder with index.html, studio.css and the .js files. Empty = app/studio next to the code.
     STUDIO_DIR: str = ""
+    # Sites allowed to show the Studio inside a frame (CSP frame-ancestors), space-separated, e.g.
+    # "https://huggingface.co" for a Hugging Face Space page. Empty = no site may frame it.
+    STUDIO_FRAME_ANCESTORS: str = ""
 
     # --- Database ---
     DATABASE_URL: str = "sqlite:///./data/broll.db"

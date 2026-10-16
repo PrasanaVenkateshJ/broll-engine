@@ -43,6 +43,7 @@ class ErrorCode(str, Enum):
     NOT_FOUND = "NOT_FOUND"
     METHOD_NOT_ALLOWED = "METHOD_NOT_ALLOWED"
     NOT_READY = "NOT_READY"
+    RANGE_NOT_SATISFIABLE = "RANGE_NOT_SATISFIABLE"  # download: the Range starts past the end of the file
 
 
 class AppError(Exception):

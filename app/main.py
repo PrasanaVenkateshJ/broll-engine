@@ -40,8 +40,12 @@ log = logging.getLogger("app.main")
 
 SAFE_FILENAME = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$")
 SAFE_CORRELATION_ID = re.compile(r"^[A-Za-z0-9._:-]{1,128}$")
+# One byte range: "bytes=500-999", "bytes=500-" (to the end) or "bytes=-500" (the last 500 bytes).
+BYTE_RANGE = re.compile(r"^bytes=(\d*)-(\d*)$")
 # Studio files are one flat folder; only these names + types are ever served (no "../" tricks).
 STUDIO_FILE = re.compile(r"^[A-Za-z0-9_-]{1,64}\.(html|css|js|svg|png|ico)$")
+# Origins like "https://huggingface.co"; anything else in STUDIO_FRAME_ANCESTORS is ignored ('none').
+FRAME_ANCESTORS = re.compile(r"^[A-Za-z0-9.:/*-]+( [A-Za-z0-9.:/*-]+)*$")
 STUDIO_DEFAULT_DIR = Path(__file__).resolve().parent / "studio"
 # Fixed types (Windows' mimetypes can say text/plain for .js, and browsers refuse such a module script).
 STUDIO_TYPES = {"html": "text/html; charset=utf-8", "css": "text/css; charset=utf-8",
@@ -373,6 +377,8 @@ def _studio_file(filename: str) -> FileResponse:
     path = folder / filename
     if not s.STUDIO_ENABLED or not STUDIO_FILE.match(filename) or not path.is_file():
         raise AppError(ErrorCode.NOT_FOUND, "File not found", 404)
+    ancestors = s.STUDIO_FRAME_ANCESTORS.strip()
+    frame_ancestors = ancestors if FRAME_ANCESTORS.match(ancestors) else "'none'"
     headers = {
         "Cache-Control": "no-cache",  # the browser re-checks (ETag) so a changed file shows at once
         "X-Content-Type-Options": "nosniff",
@@ -380,7 +386,7 @@ def _studio_file(filename: str) -> FileResponse:
         "Referrer-Policy": "no-referrer",
         # Only our own scripts / styles; videos + thumbnails come from our API (or a blob made from it).
         "Content-Security-Policy": "default-src 'self'; img-src 'self' blob: data:; media-src 'self' blob:; "
-                                   "object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+                                   f"object-src 'none'; base-uri 'none'; frame-ancestors {frame_ancestors}",
     }
     return FileResponse(path, headers=headers, media_type=STUDIO_TYPES[filename.rsplit(".", 1)[1]])
 
@@ -398,10 +404,36 @@ def studio_static(filename: str):
 
 # ---------- Signed file downloads (no bearer token: the signature IS the permission) ----------
 
+def parse_range(header: str | None, size: int) -> tuple[int, int] | None:
+    """Range header -> (first byte, last byte), both inclusive. None = send the whole file (no header,
+    several ranges or a header we do not understand: HTTP allows ignoring Range). A range that starts
+    at or past the end of the file -> 416 RANGE_NOT_SATISFIABLE."""
+    m = BYTE_RANGE.match((header or "").strip())
+    if not m or m.groups() == ("", ""):
+        return None
+    first, last = m.groups()
+    if first == "":  # suffix: the last N bytes
+        if int(last) == 0:
+            raise _range_error(size)
+        return max(0, size - int(last)), size - 1
+    start = int(first)
+    if last and int(last) < start:
+        return None  # malformed ("bytes=9-3"): ignore it
+    if start >= size:
+        raise _range_error(size)
+    return start, min(int(last), size - 1) if last else size - 1
+
+
+def _range_error(size: int) -> AppError:
+    return AppError(ErrorCode.RANGE_NOT_SATISFIABLE, "Requested range is outside the file", 416,
+                    details={"size": size}, headers={"Content-Range": f"bytes */{size}"})
+
+
 @app.get("/api/v1/jobs/{job_id}/files/{filename}", tags=["jobs"])
-def download_file(job_id: str, filename: str, expires: int = Query(...), sig: str = Query(..., max_length=128),
-                  db: Session = Depends(get_db)):
-    """Stream one output file. The link (from GET /jobs/{id}) carries an HMAC signature + expiry."""
+def download_file(job_id: str, filename: str, request: Request, expires: int = Query(...),
+                  sig: str = Query(..., max_length=128), db: Session = Depends(get_db)):
+    """Stream one output file. The link (from GET /jobs/{id}) carries an HMAC signature + expiry.
+    A Range header ("bytes=a-b") gets 206 + only those bytes, so a video player can seek at once."""
     if not SAFE_FILENAME.match(filename):
         raise AppError(ErrorCode.NOT_FOUND, "File not found", 404)
     check_file_link(job_id, filename, expires, sig)
@@ -411,10 +443,18 @@ def download_file(job_id: str, filename: str, expires: int = Query(...), sig: st
     check_rate_limit(job.client_id, "get")  # no token here: downloads count for the job's owner
     if job.status != JobStatus.SUCCEEDED or filename not in job.result_files:
         raise AppError(ErrorCode.NOT_FOUND, "File not found", 404)
+    storage, key = get_storage(), output_key(job_id, filename)
     try:
-        chunks, size = get_storage().open_stream(output_key(job_id, filename))
+        size = storage.size(key)
+        byte_range = parse_range(request.headers.get("Range"), size)
+        start, end = byte_range or (0, size - 1)
+        chunks, _ = storage.open_stream(key, start, end) if byte_range else storage.open_stream(key)
     except StorageNotFound:
         raise AppError(ErrorCode.NOT_FOUND, "File not found in storage", 404) from None
     media_type = mimetypes.guess_type(filename)[0] or "application/octet-stream"
-    return StreamingResponse(chunks, media_type=media_type, headers={
-        "Content-Length": str(size), "Content-Disposition": f'inline; filename="{filename}"'})
+    headers = {"Content-Length": str(end - start + 1), "Accept-Ranges": "bytes",
+               "Content-Disposition": f'inline; filename="{filename}"'}
+    if byte_range is None:
+        return StreamingResponse(chunks, media_type=media_type, headers=headers)
+    headers["Content-Range"] = f"bytes {start}-{end}/{size}"
+    return StreamingResponse(chunks, status_code=206, media_type=media_type, headers=headers)

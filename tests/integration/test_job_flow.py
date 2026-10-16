@@ -109,3 +109,35 @@ def test_worker_logs_carry_the_request_correlation_id(client, worker, caplog):
     started = [line for line in lines if line["message"] == "job started"]
     assert started and started[0]["correlation_id"] == "trace-42"
     assert started[0]["job_id"] == resp.json()["job_id"]
+
+
+def test_file_download_supports_byte_ranges(client, worker):
+    """Range requests (206) let the Studio's <video> and any browser seek without downloading everything."""
+    job_id = client.post(URL, json={"script": "Range test.", "aspect_ratios": ["1:1"]}, headers=AUTH).json()["job_id"]
+    final, _ = wait_for_job(client, job_id)
+    link = path_of(final["result"]["files"]["video_1x1.mp4"])
+    whole = client.get(link)
+    assert whole.status_code == 200 and whole.headers["accept-ranges"] == "bytes"
+    data, size = whole.content, len(whole.content)
+    assert int(whole.headers["content-length"]) == size > 200
+
+    for header, expected in [("bytes=0-99", data[:100]), ("bytes=100-", data[100:]), ("bytes=-50", data[-50:]),
+                             ("bytes=10-10", data[10:11]), (f"bytes=0-{size * 10}", data)]:
+        part = client.get(link, headers={"Range": header})
+        assert part.status_code == 206, header
+        assert part.content == expected, header
+        first = size - len(expected) if header.startswith("bytes=-") else int(header[6:].split("-")[0])
+        assert part.headers["content-range"] == f"bytes {first}-{first + len(expected) - 1}/{size}", header
+        assert int(part.headers["content-length"]) == len(expected) and part.headers["accept-ranges"] == "bytes"
+
+    # Several ranges or a header we do not understand: ignored -> the whole file (allowed by HTTP).
+    for header in ["bytes=0-1,5-6", "items=0-9", "bytes=9-3", "bytes=-"]:
+        resp = client.get(link, headers={"Range": header})
+        assert resp.status_code == 200 and resp.content == data, header
+
+    for header in [f"bytes={size}-", f"bytes={size + 5}-{size + 9}", "bytes=-0"]:
+        resp = client.get(link, headers={"Range": header})
+        assert resp.status_code == 416, header
+        assert resp.headers["content-range"] == f"bytes */{size}"
+        error = resp.json()["error"]
+        assert error["code"] == "RANGE_NOT_SATISFIABLE" and error["details"] == {"size": size}

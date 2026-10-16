@@ -120,7 +120,7 @@ The full contract is [openapi.yaml](openapi.yaml) (OpenAPI 3.1).
 | `POST /api/v1/broll/jobs` | start a job: JSON (`audio_url` / `script` / `scenes` + options) or multipart (`audio` file + `options` JSON) -> `202 {job_id}` |
 | `GET /api/v1/jobs/{job_id}` | `status` (queued / running / succeeded / failed), `progress` 0-100, `stage`, `warnings`, `error`, `result.files` (signed links) |
 | `POST /api/v1/broll/jobs/{job_id}/scenes/{scene_index}/swap` | swap one scene's clip (background job, `Idempotency-Key` required) -> `202 {job_id}` |
-| `GET /api/v1/jobs/{job_id}/files/{filename}?expires=&sig=` | download a result file (the signed link from `result.files`; no token needed) |
+| `GET /api/v1/jobs/{job_id}/files/{filename}?expires=&sig=` | download a result file (the signed link from `result.files`; no token needed). Supports one `Range: bytes=a-b` (206 Partial Content, `Accept-Ranges: bytes`), so videos seek at once |
 | `GET /api/v1/jobs?limit=20` | the caller's own jobs, newest first (id, status, input type, created, processing seconds, error code) |
 | `GET /api/v1/config/public` | safe settings for a UI: voices, aspect ratios, max audio seconds, max upload MB (no secrets) |
 
@@ -171,7 +171,8 @@ the public API above, so everything it shows comes from the job, `timeline.json`
   API errors are shown with their code.
 - **Progress**: stage stepper, progress bar, elapsed time, warnings. Polls with a growing pause and waits
   `Retry-After` on a 429.
-- **Result**: player with one tab per ratio (9:16 in a phone frame), downloads, and a scene strip: poster frame,
+- **Result**: player with one tab per ratio (9:16 in a phone frame; it streams the signed link with HTTP
+  Range requests, so it starts and seeks at once), downloads, and a scene strip: poster frame,
   times, text, provider + clip type, licence link, attribution, AI-generated / Generated badges, relevance bar
   (with the `STOCK_MIN_SCORE` mark), logo-check result and the selection reason. Clicking a scene seeks the
   player; the playing scene is highlighted. **Swap clip** runs a `next_best` swap for that scene and shows the
@@ -180,6 +181,29 @@ the public API above, so everything it shows comes from the job, `timeline.json`
 - The page sends `Referrer-Policy: no-referrer` (signed links never leak) and a strict Content-Security-Policy.
 - Optional browser test: `pip install playwright` + `python -m playwright install chromium`, then
   `tests/e2e/test_studio_browser.py` runs (it is skipped without Playwright).
+
+## Live demo
+
+**URL:** `https://<hf-username>-broll-studio.hf.space` *(placeholder; the real link is in the Submission Form)*
+
+- **Access:** open the URL, paste the API token from the Submission Form into the Studio's top bar. For the API,
+  send `Authorization: Bearer <token>` (`/health` and `/ready` need no token). No token is in this repository.
+- **Hardware:** free Hugging Face CPU basic Space (2 vCPU, 16 GB RAM). One job runs at a time
+  (`WORKER_CONCURRENCY=1`, `FOOTAGE_WORKERS=2`); a short script takes a few minutes, a 10-minute voiceover much longer.
+- **Cold start:** after a restart or a sleep the Space takes a few minutes until `/ready` answers. All models
+  (Whisper small, Kokoro + voices, open_clip ViT-B-32, spaCy) are baked into the image, so nothing is downloaded at
+  start. `.github/workflows/keepalive.yml` calls `/health` every 6 hours so it does not fall asleep.
+- **Storage is temporary:** MinIO and the SQLite database run inside the container (`/tmp`), so jobs and output
+  files are lost when the Space restarts. Download what you want to keep. Links expire after `FILE_LINK_TTL_SECONDS`.
+- **Rate limits are on** (per token): `RATE_LIMIT_POST_PER_MINUTE=10` new jobs / swaps and
+  `RATE_LIMIT_GET_PER_MINUTE=600` status checks + downloads per minute; above that `429 RATE_LIMITED` + `Retry-After`.
+- **Real adapters:** Kokoro TTS, faster-whisper, Groq understanding, Pixabay video / photo, Wikimedia, generated
+  cards, CLIP ranking.
+- **How it is deployed:** only [deploy/hf-space/](deploy/hf-space/) is pushed to the Space (`tools/deploy_hf.py`).
+  Its Dockerfile clones this private repo with a build secret (`GH_TOKEN`), and `start.sh` starts MinIO, the
+  worker and the API on port 7860 in one container. Check it from outside with
+  `python tools/live_check.py --url <space-url> --cold` (health, ready, one job, downloads, a Range request,
+  turnaround).
 
 ## Tests
 
@@ -231,6 +255,7 @@ comments in [.env.example](.env.example). "Code default" is used when the variab
 | **Studio (web UI)** | | | |
 | `STUDIO_ENABLED` | `true` | `true` | true = serve the B-roll Studio web page at `GET /` (its files under `/studio/`). false = API only. |
 | `STUDIO_DIR` | *(empty)* | *(empty)* | Folder with the Studio files. Empty = `app/studio` next to the code. |
+| `STUDIO_FRAME_ANCESTORS` | *(empty)* | *(empty)* | Sites allowed to show the Studio in a frame (CSP `frame-ancestors`), space-separated, e.g. `https://huggingface.co`. Empty = none. |
 | **Database** | | | |
 | `DATABASE_URL` | `sqlite:///./data/broll.db` | `sqlite:///./data/broll.db` | SQLite file for jobs + idempotency keys. (Docker overrides this to /app/data/broll.db.) |
 | **Storage** | | | |
@@ -403,6 +428,7 @@ Every error has the same shape: `{"error": {"code", "message", "retryable", "det
 | `NOT_FOUND` | Request 404 | Unknown URL, or no such result file. | no |
 | `METHOD_NOT_ALLOWED` | Request 405 | Wrong HTTP method for this URL. | no |
 | `NOT_READY` | Request 503 (`/ready`) | Database or storage not reachable. | yes |
+| `RANGE_NOT_SATISFIABLE` | Request 416 (file download) | The `Range` header starts at or past the end of the file (`Content-Range: bytes */<size>`, `details.size`). | no |
 
 ## Project files
 
@@ -411,6 +437,8 @@ Every error has the same shape: `{"error": {"code", "message", "retryable", "det
 - [app/studio/](app/studio/) - the B-roll Studio web UI (index.html, studio.css, app.js, api.js, create.js,
   result.js, presets.js, dom.js).
 - [openapi.yaml](openapi.yaml) - the API contract. [tools/batch_run.py](tools/batch_run.py) - batch runner.
+- [deploy/hf-space/](deploy/hf-space/) - the Hugging Face Space (Dockerfile, start.sh, model preload);
+  [tools/deploy_hf.py](tools/deploy_hf.py) uploads it, [tools/live_check.py](tools/live_check.py) checks the live URL.
 - [tests/](tests/) - unit, integration and e2e tests (mock adapters).
 - [SOURCES.md](SOURCES.md) - every library, model, API and media source with its licence.
 - [AI_USE.md](AI_USE.md) - how AI tools were used.

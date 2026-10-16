@@ -138,3 +138,13 @@ def test_public_config_matches_the_code():
 
     schema = SPEC["components"]["schemas"]["PublicConfig"]
     assert set(public_config()) == set(schema["properties"]) == set(schema["required"])
+
+
+def test_file_download_documents_byte_ranges():
+    op = spec_operations()[("/api/v1/jobs/{job_id}/files/{filename}", "get")]
+    params = {(p["in"], p["name"]) for p in map(resolve, op["parameters"])}
+    assert ("header", "Range") in params
+    assert {"200", "206", "416"} <= set(op["responses"])
+    assert "Accept-Ranges" in op["responses"]["200"]["headers"]
+    assert {"Content-Range", "Accept-Ranges"} <= set(op["responses"]["206"]["headers"])
+    assert "Content-Range" in op["responses"]["416"]["headers"]

@@ -25,7 +25,9 @@ class Storage:
     def put_file(self, key: str, local_path: str | Path) -> None: ...
     def put_bytes(self, key: str, data: bytes) -> None: ...
     def get_file(self, key: str, local_path: str | Path) -> None: ...  # copy a stored file to disk
-    def open_stream(self, key: str) -> tuple[Iterator[bytes], int]: ...  # (chunks, size in bytes)
+    # (chunks, size of the WHOLE file in bytes). start/end (inclusive) = only send that byte range.
+    def open_stream(self, key: str, start: int = 0, end: int | None = None) -> tuple[Iterator[bytes], int]: ...
+    def size(self, key: str) -> int: ...  # file size in bytes (StorageNotFound if missing)
     def exists(self, key: str) -> bool: ...
     def delete(self, key: str) -> None: ...
     def check(self) -> None: ...  # raise if storage is not usable (used by /ready)
@@ -60,17 +62,28 @@ class LocalStorage(Storage):
             raise StorageNotFound(key)
         shutil.copyfile(path, local_path)
 
-    def open_stream(self, key):
+    def open_stream(self, key, start=0, end=None):
         path = self._path(key)
         if not path.is_file():
             raise StorageNotFound(key)
+        total = path.stat().st_size
+        last = total - 1 if end is None else min(end, total - 1)
 
         def chunks():
             with path.open("rb") as f:
-                while chunk := f.read(CHUNK_SIZE):
+                f.seek(start)
+                left = last - start + 1
+                while left > 0 and (chunk := f.read(min(CHUNK_SIZE, left))):
+                    left -= len(chunk)
                     yield chunk
 
-        return chunks(), path.stat().st_size
+        return chunks(), total
+
+    def size(self, key):
+        path = self._path(key)
+        if not path.is_file():
+            raise StorageNotFound(key)
+        return path.stat().st_size
 
     def exists(self, key):
         return self._path(key).is_file()
@@ -121,16 +134,31 @@ class S3Storage(Storage):
                 raise StorageNotFound(key) from e
             raise
 
-    def open_stream(self, key):
+    def open_stream(self, key, start=0, end=None):
         from botocore.exceptions import ClientError
 
+        extra = {}
+        if start or end is not None:  # S3 sends only these bytes (same "bytes=a-b" rule as HTTP)
+            extra["Range"] = f"bytes={start}-{'' if end is None else end}"
         try:
-            obj = self.client.get_object(Bucket=self.bucket, Key=key)
+            obj = self.client.get_object(Bucket=self.bucket, Key=key, **extra)
         except ClientError as e:
             if e.response.get("Error", {}).get("Code") in ("NoSuchKey", "404"):
                 raise StorageNotFound(key) from e
             raise
-        return obj["Body"].iter_chunks(CHUNK_SIZE), obj["ContentLength"]
+        # With a Range, ContentLength is only the part; the whole size is after the "/" of ContentRange.
+        total = int(obj["ContentRange"].rsplit("/", 1)[1]) if "ContentRange" in obj else obj["ContentLength"]
+        return obj["Body"].iter_chunks(CHUNK_SIZE), total
+
+    def size(self, key):
+        from botocore.exceptions import ClientError
+
+        try:
+            return self.client.head_object(Bucket=self.bucket, Key=key)["ContentLength"]
+        except ClientError as e:
+            if e.response.get("Error", {}).get("Code") in ("NoSuchKey", "404"):
+                raise StorageNotFound(key) from e
+            raise
 
     def exists(self, key):
         from botocore.exceptions import ClientError

@@ -49,10 +49,17 @@ app/
     providers/       footage adapters: pixabay_video | pixabay_image_motion | wikimedia |
                      generated | mock (+ pexels, skipped while PEXELS_API_KEY is empty)
     rank.py          scoring + selection rule + no-repeat
+    footage_cache.py search-result + preview caches (per job and across jobs)
+    cards.py         motion-card text taken ONLY from the scene's own narration
     render.py        normalise, crop per ratio, colour, captions, concat, mux
     qa.py            black / frozen frames, duration drift checks
     outputs.py       timeline.json, manifest.json, captions.srt
+    swap.py          clip swap: re-render only one scene's segment
+  studio/            B-roll Studio web UI (plain HTML + CSS + JS, served at GET /)
+deploy/hf-space/     Hugging Face Docker Space (the ONLY folder pushed to the Space)
 tools/batch_run.py   CLI batch runner
+tools/deploy_hf.py   upload deploy/hf-space/ to the Space
+tools/live_check.py  health / ready / one job / turnaround against a live URL
 tests/               unit/, integration/, e2e/ (all run with mocks, no keys)
 testpack/            inputs/, outputs/, logs/, ratings.csv, INDEX.md
 
@@ -81,7 +88,8 @@ CORRUPTED_MEDIA, DOWNLOAD_FAILED, NO_SPEECH_DETECTED, MUSIC_ONLY_AUDIO,
 UNSUPPORTED_ASPECT_RATIO, JOB_NOT_FOUND, SCENE_NOT_FOUND, JOB_NOT_READY, NO_ALTERNATIVE_CLIP,
 SWAP_IN_PROGRESS, IDEMPOTENCY_KEY_REUSED,
 UNAUTHORIZED, RATE_LIMITED, PROVIDER_UNAVAILABLE, RENDER_FAILED, INTERNAL_ERROR
-Generic HTTP: NOT_FOUND (unknown URL/file), METHOD_NOT_ALLOWED, NOT_READY (/ready fails)
+Generic HTTP: NOT_FOUND (unknown URL/file), METHOD_NOT_ALLOWED, NOT_READY (/ready fails),
+RANGE_NOT_SATISFIABLE (download Range starts past the end of the file)
 
 ## Pipeline rules (the "brain" of the product)
 - Narration sets the timing. Scenes are contiguous: scene[0].start = 0,

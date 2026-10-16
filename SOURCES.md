@@ -28,8 +28,10 @@
 | Pillow | 12.3.0 | opens preview images for CLIP | MIT-CMU (HPND) |
 | FFmpeg (Debian package) | distro | audio/video processing, called as a separate program | LGPL/GPL (separate binary) |
 | espeak-ng (Debian package) | distro | phonemes for Kokoro, separate program | GPL-3.0 (separate binary) — review |
-| MinIO server (`pgsty/minio` image) | RELEASE.2026-08-04 | S3 storage service in docker compose only | AGPL-3.0 (allowed only as the storage service) |
+| MinIO server (`pgsty/minio` image) | RELEASE.2026-08-04 | S3 storage service in docker compose, and the same unmodified binary copied into the Hugging Face Space image (internal storage only) | AGPL-3.0 (allowed only as the storage service) |
 | python:3.11-slim image | 3.11 | container base | PSF + Debian licences |
+| git, curl (Debian packages, Space image only) | distro | clone the code at build time; health checks in start.sh | GPL-2.0 / curl licence (separate programs) |
+| huggingface_hub | 2.2.0 (installed with faster-whisper / Kokoro) | model downloads; `tools/deploy_hf.py` uploads the Space folder | Apache-2.0 |
 
 ## External APIs and media (footage + understanding)
 
@@ -41,3 +43,10 @@
 | `generated` motion cards | statistics / abstract lines / last fallback | Made locally by FFmpeg (gradient + text). No third-party media, no AI model: generated=true, ai_generated=false. |
 | Pexels Videos API (`pexels`) | optional only | Pexels License. Pexels paused new API keys, so the project does not depend on it; skipped while `PEXELS_API_KEY` is empty. |
 | Groq API (`UNDERSTAND_PROVIDER=groq`) | scene meaning -> search queries + flags | Groq free tier. Default model `openai/gpt-oss-120b` (Apache-2.0 weights). Falls back to offline rules if it fails. Key in `.env` only. |
+
+## Hosting (live demo)
+
+| Name | Used for | Terms |
+|---|---|---|
+| Hugging Face Spaces (Docker, CPU basic, free) | public live demo of the API + Studio | Hugging Face Terms of Service. Secrets are set in the Space settings, never in the repository. |
+| GitHub Actions (`keepalive.yml`) | GET /health every 6 hours so the free Space does not sleep | GitHub Terms; free minutes of the account |

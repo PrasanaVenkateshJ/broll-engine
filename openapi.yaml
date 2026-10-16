@@ -339,6 +339,9 @@ paths:
       tags: [jobs]
       operationId: downloadFile
       summary: Stream one output file. Use the full link from the job's `result.files` (it is signed).
+      description: >-
+        Supports one HTTP byte range (`Range: bytes=a-b`, `bytes=a-` or `bytes=-n`), so video players can
+        seek without downloading the whole file. Several ranges or a malformed header are ignored (200, whole file).
       security: []
       parameters:
         - name: job_id
@@ -359,13 +362,33 @@ paths:
           required: true
           description: hex HMAC-SHA256 of job_id, filename and expires, with FILE_LINK_SECRET.
           schema: {type: string, maxLength: 128}
+        - name: Range
+          in: header
+          required: false
+          description: 'One byte range, e.g. `bytes=0-1023`, `bytes=1024-` or `bytes=-1024` (the last 1024 bytes).'
+          schema: {type: string, example: 'bytes=0-1023'}
         - $ref: '#/components/parameters/CorrelationId'
       responses:
         '200':
-          description: The file (video/mp4, application/json, application/x-subrip or image/jpeg).
+          description: The whole file (video/mp4, application/json, application/x-subrip or image/jpeg).
           headers:
             X-Correlation-Id: {$ref: '#/components/headers/X-Correlation-Id'}
             Content-Length: {schema: {type: integer}}
+            Accept-Ranges: {$ref: '#/components/headers/Accept-Ranges'}
+          content:
+            application/octet-stream:
+              schema: {type: string, contentMediaType: application/octet-stream}
+        '206':
+          description: Partial Content - only the bytes asked for in the Range header.
+          headers:
+            X-Correlation-Id: {$ref: '#/components/headers/X-Correlation-Id'}
+            Content-Length:
+              description: Size of this part in bytes.
+              schema: {type: integer}
+            Content-Range:
+              description: 'Which bytes this is, out of the whole file: `bytes <first>-<last>/<size>`.'
+              schema: {type: string, example: 'bytes 0-1023/5242880'}
+            Accept-Ranges: {$ref: '#/components/headers/Accept-Ranges'}
           content:
             application/octet-stream:
               schema: {type: string, contentMediaType: application/octet-stream}
@@ -380,6 +403,16 @@ paths:
           description: '`JOB_NOT_FOUND` or `NOT_FOUND` (no such file for this job).'
           headers:
             X-Correlation-Id: {$ref: '#/components/headers/X-Correlation-Id'}
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Error'}
+        '416':
+          description: '`RANGE_NOT_SATISFIABLE` - the Range starts at or past the end of the file. details.size = file size.'
+          headers:
+            X-Correlation-Id: {$ref: '#/components/headers/X-Correlation-Id'}
+            Content-Range:
+              description: '`bytes */<size>` (the size of the whole file).'
+              schema: {type: string, example: 'bytes */5242880'}
           content:
             application/json:
               schema: {$ref: '#/components/schemas/Error'}
@@ -423,6 +456,9 @@ components:
     X-Correlation-Id:
       description: The request's correlation id (yours, or a generated one).
       schema: {type: string}
+    Accept-Ranges:
+      description: '`bytes` - this file can be fetched in parts with a Range header.'
+      schema: {type: string, enum: [bytes]}
 
   responses:
     Accepted:
@@ -496,6 +532,7 @@ components:
         - NOT_FOUND
         - METHOD_NOT_ALLOWED
         - NOT_READY
+        - RANGE_NOT_SATISFIABLE
 
     ErrorObject:
       type: object

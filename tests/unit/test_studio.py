@@ -69,6 +69,16 @@ def test_studio_dir_setting_is_used(client, monkeypatch, tmp_path):
     assert client.get("/").text == "<title>custom</title>"
 
 
+def test_studio_cannot_be_framed_unless_allowed(client, monkeypatch):
+    assert "frame-ancestors 'none'" in client.get("/").headers["content-security-policy"]
+    monkeypatch.setenv("STUDIO_FRAME_ANCESTORS", "https://huggingface.co")
+    get_settings.cache_clear()
+    assert "frame-ancestors https://huggingface.co" in client.get("/").headers["content-security-policy"]
+    monkeypatch.setenv("STUDIO_FRAME_ANCESTORS", "x; script-src *")  # no injecting other CSP rules
+    get_settings.cache_clear()
+    assert "frame-ancestors 'none'" in client.get("/").headers["content-security-policy"]
+
+
 # ---------- GET /api/v1/jobs ----------
 
 def test_job_list_needs_a_token(client):

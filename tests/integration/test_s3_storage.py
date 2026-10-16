@@ -20,6 +20,8 @@ def test_s3_put_stream_delete():
     store.put_bytes(key, b"hello minio")
     chunks, size = store.open_stream(key)
     assert b"".join(chunks) == b"hello minio" and size == 11
+    chunks, size = store.open_stream(key, 6, 8)  # a byte range, like an HTTP Range request
+    assert b"".join(chunks) == b"min" and size == 11 and store.size(key) == 11
     store.delete(key)
     with pytest.raises(StorageNotFound):
         store.open_stream(key)

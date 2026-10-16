@@ -14,7 +14,7 @@ const SCORE_SCALE = 0.4; // a CLIP relevance of 0.4 fills the bar (real scores a
 let current = null;        // {job, files, timeline, manifest, ratio}
 let swapping = false;
 let onSwappedCb = () => {};
-const videoUrls = new Map(); // "<job id>/<file>" -> blob: URL of a downloaded video
+let videoLoad = new AbortController(); // listeners of the video being loaded now (aborted by the next load)
 
 // ---------- Show a job's result ----------
 
@@ -24,7 +24,6 @@ export async function showResult(job, { onSwapped, ratio, time = 0 } = {}) {
   const [timeline, manifest] = await Promise.all([fetchJson(files["timeline.json"]), fetchJson(files["manifest.json"])]);
   const ratios = timeline.videos.map((v) => v.aspect_ratio);
   current = { job, files, timeline, manifest, ratio: ratios.includes(ratio) ? ratio : ratios[0] };
-  forgetOtherVideos(job.job_id);
 
   const swaps = timeline.swaps || [];
   $("result-sub").textContent = [
@@ -85,53 +84,36 @@ function selectRatio(ratio) {
   loadVideo($("player").currentTime);
 }
 
-// The video is downloaded as a whole (a blob) before it plays: the API streams files without
-// HTTP range support, and a blob lets a click on a scene card jump to any moment at once.
+// The video streams straight from its signed link. The API answers HTTP Range requests
+// (206 Partial Content), so playback starts at once and a click on a scene card seeks to any
+// moment without downloading the whole file first.
 async function loadVideo(time = 0) {
   const player = $("player");
   const frame = $("frame");
   const video = current.timeline.videos.find((v) => v.aspect_ratio === current.ratio);
   frame.className = "frame" + (current.ratio === "9:16" ? " is-phone" : current.ratio === "1:1" ? " is-square" : "");
   player.setAttribute("aria-label", `${current.ratio} video`);
-  const key = videoKey();
   const loading = $("player-loading");
   const wasPlaying = !player.paused;
-  let url = videoUrls.get(key);
-  if (!url) {
-    loading.hidden = false;
-    loading.lastElementChild.textContent = "Loading video";
-    try {
-      const resp = await fetch(sameOrigin(current.files[video.file]), { cache: "no-store" });
-      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-      url = URL.createObjectURL(await resp.blob());
-      videoUrls.set(key, url);
-    } catch {
-      loading.lastElementChild.textContent = "Could not load the video. Use the download link below.";
-      loading.firstElementChild.hidden = true;
-      return;
-    }
-    if (key !== videoKey()) return; // the user switched ratio or job while this one downloaded
-  }
-  loading.hidden = true;
+  loading.hidden = false;
   loading.firstElementChild.hidden = false;
-  player.src = url;
-  player.replaceChildren();
-  await addCaptionTrack(player);
+  loading.lastElementChild.textContent = "Loading video";
+  videoLoad.abort(); // a ratio switch / swap during a load: the old load's listeners must not fire
+  const done = (videoLoad = new AbortController()); // removes both listeners once one fired
   player.addEventListener("loadedmetadata", () => {
+    done.abort();
+    loading.hidden = true;
     if (time) player.currentTime = Math.min(time, player.duration || time);
     if (wasPlaying) player.play().catch(() => {});
-  }, { once: true });
-}
-
-function videoKey() {
-  const video = current && current.timeline.videos.find((v) => v.aspect_ratio === current.ratio);
-  return video ? `${current.job.job_id}/${video.file}` : "";
-}
-
-function forgetOtherVideos(jobId) {
-  for (const [key, url] of videoUrls) {
-    if (!key.startsWith(`${jobId}/`)) { URL.revokeObjectURL(url); videoUrls.delete(key); }
-  }
+  }, { signal: done.signal });
+  player.addEventListener("error", () => {
+    done.abort();
+    loading.lastElementChild.textContent = "Could not load the video. Use the download link below.";
+    loading.firstElementChild.hidden = true;
+  }, { signal: done.signal });
+  player.src = sameOrigin(current.files[video.file]);
+  player.replaceChildren();
+  await addCaptionTrack(player);
 }
 
 // "Show SRT in player": captions.srt -> WebVTT (the format <track> understands) as a blob.
