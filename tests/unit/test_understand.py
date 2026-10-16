@@ -240,3 +240,17 @@ def test_a_rules_fallback_is_never_reused_as_a_groq_answer(monkeypatch):
         server.close()
     assert fallback[0].source == "rules"
     assert len(server.calls) == 4                            # Groq is tried again (2 tries each time)
+
+
+def test_groq_answer_that_ignores_the_visual_hint_still_searches_it_first(monkeypatch):
+    scenes = [Scene(0, 0.0, 3.0, "Cloud computing lets small firms grow.", visual_hint="lighthouse at night"),
+              Scene(1, 3.0, 6.0, "Elon Musk said sales grew 40%.")]
+    server = FakeAPI(groq_answer(GOOD_ANSWER))  # the LLM's queries do not contain the hint
+    try:
+        use_groq(monkeypatch, server.url)
+        meanings, _, _ = understand_scenes(scenes, SCRIPT)
+    finally:
+        server.close()
+    assert meanings[0].queries == ["lighthouse at night", "data center server racks", "network cables"]
+    assert "visual_hint used as the first query" in meanings[0].reason
+    assert meanings[1].queries[0] == "rising sales chart"  # no hint -> the LLM's own order

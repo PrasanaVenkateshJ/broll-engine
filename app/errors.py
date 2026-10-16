@@ -30,6 +30,8 @@ class ErrorCode(str, Enum):
     UNSUPPORTED_ASPECT_RATIO = "UNSUPPORTED_ASPECT_RATIO"
     JOB_NOT_FOUND = "JOB_NOT_FOUND"
     SCENE_NOT_FOUND = "SCENE_NOT_FOUND"
+    JOB_NOT_READY = "JOB_NOT_READY"              # clip swap: the original job has not finished (or failed)
+    NO_ALTERNATIVE_CLIP = "NO_ALTERNATIVE_CLIP"  # clip swap: no other usable clip exists for the scene
     IDEMPOTENCY_KEY_REUSED = "IDEMPOTENCY_KEY_REUSED"
     UNAUTHORIZED = "UNAUTHORIZED"
     RATE_LIMITED = "RATE_LIMITED"

@@ -16,6 +16,7 @@ from pathlib import Path
 from fastapi import APIRouter, Depends, FastAPI, Header, Query, Request
 from fastapi.responses import JSONResponse, StreamingResponse
 from pydantic import ValidationError
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 from starlette.concurrency import run_in_threadpool
 from starlette.datastructures import UploadFile
@@ -27,8 +28,10 @@ from app.jobs import body_hash, create_job, find_existing_job, job_to_dict, new_
 from app.logging_setup import correlation_id_var, setup_logging
 from app.models import Job, JobStatus
 from app.pipeline.intake import check_audio_file, check_scene_texts, check_script
+from app.pipeline.swap import precheck as swap_precheck
+from app.pipeline.swap import read_state
 from app.pipeline.tts import check_voice
-from app.schemas import JobCreate, JobOptions
+from app.schemas import JobCreate, JobOptions, SwapRequest
 from app.security import BlockedURL, check_file_link, check_public_url, require_client
 from app.storage import StorageNotFound, get_storage, input_key, output_key
 
@@ -244,6 +247,70 @@ async def create_broll_job(
         _create_job_sync, db, client_id, idempotency_key, req_hash, input_type, payload, upload)
 
     links = {"self": f"{base_url(request).rstrip('/')}/api/v1/jobs/{job.id}"}
+    headers = {"Location": links["self"]}
+    if not created:
+        headers["Idempotent-Replayed"] = "true"
+    return JSONResponse(status_code=202, headers=headers,
+                        content={"job_id": job.id, "status": job.status, "links": links})
+
+
+def _create_swap_job_sync(db: Session, client_id: str, idem_key: str, job_id: str, scene_index: int,
+                          swap: SwapRequest) -> tuple[Job, bool]:
+    """Checks + insert for a clip swap (runs in a thread: database + storage reads)."""
+    payload = {"job_id": job_id, "scene_index": scene_index, "swap": swap.model_dump(mode="json")}
+    req_hash = body_hash({"swap": payload})
+    existing = find_existing_job(db, client_id, idem_key, req_hash)
+    if existing is not None:  # same key + same body: the same swap job, no new work
+        return existing, False
+    job = db.get(Job, job_id)
+    if job is None or job.client_id != client_id:
+        raise AppError(ErrorCode.JOB_NOT_FOUND, f"Job {job_id} not found", 404)
+    root = db.get(Job, job.parent_job_id) if job.parent_job_id else job  # a swap of a swap = same video
+    if root.status in (JobStatus.QUEUED, JobStatus.RUNNING):
+        raise AppError(ErrorCode.JOB_NOT_READY, f"Job {root.id} is still {root.status}; swap a clip after it "
+                       "succeeds", 409, retryable=True, details={"status": root.status})
+    if root.status == JobStatus.FAILED:
+        raise AppError(ErrorCode.JOB_NOT_READY, f"Job {root.id} failed, so it has no video to change", 409,
+                       details={"status": root.status})
+    busy = db.scalars(select(Job.id).where(Job.parent_job_id == root.id,
+                                           Job.status.in_([JobStatus.QUEUED, JobStatus.RUNNING]))).first()
+    if busy:  # one swap at a time per video: each swap builds on the previous one
+        raise AppError(ErrorCode.JOB_NOT_READY, f"Another clip swap ({busy}) is still running for this video", 409,
+                       retryable=True, details={"swap_job_id": busy})
+    swap_precheck(read_state(root.id), scene_index, swap)
+    payload["root_job_id"] = root.id
+    return create_job(db, job_id=new_job_id(), client_id=client_id, idem_key=idem_key, req_hash=req_hash,
+                      input_type="swap", request_data=payload, parent_job_id=root.id)
+
+
+@api.post("/broll/jobs/{job_id}/scenes/{scene_index}/swap", status_code=202, tags=["jobs"])
+async def swap_scene_clip(
+    job_id: str,
+    scene_index: int,
+    request: Request,
+    client_id: str = Depends(require_client),
+    db: Session = Depends(get_db),
+    idempotency_key: str | None = Header(default=None, alias="Idempotency-Key", max_length=255),
+):
+    """Give one scene a different clip. Only that scene is re-rendered; the result is a new job
+    (202 + job_id) whose files are the updated videos, timeline.json and manifest.json."""
+    if not idempotency_key:
+        raise AppError(ErrorCode.INVALID_INPUT, "The Idempotency-Key header is required for a clip swap", 422,
+                       details={"header": "Idempotency-Key"})
+    try:
+        swap = SwapRequest.model_validate_json(await request.body() or b"{}")
+    except ValidationError as e:
+        raise _validation_error(e) from None
+    if swap.clip_url is not None:
+        try:  # SSRF guard, like audio_url
+            await run_in_threadpool(check_public_url, str(swap.clip_url))
+        except BlockedURL as e:
+            raise AppError(ErrorCode.INVALID_INPUT, f"clip_url is not allowed: {e}", 422,
+                           details={"reason": "private_or_local_address"}) from None
+    job, created = await run_in_threadpool(_create_swap_job_sync, db, client_id, idempotency_key, job_id,
+                                           scene_index, swap)
+    links = {"self": f"{base_url(request).rstrip('/')}/api/v1/jobs/{job.id}",
+             "parent": f"{base_url(request).rstrip('/')}/api/v1/jobs/{job.parent_job_id}"}
     headers = {"Location": links["self"]}
     if not created:
         headers["Idempotent-Replayed"] = "true"

@@ -14,7 +14,7 @@ import logging
 from pathlib import Path
 
 from app.config import get_settings
-from app.pipeline.providers.base import Candidate, Provider, ProviderError
+from app.pipeline.providers.base import Candidate, ClipNotUsable, Provider, ProviderError
 from app.pipeline.providers.generated import GeneratedProvider
 from app.pipeline.providers.mock import MockProvider
 from app.pipeline.providers.pexels import PexelsProvider
@@ -28,7 +28,7 @@ REGISTRY: dict[str, type[Provider]] = {
                         GeneratedProvider, MockProvider)
 }
 
-__all__ = ["Candidate", "Provider", "ProviderError", "REGISTRY", "get_provider", "override_disabled",
+__all__ = ["Candidate", "ClipNotUsable", "Provider", "ProviderError", "REGISTRY", "get_provider", "override_disabled",
            "provider_status", "active_providers"]
 
 

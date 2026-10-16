@@ -16,8 +16,10 @@ THE SELECTION RULE (its result and reason are written to timeline.json):
    - gap >= LOGO_PENALTY_MARGIN -> kept, but LOGO_PENALTY is taken off its ORDER score, so a
      candidate without readable brand text wins a near tie.
 4. If the best CLIP score >= STOCK_MIN_SCORE: download the best candidate, check it with
-   ffprobe; if it is corrupted, take the next passing one. Done.
-   Otherwise (or if the source failed) go to the next source.
+   ffprobe; if it is corrupted, take the next passing one.
+   Frame logo check: the thumbnail is only ONE picture, so LOGO_FRAME_COUNT frames of the
+   DOWNLOADED clip get the same logo test; if any frame is "rejected", so is the clip (next one).
+   Done. Otherwise (or if the source failed) go to the next source.
 5. Nothing passed anywhere -> a `generated` motion card.
 
 "Measurable" = the decision only depends on numbers we store (scores, threshold), so you
@@ -34,6 +36,7 @@ from app.config import get_settings
 from app.pipeline import media
 from app.pipeline.net import DownloadError
 from app.pipeline.providers import Candidate, ProviderError, get_provider, provider_status
+from app.pipeline.providers.base import safe_name
 from app.pipeline.providers.generated import GeneratedProvider
 from app.pipeline.safety import SearchPlan, find_excluded
 from app.pipeline.understand import SceneMeaning
@@ -56,6 +59,11 @@ class Scorer:
         """How much each picture looks like a logo / brand text / watermark (same scale as score())."""
         raise NotImplementedError
 
+    def frame_scores(self, candidate: Candidate, frames: list[Path], texts: list[str]) -> list[tuple[float, float]]:
+        """(scene score, logo score) for each frame of the downloaded clip (same scale as score())."""
+        same = [candidate] * len(frames)
+        return list(zip(self.score(same, frames, texts), self.logo_scores(same, frames)))
+
     def score_images(self, images: list, texts: list[str]) -> list[float] | None:
         """Score raw RGB pictures (numpy arrays) against texts - used by the subject-aware crop.
         None = this scorer cannot look at pictures (render.py then uses the saliency crop)."""
@@ -67,12 +75,20 @@ class Scorer:
 
 class MockScorer(Scorer):
     """No model: share of a query's words found in the clip's tags (0.15 .. 0.30).
-    Logo score: the candidate's extra["logo_score"] if a test set one, else a low 0.05."""
+    Logo score: the candidate's extra["logo_score"] if a test set one, else a low 0.05.
+    Frame logo scores: extra["frame_logo_scores"] (one per frame) if a test set them, else the
+    same value as the thumbnail."""
     name = "mock"
     needs_images = False
 
     def logo_scores(self, candidates, previews):
         return [float(c.extra.get("logo_score", 0.05)) for c in candidates]
+
+    def frame_scores(self, candidate, frames, texts):
+        scene = self.score([candidate], [None], texts)[0]
+        per_frame = candidate.extra.get("frame_logo_scores") or []
+        default = float(candidate.extra.get("logo_score", 0.05))
+        return [(scene, float(per_frame[i]) if i < len(per_frame) else default) for i in range(len(frames))]
 
     def score(self, candidates, previews, texts):
         out = []
@@ -174,7 +190,9 @@ class Selection:
     final_score: float | None  # clip_score + fit bonus
     reason: str
     query: str = ""
-    logo_check: dict | None = None  # logo score, gap and decision; None = not checked (e.g. generated)
+    # {"thumbnail": {logo score, gap, decision}, "frames": [one per clip frame], "result": ...};
+    # None = not checked (generated card, or LOGO_CHECK=false)
+    logo_check: dict | None = None
 
     def to_dict(self) -> dict:
         c = self.candidate
@@ -185,6 +203,16 @@ class Selection:
                 "generated": c.generated, "reason": self.reason, "relevance_score": self.clip_score,
                 "final_score": self.final_score, "logo_check": self.logo_check, "width": c.width,
                 "height": c.height, "duration": c.duration}
+
+    def to_state(self) -> dict:
+        """EVERYTHING about the choice (the full candidate too), so a clip swap can rebuild it later."""
+        return {"candidate": self.candidate.to_dict(), "clip_score": self.clip_score, "final_score": self.final_score,
+                "reason": self.reason, "query": self.query, "logo_check": self.logo_check}
+
+    @classmethod
+    def from_state(cls, scene_index: int, data: dict) -> "Selection":
+        return cls(scene_index, Candidate(**data["candidate"]), None, data["clip_score"], data["final_score"],
+                   data["reason"], data.get("query", ""), data.get("logo_check"))
 
 
 @dataclass
@@ -299,6 +327,39 @@ def logo_decision(score: float, logo: float | None) -> tuple[str, float, dict | 
                              "penalty": penalty}
 
 
+def grab_check_frames(path: Path, kind: str, folder: Path, uid: str, count: int) -> list[tuple[float | None, Path]]:
+    """`count` frames spread over the WHOLE downloaded clip, as JPEGs: [(time in seconds, path)].
+    A still image has only one picture: [(None, the image itself)]."""
+    if kind == "image":
+        return [(None, path)]
+    duration = media.duration_of(path)
+    folder.mkdir(parents=True, exist_ok=True)
+    out = []
+    for i in range(max(1, count)):
+        t = round(duration * (i + 0.5) / max(1, count), 2)  # 1/6, 1/2, 5/6 of the clip for 3 frames
+        dest = folder / f"{safe_name(uid)}_f{i}.jpg"
+        media.ffmpeg("-ss", f"{t:.2f}", "-i", str(path), "-frames:v", "1", "-vf", "scale=640:-2", str(dest))
+        if dest.is_file():
+            out.append((t, dest))
+    if not out:
+        raise media.MediaError("no frames could be taken from the clip")
+    return out
+
+
+def frame_logo_check(candidate: Candidate, path: Path, texts: list[str], scorer: Scorer,
+                     folder: Path) -> tuple[bool, list[dict]]:
+    """Run the logo test on frames of the downloaded clip. Returns (rejected?, facts per frame).
+    The same rule as the thumbnail: logo score - scene score >= LOGO_REJECT_MARGIN -> rejected."""
+    s = get_settings()
+    frames = grab_check_frames(path, candidate.kind, folder, candidate.uid, s.LOGO_FRAME_COUNT)
+    scores = scorer.frame_scores(candidate, [p for _, p in frames], texts)
+    facts = []
+    for (t, _), (scene, logo) in zip(frames, scores):
+        result, _, details = logo_decision(scene, logo)
+        facts.append({"time": t, "logo_score": logo, "scene_score": scene, "gap": details["gap"], "result": result})
+    return any(f["result"] == "rejected" for f in facts), facts
+
+
 def _card(scene_index: int, meaning: SceneMeaning) -> Candidate:
     if meaning.number:
         return GeneratedProvider().card(scene_index, meaning.number, meaning.keyword)
@@ -378,15 +439,37 @@ def select_clip(scene, meaning: SceneMeaning, plan: SearchPlan, ctx: SelectionCo
                          "tried the next candidate")
                 notes.append(f"{cand.uid} corrupted ({problem})")
                 continue
+            logo_report, frame_note = None, ""
+            if s.LOGO_CHECK:
+                try:
+                    rejected, frame_facts = frame_logo_check(cand, path, plan.queries, ctx.scorer, ctx.work / "frames")
+                except Exception as e:  # frames could not be scored: the thumbnail check still stands
+                    log.warning("frame logo check of %s failed: %s", cand.uid, e)
+                    rejected, frame_facts, frame_note = False, [], f"; frame check not possible ({e})"
+                if rejected:
+                    bad = next(f for f in frame_facts if f["result"] == "rejected")
+                    where = f"at {bad['time']:.1f} s" if bad["time"] is not None else "in the picture"
+                    ctx.used.add(cand.uid)  # never try it again in this video
+                    ctx.warn(f"Scene {scene.index}: clip {cand.uid} shows a logo {where} of the downloaded clip "
+                             f"(logo {bad['logo_score']:.3f} vs scene {bad['scene_score']:.3f}); "
+                             "tried the next candidate")
+                    notes.append(f"{cand.uid} rejected by the frame logo check ({where}, gap {bad['gap']:+.3f})")
+                    continue
+                logo_report = {"thumbnail": logo_facts, "frames": frame_facts,
+                               "result": (logo_facts or {}).get("result", "ok")}
+                if frame_facts:
+                    frame_note = (f"; {len(frame_facts)} clip frame(s) passed the logo check "
+                                  f"(max gap {max(f['gap'] for f in frame_facts):+.3f})")
             ctx.used.add(cand.uid)
             reason = (f"{name}: score {score:.3f} >= {s.STOCK_MIN_SCORE:.2f} for query '{cand.query}' "
                       f"(best of {len(ranked)} candidates, order bonus {final - score:+.2f})")
             if logo_facts:
                 reason += (f"; logo check {logo_facts['result']} (logo {logo_facts['logo_score']:.3f}, "
                            f"gap {logo_facts['gap']:+.3f})")
+            reason += frame_note
             if notes:
                 reason += "; earlier: " + "; ".join(notes)
-            return Selection(scene.index, cand, path, score, round(final, 4), reason, cand.query, logo_facts)
+            return Selection(scene.index, cand, path, score, round(final, 4), reason, cand.query, logo_report)
         notes.append(f"{name}: no passing candidate could be downloaded")
 
     card = _card(scene.index, meaning)

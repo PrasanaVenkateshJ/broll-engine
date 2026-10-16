@@ -600,6 +600,11 @@ class GroqUnderstander(Understander):
             queries = [str(q).strip()[:80] for q in (item.get("queries") or []) if str(q).strip()]
             if not queries:
                 raise UnderstandError(f"scene {sc.index} has no queries")
+            reason = "groq: " + str(item.get("reason") or "").strip()[:200]
+            hint = (sc.visual_hint or "").strip()[:80]
+            if hint:  # the caller's hint ALWAYS steers the search, even if the LLM left it out
+                queries = [hint] + [q for q in queries if q.lower() != hint.lower()]
+                reason += " (visual_hint used as the first query)"
             raw_flags = item.get("flags") or {}
             facts = safety_facts(sc.text)
             # Safety flags: the LLM's answer OR the code detectors (never weaker than the rules).
@@ -609,7 +614,7 @@ class GroqUnderstander(Understander):
             flags["brand"] |= bool(facts["brands"])
             flags["sensitive"] |= bool(facts["sensitive"])
             out.append(SceneMeaning(index=sc.index, queries=_three(queries), flags=flags, source=self.name,
-                                    reason="groq: " + str(item.get("reason") or "").strip()[:200],
+                                    reason=reason,
                                     names=facts["people"] + facts["brands"], number=facts["number"],
                                     keyword=card_keyword(sc.text, facts["number"], facts["people"] + facts["brands"])))
         return out

@@ -1,0 +1,356 @@
+# B-roll Engine (IncuBrix Assessment 3)
+
+Give it a narration, get back B-roll videos that match what is being said.
+
+**Input** (one of):
+- a voiceover file (mp3 / wav / m4a, up to 10 minutes) as an **upload** or an **`audio_url`**,
+- a plain **`script`** (the voice is made with Kokoro TTS),
+- an IncuBrix **scene list** `[{"text", "visual_hint"}]` (one scene per item; `visual_hint` is always searched first).
+
+**Output** per job, stored in MinIO / S3 and returned as signed download links:
+`video_16x9.mp4`, `video_9x16.mp4`, `video_1x1.mp4` (H.264 + AAC 48 kHz, 30 fps, yuv420p, 1080p-class),
+`captions.srt`, `timeline.json` (every scene: text, times, search queries, chosen clip, licence, score and
+the *reason* it was chosen) and `manifest.json` (models + versions, settings, seed, stage timings, cost
+estimate, warnings, licences, ai_generated flags, QA results).
+
+After a job, any scene's clip can be **swapped** (next best, a named clip, or a URL); only that scene is
+re-rendered.
+
+## How it works
+
+```mermaid
+flowchart LR
+    client["Client / tools/batch_run.py"] -- "POST /api/v1/broll/jobs<br/>Bearer token + Idempotency-Key" --> api["api (FastAPI)"]
+    api -- "job row (queued)" --> db[("SQLite<br/>jobs + idempotency keys")]
+    api -- "uploaded audio" --> s3[("MinIO / S3")]
+    client -- "GET /api/v1/jobs/{id}<br/>signed file links" --> api
+    worker["worker (separate process)"] -- "atomic claim" --> db
+    worker --> pipeline
+    subgraph pipeline ["pipeline (one job)"]
+        direction TB
+        intake["intake: download / ffprobe checks"] --> tts["TTS: Kokoro (script / scene list)"]
+        tts --> stt["transcribe: faster-whisper words + speech / music checks"]
+        stt --> scenes["scenes (cut at sentence ends) + captions"]
+        scenes --> understand["understand: Groq LLM or offline rules, then safety rules"]
+        understand --> footage["footage: Pixabay video / Pixabay photo / Wikimedia / generated card<br/>CLIP score + selection rule + logo check"]
+        footage --> render["render each scene x ratio + QA, then concat + narration"]
+        render --> outputs["timeline.json + manifest.json"]
+    end
+    worker -- "outputs + swap cache" --> s3
+    worker -- "signed callback" --> hook["callback_url"]
+```
+
+- **api** and **worker** are separate processes sharing one SQLite file. The API only validates and queues
+  (`202 + job_id`); the worker claims queued jobs with an atomic `UPDATE ... WHERE status='queued'`, so two
+  workers never take the same job.
+- **Selection rule** (stored per scene in `timeline.json` as `reason`): statistic lines get an animated number
+  card; otherwise the best stock candidate whose CLIP score is `>= STOCK_MIN_SCORE` and that is not used yet
+  in this video, trying sources in `PROVIDER_ORDER`; if none passes, a `generated` motion card. A provider
+  error never fails the job (warning + next source); a corrupted download is skipped.
+- **Logo check**: every candidate's thumbnail AND `LOGO_FRAME_COUNT` frames of the downloaded clip are scored
+  against "logo / brand text" prompts; one rejected frame rejects the clip (recorded as `logo_check` in
+  `timeline.json`).
+- **Clip swap**: the full job saves a *swap cache* (narration, every rendered segment, scenes, captions,
+  saved understanding, chosen clips). A swap downloads it, picks the new clip, renders **only that scene** for
+  each ratio, joins all segments again with stream copy, re-runs QA and writes new `timeline.json` /
+  `manifest.json` with a `swaps` history (swap time next to the full render time).
+
+## Setup
+
+You need **FFmpeg** (and for the Docker path, Docker Desktop). All tests and the default settings use mock
+adapters: **no API keys are needed**.
+
+### Docker (all services: api, worker, minio, minio-init)
+
+```powershell
+git clone <repo-url> broll-engine
+cd broll-engine
+Copy-Item .env.example .env
+docker compose up --build
+```
+
+API docs: http://localhost:8000/docs - MinIO console: http://localhost:9001 (minioadmin / minioadmin).
+
+### Windows without Docker (local `.venv`, files in `./data/storage`)
+
+```powershell
+git clone <repo-url> broll-engine
+cd broll-engine
+py -3.11 -m venv .venv
+.venv\Scripts\python -m pip install -r requirements.txt
+.venv\Scripts\python -m pip install --index-url https://download.pytorch.org/whl/cpu torch==2.14.1 torchvision==0.29.1
+.venv\Scripts\python -m pip install -r requirements-ml.txt
+.\scripts\run_api.ps1        # window 1 (creates .env from .env.example the first time)
+.\scripts\run_worker.ps1     # window 2
+```
+
+The torch / ML lines are only needed for the real models (Kokoro, Whisper, CLIP); with the default mock
+settings the other commands are enough.
+
+**Real mode**: in `.env` set `TTS_PROVIDER=kokoro`, `TRANSCRIBE_PROVIDER=whisper`, `UNDERSTAND_PROVIDER=groq`
++ `GROQ_API_KEY`, `PIXABAY_API_KEY`, `PROVIDER_ORDER=pixabay_video,pixabay_image_motion,wikimedia,generated`,
+`RANK_SCORER=clip` and a `WIKIMEDIA_USER_AGENT` with your contact. Keys go in `.env` only (git-ignored).
+
+## Using the API
+
+Every `/api/v1` call needs `Authorization: Bearer <token>` (`API_TOKENS`; `dev-token` in `.env.example`).
+The full contract is [openapi.yaml](openapi.yaml) (OpenAPI 3.1).
+
+| Method + path | What it does |
+|---|---|
+| `GET /health` | process alive |
+| `GET /ready` | database + storage reachable (503 `NOT_READY` otherwise) |
+| `POST /api/v1/broll/jobs` | start a job: JSON (`audio_url` / `script` / `scenes` + options) or multipart (`audio` file + `options` JSON) -> `202 {job_id}` |
+| `GET /api/v1/jobs/{job_id}` | `status` (queued / running / succeeded / failed), `progress` 0-100, `stage`, `warnings`, `error`, `result.files` (signed links) |
+| `POST /api/v1/broll/jobs/{job_id}/scenes/{scene_index}/swap` | swap one scene's clip (background job, `Idempotency-Key` required) -> `202 {job_id}` |
+| `GET /api/v1/jobs/{job_id}/files/{filename}?expires=&sig=` | download a result file (the signed link from `result.files`; no token needed) |
+
+Headers: `Idempotency-Key` on every POST (same key + same body = same job; same key + different body = 409),
+`X-Correlation-Id` (echoed back and written into every log line of the request and its job). With
+`callback_url`, the finished job is POSTed there with `X-IncuBrix-Signature` = hex HMAC-SHA256(raw body,
+`CALLBACK_SECRET`).
+
+```powershell
+$h = @{ Authorization = "Bearer dev-token"; "Idempotency-Key" = "demo-1" }
+$job = Invoke-RestMethod -Method Post http://localhost:8000/api/v1/broll/jobs -Headers $h -ContentType "application/json" `
+  -Body '{"script": "Saving money is not about earning more. It is about spending wisely.", "aspect_ratios": ["16:9", "9:16"]}'
+Invoke-RestMethod http://localhost:8000/api/v1/jobs/$($job.job_id) -Headers @{ Authorization = "Bearer dev-token" }
+```
+
+### Swapping a clip
+
+Body (exactly one way to choose; an empty body means `next_best`):
+
+```json
+{"mode": "next_best"}
+{"provider": "pixabay_video", "clip_id": "123456"}
+{"clip_url": "https://cdn.pixabay.com/video/2024/01/02/123456-789_medium.mp4"}
+{"clip_url": "https://example.com/my.mp4", "user_supplied": true, "licence": "CC0",
+ "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/", "attribution": "Me", "commercial_use": true}
+```
+
+- `next_best` = the normal selection rule again, with every clip ever used in this video excluded.
+- `clip_url` is downloaded through the SSRF-safe downloader. Pixabay addresses get the Pixabay licence;
+  Wikimedia files are looked up and must pass the CC0 / Public Domain / CC BY filter; any other public address
+  needs `user_supplied: true` and all licence fields.
+- A clip already in the video is refused (`INVALID_INPUT`, `details.reason = clip_already_used`); a chosen
+  clip whose frames show a logo is refused (`details.reason = logo_check_failed`).
+- The swap job's `result.files` hold the new versions; the original job's files are not changed. Swapping
+  again (with the original or the swap job id) builds on the latest version; one swap per video at a time.
+
+## Tests
+
+One command runs all unit + integration + e2e tests with mock adapters (no API keys, no models):
+
+```powershell
+docker compose run --rm api pytest     # Docker (also runs the MinIO test)
+.\scripts\test.ps1                      # Windows .venv (the MinIO test is skipped)
+.\scripts\test.ps1 -k swap              # any pytest option works
+```
+
+`tests/unit/test_openapi_contract.py` fails if a route, method, header, request field, job field or error code
+differs between the app and `openapi.yaml`; `tests/unit/test_docs_in_sync.py` does the same for this README,
+`.env.example` and `CLAUDE.md`.
+
+## Batch runner
+
+```powershell
+.venv\Scripts\python tools\batch_run.py testpack\inputs --out testpack\outputs\run1
+.venv\Scripts\python tools\batch_run.py inputs.jsonl --out out --api https://<live-url> --token <token> --ratios 16:9,9:16 --concurrency 3
+```
+
+- Input: a folder of audio files (uploaded), `.txt` scripts and `.json` request bodies, or a `.jsonl` file
+  (one body per line). `"name"` in a body names its output folder.
+- Each input is sent with an Idempotency-Key made from the input itself (re-running never duplicates work),
+  polled until it ends, and every output file is downloaded into `--out/<input-name>/` with `job.json`.
+- `--out/summary.csv` and `summary.md`: input, job_id, status, error code, narration seconds, turnaround
+  seconds, scenes, warnings count.
+- Options: `--api` (default `$BROLL_API_URL` or http://localhost:8000), `--token` (default `$BROLL_API_TOKEN`
+  or `dev-token`), `--ratios`, `--concurrency` (default 2), `--timeout`, `--poll`.
+
+## Settings
+
+Every setting comes from an environment variable or `.env` ([app/config.py](app/config.py)); all are listed with
+comments in [.env.example](.env.example). "Code default" is used when the variable is not set at all.
+
+| Setting | Code default | `.env.example` | What it does |
+|---|---|---|---|
+| **General** | | | |
+| `APP_NAME` | `broll-engine` | `broll-engine` | App name shown in logs. |
+| `APP_VERSION` | `0.2.0` | `0.2.0` | App version reported in logs / docs. |
+| `LOG_LEVEL` | `INFO` | `INFO` | DEBUG, INFO, WARNING or ERROR. |
+| `PUBLIC_BASE_URL` | *(empty)* | `http://localhost:8000` | Public address of the API, used in links inside callbacks. Empty = use the request's own address. |
+| **Auth + rate limit** | | | |
+| `API_TOKENS` | *(empty)* | `dev-token` | Comma-separated bearer tokens allowed to call /api/v1. EMPTY = auth OFF (local dev only!). |
+| `RATE_LIMIT_PER_MINUTE` | `120` | `120` | Max requests per token per minute (0 = no limit). Over the limit -&gt; 429 RATE_LIMITED. |
+| **Database** | | | |
+| `DATABASE_URL` | `sqlite:///./data/broll.db` | `sqlite:///./data/broll.db` | SQLite file for jobs + idempotency keys. (Docker overrides this to /app/data/broll.db.) |
+| **Storage** | | | |
+| `STORAGE_BACKEND` | `local` | `local` | "local" = save files in LOCAL_STORAGE_DIR (my PC). "s3" = MinIO / S3 (Docker, CI, deployment). |
+| `LOCAL_STORAGE_DIR` | `./data/storage` | `./data/storage` | Folder used when STORAGE_BACKEND=local. |
+| `S3_ENDPOINT_URL` | `http://localhost:9000` | `http://localhost:9000` | MinIO / S3 address (Docker overrides this to http://minio:9000). |
+| `S3_ACCESS_KEY` | `minioadmin` | `minioadmin` | MinIO / S3 access key (also the MinIO admin user in docker compose). |
+| `S3_SECRET_KEY` | `minioadmin` | `minioadmin` | MinIO / S3 secret key (also the MinIO admin password in docker compose). |
+| `S3_BUCKET` | `broll` | `broll` | Bucket that holds all job files. |
+| `S3_REGION` | `us-east-1` | `us-east-1` | S3 region (MinIO ignores it, but boto3 needs one). |
+| **Signed download links** | | | |
+| `FILE_LINK_SECRET` | `change-me-file-link-secret` | `change-me-file-link-secret` | Secret used to sign download links. CHANGE THIS in any shared deployment. |
+| `FILE_LINK_TTL_SECONDS` | `3600` | `3600` | How long a download link works, in seconds. |
+| **Uploads** | | | |
+| `MAX_UPLOAD_MB` | `100` | `100` | Largest upload accepted, in MB. Bigger -&gt; 413 FILE_TOO_LARGE. |
+| `ALLOWED_AUDIO_EXTENSIONS` | `mp3,wav,m4a` | `mp3,wav,m4a` | File extensions accepted for the "audio" upload field. |
+| `WORK_DIR` | `./data/work` | `./data/work` | Folder for temporary files while working. |
+| **Callbacks** | | | |
+| `CALLBACK_SECRET` | `change-me-callback-secret` | `change-me-callback-secret` | Secret for X-IncuBrix-Signature = hex HMAC-SHA256(raw body, CALLBACK_SECRET). CHANGE THIS. |
+| `CALLBACK_MAX_RETRIES` | `3` | `3` | Retries after the first failed callback attempt. |
+| `CALLBACK_BACKOFF_SECONDS` | `1.0` | `1.0` | First wait between retries in seconds; it doubles each time (1, 2, 4 ...). |
+| `CALLBACK_TIMEOUT_SECONDS` | `10.0` | `10.0` | How long to wait for the receiver to answer, in seconds. |
+| **Worker** | | | |
+| `WORKER_CONCURRENCY` | `2` | `2` | How many jobs one worker process runs at the same time. |
+| `WORKER_POLL_SECONDS` | `1.0` | `1.0` | How often an idle worker checks for new jobs, in seconds. |
+| `KEEP_WORK_FILES` | `false` | `false` | true = keep each job's temp folder (WORK_DIR/&lt;job_id&gt;) after the job, for debugging. |
+| **FFmpeg** | | | |
+| `FFMPEG_BIN` | `ffmpeg` | `ffmpeg` | Name or full path of the ffmpeg / ffprobe programs. |
+| `FFPROBE_BIN` | `ffprobe` | `ffprobe` | Name or full path of the ffmpeg / ffprobe programs. |
+| `FFMPEG_TIMEOUT_SECONDS` | `600.0` | `600` | Longest time one ffmpeg call may run, in seconds. |
+| **Intake (input checks)** | | | |
+| `MAX_AUDIO_SECONDS` | `600.0` | `600` | Longest narration accepted, in seconds. Longer -&gt; FILE_TOO_LONG. |
+| `MAX_DOWNLOAD_MB` | `100` | `100` | Largest audio_url download, in MB. Bigger -&gt; FILE_TOO_LARGE. |
+| `DOWNLOAD_TIMEOUT_SECONDS` | `60.0` | `60` | Total time allowed for downloading audio_url, in seconds. Slower -&gt; DOWNLOAD_FAILED. |
+| `AUDIO_SAMPLE_RATE` | `48000` | `48000` | All audio is converted to mono WAV at this sample rate (Hz). |
+| **Text to speech** | | | |
+| `TTS_PROVIDER` | `mock` | `mock` | "kokoro" (real voice, Kokoro-82M, Apache-2.0) or "mock" (a plain tone; tests / CI). |
+| `KOKORO_REPO_ID` | `hexgrad/Kokoro-82M` | `hexgrad/Kokoro-82M` | Hugging Face model id for Kokoro. |
+| `KOKORO_SPEED` | `1.0` | `1.0` | Speaking speed for Kokoro (1.0 = normal). |
+| `TTS_VOICE_MAP` | `en-US-female=a:af_heart,en-US-male=a:am_michael,en-GB-fem...` | `en-US-female=a:af_heart,en-US-male=a:am_michael,en-GB-fem...` | Our voice names -&gt; kokoro "language code:voice id". en-IN uses a Hindi speaker voice reading English. |
+| `SCENE_PAUSE_SECONDS` | `0.3` | `0.3` | Scene-list input: seconds of silence after each scene's narration. |
+| `MOCK_WORDS_PER_SECOND` | `2.5` | `2.5` | Mock TTS: words per second (sets the length of its tone). |
+| **Transcription** | | | |
+| `TRANSCRIBE_PROVIDER` | `mock` | `mock` | "whisper" (faster-whisper, MIT) or "mock" (spreads the known text evenly; tests / CI). |
+| `WHISPER_MODEL` | `small` | `small` | Whisper model size: tiny, base, small, medium ... |
+| `WHISPER_DEVICE` | `cpu` | `cpu` | cpu or cuda. |
+| `WHISPER_COMPUTE_TYPE` | `int8` | `int8` | int8 = small and fast on a CPU. |
+| `WHISPER_BEAM_SIZE` | `5` | `5` | Beam search width (higher = a bit more accurate, slower). |
+| `WHISPER_LANGUAGE` | *(empty)* | *(empty)* | Language code like "en" or "hi". Empty = detect automatically. |
+| `WHISPER_VAD_FILTER` | `true` | `true` | true = skip parts with no voice (helps with music); timestamps stay correct. |
+| `MOCK_TRANSCRIPT` | `This is a mock transcript. The mock adapter does not list...` | `This is a mock transcript. The mock adapter does not list...` | Mock transcriber: text used for uploaded audio (it cannot really listen). |
+| **Speech checks** | | | |
+| `SILENCE_MAX_VOLUME_DB` | `-45.0` | `-45` | Loudest moment below this (dB) = silent file -&gt; NO_SPEECH_DETECTED. |
+| `SILENCE_NOISE_DB` | `-45.0` | `-45` | Quieter than this (dB) for at least SILENCE_MIN_SECONDS counts as silence. |
+| `SILENCE_MIN_SECONDS` | `0.5` | `0.5` | Quieter than this (dB) for at least SILENCE_MIN_SECONDS counts as silence. |
+| `MIN_SOUND_SECONDS` | `0.5` | `0.5` | Less non-silent audio than this (seconds) -&gt; NO_SPEECH_DETECTED. |
+| `MUSIC_MIN_WORDS_PER_MINUTE` | `20.0` | `20` | Fewer recognised words per minute of sound than this -&gt; MUSIC_ONLY_AUDIO. |
+| `MUSIC_MAX_NO_SPEECH_PROB` | `0.6` | `0.6` | Whisper's average "no speech" probability above this -&gt; MUSIC_ONLY_AUDIO. |
+| `MUSIC_MIN_WORD_PROB` | `0.3` | `0.3` | Average word confidence below this -&gt; MUSIC_ONLY_AUDIO. |
+| **Scenes** | | | |
+| `MIN_SCENE_SECONDS` | `2.0` | `2.0` | Shorter scenes are merged with a neighbour; longer ones are split. |
+| `MAX_SCENE_SECONDS` | `8.0` | `8.0` | Shorter scenes are merged with a neighbour; longer ones are split. |
+| `PAUSE_SECONDS` | `0.35` | `0.35` | A gap between two words at least this long (seconds) counts as a phrase pause. |
+| **Captions** | | | |
+| `CAPTION_MAX_CHARS_PER_LINE` | `42` | `42` | Max characters per caption line and max lines per caption. |
+| `CAPTION_MAX_LINES` | `2` | `2` | Max characters per caption line and max lines per caption. |
+| `CAPTION_MAX_SECONDS` | `6.0` | `6.0` | Longest time one caption stays on screen, in seconds. |
+| `CAPTION_LINGER_SECONDS` | `0.4` | `0.4` | Keep a caption up this long after its last word, in seconds. |
+| `CAPTION_FONT` | `Arial` | `Arial` | Font for burned-in captions (falls back to a similar font if missing). |
+| **Render** | | | |
+| `RENDER_FPS` | `30` | `30` | Frames per second of every output video. |
+| `VIDEO_PRESET` | `veryfast` | `veryfast` | libx264 speed preset (ultrafast ... veryslow) and quality (lower CRF = better, bigger). |
+| `VIDEO_CRF` | `23` | `23` | libx264 speed preset (ultrafast ... veryslow) and quality (lower CRF = better, bigger). |
+| `AUDIO_BITRATE` | `192k` | `192k` | AAC audio bitrate of the output videos. |
+| **Reproducibility** | | | |
+| `SEED` | `1234` | `1234` | One seed for LLM sampling, mock providers and generated card colours. |
+| **Network safety (SSRF)** | | | |
+| `ALLOW_PRIVATE_URLS` | `false` | `false` | false = refuse audio_url / footage URLs that point to private, loopback or link-local addresses. Only tests set true (they use local servers). Keep false everywhere else. |
+| **Scene understanding** | | | |
+| `UNDERSTAND_PROVIDER` | `mock` | `mock` | "groq" (LLM, needs GROQ_API_KEY; falls back to rules + a warning if it fails), "rules" (offline sense dictionary) or "mock" (tests / CI). |
+| `GROQ_API_KEY` | *(empty)* | *(empty)* | Groq API key (console.groq.com). Put the real key ONLY in .env. |
+| `GROQ_BASE_URL` | `https://api.groq.com/openai/v1` | `https://api.groq.com/openai/v1` | Groq's OpenAI-compatible endpoint. |
+| `LLM_MODEL` | `openai/gpt-oss-120b` | `openai/gpt-oss-120b` | Groq model id. gpt-oss is Apache-2.0; any Groq chat model with JSON mode works. |
+| `LLM_TIMEOUT_SECONDS` | `30.0` | `30` | Seconds to wait for one LLM answer. |
+| `LLM_TEMPERATURE` | `0.0` | `0` | 0 = always the most likely answer, so the same script gives the same queries (repeatable). |
+| `LLM_RETRIES` | `1` | `1` | Extra tries after a failed LLM call. |
+| **Footage providers** | | | |
+| `PROVIDER_ORDER` | `pixabay_video,pixabay_image_motion,wikimedia,generated` | `mock,generated` | Order in which sources are tried for each scene. Real order (my PC): pixabay_video,pixabay_image_motion,wikimedia,generated Docker / CI default: mock,generated (no keys, no network). Also available: pexels. |
+| `PROVIDERS_DISABLED` | *(empty)* | *(empty)* | Comma-separated providers to switch off, e.g. pixabay_video. |
+| `PROVIDERS_OVERRIDE_FILE` | `./data/providers_override.json` | `./data/providers_override.json` | JSON file re-read before every search, to switch a provider off DURING a job: {"disabled": ["pixabay_video"]} |
+| `PROVIDER_TIMEOUT_SECONDS` | `15.0` | `15` | Seconds to wait for one provider search. |
+| `PROVIDER_RESULTS_PER_QUERY` | `8` | `8` | Results asked for per search query. |
+| `PIXABAY_API_KEY` | *(empty)* | *(empty)* | Pixabay key (pixabay.com/api/docs) - used by pixabay_video AND pixabay_image_motion. Only in .env. |
+| `PIXABAY_VIDEO_API_URL` | `https://pixabay.com/api/videos/` | `https://pixabay.com/api/videos/` | Pixabay key (pixabay.com/api/docs) - used by pixabay_video AND pixabay_image_motion. Only in .env. |
+| `PIXABAY_IMAGE_API_URL` | `https://pixabay.com/api/` | `https://pixabay.com/api/` | Pixabay key (pixabay.com/api/docs) - used by pixabay_video AND pixabay_image_motion. Only in .env. |
+| `PEXELS_API_KEY` | *(empty)* | *(empty)* | Pexels has paused new API keys: leave empty and pexels is skipped. |
+| `PEXELS_VIDEO_API_URL` | `https://api.pexels.com/videos/search` | `https://api.pexels.com/videos/search` | Pexels has paused new API keys: leave empty and pexels is skipped. |
+| `WIKIMEDIA_API_URL` | `https://commons.wikimedia.org/w/api.php` | `https://commons.wikimedia.org/w/api.php` | Wikimedia Commons API (no key). |
+| `WIKIMEDIA_USER_AGENT` | `broll-engine/0.3 (set WIKIMEDIA_USER_AGENT to include you...` | `broll-engine/0.3 (set WIKIMEDIA_USER_AGENT to include you...` | Wikimedia REQUIRES a contact (email or URL) in the User-Agent, else HTTP 403 and the provider is skipped. Format: name/version (URL; email) |
+| `MAX_CLIP_DOWNLOAD_MB` | `80` | `80` | Largest footage download in MB, and the time limit for one download in seconds. |
+| `CLIP_DOWNLOAD_TIMEOUT_SECONDS` | `60.0` | `60` | Largest footage download in MB, and the time limit for one download in seconds. |
+| **Ranking** | | | |
+| `RANK_SCORER` | `mock` | `mock` | "clip" = open_clip scores previews against the scene meaning; "mock" = word overlap (tests / CI). |
+| `CLIP_MODEL` | `ViT-B-32` | `ViT-B-32` | open_clip model + weights (both MIT). |
+| `CLIP_PRETRAINED` | `laion2b_s34b_b79k` | `laion2b_s34b_b79k` | open_clip model + weights (both MIT). |
+| `STOCK_MIN_SCORE` | `0.22` | `0.22` | A stock clip is used only if its CLIP score is at least this. |
+| `DURATION_BONUS` | `0.02` | `0.02` | Small extra points that only change the ORDER of candidates (never pass/fail). |
+| `ORIENTATION_BONUS` | `0.02` | `0.02` | Small extra points that only change the ORDER of candidates (never pass/fail). |
+| `GENERATED_FOR_STATISTICS` | `true` | `true` | true = lines with a number/percentage get an animated number card instead of stock footage. |
+| `LOGO_CHECK` | `true` | `true` | Logo check: every preview is also scored with CLIP against LOGO_PROMPTS ("/"-separated). gap = logo score - scene score. gap &gt;= LOGO_REJECT_MARGIN -&gt; candidate rejected; gap &gt;= LOGO_PENALTY_MARGIN -&gt; kept, but LOGO_PENALTY is taken off its order score. false = off. |
+| `LOGO_PROMPTS` | `a product with a printed brand logo\|a famous company log...` | `a product with a printed brand logo\|a famous company log...` | Logo check: every preview is also scored with CLIP against LOGO_PROMPTS ("/"-separated). gap = logo score - scene score. gap &gt;= LOGO_REJECT_MARGIN -&gt; candidate rejected; gap &gt;= LOGO_PENALTY_MARGIN -&gt; kept, but LOGO_PENALTY is taken off its order score. false = off. |
+| `LOGO_REJECT_MARGIN` | `-0.04` | `-0.04` | Logo check: every preview is also scored with CLIP against LOGO_PROMPTS ("/"-separated). gap = logo score - scene score. gap &gt;= LOGO_REJECT_MARGIN -&gt; candidate rejected; gap &gt;= LOGO_PENALTY_MARGIN -&gt; kept, but LOGO_PENALTY is taken off its order score. false = off. |
+| `LOGO_PENALTY_MARGIN` | `-0.06` | `-0.06` | Logo check: every preview is also scored with CLIP against LOGO_PROMPTS ("/"-separated). gap = logo score - scene score. gap &gt;= LOGO_REJECT_MARGIN -&gt; candidate rejected; gap &gt;= LOGO_PENALTY_MARGIN -&gt; kept, but LOGO_PENALTY is taken off its order score. false = off. |
+| `LOGO_PENALTY` | `0.03` | `0.03` | Logo check: every preview is also scored with CLIP against LOGO_PROMPTS ("/"-separated). gap = logo score - scene score. gap &gt;= LOGO_REJECT_MARGIN -&gt; candidate rejected; gap &gt;= LOGO_PENALTY_MARGIN -&gt; kept, but LOGO_PENALTY is taken off its order score. false = off. |
+| `LOGO_FRAME_COUNT` | `3` | `3` | Frames of the DOWNLOADED clip (spread over its length) that get the same logo test; one rejected frame rejects the clip and the next candidate is tried. A still image has one picture, so it is checked once. |
+| **Clip fitting + look** | | | |
+| `MAX_SLOWDOWN` | `0.25` | `0.25` | A short clip may be slowed by up to this fraction (0.25 = 25 %), then it loops forward/backward. |
+| `KEN_BURNS_ZOOM` | `1.12` | `1.12` | Ken Burns zoom on still images (1.12 = 12 % closer by the end of the scene). |
+| `SALIENCY_SAMPLE_FRAMES` | `5` | `5` | Frames sampled per clip to find the most interesting region for cropping. |
+| `CROP_SAMPLE_FRAMES` | `3` | `3` | Subject-aware crop (RANK_SCORER=clip): colour frames sampled per clip; each crop window (left / centre / right / salient) is scored with CLIP against the scene meaning. |
+| `CROP_BLUR_MARGIN` | `0.02` | `0.02` | Best window this much (or more) BELOW the whole frame -&gt; no window keeps the subject -&gt; blurred fit. |
+| `CROP_TIE_MARGIN` | `0.03` | `0.03` | Leave the salient / centre window only if another window scores more than this above it. |
+| `TARGET_LUMA` | `110.0` | `110` | Brightness / colour normalisation: target mean luma (0-255), max brightness shift, target saturation. (Measured on real Pixabay clips in my first real run: YAVG 102-107, SATAVG 15-17.) |
+| `MAX_BRIGHTNESS_SHIFT` | `0.12` | `0.12` | Brightness / colour normalisation: target mean luma (0-255), max brightness shift, target saturation. (Measured on real Pixabay clips in my first real run: YAVG 102-107, SATAVG 15-17.) |
+| `TARGET_SATURATION` | `18.0` | `18` | Brightness / colour normalisation: target mean luma (0-255), max brightness shift, target saturation. (Measured on real Pixabay clips in my first real run: YAVG 102-107, SATAVG 15-17.) |
+| **Quality checks** | | | |
+| `QA_BLACK_SECONDS` | `0.5` | `0.5` | Black frames / frozen picture longer than this (seconds) count as a problem. |
+| `QA_FREEZE_SECONDS` | `2.0` | `2.0` | Black frames / frozen picture longer than this (seconds) count as a problem. |
+| `QA_MAX_DRIFT_SECONDS` | `0.1` | `0.1` | Max allowed difference between video and narration length (seconds). |
+| `QA_RETRIES` | `1` | `1` | How many other clips to try for a scene whose segment fails QA. |
+
+## Error codes
+
+Every error has the same shape: `{"error": {"code", "message", "retryable", "details"}}`.
+"Request" = answered straight away with that HTTP status; "Job" = the job (or swap job) ends with
+`status: failed` and this `error`.
+
+| Code | Where (HTTP) | Meaning | Retryable |
+|---|---|---|---|
+| `INVALID_INPUT` | Request 422 (415 for a wrong Content-Type); Job | The request is not valid (fields, exactly-one-input rule, private URL, missing Idempotency-Key on a swap, clip already used, chosen clip not found / licence not allowed / shows a logo). | no |
+| `EMPTY_SCRIPT` | Request 422; Job | The script or a scene text is empty or only whitespace. | no |
+| `UNSUPPORTED_FILE_TYPE` | Request 415; Job | The file is not mp3 / wav / m4a audio (checked with ffprobe, not the extension). | no |
+| `FILE_TOO_LONG` | Request 422; Job | The narration is longer than `MAX_AUDIO_SECONDS` (10 min). | no |
+| `FILE_TOO_LARGE` | Request 413; Job | Upload larger than `MAX_UPLOAD_MB`, `audio_url` larger than `MAX_DOWNLOAD_MB`, or a swap clip larger than `MAX_CLIP_DOWNLOAD_MB`. | no |
+| `CORRUPTED_MEDIA` | Request 422; Job | The audio (or a chosen swap clip) cannot be decoded. | no |
+| `DOWNLOAD_FAILED` | Job | `audio_url` (or a swap `clip_url`) could not be downloaded. | yes for timeouts, network errors and HTTP 5xx; no for HTTP 4xx / empty files |
+| `NO_SPEECH_DETECTED` | Job | The audio is silent. | no |
+| `MUSIC_ONLY_AUDIO` | Job | There is sound but (almost) no recognisable speech. | no |
+| `UNSUPPORTED_ASPECT_RATIO` | Request 422 | `aspect_ratios` holds something other than 16:9, 9:16, 1:1. | no |
+| `JOB_NOT_FOUND` | Request 404 | No such job for this token (other clients' jobs look "not found"). | no |
+| `SCENE_NOT_FOUND` | Request 404 | Swap: `scene_index` is not a scene of this video. | no |
+| `JOB_NOT_READY` | Request 409 | Swap: the original job is still queued / running, or another swap of it is running (retryable); or it failed / has no swap cache (not retryable). | depends (see meaning) |
+| `NO_ALTERNATIVE_CLIP` | Job | Swap `next_best`: every candidate is already used in the video or fails the selection rule. | no |
+| `IDEMPOTENCY_KEY_REUSED` | Request 409 | The Idempotency-Key was used before with a different body. | no |
+| `UNAUTHORIZED` | Request 401 | Bearer token missing or wrong, or a download link with a bad signature / expired. | no |
+| `RATE_LIMITED` | Request 429 | More than `RATE_LIMIT_PER_MINUTE` requests this minute (see `Retry-After`). | yes |
+| `PROVIDER_UNAVAILABLE` | Request 503 (swap); Job | TTS / transcription model failed, or a footage source named in a swap is off or failed. (A footage source failing during a normal job is only a warning.) | yes when a model / source failed; no when the source is switched off |
+| `RENDER_FAILED` | Job | FFmpeg could not render a video. | yes |
+| `INTERNAL_ERROR` | Request 500; Job | Unexpected error (details are only in the logs). | yes |
+| `NOT_FOUND` | Request 404 | Unknown URL, or no such result file. | no |
+| `METHOD_NOT_ALLOWED` | Request 405 | Wrong HTTP method for this URL. | no |
+| `NOT_READY` | Request 503 (`/ready`) | Database or storage not reachable. | yes |
+
+## Project files
+
+- [app/](app/) - API, worker, job system, pipeline ([app/pipeline/](app/pipeline/)), clip swap
+  ([app/pipeline/swap.py](app/pipeline/swap.py)).
+- [openapi.yaml](openapi.yaml) - the API contract. [tools/batch_run.py](tools/batch_run.py) - batch runner.
+- [tests/](tests/) - unit, integration and e2e tests (mock adapters).
+- [SOURCES.md](SOURCES.md) - every library, model, API and media source with its licence.
+- [AI_USE.md](AI_USE.md) - how AI tools were used.

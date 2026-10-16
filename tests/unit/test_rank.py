@@ -174,7 +174,8 @@ def test_near_logo_candidates_are_penalised_but_still_usable(tmp_path, monkeypat
     get_settings.cache_clear()
     sel = select_clip(scenes[0], meanings[0], plans[0], context(tmp_path))
     assert sel.candidate.provider == "mock"
-    assert sel.logo_check["result"] == "penalised" and sel.logo_check["penalty"] == get_settings().LOGO_PENALTY
+    assert sel.logo_check["result"] == "penalised"
+    assert sel.logo_check["thumbnail"]["penalty"] == get_settings().LOGO_PENALTY
     assert sel.final_score < sel.clip_score + 0.05  # the penalty was taken off the order score
     assert "logo check penalised" in sel.reason
 
@@ -203,3 +204,27 @@ def test_logo_check_can_be_switched_off(tmp_path, monkeypatch):
     get_settings.cache_clear()
     sel = select_clip(scenes[0], meanings[0], plans[0], context(tmp_path))
     assert sel.candidate.provider == "mock" and sel.logo_check is None and "logo" not in sel.reason
+
+
+def test_logo_in_a_frame_of_the_downloaded_clip_rejects_it_even_with_a_clean_thumbnail(tmp_path, monkeypatch):
+    """Must-have 6: the thumbnail is clean, but frame 2 of the REAL clip shows a logo -> next candidate."""
+    scenes, meanings, plans = make(["Small shops open early every morning."])
+    best = select_clip(scenes[0], meanings[0], plans[0], context(tmp_path / "a"))
+    assert best.logo_check["thumbnail"]["result"] == "ok"
+    assert [f["result"] for f in best.logo_check["frames"]] == ["ok", "ok", "ok"]  # LOGO_FRAME_COUNT=3
+    assert [f["time"] for f in best.logo_check["frames"]] == [1.0, 3.0, 5.0]  # spread over the 6 s clip
+
+    monkeypatch.setattr(MockProvider, "frame_logo_scores", {best.candidate.id: [0.05, 0.40, 0.05]})
+    warnings = []
+    sel = select_clip(scenes[0], meanings[0], plans[0], context(tmp_path / "b", warnings))
+    assert sel.candidate.provider == "mock" and sel.candidate.id != best.candidate.id
+    assert f"{best.candidate.uid} rejected by the frame logo check (at 3.0 s" in sel.reason
+    assert any("shows a logo at 3.0 s of the downloaded clip" in w for w in warnings)
+    assert sel.logo_check["frames"] and all(f["result"] == "ok" for f in sel.logo_check["frames"])
+
+
+def test_when_every_downloaded_clip_shows_a_logo_the_scene_gets_a_generated_card(tmp_path, monkeypatch):
+    scenes, meanings, plans = make(["Small shops open early every morning."])
+    monkeypatch.setattr(MockProvider, "frame_logo_scores", {i: [0.9] for i in all_mock_ids(plans[0])})
+    sel = select_clip(scenes[0], meanings[0], plans[0], context(tmp_path))
+    assert sel.candidate.provider == "generated" and "rejected by the frame logo check" in sel.reason

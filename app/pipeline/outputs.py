@@ -125,7 +125,9 @@ def build_timeline(job_id: str, input_type: str, duration: float, language: str,
             "commercial_use": clip["commercial_use"], "watermark": clip["watermark"],
             "ai_generated": clip["ai_generated"], "generated": clip["generated"], "reason": clip["reason"],
             "relevance_score": clip["relevance_score"],
-            "clip_details": {k: clip[k] for k in ("uid", "kind", "title", "source_url", "final_score", "logo_check", "width",
+            # Thumbnail + downloaded-clip-frame logo test (None for generated cards / LOGO_CHECK=false).
+            "logo_check": clip["logo_check"],
+            "clip_details": {k: clip[k] for k in ("uid", "kind", "title", "source_url", "final_score", "width",
                                                    "height", "duration")},
             # The full answer + its fingerprint, so a re-render / clip swap reuses it instead of asking again.
             "understanding": meaning.to_dict(),

@@ -66,7 +66,8 @@ def find_existing_job(db: Session, client_id: str, idem_key: str | None, req_has
 
 
 def create_job(db: Session, *, job_id: str, client_id: str, idem_key: str | None, req_hash: str,
-               input_type: str, request_data: dict[str, Any], input_key: str | None = None) -> tuple[Job, bool]:
+               input_type: str, request_data: dict[str, Any], input_key: str | None = None,
+               parent_job_id: str | None = None) -> tuple[Job, bool]:
     """Insert a new queued job (and its idempotency key) in ONE transaction.
 
     Returns (job, created). created=False means another request with the same key won the
@@ -85,6 +86,7 @@ def create_job(db: Session, *, job_id: str, client_id: str, idem_key: str | None
         input_type=input_type,
         request_json=json.dumps(request_data),
         input_key=input_key,
+        parent_job_id=parent_job_id,
         callback_url=request_data.get("callback_url"),
         correlation_id=correlation_id_var.get(),
     )
@@ -185,6 +187,7 @@ def job_to_dict(job: Job, base_url: str) -> dict[str, Any]:
         "progress": job.progress,
         "stage": job.stage,
         "input_type": job.input_type,
+        "parent_job_id": job.parent_job_id,
         "warnings": job.warnings,
         "error": job.error,
         "result": result,

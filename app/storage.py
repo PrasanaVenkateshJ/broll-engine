@@ -178,3 +178,8 @@ def output_key(job_id: str, filename: str) -> str:
 
 def input_key(job_id: str, filename: str) -> str:
     return f"jobs/{job_id}/input/{filename}"
+
+
+def cache_key(job_id: str, filename: str) -> str:
+    """Swap cache of a finished job: narration, rendered segments, state.json."""
+    return f"jobs/{job_id}/cache/{filename}"

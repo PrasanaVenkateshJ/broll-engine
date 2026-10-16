@@ -209,6 +209,9 @@ class Settings(BaseSettings):
     LOGO_REJECT_MARGIN: float = -0.04
     LOGO_PENALTY_MARGIN: float = -0.06
     LOGO_PENALTY: float = 0.03
+    # After download, this many frames of the REAL clip (spread over its length) get the same
+    # logo test; one "rejected" frame rejects the clip. (Margins were calibrated on thumbnails.)
+    LOGO_FRAME_COUNT: int = 3
 
     # --- Clip fitting + look ---
     # A clip shorter than its scene may be slowed down by up to this fraction, then it loops.

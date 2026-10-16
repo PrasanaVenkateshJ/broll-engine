@@ -9,5 +9,7 @@ sqlalchemy==2.1.4
 httpx==0.28.1
 boto3==1.43.114
 pytest==9.1.1
+# Reads openapi.yaml in the contract test.
+pyyaml==6.0.3
 # Saliency (edge/motion energy) for cropping 9:16 from landscape clips.
 numpy==2.4.6

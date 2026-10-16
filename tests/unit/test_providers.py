@@ -5,7 +5,7 @@ import pytest
 
 from app.config import get_settings
 from app.pipeline.providers import active_providers, get_provider, provider_status
-from app.pipeline.providers.base import ProviderError
+from app.pipeline.providers.base import ClipNotUsable, ProviderError
 from app.pipeline.providers.wikimedia import check_licence
 from tests.fake_api import FakeAPI
 
@@ -174,3 +174,42 @@ def test_wikimedia_without_a_contact_in_the_user_agent_is_skipped(monkeypatch):
     assert provider_status("wikimedia") == "WIKIMEDIA_USER_AGENT has no contact (add your email or a URL)"
     setenv(monkeypatch, WIKIMEDIA_USER_AGENT="broll-engine/0.3 (https://github.com/me/broll-engine)")
     assert provider_status("wikimedia") is None
+
+
+# ---------- lookup(clip_id): used by the clip swap with provider + clip_id ----------
+
+def test_pixabay_video_lookup_by_id(monkeypatch):
+    server = FakeAPI(lambda m, p, q, b: (200, {"hits": [pixabay_video_hit(int(q["id"]), 3)] if q["id"] == "11" else []}))
+    try:
+        setenv(monkeypatch, PIXABAY_API_KEY="k", PIXABAY_VIDEO_API_URL=server.url + "/api/videos/")
+        found = get_provider("pixabay_video").lookup("11")
+        with pytest.raises(ClipNotUsable, match="not found"):
+            get_provider("pixabay_video").lookup("99")
+        with pytest.raises(ClipNotUsable, match="numbers"):
+            get_provider("pixabay_video").lookup("abc")
+    finally:
+        server.close()
+    assert found.uid == "pixabay_video:11" and found.licence_name == "Pixabay Content License"
+    assert server.calls[0]["query"]["id"] == "11" and "q" not in server.calls[0]["query"]
+
+
+def test_wikimedia_lookup_applies_the_same_licence_filter(monkeypatch):
+    pages = {"Good.jpg": [wiki_page(1, "CC0", "cc0")], "Shared.jpg": [wiki_page(2, "CC BY-SA 4.0", "cc-by-sa-4.0")]}
+    server = FakeAPI(lambda m, p, q, b: (200, {"query": {"pages": pages.get(q.get("titles", "").removeprefix("File:"),
+                                                                            [])}}))
+    try:
+        setenv(monkeypatch, WIKIMEDIA_API_URL=server.url + "/w/api.php", WIKIMEDIA_USER_AGENT="tests/1.0 (me)")
+        provider = get_provider("wikimedia")
+        assert provider.lookup("File:Good.jpg").licence_name == "CC0"
+        with pytest.raises(ClipNotUsable, match="share-alike"):
+            provider.lookup("Shared.jpg")
+        with pytest.raises(ClipNotUsable, match="not found"):
+            provider.lookup("Missing.jpg")
+    finally:
+        server.close()
+    assert server.calls[0]["query"]["titles"] == "File:Good.jpg"
+
+
+def test_sources_without_lookup_say_so():
+    with pytest.raises(ClipNotUsable):
+        get_provider("generated").lookup("card-001")

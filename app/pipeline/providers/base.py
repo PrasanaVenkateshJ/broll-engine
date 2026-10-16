@@ -29,6 +29,10 @@ class ProviderError(Exception):
     """The provider could not answer (it is down, slow, or said no)."""
 
 
+class ClipNotUsable(ProviderError):
+    """lookup(): the provider answered, but this clip does not exist or its licence is not allowed."""
+
+
 @dataclass
 class Candidate:
     provider: str
@@ -85,6 +89,10 @@ class Provider:
 
     def search(self, query: str, orientation: str, min_duration: float) -> list[Candidate]:
         raise NotImplementedError
+
+    def lookup(self, clip_id: str) -> Candidate:
+        """ONE clip by the provider's own id (clip swap with provider + clip_id). ProviderError if unknown."""
+        raise ClipNotUsable(f"{self.name} cannot look up a clip by its id")
 
     def fetch(self, candidate: Candidate, dest_dir: Path) -> Path:
         """Download the full clip / image. Raises net.DownloadError on any problem."""

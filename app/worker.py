@@ -1,6 +1,6 @@
 """The worker: a separate process that does the slow work.
 
-Loop: claim a queued job -> run the pipeline -> save the result -> send the callback.
+Loop: claim a queued job -> run the pipeline (or a clip swap) -> save the result -> send the callback.
 WORKER_CONCURRENCY threads run this loop side by side, so N jobs can run at once.
 
 Run it with:  python -m app.worker
@@ -18,6 +18,7 @@ from app.jobs import claim_next_job, finish_job, send_callback
 from app.logging_setup import correlation_id_var, job_id_var, setup_logging
 from app.models import Job
 from app.pipeline.runner import run_pipeline
+from app.pipeline.swap import run_swap
 
 log = logging.getLogger("app.worker")
 
@@ -33,7 +34,10 @@ def process_job(job_id: str) -> None:
             correlation_id_var.set(job.correlation_id)  # ...and the id of the request that created it
         log.info("job started")
         try:
-            files = run_pipeline(job_id, request, input_type, stored_input)
+            if input_type == "swap":
+                files = run_swap(job_id, request)
+            else:
+                files = run_pipeline(job_id, request, input_type, stored_input)
             finish_job(job_id, files=files)
         except AppError as e:
             finish_job(job_id, error=e)

@@ -13,7 +13,7 @@ import html
 import re
 
 from app.config import get_settings
-from app.pipeline.providers.base import Candidate, Provider, ProviderError, get_json
+from app.pipeline.providers.base import Candidate, ClipNotUsable, Provider, ProviderError, get_json
 
 METADATA_FIELDS = ("LicenseShortName|License|LicenseUrl|Artist|Credit|ImageDescription|ObjectName|Categories|"
                    "Restrictions")
@@ -117,3 +117,22 @@ class WikimediaProvider(Provider):
             raise ProviderError(f"API error {data['error'].get('code', '?')}")
         candidates, _rejected = parse_pages(data, query)
         return candidates
+
+    def lookup(self, clip_id):
+        """clip_id = the page id (digits) or the file name ("Data_center.jpg" / "File:Data_center.jpg").
+        The SAME licence filter as search: a CC BY-SA / NC / ND / unknown file is refused."""
+        s = get_settings()
+        params = {"action": "query", "format": "json", "formatversion": "2", "prop": "imageinfo",
+                  "iiprop": "url|size|mime|extmetadata", "iiurlwidth": str(PREVIEW_WIDTH),
+                  "iiextmetadatafilter": METADATA_FIELDS}
+        if clip_id.isdigit():
+            params["pageids"] = clip_id
+        else:
+            params["titles"] = clip_id if clip_id.startswith("File:") else f"File:{clip_id}"
+        data = get_json(s.WIKIMEDIA_API_URL, params, headers=self.download_headers())
+        if "error" in data:
+            raise ProviderError(f"API error {data['error'].get('code', '?')}")
+        candidates, rejected = parse_pages(data, f"wikimedia file {clip_id}")
+        if candidates:
+            return candidates[0]
+        raise ClipNotUsable(rejected[0] if rejected else f"Wikimedia file {clip_id} not found (or not a photo)")

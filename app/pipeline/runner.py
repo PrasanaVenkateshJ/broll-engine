@@ -1,11 +1,16 @@
 """The whole pipeline for one job, stage by stage. The worker calls run_pipeline().
 
 intake -> (tts) -> transcribe -> scenes + captions -> understand + safety -> footage
-       -> render (segments + QA, then one video per ratio) -> upload
+       -> render (segments + QA, then one video per ratio) -> upload -> save the swap cache
+
+The swap cache (jobs/<job_id>/cache/ in storage) keeps the narration, every rendered segment and
+state.json (scenes, captions, understanding, chosen clips). A later clip swap (swap.py) reuses
+all of it and re-renders only ONE scene.
 
 Each stage updates the job's progress (0-100) and stage name, and its time is recorded
 for manifest.json. Everything happens in WORK_DIR/<job_id>, which is deleted at the end.
 """
+import json
 import shutil
 import time
 from contextlib import contextmanager
@@ -27,7 +32,7 @@ from app.pipeline.scenes import scenes_from_list, split_into_scenes
 from app.pipeline.transcribe import check_sound, check_speech, get_transcriber
 from app.pipeline.tts import get_tts
 from app.pipeline.understand import understand_scenes
-from app.storage import get_storage, output_key
+from app.storage import cache_key, get_storage, output_key
 
 
 class Run:
@@ -107,6 +112,7 @@ def run_pipeline(job_id: str, request: dict[str, Any], input_type: str, input_ke
     work.mkdir(parents=True, exist_ok=True)
     run = Run(job_id, work)
     voice = request.get("voice") or "en-US-female"
+    started = time.perf_counter()
     try:
         # 1. Get the narration as a 48 kHz mono WAV.
         item_durations = None
@@ -192,19 +198,57 @@ def run_pipeline(job_id: str, request: dict[str, Any], input_type: str, input_ke
                                       plans, selections, segments, videos), work / "timeline.json")
             write_json(_manifest(run, request, input_type, audio, sound, transcript, selections, videos,
                                  qa_report), work / "manifest.json")
+            # Stopwatch for the swap comparison: job start -> every output file written (upload excluded,
+            # the same point swap.py measures at).
+            full_seconds = round(time.perf_counter() - started, 3)
             files = [v["file"] for v in videos] + ["captions.srt", "timeline.json", "manifest.json"]
             storage = get_storage()
             for name in files:
                 storage.put_file(output_key(job_id, name), work / name)
+        with run.stage("cache", 97):
+            try:  # the videos are already saved: a cache problem only means "no clip swap later"
+                save_swap_cache(job_id, work, request, input_type, audio.duration, transcript.language, scenes, cues,
+                                meanings, plans, selections, segments, ctx.used, run.timings, full_seconds)
+            except Exception as e:
+                run.warn(f"Could not save the clip-swap cache ({type(e).__name__}); swapping a clip will not work "
+                         "for this job")
         return files
     finally:
         if not s.KEEP_WORK_FILES:
             shutil.rmtree(work, ignore_errors=True)
 
 
-def _render_segments(run: Run, scenes, cues, ratios, selections, meanings, plans, ctx, burn_captions) -> dict:
+def save_swap_cache(job_id, work, request, input_type, duration, language, scenes, cues, meanings, plans, selections,
+                    segments, used, timings, full_seconds) -> None:
+    """Upload what a later clip swap needs: narration, every segment file, and state.json."""
+    storage = get_storage()
+    storage.put_file(cache_key(job_id, "narration.wav"), work / "narration.wav")
+    for scene_segments in segments.values():
+        for ratio, facts in scene_segments.items():
+            folder = f"render_{ratio_slug(ratio)}"
+            storage.put_file(cache_key(job_id, f"{folder}/{facts['file']}"), work / folder / facts["file"])
+    state = {
+        "version": 1, "root_job_id": job_id, "latest_job_id": job_id, "input_type": input_type,
+        "aspect_ratios": request.get("aspect_ratios") or ["16:9"], "captions": request.get("captions", True),
+        "duration": duration, "language": language,
+        "scenes": [sc.to_dict() for sc in scenes],
+        "cues": [{"start": c.start, "end": c.end, "lines": c.lines, "scene_index": c.scene_index} for c in cues],
+        "meanings": [m.to_dict() for m in meanings],
+        "plans": [p.to_dict() for p in plans],
+        "selections": [sel.to_state() for sel in selections],
+        "segments": {str(k): v for k, v in segments.items()},
+        "used": sorted(used),  # every clip ever chosen (or rejected after download) in this video
+        "full_render": {"seconds": full_seconds, "timings_seconds": dict(timings)},
+        "swaps": [],
+    }
+    storage.put_bytes(cache_key(job_id, "state.json"), json.dumps(state, ensure_ascii=False).encode("utf-8"))
+
+
+def _render_segments(run: Run, scenes, cues, ratios, selections, meanings, plans, ctx, burn_captions,
+                     retry_with_next: bool = True) -> dict:
     """Render each scene for every ratio and check it. A segment that fails QA gets another clip
     (up to QA_RETRIES times); if it still fails, we keep it and add a warning.
+    retry_with_next=False (a clip the user chose in a swap): never replace it, only warn.
 
     Returns {scene index: {ratio: facts about the segment}} and updates `selections` in place.
     """
@@ -236,7 +280,7 @@ def _render_segments(run: Run, scenes, cues, ratios, selections, meanings, plans
                 problems.append(f"could not be rendered ({e})")
             if not problems:
                 break
-            if selection.candidate.generated or retries >= s.QA_RETRIES:
+            if selection.candidate.generated or retries >= s.QA_RETRIES or not retry_with_next:
                 if len(rendered) < len(ratios):  # some ratio has no segment at all
                     raise render_failed(ratios[0], media.MediaError("; ".join(problems)))
                 run.warn(f"Scene {scene.index}: quality check found {'; '.join(problems)} "
@@ -247,7 +291,8 @@ def _render_segments(run: Run, scenes, cues, ratios, selections, meanings, plans
                      f"({problems[0]}); trying another clip")
             selections[i] = select_clip(scene, meanings[i], plans[i], ctx)  # the failed clip is in ctx.used
         segments[scene.index] = rendered
-        set_progress(run.job_id, 70 + round(20 * (i + 1) / len(scenes)), "render")
+        if retry_with_next:  # a swap reports its own progress
+            set_progress(run.job_id, 70 + round(20 * (i + 1) / len(scenes)), "render")
     return segments
 
 

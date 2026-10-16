@@ -48,7 +48,7 @@ def test_script_job_makes_correct_videos_srt_and_timeline(client, worker, tmp_pa
         assert sc["understanding"]["queries"] and len(sc["understanding"]["fingerprint"]) == 16
         if not sc["generated"]:
             assert sc["segments"]["9:16"]["crop"]["method"] == "saliency"  # mock scorer: no CLIP
-            assert sc["clip_details"]["logo_check"]["result"] == "ok"
+            assert sc["logo_check"]["result"] == "ok" and len(sc["logo_check"]["frames"]) == 3
 
     for name, (w, h) in {"video_16x9.mp4": (1920, 1080), "video_9x16.mp4": (1080, 1920)}.items():
         info = media.probe(download(client, final, name, tmp_path))
@@ -77,6 +77,26 @@ def test_scene_list_job_one_scene_per_item_with_hints(client, worker, tmp_path):
     assert [s["text"] for s in scenes] == [i["text"] for i in items]
     assert [s["visual_hint"] for s in scenes] == ["coins in a glass jar", None, None]
     assert all(a["end"] == b["start"] for a, b in zip(scenes, scenes[1:]))
+    # The hint steers the search: it is the first query AND the query the chosen clip was found with.
+    assert scenes[0]["queries"][0] == "coins in a glass jar" and scenes[0]["query"] == "coins in a glass jar"
+    assert scenes[1]["queries"][0] != "coins in a glass jar"
+
+
+@pytest.mark.parametrize("understander", ["rules", "mock"])
+def test_visual_hint_picks_footage_the_text_alone_would_not(client, worker, tmp_path, monkeypatch, understander):
+    """Same scene text twice: without a hint the clip comes from the text's own queries; with the hint
+    "lighthouse at night" (nothing in the text says so) the chosen clip is a lighthouse search result."""
+    monkeypatch.setenv("UNDERSTAND_PROVIDER", understander)
+    get_settings.cache_clear()
+    items = [{"text": "Our team keeps working through every storm."},
+             {"text": "Our team keeps working through every storm.", "visual_hint": "lighthouse at night"}]
+    resp = client.post(URL, json={"scenes": items, "aspect_ratios": ["16:9"], "captions": False}, headers=AUTH)
+    final, _ = wait_for_job(client, resp.json()["job_id"])
+    assert final["status"] == "succeeded", final["error"]
+    plain, hinted = json.loads(download(client, final, "timeline.json", tmp_path).read_text(encoding="utf-8"))["scenes"]
+    assert "lighthouse" not in " ".join(plain["queries"]) and plain["query"] != "lighthouse at night"
+    assert hinted["queries"][0] == "lighthouse at night" and hinted["query"] == "lighthouse at night"
+    assert hinted["provider"] == "mock" and hinted["clip_id"] != plain["clip_id"]
 
 
 def test_audio_url_job_downloads_and_succeeds(client, worker):

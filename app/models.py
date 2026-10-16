@@ -32,7 +32,9 @@ class Job(Base):
     status: Mapped[str] = mapped_column(String(16), default=JobStatus.QUEUED, index=True)
     progress: Mapped[int] = mapped_column(Integer, default=0)
     stage: Mapped[str] = mapped_column(String(32), default="queued")
-    input_type: Mapped[str] = mapped_column(String(16))  # audio_url | upload | script | scenes
+    input_type: Mapped[str] = mapped_column(String(16))  # audio_url | upload | script | scenes | swap
+    # Clip swap jobs only: the ORIGINAL B-roll job whose video they change (None for normal jobs).
+    parent_job_id: Mapped[str | None] = mapped_column(String(32), nullable=True, index=True)
     request_json: Mapped[str] = mapped_column(Text)  # the validated request
     input_key: Mapped[str | None] = mapped_column(String(255), nullable=True)  # storage key of an upload
     callback_url: Mapped[str | None] = mapped_column(Text, nullable=True)

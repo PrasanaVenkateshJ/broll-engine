@@ -79,6 +79,7 @@ def test_env(tmp_path, monkeypatch):
         "LOGO_REJECT_MARGIN": "-0.04",
         "LOGO_PENALTY_MARGIN": "-0.06",
         "LOGO_PENALTY": "0.03",
+        "LOGO_FRAME_COUNT": "3",
         "CROP_SAMPLE_FRAMES": "3",
         "CROP_BLUR_MARGIN": "0.02",
         "CROP_TIE_MARGIN": "0.03",
@@ -94,6 +95,7 @@ def test_env(tmp_path, monkeypatch):
     monkeypatch.setattr(MockProvider, "corrupt_ids", set())
     monkeypatch.setattr(MockProvider, "clip_seconds", 6.0)
     monkeypatch.setattr(MockProvider, "logo_scores", {})
+    monkeypatch.setattr(MockProvider, "frame_logo_scores", {})
     _reset_singletons()
     init_db()
     yield

@@ -1,0 +1,612 @@
+openapi: 3.1.0
+info:
+  title: IncuBrix B-roll Engine
+  version: 0.2.0
+  summary: Narration in, matching B-roll videos out (16:9, 9:16, 1:1) with captions, timeline and manifest.
+  description: |
+    Slow work runs as a background job: every POST answers **202** with a `job_id`; poll
+    `GET /api/v1/jobs/{job_id}` until `status` is `succeeded` or `failed`.
+
+    - **Auth**: every `/api/v1` route needs `Authorization: Bearer <token>` (tokens from `API_TOKENS`),
+      except the signed file download link, whose HMAC signature is the permission.
+    - **Idempotency**: every POST accepts `Idempotency-Key`. Same key + same body -> the same job (header
+      `Idempotent-Replayed: true`); same key + different body -> 409 `IDEMPOTENCY_KEY_REUSED`.
+      The clip swap REQUIRES the header.
+    - **Correlation id**: send `X-Correlation-Id` (or one is generated); it is echoed on every response
+      and written into every log line of the request and of the job.
+    - **Errors** always use the `Error` schema; `code` is one of the listed UPPER_SNAKE_CASE codes.
+    - **Callbacks**: with `callback_url`, the finished job is POSTed there, signed with
+      `X-IncuBrix-Signature` = hex HMAC-SHA256(raw body, `CALLBACK_SECRET`).
+
+    FastAPI's own interactive docs (`/docs`, `/redoc`, `/openapi.json`) are also served; this file is
+    the hand-written contract and `tests/unit/test_openapi_contract.py` keeps it equal to the app.
+servers:
+  - url: http://localhost:8000
+    description: Local (docker compose or the Windows venv)
+tags:
+  - name: health
+  - name: jobs
+
+paths:
+  /health:
+    get:
+      tags: [health]
+      operationId: health
+      summary: The process is alive (checks nothing else).
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/CorrelationId'
+      responses:
+        '200':
+          description: Alive.
+          headers:
+            X-Correlation-Id: {$ref: '#/components/headers/X-Correlation-Id'}
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [status]
+                properties:
+                  status: {type: string, const: ok}
+
+  /ready:
+    get:
+      tags: [health]
+      operationId: ready
+      summary: Ready to take work = the database AND the storage backend (MinIO / local folder) answer.
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/CorrelationId'
+      responses:
+        '200':
+          description: Ready.
+          headers:
+            X-Correlation-Id: {$ref: '#/components/headers/X-Correlation-Id'}
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [status, checks]
+                properties:
+                  status: {type: string, const: ready}
+                  checks: {$ref: '#/components/schemas/ReadyChecks'}
+        '503':
+          description: '`NOT_READY` - details hold the same checks, showing which part failed.'
+          headers:
+            X-Correlation-Id: {$ref: '#/components/headers/X-Correlation-Id'}
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Error'}
+
+  /api/v1/broll/jobs:
+    post:
+      tags: [jobs]
+      operationId: createBrollJob
+      summary: Start a B-roll job (JSON with audio_url | script | scenes, OR a multipart audio upload).
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+        - $ref: '#/components/parameters/CorrelationId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/JobCreate'}
+            examples:
+              script:
+                value: {script: "Saving money is not about earning more. It is about spending wisely.",
+                        aspect_ratios: ["16:9", "9:16"]}
+              scenes:
+                value: {scenes: [{text: "Money grows when you save a little every week.",
+                                  visual_hint: "coins in a glass jar"}, {text: "Small habits add up."}]}
+              audio_url:
+                value: {audio_url: "https://example.com/voice.mp3", aspect_ratios: ["1:1"], captions: false}
+          multipart/form-data:
+            schema:
+              type: object
+              required: [audio]
+              properties:
+                audio:
+                  type: string
+                  contentMediaType: application/octet-stream
+                  description: The voiceover (mp3, wav or m4a; ALLOWED_AUDIO_EXTENSIONS), at most MAX_UPLOAD_MB.
+                options:
+                  type: string
+                  contentMediaType: application/json
+                  description: JSON text of `JobOptions` (everything except the input itself).
+      responses:
+        '202':
+          $ref: '#/components/responses/Accepted'
+        '401': {$ref: '#/components/responses/Unauthorized'}
+        '409':
+          description: '`IDEMPOTENCY_KEY_REUSED` - this key was used before with a different body.'
+          headers:
+            X-Correlation-Id: {$ref: '#/components/headers/X-Correlation-Id'}
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Error'}
+        '413':
+          description: '`FILE_TOO_LARGE` - the upload is larger than MAX_UPLOAD_MB.'
+          headers:
+            X-Correlation-Id: {$ref: '#/components/headers/X-Correlation-Id'}
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Error'}
+        '415':
+          description: >-
+            `UNSUPPORTED_FILE_TYPE` (not an audio file, checked with ffprobe) or `INVALID_INPUT`
+            (Content-Type is not JSON / multipart).
+          headers:
+            X-Correlation-Id: {$ref: '#/components/headers/X-Correlation-Id'}
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Error'}
+        '422':
+          description: >-
+            `INVALID_INPUT`, `EMPTY_SCRIPT`, `UNSUPPORTED_ASPECT_RATIO`, `CORRUPTED_MEDIA` or
+            `FILE_TOO_LONG` (checked before the job is queued).
+          headers:
+            X-Correlation-Id: {$ref: '#/components/headers/X-Correlation-Id'}
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Error'}
+        '429': {$ref: '#/components/responses/RateLimited'}
+        '500': {$ref: '#/components/responses/InternalError'}
+      callbacks:
+        jobFinished:
+          '{$request.body#/callback_url}':
+            post:
+              summary: Sent once when the job ends (succeeded or failed); retried CALLBACK_MAX_RETRIES times.
+              parameters:
+                - name: X-IncuBrix-Signature
+                  in: header
+                  required: true
+                  description: hex(HMAC-SHA256(raw request body, CALLBACK_SECRET)). Verify it before trusting the body.
+                  schema: {type: string, pattern: '^[0-9a-f]{64}$'}
+              requestBody:
+                required: true
+                content:
+                  application/json:
+                    schema: {$ref: '#/components/schemas/CallbackPayload'}
+              responses:
+                '200':
+                  description: Any 2xx answer counts as delivered.
+
+  /api/v1/broll/jobs/{job_id}/scenes/{scene_index}/swap:
+    post:
+      tags: [jobs]
+      operationId: swapSceneClip
+      summary: Give ONE scene a different clip; only that scene's segments are re-rendered.
+      description: |
+        Runs as a background job (202 + job_id). The new job's result files are the updated videos,
+        `captions.srt`, `timeline.json` and `manifest.json` (with a `swaps` history: what changed, why,
+        and the swap time next to the original full render time). `job_id` may be the original job or
+        any of its swap jobs: the swap always applies to the LATEST version of that video.
+        Job-level failures (seen in `GET /api/v1/jobs/{id}` -> `error`): `NO_ALTERNATIVE_CLIP`,
+        `INVALID_INPUT` (clip not found, licence not allowed, logo found in the clip's frames),
+        `CORRUPTED_MEDIA`, `DOWNLOAD_FAILED`, `FILE_TOO_LARGE`, `PROVIDER_UNAVAILABLE`, `RENDER_FAILED`.
+      parameters:
+        - name: job_id
+          in: path
+          required: true
+          schema: {type: string}
+        - name: scene_index
+          in: path
+          required: true
+          description: 0-based `index` of the scene in timeline.json.
+          schema: {type: integer}
+        - $ref: '#/components/parameters/IdempotencyKeyRequired'
+        - $ref: '#/components/parameters/CorrelationId'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/SwapRequest'}
+            examples:
+              next_best: {value: {mode: next_best}}
+              provider_clip: {value: {provider: pixabay_video, clip_id: "123456"}}
+              pixabay_url: {value: {clip_url: "https://cdn.pixabay.com/video/2024/01/02/123456-789_medium.mp4"}}
+              user_supplied:
+                value: {clip_url: "https://example.com/my-clip.mp4", user_supplied: true, licence: CC0,
+                        licence_url: "https://creativecommons.org/publicdomain/zero/1.0/", attribution: Me,
+                        commercial_use: true}
+      responses:
+        '202':
+          $ref: '#/components/responses/Accepted'
+        '401': {$ref: '#/components/responses/Unauthorized'}
+        '404':
+          description: '`JOB_NOT_FOUND` (unknown, or another client''s job) or `SCENE_NOT_FOUND`.'
+          headers:
+            X-Correlation-Id: {$ref: '#/components/headers/X-Correlation-Id'}
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Error'}
+        '409':
+          description: >-
+            `JOB_NOT_READY` (the original job is queued / running / failed, has no swap cache, or another
+            swap of the same video is still running) or `IDEMPOTENCY_KEY_REUSED`.
+          headers:
+            X-Correlation-Id: {$ref: '#/components/headers/X-Correlation-Id'}
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Error'}
+        '422':
+          description: >-
+            `INVALID_INPUT`: missing Idempotency-Key, bad body, private clip_url, a host that is not
+            Pixabay / Wikimedia without user_supplied, unknown provider, or a clip already used in this
+            video (details.reason = clip_already_used).
+          headers:
+            X-Correlation-Id: {$ref: '#/components/headers/X-Correlation-Id'}
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Error'}
+        '429': {$ref: '#/components/responses/RateLimited'}
+        '500': {$ref: '#/components/responses/InternalError'}
+        '503':
+          description: '`PROVIDER_UNAVAILABLE` - the named footage source is switched off or has no API key.'
+          headers:
+            X-Correlation-Id: {$ref: '#/components/headers/X-Correlation-Id'}
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Error'}
+
+  /api/v1/jobs/{job_id}:
+    get:
+      tags: [jobs]
+      operationId: getJob
+      summary: Status, progress 0-100, stage, warnings, error and (when succeeded) signed file links.
+      parameters:
+        - name: job_id
+          in: path
+          required: true
+          schema: {type: string}
+        - $ref: '#/components/parameters/CorrelationId'
+      responses:
+        '200':
+          description: The job.
+          headers:
+            X-Correlation-Id: {$ref: '#/components/headers/X-Correlation-Id'}
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Job'}
+        '401': {$ref: '#/components/responses/Unauthorized'}
+        '404':
+          description: '`JOB_NOT_FOUND`.'
+          headers:
+            X-Correlation-Id: {$ref: '#/components/headers/X-Correlation-Id'}
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Error'}
+        '429': {$ref: '#/components/responses/RateLimited'}
+
+  /api/v1/jobs/{job_id}/files/{filename}:
+    get:
+      tags: [jobs]
+      operationId: downloadFile
+      summary: Stream one output file. Use the full link from the job's `result.files` (it is signed).
+      security: []
+      parameters:
+        - name: job_id
+          in: path
+          required: true
+          schema: {type: string}
+        - name: filename
+          in: path
+          required: true
+          schema: {type: string, pattern: '^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$'}
+        - name: expires
+          in: query
+          required: true
+          description: Unix time when the link stops working (FILE_LINK_TTL_SECONDS after it was made).
+          schema: {type: integer}
+        - name: sig
+          in: query
+          required: true
+          description: hex HMAC-SHA256 of job_id, filename and expires, with FILE_LINK_SECRET.
+          schema: {type: string, maxLength: 128}
+        - $ref: '#/components/parameters/CorrelationId'
+      responses:
+        '200':
+          description: The file (video/mp4, application/json or application/x-subrip).
+          headers:
+            X-Correlation-Id: {$ref: '#/components/headers/X-Correlation-Id'}
+            Content-Length: {schema: {type: integer}}
+          content:
+            application/octet-stream:
+              schema: {type: string, contentMediaType: application/octet-stream}
+        '401':
+          description: '`UNAUTHORIZED` - the signature is wrong or the link has expired.'
+          headers:
+            X-Correlation-Id: {$ref: '#/components/headers/X-Correlation-Id'}
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Error'}
+        '404':
+          description: '`JOB_NOT_FOUND` or `NOT_FOUND` (no such file for this job).'
+          headers:
+            X-Correlation-Id: {$ref: '#/components/headers/X-Correlation-Id'}
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Error'}
+        '422':
+          description: '`INVALID_INPUT` - expires or sig is missing.'
+          headers:
+            X-Correlation-Id: {$ref: '#/components/headers/X-Correlation-Id'}
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Error'}
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authorization: Bearer <token>. Tokens come from API_TOKENS (empty = auth off, local dev only).'
+
+  parameters:
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: false
+      description: Same key + same body -> same job, no duplicate work. Same key + different body -> 409.
+      schema: {type: string, maxLength: 255}
+    IdempotencyKeyRequired:
+      name: Idempotency-Key
+      in: header
+      required: true
+      description: Required for a clip swap. Same key + same body -> same swap job; different body -> 409.
+      schema: {type: string, maxLength: 255}
+    CorrelationId:
+      name: X-Correlation-Id
+      in: header
+      required: false
+      description: 'Your request id (letters, digits and . _ : -, up to 128 characters). Generated if missing or invalid.'
+      schema: {type: string, maxLength: 128, pattern: '^[A-Za-z0-9._:-]{1,128}$'}
+
+  headers:
+    X-Correlation-Id:
+      description: The request's correlation id (yours, or a generated one).
+      schema: {type: string}
+
+  responses:
+    Accepted:
+      description: The job was created (or, with the same Idempotency-Key and body, found again).
+      headers:
+        X-Correlation-Id: {$ref: '#/components/headers/X-Correlation-Id'}
+        Location:
+          description: URL of GET /api/v1/jobs/{job_id}.
+          schema: {type: string}
+        Idempotent-Replayed:
+          description: '"true" when this is the job of an earlier request with the same key and body.'
+          schema: {type: string, const: 'true'}
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/JobAccepted'}
+    Unauthorized:
+      description: '`UNAUTHORIZED` - the bearer token is missing or wrong.'
+      headers:
+        X-Correlation-Id: {$ref: '#/components/headers/X-Correlation-Id'}
+        WWW-Authenticate: {schema: {type: string, const: Bearer}}
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/Error'}
+    RateLimited:
+      description: '`RATE_LIMITED` - more than RATE_LIMIT_PER_MINUTE requests this minute for this token.'
+      headers:
+        X-Correlation-Id: {$ref: '#/components/headers/X-Correlation-Id'}
+        Retry-After:
+          description: Seconds to wait.
+          schema: {type: integer}
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/Error'}
+    InternalError:
+      description: '`INTERNAL_ERROR` - unexpected; retryable.'
+      headers:
+        X-Correlation-Id: {$ref: '#/components/headers/X-Correlation-Id'}
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/Error'}
+
+  schemas:
+    ErrorCode:
+      type: string
+      description: Every error code the API can return (see the README table for meaning + retryable).
+      enum:
+        - INVALID_INPUT
+        - EMPTY_SCRIPT
+        - UNSUPPORTED_FILE_TYPE
+        - FILE_TOO_LONG
+        - FILE_TOO_LARGE
+        - CORRUPTED_MEDIA
+        - DOWNLOAD_FAILED
+        - NO_SPEECH_DETECTED
+        - MUSIC_ONLY_AUDIO
+        - UNSUPPORTED_ASPECT_RATIO
+        - JOB_NOT_FOUND
+        - SCENE_NOT_FOUND
+        - JOB_NOT_READY
+        - NO_ALTERNATIVE_CLIP
+        - IDEMPOTENCY_KEY_REUSED
+        - UNAUTHORIZED
+        - RATE_LIMITED
+        - PROVIDER_UNAVAILABLE
+        - RENDER_FAILED
+        - INTERNAL_ERROR
+        - NOT_FOUND
+        - METHOD_NOT_ALLOWED
+        - NOT_READY
+
+    ErrorObject:
+      type: object
+      required: [code, message, retryable, details]
+      additionalProperties: false
+      properties:
+        code: {$ref: '#/components/schemas/ErrorCode'}
+        message: {type: string}
+        retryable: {type: boolean, description: true = trying the same request again later may work.}
+        details: {type: object, description: Extra facts, e.g. the invalid fields or limits.}
+
+    Error:
+      type: object
+      required: [error]
+      additionalProperties: false
+      properties:
+        error: {$ref: '#/components/schemas/ErrorObject'}
+
+    ReadyChecks:
+      type: object
+      required: [database, storage, storage_backend]
+      properties:
+        database: {type: string, description: '"ok" or "error: <type>"'}
+        storage: {type: string, description: '"ok" or "error: <type>"'}
+        storage_backend: {type: string, enum: [local, s3]}
+
+    AspectRatio:
+      type: string
+      enum: ['16:9', '9:16', '1:1']
+
+    SceneIn:
+      type: object
+      required: [text]
+      additionalProperties: false
+      properties:
+        text: {type: string, minLength: 1, maxLength: 2000}
+        visual_hint:
+          type: [string, 'null']
+          maxLength: 500
+          description: What to show. Always used as the scene's FIRST search query.
+
+    JobOptions:
+      type: object
+      additionalProperties: false
+      description: Options shared by JSON jobs and uploads (the multipart `options` field).
+      properties:
+        voice:
+          type: string
+          maxLength: 64
+          default: en-US-female
+          description: TTS voice name from TTS_VOICE_MAP (script / scenes input only).
+        aspect_ratios:
+          type: array
+          minItems: 1
+          items: {$ref: '#/components/schemas/AspectRatio'}
+          default: ['16:9', '9:16', '1:1']
+        style: {type: [string, 'null'], maxLength: 200}
+        avoid:
+          type: array
+          maxItems: 50
+          items: {type: string}
+          default: []
+          description: Things never to show (e.g. "people's faces", "alcohol"); used as negative filters.
+        captions: {type: boolean, default: true, description: Burn captions into the videos.}
+        callback_url: {type: [string, 'null'], format: uri, description: POSTed (signed) when the job ends.}
+
+    JobCreate:
+      description: JSON body of POST /api/v1/broll/jobs. Exactly ONE of audio_url, script or scenes.
+      allOf:
+        - $ref: '#/components/schemas/JobOptions'
+        - type: object
+          properties:
+            audio_url: {type: [string, 'null'], format: uri, description: Public http(s) address of the voiceover.}
+            script: {type: [string, 'null'], maxLength: 20000, description: Text; the voice is made with TTS.}
+            scenes:
+              type: [array, 'null']
+              minItems: 1
+              maxItems: 200
+              items: {$ref: '#/components/schemas/SceneIn'}
+              description: IncuBrix scene list; one scene per item, timed from its own TTS audio.
+      unevaluatedProperties: false
+
+    SwapRequest:
+      type: object
+      additionalProperties: false
+      description: >-
+        Exactly one way to choose: mode next_best (also the default for an empty body), provider +
+        clip_id, or clip_url. A clip_url must be a Pixabay (pixabay.com, cdn.pixabay.com) or Wikimedia
+        (upload.wikimedia.org, commons.wikimedia.org) address - Wikimedia files must pass the CC0 / PD /
+        CC BY licence filter - or any public address with user_supplied=true and all licence fields.
+      properties:
+        mode: {type: [string, 'null'], enum: [next_best, null]}
+        provider:
+          type: [string, 'null']
+          maxLength: 32
+          description: pixabay_video | pixabay_image_motion | wikimedia | mock
+        clip_id: {type: [string, 'null'], minLength: 1, maxLength: 200}
+        clip_url: {type: [string, 'null'], format: uri}
+        user_supplied: {type: boolean, default: false}
+        licence: {type: [string, 'null'], minLength: 1, maxLength: 200}
+        licence_url: {type: [string, 'null'], format: uri}
+        attribution: {type: [string, 'null'], minLength: 1, maxLength: 500}
+        commercial_use: {type: [boolean, 'null'], description: Must be true for a user_supplied clip.}
+
+    JobAccepted:
+      type: object
+      required: [job_id, status, links]
+      properties:
+        job_id: {type: string}
+        status: {$ref: '#/components/schemas/JobStatus'}
+        links:
+          type: object
+          required: [self]
+          properties:
+            self: {type: string}
+            parent: {type: string, description: Clip swap only - the original job.}
+
+    JobStatus:
+      type: string
+      enum: [queued, running, succeeded, failed]
+
+    Job:
+      type: object
+      required: [job_id, status, progress, stage, input_type, parent_job_id, warnings, error, result, created_at,
+                 started_at, finished_at, links]
+      properties:
+        job_id: {type: string}
+        status: {$ref: '#/components/schemas/JobStatus'}
+        progress: {type: integer, minimum: 0, maximum: 100}
+        stage: {type: string, description: 'e.g. queued, intake, tts, transcribe, footage, render, upload, done'}
+        input_type: {type: string, enum: [audio_url, upload, script, scenes, swap]}
+        parent_job_id: {type: [string, 'null'], description: Clip swap jobs only - the original job.}
+        warnings: {type: array, items: {type: string}}
+        error:
+          oneOf:
+            - {$ref: '#/components/schemas/ErrorObject'}
+            - {type: 'null'}
+        result:
+          oneOf:
+            - type: object
+              required: [files]
+              properties:
+                files:
+                  type: object
+                  description: >-
+                    file name -> signed download link (video_16x9.mp4, video_9x16.mp4, video_1x1.mp4,
+                    captions.srt, timeline.json, manifest.json).
+                  additionalProperties: {type: string}
+            - {type: 'null'}
+        created_at: {type: [string, 'null'], format: date-time}
+        started_at: {type: [string, 'null'], format: date-time}
+        finished_at: {type: [string, 'null'], format: date-time}
+        links:
+          type: object
+          required: [self]
+          properties:
+            self: {type: string}
+
+    CallbackPayload:
+      type: object
+      required: [event, job_id, status, progress, error, warnings, job_url]
+      properties:
+        event: {type: string, const: job.finished}
+        job_id: {type: string}
+        status: {$ref: '#/components/schemas/JobStatus'}
+        progress: {type: integer}
+        error:
+          oneOf:
+            - {$ref: '#/components/schemas/ErrorObject'}
+            - {type: 'null'}
+        warnings: {type: array, items: {type: string}}
+        job_url: {type: string, description: GET it for fresh download links (links expire).}
+
+security:
+  - bearerAuth: []

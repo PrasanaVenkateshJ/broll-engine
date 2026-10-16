@@ -6,7 +6,7 @@ WAL mode + a busy timeout let them read and write at the same time safely.
 from collections.abc import Iterator
 from pathlib import Path
 
-from sqlalchemy import Engine, create_engine, event, text
+from sqlalchemy import Engine, create_engine, event, inspect, text
 from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
 
 from app.config import get_settings
@@ -60,11 +60,21 @@ def reset_engine() -> None:
     _session_factory = None
 
 
+# Columns added after the first release: (table, column, SQL type). create_all() only makes
+# NEW tables, so an existing database file gets these with ALTER TABLE (a tiny migration).
+ADDED_COLUMNS = [("jobs", "parent_job_id", "VARCHAR(32)")]
+
+
 def init_db() -> None:
-    """Create tables if they do not exist yet."""
+    """Create tables if they do not exist yet, and add newer columns to an older database."""
     from app import models  # noqa: F401  (import registers the tables on Base)
 
-    Base.metadata.create_all(get_engine())
+    engine = get_engine()
+    Base.metadata.create_all(engine)
+    with engine.begin() as conn:
+        for table, column, sql_type in ADDED_COLUMNS:
+            if column not in {c["name"] for c in inspect(conn).get_columns(table)}:
+                conn.execute(text(f"ALTER TABLE {table} ADD COLUMN {column} {sql_type}"))
 
 
 def new_session() -> Session:

@@ -10,6 +10,7 @@
 | httpx | 0.28.1 | HTTP client (callbacks, tests) | BSD-3-Clause |
 | boto3 | 1.43.114 | S3 / MinIO client | Apache-2.0 |
 | pytest | 9.1.1 | tests | MIT |
+| PyYAML | 6.0.3 | reads openapi.yaml in the contract test | MIT |
 | PyTorch (CPU) | 2.14.1 | model runtime (from Phase 3) | BSD-3-Clause |
 | torchvision (CPU) | 0.29.1 | image transforms used by open_clip (must match torch 2.14.1) | BSD-3-Clause |
 | faster-whisper | 1.2.1 | transcription (from Phase 4) | MIT |

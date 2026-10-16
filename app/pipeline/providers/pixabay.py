@@ -8,7 +8,7 @@ Licence: Pixabay Content License - commercial use allowed, no attribution requir
 watermark on files downloaded through the API. We still record the creator's name.
 """
 from app.config import get_settings
-from app.pipeline.providers.base import Candidate, Provider, ProviderError, get_json
+from app.pipeline.providers.base import Candidate, ClipNotUsable, Provider, ProviderError, get_json
 
 LICENCE_NAME = "Pixabay Content License"
 LICENCE_URL = "https://pixabay.com/service/license-summary/"
@@ -30,6 +30,20 @@ class PixabayVideoProvider(Provider):
         data = get_json(s.PIXABAY_VIDEO_API_URL, {
             "key": s.PIXABAY_API_KEY, "q": query[:100], "safesearch": "true", "video_type": "film",
             "per_page": max(3, min(200, s.PROVIDER_RESULTS_PER_QUERY)), "order": "popular"})
+        return self._candidates(data, query, min_duration)
+
+    def lookup(self, clip_id):
+        s = get_settings()
+        if not clip_id.isdigit():
+            raise ClipNotUsable(f"Pixabay ids are numbers, got '{clip_id}'")
+        found = self._candidates(get_json(s.PIXABAY_VIDEO_API_URL, {"key": s.PIXABAY_API_KEY, "id": clip_id}),
+                                 f"pixabay video {clip_id}", 0.0)
+        if not found:
+            raise ClipNotUsable(f"Pixabay video {clip_id} not found")
+        return found[0]
+
+    def _candidates(self, data: dict, query: str, min_duration: float) -> list[Candidate]:
+        s = get_settings()
         hits = data.get("hits")
         if not isinstance(hits, list):
             raise ProviderError("unexpected answer (no hits)")
@@ -66,6 +80,19 @@ class PixabayImageProvider(Provider):
             "key": s.PIXABAY_API_KEY, "q": query[:100], "safesearch": "true", "image_type": "photo",
             "orientation": {"landscape": "horizontal", "portrait": "vertical"}.get(orientation, "all"),
             "per_page": max(3, min(200, s.PROVIDER_RESULTS_PER_QUERY)), "order": "popular"})
+        return self._candidates(data, query)
+
+    def lookup(self, clip_id):
+        s = get_settings()
+        if not clip_id.isdigit():
+            raise ClipNotUsable(f"Pixabay ids are numbers, got '{clip_id}'")
+        found = self._candidates(get_json(s.PIXABAY_IMAGE_API_URL, {"key": s.PIXABAY_API_KEY, "id": clip_id}),
+                                 f"pixabay image {clip_id}")
+        if not found:
+            raise ClipNotUsable(f"Pixabay image {clip_id} not found")
+        return found[0]
+
+    def _candidates(self, data: dict, query: str) -> list[Candidate]:
         hits = data.get("hits")
         if not isinstance(hits, list):
             raise ProviderError("unexpected answer (no hits)")

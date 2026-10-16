@@ -59,3 +59,53 @@ class JobCreate(JobOptions):
         if self.script is not None:
             return "script"
         return "scenes"
+
+
+class SwapRequest(BaseModel):
+    """Body of POST /api/v1/broll/jobs/{job_id}/scenes/{scene_index}/swap. Exactly ONE way to choose:
+
+    {"mode": "next_best"}                               -> the next clip by the selection rule (also: empty body)
+    {"provider": "pixabay_video", "clip_id": "123"}     -> this clip from this footage source
+    {"clip_url": "https://cdn.pixabay.com/..."}         -> this file (Pixabay / Wikimedia address), or any
+       public address with "user_supplied": true + licence, licence_url, attribution, commercial_use: true
+    """
+
+    model_config = ConfigDict(extra="forbid")
+
+    mode: Literal["next_best"] | None = None
+    provider: str | None = Field(default=None, max_length=32)
+    clip_id: str | None = Field(default=None, min_length=1, max_length=200)
+    clip_url: HttpUrl | None = None
+    user_supplied: bool = False
+    licence: str | None = Field(default=None, min_length=1, max_length=200)
+    licence_url: HttpUrl | None = None
+    attribution: str | None = Field(default=None, min_length=1, max_length=500)
+    commercial_use: bool | None = None
+
+    @model_validator(mode="after")
+    def _exactly_one_choice(self):
+        if (self.provider is None) != (self.clip_id is None):
+            raise ValueError("provider and clip_id must be given together")
+        given = [name for name, on in (("mode", self.mode is not None), ("provider+clip_id", self.provider is not None),
+                                       ("clip_url", self.clip_url is not None)) if on]
+        if len(given) > 1:
+            raise ValueError(f"choose ONE of mode, provider+clip_id or clip_url; got {given}")
+        licence_fields = (self.licence, self.licence_url, self.attribution, self.commercial_use)
+        if self.user_supplied:
+            if self.clip_url is None:
+                raise ValueError("user_supplied needs clip_url")
+            if any(v is None for v in licence_fields):
+                raise ValueError("a user_supplied clip needs licence, licence_url, attribution and commercial_use")
+            if self.commercial_use is not True:
+                raise ValueError("a user_supplied clip must allow commercial use (commercial_use: true)")
+        elif any(v is not None for v in licence_fields):
+            raise ValueError("licence fields are only for user_supplied clips")
+        return self
+
+    @property
+    def choice(self) -> Literal["next_best", "provider_clip", "clip_url"]:
+        if self.provider is not None:
+            return "provider_clip"
+        if self.clip_url is not None:
+            return "clip_url"
+        return "next_best"
