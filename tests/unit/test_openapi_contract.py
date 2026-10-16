@@ -10,7 +10,7 @@ from fastapi.routing import APIRoute, iter_route_contexts
 
 from app.config import get_settings
 from app.errors import ErrorCode
-from app.jobs import callback_payload, job_to_dict
+from app.jobs import callback_payload, job_summary, job_to_dict
 from app.main import app
 from app.models import Job
 from app.schemas import JobCreate, JobOptions, SceneIn, SwapRequest
@@ -18,6 +18,8 @@ from app.security import require_client
 
 SPEC = yaml.safe_load((Path(__file__).resolve().parents[2] / "openapi.yaml").read_text(encoding="utf-8"))
 HTTP_METHODS = {"get", "post", "put", "patch", "delete"}
+# The B-roll Studio web page + its static files: a user interface, not part of the API contract.
+UI_ROUTES = {"/", "/studio/{filename}"}
 
 
 def resolve(node):
@@ -31,9 +33,9 @@ def resolve(node):
 
 
 def app_routes() -> dict[tuple[str, str], APIRoute]:
-    """(full path, method) -> route, for every route the app serves except FastAPI's own docs pages.
-    iter_route_contexts() also walks into included routers (the /api/v1 one) and gives full paths."""
-    docs = {app.openapi_url, app.docs_url, app.redoc_url, app.swagger_ui_oauth2_redirect_url}
+    """(full path, method) -> route, for every route the app serves except FastAPI's own docs pages and
+    the Studio UI. iter_route_contexts() also walks into included routers (the /api/v1 one) and gives full paths."""
+    docs = {app.openapi_url, app.docs_url, app.redoc_url, app.swagger_ui_oauth2_redirect_url} | UI_ROUTES
     out = {}
     for context in iter_route_contexts(app.routes):
         if context.path in docs:
@@ -57,6 +59,11 @@ def test_spec_is_openapi_3_1_with_the_app_version():
 
 def test_every_route_and_method_matches_exactly():
     assert set(app_routes()) == set(spec_operations())
+
+
+def test_ui_routes_are_hidden_from_fastapis_own_schema():
+    hidden = {c.path for c in iter_route_contexts(app.routes) if not c.route.include_in_schema}
+    assert UI_ROUTES <= hidden
 
 
 def test_all_api_routes_are_under_api_v1():
@@ -122,3 +129,12 @@ def test_job_and_callback_bodies_match_the_code():
     schema = SPEC["components"]["schemas"]["Job"]
     assert set(job_to_dict(job, "http://x")) == set(schema["properties"]) == set(schema["required"])
     assert set(callback_payload(job)) == set(SPEC["components"]["schemas"]["CallbackPayload"]["properties"])
+    summary = SPEC["components"]["schemas"]["JobSummary"]
+    assert set(job_summary(job)) == set(summary["properties"]) == set(summary["required"])
+
+
+def test_public_config_matches_the_code():
+    from app.main import public_config
+
+    schema = SPEC["components"]["schemas"]["PublicConfig"]
+    assert set(public_config()) == set(schema["properties"]) == set(schema["required"])

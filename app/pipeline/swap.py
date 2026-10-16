@@ -33,8 +33,8 @@ from app.pipeline import media, net
 from app.pipeline.outputs import Cue, build_timeline, rights_summary, write_json
 from app.pipeline.providers import Candidate, ClipNotUsable, ProviderError, get_provider, provider_status
 from app.pipeline.rank import Selection, SelectionContext, frame_logo_check, get_scorer, select_clip, verify_media
-from app.pipeline.render import orientation_of, ratio_slug
-from app.pipeline.runner import Run, _join_video, _render_segments
+from app.pipeline.render import orientation_of, ratio_slug, thumbnail_filename
+from app.pipeline.runner import Run, _join_video, _render_segments, make_thumbnails
 from app.pipeline.safety import SearchPlan
 from app.pipeline.scenes import Scene
 from app.pipeline.transcribe import Word
@@ -284,6 +284,7 @@ def run_swap(job_id: str, request: dict) -> list[str]:
         # 4. New timeline.json + manifest.json, then upload (captions.srt does not change).
         with run.stage("upload", 90):
             latest = state["latest_job_id"]
+            thumbnails = _thumbnails(work, latest, data.scenes, data.segments, ratios, index)
             storage.get_file(output_key(latest, "captions.srt"), work / "captions.srt")
             storage.get_file(output_key(latest, "manifest.json"), work / "previous_manifest.json")
             previous_manifest = json.loads((work / "previous_manifest.json").read_text(encoding="utf-8"))
@@ -291,12 +292,14 @@ def run_swap(job_id: str, request: dict) -> list[str]:
                                   segments_rerendered=len(ratios), segments_reused=(len(data.scenes) - 1) * len(ratios))
             history = state["swaps"] + [record]
             timeline = build_timeline(job_id, state["input_type"], state["duration"], state["language"], data.scenes,
-                                      data.meanings, data.plans, data.selections, data.segments, videos)
+                                      data.meanings, data.plans, data.selections, data.segments, videos,
+                                      thumbnails)
             timeline.update(root_job_id=root, version=len(history) + 1, swaps=history)
             write_json(timeline, work / "timeline.json")
             write_json(_manifest(previous_manifest, job_id, root, history, run, data.selections, videos, qa_report),
                        work / "manifest.json")
             files = [v["file"] for v in videos] + ["captions.srt", "timeline.json", "manifest.json"]
+            files += [name for name in thumbnails.values() if name]
             for name in files:
                 storage.put_file(output_key(job_id, name), work / name)
 
@@ -313,6 +316,22 @@ def run_swap(job_id: str, request: dict) -> list[str]:
     finally:
         if not s.KEEP_WORK_FILES:
             shutil.rmtree(work, ignore_errors=True)
+
+
+def _thumbnails(work: Path, latest: str, scenes, segments: dict, ratios: list[str], swapped: int) -> dict:
+    """Scene poster frames for the new version: a new one for the swapped scene, the others copied from
+    the previous version (made again from the cached segment if that version has none)."""
+    out, missing = {}, {swapped}
+    for sc in scenes:
+        if sc.index == swapped:
+            continue
+        name = thumbnail_filename(sc.index)
+        try:
+            get_storage().get_file(output_key(latest, name), work / name)
+            out[sc.index] = name
+        except StorageNotFound:
+            missing.add(sc.index)
+    return {**out, **make_thumbnails(work, scenes, segments, ratios, only=missing)}
 
 
 def _clip_facts(sel: Selection) -> dict:

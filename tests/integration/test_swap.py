@@ -56,10 +56,15 @@ def test_next_best_swap_rerenders_only_one_scene_and_records_history(client, wor
     final = run_swap(client, original["job_id"], target, {"mode": "next_best"}, "swap-1")
     assert final["status"] == "succeeded", final["error"]
     assert final["input_type"] == "swap" and final["parent_job_id"] == original["job_id"]
-    assert set(final["result"]["files"]) == {"video_16x9.mp4", "video_1x1.mp4", "captions.srt", "timeline.json",
-                                             "manifest.json"}
-
     after = get_json(client, final, "timeline.json")
+    thumbs = {f"thumb_{i:03d}.jpg" for i in range(len(after["scenes"]))}
+    assert set(final["result"]["files"]) == {"video_16x9.mp4", "video_1x1.mp4", "captions.srt", "timeline.json",
+                                             "manifest.json"} | thumbs
+    # Scene poster frames: the swapped scene gets a new one, the others are copied from version 1.
+    for sc in after["scenes"]:
+        old_bytes = client.get(path_of(original["result"]["files"][sc["thumbnail"]])).content
+        new_bytes = client.get(path_of(final["result"]["files"][sc["thumbnail"]])).content
+        assert (old_bytes == new_bytes) == (sc["index"] != target)
     assert after["version"] == 2 and after["root_job_id"] == original["job_id"]
     changed = [i for i, (a, b) in enumerate(zip(uids(before), uids(after))) if a != b]
     assert changed == [target]                          # ONLY that scene got another clip

@@ -11,6 +11,7 @@ Each stage updates the job's progress (0-100) and stage name, and its time is re
 for manifest.json. Everything happens in WORK_DIR/<job_id>, which is deleted at the end.
 """
 import json
+import logging
 import shutil
 import time
 from contextlib import contextmanager
@@ -26,7 +27,8 @@ from app.pipeline.outputs import build_cues, build_manifest, build_timeline, wri
 from app.pipeline.providers import get_provider, provider_status
 from app.pipeline.rank import SelectionContext, get_scorer, select_clip
 from app.pipeline.render import (RESOLUTIONS, analyse_source, concat_segments, frame_counts, orientation_of,
-                                 ratio_slug, render_failed, render_segment, video_filename)
+                                 ratio_slug, render_failed, render_segment, save_thumbnail, thumbnail_filename,
+                                 video_filename)
 from app.pipeline.safety import plan_search
 from app.pipeline.scenes import scenes_from_list, split_into_scenes
 from app.pipeline.transcribe import check_sound, check_speech, get_transcriber
@@ -34,6 +36,7 @@ from app.pipeline.tts import get_tts
 from app.pipeline.understand import understand_scenes
 from app.storage import cache_key, get_storage, output_key
 
+log = logging.getLogger("app.pipeline.runner")
 
 class Run:
     """What we learn while running one job (for timeline.json and manifest.json)."""
@@ -191,17 +194,19 @@ def run_pipeline(job_id: str, request: dict[str, Any], input_type: str, input_ke
             for ratio in ratios:
                 videos.append(_join_video(run, scenes, segments, ratio, audio))
                 qa_report[ratio] = videos[-1].pop("qa")
+            thumbnails = make_thumbnails(work, scenes, segments, ratios)
 
         # 7. timeline.json + manifest.json, then upload everything.
         with run.stage("upload", 92):
             write_json(build_timeline(job_id, input_type, audio.duration, transcript.language, scenes, meanings,
-                                      plans, selections, segments, videos), work / "timeline.json")
+                                      plans, selections, segments, videos, thumbnails), work / "timeline.json")
             write_json(_manifest(run, request, input_type, audio, sound, transcript, selections, videos,
                                  qa_report), work / "manifest.json")
             # Stopwatch for the swap comparison: job start -> every output file written (upload excluded,
             # the same point swap.py measures at).
             full_seconds = round(time.perf_counter() - started, 3)
             files = [v["file"] for v in videos] + ["captions.srt", "timeline.json", "manifest.json"]
+            files += [name for name in thumbnails.values() if name]
             storage = get_storage()
             for name in files:
                 storage.put_file(output_key(job_id, name), work / name)
@@ -294,6 +299,31 @@ def _render_segments(run: Run, scenes, cues, ratios, selections, meanings, plans
         if retry_with_next:  # a swap reports its own progress
             set_progress(run.job_id, 70 + round(20 * (i + 1) / len(scenes)), "render")
     return segments
+
+
+def make_thumbnails(work: Path, scenes, segments: dict, ratios: list[str], only: set[int] | None = None) -> dict:
+    """One small 16:9 JPEG poster frame per scene (thumb_000.jpg ...), for the Studio's scene cards.
+
+    Taken from the scene's 16:9 segment (or the first ratio's, padded to 16:9). only = just these scene
+    indexes (a clip swap). Returns {scene index: file name, or None if ffmpeg failed}. A failed thumbnail
+    never fails the job: the videos are fine, the card just shows no picture.
+    """
+    ratio = "16:9" if "16:9" in ratios else ratios[0]
+    folder = work / f"render_{ratio_slug(ratio)}"
+    fps = get_settings().RENDER_FPS
+    out = {}
+    for sc in scenes:
+        if only is not None and sc.index not in only:
+            continue
+        facts = segments[sc.index][ratio]
+        name = thumbnail_filename(sc.index)
+        try:
+            save_thumbnail(folder / facts["file"], work / name, facts.get("frames", fps) / fps)
+            out[sc.index] = name
+        except media.MediaError as e:
+            log.warning("thumbnail for scene %d failed: %s", sc.index, e)
+            out[sc.index] = None
+    return out
 
 
 def _join_video(run: Run, scenes, segments: dict, ratio: str, audio) -> dict:

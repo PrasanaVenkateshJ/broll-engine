@@ -11,10 +11,13 @@ Give it a narration, get back B-roll videos that match what is being said.
 `video_16x9.mp4`, `video_9x16.mp4`, `video_1x1.mp4` (H.264 + AAC 48 kHz, 30 fps, yuv420p, 1080p-class),
 `captions.srt`, `timeline.json` (every scene: text, times, search queries, chosen clip, licence, score and
 the *reason* it was chosen) and `manifest.json` (models + versions, settings, seed, stage timings, cost
-estimate, warnings, licences, ai_generated flags, QA results).
+estimate, warnings, licences, ai_generated flags, QA results), plus one small 16:9 JPEG poster frame per
+scene (`thumb_000.jpg`, ..., named in `timeline.json` as each scene's `thumbnail`).
 
 After a job, any scene's clip can be **swapped** (next best, a named clip, or a URL); only that scene is
 re-rendered.
+
+A web UI, the **B-roll Studio**, is served at `http://localhost:8000/` (see [B-roll Studio](#b-roll-studio-web-ui)).
 
 ## How it works
 
@@ -108,6 +111,8 @@ The full contract is [openapi.yaml](openapi.yaml) (OpenAPI 3.1).
 | `GET /api/v1/jobs/{job_id}` | `status` (queued / running / succeeded / failed), `progress` 0-100, `stage`, `warnings`, `error`, `result.files` (signed links) |
 | `POST /api/v1/broll/jobs/{job_id}/scenes/{scene_index}/swap` | swap one scene's clip (background job, `Idempotency-Key` required) -> `202 {job_id}` |
 | `GET /api/v1/jobs/{job_id}/files/{filename}?expires=&sig=` | download a result file (the signed link from `result.files`; no token needed) |
+| `GET /api/v1/jobs?limit=20` | the caller's own jobs, newest first (id, status, input type, created, processing seconds, error code) |
+| `GET /api/v1/config/public` | safe settings for a UI: voices, aspect ratios, max audio seconds, max upload MB (no secrets) |
 
 Headers: `Idempotency-Key` on every POST (same key + same body = same job; same key + different body = 409),
 `X-Correlation-Id` (echoed back and written into every log line of the request and its job). With
@@ -142,6 +147,29 @@ Body (exactly one way to choose; an empty body means `next_best`):
 - The swap job's `result.files` hold the new versions; the original job's files are not changed. Swapping
   again (with the original or the swap job id) builds on the latest version; one swap per video at a time
   (a second swap while one is queued / running gets 409 `SWAP_IN_PROGRESS`).
+
+## B-roll Studio (web UI)
+
+Start the API (and the worker), then open **http://localhost:8000/** and paste an API token (from
+`API_TOKENS`) in the top bar. Plain HTML + CSS + JavaScript in [app/studio/](app/studio/), served by FastAPI
+(`GET /` and `/studio/<file>`); no build step, no CDN. `STUDIO_ENABLED=false` switches it off. It only uses
+the public API above, so everything it shows comes from the job, `timeline.json` and `manifest.json`.
+
+- **Create**: Voiceover (drag and drop / choose a file, or an audio URL), Script (word count + estimated length,
+  voice) or Scene list (rows of text + visual hint); aspect ratios, style, avoid tags, burned-in captions;
+  one-click examples for the hard cases (double meanings, statistics, sad news, named brand, scene hints).
+  API errors are shown with their code.
+- **Progress**: stage stepper, progress bar, elapsed time, warnings. Polls with a growing pause and waits
+  `Retry-After` on a 429.
+- **Result**: player with one tab per ratio (9:16 in a phone frame), downloads, and a scene strip: poster frame,
+  times, text, provider + clip type, licence link, attribution, AI-generated / Generated badges, relevance bar
+  (with the `STOCK_MIN_SCORE` mark), logo-check result and the selection reason. Clicking a scene seeks the
+  player; the playing scene is highlighted. **Swap clip** runs a `next_best` swap for that scene and shows the
+  swap time next to the full render time.
+- **Recent jobs** (your token's jobs) and **Insights**: footage mix, stage timings chart, cost estimate, models.
+- The page sends `Referrer-Policy: no-referrer` (signed links never leak) and a strict Content-Security-Policy.
+- Optional browser test: `pip install playwright` + `python -m playwright install chromium`, then
+  `tests/e2e/test_studio_browser.py` runs (it is skipped without Playwright).
 
 ## Tests
 
@@ -189,6 +217,10 @@ comments in [.env.example](.env.example). "Code default" is used when the variab
 | `API_TOKENS` | *(empty)* | `dev-token` | Comma-separated bearer tokens allowed to call /api/v1. EMPTY = auth OFF (local dev only!). |
 | `RATE_LIMIT_POST_PER_MINUTE` | `30` | `30` | Max POST requests (new jobs + clip swaps) per token per minute (0 = no limit). Over the limit -&gt; 429 RATE_LIMITED with a `Retry-After` header (seconds to wait). |
 | `RATE_LIMIT_GET_PER_MINUTE` | `600` | `600` | Max GET requests (job status + file downloads) per token per minute (0 = no limit). Same 429 rule. File downloads count against the job owner's GET limit. |
+| `JOBS_LIST_MAX` | `100` | `100` | Most jobs `GET /api/v1/jobs` may return in one answer (`?limit=1..this`). |
+| **Studio (web UI)** | | | |
+| `STUDIO_ENABLED` | `true` | `true` | true = serve the B-roll Studio web page at `GET /` (its files under `/studio/`). false = API only. |
+| `STUDIO_DIR` | *(empty)* | *(empty)* | Folder with the Studio files. Empty = `app/studio` next to the code. |
 | **Database** | | | |
 | `DATABASE_URL` | `sqlite:///./data/broll.db` | `sqlite:///./data/broll.db` | SQLite file for jobs + idempotency keys. (Docker overrides this to /app/data/broll.db.) |
 | **Storage** | | | |
@@ -359,6 +391,8 @@ Every error has the same shape: `{"error": {"code", "message", "retryable", "det
 
 - [app/](app/) - API, worker, job system, pipeline ([app/pipeline/](app/pipeline/)), clip swap
   ([app/pipeline/swap.py](app/pipeline/swap.py)).
+- [app/studio/](app/studio/) - the B-roll Studio web UI (index.html, studio.css, app.js, api.js, create.js,
+  result.js, presets.js, dom.js).
 - [openapi.yaml](openapi.yaml) - the API contract. [tools/batch_run.py](tools/batch_run.py) - batch runner.
 - [tests/](tests/) - unit, integration and e2e tests (mock adapters).
 - [SOURCES.md](SOURCES.md) - every library, model, API and media source with its licence.

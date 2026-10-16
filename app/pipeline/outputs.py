@@ -110,8 +110,10 @@ def write_json(data: dict, path: Path) -> Path:
 # ---------- timeline.json + manifest.json ----------
 
 def build_timeline(job_id: str, input_type: str, duration: float, language: str, scenes: list[Scene],
-                   meanings: list, plans: list, selections: list, segments: dict, videos: list[dict]) -> dict:
-    """One entry per scene: what was said, when, what we searched for, what we used, and why."""
+                   meanings: list, plans: list, selections: list, segments: dict, videos: list[dict],
+                   thumbnails: dict | None = None) -> dict:
+    """One entry per scene: what was said, when, what we searched for, what we used, and why.
+    thumbnails: {scene index: poster-frame file name (an output file of the same job) or None}."""
     out = []
     for scene, meaning, plan, selection in zip(scenes, meanings, plans, selections):
         clip = selection.to_dict()
@@ -125,6 +127,7 @@ def build_timeline(job_id: str, input_type: str, duration: float, language: str,
             "commercial_use": clip["commercial_use"], "watermark": clip["watermark"],
             "ai_generated": clip["ai_generated"], "generated": clip["generated"], "reason": clip["reason"],
             "relevance_score": clip["relevance_score"],
+            "thumbnail": (thumbnails or {}).get(scene.index),
             # Thumbnail + downloaded-clip-frame logo test (None for generated cards / LOGO_CHECK=false).
             "logo_check": clip["logo_check"],
             "clip_details": {k: clip[k] for k in ("uid", "kind", "title", "source_url", "final_score", "width",

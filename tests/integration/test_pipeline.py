@@ -36,11 +36,20 @@ def test_script_job_makes_correct_videos_srt_and_timeline(client, worker, tmp_pa
     resp = client.post(URL, json={"script": SCRIPT, "aspect_ratios": ["16:9", "9:16"]}, headers=AUTH)
     final, _ = wait_for_job(client, resp.json()["job_id"])
     assert final["status"] == "succeeded", final["error"]
-    assert set(final["result"]["files"]) == {"video_16x9.mp4", "video_9x16.mp4", "captions.srt",
-                                              "timeline.json", "manifest.json"}
+    files = set(final["result"]["files"])
+    assert {n for n in files if not n.startswith("thumb_")} == {"video_16x9.mp4", "video_9x16.mp4", "captions.srt",
+                                                                "timeline.json", "manifest.json"}
 
     timeline = json.loads(download(client, final, "timeline.json", tmp_path).read_text(encoding="utf-8"))
     scenes = timeline["scenes"]
+    # One 16:9 poster frame per scene (for the Studio's scene cards), listed in timeline.json + downloadable.
+    assert {n for n in files if n.startswith("thumb_")} == {f"thumb_{i:03d}.jpg" for i in range(len(scenes))}
+    for sc in scenes:
+        assert sc["thumbnail"] == f"thumb_{sc['index']:03d}.jpg"
+        thumb = download(client, final, sc["thumbnail"], tmp_path)
+        assert thumb.read_bytes()[:3] == bytes([0xFF, 0xD8, 0xFF])  # JPEG
+        picture = next(s for s in media.probe(thumb)["streams"] if s["codec_type"] == "video")
+        assert (picture["width"], picture["height"]) == (640, 360)
     assert scenes[0]["start"] == 0 and scenes[-1]["end"] == timeline["duration"]
     assert all(a["end"] == b["start"] for a, b in zip(scenes, scenes[1:]))
     # Every scene stores its full understanding (for re-renders) and every segment its crop choice.

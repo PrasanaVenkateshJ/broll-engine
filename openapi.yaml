@@ -23,12 +23,15 @@ info:
 
     FastAPI's own interactive docs (`/docs`, `/redoc`, `/openapi.json`) are also served; this file is
     the hand-written contract and `tests/unit/test_openapi_contract.py` keeps it equal to the app.
+    The B-roll Studio web UI (`GET /` and its files under `/studio/`, `STUDIO_ENABLED`) is a user
+    interface on top of this API, not part of the contract; it only calls the routes listed here.
 servers:
   - url: http://localhost:8000
     description: Local (docker compose or the Windows venv)
 tags:
   - name: health
   - name: jobs
+  - name: config
 
 paths:
   /health:
@@ -254,6 +257,54 @@ paths:
             application/json:
               schema: {$ref: '#/components/schemas/Error'}
 
+  /api/v1/jobs:
+    get:
+      tags: [jobs]
+      operationId: listJobs
+      summary: The caller's OWN jobs (normal jobs and clip swaps), newest first. No links - GET the job for those.
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          description: How many jobs (1 to JOBS_LIST_MAX, default 20).
+          schema: {type: integer, minimum: 1, default: 20}
+        - $ref: '#/components/parameters/CorrelationId'
+      responses:
+        '200':
+          description: The jobs.
+          headers:
+            X-Correlation-Id: {$ref: '#/components/headers/X-Correlation-Id'}
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/JobList'}
+        '401': {$ref: '#/components/responses/Unauthorized'}
+        '422':
+          description: '`INVALID_INPUT` - limit is not a whole number from 1 to JOBS_LIST_MAX.'
+          headers:
+            X-Correlation-Id: {$ref: '#/components/headers/X-Correlation-Id'}
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Error'}
+        '429': {$ref: '#/components/responses/RateLimited'}
+
+  /api/v1/config/public:
+    get:
+      tags: [config]
+      operationId: publicConfig
+      summary: The settings a user interface needs to build its form (voices, ratios, limits). No secrets.
+      parameters:
+        - $ref: '#/components/parameters/CorrelationId'
+      responses:
+        '200':
+          description: The public settings.
+          headers:
+            X-Correlation-Id: {$ref: '#/components/headers/X-Correlation-Id'}
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/PublicConfig'}
+        '401': {$ref: '#/components/responses/Unauthorized'}
+        '429': {$ref: '#/components/responses/RateLimited'}
+
   /api/v1/jobs/{job_id}:
     get:
       tags: [jobs]
@@ -311,7 +362,7 @@ paths:
         - $ref: '#/components/parameters/CorrelationId'
       responses:
         '200':
-          description: The file (video/mp4, application/json or application/x-subrip).
+          description: The file (video/mp4, application/json, application/x-subrip or image/jpeg).
           headers:
             X-Correlation-Id: {$ref: '#/components/headers/X-Correlation-Id'}
             Content-Length: {schema: {type: integer}}
@@ -591,7 +642,8 @@ components:
                   type: object
                   description: >-
                     file name -> signed download link (video_16x9.mp4, video_9x16.mp4, video_1x1.mp4,
-                    captions.srt, timeline.json, manifest.json).
+                    captions.srt, timeline.json, manifest.json, and thumb_000.jpg, thumb_001.jpg ... = one
+                    640x360 JPEG poster frame per scene, named in timeline.json as each scene's "thumbnail").
                   additionalProperties: {type: string}
             - {type: 'null'}
         created_at: {type: [string, 'null'], format: date-time}
@@ -602,6 +654,48 @@ components:
           required: [self]
           properties:
             self: {type: string}
+
+    JobSummary:
+      type: object
+      required: [job_id, status, progress, stage, input_type, parent_job_id, error_code, created_at, finished_at,
+                 duration_seconds]
+      properties:
+        job_id: {type: string}
+        status: {$ref: '#/components/schemas/JobStatus'}
+        progress: {type: integer, minimum: 0, maximum: 100}
+        stage: {type: string}
+        input_type: {type: string, enum: [audio_url, upload, script, scenes, swap]}
+        parent_job_id: {type: [string, 'null'], description: Clip swap jobs only - the original job.}
+        error_code:
+          oneOf:
+            - {$ref: '#/components/schemas/ErrorCode'}
+            - {type: 'null'}
+        created_at: {type: [string, 'null'], format: date-time}
+        finished_at: {type: [string, 'null'], format: date-time}
+        duration_seconds: {type: [number, 'null'], description: Processing time (started -> finished); null until it ends.}
+
+    JobList:
+      type: object
+      required: [jobs]
+      properties:
+        jobs:
+          type: array
+          items: {$ref: '#/components/schemas/JobSummary'}
+
+    PublicConfig:
+      type: object
+      required: [app_version, voices, default_voice, aspect_ratios, max_audio_seconds, max_upload_mb,
+                 allowed_audio_extensions, max_script_chars, max_scenes]
+      properties:
+        app_version: {type: string}
+        voices: {type: array, items: {type: string}, description: Voice names from TTS_VOICE_MAP.}
+        default_voice: {type: string}
+        aspect_ratios: {type: array, items: {$ref: '#/components/schemas/AspectRatio'}}
+        max_audio_seconds: {type: number}
+        max_upload_mb: {type: integer}
+        allowed_audio_extensions: {type: array, items: {type: string}}
+        max_script_chars: {type: integer}
+        max_scenes: {type: integer}
 
     CallbackPayload:
       type: object

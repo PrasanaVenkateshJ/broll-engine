@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>B-roll Studio</title>
+  <meta name="description" content="Turn a voiceover, a script or a scene list into matching B-roll videos.">
+  <link rel="icon" href="/studio/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/studio/studio.css">
+  <script type="module" src="/studio/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="topbar">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M10 9.2v5.6l4.8-2.8z"/></svg>
+      <span class="brand-name">B-roll Studio</span>
+    </div>
+    <div class="topbar-actions">
+      <span id="ready-pill" class="pill pill-wait" role="status" aria-live="polite">Checking</span>
+      <label class="token-field">
+        <span class="sr-only">API token</span>
+        <input id="token" type="password" autocomplete="off" spellcheck="false" placeholder="API token"
+               aria-describedby="token-help">
+        <span id="token-help" class="sr-only">Saved in this browser only. Sent as a bearer token to the API.</span>
+      </label>
+      <button id="theme-toggle" class="icon-btn" type="button" aria-label="Switch to light theme">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path class="icon-sun" d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0-5v3m0 14v3M2 12h3m14 0h3M4.9 4.9 7 7m10 10 2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/><path class="icon-moon" d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <div id="banner" class="banner" role="alert" hidden></div>
+
+  <div class="layout">
+    <main id="main" tabindex="-1">
+
+      <!-- 1. Create -->
+      <section class="panel" id="create" aria-labelledby="create-title">
+        <div class="panel-head">
+          <h1 id="create-title">Create a video</h1>
+          <p class="panel-sub">Narration in, matching B-roll out: 16:9, 9:16 and 1:1 with captions.</p>
+        </div>
+
+        <div class="presets" role="group" aria-labelledby="presets-label">
+          <span id="presets-label" class="label">Examples</span>
+          <div id="preset-list" class="chip-row"></div>
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="Input type">
+          <button role="tab" id="tab-voiceover" aria-controls="pane-voiceover" aria-selected="false" tabindex="-1" data-input="voiceover">Voiceover</button>
+          <button role="tab" id="tab-script" aria-controls="pane-script" aria-selected="true" data-input="script">Script</button>
+          <button role="tab" id="tab-scenes" aria-controls="pane-scenes" aria-selected="false" tabindex="-1" data-input="scenes">Scene list</button>
+        </div>
+
+        <form id="create-form" novalidate>
+          <div role="tabpanel" id="pane-voiceover" aria-labelledby="tab-voiceover" class="tabpane" hidden>
+            <label class="dropzone" id="dropzone" for="audio-file">
+              <input id="audio-file" type="file" accept=".mp3,.wav,.m4a,audio/mpeg,audio/wav,audio/mp4" class="sr-only">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V4m0 0L8 8m4-4 4 4M5 15v3a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3"/></svg>
+              <span class="dropzone-title" id="dropzone-title">Drop an audio file here, or choose one</span>
+              <span class="dropzone-sub" id="dropzone-sub">mp3, wav or m4a</span>
+            </label>
+            <div class="or"><span>or</span></div>
+            <div class="field">
+              <label for="audio-url">Audio URL</label>
+              <input id="audio-url" type="url" inputmode="url" placeholder="Paste a public link to an mp3, wav or m4a">
+            </div>
+          </div>
+
+          <div role="tabpanel" id="pane-script" aria-labelledby="tab-script" class="tabpane">
+            <div class="field">
+              <label for="script">Script</label>
+              <textarea id="script" rows="7" placeholder="Write the narration. The voice is generated for you." aria-describedby="script-meta"></textarea>
+              <p id="script-meta" class="hint" aria-live="polite">0 words</p>
+            </div>
+          </div>
+
+          <div role="tabpanel" id="pane-scenes" aria-labelledby="tab-scenes" class="tabpane" hidden>
+            <div class="scene-rows-head" aria-hidden="true"><span>Narration</span><span>Visual hint</span><span></span></div>
+            <ol id="scene-rows" class="scene-rows"></ol>
+            <button type="button" id="add-scene" class="btn btn-ghost">Add scene</button>
+          </div>
+
+          <fieldset class="options">
+            <legend class="sr-only">Options</legend>
+            <div class="field" id="voice-field">
+              <label for="voice">Voice</label>
+              <select id="voice"><option value="en-US-female">en-US-female</option></select>
+            </div>
+            <div class="field">
+              <span class="label" id="ratios-label">Aspect ratios</span>
+              <div class="chip-row" id="ratios" role="group" aria-labelledby="ratios-label"></div>
+            </div>
+            <div class="field">
+              <label for="style">Style</label>
+              <input id="style" type="text" maxlength="200" placeholder="e.g. calm, warm light, cinematic">
+            </div>
+            <div class="field">
+              <label for="avoid-input">Avoid</label>
+              <div class="tag-input" id="avoid-box">
+                <ul id="avoid-tags" class="tags" aria-label="Avoid list"></ul>
+                <input id="avoid-input" type="text" maxlength="80" placeholder="Type and press Enter" aria-describedby="avoid-help">
+              </div>
+              <p id="avoid-help" class="hint">Things never to show, used as negative filters.</p>
+            </div>
+            <div class="field toggles">
+              <span class="label">Captions</span>
+              <label class="switch"><input type="checkbox" id="burn-captions" checked><span class="switch-track" aria-hidden="true"></span>Burn into video</label>
+              <label class="switch"><input type="checkbox" id="srt-player"><span class="switch-track" aria-hidden="true"></span>Show SRT in player</label>
+              <p class="hint">captions.srt is always included in the downloads.</p>
+            </div>
+          </fieldset>
+
+          <div id="form-error" class="error-box" role="alert" hidden></div>
+
+          <div class="form-actions">
+            <button type="submit" id="generate" class="btn btn-primary">Generate video</button>
+            <span id="form-status" class="hint" aria-live="polite"></span>
+          </div>
+        </form>
+      </section>
+
+      <!-- 2. Progress -->
+      <section class="panel" id="job" aria-labelledby="job-title" hidden>
+        <div class="panel-head row">
+          <div>
+            <h2 id="job-title">Rendering</h2>
+            <p class="panel-sub mono" id="job-id"></p>
+          </div>
+          <div class="job-meta">
+            <span id="job-status" class="pill"></span>
+            <span id="job-elapsed" class="mono" aria-label="Elapsed time">0:00</span>
+          </div>
+        </div>
+        <ol class="stepper" id="stepper" aria-label="Pipeline stages"></ol>
+        <div class="progress" id="progress" role="progressbar" aria-label="Job progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        <p class="hint" id="job-note" aria-live="polite"></p>
+        <div id="job-error" class="error-box" role="alert" hidden></div>
+        <details class="warnings" id="job-warnings" hidden>
+          <summary>Warnings <span class="count" id="warning-count">0</span></summary>
+          <ul id="warning-list"></ul>
+        </details>
+      </section>
+
+      <!-- 3. Result -->
+      <section class="panel" id="result" aria-labelledby="result-title" hidden>
+        <div class="panel-head row">
+          <div>
+            <h2 id="result-title">Your video</h2>
+            <p class="panel-sub" id="result-sub"></p>
+          </div>
+          <p id="swap-note" class="swap-note" role="status" aria-live="polite" hidden></p>
+        </div>
+        <div class="tabs tabs-small" role="tablist" aria-label="Aspect ratio" id="ratio-tabs"></div>
+        <div class="stage" id="stage">
+          <div class="frame" id="frame">
+            <video id="player" controls playsinline preload="metadata"></video>
+            <div class="frame-loading" id="player-loading" hidden><span class="spinner" aria-hidden="true"></span><span>Loading video</span></div>
+          </div>
+        </div>
+        <div class="downloads" id="downloads" aria-label="Downloads"></div>
+
+        <div class="strip-head">
+          <h3>Scenes</h3>
+          <p class="hint">Select a scene to jump to it. Swap gives one scene a different clip and re-renders only that scene.</p>
+        </div>
+        <ol class="strip" id="strip" aria-label="Scene timeline"></ol>
+      </section>
+
+      <!-- 4. Insights -->
+      <section class="panel" id="insights" aria-labelledby="insights-title" hidden>
+        <div class="panel-head"><h2 id="insights-title">Insights</h2></div>
+        <div class="insights-grid">
+          <div class="card">
+            <h3>Footage mix</h3>
+            <div class="tiles" id="mix"></div>
+          </div>
+          <div class="card">
+            <h3>Cost estimate</h3>
+            <p class="big" id="cost"></p>
+            <p class="hint" id="cost-note"></p>
+          </div>
+          <div class="card span-2">
+            <h3>Stage timings</h3>
+            <div id="timings" class="chart"></div>
+          </div>
+          <div class="card span-2">
+            <h3>Models and versions</h3>
+            <dl class="models" id="models"></dl>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <aside class="panel recent" aria-labelledby="recent-title">
+      <div class="panel-head row">
+        <h2 id="recent-title">Recent jobs</h2>
+        <button type="button" class="icon-btn" id="recent-refresh" aria-label="Refresh recent jobs">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></svg>
+        </button>
+      </div>
+      <ul id="recent-list" class="recent-list"></ul>
+      <p id="recent-empty" class="hint">No jobs yet.</p>
+    </aside>
+  </div>
+</body>
+</html>

@@ -29,6 +29,13 @@ class Settings(BaseSettings):
     # (cheap, and clients poll while they wait).
     RATE_LIMIT_POST_PER_MINUTE: int = 30
     RATE_LIMIT_GET_PER_MINUTE: int = 600
+    # Most jobs GET /api/v1/jobs may return in one answer (?limit=1..this).
+    JOBS_LIST_MAX: int = 100
+
+    # --- Studio (the web UI at GET /, files under /studio/) ---
+    STUDIO_ENABLED: bool = True
+    # Folder with index.html, studio.css and the .js files. Empty = app/studio next to the code.
+    STUDIO_DIR: str = ""
 
     # --- Database ---
     DATABASE_URL: str = "sqlite:///./data/broll.db"

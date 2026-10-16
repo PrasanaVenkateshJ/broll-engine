@@ -4,6 +4,9 @@ from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field, HttpUrl, field_validator, model_validator
 
 SUPPORTED_ASPECT_RATIOS = ("16:9", "9:16", "1:1")
+MAX_SCRIPT_CHARS = 20000
+MAX_SCENES = 200
+DEFAULT_VOICE = "en-US-female"
 
 
 class SceneIn(BaseModel):
@@ -17,7 +20,7 @@ class JobOptions(BaseModel):
 
     model_config = ConfigDict(extra="forbid")  # unknown fields -> INVALID_INPUT
 
-    voice: str = Field(default="en-US-female", max_length=64)
+    voice: str = Field(default=DEFAULT_VOICE, max_length=64)
     aspect_ratios: list[str] = Field(default_factory=lambda: list(SUPPORTED_ASPECT_RATIOS), min_length=1)
     style: str | None = Field(default=None, max_length=200)
     avoid: list[str] = Field(default_factory=list, max_length=50)
@@ -39,8 +42,8 @@ class JobCreate(JobOptions):
     """Body of POST /api/v1/broll/jobs as JSON. Exactly ONE of audio_url / script / scenes."""
 
     audio_url: HttpUrl | None = None
-    script: str | None = Field(default=None, max_length=20000)
-    scenes: list[SceneIn] | None = Field(default=None, min_length=1, max_length=200)
+    script: str | None = Field(default=None, max_length=MAX_SCRIPT_CHARS)
+    scenes: list[SceneIn] | None = Field(default=None, min_length=1, max_length=MAX_SCENES)
 
     @model_validator(mode="after")
     def _exactly_one_input(self):

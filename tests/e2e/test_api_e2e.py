@@ -19,7 +19,7 @@ SCRIPT = ("Saving money is not about earning more. It is about spending wisely. 
 SIZES = {"video_16x9.mp4": (1920, 1080), "video_9x16.mp4": (1080, 1920), "video_1x1.mp4": (1080, 1080)}
 SCENE_FIELDS = {"index", "text", "start", "end", "query", "flags", "provider", "clip_id", "page_url", "licence",
                 "licence_url", "attribution", "commercial_use", "watermark", "ai_generated", "generated", "reason",
-                "relevance_score"}
+                "relevance_score", "thumbnail"}
 
 
 def fetch(client, final, name, tmp_path):
@@ -41,7 +41,9 @@ def run_job(client, body, timeout=180):
 def test_full_job_all_ratios_with_mocks(client, worker, tmp_path):
     final = run_job(client, {"script": SCRIPT, "aspect_ratios": ["16:9", "9:16", "1:1"],
                              "avoid": ["people's faces"], "style": "calm"})
-    assert set(final["result"]["files"]) == set(SIZES) | {"captions.srt", "timeline.json", "manifest.json"}
+    files = set(final["result"]["files"])
+    assert {n for n in files if not n.startswith("thumb_")} == set(SIZES) | {"captions.srt", "timeline.json",
+                                                                             "manifest.json"}
 
     timeline = json.loads(fetch(client, final, "timeline.json", tmp_path).read_text(encoding="utf-8"))
     scenes = timeline["scenes"]
@@ -53,6 +55,7 @@ def test_full_job_all_ratios_with_mocks(client, worker, tmp_path):
         assert sc["commercial_use"] is True and sc["watermark"] is False and sc["ai_generated"] is False
         assert sc["reason"] and sc["licence"]
         assert set(sc["segments"]) == {"16:9", "9:16", "1:1"}
+        assert sc["thumbnail"] in files
     clip_ids = [(sc["provider"], sc["clip_id"]) for sc in scenes]
     assert len(clip_ids) == len(set(clip_ids))  # no clip twice
     stat = next(sc for sc in scenes if "40 percent" in sc["text"])

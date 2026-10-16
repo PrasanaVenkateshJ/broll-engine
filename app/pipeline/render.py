@@ -566,6 +566,27 @@ def concat_segments(segment_paths: list[Path], narration: Path, folder: Path, ou
                  "-movflags", "+faststart", str(out_path.resolve()), cwd=folder)
 
 
+THUMBNAIL_SIZE = (640, 360)  # small 16:9 poster frame per scene (for the Studio's scene cards)
+
+
+def thumbnail_filename(scene_index: int) -> str:
+    return f"thumb_{scene_index:03d}.jpg"
+
+
+def save_thumbnail(segment: Path, out_path: Path, seconds: float) -> None:
+    """One JPEG poster frame of a rendered segment, always 16:9 (a 9:16 / 1:1 segment is padded).
+
+    "First good frame": start a little after the cut (0.3 s, or the middle of a very short scene), then
+    ffmpeg's `thumbnail` filter picks the most typical of the next 10 frames (skips a flash or fade).
+    Raises media.MediaError if ffmpeg fails.
+    """
+    w, h = THUMBNAIL_SIZE
+    media.ffmpeg("-ss", f"{min(0.3, seconds / 2):.3f}", "-i", str(segment.resolve()), "-vf",
+                 f"thumbnail=n=10,scale={w}:{h}:force_original_aspect_ratio=decrease,"
+                 f"pad={w}:{h}:(ow-iw)/2:(oh-ih)/2:color=0x111111,format=yuvj420p",
+                 "-frames:v", "1", "-q:v", "4", str(out_path.resolve()))
+
+
 def render_failed(ratio: str, e: media.MediaError) -> AppError:
     log.error("render failed for %s: %s | %s", ratio, e, e.output)
     return AppError(ErrorCode.RENDER_FAILED, f"Rendering the {ratio} video failed", 500, retryable=True)

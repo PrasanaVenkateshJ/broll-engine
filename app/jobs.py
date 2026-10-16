@@ -240,6 +240,25 @@ def job_to_dict(job: Job, base_url: str) -> dict[str, Any]:
     }
 
 
+def job_summary(job: Job) -> dict[str, Any]:
+    """One row of GET /api/v1/jobs: enough for a "recent jobs" list, no links (GET the job for those)."""
+    duration = None
+    if job.started_at and job.finished_at:
+        duration = round((job.finished_at - job.started_at).total_seconds(), 1)
+    return {
+        "job_id": job.id,
+        "status": job.status,
+        "progress": job.progress,
+        "stage": job.stage,
+        "input_type": job.input_type,
+        "parent_job_id": job.parent_job_id,
+        "error_code": (job.error or {}).get("code"),
+        "created_at": iso(job.created_at),
+        "finished_at": iso(job.finished_at),
+        "duration_seconds": duration,  # processing time: started -> finished (None until it ends)
+    }
+
+
 # ---------- Signed callback ----------
 
 def callback_payload(job: Job) -> dict[str, Any]:

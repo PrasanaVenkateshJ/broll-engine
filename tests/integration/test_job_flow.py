@@ -28,8 +28,9 @@ def test_job_goes_queued_running_succeeded_and_file_downloads(client, worker):
     assert [p for _, p in seen] == sorted(p for _, p in seen)  # never goes backwards
 
     files = final["result"]["files"]
-    assert set(files) == {"video_16x9.mp4", "video_9x16.mp4", "video_1x1.mp4", "captions.srt", "timeline.json",
-                          "manifest.json"}
+    assert {n for n in files if not n.startswith("thumb_")} == {
+        "video_16x9.mp4", "video_9x16.mp4", "video_1x1.mp4", "captions.srt", "timeline.json", "manifest.json"}
+    assert "thumb_000.jpg" in files  # + one poster frame per scene
     download = client.get(path_of(files["timeline.json"]))  # NO bearer token: the signature is enough
     assert download.status_code == 200
     assert json.loads(download.content)["job_id"] == job_id

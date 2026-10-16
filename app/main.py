@@ -14,8 +14,9 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import APIRouter, Depends, FastAPI, Header, Query, Request
-from fastapi.responses import JSONResponse, StreamingResponse
+from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
 from pydantic import ValidationError
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 from starlette.concurrency import run_in_threadpool
 from starlette.datastructures import UploadFile
@@ -23,14 +24,15 @@ from starlette.datastructures import UploadFile
 from app.config import get_settings
 from app.db import check_db, get_db, init_db
 from app.errors import AppError, ErrorCode, error_body, register_error_handlers, validation_details
-from app.jobs import body_hash, create_job, find_existing_job, job_to_dict, new_job_id
+from app.jobs import body_hash, create_job, find_existing_job, job_summary, job_to_dict, new_job_id
 from app.logging_setup import correlation_id_var, setup_logging
 from app.models import Job, JobStatus
 from app.pipeline.intake import check_audio_file, check_scene_texts, check_script
 from app.pipeline.swap import precheck as swap_precheck
 from app.pipeline.swap import read_state
 from app.pipeline.tts import check_voice
-from app.schemas import JobCreate, JobOptions, SwapRequest
+from app.schemas import (DEFAULT_VOICE, MAX_SCENES, MAX_SCRIPT_CHARS, SUPPORTED_ASPECT_RATIOS, JobCreate,
+                         JobOptions, SwapRequest)
 from app.security import BlockedURL, check_file_link, check_public_url, check_rate_limit, require_client
 from app.storage import StorageNotFound, get_storage, input_key, output_key
 
@@ -38,6 +40,13 @@ log = logging.getLogger("app.main")
 
 SAFE_FILENAME = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$")
 SAFE_CORRELATION_ID = re.compile(r"^[A-Za-z0-9._:-]{1,128}$")
+# Studio files are one flat folder; only these names + types are ever served (no "../" tricks).
+STUDIO_FILE = re.compile(r"^[A-Za-z0-9_-]{1,64}\.(html|css|js|svg|png|ico)$")
+STUDIO_DEFAULT_DIR = Path(__file__).resolve().parent / "studio"
+# Fixed types (Windows' mimetypes can say text/plain for .js, and browsers refuse such a module script).
+STUDIO_TYPES = {"html": "text/html; charset=utf-8", "css": "text/css; charset=utf-8",
+                "js": "text/javascript; charset=utf-8", "svg": "image/svg+xml", "png": "image/png",
+                "ico": "image/x-icon"}
 
 
 @asynccontextmanager
@@ -315,6 +324,35 @@ async def swap_scene_clip(
                         content={"job_id": job.id, "status": job.status, "links": links})
 
 
+@api.get("/jobs", tags=["jobs"])
+def list_jobs(limit: int = Query(20), client_id: str = Depends(require_client), db: Session = Depends(get_db)):
+    """The caller's OWN jobs (normal jobs and clip swaps), newest first."""
+    max_limit = get_settings().JOBS_LIST_MAX
+    if not 1 <= limit <= max_limit:
+        raise AppError(ErrorCode.INVALID_INPUT, f"limit must be between 1 and {max_limit}", 422,
+                       details={"min": 1, "max": max_limit})
+    rows = db.scalars(select(Job).where(Job.client_id == client_id)
+                      .order_by(Job.created_at.desc(), Job.id).limit(limit)).all()
+    return {"jobs": [job_summary(job) for job in rows]}
+
+
+@api.get("/config/public", tags=["config"])
+def public_config():
+    """Settings a user interface needs to build its form. Only safe values: no keys, secrets or paths."""
+    s = get_settings()
+    return {
+        "app_version": s.APP_VERSION,
+        "voices": list(s.tts_voices),
+        "default_voice": DEFAULT_VOICE,
+        "aspect_ratios": list(SUPPORTED_ASPECT_RATIOS),
+        "max_audio_seconds": s.MAX_AUDIO_SECONDS,
+        "max_upload_mb": s.MAX_UPLOAD_MB,
+        "allowed_audio_extensions": sorted(s.allowed_audio_extensions),
+        "max_script_chars": MAX_SCRIPT_CHARS,
+        "max_scenes": MAX_SCENES,
+    }
+
+
 @api.get("/jobs/{job_id}", tags=["jobs"])
 def get_job(job_id: str, request: Request, client_id: str = Depends(require_client), db: Session = Depends(get_db)):
     """Status, progress 0-100, stage, warnings, error and (when done) signed file links."""
@@ -325,6 +363,37 @@ def get_job(job_id: str, request: Request, client_id: str = Depends(require_clie
 
 
 app.include_router(api)
+
+
+# ---------- B-roll Studio (web UI; not part of the API contract) ----------
+
+def _studio_file(filename: str) -> FileResponse:
+    s = get_settings()
+    folder = Path(s.STUDIO_DIR) if s.STUDIO_DIR else STUDIO_DEFAULT_DIR
+    path = folder / filename
+    if not s.STUDIO_ENABLED or not STUDIO_FILE.match(filename) or not path.is_file():
+        raise AppError(ErrorCode.NOT_FOUND, "File not found", 404)
+    headers = {
+        "Cache-Control": "no-cache",  # the browser re-checks (ETag) so a changed file shows at once
+        "X-Content-Type-Options": "nosniff",
+        # Signed download links are in the page's URLs: never send them to other sites as a Referer.
+        "Referrer-Policy": "no-referrer",
+        # Only our own scripts / styles; videos + thumbnails come from our API (or a blob made from it).
+        "Content-Security-Policy": "default-src 'self'; img-src 'self' blob: data:; media-src 'self' blob:; "
+                                   "object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+    }
+    return FileResponse(path, headers=headers, media_type=STUDIO_TYPES[filename.rsplit(".", 1)[1]])
+
+
+@app.get("/", include_in_schema=False)
+def studio_page():
+    """The B-roll Studio web page (plain HTML + CSS + JavaScript, no build step)."""
+    return _studio_file("index.html")
+
+
+@app.get("/studio/{filename}", include_in_schema=False)
+def studio_static(filename: str):
+    return _studio_file(filename)
 
 
 # ---------- Signed file downloads (no bearer token: the signature IS the permission) ----------
