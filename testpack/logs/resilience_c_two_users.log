@@ -1,0 +1,6 @@
+2026-10-17T13:32:35.012617+00:00  two users submit at the same moment  {'users': ['user 1 (token #1)', 'user 2 (token #2)'], 'inputs': ['res_c_user_a', 'res_c_user_b']}
+2026-10-17T13:36:42.183840+00:00  user 1 job ended  {'job_id': '97e030c86669491f9c35276b4b5ffa8e', 'status': 'succeeded', 'turnaround_seconds': 246.85}
+2026-10-17T13:36:42.184727+00:00  user 2 job ended  {'job_id': '2a5922a69e764519b7f287497909f17d', 'status': 'succeeded', 'turnaround_seconds': 240.9}
+2026-10-17T13:36:42.191809+00:00  user 1 reads user 2's job  {'http_status': 404, 'error_code': 'JOB_NOT_FOUND'}
+2026-10-17T13:36:44.248302+00:00  user 2 reads user 1's job  {'http_status': 404, 'error_code': 'JOB_NOT_FOUND'}
+2026-10-17T13:36:44.277159+00:00  job run times (started_at, finished_at)  {'spans': [('2026-10-17T13:32:37.550034+00:00', '2026-10-17T13:36:41.427557+00:00'), ('2026-10-17T13:32:37.214772+00:00', '2026-10-17T13:36:34.147694+00:00')]}

@@ -1,0 +1,8 @@
+{"scenes": [
+ {"text": "A productive day starts the night before.", "visual_hint": "person setting an alarm clock on a bedside table at night"},
+ {"text": "Wake up at the same time every morning, even on weekends.", "visual_hint": "sunrise through a bedroom window"},
+ {"text": "Drink a full glass of water before you reach for your phone.", "visual_hint": "pouring water into a glass in a bright kitchen"},
+ {"text": "Spend ten minutes moving your body, with a short walk or some stretching.", "visual_hint": "woman stretching on a yoga mat in a park"},
+ {"text": "Then write down the three most important tasks for the day.", "visual_hint": "hand writing a to-do list in a notebook"},
+ {"text": "Start with the hardest one, while your mind is still fresh.", "visual_hint": "focused person working at a desk with a laptop"}
+], "voice": "en-US-female", "aspect_ratios": ["16:9", "9:16", "1:1"]}

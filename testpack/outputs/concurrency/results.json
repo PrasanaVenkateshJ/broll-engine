@@ -1,0 +1,119 @@
+{
+  "api": "http://localhost:8000",
+  "ratios": [
+    "16:9",
+    "9:16"
+  ],
+  "inputs": [
+    "perf_a_gardening",
+    "perf_b_sleep",
+    "perf_c_cycling"
+  ],
+  "levels": [
+    {
+      "level": 1,
+      "started_utc": "2026-10-17T13:05:50.076162+00:00",
+      "finished_utc": "2026-10-17T13:11:13.670073+00:00",
+      "wall_seconds": 323.59,
+      "jobs": [
+        {
+          "input": "perf_a_gardening_L1_r2",
+          "job_id": "3af0ee37c44346dfa91121a71d5d00b0",
+          "status": "succeeded",
+          "error_code": "",
+          "narration_seconds": 59.5,
+          "turnaround_seconds": 322.93
+        }
+      ],
+      "succeeded": 1,
+      "narration_minutes_finished": 0.992,
+      "throughput_narration_min_per_wall_min": 0.184,
+      "jobs_per_hour": 11.13,
+      "memory_peak_mb": {
+        "api_mb": 46.3,
+        "worker_mb": 2657.9,
+        "ffmpeg_mb": 873.7,
+        "total_mb": 3557.1,
+        "samples": 78
+      }
+    },
+    {
+      "level": 2,
+      "started_utc": "2026-10-17T13:11:13.673070+00:00",
+      "finished_utc": "2026-10-17T13:19:17.603454+00:00",
+      "wall_seconds": 483.93,
+      "jobs": [
+        {
+          "input": "perf_a_gardening_L2_r2",
+          "job_id": "2b3bb66cdb8b4abbbe761d47d6ba2c8b",
+          "status": "succeeded",
+          "error_code": "",
+          "narration_seconds": 59.5,
+          "turnaround_seconds": 483.57
+        },
+        {
+          "input": "perf_b_sleep_L2_r2",
+          "job_id": "cc46cfa8eb434eaf85ba05296226d27a",
+          "status": "succeeded",
+          "error_code": "",
+          "narration_seconds": 54.35,
+          "turnaround_seconds": 452.57
+        }
+      ],
+      "succeeded": 2,
+      "narration_minutes_finished": 1.897,
+      "throughput_narration_min_per_wall_min": 0.235,
+      "jobs_per_hour": 14.88,
+      "memory_peak_mb": {
+        "api_mb": 46.4,
+        "worker_mb": 3623.2,
+        "ffmpeg_mb": 1601.2,
+        "total_mb": 4240.3,
+        "samples": 365
+      }
+    },
+    {
+      "level": 3,
+      "started_utc": "2026-10-17T13:19:17.606451+00:00",
+      "finished_utc": "2026-10-17T13:32:13.122317+00:00",
+      "wall_seconds": 775.52,
+      "jobs": [
+        {
+          "input": "perf_a_gardening_L3_r2",
+          "job_id": "e17ce74b18e24fb09140fa2b76a05ef5",
+          "status": "succeeded",
+          "error_code": "",
+          "narration_seconds": 59.5,
+          "turnaround_seconds": 752.65
+        },
+        {
+          "input": "perf_b_sleep_L3_r2",
+          "job_id": "97e27214c68e4359826dc16ff27e4518",
+          "status": "succeeded",
+          "error_code": "",
+          "narration_seconds": 54.35,
+          "turnaround_seconds": 748.2
+        },
+        {
+          "input": "perf_c_cycling_L3_r2",
+          "job_id": "987be7c4fff34b4fb185c478d61cbfe3",
+          "status": "succeeded",
+          "error_code": "",
+          "narration_seconds": 54.05,
+          "turnaround_seconds": 775.06
+        }
+      ],
+      "succeeded": 3,
+      "narration_minutes_finished": 2.798,
+      "throughput_narration_min_per_wall_min": 0.216,
+      "jobs_per_hour": 13.93,
+      "memory_peak_mb": {
+        "api_mb": 46.5,
+        "worker_mb": 4131.0,
+        "ffmpeg_mb": 2246.7,
+        "total_mb": 5148.4,
+        "samples": 547
+      }
+    }
+  ]
+}

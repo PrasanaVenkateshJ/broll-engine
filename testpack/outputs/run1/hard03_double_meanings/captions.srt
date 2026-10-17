@@ -1,0 +1,42 @@
+1
+00:00:00,050 --> 00:00:03,800
+We sat on the bank of the river
+and watched the water flow past.
+
+2
+00:00:04,090 --> 00:00:07,210
+Later that day, I went to the
+bank to deposit my salary.
+
+3
+00:00:07,510 --> 00:00:10,590
+Dark clouds gathered over the
+hills just before the rain.
+
+4
+00:00:10,870 --> 00:00:14,070
+Last year, our company moved
+all of its files to the cloud.
+
+5
+00:00:14,330 --> 00:00:16,820
+A tiny mouse ran across the kitchen floor.
+
+6
+00:00:17,070 --> 00:00:19,420
+Click the left mouse
+button to open the file.
+
+7
+00:00:19,670 --> 00:00:23,270
+At the zoo, a python lay
+curled around a thick branch.
+
+8
+00:00:23,570 --> 00:00:26,510
+Python is a popular language
+for writing software.
+
+9
+00:00:26,510 --> 00:00:29,850
+Good friends add real value to your life.

@@ -1,0 +1,1168 @@
+{
+  "job_id": "302fd7b0b94149da8d7de1eac937710c",
+  "input_type": "script",
+  "duration": 21.625,
+  "language": "en",
+  "scenes": [
+    {
+      "index": 0,
+      "text": "The ocean covers most of our planet, waves roll onto sandy beaches and crash against rocky cliffs.",
+      "start": 0.0,
+      "end": 6.98,
+      "duration": 6.98,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "calm wide ocean horizon",
+      "queries": [
+        "calm wide ocean horizon",
+        "calm waves hitting sandy beach",
+        "calm rocky coastline waves"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": true
+      },
+      "provider": "pixabay_video",
+      "clip_id": "286278",
+      "page_url": "https://pixabay.com/videos/id-286278/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Mario_Krimer on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.286 >= 0.22 for query 'calm wide ocean horizon' (best of 22 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.00); earlier: pixabay_video:160867 download failed (took longer than 60 s); pixabay_video:286275 corrupted (the video data cannot be decoded)",
+      "relevance_score": 0.2862,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_000.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0001,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 5.02,
+            "logo_prob": 0.0015,
+            "scene_score": 0.2703,
+            "result": "ok"
+          },
+          {
+            "time": 15.06,
+            "logo_prob": 0.0012,
+            "scene_score": 0.2636,
+            "result": "ok"
+          },
+          {
+            "time": 25.1,
+            "logo_prob": 0.0016,
+            "scene_score": 0.2776,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:286278",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2025/06/17/286278_medium.mp4",
+        "final_score": 0.3262,
+        "width": 1280,
+        "height": 720,
+        "duration": 30.0
+      },
+      "understanding": {
+        "queries": [
+          "wide ocean horizon",
+          "waves hitting sandy beach",
+          "rocky coastline waves"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": true
+        },
+        "reason": "groq: Depicts the expansive ocean, rolling waves on sand, and crashing against cliffs to match the narration.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "ocean covers",
+        "card": {
+          "headline": "OCEAN COVERS",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "394822d5c7cd63b4"
+      },
+      "safety": {
+        "queries": [
+          "calm wide ocean horizon",
+          "calm waves hitting sandy beach",
+          "calm rocky coastline waves"
+        ],
+        "exclude_terms": [
+          "blood",
+          "bloody",
+          "gore",
+          "corpse",
+          "dead body",
+          "injury",
+          "wound",
+          "wounded",
+          "weapon",
+          "gun",
+          "guns",
+          "knife",
+          "explosion",
+          "violence",
+          "violent",
+          "fight",
+          "riot",
+          "crash",
+          "victim",
+          "war zone"
+        ],
+        "no_faces": false,
+        "notes": [
+          "sensitive topic: calm queries, graphic content excluded"
+        ]
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_000_f2867d2e98536fbf.mp4",
+          "cache_key": "f2867d2e98536fbf",
+          "frames": 209,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_000_c39c9f23df434fff.mp4",
+          "cache_key": "c39c9f23df434fff",
+          "frames": 209,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2856,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2936
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2904
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2876
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.294; best window 0.294; whole frame 0.286; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "The",
+          "start": 0.05,
+          "end": 0.51
+        },
+        {
+          "text": "ocean",
+          "start": 0.51,
+          "end": 0.83
+        },
+        {
+          "text": "covers",
+          "start": 0.83,
+          "end": 1.23
+        },
+        {
+          "text": "most",
+          "start": 1.23,
+          "end": 1.53
+        },
+        {
+          "text": "of",
+          "start": 1.53,
+          "end": 1.73
+        },
+        {
+          "text": "our",
+          "start": 1.73,
+          "end": 1.85
+        },
+        {
+          "text": "planet,",
+          "start": 1.85,
+          "end": 2.27
+        },
+        {
+          "text": "waves",
+          "start": 2.91,
+          "end": 3.23
+        },
+        {
+          "text": "roll",
+          "start": 3.23,
+          "end": 3.57
+        },
+        {
+          "text": "onto",
+          "start": 3.57,
+          "end": 3.91
+        },
+        {
+          "text": "sandy",
+          "start": 3.91,
+          "end": 4.37
+        },
+        {
+          "text": "beaches",
+          "start": 4.37,
+          "end": 4.79
+        },
+        {
+          "text": "and",
+          "start": 4.79,
+          "end": 5.05
+        },
+        {
+          "text": "crash",
+          "start": 5.05,
+          "end": 5.43
+        },
+        {
+          "text": "against",
+          "start": 5.43,
+          "end": 5.81
+        },
+        {
+          "text": "rocky",
+          "start": 5.81,
+          "end": 6.25
+        },
+        {
+          "text": "cliffs.",
+          "start": 6.25,
+          "end": 6.69
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "text": "Under the surface, coral reefs are full of colorful fish.",
+      "start": 6.98,
+      "end": 11.04,
+      "duration": 4.06,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "vibrant coral reef",
+      "queries": [
+        "vibrant coral reef",
+        "tropical fish swimming",
+        "underwater reef ecosystem"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "51594",
+      "page_url": "https://pixabay.com/videos/id-51594/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Hassas_Arts on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.307 >= 0.22 for query 'vibrant coral reef' (best of 21 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.00)",
+      "relevance_score": 0.3066,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_001.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0002,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.05,
+            "logo_prob": 0.0004,
+            "scene_score": 0.2902,
+            "result": "ok"
+          },
+          {
+            "time": 6.16,
+            "logo_prob": 0.0007,
+            "scene_score": 0.279,
+            "result": "ok"
+          },
+          {
+            "time": 10.26,
+            "logo_prob": 0.0001,
+            "scene_score": 0.2695,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:51594",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2020/10/05/51594-465226691_medium.mp4",
+        "final_score": 0.3466,
+        "width": 1280,
+        "height": 720,
+        "duration": 12.0
+      },
+      "understanding": {
+        "queries": [
+          "vibrant coral reef",
+          "tropical fish swimming",
+          "underwater reef ecosystem"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows colorful coral structures teeming with fish, illustrating the underwater scene described.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "surface coral",
+        "card": {
+          "headline": "SURFACE CORAL",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "08930719d241928f"
+      },
+      "safety": {
+        "queries": [
+          "vibrant coral reef",
+          "tropical fish swimming",
+          "underwater reef ecosystem"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_001_e108b65f4f322a7f.mp4",
+          "cache_key": "e108b65f4f322a7f",
+          "frames": 122,
+          "look": "eq=brightness=0.041:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_001_8f326b212b1abc08.mp4",
+          "cache_key": "8f326b212b1abc08",
+          "frames": 122,
+          "look": "eq=brightness=0.041:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.299,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2885
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2866
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.3069
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.288; best window 0.307; whole frame 0.299; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Under",
+          "start": 7.27,
+          "end": 7.45
+        },
+        {
+          "text": "the",
+          "start": 7.45,
+          "end": 7.59
+        },
+        {
+          "text": "surface,",
+          "start": 7.59,
+          "end": 7.99
+        },
+        {
+          "text": "coral",
+          "start": 8.45,
+          "end": 8.71
+        },
+        {
+          "text": "reefs",
+          "start": 8.71,
+          "end": 9.11
+        },
+        {
+          "text": "are",
+          "start": 9.11,
+          "end": 9.35
+        },
+        {
+          "text": "full",
+          "start": 9.35,
+          "end": 9.65
+        },
+        {
+          "text": "of",
+          "start": 9.65,
+          "end": 9.83
+        },
+        {
+          "text": "colorful",
+          "start": 9.83,
+          "end": 10.25
+        },
+        {
+          "text": "fish.",
+          "start": 10.25,
+          "end": 10.79
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "text": "Sea turtles glide through the clear blue water.",
+      "start": 11.04,
+      "end": 14.23,
+      "duration": 3.19,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "sea turtle swimming",
+      "queries": [
+        "sea turtle swimming",
+        "turtle gliding underwater",
+        "clear blue ocean"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "19052",
+      "page_url": "https://pixabay.com/videos/id-19052/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "kt_silver on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.302 >= 0.22 for query 'sea turtle swimming' (best of 22 candidates, order bonus +0.04); logo check ok (logo prob 0.01); 3 clip frame(s) passed the logo check (max logo prob 0.04)",
+      "relevance_score": 0.302,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_002.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0104,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 4.71,
+            "logo_prob": 0.022,
+            "scene_score": 0.2851,
+            "result": "ok"
+          },
+          {
+            "time": 14.13,
+            "logo_prob": 0.0354,
+            "scene_score": 0.2783,
+            "result": "ok"
+          },
+          {
+            "time": 23.56,
+            "logo_prob": 0.0257,
+            "scene_score": 0.2992,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:19052",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2018/11/01/19052-298885300_medium.mp4",
+        "final_score": 0.342,
+        "width": 1280,
+        "height": 720,
+        "duration": 28.0
+      },
+      "understanding": {
+        "queries": [
+          "sea turtle swimming",
+          "turtle gliding underwater",
+          "clear blue ocean"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Illustrates sea turtles moving gracefully in clear blue water as mentioned.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "sea turtles",
+        "card": {
+          "headline": "SEA TURTLES",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "bb60b9953350ba4d"
+      },
+      "safety": {
+        "queries": [
+          "sea turtle swimming",
+          "turtle gliding underwater",
+          "clear blue ocean"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_002_f9e2ec5ac660af0b.mp4",
+          "cache_key": "f9e2ec5ac660af0b",
+          "frames": 96,
+          "look": "eq=brightness=-0.053:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_002_903da6dc37dd0a3b.mp4",
+          "cache_key": "903da6dc37dd0a3b",
+          "frames": 96,
+          "look": "eq=brightness=-0.053:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.307,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2976
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.266
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.267
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.298; best window 0.298; whole frame 0.307; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Sea",
+          "start": 11.29,
+          "end": 11.53
+        },
+        {
+          "text": "turtles",
+          "start": 11.53,
+          "end": 11.91
+        },
+        {
+          "text": "glide",
+          "start": 11.91,
+          "end": 12.39
+        },
+        {
+          "text": "through",
+          "start": 12.39,
+          "end": 12.73
+        },
+        {
+          "text": "the",
+          "start": 12.73,
+          "end": 12.89
+        },
+        {
+          "text": "clear",
+          "start": 12.89,
+          "end": 13.23
+        },
+        {
+          "text": "blue",
+          "start": 13.23,
+          "end": 13.49
+        },
+        {
+          "text": "water.",
+          "start": 13.49,
+          "end": 13.93
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "text": "Fishing boats leave the harbor early in the morning.",
+      "start": 14.23,
+      "end": 17.24,
+      "duration": 3.01,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "harbor morning boats",
+      "queries": [
+        "fishing boats departing sunrise",
+        "harbor morning boats",
+        "early morning fishing fleet"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "28947",
+      "page_url": "https://pixabay.com/videos/id-28947/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "2278342 on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.270 >= 0.22 for query 'harbor morning boats' (best of 23 candidates, order bonus +0.04); logo check ok (logo prob 0.13); 3 clip frame(s) passed the logo check (max logo prob 0.12); earlier: pixabay_video:107814 download failed (took longer than 60 s)",
+      "relevance_score": 0.2699,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_003.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.1256,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 3.55,
+            "logo_prob": 0.0656,
+            "scene_score": 0.2682,
+            "result": "ok"
+          },
+          {
+            "time": 10.65,
+            "logo_prob": 0.1012,
+            "scene_score": 0.2645,
+            "result": "ok"
+          },
+          {
+            "time": 17.75,
+            "logo_prob": 0.1186,
+            "scene_score": 0.2729,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:28947",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2019/11/11/28947-372617914_medium.mp4",
+        "final_score": 0.3099,
+        "width": 1280,
+        "height": 720,
+        "duration": 21.0
+      },
+      "understanding": {
+        "queries": [
+          "fishing boats departing sunrise",
+          "harbor morning boats",
+          "early morning fishing fleet"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Represents fishing vessels leaving the harbor at dawn, matching the early‑morning departure.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "fishing boats",
+        "card": {
+          "headline": "FISHING BOATS",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "a519e4f2162fd589"
+      },
+      "safety": {
+        "queries": [
+          "fishing boats departing sunrise",
+          "harbor morning boats",
+          "early morning fishing fleet"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_003_151eb928c6a04ad1.mp4",
+          "cache_key": "151eb928c6a04ad1",
+          "frames": 90,
+          "look": "eq=brightness=-0.115:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_003_925bf3b51bc32a8e.mp4",
+          "cache_key": "925bf3b51bc32a8e",
+          "frames": 90,
+          "look": "eq=brightness=-0.115:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2586,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2509
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2395
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2326
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.251; best window 0.251; whole frame 0.259; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Fishing",
+          "start": 14.53,
+          "end": 14.77
+        },
+        {
+          "text": "boats",
+          "start": 14.77,
+          "end": 15.13
+        },
+        {
+          "text": "leave",
+          "start": 15.13,
+          "end": 15.45
+        },
+        {
+          "text": "the",
+          "start": 15.45,
+          "end": 15.65
+        },
+        {
+          "text": "harbor",
+          "start": 15.65,
+          "end": 15.91
+        },
+        {
+          "text": "early",
+          "start": 15.91,
+          "end": 16.37
+        },
+        {
+          "text": "in",
+          "start": 16.37,
+          "end": 16.55
+        },
+        {
+          "text": "the",
+          "start": 16.55,
+          "end": 16.61
+        },
+        {
+          "text": "morning.",
+          "start": 16.61,
+          "end": 16.93
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "text": "At sunset, the whole sea shines with golden light.",
+      "start": 17.24,
+      "end": 21.625,
+      "duration": 4.385,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "sunset over ocean",
+      "queries": [
+        "sunset over ocean",
+        "golden light sea",
+        "sunlit water horizon"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "325644",
+      "page_url": "https://pixabay.com/videos/id-325644/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Mario_Krimer on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.342 >= 0.22 for query 'sunset over ocean' (best of 22 candidates, order bonus +0.02); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.00)",
+      "relevance_score": 0.3417,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_004.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0002,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 1.86,
+            "logo_prob": 0.0007,
+            "scene_score": 0.3394,
+            "result": "ok"
+          },
+          {
+            "time": 5.58,
+            "logo_prob": 0.0015,
+            "scene_score": 0.3307,
+            "result": "ok"
+          },
+          {
+            "time": 9.31,
+            "logo_prob": 0.0016,
+            "scene_score": 0.3338,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:325644",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2026/01/02/325644_medium.mp4",
+        "final_score": 0.3617,
+        "width": 720,
+        "height": 1280,
+        "duration": 11.0
+      },
+      "understanding": {
+        "queries": [
+          "sunset over ocean",
+          "golden light sea",
+          "sunlit water horizon"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Captures the sea bathed in golden sunset light, reflecting the final scene.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "sunset whole",
+        "card": {
+          "headline": "SUNSET WHOLE",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "c4dde87141c706ea"
+      },
+      "safety": {
+        "queries": [
+          "sunset over ocean",
+          "golden light sea",
+          "sunlit water horizon"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_004_e6829d761b1cd87e.mp4",
+          "cache_key": "e6829d761b1cd87e",
+          "frames": 132,
+          "look": "eq=brightness=-0.076:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "y",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.3431,
+            "windows": {
+              "salient": {
+                "start": 0.5261,
+                "score": 0.3054
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.3227
+              },
+              "top": {
+                "start": 0.0,
+                "score": 0.3242
+              },
+              "bottom": {
+                "start": 0.6836,
+                "score": 0.3102
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'salient' chosen (0.305; best window 0.324; whole frame 0.343; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_004_98ef437222821f70.mp4",
+          "cache_key": "98ef437222821f70",
+          "frames": 132,
+          "look": "eq=brightness=-0.076:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "At",
+          "start": 17.55,
+          "end": 17.69
+        },
+        {
+          "text": "sunset,",
+          "start": 17.69,
+          "end": 18.13
+        },
+        {
+          "text": "the",
+          "start": 18.71,
+          "end": 18.77
+        },
+        {
+          "text": "whole",
+          "start": 18.77,
+          "end": 19.01
+        },
+        {
+          "text": "sea",
+          "start": 19.01,
+          "end": 19.37
+        },
+        {
+          "text": "shines",
+          "start": 19.37,
+          "end": 19.87
+        },
+        {
+          "text": "with",
+          "start": 19.87,
+          "end": 20.13
+        },
+        {
+          "text": "golden",
+          "start": 20.13,
+          "end": 20.57
+        },
+        {
+          "text": "light.",
+          "start": 20.57,
+          "end": 20.93
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "aspect_ratio": "16:9",
+      "file": "video_16x9.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 21.633
+    },
+    {
+      "aspect_ratio": "9:16",
+      "file": "video_9x16.mp4",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "duration": 21.633
+    }
+  ]
+}

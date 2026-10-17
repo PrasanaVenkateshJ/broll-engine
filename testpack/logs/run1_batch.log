@@ -1,0 +1,25 @@
+23 input(s) -> http://localhost:8000 (concurrency 1)
+core01_en_saving_tips_myvoice  succeeded                              92.77 s  job 2eea2c49161e40e3b2437e002956ef83
+core02_en_bakery_story_myvoice succeeded                              78.69 s  job b0bcc3d4915e4373b7a920d5d35fc162
+core03_ta_screen_time_myvoice  succeeded                             211.23 s  job d4f43327f85b478e96a9f8e32c14c43e
+core04_tutorial_cold_brew      succeeded                             235.33 s  job b0377e8e48fa4540a3e3bb987534f390
+core05_news_summary            succeeded                              138.8 s  job b84bb7185bf84e50822079a4169644a3
+core06_product_promo           succeeded                             187.06 s  job a62288037a4f4b5bb95f5b01325c3e0a
+core07_story_lighthouse        succeeded                             283.46 s  job f04ac333b96e449f98f6fa9e7302e10d
+core08_motivational_talk       succeeded                             223.21 s  job 1405dec809ff420d8bd39a351e7c0368
+core09_explainer_solar         succeeded                             415.87 s  job 2c119490d9624cc0bad8036d938d5abe
+core10_scene_list_incubrix     succeeded                             162.82 s  job c74fbe9be9cc4b6bbad8286375115502
+core11_hi_tts_saving           succeeded                             126.86 s  job 36c9f35f0ad842b981478dc447ba29e2
+core12_hi_tts_monsoon          succeeded                             175.07 s  job e03bcded93ac46f68ede9307264eecee
+core13_hi_script_tea           succeeded                             211.27 s  job 2041588a3c054eb6870cefa999453b36
+hard01_abstract_and_statistics succeeded                              102.7 s  job 4e6841f0d5f6495580a4ff785d8626bd
+hard02_named_person_and_brand  succeeded                              90.67 s  job 328aacac8eba4e13bf7ecdaeb6b7e861
+hard03_double_meanings         succeeded                             211.24 s  job 45cb9e08605f4cc49c45349786ae3e4f
+hard04_sensitive_news          succeeded                             150.91 s  job 0583890289ae42d6bf5584d80b575945
+hard05_crop_subject_at_edge_9x16 succeeded                             114.83 s  job a2d1c52631c2476dbf1480efc97e9b07
+hard06_five_minute_voiceover   succeeded                            1585.46 s  job 1ed7b2d0e7b04eeca11d75beb46229f2
+hard07_silent_audio            failed     NO_SPEECH_DETECTED           2.19 s  job 69f6b740db9b479db68b4ddea8469cd7
+hard08_music_only_chords       failed     MUSIC_ONLY_AUDIO              9.7 s  job eb199c3009f246a498b1bbd1dff9612b
+hard09_wrong_type_text_renamed rejected   UNSUPPORTED_FILE_TYPE             s  job 
+hard10_empty_script            rejected   EMPTY_SCRIPT                      s  job 
+summary: testpack\outputs\run1\summary.csv and testpack\outputs\run1\summary.md

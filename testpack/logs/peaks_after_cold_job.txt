@@ -1,0 +1,4 @@
+api,pid=15236,parent=17328,peak_mb=4.2,now_mb=4.1
+api,pid=18060,parent=15236,peak_mb=88.6,now_mb=84.1
+worker,pid=26224,parent=22748,peak_mb=4.2,now_mb=4.1
+worker,pid=15548,parent=26224,peak_mb=2734.6,now_mb=2266.6

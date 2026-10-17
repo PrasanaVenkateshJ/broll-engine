@@ -1,0 +1,1504 @@
+{
+  "job_id": "0583890289ae42d6bf5584d80b575945",
+  "input_type": "script",
+  "duration": 26.15,
+  "language": "en",
+  "scenes": [
+    {
+      "index": 0,
+      "text": "Heavy floods this week forced thousands of families to leave their homes.",
+      "start": 0.0,
+      "end": 3.63,
+      "duration": 3.63,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "calm family evacuating flood",
+      "queries": [
+        "calm flooded residential area",
+        "calm family evacuating flood",
+        "calm waterlogged streets"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": true
+      },
+      "provider": "pixabay_video",
+      "clip_id": "135765",
+      "page_url": "https://pixabay.com/videos/id-135765/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "TravelingOnTheGoYoutubeCh on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.267 >= 0.22 for query 'calm family evacuating flood' (best of 22 candidates, order bonus +0.04); logo check ok (logo prob 0.03); 3 clip frame(s) passed the logo check (max logo prob 0.09)",
+      "relevance_score": 0.2674,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_000.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0322,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 1.83,
+            "logo_prob": 0.0044,
+            "scene_score": 0.2605,
+            "result": "ok"
+          },
+          {
+            "time": 5.5,
+            "logo_prob": 0.0043,
+            "scene_score": 0.2645,
+            "result": "ok"
+          },
+          {
+            "time": 9.17,
+            "logo_prob": 0.0931,
+            "scene_score": 0.2654,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:135765",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2022/10/20/135765-764361819_medium.mp4",
+        "final_score": 0.3074,
+        "width": 2560,
+        "height": 1440,
+        "duration": 11.0
+      },
+      "understanding": {
+        "queries": [
+          "flooded residential area",
+          "family evacuating flood",
+          "waterlogged streets"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": true
+        },
+        "reason": "groq: Shows the impact of heavy floods forcing families to leave their homes.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "heavy floods",
+        "card": {
+          "headline": "HEAVY FLOODS",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "6c049c9b51d7d8fd"
+      },
+      "safety": {
+        "queries": [
+          "calm flooded residential area",
+          "calm family evacuating flood",
+          "calm waterlogged streets"
+        ],
+        "exclude_terms": [
+          "blood",
+          "bloody",
+          "gore",
+          "corpse",
+          "dead body",
+          "injury",
+          "wound",
+          "wounded",
+          "weapon",
+          "gun",
+          "guns",
+          "knife",
+          "explosion",
+          "violence",
+          "violent",
+          "fight",
+          "riot",
+          "crash",
+          "victim",
+          "war zone"
+        ],
+        "no_faces": false,
+        "notes": [
+          "sensitive topic: calm queries, graphic content excluded"
+        ]
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_000_a3d520d03c4aaf9a.mp4",
+          "cache_key": "a3d520d03c4aaf9a",
+          "frames": 109,
+          "look": "eq=brightness=0.077:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_000_5a53818a373a6c80.mp4",
+          "cache_key": "5a53818a373a6c80",
+          "frames": 109,
+          "look": "eq=brightness=0.077:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2697,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2773
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.1933
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2413
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.277; best window 0.277; whole frame 0.270; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Heavy",
+          "start": 0.0,
+          "end": 0.46
+        },
+        {
+          "text": "floods",
+          "start": 0.46,
+          "end": 0.72
+        },
+        {
+          "text": "this",
+          "start": 0.72,
+          "end": 0.98
+        },
+        {
+          "text": "week",
+          "start": 0.98,
+          "end": 1.18
+        },
+        {
+          "text": "forced",
+          "start": 1.18,
+          "end": 1.4
+        },
+        {
+          "text": "thousands",
+          "start": 1.4,
+          "end": 1.86
+        },
+        {
+          "text": "of",
+          "start": 1.86,
+          "end": 2.04
+        },
+        {
+          "text": "families",
+          "start": 2.04,
+          "end": 2.36
+        },
+        {
+          "text": "to",
+          "start": 2.36,
+          "end": 2.62
+        },
+        {
+          "text": "leave",
+          "start": 2.62,
+          "end": 2.78
+        },
+        {
+          "text": "their",
+          "start": 2.78,
+          "end": 3.0
+        },
+        {
+          "text": "homes.",
+          "start": 3.0,
+          "end": 3.34
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "text": "Rescue teams are still reaching some villages, and officials have confirmed that several people lost their lives.",
+      "start": 3.63,
+      "end": 9.29,
+      "duration": 5.66,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "calm emergency boat reaching village",
+      "queries": [
+        "calm rescue workers in flood",
+        "calm emergency boat reaching village",
+        "calm search and rescue operation"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": true
+      },
+      "provider": "pixabay_video",
+      "clip_id": "50567",
+      "page_url": "https://pixabay.com/videos/id-50567/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "MingMedia on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.254 >= 0.22 for query 'calm emergency boat reaching village' (best of 21 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.00)",
+      "relevance_score": 0.2541,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_001.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0004,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 3.25,
+            "logo_prob": 0.0021,
+            "scene_score": 0.2402,
+            "result": "ok"
+          },
+          {
+            "time": 9.76,
+            "logo_prob": 0.0043,
+            "scene_score": 0.244,
+            "result": "ok"
+          },
+          {
+            "time": 16.27,
+            "logo_prob": 0.0011,
+            "scene_score": 0.2193,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:50567",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2020/09/22/50567-460509472_medium.mp4",
+        "final_score": 0.2941,
+        "width": 2560,
+        "height": 1440,
+        "duration": 20.0
+      },
+      "understanding": {
+        "queries": [
+          "rescue workers in flood",
+          "emergency boat reaching village",
+          "search and rescue operation"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": true
+        },
+        "reason": "groq: Depicts rescue teams arriving in flooded villages and the tragic loss of life.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "rescue teams",
+        "card": {
+          "headline": "RESCUE TEAMS",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "ee2f9a6f7c4fc7f5"
+      },
+      "safety": {
+        "queries": [
+          "calm rescue workers in flood",
+          "calm emergency boat reaching village",
+          "calm search and rescue operation"
+        ],
+        "exclude_terms": [
+          "blood",
+          "bloody",
+          "gore",
+          "corpse",
+          "dead body",
+          "injury",
+          "wound",
+          "wounded",
+          "weapon",
+          "gun",
+          "guns",
+          "knife",
+          "explosion",
+          "violence",
+          "violent",
+          "fight",
+          "riot",
+          "crash",
+          "victim",
+          "war zone"
+        ],
+        "no_faces": false,
+        "notes": [
+          "sensitive topic: calm queries, graphic content excluded"
+        ]
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_001_9c102d3d06caa57c.mp4",
+          "cache_key": "9c102d3d06caa57c",
+          "frames": 170,
+          "look": "eq=brightness=-0.012:saturation=0.962",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_001_a0ca6fae56650f87.mp4",
+          "cache_key": "a0ca6fae56650f87",
+          "frames": 170,
+          "look": "eq=brightness=-0.012:saturation=0.962",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2586,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2657
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.1818
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2077
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.266; best window 0.266; whole frame 0.259; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Rescue",
+          "start": 3.92,
+          "end": 4.22
+        },
+        {
+          "text": "teams",
+          "start": 4.22,
+          "end": 4.54
+        },
+        {
+          "text": "are",
+          "start": 4.54,
+          "end": 4.72
+        },
+        {
+          "text": "still",
+          "start": 4.72,
+          "end": 4.88
+        },
+        {
+          "text": "reaching",
+          "start": 4.88,
+          "end": 5.2
+        },
+        {
+          "text": "some",
+          "start": 5.2,
+          "end": 5.52
+        },
+        {
+          "text": "villages,",
+          "start": 5.52,
+          "end": 5.88
+        },
+        {
+          "text": "and",
+          "start": 6.34,
+          "end": 6.48
+        },
+        {
+          "text": "officials",
+          "start": 6.48,
+          "end": 6.78
+        },
+        {
+          "text": "have",
+          "start": 6.78,
+          "end": 6.98
+        },
+        {
+          "text": "confirmed",
+          "start": 6.98,
+          "end": 7.38
+        },
+        {
+          "text": "that",
+          "start": 7.38,
+          "end": 7.6
+        },
+        {
+          "text": "several",
+          "start": 7.6,
+          "end": 7.9
+        },
+        {
+          "text": "people",
+          "start": 7.9,
+          "end": 8.2
+        },
+        {
+          "text": "lost",
+          "start": 8.2,
+          "end": 8.46
+        },
+        {
+          "text": "their",
+          "start": 8.46,
+          "end": 8.66
+        },
+        {
+          "text": "lives.",
+          "start": 8.66,
+          "end": 9.02
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "text": "Schools and community halls have been opened as shelters, where volunteers are serving hot food and clean water.",
+      "start": 9.29,
+      "end": 15.0,
+      "duration": 5.71,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "temporary flood shelter interior",
+      "queries": [
+        "temporary flood shelter interior",
+        "volunteers distributing meals",
+        "clean water distribution"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "generated",
+      "clip_id": "card-002-5eec1253",
+      "page_url": "",
+      "licence": "Generated by broll-engine (FFmpeg motion card)",
+      "licence_url": "",
+      "attribution": "",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": true,
+      "reason": "no stock source passed the rule (pixabay_video: best score 0.186 < 0.22; pixabay_image_motion: best score 0.214 < 0.22; wikimedia: best score 0.193 < 0.22) -> generated motion card 'SCHOOLS COMMUNITY'",
+      "relevance_score": null,
+      "card_text": "SCHOOLS COMMUNITY",
+      "card_subtitle": "",
+      "card_source": "narration",
+      "card_numbers": [],
+      "thumbnail": "thumb_002.jpg",
+      "logo_check": null,
+      "clip_details": {
+        "uid": "generated:card-002-5eec1253",
+        "kind": "generated",
+        "title": "SCHOOLS COMMUNITY",
+        "source_url": "",
+        "final_score": null,
+        "width": 0,
+        "height": 0,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "temporary flood shelter interior",
+          "volunteers distributing meals",
+          "clean water distribution"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Illustrates shelters set up in schools/halls with volunteers providing food and water.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "schools community",
+        "card": {
+          "headline": "SCHOOLS COMMUNITY",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "91262db9b6312caf"
+      },
+      "safety": {
+        "queries": [
+          "temporary flood shelter interior",
+          "volunteers distributing meals",
+          "clean water distribution"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_002_62aa814a7640caf2.mp4",
+          "cache_key": "62aa814a7640caf2",
+          "frames": 171,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_002_8f0b0dd412138f62.mp4",
+          "cache_key": "8f0b0dd412138f62",
+          "frames": 171,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Schools",
+          "start": 9.56,
+          "end": 9.84
+        },
+        {
+          "text": "and",
+          "start": 9.84,
+          "end": 10.08
+        },
+        {
+          "text": "community",
+          "start": 10.08,
+          "end": 10.38
+        },
+        {
+          "text": "halls",
+          "start": 10.38,
+          "end": 10.84
+        },
+        {
+          "text": "have",
+          "start": 10.84,
+          "end": 11.02
+        },
+        {
+          "text": "been",
+          "start": 11.02,
+          "end": 11.12
+        },
+        {
+          "text": "opened",
+          "start": 11.12,
+          "end": 11.4
+        },
+        {
+          "text": "as",
+          "start": 11.4,
+          "end": 11.58
+        },
+        {
+          "text": "shelters,",
+          "start": 11.58,
+          "end": 11.92
+        },
+        {
+          "text": "where",
+          "start": 12.34,
+          "end": 12.46
+        },
+        {
+          "text": "volunteers",
+          "start": 12.46,
+          "end": 12.88
+        },
+        {
+          "text": "are",
+          "start": 12.88,
+          "end": 13.12
+        },
+        {
+          "text": "serving",
+          "start": 13.12,
+          "end": 13.4
+        },
+        {
+          "text": "hot",
+          "start": 13.4,
+          "end": 13.66
+        },
+        {
+          "text": "food",
+          "start": 13.66,
+          "end": 13.96
+        },
+        {
+          "text": "and",
+          "start": 13.96,
+          "end": 14.1
+        },
+        {
+          "text": "clean",
+          "start": 14.1,
+          "end": 14.34
+        },
+        {
+          "text": "water.",
+          "start": 14.34,
+          "end": 14.68
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "text": "Doctors are visiting the camps to check on children and older people.",
+      "start": 15.0,
+      "end": 18.43,
+      "duration": 3.43,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "doctor examining child refugee",
+      "queries": [
+        "medical staff at relief camp",
+        "doctor examining child refugee",
+        "health checkup in shelter"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "49813",
+      "page_url": "https://pixabay.com/videos/id-49813/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Hassas_Arts on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.245 >= 0.22 for query 'doctor examining child refugee' (best of 24 candidates, order bonus +0.04); logo check ok (logo prob 0.01); 3 clip frame(s) passed the logo check (max logo prob 0.06)",
+      "relevance_score": 0.2451,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_003.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0144,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 1.99,
+            "logo_prob": 0.0605,
+            "scene_score": 0.249,
+            "result": "ok"
+          },
+          {
+            "time": 5.98,
+            "logo_prob": 0.0202,
+            "scene_score": 0.2358,
+            "result": "ok"
+          },
+          {
+            "time": 9.97,
+            "logo_prob": 0.0304,
+            "scene_score": 0.2459,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:49813",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2020/09/13/49813-458438871_medium.mp4",
+        "final_score": 0.2851,
+        "width": 1280,
+        "height": 720,
+        "duration": 12.0
+      },
+      "understanding": {
+        "queries": [
+          "medical staff at relief camp",
+          "doctor examining child refugee",
+          "health checkup in shelter"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows doctors checking on children and elders in the camp.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "doctors visiting",
+        "card": {
+          "headline": "DOCTORS VISITING",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "2d1a36dadad3bddb"
+      },
+      "safety": {
+        "queries": [
+          "medical staff at relief camp",
+          "doctor examining child refugee",
+          "health checkup in shelter"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_003_b67f339dc26a6c4a.mp4",
+          "cache_key": "b67f339dc26a6c4a",
+          "frames": 103,
+          "look": "eq=brightness=-0.055:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_003_59cbd75fc01dd200.mp4",
+          "cache_key": "59cbd75fc01dd200",
+          "frames": 103,
+          "look": "eq=brightness=-0.055:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2441,
+            "windows": {
+              "salient": {
+                "start": 0.2031,
+                "score": 0.2306
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.1997
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2313
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2155
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'salient' chosen (0.231; best window 0.231; whole frame 0.244; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Doctors",
+          "start": 15.32,
+          "end": 15.52
+        },
+        {
+          "text": "are",
+          "start": 15.52,
+          "end": 15.74
+        },
+        {
+          "text": "visiting",
+          "start": 15.74,
+          "end": 15.94
+        },
+        {
+          "text": "the",
+          "start": 15.94,
+          "end": 16.18
+        },
+        {
+          "text": "camps",
+          "start": 16.18,
+          "end": 16.42
+        },
+        {
+          "text": "to",
+          "start": 16.42,
+          "end": 16.64
+        },
+        {
+          "text": "check",
+          "start": 16.64,
+          "end": 16.82
+        },
+        {
+          "text": "on",
+          "start": 16.82,
+          "end": 17.0
+        },
+        {
+          "text": "children",
+          "start": 17.0,
+          "end": 17.36
+        },
+        {
+          "text": "and",
+          "start": 17.36,
+          "end": 17.58
+        },
+        {
+          "text": "older",
+          "start": 17.58,
+          "end": 17.8
+        },
+        {
+          "text": "people.",
+          "start": 17.8,
+          "end": 18.16
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "text": "If you would like to help, local charities are collecting blankets and dry food.",
+      "start": 18.43,
+      "end": 22.5,
+      "duration": 4.07,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "volunteers sorting supplies",
+      "queries": [
+        "charity donation collection",
+        "blankets and food pile",
+        "volunteers sorting supplies"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "wikimedia",
+      "clip_id": "157433677",
+      "page_url": "https://commons.wikimedia.org/wiki/File:NAVSTA_Rota_Volunteers_Get_Food_and_Donations_to_Evacuees_from_Afghanistan_(6820937).jpg",
+      "licence": "Public domain",
+      "licence_url": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "attribution": "U.S. Navy photo by Petty Officer 2nd Class John Owen, via Wikimedia Commons, Public domain",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "wikimedia: score 0.279 >= 0.22 for query 'volunteers sorting supplies' (best of 8 candidates, order bonus +0.02); logo check ok (logo prob 0.01); 1 clip frame(s) passed the logo check (max logo prob 0.03); earlier: pixabay_video: best score 0.172 < 0.22; pixabay_image_motion: best score 0.192 < 0.22",
+      "relevance_score": 0.2794,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_004.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0077,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.0305,
+            "scene_score": 0.2844,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "wikimedia:157433677",
+        "kind": "image",
+        "title": "NAVSTA Rota Volunteers Get Food and Donations to Evacuees from Afghanistan (6820937)",
+        "source_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c9/NAVSTA_Rota_Volunteers_Get_Food_and_Donations_to_Evacuees_from_Afghanistan_%286820937%29.jpg/1920px-NAVSTA_Rota_Volunteers_Get_Food_and_Donations_to_Evacuees_from_Afghanistan_%286820937%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "final_score": 0.2994,
+        "width": 1920,
+        "height": 2880,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "charity donation collection",
+          "blankets and food pile",
+          "volunteers sorting supplies"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Represents local charities gathering blankets and dry food for aid.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "like help",
+        "card": {
+          "headline": "LIKE HELP",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "176fb945d6b27b04"
+      },
+      "safety": {
+        "queries": [
+          "charity donation collection",
+          "blankets and food pile",
+          "volunteers sorting supplies"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_004_209b074ae0d66c23.mp4",
+          "cache_key": "209b074ae0d66c23",
+          "frames": 122,
+          "look": "eq=brightness=0.077:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "y",
+            "window_fraction": 0.375,
+            "full_frame_score": 0.2896,
+            "windows": {
+              "salient": {
+                "start": 0.2779,
+                "score": 0.2587
+              },
+              "centre": {
+                "start": 0.3125,
+                "score": 0.2807
+              },
+              "top": {
+                "start": 0.0,
+                "score": 0.1163
+              },
+              "bottom": {
+                "start": 0.625,
+                "score": 0.2789
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'salient' chosen (0.259; best window 0.281; whole frame 0.290; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_004_45a9b681612fa2bf.mp4",
+          "cache_key": "45a9b681612fa2bf",
+          "frames": 122,
+          "look": "eq=brightness=0.077:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.8438,
+            "full_frame_score": 0.2896,
+            "windows": {
+              "centre": {
+                "start": 0.0781,
+                "score": 0.2897
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2696
+              },
+              "right": {
+                "start": 0.1562,
+                "score": 0.2722
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'centre' chosen (0.290; best window 0.290; whole frame 0.290; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "If",
+          "start": 18.7,
+          "end": 18.84
+        },
+        {
+          "text": "you",
+          "start": 18.84,
+          "end": 18.94
+        },
+        {
+          "text": "would",
+          "start": 18.94,
+          "end": 19.04
+        },
+        {
+          "text": "like",
+          "start": 19.04,
+          "end": 19.18
+        },
+        {
+          "text": "to",
+          "start": 19.18,
+          "end": 19.36
+        },
+        {
+          "text": "help,",
+          "start": 19.36,
+          "end": 19.6
+        },
+        {
+          "text": "local",
+          "start": 19.88,
+          "end": 20.08
+        },
+        {
+          "text": "charities",
+          "start": 20.08,
+          "end": 20.62
+        },
+        {
+          "text": "are",
+          "start": 20.62,
+          "end": 20.8
+        },
+        {
+          "text": "collecting",
+          "start": 20.8,
+          "end": 21.14
+        },
+        {
+          "text": "blankets",
+          "start": 21.14,
+          "end": 21.58
+        },
+        {
+          "text": "and",
+          "start": 21.58,
+          "end": 21.88
+        },
+        {
+          "text": "dry",
+          "start": 21.88,
+          "end": 22.12
+        },
+        {
+          "text": "food.",
+          "start": 22.12,
+          "end": 22.5
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "text": "Our thoughts are with every family who has lost someone.",
+      "start": 22.5,
+      "end": 26.15,
+      "duration": 3.65,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "calm candles memorial flood victims",
+      "queries": [
+        "calm candles memorial flood victims",
+        "calm silhouette of grieving family",
+        "calm hands holding memorial flowers"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": true
+      },
+      "provider": "pixabay_image_motion",
+      "clip_id": "7441568",
+      "page_url": "https://pixabay.com/photos/candles-church-religion-burn-flame-7441568/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Ri_Ya on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_image_motion: score 0.244 >= 0.22 for query 'calm candles memorial flood victims' (best of 24 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 1 clip frame(s) passed the logo check (max logo prob 0.00); earlier: pixabay_video: best score 0.203 < 0.22",
+      "relevance_score": 0.2439,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_005.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0001,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.0001,
+            "scene_score": 0.236,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_image_motion:7441568",
+        "kind": "image",
+        "title": "",
+        "source_url": "https://pixabay.com/get/g051f5b312cb428f2b37a1e60afee0e82e1a0f7a7b329249d432ddd3ebf6755550f611fd99612f2f90b9fb3accaad22764902b9823257a2c4afc82414e0a5f919_1280.jpg",
+        "final_score": 0.2839,
+        "width": 1280,
+        "height": 848,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "candles memorial flood victims",
+          "silhouette of grieving family",
+          "hands holding memorial flowers"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": true
+        },
+        "reason": "groq: Conveys sympathy and remembrance for families who have lost loved ones.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "thoughts family",
+        "card": {
+          "headline": "THOUGHTS FAMILY",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "fd9c84a71d7cfe4d"
+      },
+      "safety": {
+        "queries": [
+          "calm candles memorial flood victims",
+          "calm silhouette of grieving family",
+          "calm hands holding memorial flowers"
+        ],
+        "exclude_terms": [
+          "blood",
+          "bloody",
+          "gore",
+          "corpse",
+          "dead body",
+          "injury",
+          "wound",
+          "wounded",
+          "weapon",
+          "gun",
+          "guns",
+          "knife",
+          "explosion",
+          "violence",
+          "violent",
+          "fight",
+          "riot",
+          "crash",
+          "victim",
+          "war zone"
+        ],
+        "no_faces": false,
+        "notes": [
+          "sensitive topic: calm queries, graphic content excluded"
+        ]
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_005_404da01571e17a97.mp4",
+          "cache_key": "404da01571e17a97",
+          "frames": 109,
+          "look": "eq=brightness=0.120:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "y",
+            "window_fraction": 0.8491,
+            "full_frame_score": 0.2379,
+            "windows": {
+              "salient": {
+                "start": 0.1229,
+                "score": 0.2454
+              },
+              "centre": {
+                "start": 0.0755,
+                "score": 0.2426
+              },
+              "top": {
+                "start": 0.0,
+                "score": 0.2387
+              },
+              "bottom": {
+                "start": 0.1509,
+                "score": 0.2453
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'salient' chosen (0.245; best window 0.245; whole frame 0.238; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_005_59bb825d6f296ba5.mp4",
+          "cache_key": "59bb825d6f296ba5",
+          "frames": 109,
+          "look": "eq=brightness=0.120:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.3727,
+            "full_frame_score": 0.2379,
+            "windows": {
+              "salient": {
+                "start": 0.1705,
+                "score": 0.2494
+              },
+              "centre": {
+                "start": 0.3137,
+                "score": 0.2538
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2277
+              },
+              "right": {
+                "start": 0.6273,
+                "score": 0.2453
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'salient' chosen (0.249; best window 0.254; whole frame 0.238; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Our",
+          "start": 22.5,
+          "end": 23.26
+        },
+        {
+          "text": "thoughts",
+          "start": 23.26,
+          "end": 23.52
+        },
+        {
+          "text": "are",
+          "start": 23.52,
+          "end": 23.74
+        },
+        {
+          "text": "with",
+          "start": 23.74,
+          "end": 23.86
+        },
+        {
+          "text": "every",
+          "start": 23.86,
+          "end": 24.06
+        },
+        {
+          "text": "family",
+          "start": 24.06,
+          "end": 24.44
+        },
+        {
+          "text": "who",
+          "start": 24.44,
+          "end": 24.68
+        },
+        {
+          "text": "has",
+          "start": 24.68,
+          "end": 24.78
+        },
+        {
+          "text": "lost",
+          "start": 24.78,
+          "end": 24.96
+        },
+        {
+          "text": "someone.",
+          "start": 24.96,
+          "end": 25.3
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "aspect_ratio": "16:9",
+      "file": "video_16x9.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 26.133
+    },
+    {
+      "aspect_ratio": "9:16",
+      "file": "video_9x16.mp4",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "duration": 26.133
+    }
+  ]
+}

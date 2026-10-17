@@ -1,0 +1,1613 @@
+{
+  "job_id": "c74fbe9be9cc4b6bbad8286375115502",
+  "input_type": "scenes",
+  "duration": 23.85,
+  "language": "en",
+  "scenes": [
+    {
+      "index": 0,
+      "text": "A productive day starts the night before.",
+      "start": 0.0,
+      "end": 3.15,
+      "duration": 3.15,
+      "visual_hint": "person setting an alarm clock on a bedside table at night",
+      "search_text": null,
+      "query": "person setting an alarm clock on a bedside table at night",
+      "queries": [
+        "person setting an alarm clock on a bedside table at night",
+        "nighttime bedroom routine",
+        "setting alarm clock"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "21222",
+      "page_url": "https://pixabay.com/videos/id-21222/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "ha11ok on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.294 >= 0.22 for query 'person setting an alarm clock on a bedside table at night' (best of 19 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.01)",
+      "relevance_score": 0.2945,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_000.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0019,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 10.17,
+            "logo_prob": 0.0073,
+            "scene_score": 0.2779,
+            "result": "ok"
+          },
+          {
+            "time": 30.52,
+            "logo_prob": 0.0046,
+            "scene_score": 0.2745,
+            "result": "ok"
+          },
+          {
+            "time": 50.87,
+            "logo_prob": 0.0098,
+            "scene_score": 0.2783,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:21222",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2019/02/07/21222-316092837_medium.mp4",
+        "final_score": 0.3345,
+        "width": 2560,
+        "height": 1440,
+        "duration": 61.0
+      },
+      "understanding": {
+        "queries": [
+          "person setting an alarm clock on a bedside table at night",
+          "nighttime bedroom routine",
+          "setting alarm clock"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows the evening habit that sets up a productive day (visual_hint used as the first query)",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "productive day",
+        "card": {
+          "headline": "PRODUCTIVE DAY",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "bca4848ccc078ca8"
+      },
+      "safety": {
+        "queries": [
+          "person setting an alarm clock on a bedside table at night",
+          "nighttime bedroom routine",
+          "setting alarm clock"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_000_d6888dfd4ea5929e.mp4",
+          "cache_key": "d6888dfd4ea5929e",
+          "frames": 94,
+          "look": "eq=brightness=-0.120:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_000_6d3cb7b79c74416f.mp4",
+          "cache_key": "6d3cb7b79c74416f",
+          "frames": 94,
+          "look": "eq=brightness=-0.120:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2548,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2734
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.1426
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2557
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.273; best window 0.273; whole frame 0.255; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "1:1": {
+          "file": "seg_000_33a2dc3273ffbb20.mp4",
+          "cache_key": "33a2dc3273ffbb20",
+          "frames": 94,
+          "look": "eq=brightness=-0.120:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.5625,
+            "full_frame_score": 0.2548,
+            "windows": {
+              "salient": {
+                "start": 0.3875,
+                "score": 0.2847
+              },
+              "centre": {
+                "start": 0.2188,
+                "score": 0.2911
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.1562
+              },
+              "right": {
+                "start": 0.4375,
+                "score": 0.2844
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'salient' chosen (0.285; best window 0.291; whole frame 0.255; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "A",
+          "start": 0.0,
+          "end": 0.38
+        },
+        {
+          "text": "productive",
+          "start": 0.38,
+          "end": 0.74
+        },
+        {
+          "text": "day",
+          "start": 0.74,
+          "end": 1.08
+        },
+        {
+          "text": "starts",
+          "start": 1.08,
+          "end": 1.52
+        },
+        {
+          "text": "the",
+          "start": 1.52,
+          "end": 1.72
+        },
+        {
+          "text": "night",
+          "start": 1.72,
+          "end": 1.86
+        },
+        {
+          "text": "before.",
+          "start": 1.86,
+          "end": 2.16
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "text": "Wake up at the same time every morning, even on weekends.",
+      "start": 3.15,
+      "end": 7.3,
+      "duration": 4.15,
+      "visual_hint": "sunrise through a bedroom window",
+      "search_text": null,
+      "query": "consistent morning sunrise",
+      "queries": [
+        "sunrise through a bedroom window",
+        "consistent morning sunrise",
+        "sunlight through bedroom window"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "189813",
+      "page_url": "https://pixabay.com/videos/id-189813/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Matthias_Groeneveld on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.233 >= 0.22 for query 'consistent morning sunrise' (best of 21 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.00)",
+      "relevance_score": 0.2329,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_001.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0001,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 4.01,
+            "logo_prob": 0.0001,
+            "scene_score": 0.2252,
+            "result": "ok"
+          },
+          {
+            "time": 12.02,
+            "logo_prob": 0.0002,
+            "scene_score": 0.1772,
+            "result": "ok"
+          },
+          {
+            "time": 20.03,
+            "logo_prob": 0.0001,
+            "scene_score": 0.2186,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:189813",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2023/11/19/189813-887078786_medium.mp4",
+        "final_score": 0.2729,
+        "width": 2560,
+        "height": 1440,
+        "duration": 23.0
+      },
+      "understanding": {
+        "queries": [
+          "sunrise through a bedroom window",
+          "consistent morning sunrise",
+          "sunlight through bedroom window"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Illustrates waking up at the same time each day (visual_hint used as the first query)",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "wake morning",
+        "card": {
+          "headline": "WAKE MORNING",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "bfc52f0f5e5f2a8c"
+      },
+      "safety": {
+        "queries": [
+          "sunrise through a bedroom window",
+          "consistent morning sunrise",
+          "sunlight through bedroom window"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_001_0cd329890fdf9755.mp4",
+          "cache_key": "0cd329890fdf9755",
+          "frames": 125,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_001_7336c545f86d6891.mp4",
+          "cache_key": "7336c545f86d6891",
+          "frames": 125,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2283,
+            "windows": {
+              "salient": {
+                "start": 0.2968,
+                "score": 0.2519
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.242
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.1905
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2526
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'salient' chosen (0.252; best window 0.253; whole frame 0.228; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "1:1": {
+          "file": "seg_001_7e8d5393b5b316e0.mp4",
+          "cache_key": "7e8d5393b5b316e0",
+          "frames": 125,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.5625,
+            "full_frame_score": 0.2283,
+            "windows": {
+              "salient": {
+                "start": 0.1738,
+                "score": 0.2365
+              },
+              "centre": {
+                "start": 0.2188,
+                "score": 0.2317
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2158
+              },
+              "right": {
+                "start": 0.4375,
+                "score": 0.229
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'salient' chosen (0.236; best window 0.236; whole frame 0.228; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Wake",
+          "start": 3.3,
+          "end": 3.58
+        },
+        {
+          "text": "up",
+          "start": 3.58,
+          "end": 3.76
+        },
+        {
+          "text": "at",
+          "start": 3.76,
+          "end": 3.88
+        },
+        {
+          "text": "the",
+          "start": 3.88,
+          "end": 3.94
+        },
+        {
+          "text": "same",
+          "start": 3.94,
+          "end": 4.2
+        },
+        {
+          "text": "time",
+          "start": 4.2,
+          "end": 4.48
+        },
+        {
+          "text": "every",
+          "start": 4.48,
+          "end": 4.82
+        },
+        {
+          "text": "morning,",
+          "start": 4.82,
+          "end": 5.18
+        },
+        {
+          "text": "even",
+          "start": 5.6,
+          "end": 5.8
+        },
+        {
+          "text": "on",
+          "start": 5.8,
+          "end": 5.96
+        },
+        {
+          "text": "weekends.",
+          "start": 5.96,
+          "end": 6.24
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "text": "Drink a full glass of water before you reach for your phone.",
+      "start": 7.3,
+      "end": 11.325,
+      "duration": 4.025,
+      "visual_hint": "pouring water into a glass in a bright kitchen",
+      "search_text": null,
+      "query": "pouring water into glass",
+      "queries": [
+        "pouring water into a glass in a bright kitchen",
+        "glass of water on kitchen counter",
+        "pouring water into glass"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "2290",
+      "page_url": "https://pixabay.com/videos/id-2290/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Coverr-Free-Footage on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.299 >= 0.22 for query 'pouring water into glass' (best of 21 candidates, order bonus +0.04); logo check ok (logo prob 0.01); 3 clip frame(s) passed the logo check (max logo prob 0.04)",
+      "relevance_score": 0.2995,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_002.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.008,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.61,
+            "logo_prob": 0.0095,
+            "scene_score": 0.2832,
+            "result": "ok"
+          },
+          {
+            "time": 7.84,
+            "logo_prob": 0.0443,
+            "scene_score": 0.2799,
+            "result": "ok"
+          },
+          {
+            "time": 13.07,
+            "logo_prob": 0.0238,
+            "scene_score": 0.2893,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:2290",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2016/02/29/2290-157183576_medium.mp4",
+        "final_score": 0.3395,
+        "width": 1280,
+        "height": 720,
+        "duration": 16.0
+      },
+      "understanding": {
+        "queries": [
+          "pouring water into a glass in a bright kitchen",
+          "glass of water on kitchen counter",
+          "pouring water into glass"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Depicts drinking water before checking the phone (visual_hint used as the first query)",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "drink full",
+        "card": {
+          "headline": "DRINK FULL",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "58ce045f948fea17"
+      },
+      "safety": {
+        "queries": [
+          "pouring water into a glass in a bright kitchen",
+          "glass of water on kitchen counter",
+          "pouring water into glass"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_002_73e76e9655ed609e.mp4",
+          "cache_key": "73e76e9655ed609e",
+          "frames": 121,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_002_afc39aae5498c8f8.mp4",
+          "cache_key": "afc39aae5498c8f8",
+          "frames": 121,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.26,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.3124
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.1767
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.1298
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.312; best window 0.312; whole frame 0.260; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "1:1": {
+          "file": "seg_002_dea5580b6b57694b.mp4",
+          "cache_key": "dea5580b6b57694b",
+          "frames": 121,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.5625,
+            "full_frame_score": 0.26,
+            "windows": {
+              "centre": {
+                "start": 0.2188,
+                "score": 0.2997
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2681
+              },
+              "right": {
+                "start": 0.4375,
+                "score": 0.2538
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.300; best window 0.300; whole frame 0.260; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Drink",
+          "start": 7.54,
+          "end": 7.76
+        },
+        {
+          "text": "a",
+          "start": 7.76,
+          "end": 7.92
+        },
+        {
+          "text": "full",
+          "start": 7.92,
+          "end": 8.16
+        },
+        {
+          "text": "glass",
+          "start": 8.16,
+          "end": 8.42
+        },
+        {
+          "text": "of",
+          "start": 8.42,
+          "end": 8.64
+        },
+        {
+          "text": "water",
+          "start": 8.64,
+          "end": 8.9
+        },
+        {
+          "text": "before",
+          "start": 8.9,
+          "end": 9.44
+        },
+        {
+          "text": "you",
+          "start": 9.44,
+          "end": 9.66
+        },
+        {
+          "text": "reach",
+          "start": 9.66,
+          "end": 9.88
+        },
+        {
+          "text": "for",
+          "start": 9.88,
+          "end": 10.02
+        },
+        {
+          "text": "your",
+          "start": 10.02,
+          "end": 10.14
+        },
+        {
+          "text": "phone.",
+          "start": 10.14,
+          "end": 10.44
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "text": "Spend ten minutes moving your body, with a short walk or some stretching.",
+      "start": 11.325,
+      "end": 16.075,
+      "duration": 4.75,
+      "visual_hint": "woman stretching on a yoga mat in a park",
+      "search_text": null,
+      "query": "woman stretching on a yoga mat in a park",
+      "queries": [
+        "woman stretching on a yoga mat in a park",
+        "morning stretch in park",
+        "short walk outdoors"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "27539",
+      "page_url": "https://pixabay.com/videos/id-27539/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "socialsudo on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.239 >= 0.22 for query 'woman stretching on a yoga mat in a park' (best of 22 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.00)",
+      "relevance_score": 0.2386,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_003.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0016,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 1.37,
+            "logo_prob": 0.0042,
+            "scene_score": 0.2147,
+            "result": "ok"
+          },
+          {
+            "time": 4.1,
+            "logo_prob": 0.0016,
+            "scene_score": 0.2387,
+            "result": "ok"
+          },
+          {
+            "time": 6.83,
+            "logo_prob": 0.0027,
+            "scene_score": 0.2244,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:27539",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2019/10/04/27539-364430966_medium.mp4",
+        "final_score": 0.2786,
+        "width": 2560,
+        "height": 1440,
+        "duration": 8.0
+      },
+      "understanding": {
+        "queries": [
+          "woman stretching on a yoga mat in a park",
+          "morning stretch in park",
+          "short walk outdoors"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Represents a brief movement session like walking or stretching (visual_hint used as the first query)",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "spend ten",
+        "card": {
+          "headline": "SPEND TEN",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "9dcf35902e5a624f"
+      },
+      "safety": {
+        "queries": [
+          "woman stretching on a yoga mat in a park",
+          "morning stretch in park",
+          "short walk outdoors"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_003_e28fe6579515fe0c.mp4",
+          "cache_key": "e28fe6579515fe0c",
+          "frames": 142,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_003_f30c343b60dfd0fa.mp4",
+          "cache_key": "f30c343b60dfd0fa",
+          "frames": 142,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2322,
+            "windows": {
+              "salient": {
+                "start": 0.3721,
+                "score": 0.2304
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2384
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2207
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.225
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'salient' chosen (0.230; best window 0.238; whole frame 0.232; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "1:1": {
+          "file": "seg_003_4b13e0b8daa8d8f9.mp4",
+          "cache_key": "4b13e0b8daa8d8f9",
+          "frames": 142,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.5625,
+            "full_frame_score": 0.2322,
+            "windows": {
+              "salient": {
+                "start": 0.2491,
+                "score": 0.2303
+              },
+              "centre": {
+                "start": 0.2188,
+                "score": 0.2363
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.234
+              },
+              "right": {
+                "start": 0.4375,
+                "score": 0.2351
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'salient' chosen (0.230; best window 0.236; whole frame 0.232; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Spend",
+          "start": 11.54,
+          "end": 11.84
+        },
+        {
+          "text": "10",
+          "start": 11.84,
+          "end": 12.06
+        },
+        {
+          "text": "minutes",
+          "start": 12.06,
+          "end": 12.28
+        },
+        {
+          "text": "moving",
+          "start": 12.28,
+          "end": 12.58
+        },
+        {
+          "text": "your",
+          "start": 12.58,
+          "end": 12.78
+        },
+        {
+          "text": "body",
+          "start": 12.78,
+          "end": 13.08
+        },
+        {
+          "text": "with",
+          "start": 13.08,
+          "end": 13.62
+        },
+        {
+          "text": "a",
+          "start": 13.62,
+          "end": 13.74
+        },
+        {
+          "text": "short",
+          "start": 13.74,
+          "end": 14.0
+        },
+        {
+          "text": "walk",
+          "start": 14.0,
+          "end": 14.3
+        },
+        {
+          "text": "or",
+          "start": 14.3,
+          "end": 14.56
+        },
+        {
+          "text": "some",
+          "start": 14.56,
+          "end": 14.72
+        },
+        {
+          "text": "stretching.",
+          "start": 14.72,
+          "end": 15.1
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "text": "Then write down the three most important tasks for the day.",
+      "start": 16.075,
+      "end": 19.95,
+      "duration": 3.875,
+      "visual_hint": "hand writing a to-do list in a notebook",
+      "search_text": null,
+      "query": "notebook task planning",
+      "queries": [
+        "hand writing a to-do list in a notebook",
+        "hand writing to-do list",
+        "notebook task planning"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "131993",
+      "page_url": "https://pixabay.com/videos/id-131993/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Dx21 on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.270 >= 0.22 for query 'notebook task planning' (best of 20 candidates, order bonus +0.04); logo check ok (logo prob 0.02); 3 clip frame(s) passed the logo check (max logo prob 0.16)",
+      "relevance_score": 0.27,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_004.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0212,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 3.92,
+            "logo_prob": 0.1315,
+            "scene_score": 0.2374,
+            "result": "ok"
+          },
+          {
+            "time": 11.76,
+            "logo_prob": 0.0508,
+            "scene_score": 0.2461,
+            "result": "ok"
+          },
+          {
+            "time": 19.6,
+            "logo_prob": 0.1605,
+            "scene_score": 0.2389,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:131993",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2022/09/20/131993-751915314_medium.mp4",
+        "final_score": 0.31,
+        "width": 1280,
+        "height": 720,
+        "duration": 23.0
+      },
+      "understanding": {
+        "queries": [
+          "hand writing a to-do list in a notebook",
+          "hand writing to-do list",
+          "notebook task planning"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows the act of listing the three most important tasks (visual_hint used as the first query)",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "write three",
+        "card": {
+          "headline": "WRITE THREE",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "82733afb6bacfe87"
+      },
+      "safety": {
+        "queries": [
+          "hand writing a to-do list in a notebook",
+          "hand writing to-do list",
+          "notebook task planning"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_004_19038cb77c94077d.mp4",
+          "cache_key": "19038cb77c94077d",
+          "frames": 116,
+          "look": "eq=saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_004_b410552beff65d3d.mp4",
+          "cache_key": "b410552beff65d3d",
+          "frames": 116,
+          "look": "eq=saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2658,
+            "windows": {
+              "salient": {
+                "start": 0.0829,
+                "score": 0.2544
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2241
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2387
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2221
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'salient' chosen (0.254; best window 0.254; whole frame 0.266; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "1:1": {
+          "file": "seg_004_c0c0c75f653560b4.mp4",
+          "cache_key": "c0c0c75f653560b4",
+          "frames": 116,
+          "look": "eq=saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.5625,
+            "full_frame_score": 0.2658,
+            "windows": {
+              "salient": {
+                "start": 0.0,
+                "score": 0.2549
+              },
+              "centre": {
+                "start": 0.2188,
+                "score": 0.2661
+              },
+              "right": {
+                "start": 0.4375,
+                "score": 0.2616
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'salient' chosen (0.255; best window 0.266; whole frame 0.266; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Then",
+          "start": 16.02,
+          "end": 16.54
+        },
+        {
+          "text": "write",
+          "start": 16.54,
+          "end": 16.72
+        },
+        {
+          "text": "down",
+          "start": 16.72,
+          "end": 17.0
+        },
+        {
+          "text": "the",
+          "start": 17.0,
+          "end": 17.18
+        },
+        {
+          "text": "three",
+          "start": 17.18,
+          "end": 17.44
+        },
+        {
+          "text": "most",
+          "start": 17.44,
+          "end": 17.64
+        },
+        {
+          "text": "important",
+          "start": 17.64,
+          "end": 18.08
+        },
+        {
+          "text": "tasks",
+          "start": 18.08,
+          "end": 18.52
+        },
+        {
+          "text": "for",
+          "start": 18.52,
+          "end": 18.76
+        },
+        {
+          "text": "the",
+          "start": 18.76,
+          "end": 18.84
+        },
+        {
+          "text": "day.",
+          "start": 18.84,
+          "end": 19.08
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "text": "Start with the hardest one, while your mind is still fresh.",
+      "start": 19.95,
+      "end": 23.85,
+      "duration": 3.9,
+      "visual_hint": "focused person working at a desk with a laptop",
+      "search_text": null,
+      "query": "focused person working at a desk with a laptop",
+      "queries": [
+        "focused person working at a desk with a laptop",
+        "person tackling tough task",
+        "focused work at desk"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "42305",
+      "page_url": "https://pixabay.com/videos/id-42305/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "CycleZyklusCiclo on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.275 >= 0.22 for query 'focused person working at a desk with a laptop' (best of 19 candidates, order bonus +0.04); logo check ok (logo prob 0.17); 3 clip frame(s) passed the logo check (max logo prob 0.19); earlier: pixabay_video: logo check rejected 1, best: pixabay_video:137186 (logo prob 0.83, scene 0.249) (3 checked)",
+      "relevance_score": 0.2753,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_005.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.1708,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.49,
+            "logo_prob": 0.0894,
+            "scene_score": 0.2398,
+            "result": "ok"
+          },
+          {
+            "time": 7.48,
+            "logo_prob": 0.1931,
+            "scene_score": 0.242,
+            "result": "ok"
+          },
+          {
+            "time": 12.47,
+            "logo_prob": 0.1231,
+            "scene_score": 0.2532,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:42305",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2020/06/16/42305-431511171_medium.mp4",
+        "final_score": 0.3153,
+        "width": 1280,
+        "height": 720,
+        "duration": 15.0
+      },
+      "understanding": {
+        "queries": [
+          "focused person working at a desk with a laptop",
+          "person tackling tough task",
+          "focused work at desk"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Conveys beginning the day with the most challenging work while the mind is fresh (visual_hint used as the first query)",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "start hardest",
+        "card": {
+          "headline": "START HARDEST",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "79b9f88094687341"
+      },
+      "safety": {
+        "queries": [
+          "focused person working at a desk with a laptop",
+          "person tackling tough task",
+          "focused work at desk"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_005_7062408cd772c6cc.mp4",
+          "cache_key": "7062408cd772c6cc",
+          "frames": 118,
+          "look": "eq=brightness=-0.076:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_005_c33e4c2e4619e39f.mp4",
+          "cache_key": "c33e4c2e4619e39f",
+          "frames": 118,
+          "look": "eq=brightness=-0.076:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (left)",
+          "crop": {
+            "method": "clip",
+            "choice": "left",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2845,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2437
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2922
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2666
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'left' chosen (0.292; best window 0.292; whole frame 0.284; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "1:1": {
+          "file": "seg_005_15de2eb139bbf73d.mp4",
+          "cache_key": "15de2eb139bbf73d",
+          "frames": 118,
+          "look": "eq=brightness=-0.076:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.5625,
+            "full_frame_score": 0.2845,
+            "windows": {
+              "centre": {
+                "start": 0.2188,
+                "score": 0.2748
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2911
+              },
+              "right": {
+                "start": 0.4375,
+                "score": 0.2861
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.275; best window 0.291; whole frame 0.284; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Start",
+          "start": 20.02,
+          "end": 20.42
+        },
+        {
+          "text": "with",
+          "start": 20.42,
+          "end": 20.62
+        },
+        {
+          "text": "the",
+          "start": 20.62,
+          "end": 20.72
+        },
+        {
+          "text": "hardest",
+          "start": 20.72,
+          "end": 20.98
+        },
+        {
+          "text": "one",
+          "start": 20.98,
+          "end": 21.3
+        },
+        {
+          "text": "while",
+          "start": 21.3,
+          "end": 21.74
+        },
+        {
+          "text": "your",
+          "start": 21.74,
+          "end": 21.88
+        },
+        {
+          "text": "mind",
+          "start": 21.88,
+          "end": 22.16
+        },
+        {
+          "text": "is",
+          "start": 22.16,
+          "end": 22.36
+        },
+        {
+          "text": "still",
+          "start": 22.36,
+          "end": 22.56
+        },
+        {
+          "text": "fresh.",
+          "start": 22.56,
+          "end": 22.88
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "aspect_ratio": "16:9",
+      "file": "video_16x9.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 23.866
+    },
+    {
+      "aspect_ratio": "9:16",
+      "file": "video_9x16.mp4",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "duration": 23.866
+    },
+    {
+      "aspect_ratio": "1:1",
+      "file": "video_1x1.mp4",
+      "width": 1080,
+      "height": 1080,
+      "fps": 30,
+      "duration": 23.866
+    }
+  ]
+}

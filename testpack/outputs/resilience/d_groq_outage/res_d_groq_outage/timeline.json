@@ -1,0 +1,916 @@
+{
+  "job_id": "0a20fb2898c84e25ab7044d27640c40e",
+  "input_type": "script",
+  "duration": 16.875,
+  "language": "en",
+  "scenes": [
+    {
+      "index": 0,
+      "text": "Cloud computing lets small businesses rent powerful servers instead of buying them.",
+      "start": 0.0,
+      "end": 5.02,
+      "duration": 5.02,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "data center server racks",
+      "queries": [
+        "data center server racks",
+        "network cables in a server room",
+        "people working on laptops in office"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "14900",
+      "page_url": "https://pixabay.com/videos/id-14900/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "cipnt on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.253 >= 0.22 for query 'data center server racks' (best of 20 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.01)",
+      "relevance_score": 0.2525,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_000.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0023,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 3.93,
+            "logo_prob": 0.0066,
+            "scene_score": 0.2362,
+            "result": "ok"
+          },
+          {
+            "time": 11.78,
+            "logo_prob": 0.0026,
+            "scene_score": 0.2413,
+            "result": "ok"
+          },
+          {
+            "time": 19.63,
+            "logo_prob": 0.0045,
+            "scene_score": 0.2276,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:14900",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2018/03/09/14900-259623335_medium.mp4",
+        "final_score": 0.2925,
+        "width": 2560,
+        "height": 1440,
+        "duration": 24.0
+      },
+      "understanding": {
+        "queries": [
+          "data center server racks",
+          "network cables in a server room",
+          "people working on laptops in office"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "rules: 'cloud' read as computing",
+        "source": "rules",
+        "names": [],
+        "number": null,
+        "keyword": "cloud computing",
+        "card": {
+          "headline": "CLOUD COMPUTING",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "225e0e4d54b2dc04"
+      },
+      "safety": {
+        "queries": [
+          "data center server racks",
+          "network cables in a server room",
+          "people working on laptops in office"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_000_ea6443d6745ec46f.mp4",
+          "cache_key": "ea6443d6745ec46f",
+          "frames": 151,
+          "look": "eq=brightness=0.120:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_000_b47dce521a767003.mp4",
+          "cache_key": "b47dce521a767003",
+          "frames": 151,
+          "look": "eq=brightness=0.120:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "subject crop (left)",
+          "crop": {
+            "method": "clip",
+            "choice": "left",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.1887,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.166
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2127
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.1793
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'left' chosen (0.213; best window 0.213; whole frame 0.189; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Cloud",
+          "start": 0.0,
+          "end": 0.48
+        },
+        {
+          "text": "computing",
+          "start": 0.48,
+          "end": 0.98
+        },
+        {
+          "text": "lets",
+          "start": 0.98,
+          "end": 1.4
+        },
+        {
+          "text": "small",
+          "start": 1.4,
+          "end": 1.8
+        },
+        {
+          "text": "businesses",
+          "start": 1.8,
+          "end": 2.28
+        },
+        {
+          "text": "rent",
+          "start": 2.28,
+          "end": 2.6
+        },
+        {
+          "text": "powerful",
+          "start": 2.6,
+          "end": 3.14
+        },
+        {
+          "text": "servers",
+          "start": 3.14,
+          "end": 3.62
+        },
+        {
+          "text": "instead",
+          "start": 3.62,
+          "end": 4.04
+        },
+        {
+          "text": "of",
+          "start": 4.04,
+          "end": 4.2
+        },
+        {
+          "text": "buying",
+          "start": 4.2,
+          "end": 4.44
+        },
+        {
+          "text": "them.",
+          "start": 4.44,
+          "end": 4.66
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "text": "Their files are stored safely in large data centers.",
+      "start": 5.02,
+      "end": 8.73,
+      "duration": 3.71,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "files stored safely",
+      "queries": [
+        "files stored safely",
+        "stored safely",
+        "files stored"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "87146",
+      "page_url": "https://pixabay.com/videos/id-87146/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "tolomedia43 on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.303 >= 0.22 for query 'files stored safely' (best of 11 candidates, order bonus +0.04); logo check ok (logo prob 0.01); 3 clip frame(s) passed the logo check (max logo prob 0.01)",
+      "relevance_score": 0.3034,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_001.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0088,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 0.99,
+            "logo_prob": 0.0122,
+            "scene_score": 0.2883,
+            "result": "ok"
+          },
+          {
+            "time": 2.98,
+            "logo_prob": 0.0009,
+            "scene_score": 0.2614,
+            "result": "ok"
+          },
+          {
+            "time": 4.96,
+            "logo_prob": 0.0061,
+            "scene_score": 0.2766,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:87146",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2021/09/01/87146-601076915_medium.mp4",
+        "final_score": 0.3434,
+        "width": 1280,
+        "height": 720,
+        "duration": 6.0
+      },
+      "understanding": {
+        "queries": [
+          "files stored safely",
+          "stored safely",
+          "files stored"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "rules: keywords of the line",
+        "source": "rules",
+        "names": [],
+        "number": null,
+        "keyword": "files stored",
+        "card": {
+          "headline": "FILES STORED",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "b7b17eb268701082"
+      },
+      "safety": {
+        "queries": [
+          "files stored safely",
+          "stored safely",
+          "files stored"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_001_12b9a2f699571cc9.mp4",
+          "cache_key": "12b9a2f699571cc9",
+          "frames": 111,
+          "look": "eq=brightness=0.015:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_001_fdf4f1f4faf3aec5.mp4",
+          "cache_key": "fdf4f1f4faf3aec5",
+          "frames": 111,
+          "look": "eq=brightness=0.015:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "subject crop (left)",
+          "crop": {
+            "method": "clip",
+            "choice": "left",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.288,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2397
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.3103
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.194
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'left' chosen (0.310; best window 0.310; whole frame 0.288; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Their",
+          "start": 5.38,
+          "end": 5.48
+        },
+        {
+          "text": "files",
+          "start": 5.48,
+          "end": 5.92
+        },
+        {
+          "text": "are",
+          "start": 5.92,
+          "end": 6.14
+        },
+        {
+          "text": "stored",
+          "start": 6.14,
+          "end": 6.42
+        },
+        {
+          "text": "safely",
+          "start": 6.42,
+          "end": 6.86
+        },
+        {
+          "text": "in",
+          "start": 6.86,
+          "end": 7.28
+        },
+        {
+          "text": "large",
+          "start": 7.28,
+          "end": 7.62
+        },
+        {
+          "text": "data",
+          "start": 7.62,
+          "end": 7.96
+        },
+        {
+          "text": "centers.",
+          "start": 7.96,
+          "end": 8.36
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "text": "Teams can work together from anywhere with an internet connection,",
+      "start": 8.73,
+      "end": 12.42,
+      "duration": 3.69,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "teams work",
+      "queries": [
+        "teams work together",
+        "work together",
+        "teams work"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "137265",
+      "page_url": "https://pixabay.com/videos/id-137265/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "blackmarketmusic on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.280 >= 0.22 for query 'teams work' (best of 18 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.25); earlier: pixabay_video: logo check rejected 2, best: pixabay_video:87593 (logo prob 0.98, scene 0.275), pixabay_video:137186 (logo prob 0.83, scene 0.264) (4 checked)",
+      "relevance_score": 0.2795,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_002.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0013,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.41,
+            "logo_prob": 0.0347,
+            "scene_score": 0.2589,
+            "result": "ok"
+          },
+          {
+            "time": 7.24,
+            "logo_prob": 0.0956,
+            "scene_score": 0.2468,
+            "result": "ok"
+          },
+          {
+            "time": 12.07,
+            "logo_prob": 0.2461,
+            "scene_score": 0.2339,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:137265",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2022/10/31/137265-766326232_medium.mp4",
+        "final_score": 0.3195,
+        "width": 2560,
+        "height": 1440,
+        "duration": 14.0
+      },
+      "understanding": {
+        "queries": [
+          "teams work together",
+          "work together",
+          "teams work"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "rules: keywords of the line",
+        "source": "rules",
+        "names": [],
+        "number": null,
+        "keyword": "teams work",
+        "card": {
+          "headline": "TEAMS WORK",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "951f5fe6d7d1d980"
+      },
+      "safety": {
+        "queries": [
+          "teams work together",
+          "work together",
+          "teams work"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_002_a1eb51d35d029f2f.mp4",
+          "cache_key": "a1eb51d35d029f2f",
+          "frames": 111,
+          "look": "eq=brightness=0.093:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_002_10ec9856204ba855.mp4",
+          "cache_key": "10ec9856204ba855",
+          "frames": 111,
+          "look": "eq=brightness=0.093:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2618,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2807
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.1935
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.1715
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.281; best window 0.281; whole frame 0.262; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Teams",
+          "start": 9.1,
+          "end": 9.32
+        },
+        {
+          "text": "can",
+          "start": 9.32,
+          "end": 9.62
+        },
+        {
+          "text": "work",
+          "start": 9.62,
+          "end": 9.8
+        },
+        {
+          "text": "together",
+          "start": 9.8,
+          "end": 10.12
+        },
+        {
+          "text": "from",
+          "start": 10.12,
+          "end": 10.44
+        },
+        {
+          "text": "anywhere",
+          "start": 10.44,
+          "end": 10.82
+        },
+        {
+          "text": "with",
+          "start": 10.82,
+          "end": 11.16
+        },
+        {
+          "text": "an",
+          "start": 11.16,
+          "end": 11.28
+        },
+        {
+          "text": "internet",
+          "start": 11.28,
+          "end": 11.58
+        },
+        {
+          "text": "connection,",
+          "start": 11.58,
+          "end": 12.1
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "text": "and when the business grows, it simply rents more computing power.",
+      "start": 12.42,
+      "end": 16.875,
+      "duration": 4.455,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "team meeting in a small office",
+      "queries": [
+        "small shop owner opening store",
+        "cafe owner at counter",
+        "team meeting in a small office"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "1035",
+      "page_url": "https://pixabay.com/videos/id-1035/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Coverr-Free-Footage on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.244 >= 0.22 for query 'team meeting in a small office' (best of 23 candidates, order bonus +0.04); logo check ok (logo prob 0.02); 3 clip frame(s) passed the logo check (max logo prob 0.06)",
+      "relevance_score": 0.2438,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_003.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0228,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.6,
+            "logo_prob": 0.0618,
+            "scene_score": 0.2408,
+            "result": "ok"
+          },
+          {
+            "time": 7.8,
+            "logo_prob": 0.047,
+            "scene_score": 0.2397,
+            "result": "ok"
+          },
+          {
+            "time": 13.0,
+            "logo_prob": 0.0334,
+            "scene_score": 0.2381,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:1035",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2015/10/16/1035-142621331_medium.mp4",
+        "final_score": 0.2838,
+        "width": 1280,
+        "height": 720,
+        "duration": 16.0
+      },
+      "understanding": {
+        "queries": [
+          "small shop owner opening store",
+          "cafe owner at counter",
+          "team meeting in a small office"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "rules: keywords of the line",
+        "source": "rules",
+        "names": [],
+        "number": null,
+        "keyword": "business grows",
+        "card": {
+          "headline": "BUSINESS GROWS",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "4166b0607868a96c"
+      },
+      "safety": {
+        "queries": [
+          "small shop owner opening store",
+          "cafe owner at counter",
+          "team meeting in a small office"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_003_61fd0e1e85108c0f.mp4",
+          "cache_key": "61fd0e1e85108c0f",
+          "frames": 133,
+          "look": "eq=brightness=-0.038:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_003_f60fda5d506195f0.mp4",
+          "cache_key": "f60fda5d506195f0",
+          "frames": 133,
+          "look": "eq=brightness=-0.038:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "blurred fit",
+          "crop": {
+            "method": "clip",
+            "choice": "blurred fit",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2583,
+            "windows": {
+              "salient": {
+                "start": 0.0,
+                "score": 0.2372
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2334
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2311
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "best window 'salient' 0.237 is more than 0.02 below the whole frame 0.258: every window cuts the subject -> blurred fit"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "and",
+          "start": 12.74,
+          "end": 12.92
+        },
+        {
+          "text": "when",
+          "start": 12.92,
+          "end": 13.04
+        },
+        {
+          "text": "the",
+          "start": 13.04,
+          "end": 13.14
+        },
+        {
+          "text": "business",
+          "start": 13.14,
+          "end": 13.42
+        },
+        {
+          "text": "grows,",
+          "start": 13.42,
+          "end": 13.88
+        },
+        {
+          "text": "it",
+          "start": 14.34,
+          "end": 14.44
+        },
+        {
+          "text": "simply",
+          "start": 14.44,
+          "end": 14.72
+        },
+        {
+          "text": "rents",
+          "start": 14.72,
+          "end": 15.22
+        },
+        {
+          "text": "more",
+          "start": 15.22,
+          "end": 15.36
+        },
+        {
+          "text": "computing",
+          "start": 15.36,
+          "end": 15.8
+        },
+        {
+          "text": "power.",
+          "start": 15.8,
+          "end": 16.18
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "aspect_ratio": "16:9",
+      "file": "video_16x9.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 16.867
+    },
+    {
+      "aspect_ratio": "9:16",
+      "file": "video_9x16.mp4",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "duration": 16.867
+    }
+  ]
+}

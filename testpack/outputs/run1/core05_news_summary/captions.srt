@@ -1,0 +1,57 @@
+1
+00:00:00,000 --> 00:00:02,430
+Here is your city news
+summary for this week.
+
+2
+00:00:02,700 --> 00:00:07,280
+The city council approved 12km of new
+protected bike lanes with work starting
+
+3
+00:00:07,280 --> 00:00:08,270
+next spring.
+
+4
+00:00:08,580 --> 00:00:12,800
+The central library will now stay open
+until 9 in the evening on weekdays after
+
+5
+00:00:12,800 --> 00:00:14,430
+many requests from students.
+
+6
+00:00:14,760 --> 00:00:19,080
+Farmers at the weekend market report an
+early mango season and prices have already
+
+7
+00:00:19,080 --> 00:00:20,190
+started to fall.
+
+8
+00:00:20,400 --> 00:00:24,840
+Meanwhile, the weather office expects
+light rain on Thursday and clear skies
+
+9
+00:00:24,840 --> 00:00:26,060
+through the weekend.
+
+10
+00:00:26,440 --> 00:00:32,120
+Finally, volunteers planted more than 2
+,000 trees along the river path on Sunday
+
+11
+00:00:32,120 --> 00:00:32,830
+morning.
+
+12
+00:00:33,120 --> 00:00:34,760
+That is all for this week.
+
+13
+00:00:34,960 --> 00:00:36,140
+Thank you for listening.

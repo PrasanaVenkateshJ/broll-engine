@@ -1,0 +1,6 @@
+{"scenes": [
+ {"text": "Sometimes the best ideas come when you give yourself space.", "visual_hint": "lone tree on the left side of a wide empty field"},
+ {"text": "A single light can guide you home through the dark.", "visual_hint": "lighthouse at the right edge of a wide rocky coastline"},
+ {"text": "Leave room on the page for the things you have not imagined yet.", "visual_hint": "small sailboat far on the left of a wide calm sea"},
+ {"text": "And keep moving, even when the road ahead looks long.", "visual_hint": "cyclist riding along the right edge of a long empty road"}
+], "voice": "en-US-female", "aspect_ratios": ["16:9", "9:16"]}

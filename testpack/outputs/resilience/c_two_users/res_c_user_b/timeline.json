@@ -1,0 +1,962 @@
+{
+  "job_id": "2a5922a69e764519b7f287497909f17d",
+  "input_type": "script",
+  "duration": 18.525,
+  "language": "en",
+  "scenes": [
+    {
+      "index": 0,
+      "text": "Mountains have always called to explorers, hikers climb steep rocky trails through pine forests,",
+      "start": 0.0,
+      "end": 6.15,
+      "duration": 6.15,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "adventurers trekking mountains",
+      "queries": [
+        "mountain trail hikers",
+        "rocky path pine forest",
+        "adventurers trekking mountains"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "47329",
+      "page_url": "https://pixabay.com/videos/id-47329/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "CLEARSTREAMFILM on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.240 >= 0.22 for query 'adventurers trekking mountains' (best of 24 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.00)",
+      "relevance_score": 0.2401,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_000.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0002,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 1.56,
+            "logo_prob": 0.0001,
+            "scene_score": 0.2229,
+            "result": "ok"
+          },
+          {
+            "time": 4.69,
+            "logo_prob": 0.0001,
+            "scene_score": 0.2152,
+            "result": "ok"
+          },
+          {
+            "time": 7.82,
+            "logo_prob": 0.0003,
+            "scene_score": 0.211,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:47329",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2020/08/16/47329-451164116_medium.mp4",
+        "final_score": 0.2801,
+        "width": 2732,
+        "height": 1440,
+        "duration": 9.0
+      },
+      "understanding": {
+        "queries": [
+          "mountain trail hikers",
+          "rocky path pine forest",
+          "adventurers trekking mountains"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows people hiking steep, rocky mountain trails surrounded by pine trees, matching the explorer theme.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "mountains always",
+        "card": {
+          "headline": "MOUNTAINS ALWAYS",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "c190008f3b8e8111"
+      },
+      "safety": {
+        "queries": [
+          "mountain trail hikers",
+          "rocky path pine forest",
+          "adventurers trekking mountains"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_000_6d2b6eca14245a7b.mp4",
+          "cache_key": "6d2b6eca14245a7b",
+          "frames": 184,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.937,
+            "full_frame_score": 0.2224,
+            "windows": {
+              "centre": {
+                "start": 0.0315,
+                "score": 0.2204
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2206
+              },
+              "right": {
+                "start": 0.063,
+                "score": 0.2077
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.220; best window 0.221; whole frame 0.222; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_000_73c6c21f8925eefd.mp4",
+          "cache_key": "73c6c21f8925eefd",
+          "frames": 184,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.2965,
+            "full_frame_score": 0.2224,
+            "windows": {
+              "centre": {
+                "start": 0.3518,
+                "score": 0.2117
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2271
+              },
+              "right": {
+                "start": 0.7035,
+                "score": 0.1933
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.212; best window 0.227; whole frame 0.222; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Mountains",
+          "start": 0.0,
+          "end": 0.56
+        },
+        {
+          "text": "have",
+          "start": 0.56,
+          "end": 0.9
+        },
+        {
+          "text": "always",
+          "start": 0.9,
+          "end": 1.18
+        },
+        {
+          "text": "called",
+          "start": 1.18,
+          "end": 1.48
+        },
+        {
+          "text": "to",
+          "start": 1.48,
+          "end": 1.68
+        },
+        {
+          "text": "explorers,",
+          "start": 1.68,
+          "end": 2.46
+        },
+        {
+          "text": "hikers",
+          "start": 2.94,
+          "end": 3.26
+        },
+        {
+          "text": "climb",
+          "start": 3.26,
+          "end": 3.5
+        },
+        {
+          "text": "steep",
+          "start": 3.5,
+          "end": 3.9
+        },
+        {
+          "text": "rocky",
+          "start": 3.9,
+          "end": 4.22
+        },
+        {
+          "text": "trails",
+          "start": 4.22,
+          "end": 4.72
+        },
+        {
+          "text": "through",
+          "start": 4.72,
+          "end": 5.0
+        },
+        {
+          "text": "pine",
+          "start": 5.0,
+          "end": 5.34
+        },
+        {
+          "text": "forests,",
+          "start": 5.34,
+          "end": 5.92
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "text": "higher up the trees disappear and snow covers the peaks.",
+      "start": 6.15,
+      "end": 9.98,
+      "duration": 3.83,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "snow capped mountain peaks",
+      "queries": [
+        "snow capped mountain peaks",
+        "treeless alpine summit",
+        "high altitude snowy landscape"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "125695",
+      "page_url": "https://pixabay.com/videos/id-125695/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "OshanGamer on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.277 >= 0.22 for query 'snow capped mountain peaks' (best of 22 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.00)",
+      "relevance_score": 0.277,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_001.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0003,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 3.29,
+            "logo_prob": 0.0003,
+            "scene_score": 0.2399,
+            "result": "ok"
+          },
+          {
+            "time": 9.86,
+            "logo_prob": 0.0022,
+            "scene_score": 0.264,
+            "result": "ok"
+          },
+          {
+            "time": 16.44,
+            "logo_prob": 0.0028,
+            "scene_score": 0.2477,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:125695",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2022/07/27/125695-735655844_medium.mp4",
+        "final_score": 0.317,
+        "width": 1282,
+        "height": 720,
+        "duration": 19.0
+      },
+      "understanding": {
+        "queries": [
+          "snow capped mountain peaks",
+          "treeless alpine summit",
+          "high altitude snowy landscape"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Depicts the upper mountain where trees vanish and snow blankets the peaks.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "higher trees",
+        "card": {
+          "headline": "HIGHER TREES",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "3c840e29831e6e4c"
+      },
+      "safety": {
+        "queries": [
+          "snow capped mountain peaks",
+          "treeless alpine summit",
+          "high altitude snowy landscape"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_001_f764111169632c31.mp4",
+          "cache_key": "f764111169632c31",
+          "frames": 115,
+          "look": "eq=brightness=0.054",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_001_a2f17c5d26d04e01.mp4",
+          "cache_key": "a2f17c5d26d04e01",
+          "frames": 115,
+          "look": "eq=brightness=0.054",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3159,
+            "full_frame_score": 0.2558,
+            "windows": {
+              "centre": {
+                "start": 0.342,
+                "score": 0.2732
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2724
+              },
+              "right": {
+                "start": 0.6841,
+                "score": 0.2858
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.273; best window 0.286; whole frame 0.256; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "higher",
+          "start": 6.38,
+          "end": 6.66
+        },
+        {
+          "text": "up",
+          "start": 6.66,
+          "end": 6.96
+        },
+        {
+          "text": "the",
+          "start": 6.96,
+          "end": 7.28
+        },
+        {
+          "text": "trees",
+          "start": 7.28,
+          "end": 7.56
+        },
+        {
+          "text": "disappear",
+          "start": 7.56,
+          "end": 8.02
+        },
+        {
+          "text": "and",
+          "start": 8.02,
+          "end": 8.36
+        },
+        {
+          "text": "snow",
+          "start": 8.36,
+          "end": 8.74
+        },
+        {
+          "text": "covers",
+          "start": 8.74,
+          "end": 9.12
+        },
+        {
+          "text": "the",
+          "start": 9.12,
+          "end": 9.36
+        },
+        {
+          "text": "peaks.",
+          "start": 9.36,
+          "end": 9.68
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "text": "From the summit, you can see clouds drifting over the valleys below.",
+      "start": 9.98,
+      "end": 14.04,
+      "duration": 4.06,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "summit view over clouds",
+      "queries": [
+        "panoramic valley clouds",
+        "summit view over clouds",
+        "mountain top overlooking valleys"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "128109",
+      "page_url": "https://pixabay.com/videos/id-128109/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "JoshuaWoroniecki on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.301 >= 0.22 for query 'summit view over clouds' (best of 23 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.00)",
+      "relevance_score": 0.301,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_002.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0007,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.08,
+            "logo_prob": 0.001,
+            "scene_score": 0.2893,
+            "result": "ok"
+          },
+          {
+            "time": 6.25,
+            "logo_prob": 0.0036,
+            "scene_score": 0.2848,
+            "result": "ok"
+          },
+          {
+            "time": 10.42,
+            "logo_prob": 0.0013,
+            "scene_score": 0.2864,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:128109",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2022/08/17/128109-740854483_medium.mp4",
+        "final_score": 0.341,
+        "width": 2560,
+        "height": 1440,
+        "duration": 12.0
+      },
+      "understanding": {
+        "queries": [
+          "panoramic valley clouds",
+          "summit view over clouds",
+          "mountain top overlooking valleys"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Illustrates a summit perspective with clouds drifting across valleys below.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "summit see",
+        "card": {
+          "headline": "SUMMIT SEE",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "3204266e00e05aa6"
+      },
+      "safety": {
+        "queries": [
+          "panoramic valley clouds",
+          "summit view over clouds",
+          "mountain top overlooking valleys"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_002_ffb13c77b571734f.mp4",
+          "cache_key": "ffb13c77b571734f",
+          "frames": 122,
+          "look": "eq=brightness=0.057",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_002_b5f0d283e504fc36.mp4",
+          "cache_key": "b5f0d283e504fc36",
+          "frames": 122,
+          "look": "eq=brightness=0.057",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2839,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2912
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2829
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2858
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.291; best window 0.291; whole frame 0.284; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "From",
+          "start": 10.28,
+          "end": 10.36
+        },
+        {
+          "text": "the",
+          "start": 10.36,
+          "end": 10.48
+        },
+        {
+          "text": "summit,",
+          "start": 10.48,
+          "end": 10.8
+        },
+        {
+          "text": "you",
+          "start": 11.24,
+          "end": 11.3
+        },
+        {
+          "text": "can",
+          "start": 11.3,
+          "end": 11.44
+        },
+        {
+          "text": "see",
+          "start": 11.44,
+          "end": 11.68
+        },
+        {
+          "text": "clouds",
+          "start": 11.68,
+          "end": 12.1
+        },
+        {
+          "text": "drifting",
+          "start": 12.1,
+          "end": 12.48
+        },
+        {
+          "text": "over",
+          "start": 12.48,
+          "end": 12.84
+        },
+        {
+          "text": "the",
+          "start": 12.84,
+          "end": 12.98
+        },
+        {
+          "text": "valleys",
+          "start": 12.98,
+          "end": 13.28
+        },
+        {
+          "text": "below.",
+          "start": 13.28,
+          "end": 13.7
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "text": "A cold wind blows, but the view is worth every step.",
+      "start": 14.04,
+      "end": 18.525,
+      "duration": 4.485,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "breathtaking alpine vista",
+      "queries": [
+        "windy mountain ridge",
+        "breathtaking alpine vista",
+        "cold breeze on summit"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "22512",
+      "page_url": "https://pixabay.com/videos/id-22512/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "luc_toutsimplement on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.288 >= 0.22 for query 'breathtaking alpine vista' (best of 23 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.00)",
+      "relevance_score": 0.288,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_003.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0005,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 3.29,
+            "logo_prob": 0.0005,
+            "scene_score": 0.2508,
+            "result": "ok"
+          },
+          {
+            "time": 9.88,
+            "logo_prob": 0.0015,
+            "scene_score": 0.2747,
+            "result": "ok"
+          },
+          {
+            "time": 16.47,
+            "logo_prob": 0.0022,
+            "scene_score": 0.2703,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:22512",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2019/04/01/22512-328261507_medium.mp4",
+        "final_score": 0.328,
+        "width": 1922,
+        "height": 1080,
+        "duration": 20.0
+      },
+      "understanding": {
+        "queries": [
+          "windy mountain ridge",
+          "breathtaking alpine vista",
+          "cold breeze on summit"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Conveys the cold wind and rewarding view experienced at the peak.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "cold wind",
+        "card": {
+          "headline": "COLD WIND",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "92ec570aedc9eb7a"
+      },
+      "safety": {
+        "queries": [
+          "windy mountain ridge",
+          "breathtaking alpine vista",
+          "cold breeze on summit"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_003_fd234200907c4a41.mp4",
+          "cache_key": "fd234200907c4a41",
+          "frames": 135,
+          "look": "eq=brightness=0.054",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_003_2dc9479a06ffadf0.mp4",
+          "cache_key": "2dc9479a06ffadf0",
+          "frames": 135,
+          "look": "eq=brightness=0.054",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3161,
+            "full_frame_score": 0.279,
+            "windows": {
+              "centre": {
+                "start": 0.342,
+                "score": 0.2875
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2862
+              },
+              "right": {
+                "start": 0.6839,
+                "score": 0.2918
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.287; best window 0.292; whole frame 0.279; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "A",
+          "start": 14.38,
+          "end": 14.44
+        },
+        {
+          "text": "cold",
+          "start": 14.44,
+          "end": 14.78
+        },
+        {
+          "text": "wind",
+          "start": 14.78,
+          "end": 15.12
+        },
+        {
+          "text": "blows,",
+          "start": 15.12,
+          "end": 15.5
+        },
+        {
+          "text": "but",
+          "start": 16.12,
+          "end": 16.22
+        },
+        {
+          "text": "the",
+          "start": 16.22,
+          "end": 16.34
+        },
+        {
+          "text": "view",
+          "start": 16.34,
+          "end": 16.62
+        },
+        {
+          "text": "is",
+          "start": 16.62,
+          "end": 16.82
+        },
+        {
+          "text": "worth",
+          "start": 16.82,
+          "end": 17.06
+        },
+        {
+          "text": "every",
+          "start": 17.06,
+          "end": 17.46
+        },
+        {
+          "text": "step.",
+          "start": 17.46,
+          "end": 17.84
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "aspect_ratio": "16:9",
+      "file": "video_16x9.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 18.533
+    },
+    {
+      "aspect_ratio": "9:16",
+      "file": "video_9x16.mp4",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "duration": 18.533
+    }
+  ]
+}

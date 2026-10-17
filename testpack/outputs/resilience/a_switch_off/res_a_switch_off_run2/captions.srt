@@ -1,0 +1,37 @@
+1
+00:00:00,000 --> 00:00:02,440
+A city park changes with every season.
+
+2
+00:00:02,700 --> 00:00:05,520
+In spring, cherry trees bloom
+along the walking paths.
+
+3
+00:00:05,800 --> 00:00:09,360
+Children run across the green grass while
+their parents sit on wooden benches.
+
+4
+00:00:09,660 --> 00:00:13,760
+In summer, families spread picnic blankets
+in the shade of tall trees, ducks swim
+
+5
+00:00:13,760 --> 00:00:15,220
+slowly across the pond.
+
+6
+00:00:15,480 --> 00:00:18,690
+In autumn the leaves turn orange
+and red and fall onto the paths.
+
+7
+00:00:18,980 --> 00:00:22,140
+In winter the park is quiet,
+covered in a thin layer of frost.
+
+8
+00:00:22,420 --> 00:00:25,540
+Every season the park gives
+the city a place to breathe.

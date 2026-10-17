@@ -258,7 +258,8 @@ differs between the app and `openapi.yaml`; `tests/unit/test_docs_in_sync.py` do
 - `--out/summary.csv` and `summary.md`: input, job_id, status, error code, narration seconds, turnaround
   seconds, scenes, warnings count.
 - Options: `--api` (default `$BROLL_API_URL` or http://localhost:8000), `--token` (default `$BROLL_API_TOKEN`
-  or `dev-token`), `--ratios`, `--concurrency` (default 2), `--timeout`, `--poll`.
+  or `dev-token`), `--ratios`, `--keep-input-ratios` (a .json input with its own `aspect_ratios` keeps them),
+  `--concurrency` (default 2), `--timeout`, `--poll`.
 
 ## Settings
 
@@ -333,6 +334,7 @@ comments in [.env.example](.env.example). "Code default" is used when the variab
 | `WHISPER_COMPUTE_TYPE` | `int8` | `int8` | int8 = small and fast on a CPU. |
 | `WHISPER_BEAM_SIZE` | `5` | `5` | Beam search width (higher = a bit more accurate, slower). |
 | `WHISPER_LANGUAGE` | *(empty)* | *(empty)* | Language code like "en" or "hi". Empty = detect automatically. |
+| `TRANSLATE_FOR_SEARCH` | `true` | `true` | Non-English narration: Whisper also translates the speech to English, used ONLY for footage search queries; captions stay in the spoken language. |
 | `WHISPER_VAD_FILTER` | `true` | `true` | true = skip parts with no voice (helps with music); timestamps stay correct. |
 | `MOCK_TRANSCRIPT` | `This is a mock transcript. The mock adapter does not list...` | `This is a mock transcript. The mock adapter does not list...` | Mock transcriber: text used for uploaded audio (it cannot really listen). |
 | **Speech checks** | | | |
@@ -353,6 +355,9 @@ comments in [.env.example](.env.example). "Code default" is used when the variab
 | `CAPTION_MAX_SECONDS` | `6.0` | `6.0` | Longest time one caption stays on screen, in seconds. |
 | `CAPTION_LINGER_SECONDS` | `0.4` | `0.4` | Keep a caption up this long after its last word, in seconds. |
 | `CAPTION_FONT` | `Arial` | `Arial` | Font for burned-in captions (falls back to a similar font if missing). |
+| `CAPTION_FONTS_BY_LANGUAGE` | `ta=Noto Sans Tamil,hi=Noto Sans Devanagari,mr=Noto Sans Devanagari,ne=Noto Sans Devanagari` | same | Caption language (Whisper code) -&gt; font. Text with Tamil / Devanagari letters gets that font even without a language code. Fonts ship in `app/fonts` (SIL OFL). |
+| `CAPTION_FONT_SCALES` | `Noto Sans Devanagari=1.4` | same | Size factor per font so every script looks about as big (Noto Sans Devanagari draws small letters at the same size). |
+| `CAPTION_FONTS_DIR` | *(empty = `app/fonts`)* | *(empty)* | Folder of caption font files given to FFmpeg (`fontsdir`). |
 | **Render** | | | |
 | `RENDER_FPS` | `30` | `30` | Frames per second of every output video. |
 | `VIDEO_PRESET` | `veryfast` | `veryfast` | libx264 speed preset (ultrafast ... veryslow) and quality (lower CRF = better, bigger). |

@@ -1,0 +1,2180 @@
+{
+  "job_id": "1405dec809ff420d8bd39a351e7c0368",
+  "input_type": "script",
+  "duration": 37.2,
+  "language": "en",
+  "scenes": [
+    {
+      "index": 0,
+      "text": "Every big journey begins with one small step.",
+      "start": 0.0,
+      "end": 2.96,
+      "duration": 2.96,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "foot stepping onto trail",
+      "queries": [
+        "foot stepping onto trail",
+        "seed sprouting time-lapse",
+        "small stone path start"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "88644",
+      "page_url": "https://pixabay.com/videos/id-88644/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "KIMDAEJEUNG on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.237 >= 0.22 for query 'foot stepping onto trail' (best of 24 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.00)",
+      "relevance_score": 0.2367,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_000.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0001,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 5.51,
+            "logo_prob": 0.0001,
+            "scene_score": 0.2504,
+            "result": "ok"
+          },
+          {
+            "time": 16.52,
+            "logo_prob": 0.0001,
+            "scene_score": 0.2478,
+            "result": "ok"
+          },
+          {
+            "time": 27.54,
+            "logo_prob": 0.0001,
+            "scene_score": 0.2515,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:88644",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2021/09/14/88644-608506144_medium.mp4",
+        "final_score": 0.2767,
+        "width": 2560,
+        "height": 1440,
+        "duration": 33.0
+      },
+      "understanding": {
+        "queries": [
+          "foot stepping onto trail",
+          "seed sprouting time-lapse",
+          "small stone path start"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows a literal small step starting a larger journey.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "big journey",
+        "card": {
+          "headline": "BIG JOURNEY",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "ccb83a7339c78842"
+      },
+      "safety": {
+        "queries": [
+          "foot stepping onto trail",
+          "seed sprouting time-lapse",
+          "small stone path start"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_000_e31a5669b9b5407b.mp4",
+          "cache_key": "e31a5669b9b5407b",
+          "frames": 89,
+          "look": "eq=brightness=0.106:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_000_62239f3f928b3e5e.mp4",
+          "cache_key": "62239f3f928b3e5e",
+          "frames": 89,
+          "look": "eq=brightness=0.106:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2074,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2475
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2241
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2164
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.247; best window 0.247; whole frame 0.207; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Every",
+          "start": 0.14,
+          "end": 0.72
+        },
+        {
+          "text": "big",
+          "start": 0.72,
+          "end": 0.98
+        },
+        {
+          "text": "journey",
+          "start": 0.98,
+          "end": 1.32
+        },
+        {
+          "text": "begins",
+          "start": 1.32,
+          "end": 1.68
+        },
+        {
+          "text": "with",
+          "start": 1.68,
+          "end": 1.92
+        },
+        {
+          "text": "one",
+          "start": 1.92,
+          "end": 2.12
+        },
+        {
+          "text": "small",
+          "start": 2.12,
+          "end": 2.4
+        },
+        {
+          "text": "step.",
+          "start": 2.4,
+          "end": 2.74
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "text": "You do not need to have everything figured out today.",
+      "start": 2.96,
+      "end": 5.27,
+      "duration": 2.31,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "open road sunrise",
+      "queries": [
+        "open road sunrise",
+        "blank notebook pages",
+        "cloudy sky horizon"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "generated",
+      "clip_id": "card-001-cbec77eb",
+      "page_url": "",
+      "licence": "Generated by broll-engine (FFmpeg motion card)",
+      "licence_url": "",
+      "attribution": "",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": true,
+      "reason": "no stock source passed the rule (pixabay_video: best score 0.198 < 0.22; pixabay_image_motion: best score 0.208 < 0.22; wikimedia: best score 0.177 < 0.22) -> generated motion card 'NEED FIGURED'",
+      "relevance_score": null,
+      "card_text": "NEED FIGURED",
+      "card_subtitle": "",
+      "card_source": "narration",
+      "card_numbers": [],
+      "thumbnail": "thumb_001.jpg",
+      "logo_check": null,
+      "clip_details": {
+        "uid": "generated:card-001-cbec77eb",
+        "kind": "generated",
+        "title": "NEED FIGURED",
+        "source_url": "",
+        "final_score": null,
+        "width": 0,
+        "height": 0,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "open road sunrise",
+          "blank notebook pages",
+          "cloudy sky horizon"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Conveys openness and the idea that you don’t need a complete plan right now.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "need figured",
+        "card": {
+          "headline": "NEED FIGURED",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "7ba9b9bc164d1ca4"
+      },
+      "safety": {
+        "queries": [
+          "open road sunrise",
+          "blank notebook pages",
+          "cloudy sky horizon"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_001_fa5723c40fdf3e27.mp4",
+          "cache_key": "fa5723c40fdf3e27",
+          "frames": 69,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_001_67648a0a44ec3ae6.mp4",
+          "cache_key": "67648a0a44ec3ae6",
+          "frames": 69,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "You",
+          "start": 3.18,
+          "end": 3.26
+        },
+        {
+          "text": "do",
+          "start": 3.26,
+          "end": 3.36
+        },
+        {
+          "text": "not",
+          "start": 3.36,
+          "end": 3.48
+        },
+        {
+          "text": "need",
+          "start": 3.48,
+          "end": 3.62
+        },
+        {
+          "text": "to",
+          "start": 3.62,
+          "end": 3.78
+        },
+        {
+          "text": "have",
+          "start": 3.78,
+          "end": 3.88
+        },
+        {
+          "text": "everything",
+          "start": 3.88,
+          "end": 4.26
+        },
+        {
+          "text": "figured",
+          "start": 4.26,
+          "end": 4.58
+        },
+        {
+          "text": "out",
+          "start": 4.58,
+          "end": 4.78
+        },
+        {
+          "text": "today.",
+          "start": 4.78,
+          "end": 5.02
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "text": "You only need to begin. Think about a runner training for a marathon.",
+      "start": 5.27,
+      "end": 8.82,
+      "duration": 3.55,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "runner tying shoes",
+      "queries": [
+        "runner tying shoes",
+        "starting line empty",
+        "early morning jog trail"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "15748",
+      "page_url": "https://pixabay.com/videos/id-15748/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "anncapictures on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.246 >= 0.22 for query 'runner tying shoes' (best of 24 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.01)",
+      "relevance_score": 0.2461,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_002.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0011,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 4.82,
+            "logo_prob": 0.0027,
+            "scene_score": 0.2547,
+            "result": "ok"
+          },
+          {
+            "time": 14.46,
+            "logo_prob": 0.0013,
+            "scene_score": 0.2647,
+            "result": "ok"
+          },
+          {
+            "time": 24.11,
+            "logo_prob": 0.0053,
+            "scene_score": 0.2459,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:15748",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2018/04/22/15748-266043652_medium.mp4",
+        "final_score": 0.2861,
+        "width": 1280,
+        "height": 720,
+        "duration": 29.0
+      },
+      "understanding": {
+        "queries": [
+          "runner tying shoes",
+          "starting line empty",
+          "early morning jog trail"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Illustrates the act of beginning, using a runner as the metaphor.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "need begin",
+        "card": {
+          "headline": "NEED BEGIN",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "1e8056e67c812b4d"
+      },
+      "safety": {
+        "queries": [
+          "runner tying shoes",
+          "starting line empty",
+          "early morning jog trail"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_002_8230b1338a64a972.mp4",
+          "cache_key": "8230b1338a64a972",
+          "frames": 107,
+          "look": "eq=brightness=-0.073:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_002_bd249d3d4876a129.mp4",
+          "cache_key": "bd249d3d4876a129",
+          "frames": 107,
+          "look": "eq=brightness=-0.073:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2515,
+            "windows": {
+              "salient": {
+                "start": 0.6595,
+                "score": 0.2495
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.226
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2206
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2511
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'salient' chosen (0.249; best window 0.251; whole frame 0.252; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "You",
+          "start": 5.52,
+          "end": 5.64
+        },
+        {
+          "text": "only",
+          "start": 5.64,
+          "end": 5.88
+        },
+        {
+          "text": "need",
+          "start": 5.88,
+          "end": 6.1
+        },
+        {
+          "text": "to",
+          "start": 6.1,
+          "end": 6.26
+        },
+        {
+          "text": "begin.",
+          "start": 6.26,
+          "end": 6.52
+        },
+        {
+          "text": "Think",
+          "start": 6.96,
+          "end": 7.08
+        },
+        {
+          "text": "about",
+          "start": 7.08,
+          "end": 7.28
+        },
+        {
+          "text": "a",
+          "start": 7.28,
+          "end": 7.4
+        },
+        {
+          "text": "runner",
+          "start": 7.4,
+          "end": 7.54
+        },
+        {
+          "text": "training",
+          "start": 7.54,
+          "end": 7.92
+        },
+        {
+          "text": "for",
+          "start": 7.92,
+          "end": 8.14
+        },
+        {
+          "text": "a",
+          "start": 8.14,
+          "end": 8.24
+        },
+        {
+          "text": "marathon.",
+          "start": 8.24,
+          "end": 8.54
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "text": "On the first day, they cannot run 40 kilometers.",
+      "start": 8.82,
+      "end": 11.47,
+      "duration": 2.65,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "short distance marker",
+      "queries": [
+        "short distance marker",
+        "runner stopping early",
+        "map showing short route"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": true,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "generated",
+      "clip_id": "card-003-dceecdf6",
+      "page_url": "",
+      "licence": "Generated by broll-engine (FFmpeg motion card)",
+      "licence_url": "",
+      "attribution": "",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": true,
+      "reason": "statistic line: number card '40' taken from the narration (GENERATED_FOR_STATISTICS=true)",
+      "relevance_score": null,
+      "card_text": "40",
+      "card_subtitle": "they cannot run",
+      "card_source": "narration",
+      "card_numbers": [
+        "40"
+      ],
+      "thumbnail": "thumb_003.jpg",
+      "logo_check": null,
+      "clip_details": {
+        "uid": "generated:card-003-dceecdf6",
+        "kind": "generated",
+        "title": "40 they cannot run",
+        "source_url": "",
+        "final_score": null,
+        "width": 0,
+        "height": 0,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "short distance marker",
+          "runner stopping early",
+          "map showing short route"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": true,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Depicts the initial limitation of only being able to run a short distance.",
+        "source": "groq",
+        "names": [],
+        "number": "40",
+        "keyword": "first day cannot run kilometers",
+        "card": {
+          "headline": "40",
+          "subtitle": "they cannot run",
+          "number": "40",
+          "kind": "number",
+          "source": "narration",
+          "numbers_shown": [
+            "40"
+          ]
+        },
+        "fingerprint": "8db9223ba5b63da3"
+      },
+      "safety": {
+        "queries": [
+          "short distance marker",
+          "runner stopping early",
+          "map showing short route"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_003_bd9f60a0f500b631.mp4",
+          "cache_key": "bd9f60a0f500b631",
+          "frames": 79,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_003_9544261d4bc9c014.mp4",
+          "cache_key": "9544261d4bc9c014",
+          "frames": 79,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "On",
+          "start": 9.1,
+          "end": 9.24
+        },
+        {
+          "text": "the",
+          "start": 9.24,
+          "end": 9.34
+        },
+        {
+          "text": "first",
+          "start": 9.34,
+          "end": 9.48
+        },
+        {
+          "text": "day,",
+          "start": 9.48,
+          "end": 9.7
+        },
+        {
+          "text": "they",
+          "start": 9.84,
+          "end": 9.9
+        },
+        {
+          "text": "cannot",
+          "start": 9.9,
+          "end": 10.16
+        },
+        {
+          "text": "run",
+          "start": 10.16,
+          "end": 10.42
+        },
+        {
+          "text": "40",
+          "start": 10.42,
+          "end": 10.78
+        },
+        {
+          "text": "kilometers.",
+          "start": 10.78,
+          "end": 11.22
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "text": "But they put on their shoes and run around the block.",
+      "start": 11.47,
+      "end": 13.91,
+      "duration": 2.44,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "lacing running shoes",
+      "queries": [
+        "lacing running shoes",
+        "runner on city block",
+        "foot hitting pavement"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "27539",
+      "page_url": "https://pixabay.com/videos/id-27539/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "socialsudo on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.284 >= 0.22 for query 'lacing running shoes' (best of 21 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.00)",
+      "relevance_score": 0.2837,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_004.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0016,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 1.37,
+            "logo_prob": 0.0042,
+            "scene_score": 0.2027,
+            "result": "ok"
+          },
+          {
+            "time": 4.1,
+            "logo_prob": 0.0016,
+            "scene_score": 0.1968,
+            "result": "ok"
+          },
+          {
+            "time": 6.83,
+            "logo_prob": 0.0027,
+            "scene_score": 0.1807,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:27539",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2019/10/04/27539-364430966_medium.mp4",
+        "final_score": 0.3237,
+        "width": 2560,
+        "height": 1440,
+        "duration": 8.0
+      },
+      "understanding": {
+        "queries": [
+          "lacing running shoes",
+          "runner on city block",
+          "foot hitting pavement"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows the simple act of putting on shoes and taking a modest run.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "put shoes",
+        "card": {
+          "headline": "PUT SHOES",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "d55b7027ebadb10b"
+      },
+      "safety": {
+        "queries": [
+          "lacing running shoes",
+          "runner on city block",
+          "foot hitting pavement"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_004_b5cb6d847256900f.mp4",
+          "cache_key": "b5cb6d847256900f",
+          "frames": 73,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_004_f096a7bbc38ba223.mp4",
+          "cache_key": "f096a7bbc38ba223",
+          "frames": 73,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2173,
+            "windows": {
+              "salient": {
+                "start": 0.3796,
+                "score": 0.2415
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.251
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.1825
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.1984
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'salient' chosen (0.241; best window 0.251; whole frame 0.217; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "But",
+          "start": 11.72,
+          "end": 11.9
+        },
+        {
+          "text": "they",
+          "start": 11.9,
+          "end": 12.0
+        },
+        {
+          "text": "put",
+          "start": 12.0,
+          "end": 12.14
+        },
+        {
+          "text": "on",
+          "start": 12.14,
+          "end": 12.28
+        },
+        {
+          "text": "their",
+          "start": 12.28,
+          "end": 12.4
+        },
+        {
+          "text": "shoes",
+          "start": 12.4,
+          "end": 12.6
+        },
+        {
+          "text": "and",
+          "start": 12.6,
+          "end": 12.82
+        },
+        {
+          "text": "run",
+          "start": 12.82,
+          "end": 13.02
+        },
+        {
+          "text": "around",
+          "start": 13.02,
+          "end": 13.28
+        },
+        {
+          "text": "the",
+          "start": 13.28,
+          "end": 13.48
+        },
+        {
+          "text": "block.",
+          "start": 13.48,
+          "end": 13.7
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "text": "The next week, they run a little further. Progress is quiet and slow. And most days, nobody notices it.",
+      "start": 13.91,
+      "end": 19.65,
+      "duration": 5.74,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "runner extending distance",
+      "queries": [
+        "calendar pages turning",
+        "runner extending distance",
+        "quiet sunrise trail"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "32934",
+      "page_url": "https://pixabay.com/videos/id-32934/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Stuck1 on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.225 >= 0.22 for query 'runner extending distance' (best of 23 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.00)",
+      "relevance_score": 0.2247,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_005.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0001,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.12,
+            "logo_prob": 0.0047,
+            "scene_score": 0.155,
+            "result": "ok"
+          },
+          {
+            "time": 6.36,
+            "logo_prob": 0.004,
+            "scene_score": 0.1595,
+            "result": "ok"
+          },
+          {
+            "time": 10.6,
+            "logo_prob": 0.0019,
+            "scene_score": 0.1738,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:32934",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2020/02/27/32934-395456365_medium.mp4",
+        "final_score": 0.2647,
+        "width": 2560,
+        "height": 1440,
+        "duration": 13.0
+      },
+      "understanding": {
+        "queries": [
+          "calendar pages turning",
+          "runner extending distance",
+          "quiet sunrise trail"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Represents gradual, quiet progress that often goes unnoticed.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "next week",
+        "card": {
+          "headline": "NEXT WEEK",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "530aed95f007a9ab"
+      },
+      "safety": {
+        "queries": [
+          "calendar pages turning",
+          "runner extending distance",
+          "quiet sunrise trail"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_005_556e70cfa191ce1a.mp4",
+          "cache_key": "556e70cfa191ce1a",
+          "frames": 173,
+          "look": "eq=brightness=0.020:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_005_e5b8c54306f29e3c.mp4",
+          "cache_key": "e5b8c54306f29e3c",
+          "frames": 173,
+          "look": "eq=brightness=0.020:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2001,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2053
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.206
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2109
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.205; best window 0.211; whole frame 0.200; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "The",
+          "start": 14.12,
+          "end": 14.26
+        },
+        {
+          "text": "next",
+          "start": 14.26,
+          "end": 14.44
+        },
+        {
+          "text": "week,",
+          "start": 14.44,
+          "end": 14.66
+        },
+        {
+          "text": "they",
+          "start": 14.74,
+          "end": 14.82
+        },
+        {
+          "text": "run",
+          "start": 14.82,
+          "end": 15.0
+        },
+        {
+          "text": "a",
+          "start": 15.0,
+          "end": 15.14
+        },
+        {
+          "text": "little",
+          "start": 15.14,
+          "end": 15.28
+        },
+        {
+          "text": "further.",
+          "start": 15.28,
+          "end": 15.62
+        },
+        {
+          "text": "Progress",
+          "start": 16.12,
+          "end": 16.4
+        },
+        {
+          "text": "is",
+          "start": 16.4,
+          "end": 16.66
+        },
+        {
+          "text": "quiet",
+          "start": 16.66,
+          "end": 17.02
+        },
+        {
+          "text": "and",
+          "start": 17.02,
+          "end": 17.22
+        },
+        {
+          "text": "slow.",
+          "start": 17.22,
+          "end": 17.52
+        },
+        {
+          "text": "And",
+          "start": 17.84,
+          "end": 17.96
+        },
+        {
+          "text": "most",
+          "start": 17.96,
+          "end": 18.14
+        },
+        {
+          "text": "days,",
+          "start": 18.14,
+          "end": 18.38
+        },
+        {
+          "text": "nobody",
+          "start": 18.52,
+          "end": 18.74
+        },
+        {
+          "text": "notices",
+          "start": 18.74,
+          "end": 19.14
+        },
+        {
+          "text": "it.",
+          "start": 19.14,
+          "end": 19.48
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "text": "Then one day, they cross the finish line. Your goals work the same way.",
+      "start": 19.65,
+      "end": 23.55,
+      "duration": 3.9,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "confetti celebration",
+      "queries": [
+        "finish line ribbon",
+        "runner crossing finish",
+        "confetti celebration"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "29322",
+      "page_url": "https://pixabay.com/videos/id-29322/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "BestEdmontonMall on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.224 >= 0.22 for query 'confetti celebration' (best of 22 candidates, order bonus +0.04); logo check ok (logo prob 0.01); 3 clip frame(s) passed the logo check (max logo prob 0.01)",
+      "relevance_score": 0.2237,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_006.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0087,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 0.84,
+            "logo_prob": 0.0053,
+            "scene_score": 0.2256,
+            "result": "ok"
+          },
+          {
+            "time": 2.53,
+            "logo_prob": 0.0015,
+            "scene_score": 0.2099,
+            "result": "ok"
+          },
+          {
+            "time": 4.21,
+            "logo_prob": 0.0145,
+            "scene_score": 0.196,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:29322",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2019/11/21/29322-374747506_medium.mp4",
+        "final_score": 0.2637,
+        "width": 1280,
+        "height": 720,
+        "duration": 5.0
+      },
+      "understanding": {
+        "queries": [
+          "finish line ribbon",
+          "runner crossing finish",
+          "confetti celebration"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Visualizes the moment of achievement when the goal is finally reached.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "goals",
+        "card": {
+          "headline": "GOALS",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "98656df617cbaae5"
+      },
+      "safety": {
+        "queries": [
+          "finish line ribbon",
+          "runner crossing finish",
+          "confetti celebration"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_006_6731382a1753df78.mp4",
+          "cache_key": "6731382a1753df78",
+          "frames": 116,
+          "look": "eq=brightness=0.086:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_006_874c89ce64c68f75.mp4",
+          "cache_key": "874c89ce64c68f75",
+          "frames": 116,
+          "look": "eq=brightness=0.086:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2173,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2318
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2233
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2306
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.232; best window 0.232; whole frame 0.217; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Then",
+          "start": 19.82,
+          "end": 20.0
+        },
+        {
+          "text": "one",
+          "start": 20.0,
+          "end": 20.2
+        },
+        {
+          "text": "day,",
+          "start": 20.2,
+          "end": 20.46
+        },
+        {
+          "text": "they",
+          "start": 20.58,
+          "end": 20.66
+        },
+        {
+          "text": "cross",
+          "start": 20.66,
+          "end": 20.88
+        },
+        {
+          "text": "the",
+          "start": 20.88,
+          "end": 21.1
+        },
+        {
+          "text": "finish",
+          "start": 21.1,
+          "end": 21.32
+        },
+        {
+          "text": "line.",
+          "start": 21.32,
+          "end": 21.6
+        },
+        {
+          "text": "Your",
+          "start": 22.1,
+          "end": 22.18
+        },
+        {
+          "text": "goals",
+          "start": 22.18,
+          "end": 22.4
+        },
+        {
+          "text": "work",
+          "start": 22.4,
+          "end": 22.68
+        },
+        {
+          "text": "the",
+          "start": 22.68,
+          "end": 22.86
+        },
+        {
+          "text": "same",
+          "start": 22.86,
+          "end": 23.12
+        },
+        {
+          "text": "way.",
+          "start": 23.12,
+          "end": 23.38
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "text": "Write one page. Learn one new word. Save one coin.",
+      "start": 23.55,
+      "end": 27.84,
+      "duration": 4.29,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "open dictionary page",
+      "queries": [
+        "hand writing page",
+        "open dictionary page",
+        "coin dropped into jar"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "21941",
+      "page_url": "https://pixabay.com/videos/id-21941/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "ElenLackner on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.237 >= 0.22 for query 'open dictionary page' (best of 22 candidates, order bonus +0.04); logo check ok (logo prob 0.03); 3 clip frame(s) passed the logo check (max logo prob 0.01)",
+      "relevance_score": 0.2374,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_007.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0279,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 4.39,
+            "logo_prob": 0.009,
+            "scene_score": 0.2006,
+            "result": "ok"
+          },
+          {
+            "time": 13.18,
+            "logo_prob": 0.0115,
+            "scene_score": 0.2366,
+            "result": "ok"
+          },
+          {
+            "time": 21.97,
+            "logo_prob": 0.0068,
+            "scene_score": 0.2225,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:21941",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2019/03/11/21941-323198485_medium.mp4",
+        "final_score": 0.2774,
+        "width": 2560,
+        "height": 1440,
+        "duration": 26.0
+      },
+      "understanding": {
+        "queries": [
+          "hand writing page",
+          "open dictionary page",
+          "coin dropped into jar"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows small, concrete actions like writing, learning, and saving.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "write page",
+        "card": {
+          "headline": "WRITE PAGE",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "8c00a0cb9583f033"
+      },
+      "safety": {
+        "queries": [
+          "hand writing page",
+          "open dictionary page",
+          "coin dropped into jar"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_007_2ce64b26b318605d.mp4",
+          "cache_key": "2ce64b26b318605d",
+          "frames": 129,
+          "look": "eq=brightness=-0.034:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_007_07c95279e3f7c4b7.mp4",
+          "cache_key": "07c95279e3f7c4b7",
+          "frames": 129,
+          "look": "eq=brightness=-0.034:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2246,
+            "windows": {
+              "salient": {
+                "start": 0.15,
+                "score": 0.2435
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2314
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2394
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2118
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'salient' chosen (0.243; best window 0.243; whole frame 0.225; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Write",
+          "start": 23.72,
+          "end": 23.9
+        },
+        {
+          "text": "one",
+          "start": 23.9,
+          "end": 24.16
+        },
+        {
+          "text": "page.",
+          "start": 24.16,
+          "end": 24.46
+        },
+        {
+          "text": "Learn",
+          "start": 24.92,
+          "end": 25.16
+        },
+        {
+          "text": "one",
+          "start": 25.16,
+          "end": 25.44
+        },
+        {
+          "text": "new",
+          "start": 25.44,
+          "end": 25.68
+        },
+        {
+          "text": "word.",
+          "start": 25.68,
+          "end": 25.94
+        },
+        {
+          "text": "Save",
+          "start": 26.82,
+          "end": 27.24
+        },
+        {
+          "text": "one",
+          "start": 27.24,
+          "end": 27.52
+        },
+        {
+          "text": "coin.",
+          "start": 27.52,
+          "end": 27.84
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "text": "Small actions repeated every day build a life you can be proud of.",
+      "start": 27.84,
+      "end": 32.71,
+      "duration": 4.87,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "time-lapse plant growth",
+      "queries": [
+        "time-lapse plant growth",
+        "stack of daily journals",
+        "sunrise over cityscape"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "generated",
+      "clip_id": "card-008-21c337e5",
+      "page_url": "",
+      "licence": "Generated by broll-engine (FFmpeg motion card)",
+      "licence_url": "",
+      "attribution": "",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": true,
+      "reason": "no stock source passed the rule (pixabay_video: best score 0.177 < 0.22; pixabay_image_motion: best score 0.193 < 0.22; wikimedia: best score 0.193 < 0.22) -> generated motion card 'SMALL ACTIONS'",
+      "relevance_score": null,
+      "card_text": "SMALL ACTIONS",
+      "card_subtitle": "",
+      "card_source": "narration",
+      "card_numbers": [],
+      "thumbnail": "thumb_008.jpg",
+      "logo_check": null,
+      "clip_details": {
+        "uid": "generated:card-008-21c337e5",
+        "kind": "generated",
+        "title": "SMALL ACTIONS",
+        "source_url": "",
+        "final_score": null,
+        "width": 0,
+        "height": 0,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "time-lapse plant growth",
+          "stack of daily journals",
+          "sunrise over cityscape"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Conveys how repeated tiny actions build a fulfilling life over time.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "small actions",
+        "card": {
+          "headline": "SMALL ACTIONS",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "45bce0eeeb240667"
+      },
+      "safety": {
+        "queries": [
+          "time-lapse plant growth",
+          "stack of daily journals",
+          "sunrise over cityscape"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_008_866ddf9dac2f521b.mp4",
+          "cache_key": "866ddf9dac2f521b",
+          "frames": 146,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_008_9332d3bd73d728e2.mp4",
+          "cache_key": "9332d3bd73d728e2",
+          "frames": 146,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Small",
+          "start": 27.84,
+          "end": 28.64
+        },
+        {
+          "text": "actions",
+          "start": 28.64,
+          "end": 29.2
+        },
+        {
+          "text": "repeated",
+          "start": 29.2,
+          "end": 29.78
+        },
+        {
+          "text": "every",
+          "start": 29.78,
+          "end": 30.22
+        },
+        {
+          "text": "day",
+          "start": 30.22,
+          "end": 30.52
+        },
+        {
+          "text": "build",
+          "start": 30.52,
+          "end": 31.08
+        },
+        {
+          "text": "a",
+          "start": 31.08,
+          "end": 31.24
+        },
+        {
+          "text": "life",
+          "start": 31.24,
+          "end": 31.52
+        },
+        {
+          "text": "you",
+          "start": 31.52,
+          "end": 31.7
+        },
+        {
+          "text": "can",
+          "start": 31.7,
+          "end": 31.84
+        },
+        {
+          "text": "be",
+          "start": 31.84,
+          "end": 32.0
+        },
+        {
+          "text": "proud",
+          "start": 32.0,
+          "end": 32.28
+        },
+        {
+          "text": "of.",
+          "start": 32.28,
+          "end": 32.58
+        }
+      ]
+    },
+    {
+      "index": 9,
+      "text": "So close your eyes, take a deep breath and take your first step today.",
+      "start": 32.71,
+      "end": 37.2,
+      "duration": 4.49,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "foot stepping forward",
+      "queries": [
+        "silhouette with closed eyes",
+        "person inhaling breath",
+        "foot stepping forward"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_image_motion",
+      "clip_id": "2293377",
+      "page_url": "https://pixabay.com/photos/desperate-sad-depressed-feet-hands-2293377/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Anemone123 on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_image_motion: score 0.222 >= 0.22 for query 'foot stepping forward' (best of 24 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 1 clip frame(s) passed the logo check (max logo prob 0.00); earlier: pixabay_video: best score 0.197 < 0.22",
+      "relevance_score": 0.2221,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_009.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0006,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.0007,
+            "scene_score": 0.2187,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_image_motion:2293377",
+        "kind": "image",
+        "title": "",
+        "source_url": "https://pixabay.com/get/g7ba0a872336ebb9c6037c095a7a85580dd95d67838b3f9b987b12857a05366010f6f346c972566fc2227ca047a8995d2faa79742045a0d85ecc576488426c683_1280.jpg",
+        "final_score": 0.2621,
+        "width": 1280,
+        "height": 832,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "silhouette with closed eyes",
+          "person inhaling breath",
+          "foot stepping forward"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Encourages mindfulness and taking the first step right now.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "close eyes",
+        "card": {
+          "headline": "CLOSE EYES",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "eb9b955a8fbef8a9"
+      },
+      "safety": {
+        "queries": [
+          "silhouette with closed eyes",
+          "person inhaling breath",
+          "foot stepping forward"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_009_60775dbe23cd3e72.mp4",
+          "cache_key": "60775dbe23cd3e72",
+          "frames": 135,
+          "look": "eq=brightness=0.080:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "y",
+            "window_fraction": 0.8654,
+            "full_frame_score": 0.2153,
+            "windows": {
+              "centre": {
+                "start": 0.0673,
+                "score": 0.2127
+              },
+              "top": {
+                "start": 0.0,
+                "score": 0.2153
+              },
+              "bottom": {
+                "start": 0.1346,
+                "score": 0.2157
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'centre' chosen (0.213; best window 0.216; whole frame 0.215; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_009_3668a51e68ee79e2.mp4",
+          "cache_key": "3668a51e68ee79e2",
+          "frames": 135,
+          "look": "eq=brightness=0.080:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.3656,
+            "full_frame_score": 0.2153,
+            "windows": {
+              "salient": {
+                "start": 0.5197,
+                "score": 0.2137
+              },
+              "centre": {
+                "start": 0.3172,
+                "score": 0.2318
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.1674
+              },
+              "right": {
+                "start": 0.6344,
+                "score": 0.2248
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'salient' chosen (0.214; best window 0.232; whole frame 0.215; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "So",
+          "start": 32.84,
+          "end": 33.02
+        },
+        {
+          "text": "close",
+          "start": 33.02,
+          "end": 33.28
+        },
+        {
+          "text": "your",
+          "start": 33.28,
+          "end": 33.52
+        },
+        {
+          "text": "eyes,",
+          "start": 33.52,
+          "end": 33.9
+        },
+        {
+          "text": "take",
+          "start": 34.24,
+          "end": 34.36
+        },
+        {
+          "text": "a",
+          "start": 34.36,
+          "end": 34.5
+        },
+        {
+          "text": "deep",
+          "start": 34.5,
+          "end": 34.64
+        },
+        {
+          "text": "breath",
+          "start": 34.64,
+          "end": 35.0
+        },
+        {
+          "text": "and",
+          "start": 35.0,
+          "end": 35.38
+        },
+        {
+          "text": "take",
+          "start": 35.38,
+          "end": 35.56
+        },
+        {
+          "text": "your",
+          "start": 35.56,
+          "end": 35.74
+        },
+        {
+          "text": "first",
+          "start": 35.74,
+          "end": 35.98
+        },
+        {
+          "text": "step",
+          "start": 35.98,
+          "end": 36.28
+        },
+        {
+          "text": "today.",
+          "start": 36.28,
+          "end": 36.58
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "aspect_ratio": "16:9",
+      "file": "video_16x9.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 37.199
+    },
+    {
+      "aspect_ratio": "9:16",
+      "file": "video_9x16.mp4",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "duration": 37.199
+    }
+  ]
+}

@@ -123,6 +123,10 @@ class Settings(BaseSettings):
     WHISPER_LANGUAGE: str = ""
     # Skip parts without voice (Silero VAD, bundled with faster-whisper). Helps on music.
     WHISPER_VAD_FILTER: bool = True
+    # Non-English narration: Whisper also translates the speech to English (a second, faster pass). The
+    # English is used ONLY to search for footage; captions stay in the spoken language. false = search
+    # with the original text (Groq still writes English queries; the offline rules then find few words).
+    TRANSLATE_FOR_SEARCH: bool = True
     # Mock transcriber: words used for uploaded audio (it cannot really listen).
     MOCK_TRANSCRIPT: str = "This is a mock transcript. The mock adapter does not listen to the audio."
 
@@ -154,6 +158,16 @@ class Settings(BaseSettings):
     # Keep a caption on screen this long after its last word (unless the next one starts).
     CAPTION_LINGER_SECONDS: float = 0.4
     CAPTION_FONT: str = "Arial"
+    # Caption language (Whisper code) -> font for that script. A caption whose language is not listed but
+    # whose text holds Tamil / Devanagari letters gets that script's font too. Others use CAPTION_FONT.
+    CAPTION_FONTS_BY_LANGUAGE: str = (
+        "ta=Noto Sans Tamil,hi=Noto Sans Devanagari,mr=Noto Sans Devanagari,ne=Noto Sans Devanagari"
+    )
+    # Size factor per font, so every script looks about as big as CAPTION_FONT at the same size. Noto Sans
+    # Devanagari has tall line metrics: at one size its letters were 28 px high vs 46 px for Arial (measured).
+    CAPTION_FONT_SCALES: str = "Noto Sans Devanagari=1.4"
+    # Folder of font files given to FFmpeg's subtitles filter (fontsdir). Empty = app/fonts (Noto, SIL OFL).
+    CAPTION_FONTS_DIR: str = ""
 
     # --- Render ---
     RENDER_FPS: int = 30
@@ -325,6 +339,26 @@ class Settings(BaseSettings):
             if name and lang and voice_id:
                 voices[name.strip()] = (lang.strip(), voice_id.strip())
         return voices
+
+    @property
+    def caption_fonts_by_language(self) -> dict[str, str]:
+        """"ta=Noto Sans Tamil,hi=..." -> {"ta": "Noto Sans Tamil", "hi": ...}"""
+        fonts = {}
+        for item in self.CAPTION_FONTS_BY_LANGUAGE.split(","):
+            lang, _, font = item.partition("=")
+            if lang.strip() and font.strip():
+                fonts[lang.strip().lower()] = font.strip()
+        return fonts
+
+    @property
+    def caption_font_scales(self) -> dict[str, float]:
+        """"Noto Sans Devanagari=1.4" -> {"Noto Sans Devanagari": 1.4}"""
+        scales = {}
+        for item in self.CAPTION_FONT_SCALES.split(","):
+            font, _, factor = item.partition("=")
+            if font.strip() and factor.strip():
+                scales[font.strip()] = float(factor)
+        return scales
 
 
 @lru_cache

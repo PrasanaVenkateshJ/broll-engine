@@ -1,0 +1,39 @@
+{
+  "job_id": "987be7c4fff34b4fb185c478d61cbfe3",
+  "status": "succeeded",
+  "progress": 100,
+  "stage": "done",
+  "input_type": "script",
+  "parent_job_id": null,
+  "warnings": [
+    "Scene 8: clip pixabay_video:132311 shows a logo at 34.7 s of the downloaded clip (logo prob 0.80 > 0.60); tried the next candidate"
+  ],
+  "error": null,
+  "result": {
+    "files": {
+      "video_16x9.mp4": "http://localhost:8000/api/v1/jobs/987be7c4fff34b4fb185c478d61cbfe3/files/video_16x9.mp4?expires=1792247532&sig=57a4a1fc98bd318c488388a1d3326bb314c637c68b3d39ea028633fdca8272aa",
+      "video_9x16.mp4": "http://localhost:8000/api/v1/jobs/987be7c4fff34b4fb185c478d61cbfe3/files/video_9x16.mp4?expires=1792247532&sig=fc8138ab6ab176b8c31d41ef7aded8003f636616ea62efc3401496cae7124314",
+      "captions.srt": "http://localhost:8000/api/v1/jobs/987be7c4fff34b4fb185c478d61cbfe3/files/captions.srt?expires=1792247532&sig=c11f223329b6f4f9b462b3212f2598f8b25fc603bf1e4691f34b25b34feabcc6",
+      "timeline.json": "http://localhost:8000/api/v1/jobs/987be7c4fff34b4fb185c478d61cbfe3/files/timeline.json?expires=1792247532&sig=3c0410865d6dcf172ea380e03eea57dca12e229d4156bf1bff0624165917ed76",
+      "manifest.json": "http://localhost:8000/api/v1/jobs/987be7c4fff34b4fb185c478d61cbfe3/files/manifest.json?expires=1792247532&sig=438ac174d79a2354f473151a5794df495bddf0290e5b74f081c63c2f0cb40d11",
+      "thumb_000.jpg": "http://localhost:8000/api/v1/jobs/987be7c4fff34b4fb185c478d61cbfe3/files/thumb_000.jpg?expires=1792247532&sig=01f51315dc84d65f356226eb73bf320850697b7ab578e2998647f72fd04eccb3",
+      "thumb_001.jpg": "http://localhost:8000/api/v1/jobs/987be7c4fff34b4fb185c478d61cbfe3/files/thumb_001.jpg?expires=1792247532&sig=1873db47db45915c5bb7605e952a46cd286379c48de6d6f3a93eca9f47295c05",
+      "thumb_002.jpg": "http://localhost:8000/api/v1/jobs/987be7c4fff34b4fb185c478d61cbfe3/files/thumb_002.jpg?expires=1792247532&sig=7763f6e654f194162cd0adbf8365145038f82f55e63e037fbae28179aef5193b",
+      "thumb_003.jpg": "http://localhost:8000/api/v1/jobs/987be7c4fff34b4fb185c478d61cbfe3/files/thumb_003.jpg?expires=1792247532&sig=af4734a9dcef376b25440a938a0d3904139876eaf593a9232a67106d47a9f498",
+      "thumb_004.jpg": "http://localhost:8000/api/v1/jobs/987be7c4fff34b4fb185c478d61cbfe3/files/thumb_004.jpg?expires=1792247532&sig=e309bf8671c4f0162eaf7355eeb61c7bab1d383edc0496e218dc7378671cce4b",
+      "thumb_005.jpg": "http://localhost:8000/api/v1/jobs/987be7c4fff34b4fb185c478d61cbfe3/files/thumb_005.jpg?expires=1792247532&sig=125d12e5a1bfcf472be6ea7ab867308f6d546daf5b382ea962fe3e270df47f9b",
+      "thumb_006.jpg": "http://localhost:8000/api/v1/jobs/987be7c4fff34b4fb185c478d61cbfe3/files/thumb_006.jpg?expires=1792247532&sig=3a249965af7f9776463d5a247ad56a840dbfd5a347d205b9709318c7745e55f4",
+      "thumb_007.jpg": "http://localhost:8000/api/v1/jobs/987be7c4fff34b4fb185c478d61cbfe3/files/thumb_007.jpg?expires=1792247532&sig=b7c4daf2e994b1538a1b430d01f3f2d05ea5f9128a12b275eb2293c9e0a233b5",
+      "thumb_008.jpg": "http://localhost:8000/api/v1/jobs/987be7c4fff34b4fb185c478d61cbfe3/files/thumb_008.jpg?expires=1792247532&sig=0c8fc13c4ec1ff42770b6ddb3bfee5d0539d07da8195c51013ae0b6b1ad07381",
+      "thumb_009.jpg": "http://localhost:8000/api/v1/jobs/987be7c4fff34b4fb185c478d61cbfe3/files/thumb_009.jpg?expires=1792247532&sig=50ac7bafad96f874544cda42333c02c1e6c7eaff6cf0ebd9b3689e81b9f36d74",
+      "thumb_010.jpg": "http://localhost:8000/api/v1/jobs/987be7c4fff34b4fb185c478d61cbfe3/files/thumb_010.jpg?expires=1792247532&sig=379b6b5825901e7e61a47e2ceb24ecf353b9063afd0e123f95810ada1f12c4e1",
+      "thumb_011.jpg": "http://localhost:8000/api/v1/jobs/987be7c4fff34b4fb185c478d61cbfe3/files/thumb_011.jpg?expires=1792247532&sig=f9ab13a91813ed2185d2e2e0c2af33bea245b9b97fb91d2638cfc62e9bb72e5d"
+    }
+  },
+  "created_at": "2026-10-17T13:19:19.669141+00:00",
+  "started_at": "2026-10-17T13:19:19.937376+00:00",
+  "finished_at": "2026-10-17T13:32:12.237519+00:00",
+  "links": {
+    "self": "http://localhost:8000/api/v1/jobs/987be7c4fff34b4fb185c478d61cbfe3"
+  }
+}

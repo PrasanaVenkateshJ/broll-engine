@@ -73,6 +73,7 @@ IGNORE = [".git", ".venv", ".env", "**/.env", "data", "**/__pycache__", "**/*.py
 image = (
     modal.Image.debian_slim(python_version="3.11")
     # ffmpeg = all audio/video work; espeak-ng = Kokoro pronunciation helper; fonts-dejavu-core = captions
+    # (Tamil / Devanagari caption fonts come with the code in app/fonts)
     .apt_install("ffmpeg", "espeak-ng", "fonts-dejavu-core")
     .pip_install(*TORCH_PINS, index_url="https://download.pytorch.org/whl/cpu")
     .pip_install_from_requirements(str(REPO / "requirements-ml.txt"))

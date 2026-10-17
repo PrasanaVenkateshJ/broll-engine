@@ -1,0 +1,4267 @@
+{
+  "job_id": "2c119490d9624cc0bad8036d938d5abe",
+  "input_type": "script",
+  "duration": 87.35,
+  "language": "en",
+  "scenes": [
+    {
+      "index": 0,
+      "text": "How do solar panels turn sunlight into electricity? Let us take it step by step.",
+      "start": 0.0,
+      "end": 5.0,
+      "duration": 5.0,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "solar panel animation",
+      "queries": [
+        "solar panel animation",
+        "sunlight to electricity diagram",
+        "energy conversion illustration"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "156444",
+      "page_url": "https://pixabay.com/videos/id-156444/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "adege on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.258 >= 0.22 for query 'solar panel animation' (best of 23 candidates, order bonus +0.04); logo check ok (logo prob 0.01); 3 clip frame(s) passed the logo check (max logo prob 0.16)",
+      "relevance_score": 0.2582,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_000.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.006,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 5.69,
+            "logo_prob": 0.0995,
+            "scene_score": 0.268,
+            "result": "ok"
+          },
+          {
+            "time": 17.07,
+            "logo_prob": 0.1563,
+            "scene_score": 0.2621,
+            "result": "ok"
+          },
+          {
+            "time": 28.44,
+            "logo_prob": 0.015,
+            "scene_score": 0.257,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:156444",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2023/03/28/156444-812591952_medium.mp4",
+        "final_score": 0.2982,
+        "width": 2560,
+        "height": 1440,
+        "duration": 34.0
+      },
+      "understanding": {
+        "queries": [
+          "solar panel animation",
+          "sunlight to electricity diagram",
+          "energy conversion illustration"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows the concept of panels turning light into power in a step‑by‑step visual way.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "solar panels",
+        "card": {
+          "headline": "SOLAR PANELS",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "9439731be48bc699"
+      },
+      "safety": {
+        "queries": [
+          "solar panel animation",
+          "sunlight to electricity diagram",
+          "energy conversion illustration"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_000_7119a889bf5cd0f1.mp4",
+          "cache_key": "7119a889bf5cd0f1",
+          "frames": 150,
+          "look": "eq=saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_000_eeaa3e9f1dea6537.mp4",
+          "cache_key": "eeaa3e9f1dea6537",
+          "frames": 150,
+          "look": "eq=saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2648,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2592
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2633
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2653
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.259; best window 0.265; whole frame 0.265; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "How",
+          "start": 0.14,
+          "end": 0.64
+        },
+        {
+          "text": "do",
+          "start": 0.64,
+          "end": 0.78
+        },
+        {
+          "text": "solar",
+          "start": 0.78,
+          "end": 1.06
+        },
+        {
+          "text": "panels",
+          "start": 1.06,
+          "end": 1.5
+        },
+        {
+          "text": "turn",
+          "start": 1.5,
+          "end": 1.8
+        },
+        {
+          "text": "sunlight",
+          "start": 1.8,
+          "end": 2.22
+        },
+        {
+          "text": "into",
+          "start": 2.22,
+          "end": 2.52
+        },
+        {
+          "text": "electricity?",
+          "start": 2.52,
+          "end": 3.1
+        },
+        {
+          "text": "Let",
+          "start": 3.58,
+          "end": 3.66
+        },
+        {
+          "text": "us",
+          "start": 3.66,
+          "end": 3.8
+        },
+        {
+          "text": "take",
+          "start": 3.8,
+          "end": 4.0
+        },
+        {
+          "text": "it",
+          "start": 4.0,
+          "end": 4.1
+        },
+        {
+          "text": "step",
+          "start": 4.1,
+          "end": 4.3
+        },
+        {
+          "text": "by",
+          "start": 4.3,
+          "end": 4.5
+        },
+        {
+          "text": "step.",
+          "start": 4.5,
+          "end": 4.82
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "text": "A solar panel is made of many small cells, usually built from material called silicon.",
+      "start": 5.0,
+      "end": 10.0,
+      "duration": 5.0,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "silicon wafer solar panel",
+      "queries": [
+        "close-up solar cells",
+        "silicon wafer solar panel",
+        "solar panel cell array"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "922",
+      "page_url": "https://pixabay.com/videos/id-922/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Vimeo-Free-Videos on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.284 >= 0.22 for query 'silicon wafer solar panel' (best of 15 candidates, order bonus +0.04); logo check ok (logo prob 0.01); 3 clip frame(s) passed the logo check (max logo prob 0.05)",
+      "relevance_score": 0.2837,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_001.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.006,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.29,
+            "logo_prob": 0.0522,
+            "scene_score": 0.2528,
+            "result": "ok"
+          },
+          {
+            "time": 6.86,
+            "logo_prob": 0.0264,
+            "scene_score": 0.285,
+            "result": "ok"
+          },
+          {
+            "time": 11.43,
+            "logo_prob": 0.033,
+            "scene_score": 0.2953,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:922",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2015/10/09/922-141891343_medium.mp4",
+        "final_score": 0.3237,
+        "width": 1280,
+        "height": 720,
+        "duration": 14.0
+      },
+      "understanding": {
+        "queries": [
+          "close-up solar cells",
+          "silicon wafer solar panel",
+          "solar panel cell array"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Depicts many tiny silicon cells that compose a panel.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "solar panel",
+        "card": {
+          "headline": "SOLAR PANEL",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "e0bd98dc2b9f3c04"
+      },
+      "safety": {
+        "queries": [
+          "close-up solar cells",
+          "silicon wafer solar panel",
+          "solar panel cell array"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_001_adb6d2b3eec131d0.mp4",
+          "cache_key": "adb6d2b3eec131d0",
+          "frames": 150,
+          "look": "eq=brightness=0.037:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_001_341a34e87089ccb8.mp4",
+          "cache_key": "341a34e87089ccb8",
+          "frames": 150,
+          "look": "eq=brightness=0.037:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "blurred fit",
+          "crop": {
+            "method": "clip",
+            "choice": "blurred fit",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2899,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2516
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2695
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2285
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "best window 'left' 0.270 is more than 0.02 below the whole frame 0.290: every window cuts the subject -> blurred fit"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "A",
+          "start": 5.18,
+          "end": 5.28
+        },
+        {
+          "text": "solar",
+          "start": 5.28,
+          "end": 5.52
+        },
+        {
+          "text": "panel",
+          "start": 5.52,
+          "end": 5.88
+        },
+        {
+          "text": "is",
+          "start": 5.88,
+          "end": 6.08
+        },
+        {
+          "text": "made",
+          "start": 6.08,
+          "end": 6.28
+        },
+        {
+          "text": "of",
+          "start": 6.28,
+          "end": 6.42
+        },
+        {
+          "text": "many",
+          "start": 6.42,
+          "end": 6.6
+        },
+        {
+          "text": "small",
+          "start": 6.6,
+          "end": 6.94
+        },
+        {
+          "text": "cells,",
+          "start": 6.94,
+          "end": 7.36
+        },
+        {
+          "text": "usually",
+          "start": 7.74,
+          "end": 8.0
+        },
+        {
+          "text": "built",
+          "start": 8.0,
+          "end": 8.3
+        },
+        {
+          "text": "from",
+          "start": 8.3,
+          "end": 8.5
+        },
+        {
+          "text": "material",
+          "start": 8.5,
+          "end": 8.9
+        },
+        {
+          "text": "called",
+          "start": 8.9,
+          "end": 9.3
+        },
+        {
+          "text": "silicon.",
+          "start": 9.3,
+          "end": 9.68
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "text": "Silicon is a semiconductor, which means it can carry electricity under the right conditions.",
+      "start": 10.0,
+      "end": 15.05,
+      "duration": 5.05,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "silicon semiconductor material",
+      "queries": [
+        "silicon semiconductor material",
+        "electrical conductivity silicon",
+        "semiconductor crystal structure"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "13370",
+      "page_url": "https://pixabay.com/videos/id-13370/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Art-Production on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.278 >= 0.22 for query 'silicon semiconductor material' (best of 23 candidates, order bonus +0.04); logo check ok (logo prob 0.03); 3 clip frame(s) passed the logo check (max logo prob 0.23)",
+      "relevance_score": 0.2779,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_002.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0275,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 1.92,
+            "logo_prob": 0.0742,
+            "scene_score": 0.2528,
+            "result": "ok"
+          },
+          {
+            "time": 5.77,
+            "logo_prob": 0.231,
+            "scene_score": 0.2474,
+            "result": "ok"
+          },
+          {
+            "time": 9.61,
+            "logo_prob": 0.0982,
+            "scene_score": 0.2339,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:13370",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2017/12/14/13370-247710847_medium.mp4",
+        "final_score": 0.3179,
+        "width": 1280,
+        "height": 720,
+        "duration": 12.0
+      },
+      "understanding": {
+        "queries": [
+          "silicon semiconductor material",
+          "electrical conductivity silicon",
+          "semiconductor crystal structure"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Illustrates silicon as a semiconductor that can carry electricity.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "silicon semiconductor",
+        "card": {
+          "headline": "SILICON SEMICONDUCTOR",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "ee3a00c1667afa10"
+      },
+      "safety": {
+        "queries": [
+          "silicon semiconductor material",
+          "electrical conductivity silicon",
+          "semiconductor crystal structure"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_002_43c20692e9faac04.mp4",
+          "cache_key": "43c20692e9faac04",
+          "frames": 152,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_002_3b1790564a16cb30.mp4",
+          "cache_key": "3b1790564a16cb30",
+          "frames": 152,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2641,
+            "windows": {
+              "salient": {
+                "start": 0.5167,
+                "score": 0.2783
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2711
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2685
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2692
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'salient' chosen (0.278; best window 0.278; whole frame 0.264; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Silicon",
+          "start": 10.32,
+          "end": 10.54
+        },
+        {
+          "text": "is",
+          "start": 10.54,
+          "end": 10.9
+        },
+        {
+          "text": "a",
+          "start": 10.9,
+          "end": 11.02
+        },
+        {
+          "text": "semiconductor,",
+          "start": 11.02,
+          "end": 11.46
+        },
+        {
+          "text": "which",
+          "start": 12.06,
+          "end": 12.22
+        },
+        {
+          "text": "means",
+          "start": 12.22,
+          "end": 12.5
+        },
+        {
+          "text": "it",
+          "start": 12.5,
+          "end": 12.64
+        },
+        {
+          "text": "can",
+          "start": 12.64,
+          "end": 12.78
+        },
+        {
+          "text": "carry",
+          "start": 12.78,
+          "end": 13.02
+        },
+        {
+          "text": "electricity",
+          "start": 13.02,
+          "end": 13.62
+        },
+        {
+          "text": "under",
+          "start": 13.62,
+          "end": 13.94
+        },
+        {
+          "text": "the",
+          "start": 13.94,
+          "end": 14.08
+        },
+        {
+          "text": "right",
+          "start": 14.08,
+          "end": 14.28
+        },
+        {
+          "text": "conditions.",
+          "start": 14.28,
+          "end": 14.8
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "text": "When sunlight hits a solar cell, tiny particles of light called photons knock electrons loose from the silicon atoms.",
+      "start": 15.05,
+      "end": 22.14,
+      "duration": 7.09,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "photons hitting solar cell",
+      "queries": [
+        "photons hitting solar cell",
+        "electron excitation illustration",
+        "light particles solar panel"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "370344",
+      "page_url": "https://pixabay.com/videos/id-370344/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "adege on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.236 >= 0.22 for query 'photons hitting solar cell' (best of 17 candidates, order bonus +0.04); logo check ok (logo prob 0.17); 3 clip frame(s) passed the logo check (max logo prob 0.27)",
+      "relevance_score": 0.2363,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_003.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.1737,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 6.9,
+            "logo_prob": 0.2509,
+            "scene_score": 0.2144,
+            "result": "ok"
+          },
+          {
+            "time": 20.7,
+            "logo_prob": 0.2655,
+            "scene_score": 0.2158,
+            "result": "ok"
+          },
+          {
+            "time": 34.5,
+            "logo_prob": 0.2135,
+            "scene_score": 0.2025,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:370344",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2026/08/13/370344_medium.mp4",
+        "final_score": 0.2763,
+        "width": 2560,
+        "height": 1440,
+        "duration": 41.0
+      },
+      "understanding": {
+        "queries": [
+          "photons hitting solar cell",
+          "electron excitation illustration",
+          "light particles solar panel"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Visualizes light photons freeing electrons in the cell.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "sunlight hits",
+        "card": {
+          "headline": "SUNLIGHT HITS",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "c68b8ed4273503a8"
+      },
+      "safety": {
+        "queries": [
+          "photons hitting solar cell",
+          "electron excitation illustration",
+          "light particles solar panel"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_003_58b85ed05382fab5.mp4",
+          "cache_key": "58b85ed05382fab5",
+          "frames": 212,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_003_57d6630d4be917f9.mp4",
+          "cache_key": "57d6630d4be917f9",
+          "frames": 212,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2207,
+            "windows": {
+              "salient": {
+                "start": 0.185,
+                "score": 0.2314
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2191
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2276
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2045
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'salient' chosen (0.231; best window 0.231; whole frame 0.221; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "When",
+          "start": 15.3,
+          "end": 15.42
+        },
+        {
+          "text": "sunlight",
+          "start": 15.42,
+          "end": 15.82
+        },
+        {
+          "text": "hits",
+          "start": 15.82,
+          "end": 16.12
+        },
+        {
+          "text": "a",
+          "start": 16.12,
+          "end": 16.3
+        },
+        {
+          "text": "solar",
+          "start": 16.3,
+          "end": 16.54
+        },
+        {
+          "text": "cell,",
+          "start": 16.54,
+          "end": 16.94
+        },
+        {
+          "text": "tiny",
+          "start": 17.26,
+          "end": 17.48
+        },
+        {
+          "text": "particles",
+          "start": 17.48,
+          "end": 17.96
+        },
+        {
+          "text": "of",
+          "start": 17.96,
+          "end": 18.2
+        },
+        {
+          "text": "light",
+          "start": 18.2,
+          "end": 18.42
+        },
+        {
+          "text": "called",
+          "start": 18.42,
+          "end": 18.72
+        },
+        {
+          "text": "photons",
+          "start": 18.72,
+          "end": 19.16
+        },
+        {
+          "text": "knock",
+          "start": 19.16,
+          "end": 19.54
+        },
+        {
+          "text": "electrons",
+          "start": 19.54,
+          "end": 20.14
+        },
+        {
+          "text": "loose",
+          "start": 20.14,
+          "end": 20.7
+        },
+        {
+          "text": "from",
+          "start": 20.7,
+          "end": 20.96
+        },
+        {
+          "text": "the",
+          "start": 20.96,
+          "end": 21.12
+        },
+        {
+          "text": "silicon",
+          "start": 21.12,
+          "end": 21.44
+        },
+        {
+          "text": "atoms.",
+          "start": 21.44,
+          "end": 21.88
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "text": "The cell is built with two layers that push these free electrons in one direction.",
+      "start": 22.14,
+      "end": 26.76,
+      "duration": 4.62,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "electron flow direction",
+      "queries": [
+        "solar cell layered structure",
+        "p-n junction diagram",
+        "electron flow direction"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "wikimedia",
+      "clip_id": "143050026",
+      "page_url": "https://commons.wikimedia.org/wiki/File:Dipole-standing-wave-4-frame-summary.png",
+      "licence": "CC0",
+      "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "attribution": "File:Dipole antenna standing waves animation 1-10fps.gif : Chetvorno derivative work: MikeRun, via Wikimedia Commons, CC0",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "wikimedia: score 0.264 >= 0.22 for query 'electron flow direction' (best of 4 candidates, order bonus +0.04); logo check ok (logo prob 0.02); 1 clip frame(s) passed the logo check (max logo prob 0.06); earlier: pixabay_video: best score 0.188 < 0.22; pixabay_image_motion: best score 0.198 < 0.22",
+      "relevance_score": 0.2644,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_004.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0248,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.0578,
+            "scene_score": 0.2678,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "wikimedia:143050026",
+        "kind": "image",
+        "title": "Dipole-standing-wave-4-frame-summary",
+        "source_url": "https://upload.wikimedia.org/wikipedia/commons/1/14/Dipole-standing-wave-4-frame-summary.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "final_score": 0.3044,
+        "width": 1364,
+        "height": 622,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "solar cell layered structure",
+          "p-n junction diagram",
+          "electron flow direction"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows the two layers that direct free electrons one way.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "cell built",
+        "card": {
+          "headline": "CELL BUILT",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "9d0c9185afb7ff3c"
+      },
+      "safety": {
+        "queries": [
+          "solar cell layered structure",
+          "p-n junction diagram",
+          "electron flow direction"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_004_6d5536a52442c10a.mp4",
+          "cache_key": "6d5536a52442c10a",
+          "frames": 139,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.8107,
+            "full_frame_score": 0.2243,
+            "windows": {
+              "salient": {
+                "start": 0.0611,
+                "score": 0.2708
+              },
+              "centre": {
+                "start": 0.0947,
+                "score": 0.2552
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.247
+              },
+              "right": {
+                "start": 0.1893,
+                "score": 0.2595
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'salient' chosen (0.271; best window 0.271; whole frame 0.224; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_004_63ced128fc9faa1f.mp4",
+          "cache_key": "63ced128fc9faa1f",
+          "frames": 139,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.2565,
+            "full_frame_score": 0.2243,
+            "windows": {
+              "centre": {
+                "start": 0.3717,
+                "score": 0.2786
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2749
+              },
+              "right": {
+                "start": 0.7435,
+                "score": 0.2659
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'centre' chosen (0.279; best window 0.279; whole frame 0.224; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "The",
+          "start": 22.4,
+          "end": 22.5
+        },
+        {
+          "text": "cell",
+          "start": 22.5,
+          "end": 22.72
+        },
+        {
+          "text": "is",
+          "start": 22.72,
+          "end": 22.9
+        },
+        {
+          "text": "built",
+          "start": 22.9,
+          "end": 23.14
+        },
+        {
+          "text": "with",
+          "start": 23.14,
+          "end": 23.38
+        },
+        {
+          "text": "two",
+          "start": 23.38,
+          "end": 23.6
+        },
+        {
+          "text": "layers",
+          "start": 23.6,
+          "end": 23.94
+        },
+        {
+          "text": "that",
+          "start": 23.94,
+          "end": 24.22
+        },
+        {
+          "text": "push",
+          "start": 24.22,
+          "end": 24.44
+        },
+        {
+          "text": "these",
+          "start": 24.44,
+          "end": 24.66
+        },
+        {
+          "text": "free",
+          "start": 24.66,
+          "end": 24.96
+        },
+        {
+          "text": "electrons",
+          "start": 24.96,
+          "end": 25.44
+        },
+        {
+          "text": "in",
+          "start": 25.44,
+          "end": 25.76
+        },
+        {
+          "text": "one",
+          "start": 25.76,
+          "end": 26.0
+        },
+        {
+          "text": "direction.",
+          "start": 26.0,
+          "end": 26.36
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "text": "That steady flow of electrons is an electric current.",
+      "start": 26.76,
+      "end": 30.45,
+      "duration": 3.69,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "current moving through circuit",
+      "queries": [
+        "electric current flow animation",
+        "electron stream solar panel",
+        "current moving through circuit"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_image_motion",
+      "clip_id": "1098059",
+      "page_url": "https://pixabay.com/photos/wire-cables-electric-network-1098059/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Taken on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_image_motion: score 0.241 >= 0.22 for query 'current moving through circuit' (best of 24 candidates, order bonus +0.04); logo check ok (logo prob 0.01); 1 clip frame(s) passed the logo check (max logo prob 0.01); earlier: pixabay_video: best score 0.214 < 0.22",
+      "relevance_score": 0.241,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_005.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0072,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.0108,
+            "scene_score": 0.2411,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_image_motion:1098059",
+        "kind": "image",
+        "title": "",
+        "source_url": "https://pixabay.com/get/g62995f52c087684f38b609d4de65289588de102d3c5d1e9c2023711d3888390313b2f9ed3d5c9b94438d309f97ad97092d976976af694b907d0528b5b8c3971f_1280.jpg",
+        "final_score": 0.281,
+        "width": 1280,
+        "height": 720,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "electric current flow animation",
+          "electron stream solar panel",
+          "current moving through circuit"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Represents the steady flow of electrons as electric current.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "steady flow",
+        "card": {
+          "headline": "STEADY FLOW",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "9b448edc6de77a78"
+      },
+      "safety": {
+        "queries": [
+          "electric current flow animation",
+          "electron stream solar panel",
+          "current moving through circuit"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_005_6ea245b91a952dc1.mp4",
+          "cache_key": "6ea245b91a952dc1",
+          "frames": 111,
+          "look": "eq=brightness=0.068",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_005_19b37183e4e3a4c1.mp4",
+          "cache_key": "19b37183e4e3a4c1",
+          "frames": 111,
+          "look": "eq=brightness=0.068",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.257,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2493
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2415
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2518
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'centre' chosen (0.249; best window 0.252; whole frame 0.257; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "That",
+          "start": 27.16,
+          "end": 27.68
+        },
+        {
+          "text": "steady",
+          "start": 27.68,
+          "end": 28.04
+        },
+        {
+          "text": "flow",
+          "start": 28.04,
+          "end": 28.32
+        },
+        {
+          "text": "of",
+          "start": 28.32,
+          "end": 28.48
+        },
+        {
+          "text": "electrons",
+          "start": 28.48,
+          "end": 28.94
+        },
+        {
+          "text": "is",
+          "start": 28.94,
+          "end": 29.36
+        },
+        {
+          "text": "an",
+          "start": 29.36,
+          "end": 29.46
+        },
+        {
+          "text": "electric",
+          "start": 29.46,
+          "end": 29.78
+        },
+        {
+          "text": "current.",
+          "start": 29.78,
+          "end": 30.24
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "text": "Thin metal lines on the surface of the cell collect this current and send it out through wires. But there is a catch.",
+      "start": 30.45,
+      "end": 36.42,
+      "duration": 5.97,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "solar cell metal contacts",
+      "queries": [
+        "solar cell metal contacts",
+        "thin conductive grid",
+        "wiring solar panel connection"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "42388",
+      "page_url": "https://pixabay.com/videos/id-42388/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "RoyBuri on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.228 >= 0.22 for query 'solar cell metal contacts' (best of 16 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.01)",
+      "relevance_score": 0.2279,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_006.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0031,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 1.96,
+            "logo_prob": 0.0066,
+            "scene_score": 0.2109,
+            "result": "ok"
+          },
+          {
+            "time": 5.87,
+            "logo_prob": 0.0119,
+            "scene_score": 0.2119,
+            "result": "ok"
+          },
+          {
+            "time": 9.78,
+            "logo_prob": 0.0097,
+            "scene_score": 0.2212,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:42388",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2020/06/17/42388-431511474_medium.mp4",
+        "final_score": 0.2679,
+        "width": 2560,
+        "height": 1440,
+        "duration": 12.0
+      },
+      "understanding": {
+        "queries": [
+          "solar cell metal contacts",
+          "thin conductive grid",
+          "wiring solar panel connection"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Depicts thin metal lines collecting current and leading to wires.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "thin metal",
+        "card": {
+          "headline": "THIN METAL",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "d4e8113267a4e4ec"
+      },
+      "safety": {
+        "queries": [
+          "solar cell metal contacts",
+          "thin conductive grid",
+          "wiring solar panel connection"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_006_b40dc69c8f7a114c.mp4",
+          "cache_key": "b40dc69c8f7a114c",
+          "frames": 179,
+          "look": "eq=brightness=-0.029:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_006_3c0ed5b5e8360f90.mp4",
+          "cache_key": "3c0ed5b5e8360f90",
+          "frames": 179,
+          "look": "eq=brightness=-0.029:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2479,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2339
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2436
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2465
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.234; best window 0.246; whole frame 0.248; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Thin",
+          "start": 30.66,
+          "end": 30.84
+        },
+        {
+          "text": "metal",
+          "start": 30.84,
+          "end": 31.1
+        },
+        {
+          "text": "lines",
+          "start": 31.1,
+          "end": 31.46
+        },
+        {
+          "text": "on",
+          "start": 31.46,
+          "end": 31.64
+        },
+        {
+          "text": "the",
+          "start": 31.64,
+          "end": 31.74
+        },
+        {
+          "text": "surface",
+          "start": 31.74,
+          "end": 32.0
+        },
+        {
+          "text": "of",
+          "start": 32.0,
+          "end": 32.18
+        },
+        {
+          "text": "the",
+          "start": 32.18,
+          "end": 32.3
+        },
+        {
+          "text": "cell",
+          "start": 32.3,
+          "end": 32.56
+        },
+        {
+          "text": "collect",
+          "start": 32.56,
+          "end": 32.88
+        },
+        {
+          "text": "this",
+          "start": 32.88,
+          "end": 33.18
+        },
+        {
+          "text": "current",
+          "start": 33.18,
+          "end": 33.52
+        },
+        {
+          "text": "and",
+          "start": 33.52,
+          "end": 33.94
+        },
+        {
+          "text": "send",
+          "start": 33.94,
+          "end": 34.18
+        },
+        {
+          "text": "it",
+          "start": 34.18,
+          "end": 34.3
+        },
+        {
+          "text": "out",
+          "start": 34.3,
+          "end": 34.44
+        },
+        {
+          "text": "through",
+          "start": 34.44,
+          "end": 34.66
+        },
+        {
+          "text": "wires.",
+          "start": 34.66,
+          "end": 35.04
+        },
+        {
+          "text": "But",
+          "start": 35.34,
+          "end": 35.56
+        },
+        {
+          "text": "there",
+          "start": 35.56,
+          "end": 35.74
+        },
+        {
+          "text": "is",
+          "start": 35.74,
+          "end": 35.86
+        },
+        {
+          "text": "a",
+          "start": 35.86,
+          "end": 35.98
+        },
+        {
+          "text": "catch.",
+          "start": 35.98,
+          "end": 36.22
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "text": "The electricity that comes out of a panel is direct current, while most homes use alternating current.",
+      "start": 36.42,
+      "end": 41.85,
+      "duration": 5.43,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "DC electricity illustration",
+      "queries": [
+        "direct current vs alternating current",
+        "DC electricity illustration",
+        "AC power household"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_image_motion",
+      "clip_id": "4057799",
+      "page_url": "https://pixabay.com/photos/mast-electricity-energy-landline-4057799/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "blindguard on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_image_motion: score 0.270 >= 0.22 for query 'DC electricity illustration' (best of 23 candidates, order bonus +0.04); logo check ok (logo prob 0.08); 1 clip frame(s) passed the logo check (max logo prob 0.12); earlier: pixabay_video: best score 0.202 < 0.22",
+      "relevance_score": 0.2701,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_007.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.078,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.1214,
+            "scene_score": 0.2661,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_image_motion:4057799",
+        "kind": "image",
+        "title": "",
+        "source_url": "https://pixabay.com/get/g5d88af9bf718ff5691a54369d57f168988f76f980d8eac34dd9bf841993867c123ebe83edf45ce436effa836640d7dbeaa5ca137028fe06a735edb36bd50fbc6_1280.jpg",
+        "final_score": 0.3101,
+        "width": 1280,
+        "height": 853,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "direct current vs alternating current",
+          "DC electricity illustration",
+          "AC power household"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Contrasts DC output of panels with AC used in homes.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "electricity comes",
+        "card": {
+          "headline": "ELECTRICITY COMES",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "dcb1de2c4b151ffd"
+      },
+      "safety": {
+        "queries": [
+          "direct current vs alternating current",
+          "DC electricity illustration",
+          "AC power household"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_007_854c3d74980ee788.mp4",
+          "cache_key": "854c3d74980ee788",
+          "frames": 163,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "y",
+            "window_fraction": 0.8441,
+            "full_frame_score": 0.2597,
+            "windows": {
+              "salient": {
+                "start": 0.126,
+                "score": 0.2652
+              },
+              "centre": {
+                "start": 0.078,
+                "score": 0.2656
+              },
+              "top": {
+                "start": 0.0,
+                "score": 0.2693
+              },
+              "bottom": {
+                "start": 0.1559,
+                "score": 0.2618
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'salient' chosen (0.265; best window 0.269; whole frame 0.260; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_007_e3341e162abe31f9.mp4",
+          "cache_key": "e3341e162abe31f9",
+          "frames": 163,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.3749,
+            "full_frame_score": 0.2597,
+            "windows": {
+              "salient": {
+                "start": 0.2524,
+                "score": 0.2616
+              },
+              "centre": {
+                "start": 0.3126,
+                "score": 0.2562
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2267
+              },
+              "right": {
+                "start": 0.6251,
+                "score": 0.2316
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'salient' chosen (0.262; best window 0.262; whole frame 0.260; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "The",
+          "start": 36.62,
+          "end": 36.72
+        },
+        {
+          "text": "electricity",
+          "start": 36.72,
+          "end": 37.12
+        },
+        {
+          "text": "that",
+          "start": 37.12,
+          "end": 37.48
+        },
+        {
+          "text": "comes",
+          "start": 37.48,
+          "end": 37.7
+        },
+        {
+          "text": "out",
+          "start": 37.7,
+          "end": 37.88
+        },
+        {
+          "text": "of",
+          "start": 37.88,
+          "end": 37.96
+        },
+        {
+          "text": "a",
+          "start": 37.96,
+          "end": 38.02
+        },
+        {
+          "text": "panel",
+          "start": 38.02,
+          "end": 38.28
+        },
+        {
+          "text": "is",
+          "start": 38.28,
+          "end": 38.56
+        },
+        {
+          "text": "direct",
+          "start": 38.56,
+          "end": 38.88
+        },
+        {
+          "text": "current,",
+          "start": 38.88,
+          "end": 39.36
+        },
+        {
+          "text": "while",
+          "start": 39.56,
+          "end": 39.8
+        },
+        {
+          "text": "most",
+          "start": 39.8,
+          "end": 40.04
+        },
+        {
+          "text": "homes",
+          "start": 40.04,
+          "end": 40.32
+        },
+        {
+          "text": "use",
+          "start": 40.32,
+          "end": 40.58
+        },
+        {
+          "text": "alternating",
+          "start": 40.58,
+          "end": 41.1
+        },
+        {
+          "text": "current.",
+          "start": 41.1,
+          "end": 41.66
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "text": "So a box called an inverter converts it into the kind of power your lights and fridge can use.",
+      "start": 41.85,
+      "end": 46.94,
+      "duration": 5.09,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "inverter converting DC to AC",
+      "queries": [
+        "solar inverter device",
+        "power conversion box",
+        "inverter converting DC to AC"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_image_motion",
+      "clip_id": "672393",
+      "page_url": "https://pixabay.com/photos/power-supply-converter-outlet-672393/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Gadini on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_image_motion: score 0.229 >= 0.22 for query 'inverter converting DC to AC' (best of 21 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 1 clip frame(s) passed the logo check (max logo prob 0.00); earlier: pixabay_video: best score 0.196 < 0.22; pixabay_image_motion: logo check rejected 1, best: pixabay_image_motion:1035177 (logo prob 0.76, scene 0.266) (2 checked)",
+      "relevance_score": 0.2289,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_008.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0023,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.0046,
+            "scene_score": 0.2277,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_image_motion:672393",
+        "kind": "image",
+        "title": "",
+        "source_url": "https://pixabay.com/get/g0925b5565fb0c80568bd3199dbdd01ff8554386181d626112b10af08b5c9b378fcfa563b655a4a82ca5173e7d4661c1d9bf346077f30cefe9c10e09055f3d857_1280.jpg",
+        "final_score": 0.2689,
+        "width": 1280,
+        "height": 853,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "solar inverter device",
+          "power conversion box",
+          "inverter converting DC to AC"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows the inverter that changes DC to usable AC.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "box called",
+        "card": {
+          "headline": "BOX CALLED",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "b2538dcc910702ff"
+      },
+      "safety": {
+        "queries": [
+          "solar inverter device",
+          "power conversion box",
+          "inverter converting DC to AC"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_008_239bbea9a4b53cb2.mp4",
+          "cache_key": "239bbea9a4b53cb2",
+          "frames": 152,
+          "look": "eq=brightness=-0.087:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "y",
+            "window_fraction": 0.8441,
+            "full_frame_score": 0.2115,
+            "windows": {
+              "salient": {
+                "start": 0.0,
+                "score": 0.2009
+              },
+              "centre": {
+                "start": 0.078,
+                "score": 0.2009
+              },
+              "bottom": {
+                "start": 0.1559,
+                "score": 0.2105
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'salient' chosen (0.201; best window 0.210; whole frame 0.211; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_008_52acc5c94b68b553.mp4",
+          "cache_key": "52acc5c94b68b553",
+          "frames": 152,
+          "look": "eq=brightness=-0.087:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3749,
+            "full_frame_score": 0.2115,
+            "windows": {
+              "centre": {
+                "start": 0.3126,
+                "score": 0.1951
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2065
+              },
+              "right": {
+                "start": 0.6251,
+                "score": 0.1915
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'centre' chosen (0.195; best window 0.206; whole frame 0.211; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "So",
+          "start": 42.04,
+          "end": 42.22
+        },
+        {
+          "text": "a",
+          "start": 42.22,
+          "end": 42.36
+        },
+        {
+          "text": "box",
+          "start": 42.36,
+          "end": 42.58
+        },
+        {
+          "text": "called",
+          "start": 42.58,
+          "end": 42.9
+        },
+        {
+          "text": "an",
+          "start": 42.9,
+          "end": 43.06
+        },
+        {
+          "text": "inverter",
+          "start": 43.06,
+          "end": 43.42
+        },
+        {
+          "text": "converts",
+          "start": 43.42,
+          "end": 43.96
+        },
+        {
+          "text": "it",
+          "start": 43.96,
+          "end": 44.26
+        },
+        {
+          "text": "into",
+          "start": 44.26,
+          "end": 44.5
+        },
+        {
+          "text": "the",
+          "start": 44.5,
+          "end": 44.66
+        },
+        {
+          "text": "kind",
+          "start": 44.66,
+          "end": 44.82
+        },
+        {
+          "text": "of",
+          "start": 44.82,
+          "end": 44.94
+        },
+        {
+          "text": "power",
+          "start": 44.94,
+          "end": 45.24
+        },
+        {
+          "text": "your",
+          "start": 45.24,
+          "end": 45.46
+        },
+        {
+          "text": "lights",
+          "start": 45.46,
+          "end": 45.78
+        },
+        {
+          "text": "and",
+          "start": 45.78,
+          "end": 45.98
+        },
+        {
+          "text": "fridge",
+          "start": 45.98,
+          "end": 46.2
+        },
+        {
+          "text": "can",
+          "start": 46.2,
+          "end": 46.5
+        },
+        {
+          "text": "use.",
+          "start": 46.5,
+          "end": 46.76
+        }
+      ]
+    },
+    {
+      "index": 9,
+      "text": "On a sunny day, a home system can produce more power than the family needs.",
+      "start": 46.94,
+      "end": 51.58,
+      "duration": 4.64,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "home solar power surplus",
+      "queries": [
+        "home solar power surplus",
+        "sunny day solar generation",
+        "excess electricity rooftop"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "259949",
+      "page_url": "https://pixabay.com/videos/id-259949/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Blusunsolar22 on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.266 >= 0.22 for query 'home solar power surplus' (best of 16 candidates, order bonus +0.04); logo check ok (logo prob 0.02); 3 clip frame(s) passed the logo check (max logo prob 0.10)",
+      "relevance_score": 0.2662,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_009.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0178,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 1.2,
+            "logo_prob": 0.0982,
+            "scene_score": 0.261,
+            "result": "ok"
+          },
+          {
+            "time": 3.6,
+            "logo_prob": 0.0696,
+            "scene_score": 0.2589,
+            "result": "ok"
+          },
+          {
+            "time": 6.0,
+            "logo_prob": 0.0513,
+            "scene_score": 0.2582,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:259949",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2025/02/21/259949_medium.mp4",
+        "final_score": 0.3062,
+        "width": 1280,
+        "height": 720,
+        "duration": 7.0
+      },
+      "understanding": {
+        "queries": [
+          "home solar power surplus",
+          "sunny day solar generation",
+          "excess electricity rooftop"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Illustrates a sunny home system producing more electricity than needed.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "sunny day",
+        "card": {
+          "headline": "SUNNY DAY",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "873558320703cb0a"
+      },
+      "safety": {
+        "queries": [
+          "home solar power surplus",
+          "sunny day solar generation",
+          "excess electricity rooftop"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_009_5288a798ea5972ff.mp4",
+          "cache_key": "5288a798ea5972ff",
+          "frames": 139,
+          "look": "eq=saturation=1.024",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_009_b667f57f5eac2fa0.mp4",
+          "cache_key": "b667f57f5eac2fa0",
+          "frames": 139,
+          "look": "eq=saturation=1.024",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2665,
+            "windows": {
+              "salient": {
+                "start": 0.121,
+                "score": 0.2621
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2643
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2659
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2808
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'salient' chosen (0.262; best window 0.281; whole frame 0.267; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "On",
+          "start": 47.12,
+          "end": 47.28
+        },
+        {
+          "text": "a",
+          "start": 47.28,
+          "end": 47.42
+        },
+        {
+          "text": "sunny",
+          "start": 47.42,
+          "end": 47.62
+        },
+        {
+          "text": "day,",
+          "start": 47.62,
+          "end": 47.92
+        },
+        {
+          "text": "a",
+          "start": 48.24,
+          "end": 48.36
+        },
+        {
+          "text": "home",
+          "start": 48.36,
+          "end": 48.56
+        },
+        {
+          "text": "system",
+          "start": 48.56,
+          "end": 48.9
+        },
+        {
+          "text": "can",
+          "start": 48.9,
+          "end": 49.18
+        },
+        {
+          "text": "produce",
+          "start": 49.18,
+          "end": 49.54
+        },
+        {
+          "text": "more",
+          "start": 49.54,
+          "end": 49.84
+        },
+        {
+          "text": "power",
+          "start": 49.84,
+          "end": 50.22
+        },
+        {
+          "text": "than",
+          "start": 50.22,
+          "end": 50.42
+        },
+        {
+          "text": "the",
+          "start": 50.42,
+          "end": 50.54
+        },
+        {
+          "text": "family",
+          "start": 50.54,
+          "end": 50.82
+        },
+        {
+          "text": "needs.",
+          "start": 50.82,
+          "end": 51.24
+        }
+      ]
+    },
+    {
+      "index": 10,
+      "text": "The extra power can charge a battery for the evening or flow back into the grid for neighbours to use.",
+      "start": 51.58,
+      "end": 57.55,
+      "duration": 5.97,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "solar battery storage",
+      "queries": [
+        "solar battery storage",
+        "energy flowing to grid",
+        "grid‑tied solar system"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "72837",
+      "page_url": "https://pixabay.com/videos/id-72837/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Stdudioray on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.251 >= 0.22 for query 'solar battery storage' (best of 15 candidates, order bonus +0.04); logo check ok (logo prob 0.01); 3 clip frame(s) passed the logo check (max logo prob 0.02); earlier: pixabay_video: logo check rejected 1, best: pixabay_video:5858 (logo prob 0.80, scene 0.255) (3 checked)",
+      "relevance_score": 0.2507,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_010.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0069,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 6.77,
+            "logo_prob": 0.0241,
+            "scene_score": 0.2458,
+            "result": "ok"
+          },
+          {
+            "time": 20.3,
+            "logo_prob": 0.01,
+            "scene_score": 0.2643,
+            "result": "ok"
+          },
+          {
+            "time": 33.83,
+            "logo_prob": 0.0034,
+            "scene_score": 0.2603,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:72837",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2021/05/02/72837-545276870_medium.mp4",
+        "final_score": 0.2907,
+        "width": 1280,
+        "height": 720,
+        "duration": 41.0
+      },
+      "understanding": {
+        "queries": [
+          "solar battery storage",
+          "energy flowing to grid",
+          "grid‑tied solar system"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows extra power charging a battery or feeding the grid.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "extra power",
+        "card": {
+          "headline": "EXTRA POWER",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "6bfcc090aacddd6f"
+      },
+      "safety": {
+        "queries": [
+          "solar battery storage",
+          "energy flowing to grid",
+          "grid‑tied solar system"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_010_9f6f0571697f3b99.mp4",
+          "cache_key": "9f6f0571697f3b99",
+          "frames": 179,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_010_51fe39d515a5d9e6.mp4",
+          "cache_key": "51fe39d515a5d9e6",
+          "frames": 179,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2585,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2586
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2247
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2497
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.259; best window 0.259; whole frame 0.259; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "The",
+          "start": 51.92,
+          "end": 52.44
+        },
+        {
+          "text": "extra",
+          "start": 52.44,
+          "end": 52.8
+        },
+        {
+          "text": "power",
+          "start": 52.8,
+          "end": 53.12
+        },
+        {
+          "text": "can",
+          "start": 53.12,
+          "end": 53.36
+        },
+        {
+          "text": "charge",
+          "start": 53.36,
+          "end": 53.68
+        },
+        {
+          "text": "a",
+          "start": 53.68,
+          "end": 53.84
+        },
+        {
+          "text": "battery",
+          "start": 53.84,
+          "end": 54.18
+        },
+        {
+          "text": "for",
+          "start": 54.18,
+          "end": 54.36
+        },
+        {
+          "text": "the",
+          "start": 54.36,
+          "end": 54.48
+        },
+        {
+          "text": "evening",
+          "start": 54.48,
+          "end": 54.82
+        },
+        {
+          "text": "or",
+          "start": 54.82,
+          "end": 55.32
+        },
+        {
+          "text": "flow",
+          "start": 55.32,
+          "end": 55.54
+        },
+        {
+          "text": "back",
+          "start": 55.54,
+          "end": 55.8
+        },
+        {
+          "text": "into",
+          "start": 55.8,
+          "end": 56.04
+        },
+        {
+          "text": "the",
+          "start": 56.04,
+          "end": 56.18
+        },
+        {
+          "text": "grid",
+          "start": 56.18,
+          "end": 56.32
+        },
+        {
+          "text": "for",
+          "start": 56.32,
+          "end": 56.5
+        },
+        {
+          "text": "neighbours",
+          "start": 56.5,
+          "end": 56.8
+        },
+        {
+          "text": "to",
+          "start": 56.8,
+          "end": 57.06
+        },
+        {
+          "text": "use.",
+          "start": 57.06,
+          "end": 57.34
+        }
+      ]
+    },
+    {
+      "index": 11,
+      "text": "Panels work best when they face the sun and are kept free of dust and shade.",
+      "start": 57.55,
+      "end": 61.79,
+      "duration": 4.24,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "solar panels sun tracking",
+      "queries": [
+        "solar panels sun tracking",
+        "clean solar panel maintenance",
+        "panel orientation sunlight"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_image_motion",
+      "clip_id": "8244680",
+      "page_url": "https://pixabay.com/photos/solar-panels-solar-energy-8244680/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Michael_Pointner on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_image_motion: score 0.296 >= 0.22 for query 'solar panels sun tracking' (best of 20 candidates, order bonus +0.04); logo check ok (logo prob 0.01); 1 clip frame(s) passed the logo check (max logo prob 0.01); earlier: pixabay_video: logo check rejected 1, best: pixabay_video:5858 (logo prob 0.80, scene 0.269) (1 checked); pixabay_video: best score 0.200 < 0.22",
+      "relevance_score": 0.2957,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_011.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0111,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.006,
+            "scene_score": 0.2835,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_image_motion:8244680",
+        "kind": "image",
+        "title": "",
+        "source_url": "https://pixabay.com/get/gccff0f57438125ca445154548c048400b4538b6101cd4f5cfac6fd546e74cef7141755d1c5c24b7797cb4876aaff89d9a0553bf65b8706799cf9683ac17ef0c1_1280.jpg",
+        "final_score": 0.3357,
+        "width": 1280,
+        "height": 853,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "solar panels sun tracking",
+          "clean solar panel maintenance",
+          "panel orientation sunlight"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Depicts panels angled toward the sun and kept free of dust/shade.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "panels work",
+        "card": {
+          "headline": "PANELS WORK",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "9d6421d580fab560"
+      },
+      "safety": {
+        "queries": [
+          "solar panels sun tracking",
+          "clean solar panel maintenance",
+          "panel orientation sunlight"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_011_eeb8f227dc90c2f6.mp4",
+          "cache_key": "eeb8f227dc90c2f6",
+          "frames": 128,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "y",
+            "window_fraction": 0.8441,
+            "full_frame_score": 0.2937,
+            "windows": {
+              "centre": {
+                "start": 0.078,
+                "score": 0.2935
+              },
+              "top": {
+                "start": 0.0,
+                "score": 0.2945
+              },
+              "bottom": {
+                "start": 0.1559,
+                "score": 0.2886
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'centre' chosen (0.293; best window 0.294; whole frame 0.294; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_011_a338c177e41c0196.mp4",
+          "cache_key": "a338c177e41c0196",
+          "frames": 128,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3749,
+            "full_frame_score": 0.2937,
+            "windows": {
+              "centre": {
+                "start": 0.3126,
+                "score": 0.2811
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2886
+              },
+              "right": {
+                "start": 0.6251,
+                "score": 0.2866
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'centre' chosen (0.281; best window 0.289; whole frame 0.294; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Panels",
+          "start": 57.76,
+          "end": 58.08
+        },
+        {
+          "text": "work",
+          "start": 58.08,
+          "end": 58.3
+        },
+        {
+          "text": "best",
+          "start": 58.3,
+          "end": 58.6
+        },
+        {
+          "text": "when",
+          "start": 58.6,
+          "end": 58.78
+        },
+        {
+          "text": "they",
+          "start": 58.78,
+          "end": 58.92
+        },
+        {
+          "text": "face",
+          "start": 58.92,
+          "end": 59.16
+        },
+        {
+          "text": "the",
+          "start": 59.16,
+          "end": 59.38
+        },
+        {
+          "text": "sun",
+          "start": 59.38,
+          "end": 59.66
+        },
+        {
+          "text": "and",
+          "start": 59.66,
+          "end": 60.02
+        },
+        {
+          "text": "are",
+          "start": 60.02,
+          "end": 60.14
+        },
+        {
+          "text": "kept",
+          "start": 60.14,
+          "end": 60.3
+        },
+        {
+          "text": "free",
+          "start": 60.3,
+          "end": 60.62
+        },
+        {
+          "text": "of",
+          "start": 60.62,
+          "end": 60.74
+        },
+        {
+          "text": "dust",
+          "start": 60.74,
+          "end": 61.04
+        },
+        {
+          "text": "and",
+          "start": 61.04,
+          "end": 61.28
+        },
+        {
+          "text": "shade.",
+          "start": 61.28,
+          "end": 61.6
+        }
+      ]
+    },
+    {
+      "index": 12,
+      "text": "Even on cloudy days, they still produce some power just less.",
+      "start": 61.79,
+      "end": 65.45,
+      "duration": 3.66,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "cloudy day solar output",
+      "queries": [
+        "cloudy day solar output",
+        "reduced solar generation",
+        "overcast solar panels"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "4753",
+      "page_url": "https://pixabay.com/videos/id-4753/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Life-Of-Vids on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.263 >= 0.22 for query 'cloudy day solar output' (best of 12 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.00)",
+      "relevance_score": 0.2631,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_012.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0011,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 8.34,
+            "logo_prob": 0.002,
+            "scene_score": 0.2548,
+            "result": "ok"
+          },
+          {
+            "time": 25.01,
+            "logo_prob": 0.0011,
+            "scene_score": 0.2582,
+            "result": "ok"
+          },
+          {
+            "time": 41.68,
+            "logo_prob": 0.0013,
+            "scene_score": 0.2565,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:4753",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2016/08/22/4753-179739298_medium.mp4",
+        "final_score": 0.3031,
+        "width": 1280,
+        "height": 720,
+        "duration": 50.0
+      },
+      "understanding": {
+        "queries": [
+          "cloudy day solar output",
+          "reduced solar generation",
+          "overcast solar panels"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows that panels still generate power on cloudy days, though less.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "even cloudy",
+        "card": {
+          "headline": "EVEN CLOUDY",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "c3075bb423a3d13e"
+      },
+      "safety": {
+        "queries": [
+          "cloudy day solar output",
+          "reduced solar generation",
+          "overcast solar panels"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_012_aa7dc4f7c2ab673d.mp4",
+          "cache_key": "aa7dc4f7c2ab673d",
+          "frames": 110,
+          "look": "eq=brightness=-0.018:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_012_6c4b05397d9ffa8b.mp4",
+          "cache_key": "6c4b05397d9ffa8b",
+          "frames": 110,
+          "look": "eq=brightness=-0.018:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.253,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2549
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2276
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2262
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.255; best window 0.255; whole frame 0.253; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Even",
+          "start": 61.98,
+          "end": 62.2
+        },
+        {
+          "text": "on",
+          "start": 62.2,
+          "end": 62.42
+        },
+        {
+          "text": "cloudy",
+          "start": 62.42,
+          "end": 62.68
+        },
+        {
+          "text": "days,",
+          "start": 62.68,
+          "end": 63.12
+        },
+        {
+          "text": "they",
+          "start": 63.42,
+          "end": 63.52
+        },
+        {
+          "text": "still",
+          "start": 63.52,
+          "end": 63.78
+        },
+        {
+          "text": "produce",
+          "start": 63.78,
+          "end": 64.08
+        },
+        {
+          "text": "some",
+          "start": 64.08,
+          "end": 64.34
+        },
+        {
+          "text": "power",
+          "start": 64.34,
+          "end": 64.68
+        },
+        {
+          "text": "just",
+          "start": 64.68,
+          "end": 64.92
+        },
+        {
+          "text": "less.",
+          "start": 64.92,
+          "end": 65.24
+        }
+      ]
+    },
+    {
+      "index": 13,
+      "text": "A typical panel keeps working for 25 years or more, with very little maintenance.",
+      "start": 65.45,
+      "end": 70.15,
+      "duration": 4.7,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "solar panel long lifespan",
+      "queries": [
+        "solar panel long lifespan",
+        "twenty five years warranty",
+        "low maintenance solar array"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": true,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "generated",
+      "clip_id": "card-013-ebc0021c",
+      "page_url": "",
+      "licence": "Generated by broll-engine (FFmpeg motion card)",
+      "licence_url": "",
+      "attribution": "",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": true,
+      "reason": "statistic line: number card '25' taken from the narration (GENERATED_FOR_STATISTICS=true)",
+      "relevance_score": null,
+      "card_text": "25",
+      "card_subtitle": "panel keeps working",
+      "card_source": "narration",
+      "card_numbers": [
+        "25"
+      ],
+      "thumbnail": "thumb_013.jpg",
+      "logo_check": null,
+      "clip_details": {
+        "uid": "generated:card-013-ebc0021c",
+        "kind": "generated",
+        "title": "25 panel keeps working",
+        "source_url": "",
+        "final_score": null,
+        "width": 0,
+        "height": 0,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "solar panel long lifespan",
+          "twenty five years warranty",
+          "low maintenance solar array"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": true,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Conveys the typical 25‑year durability with minimal upkeep.",
+        "source": "groq",
+        "names": [],
+        "number": "25",
+        "keyword": "typical panel keeps working years little",
+        "card": {
+          "headline": "25",
+          "subtitle": "panel keeps working",
+          "number": "25",
+          "kind": "number",
+          "source": "narration",
+          "numbers_shown": [
+            "25"
+          ],
+          "subtitle_from": "llm, every word checked against the line"
+        },
+        "fingerprint": "50d7980107e89606"
+      },
+      "safety": {
+        "queries": [
+          "solar panel long lifespan",
+          "twenty five years warranty",
+          "low maintenance solar array"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_013_9b8bec00d0c6c766.mp4",
+          "cache_key": "9b8bec00d0c6c766",
+          "frames": 140,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_013_7a7f557b71427ad4.mp4",
+          "cache_key": "7a7f557b71427ad4",
+          "frames": 140,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "A",
+          "start": 65.66,
+          "end": 65.78
+        },
+        {
+          "text": "typical",
+          "start": 65.78,
+          "end": 66.04
+        },
+        {
+          "text": "panel",
+          "start": 66.04,
+          "end": 66.46
+        },
+        {
+          "text": "keeps",
+          "start": 66.46,
+          "end": 66.78
+        },
+        {
+          "text": "working",
+          "start": 66.78,
+          "end": 67.1
+        },
+        {
+          "text": "for",
+          "start": 67.1,
+          "end": 67.36
+        },
+        {
+          "text": "25",
+          "start": 67.36,
+          "end": 67.78
+        },
+        {
+          "text": "years",
+          "start": 67.78,
+          "end": 68.14
+        },
+        {
+          "text": "or",
+          "start": 68.14,
+          "end": 68.32
+        },
+        {
+          "text": "more,",
+          "start": 68.32,
+          "end": 68.54
+        },
+        {
+          "text": "with",
+          "start": 68.8,
+          "end": 68.98
+        },
+        {
+          "text": "very",
+          "start": 68.98,
+          "end": 69.24
+        },
+        {
+          "text": "little",
+          "start": 69.24,
+          "end": 69.48
+        },
+        {
+          "text": "maintenance.",
+          "start": 69.48,
+          "end": 69.86
+        }
+      ]
+    },
+    {
+      "index": 14,
+      "text": "Today, solar power is one of the cheapest ways to produce electricity in many parts of the world.",
+      "start": 70.15,
+      "end": 76.15,
+      "duration": 6.0,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "economical renewable electricity",
+      "queries": [
+        "affordable solar energy",
+        "low cost solar power",
+        "economical renewable electricity"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "118630",
+      "page_url": "https://pixabay.com/videos/id-118630/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Kaffeesüchtig on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.237 >= 0.22 for query 'economical renewable electricity' (best of 12 candidates, order bonus +0.04); logo check ok (logo prob 0.01); 3 clip frame(s) passed the logo check (max logo prob 0.07); earlier: pixabay_video: logo check rejected 1, best: pixabay_video:5858 (logo prob 0.80, scene 0.270) (4 checked)",
+      "relevance_score": 0.2374,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_014.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0099,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.93,
+            "logo_prob": 0.0572,
+            "scene_score": 0.2046,
+            "result": "ok"
+          },
+          {
+            "time": 8.79,
+            "logo_prob": 0.0661,
+            "scene_score": 0.2042,
+            "result": "ok"
+          },
+          {
+            "time": 14.65,
+            "logo_prob": 0.0335,
+            "scene_score": 0.207,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:118630",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2022/05/29/118630-715427049_medium.mp4",
+        "final_score": 0.2774,
+        "width": 2560,
+        "height": 1440,
+        "duration": 18.0
+      },
+      "understanding": {
+        "queries": [
+          "affordable solar energy",
+          "low cost solar power",
+          "economical renewable electricity"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Highlights solar as a cheap way to generate electricity.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "today solar",
+        "card": {
+          "headline": "TODAY SOLAR",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "d7e810514f177768"
+      },
+      "safety": {
+        "queries": [
+          "affordable solar energy",
+          "low cost solar power",
+          "economical renewable electricity"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_014_4be0e311a935fcef.mp4",
+          "cache_key": "4be0e311a935fcef",
+          "frames": 180,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_014_618bbd14781ed662.mp4",
+          "cache_key": "618bbd14781ed662",
+          "frames": 180,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2428,
+            "windows": {
+              "salient": {
+                "start": 0.1116,
+                "score": 0.2353
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2255
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2344
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.206
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'salient' chosen (0.235; best window 0.235; whole frame 0.243; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Today,",
+          "start": 70.44,
+          "end": 70.64
+        },
+        {
+          "text": "solar",
+          "start": 71.0,
+          "end": 71.2
+        },
+        {
+          "text": "power",
+          "start": 71.2,
+          "end": 71.6
+        },
+        {
+          "text": "is",
+          "start": 71.6,
+          "end": 72.0
+        },
+        {
+          "text": "one",
+          "start": 72.0,
+          "end": 72.16
+        },
+        {
+          "text": "of",
+          "start": 72.16,
+          "end": 72.26
+        },
+        {
+          "text": "the",
+          "start": 72.26,
+          "end": 72.36
+        },
+        {
+          "text": "cheapest",
+          "start": 72.36,
+          "end": 72.62
+        },
+        {
+          "text": "ways",
+          "start": 72.62,
+          "end": 73.08
+        },
+        {
+          "text": "to",
+          "start": 73.08,
+          "end": 73.32
+        },
+        {
+          "text": "produce",
+          "start": 73.32,
+          "end": 73.64
+        },
+        {
+          "text": "electricity",
+          "start": 73.64,
+          "end": 74.26
+        },
+        {
+          "text": "in",
+          "start": 74.26,
+          "end": 74.68
+        },
+        {
+          "text": "many",
+          "start": 74.68,
+          "end": 74.92
+        },
+        {
+          "text": "parts",
+          "start": 74.92,
+          "end": 75.24
+        },
+        {
+          "text": "of",
+          "start": 75.24,
+          "end": 75.4
+        },
+        {
+          "text": "the",
+          "start": 75.4,
+          "end": 75.48
+        },
+        {
+          "text": "world.",
+          "start": 75.48,
+          "end": 75.74
+        }
+      ]
+    },
+    {
+      "index": 15,
+      "text": "From rooftops in busy cities to large solar farms in the desert, the same simple idea is at work.",
+      "start": 76.15,
+      "end": 82.78,
+      "duration": 6.63,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "large desert solar farm",
+      "queries": [
+        "urban rooftop solar",
+        "large desert solar farm",
+        "solar installations varied locations"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_image_motion",
+      "clip_id": "78116",
+      "page_url": "https://pixabay.com/photos/energy-landscape-desert-mountains-78116/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "12019 on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_image_motion: score 0.308 >= 0.22 for query 'large desert solar farm' (best of 21 candidates, order bonus +0.04); logo check ok (logo prob 0.03); 1 clip frame(s) passed the logo check (max logo prob 0.07); earlier: pixabay_video: best score 0.220 < 0.22",
+      "relevance_score": 0.308,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_015.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0259,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.0681,
+            "scene_score": 0.3071,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_image_motion:78116",
+        "kind": "image",
+        "title": "",
+        "source_url": "https://pixabay.com/get/g3ae7369b9542c9b50eabf5e78e4a224d1e4f042b708baf6a5cc1347490353d7d92a57a21c0986554961adae4b7e243b4_1280.jpg",
+        "final_score": 0.348,
+        "width": 1280,
+        "height": 960,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "urban rooftop solar",
+          "large desert solar farm",
+          "solar installations varied locations"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows solar panels on city rooftops and expansive desert farms.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "idea",
+        "card": {
+          "headline": "IDEA",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "0850c37861920709"
+      },
+      "safety": {
+        "queries": [
+          "urban rooftop solar",
+          "large desert solar farm",
+          "solar installations varied locations"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_015_1ca429b77275e9c3.mp4",
+          "cache_key": "1ca429b77275e9c3",
+          "frames": 199,
+          "look": "eq=brightness=-0.075",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "y",
+            "window_fraction": 0.75,
+            "full_frame_score": 0.3019,
+            "windows": {
+              "centre": {
+                "start": 0.125,
+                "score": 0.3115
+              },
+              "top": {
+                "start": 0.0,
+                "score": 0.2976
+              },
+              "bottom": {
+                "start": 0.25,
+                "score": 0.304
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'centre' chosen (0.311; best window 0.311; whole frame 0.302; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_015_4ba8fc2ace0e34aa.mp4",
+          "cache_key": "4ba8fc2ace0e34aa",
+          "frames": 199,
+          "look": "eq=brightness=-0.075",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.4219,
+            "full_frame_score": 0.3019,
+            "windows": {
+              "centre": {
+                "start": 0.2891,
+                "score": 0.3021
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.3003
+              },
+              "right": {
+                "start": 0.5781,
+                "score": 0.3019
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'centre' chosen (0.302; best window 0.302; whole frame 0.302; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "From",
+          "start": 76.56,
+          "end": 77.08
+        },
+        {
+          "text": "rooftops",
+          "start": 77.08,
+          "end": 77.6
+        },
+        {
+          "text": "in",
+          "start": 77.6,
+          "end": 77.78
+        },
+        {
+          "text": "busy",
+          "start": 77.78,
+          "end": 78.08
+        },
+        {
+          "text": "cities",
+          "start": 78.08,
+          "end": 78.42
+        },
+        {
+          "text": "to",
+          "start": 78.42,
+          "end": 78.64
+        },
+        {
+          "text": "large",
+          "start": 78.64,
+          "end": 79.04
+        },
+        {
+          "text": "solar",
+          "start": 79.04,
+          "end": 79.34
+        },
+        {
+          "text": "farms",
+          "start": 79.34,
+          "end": 79.76
+        },
+        {
+          "text": "in",
+          "start": 79.76,
+          "end": 79.92
+        },
+        {
+          "text": "the",
+          "start": 79.92,
+          "end": 80.0
+        },
+        {
+          "text": "desert,",
+          "start": 80.0,
+          "end": 80.3
+        },
+        {
+          "text": "the",
+          "start": 80.3,
+          "end": 80.72
+        },
+        {
+          "text": "same",
+          "start": 80.72,
+          "end": 81.02
+        },
+        {
+          "text": "simple",
+          "start": 81.02,
+          "end": 81.42
+        },
+        {
+          "text": "idea",
+          "start": 81.42,
+          "end": 81.86
+        },
+        {
+          "text": "is",
+          "start": 81.86,
+          "end": 82.18
+        },
+        {
+          "text": "at",
+          "start": 82.18,
+          "end": 82.34
+        },
+        {
+          "text": "work.",
+          "start": 82.34,
+          "end": 82.58
+        }
+      ]
+    },
+    {
+      "index": 16,
+      "text": "Sunlight in, electricity out, and no smoke along the way.",
+      "start": 82.78,
+      "end": 87.35,
+      "duration": 4.57,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "clean energy solar",
+      "queries": [
+        "clean energy solar",
+        "smoke‑free power generation",
+        "sunlight to electricity"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "39991",
+      "page_url": "https://pixabay.com/videos/id-39991/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "RoyBuri on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.256 >= 0.22 for query 'clean energy solar' (best of 20 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.01); earlier: pixabay_video: logo check rejected 1, best: pixabay_video:177590 (logo prob 0.99, scene 0.251) (2 checked)",
+      "relevance_score": 0.2563,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_016.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0045,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.5,
+            "logo_prob": 0.0044,
+            "scene_score": 0.2404,
+            "result": "ok"
+          },
+          {
+            "time": 7.51,
+            "logo_prob": 0.0018,
+            "scene_score": 0.2452,
+            "result": "ok"
+          },
+          {
+            "time": 12.51,
+            "logo_prob": 0.0059,
+            "scene_score": 0.244,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:39991",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2020/05/24/39991-424360905_medium.mp4",
+        "final_score": 0.2963,
+        "width": 2560,
+        "height": 1440,
+        "duration": 15.0
+      },
+      "understanding": {
+        "queries": [
+          "clean energy solar",
+          "smoke‑free power generation",
+          "sunlight to electricity"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Emphasizes the pollution‑free nature of solar power.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "sunlight electricity",
+        "card": {
+          "headline": "SUNLIGHT ELECTRICITY",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "ca1f20be50f58c2d"
+      },
+      "safety": {
+        "queries": [
+          "clean energy solar",
+          "smoke‑free power generation",
+          "sunlight to electricity"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_016_6a269eda3ada9814.mp4",
+          "cache_key": "6a269eda3ada9814",
+          "frames": 137,
+          "look": "eq=saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_016_4eabccd0e20763b9.mp4",
+          "cache_key": "4eabccd0e20763b9",
+          "frames": 137,
+          "look": "eq=saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2514,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2612
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2656
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2596
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.261; best window 0.266; whole frame 0.251; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Sunlight",
+          "start": 82.98,
+          "end": 83.44
+        },
+        {
+          "text": "in,",
+          "start": 83.44,
+          "end": 83.7
+        },
+        {
+          "text": "electricity",
+          "start": 84.08,
+          "end": 84.5
+        },
+        {
+          "text": "out,",
+          "start": 84.5,
+          "end": 85.04
+        },
+        {
+          "text": "and",
+          "start": 85.4,
+          "end": 85.44
+        },
+        {
+          "text": "no",
+          "start": 85.44,
+          "end": 85.62
+        },
+        {
+          "text": "smoke",
+          "start": 85.62,
+          "end": 86.0
+        },
+        {
+          "text": "along",
+          "start": 86.0,
+          "end": 86.26
+        },
+        {
+          "text": "the",
+          "start": 86.26,
+          "end": 86.52
+        },
+        {
+          "text": "way.",
+          "start": 86.52,
+          "end": 86.74
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "aspect_ratio": "16:9",
+      "file": "video_16x9.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 87.333
+    },
+    {
+      "aspect_ratio": "9:16",
+      "file": "video_9x16.mp4",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "duration": 87.333
+    }
+  ]
+}

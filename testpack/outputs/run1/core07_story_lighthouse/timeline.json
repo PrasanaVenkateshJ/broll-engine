@@ -1,0 +1,2823 @@
+{
+  "job_id": "f04ac333b96e449f98f6fa9e7302e10d",
+  "input_type": "script",
+  "duration": 46.625,
+  "language": "en",
+  "scenes": [
+    {
+      "index": 0,
+      "text": "On a small rocky island there was an old lighthouse and a keeper named Mara.",
+      "start": 0.0,
+      "end": 3.87,
+      "duration": 3.87,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "weathered lighthouse tower",
+      "queries": [
+        "isolated lighthouse on rocky coast",
+        "weathered lighthouse tower",
+        "seaside cliff with lighthouse"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "347987",
+      "page_url": "https://pixabay.com/videos/id-347987/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Gylfi on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.300 >= 0.22 for query 'weathered lighthouse tower' (best of 18 candidates, order bonus +0.04); logo check ok (logo prob 0.01); 3 clip frame(s) passed the logo check (max logo prob 0.12)",
+      "relevance_score": 0.2999,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_000.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.009,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 3.75,
+            "logo_prob": 0.1246,
+            "scene_score": 0.2879,
+            "result": "ok"
+          },
+          {
+            "time": 11.24,
+            "logo_prob": 0.0141,
+            "scene_score": 0.291,
+            "result": "ok"
+          },
+          {
+            "time": 18.74,
+            "logo_prob": 0.0303,
+            "scene_score": 0.2848,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:347987",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2026/04/21/347987_medium.mp4",
+        "final_score": 0.3399,
+        "width": 2560,
+        "height": 1440,
+        "duration": 22.0
+      },
+      "understanding": {
+        "queries": [
+          "isolated lighthouse on rocky coast",
+          "weathered lighthouse tower",
+          "seaside cliff with lighthouse"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows the remote island setting and the lighthouse itself.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "small rocky",
+        "card": {
+          "headline": "SMALL ROCKY",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "805015215fcae18f"
+      },
+      "safety": {
+        "queries": [
+          "isolated lighthouse on rocky coast",
+          "weathered lighthouse tower",
+          "seaside cliff with lighthouse"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_000_d56e917e6c866920.mp4",
+          "cache_key": "d56e917e6c866920",
+          "frames": 116,
+          "look": "eq=brightness=-0.012:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_000_c190f1ef486f5510.mp4",
+          "cache_key": "c190f1ef486f5510",
+          "frames": 116,
+          "look": "eq=brightness=-0.012:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2677,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.304
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2349
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2393
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.304; best window 0.304; whole frame 0.268; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "On",
+          "start": 0.0,
+          "end": 0.38
+        },
+        {
+          "text": "a",
+          "start": 0.38,
+          "end": 0.48
+        },
+        {
+          "text": "small",
+          "start": 0.48,
+          "end": 0.68
+        },
+        {
+          "text": "rocky",
+          "start": 0.68,
+          "end": 0.96
+        },
+        {
+          "text": "island",
+          "start": 0.96,
+          "end": 1.38
+        },
+        {
+          "text": "there",
+          "start": 1.38,
+          "end": 1.54
+        },
+        {
+          "text": "was",
+          "start": 1.54,
+          "end": 1.64
+        },
+        {
+          "text": "an",
+          "start": 1.64,
+          "end": 1.74
+        },
+        {
+          "text": "old",
+          "start": 1.74,
+          "end": 1.92
+        },
+        {
+          "text": "lighthouse",
+          "start": 1.92,
+          "end": 2.32
+        },
+        {
+          "text": "and",
+          "start": 2.32,
+          "end": 2.56
+        },
+        {
+          "text": "a",
+          "start": 2.56,
+          "end": 2.68
+        },
+        {
+          "text": "keeper",
+          "start": 2.68,
+          "end": 2.86
+        },
+        {
+          "text": "named",
+          "start": 2.86,
+          "end": 3.16
+        },
+        {
+          "text": "Mara.",
+          "start": 3.16,
+          "end": 3.58
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "text": "Every evening she climbed the 120 steps to light the great lamp. Most nights were quiet.",
+      "start": 3.87,
+      "end": 9.14,
+      "duration": 5.27,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "person ascending lighthouse stairs",
+      "queries": [
+        "person ascending lighthouse stairs",
+        "lighthouse interior staircase",
+        "calm night lighthouse interior"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": true,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "generated",
+      "clip_id": "card-001-899f4609",
+      "page_url": "",
+      "licence": "Generated by broll-engine (FFmpeg motion card)",
+      "licence_url": "",
+      "attribution": "",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": true,
+      "reason": "statistic line: number card '120' taken from the narration (GENERATED_FOR_STATISTICS=true)",
+      "relevance_score": null,
+      "card_text": "120",
+      "card_subtitle": "every evening she climbed",
+      "card_source": "narration",
+      "card_numbers": [
+        "120"
+      ],
+      "thumbnail": "thumb_001.jpg",
+      "logo_check": null,
+      "clip_details": {
+        "uid": "generated:card-001-899f4609",
+        "kind": "generated",
+        "title": "120 every evening she climbed",
+        "source_url": "",
+        "final_score": null,
+        "width": 0,
+        "height": 0,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "person ascending lighthouse stairs",
+          "lighthouse interior staircase",
+          "calm night lighthouse interior"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": true,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Depicts climbing many steps inside a quiet lighthouse.",
+        "source": "groq",
+        "names": [],
+        "number": "120",
+        "keyword": "evening climbed steps light great lamp n",
+        "card": {
+          "headline": "120",
+          "subtitle": "every evening she climbed",
+          "number": "120",
+          "kind": "number",
+          "source": "narration",
+          "numbers_shown": [
+            "120"
+          ]
+        },
+        "fingerprint": "3cba84d4bd243cb5"
+      },
+      "safety": {
+        "queries": [
+          "person ascending lighthouse stairs",
+          "lighthouse interior staircase",
+          "calm night lighthouse interior"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_001_93088e32cf807a81.mp4",
+          "cache_key": "93088e32cf807a81",
+          "frames": 158,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_001_2e05f5c09f270502.mp4",
+          "cache_key": "2e05f5c09f270502",
+          "frames": 158,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Every",
+          "start": 4.16,
+          "end": 4.4
+        },
+        {
+          "text": "evening",
+          "start": 4.4,
+          "end": 4.7
+        },
+        {
+          "text": "she",
+          "start": 4.7,
+          "end": 4.92
+        },
+        {
+          "text": "climbed",
+          "start": 4.92,
+          "end": 5.18
+        },
+        {
+          "text": "the",
+          "start": 5.18,
+          "end": 5.34
+        },
+        {
+          "text": "120",
+          "start": 5.34,
+          "end": 5.78
+        },
+        {
+          "text": "steps",
+          "start": 5.78,
+          "end": 6.52
+        },
+        {
+          "text": "to",
+          "start": 6.52,
+          "end": 6.7
+        },
+        {
+          "text": "light",
+          "start": 6.7,
+          "end": 6.84
+        },
+        {
+          "text": "the",
+          "start": 6.84,
+          "end": 6.98
+        },
+        {
+          "text": "great",
+          "start": 6.98,
+          "end": 7.2
+        },
+        {
+          "text": "lamp.",
+          "start": 7.2,
+          "end": 7.44
+        },
+        {
+          "text": "Most",
+          "start": 7.88,
+          "end": 8.12
+        },
+        {
+          "text": "nights",
+          "start": 8.12,
+          "end": 8.34
+        },
+        {
+          "text": "were",
+          "start": 8.34,
+          "end": 8.58
+        },
+        {
+          "text": "quiet.",
+          "start": 8.58,
+          "end": 8.9
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "text": "She watched the fishing boats come home and the gulls settle on the rocks, but one winter night a storm rolled in from the sea.",
+      "start": 9.14,
+      "end": 15.38,
+      "duration": 6.24,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "seagulls perched on rocks",
+      "queries": [
+        "fishing boats returning at dusk",
+        "seagulls perched on rocks",
+        "dark clouds gathering over sea"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "322964",
+      "page_url": "https://pixabay.com/videos/id-322964/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Rainbow76 on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.261 >= 0.22 for query 'seagulls perched on rocks' (best of 24 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.02)",
+      "relevance_score": 0.2606,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_002.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0007,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 8.84,
+            "logo_prob": 0.0197,
+            "scene_score": 0.2269,
+            "result": "ok"
+          },
+          {
+            "time": 26.51,
+            "logo_prob": 0.0075,
+            "scene_score": 0.2313,
+            "result": "ok"
+          },
+          {
+            "time": 44.18,
+            "logo_prob": 0.0075,
+            "scene_score": 0.2316,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:322964",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2025/12/19/322964_medium.mp4",
+        "final_score": 0.3006,
+        "width": 2560,
+        "height": 1440,
+        "duration": 53.0
+      },
+      "understanding": {
+        "queries": [
+          "fishing boats returning at dusk",
+          "seagulls perched on rocks",
+          "dark clouds gathering over sea"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Illustrates boats and gulls before a winter storm approaches.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "watched fishing",
+        "card": {
+          "headline": "WATCHED FISHING",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "eb08f83c20903425"
+      },
+      "safety": {
+        "queries": [
+          "fishing boats returning at dusk",
+          "seagulls perched on rocks",
+          "dark clouds gathering over sea"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_002_04d9b42999c1d2e9.mp4",
+          "cache_key": "04d9b42999c1d2e9",
+          "frames": 187,
+          "look": "eq=brightness=0.086:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_002_bafe22147a69b909.mp4",
+          "cache_key": "bafe22147a69b909",
+          "frames": 187,
+          "look": "eq=brightness=0.086:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (right)",
+          "crop": {
+            "method": "clip",
+            "choice": "right",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2128,
+            "windows": {
+              "salient": {
+                "start": 0.0847,
+                "score": 0.2133
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2385
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2302
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2859
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'right' chosen (0.286; best window 0.286; whole frame 0.213; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "She",
+          "start": 9.38,
+          "end": 9.52
+        },
+        {
+          "text": "watched",
+          "start": 9.52,
+          "end": 9.72
+        },
+        {
+          "text": "the",
+          "start": 9.72,
+          "end": 9.9
+        },
+        {
+          "text": "fishing",
+          "start": 9.9,
+          "end": 10.08
+        },
+        {
+          "text": "boats",
+          "start": 10.08,
+          "end": 10.46
+        },
+        {
+          "text": "come",
+          "start": 10.46,
+          "end": 10.66
+        },
+        {
+          "text": "home",
+          "start": 10.66,
+          "end": 10.96
+        },
+        {
+          "text": "and",
+          "start": 10.96,
+          "end": 11.08
+        },
+        {
+          "text": "the",
+          "start": 11.08,
+          "end": 11.2
+        },
+        {
+          "text": "gulls",
+          "start": 11.2,
+          "end": 11.44
+        },
+        {
+          "text": "settle",
+          "start": 11.44,
+          "end": 11.76
+        },
+        {
+          "text": "on",
+          "start": 11.76,
+          "end": 11.96
+        },
+        {
+          "text": "the",
+          "start": 11.96,
+          "end": 12.06
+        },
+        {
+          "text": "rocks,",
+          "start": 12.06,
+          "end": 12.34
+        },
+        {
+          "text": "but",
+          "start": 12.84,
+          "end": 13.02
+        },
+        {
+          "text": "one",
+          "start": 13.02,
+          "end": 13.2
+        },
+        {
+          "text": "winter",
+          "start": 13.2,
+          "end": 13.44
+        },
+        {
+          "text": "night",
+          "start": 13.44,
+          "end": 13.74
+        },
+        {
+          "text": "a",
+          "start": 13.74,
+          "end": 13.98
+        },
+        {
+          "text": "storm",
+          "start": 13.98,
+          "end": 14.2
+        },
+        {
+          "text": "rolled",
+          "start": 14.2,
+          "end": 14.46
+        },
+        {
+          "text": "in",
+          "start": 14.46,
+          "end": 14.64
+        },
+        {
+          "text": "from",
+          "start": 14.64,
+          "end": 14.78
+        },
+        {
+          "text": "the",
+          "start": 14.78,
+          "end": 14.92
+        },
+        {
+          "text": "sea.",
+          "start": 14.92,
+          "end": 15.16
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "text": "The wind howled and the waves crashed against the walls.",
+      "start": 15.38,
+      "end": 18.15,
+      "duration": 2.77,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "calm stormy sea waves hitting rocks",
+      "queries": [
+        "calm stormy sea waves hitting rocks",
+        "calm strong wind blowing lighthouse",
+        "calm rough ocean against cliff"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": true
+      },
+      "provider": "pixabay_video",
+      "clip_id": "197439",
+      "page_url": "https://pixabay.com/videos/id-197439/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Kanenori on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.289 >= 0.22 for query 'calm stormy sea waves hitting rocks' (best of 20 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.00)",
+      "relevance_score": 0.289,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_003.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0001,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 4.26,
+            "logo_prob": 0.0005,
+            "scene_score": 0.2765,
+            "result": "ok"
+          },
+          {
+            "time": 12.79,
+            "logo_prob": 0.0007,
+            "scene_score": 0.2815,
+            "result": "ok"
+          },
+          {
+            "time": 21.32,
+            "logo_prob": 0.0006,
+            "scene_score": 0.2751,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:197439",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2024/01/20/197439-904825219_medium.mp4",
+        "final_score": 0.329,
+        "width": 2560,
+        "height": 1440,
+        "duration": 25.0
+      },
+      "understanding": {
+        "queries": [
+          "stormy sea waves hitting rocks",
+          "strong wind blowing lighthouse",
+          "rough ocean against cliff"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": true
+        },
+        "reason": "groq: Conveys the howling wind and crashing waves.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "wind howled",
+        "card": {
+          "headline": "WIND HOWLED",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "c578afb918939ba0"
+      },
+      "safety": {
+        "queries": [
+          "calm stormy sea waves hitting rocks",
+          "calm strong wind blowing lighthouse",
+          "calm rough ocean against cliff"
+        ],
+        "exclude_terms": [
+          "blood",
+          "bloody",
+          "gore",
+          "corpse",
+          "dead body",
+          "injury",
+          "wound",
+          "wounded",
+          "weapon",
+          "gun",
+          "guns",
+          "knife",
+          "explosion",
+          "violence",
+          "violent",
+          "fight",
+          "riot",
+          "crash",
+          "victim",
+          "war zone"
+        ],
+        "no_faces": false,
+        "notes": [
+          "sensitive topic: calm queries, graphic content excluded"
+        ]
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_003_cf9bc28eab1511f7.mp4",
+          "cache_key": "cf9bc28eab1511f7",
+          "frames": 83,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_003_1a30f2c8f4e88395.mp4",
+          "cache_key": "1a30f2c8f4e88395",
+          "frames": 83,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2781,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2794
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2549
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2921
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.279; best window 0.292; whole frame 0.278; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "The",
+          "start": 15.6,
+          "end": 15.7
+        },
+        {
+          "text": "wind",
+          "start": 15.7,
+          "end": 15.9
+        },
+        {
+          "text": "howled",
+          "start": 15.9,
+          "end": 16.3
+        },
+        {
+          "text": "and",
+          "start": 16.3,
+          "end": 16.42
+        },
+        {
+          "text": "the",
+          "start": 16.42,
+          "end": 16.54
+        },
+        {
+          "text": "waves",
+          "start": 16.54,
+          "end": 16.8
+        },
+        {
+          "text": "crashed",
+          "start": 16.8,
+          "end": 17.12
+        },
+        {
+          "text": "against",
+          "start": 17.12,
+          "end": 17.42
+        },
+        {
+          "text": "the",
+          "start": 17.42,
+          "end": 17.64
+        },
+        {
+          "text": "walls.",
+          "start": 17.64,
+          "end": 17.86
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "text": "Suddenly the power went out and the lamp went dark.",
+      "start": 18.15,
+      "end": 20.95,
+      "duration": 2.8,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "empty light fixture in storm",
+      "queries": [
+        "lighthouse lantern extinguished",
+        "dark lighthouse interior",
+        "empty light fixture in storm"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "125627",
+      "page_url": "https://pixabay.com/videos/id-125627/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "yousafbhutta on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.226 >= 0.22 for query 'empty light fixture in storm' (best of 17 candidates, order bonus +0.04); logo check ok (logo prob 0.05); 3 clip frame(s) passed the logo check (max logo prob 0.16)",
+      "relevance_score": 0.2258,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_004.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.046,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 9.97,
+            "logo_prob": 0.0384,
+            "scene_score": 0.2046,
+            "result": "ok"
+          },
+          {
+            "time": 29.9,
+            "logo_prob": 0.117,
+            "scene_score": 0.2087,
+            "result": "ok"
+          },
+          {
+            "time": 49.83,
+            "logo_prob": 0.1572,
+            "scene_score": 0.2182,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:125627",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2022/07/26/125627-733826821_medium.mp4",
+        "final_score": 0.2658,
+        "width": 1280,
+        "height": 720,
+        "duration": 59.0
+      },
+      "understanding": {
+        "queries": [
+          "lighthouse lantern extinguished",
+          "dark lighthouse interior",
+          "empty light fixture in storm"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows the sudden loss of light and power.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "suddenly power",
+        "card": {
+          "headline": "SUDDENLY POWER",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "1d89c41337876821"
+      },
+      "safety": {
+        "queries": [
+          "lighthouse lantern extinguished",
+          "dark lighthouse interior",
+          "empty light fixture in storm"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_004_879a42b0204f1609.mp4",
+          "cache_key": "879a42b0204f1609",
+          "frames": 84,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_004_2a67a27bee4449a0.mp4",
+          "cache_key": "2a67a27bee4449a0",
+          "frames": 84,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2253,
+            "windows": {
+              "salient": {
+                "start": 0.2075,
+                "score": 0.2283
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2219
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2512
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2373
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'salient' chosen (0.228; best window 0.251; whole frame 0.225; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Suddenly",
+          "start": 18.44,
+          "end": 18.84
+        },
+        {
+          "text": "the",
+          "start": 18.84,
+          "end": 19.08
+        },
+        {
+          "text": "power",
+          "start": 19.08,
+          "end": 19.3
+        },
+        {
+          "text": "went",
+          "start": 19.3,
+          "end": 19.46
+        },
+        {
+          "text": "out",
+          "start": 19.46,
+          "end": 19.7
+        },
+        {
+          "text": "and",
+          "start": 19.7,
+          "end": 19.88
+        },
+        {
+          "text": "the",
+          "start": 19.88,
+          "end": 19.98
+        },
+        {
+          "text": "lamp",
+          "start": 19.98,
+          "end": 20.22
+        },
+        {
+          "text": "went",
+          "start": 20.22,
+          "end": 20.38
+        },
+        {
+          "text": "dark.",
+          "start": 20.38,
+          "end": 20.66
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "text": "Mara knew a ship was still out there in the rain.",
+      "start": 20.95,
+      "end": 23.77,
+      "duration": 2.82,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "rainy night sea vessel",
+      "queries": [
+        "sailboat struggling in heavy rain",
+        "rainy night sea vessel",
+        "stormy ocean with lone ship"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "16160",
+      "page_url": "https://pixabay.com/videos/id-16160/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Macb3t on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.261 >= 0.22 for query 'rainy night sea vessel' (best of 22 candidates, order bonus +0.04); logo check ok (logo prob 0.02); 3 clip frame(s) passed the logo check (max logo prob 0.03)",
+      "relevance_score": 0.2612,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_005.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0194,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 6.66,
+            "logo_prob": 0.014,
+            "scene_score": 0.2177,
+            "result": "ok"
+          },
+          {
+            "time": 19.98,
+            "logo_prob": 0.0345,
+            "scene_score": 0.2509,
+            "result": "ok"
+          },
+          {
+            "time": 33.3,
+            "logo_prob": 0.0147,
+            "scene_score": 0.2462,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:16160",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2018/05/11/16160-269534741_medium.mp4",
+        "final_score": 0.3012,
+        "width": 1280,
+        "height": 720,
+        "duration": 40.0
+      },
+      "understanding": {
+        "queries": [
+          "sailboat struggling in heavy rain",
+          "rainy night sea vessel",
+          "stormy ocean with lone ship"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Represents the ship still out in the rain.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "mara knew",
+        "card": {
+          "headline": "MARA KNEW",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "5f984fbf63bf0023"
+      },
+      "safety": {
+        "queries": [
+          "sailboat struggling in heavy rain",
+          "rainy night sea vessel",
+          "stormy ocean with lone ship"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_005_ff34721ccf2ab20f.mp4",
+          "cache_key": "ff34721ccf2ab20f",
+          "frames": 85,
+          "look": "eq=brightness=0.120:saturation=0.887",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_005_a06492d67ae8f1c7.mp4",
+          "cache_key": "a06492d67ae8f1c7",
+          "frames": 85,
+          "look": "eq=brightness=0.120:saturation=0.887",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2474,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2768
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2787
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2826
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.277; best window 0.283; whole frame 0.247; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Mara",
+          "start": 21.24,
+          "end": 21.6
+        },
+        {
+          "text": "knew",
+          "start": 21.6,
+          "end": 21.78
+        },
+        {
+          "text": "a",
+          "start": 21.78,
+          "end": 21.94
+        },
+        {
+          "text": "ship",
+          "start": 21.94,
+          "end": 22.14
+        },
+        {
+          "text": "was",
+          "start": 22.14,
+          "end": 22.34
+        },
+        {
+          "text": "still",
+          "start": 22.34,
+          "end": 22.52
+        },
+        {
+          "text": "out",
+          "start": 22.52,
+          "end": 22.72
+        },
+        {
+          "text": "there",
+          "start": 22.72,
+          "end": 22.9
+        },
+        {
+          "text": "in",
+          "start": 22.9,
+          "end": 23.02
+        },
+        {
+          "text": "the",
+          "start": 23.02,
+          "end": 23.12
+        },
+        {
+          "text": "rain.",
+          "start": 23.12,
+          "end": 23.36
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "text": "She found an old oil lantern, lit it with shaking hands and held it high in the window.",
+      "start": 23.77,
+      "end": 28.825,
+      "duration": 5.055,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "lantern held in lighthouse window",
+      "queries": [
+        "hand lighting oil lantern",
+        "old oil lantern glow",
+        "lantern held in lighthouse window"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "11722",
+      "page_url": "https://pixabay.com/videos/id-11722/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Iconikmg on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.226 >= 0.22 for query 'lantern held in lighthouse window' (best of 23 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.00); earlier: pixabay_video:21698 rejected by the frame logo check (at 24.3 s, logo prob 0.71)",
+      "relevance_score": 0.2261,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_006.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0002,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 5.52,
+            "logo_prob": 0.0008,
+            "scene_score": 0.2356,
+            "result": "ok"
+          },
+          {
+            "time": 16.57,
+            "logo_prob": 0.0004,
+            "scene_score": 0.2081,
+            "result": "ok"
+          },
+          {
+            "time": 27.61,
+            "logo_prob": 0.0008,
+            "scene_score": 0.2183,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:11722",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2017/08/30/11722-231759069_medium.mp4",
+        "final_score": 0.2661,
+        "width": 1280,
+        "height": 720,
+        "duration": 33.0
+      },
+      "understanding": {
+        "queries": [
+          "hand lighting oil lantern",
+          "old oil lantern glow",
+          "lantern held in lighthouse window"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Depicts the lantern being lit and raised in the window.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "found old",
+        "card": {
+          "headline": "FOUND OLD",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "a1a082d67fcac6f9"
+      },
+      "safety": {
+        "queries": [
+          "hand lighting oil lantern",
+          "old oil lantern glow",
+          "lantern held in lighthouse window"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_006_8a946e5cfbc9e7a1.mp4",
+          "cache_key": "8a946e5cfbc9e7a1",
+          "frames": 152,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_006_6de1f6d5f8ea2ce6.mp4",
+          "cache_key": "6de1f6d5f8ea2ce6",
+          "frames": 152,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2249,
+            "windows": {
+              "salient": {
+                "start": 0.4595,
+                "score": 0.2494
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2662
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2183
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2398
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'salient' chosen (0.249; best window 0.266; whole frame 0.225; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "She",
+          "start": 24.18,
+          "end": 24.6
+        },
+        {
+          "text": "found",
+          "start": 24.6,
+          "end": 24.82
+        },
+        {
+          "text": "an",
+          "start": 24.82,
+          "end": 25.0
+        },
+        {
+          "text": "old",
+          "start": 25.0,
+          "end": 25.16
+        },
+        {
+          "text": "oil",
+          "start": 25.16,
+          "end": 25.38
+        },
+        {
+          "text": "lantern,",
+          "start": 25.38,
+          "end": 25.76
+        },
+        {
+          "text": "lit",
+          "start": 26.22,
+          "end": 26.3
+        },
+        {
+          "text": "it",
+          "start": 26.3,
+          "end": 26.46
+        },
+        {
+          "text": "with",
+          "start": 26.46,
+          "end": 26.58
+        },
+        {
+          "text": "shaking",
+          "start": 26.58,
+          "end": 26.9
+        },
+        {
+          "text": "hands",
+          "start": 26.9,
+          "end": 27.36
+        },
+        {
+          "text": "and",
+          "start": 27.36,
+          "end": 27.56
+        },
+        {
+          "text": "held",
+          "start": 27.56,
+          "end": 27.76
+        },
+        {
+          "text": "it",
+          "start": 27.76,
+          "end": 27.9
+        },
+        {
+          "text": "high",
+          "start": 27.9,
+          "end": 28.1
+        },
+        {
+          "text": "in",
+          "start": 28.1,
+          "end": 28.2
+        },
+        {
+          "text": "the",
+          "start": 28.2,
+          "end": 28.28
+        },
+        {
+          "text": "window.",
+          "start": 28.28,
+          "end": 28.56
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "text": "For hours she stood there, refilling the oil and keeping the small flame alive.",
+      "start": 28.825,
+      "end": 32.82,
+      "duration": 3.995,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "maintaining small flame in storm",
+      "queries": [
+        "person refilling oil lantern",
+        "maintaining small flame in storm",
+        "close-up of oil lantern flame"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "143419",
+      "page_url": "https://pixabay.com/videos/id-143419/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "NickyPe on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.313 >= 0.22 for query 'maintaining small flame in storm' (best of 21 candidates, order bonus +0.04); logo check ok (logo prob 0.18); 3 clip frame(s) passed the logo check (max logo prob 0.31)",
+      "relevance_score": 0.3126,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_007.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.1834,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 5.16,
+            "logo_prob": 0.1736,
+            "scene_score": 0.2722,
+            "result": "ok"
+          },
+          {
+            "time": 15.49,
+            "logo_prob": 0.2991,
+            "scene_score": 0.2728,
+            "result": "ok"
+          },
+          {
+            "time": 25.81,
+            "logo_prob": 0.3083,
+            "scene_score": 0.2772,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:143419",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2022/12/18/143419-782363231_medium.mp4",
+        "final_score": 0.3526,
+        "width": 2560,
+        "height": 1440,
+        "duration": 30.0
+      },
+      "understanding": {
+        "queries": [
+          "person refilling oil lantern",
+          "maintaining small flame in storm",
+          "close-up of oil lantern flame"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows the keeper keeping the flame alive for hours.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "hours stood",
+        "card": {
+          "headline": "HOURS STOOD",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "e497da5e5f670922"
+      },
+      "safety": {
+        "queries": [
+          "person refilling oil lantern",
+          "maintaining small flame in storm",
+          "close-up of oil lantern flame"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_007_f23a90a8b308a543.mp4",
+          "cache_key": "f23a90a8b308a543",
+          "frames": 120,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_007_939b077e45739a4d.mp4",
+          "cache_key": "939b077e45739a4d",
+          "frames": 120,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2803,
+            "windows": {
+              "salient": {
+                "start": 0.3968,
+                "score": 0.297
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.3002
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2378
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.25
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'salient' chosen (0.297; best window 0.300; whole frame 0.280; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "For",
+          "start": 29.09,
+          "end": 29.32
+        },
+        {
+          "text": "hours",
+          "start": 29.32,
+          "end": 29.6
+        },
+        {
+          "text": "she",
+          "start": 29.6,
+          "end": 29.78
+        },
+        {
+          "text": "stood",
+          "start": 29.78,
+          "end": 30.0
+        },
+        {
+          "text": "there,",
+          "start": 30.0,
+          "end": 30.24
+        },
+        {
+          "text": "refilling",
+          "start": 30.38,
+          "end": 30.66
+        },
+        {
+          "text": "the",
+          "start": 30.66,
+          "end": 30.84
+        },
+        {
+          "text": "oil",
+          "start": 30.84,
+          "end": 31.06
+        },
+        {
+          "text": "and",
+          "start": 31.06,
+          "end": 31.22
+        },
+        {
+          "text": "keeping",
+          "start": 31.22,
+          "end": 31.44
+        },
+        {
+          "text": "the",
+          "start": 31.44,
+          "end": 31.62
+        },
+        {
+          "text": "small",
+          "start": 31.62,
+          "end": 31.88
+        },
+        {
+          "text": "flame",
+          "start": 31.88,
+          "end": 32.14
+        },
+        {
+          "text": "alive.",
+          "start": 32.14,
+          "end": 32.5
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "text": "At dawn the storm finally passed.",
+      "start": 32.82,
+      "end": 35.07,
+      "duration": 2.25,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "calm sea at dawn",
+      "queries": [
+        "sunrise after storm over sea",
+        "calm sea at dawn",
+        "light breaking through clouds"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "365737",
+      "page_url": "https://pixabay.com/videos/id-365737/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Mario_Krimer on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.259 >= 0.22 for query 'calm sea at dawn' (best of 23 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.00)",
+      "relevance_score": 0.2587,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_008.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0002,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 9.99,
+            "logo_prob": 0.0017,
+            "scene_score": 0.2078,
+            "result": "ok"
+          },
+          {
+            "time": 29.98,
+            "logo_prob": 0.0003,
+            "scene_score": 0.2431,
+            "result": "ok"
+          },
+          {
+            "time": 49.97,
+            "logo_prob": 0.0004,
+            "scene_score": 0.2452,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:365737",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2026/07/23/365737_medium.mp4",
+        "final_score": 0.2987,
+        "width": 1280,
+        "height": 720,
+        "duration": 59.0
+      },
+      "understanding": {
+        "queries": [
+          "sunrise after storm over sea",
+          "calm sea at dawn",
+          "light breaking through clouds"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Signals the dawn and the storm's end.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "dawn storm",
+        "card": {
+          "headline": "DAWN STORM",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "ada0219f1a07d13e"
+      },
+      "safety": {
+        "queries": [
+          "sunrise after storm over sea",
+          "calm sea at dawn",
+          "light breaking through clouds"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_008_3f75055be4182efb.mp4",
+          "cache_key": "3f75055be4182efb",
+          "frames": 67,
+          "look": "eq=brightness=-0.041:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_008_7f603a5f03300211.mp4",
+          "cache_key": "7f603a5f03300211",
+          "frames": 67,
+          "look": "eq=brightness=-0.041:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2421,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2618
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2621
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2578
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.262; best window 0.262; whole frame 0.242; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "At",
+          "start": 33.14,
+          "end": 33.32
+        },
+        {
+          "text": "dawn",
+          "start": 33.32,
+          "end": 33.54
+        },
+        {
+          "text": "the",
+          "start": 33.54,
+          "end": 33.72
+        },
+        {
+          "text": "storm",
+          "start": 33.72,
+          "end": 34.0
+        },
+        {
+          "text": "finally",
+          "start": 34.0,
+          "end": 34.38
+        },
+        {
+          "text": "passed.",
+          "start": 34.38,
+          "end": 34.78
+        }
+      ]
+    },
+    {
+      "index": 9,
+      "text": "Far below a fishing boat sailed safely into the harbour.",
+      "start": 35.07,
+      "end": 38.35,
+      "duration": 3.28,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "fishing boat entering harbor",
+      "queries": [
+        "fishing boat entering harbor",
+        "harbor sunrise with boat",
+        "safe arrival of fishing vessel"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "6412",
+      "page_url": "https://pixabay.com/videos/id-6412/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Life-Of-Vids on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.286 >= 0.22 for query 'fishing boat entering harbor' (best of 19 candidates, order bonus +0.04); logo check ok (logo prob 0.14); 3 clip frame(s) passed the logo check (max logo prob 0.18)",
+      "relevance_score": 0.286,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_009.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.1433,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 4.16,
+            "logo_prob": 0.1122,
+            "scene_score": 0.2741,
+            "result": "ok"
+          },
+          {
+            "time": 12.48,
+            "logo_prob": 0.1814,
+            "scene_score": 0.2754,
+            "result": "ok"
+          },
+          {
+            "time": 20.8,
+            "logo_prob": 0.1359,
+            "scene_score": 0.2766,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:6412",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2016/11/15/6412-191719125_medium.mp4",
+        "final_score": 0.326,
+        "width": 1280,
+        "height": 720,
+        "duration": 25.0
+      },
+      "understanding": {
+        "queries": [
+          "fishing boat entering harbor",
+          "harbor sunrise with boat",
+          "safe arrival of fishing vessel"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows the boat reaching safety in the harbor.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "far fishing",
+        "card": {
+          "headline": "FAR FISHING",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "2b6ec41c57d66032"
+      },
+      "safety": {
+        "queries": [
+          "fishing boat entering harbor",
+          "harbor sunrise with boat",
+          "safe arrival of fishing vessel"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_009_b049131caf43498c.mp4",
+          "cache_key": "b049131caf43498c",
+          "frames": 98,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_009_a5f6087b2423d20a.mp4",
+          "cache_key": "a5f6087b2423d20a",
+          "frames": 98,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2801,
+            "windows": {
+              "salient": {
+                "start": 0.1566,
+                "score": 0.2983
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2829
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2811
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2408
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'salient' chosen (0.298; best window 0.298; whole frame 0.280; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Far",
+          "start": 35.36,
+          "end": 35.54
+        },
+        {
+          "text": "below",
+          "start": 35.54,
+          "end": 35.78
+        },
+        {
+          "text": "a",
+          "start": 35.78,
+          "end": 36.06
+        },
+        {
+          "text": "fishing",
+          "start": 36.06,
+          "end": 36.26
+        },
+        {
+          "text": "boat",
+          "start": 36.26,
+          "end": 36.54
+        },
+        {
+          "text": "sailed",
+          "start": 36.54,
+          "end": 36.94
+        },
+        {
+          "text": "safely",
+          "start": 36.94,
+          "end": 37.38
+        },
+        {
+          "text": "into",
+          "start": 37.38,
+          "end": 37.64
+        },
+        {
+          "text": "the",
+          "start": 37.64,
+          "end": 37.78
+        },
+        {
+          "text": "harbour.",
+          "start": 37.78,
+          "end": 38.1
+        }
+      ]
+    },
+    {
+      "index": 10,
+      "text": "The captain looked up and waved at the tiny light in the tower.",
+      "start": 38.35,
+      "end": 41.42,
+      "duration": 3.07,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "ship captain waving from deck",
+      "queries": [
+        "ship captain waving from deck",
+        "captain spotting lighthouse light",
+        "hand wave from boat at sunrise"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "32231",
+      "page_url": "https://pixabay.com/videos/id-32231/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "ChristianBodhi on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.237 >= 0.22 for query 'ship captain waving from deck' (best of 23 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.05)",
+      "relevance_score": 0.2368,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_010.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0025,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 5.17,
+            "logo_prob": 0.0016,
+            "scene_score": 0.2336,
+            "result": "ok"
+          },
+          {
+            "time": 15.52,
+            "logo_prob": 0.0022,
+            "scene_score": 0.2338,
+            "result": "ok"
+          },
+          {
+            "time": 25.87,
+            "logo_prob": 0.0506,
+            "scene_score": 0.227,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:32231",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2020/02/11/32231-390923700_medium.mp4",
+        "final_score": 0.2768,
+        "width": 1280,
+        "height": 720,
+        "duration": 31.0
+      },
+      "understanding": {
+        "queries": [
+          "ship captain waving from deck",
+          "captain spotting lighthouse light",
+          "hand wave from boat at sunrise"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Illustrates the captain noticing and waving at the light.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "captain looked",
+        "card": {
+          "headline": "CAPTAIN LOOKED",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "ec195e956091d1c4"
+      },
+      "safety": {
+        "queries": [
+          "ship captain waving from deck",
+          "captain spotting lighthouse light",
+          "hand wave from boat at sunrise"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_010_74f4f789da52c2e8.mp4",
+          "cache_key": "74f4f789da52c2e8",
+          "frames": 93,
+          "look": "eq=brightness=-0.020:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_010_60f6328abb919578.mp4",
+          "cache_key": "60f6328abb919578",
+          "frames": 93,
+          "look": "eq=brightness=-0.020:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2043,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2292
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2157
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2399
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.229; best window 0.240; whole frame 0.204; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "The",
+          "start": 38.6,
+          "end": 38.72
+        },
+        {
+          "text": "captain",
+          "start": 38.72,
+          "end": 38.98
+        },
+        {
+          "text": "looked",
+          "start": 38.98,
+          "end": 39.18
+        },
+        {
+          "text": "up",
+          "start": 39.18,
+          "end": 39.42
+        },
+        {
+          "text": "and",
+          "start": 39.42,
+          "end": 39.58
+        },
+        {
+          "text": "waved",
+          "start": 39.58,
+          "end": 39.9
+        },
+        {
+          "text": "at",
+          "start": 39.9,
+          "end": 40.02
+        },
+        {
+          "text": "the",
+          "start": 40.02,
+          "end": 40.1
+        },
+        {
+          "text": "tiny",
+          "start": 40.1,
+          "end": 40.34
+        },
+        {
+          "text": "light",
+          "start": 40.34,
+          "end": 40.6
+        },
+        {
+          "text": "in",
+          "start": 40.6,
+          "end": 40.76
+        },
+        {
+          "text": "the",
+          "start": 40.76,
+          "end": 40.86
+        },
+        {
+          "text": "tower.",
+          "start": 40.86,
+          "end": 41.12
+        }
+      ]
+    },
+    {
+      "index": 11,
+      "text": "Mara smiled, blew out the lantern and went down the steps to make a hot cup of tea.",
+      "start": 41.42,
+      "end": 46.625,
+      "duration": 5.205,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "person blowing out lantern",
+      "queries": [
+        "person blowing out lantern",
+        "descending lighthouse stairs",
+        "making tea in cozy kitchen"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "generated",
+      "clip_id": "card-011-1e5330d2",
+      "page_url": "",
+      "licence": "Generated by broll-engine (FFmpeg motion card)",
+      "licence_url": "",
+      "attribution": "",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": true,
+      "reason": "no stock source passed the rule (pixabay_video: best score 0.185 < 0.22; pixabay_image_motion: best score 0.206 < 0.22; wikimedia: best score 0.155 < 0.22) -> generated motion card 'MARA SMILED'",
+      "relevance_score": null,
+      "card_text": "MARA SMILED",
+      "card_subtitle": "",
+      "card_source": "narration",
+      "card_numbers": [],
+      "thumbnail": "thumb_011.jpg",
+      "logo_check": null,
+      "clip_details": {
+        "uid": "generated:card-011-1e5330d2",
+        "kind": "generated",
+        "title": "MARA SMILED",
+        "source_url": "",
+        "final_score": null,
+        "width": 0,
+        "height": 0,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "person blowing out lantern",
+          "descending lighthouse stairs",
+          "making tea in cozy kitchen"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows the keeper ending her watch and preparing tea.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "mara smiled",
+        "card": {
+          "headline": "MARA SMILED",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "fb70e8d0ec249968"
+      },
+      "safety": {
+        "queries": [
+          "person blowing out lantern",
+          "descending lighthouse stairs",
+          "making tea in cozy kitchen"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_011_e31b20e76cc2f3db.mp4",
+          "cache_key": "e31b20e76cc2f3db",
+          "frames": 156,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_011_7eb1ec43e5065a01.mp4",
+          "cache_key": "7eb1ec43e5065a01",
+          "frames": 156,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Mara",
+          "start": 41.72,
+          "end": 42.14
+        },
+        {
+          "text": "smiled,",
+          "start": 42.14,
+          "end": 42.62
+        },
+        {
+          "text": "blew",
+          "start": 42.8,
+          "end": 42.9
+        },
+        {
+          "text": "out",
+          "start": 42.9,
+          "end": 43.08
+        },
+        {
+          "text": "the",
+          "start": 43.08,
+          "end": 43.2
+        },
+        {
+          "text": "lantern",
+          "start": 43.2,
+          "end": 43.48
+        },
+        {
+          "text": "and",
+          "start": 43.48,
+          "end": 43.78
+        },
+        {
+          "text": "went",
+          "start": 43.78,
+          "end": 43.92
+        },
+        {
+          "text": "down",
+          "start": 43.92,
+          "end": 44.14
+        },
+        {
+          "text": "the",
+          "start": 44.14,
+          "end": 44.3
+        },
+        {
+          "text": "steps",
+          "start": 44.3,
+          "end": 44.58
+        },
+        {
+          "text": "to",
+          "start": 44.58,
+          "end": 44.76
+        },
+        {
+          "text": "make",
+          "start": 44.76,
+          "end": 44.9
+        },
+        {
+          "text": "a",
+          "start": 44.9,
+          "end": 45.02
+        },
+        {
+          "text": "hot",
+          "start": 45.02,
+          "end": 45.18
+        },
+        {
+          "text": "cup",
+          "start": 45.18,
+          "end": 45.38
+        },
+        {
+          "text": "of",
+          "start": 45.38,
+          "end": 45.5
+        },
+        {
+          "text": "tea.",
+          "start": 45.5,
+          "end": 45.76
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "aspect_ratio": "16:9",
+      "file": "video_16x9.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 46.633
+    },
+    {
+      "aspect_ratio": "9:16",
+      "file": "video_9x16.mp4",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "duration": 46.633
+    }
+  ]
+}

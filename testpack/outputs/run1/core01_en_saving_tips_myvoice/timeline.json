@@ -1,0 +1,840 @@
+{
+  "job_id": "2eea2c49161e40e3b2437e002956ef83",
+  "input_type": "upload",
+  "duration": 24.875,
+  "language": "en",
+  "scenes": [
+    {
+      "index": 0,
+      "text": "If you want to save money, start small, track every rupee you spend for one week.",
+      "start": 0.0,
+      "end": 7.65,
+      "duration": 7.65,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "wallet with cash",
+      "queries": [
+        "counting banknotes",
+        "coins on a wooden table",
+        "wallet with cash"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "95818",
+      "page_url": "https://pixabay.com/videos/id-95818/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Engin_Akyurt on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.266 >= 0.22 for query 'wallet with cash' (best of 21 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.05)",
+      "relevance_score": 0.2659,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_000.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0015,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 9.89,
+            "logo_prob": 0.0284,
+            "scene_score": 0.2634,
+            "result": "ok"
+          },
+          {
+            "time": 29.66,
+            "logo_prob": 0.0532,
+            "scene_score": 0.2619,
+            "result": "ok"
+          },
+          {
+            "time": 49.44,
+            "logo_prob": 0.0321,
+            "scene_score": 0.2637,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:95818",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2021/11/13/95818-649760880_medium.mp4",
+        "final_score": 0.3059,
+        "width": 2560,
+        "height": 1440,
+        "duration": 59.0
+      },
+      "understanding": {
+        "queries": [
+          "counting banknotes",
+          "coins on a wooden table",
+          "wallet with cash"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "rules: keywords of the line",
+        "source": "rules",
+        "names": [],
+        "number": null,
+        "keyword": "want save",
+        "card": {
+          "headline": "WANT SAVE",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "e4f903dd3830c028"
+      },
+      "safety": {
+        "queries": [
+          "counting banknotes",
+          "coins on a wooden table",
+          "wallet with cash"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_000_4982bd00693da0f7.mp4",
+          "cache_key": "4982bd00693da0f7",
+          "frames": 230,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_000_21aa090acb355b3e.mp4",
+          "cache_key": "21aa090acb355b3e",
+          "frames": 230,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2709,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2718
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2779
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2774
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.272; best window 0.278; whole frame 0.271; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "If",
+          "start": 0.72,
+          "end": 1.26
+        },
+        {
+          "text": "you",
+          "start": 1.26,
+          "end": 1.42
+        },
+        {
+          "text": "want",
+          "start": 1.42,
+          "end": 1.7
+        },
+        {
+          "text": "to",
+          "start": 1.7,
+          "end": 1.92
+        },
+        {
+          "text": "save",
+          "start": 1.92,
+          "end": 2.18
+        },
+        {
+          "text": "money,",
+          "start": 2.18,
+          "end": 2.5
+        },
+        {
+          "text": "start",
+          "start": 3.0,
+          "end": 3.36
+        },
+        {
+          "text": "small,",
+          "start": 3.36,
+          "end": 3.78
+        },
+        {
+          "text": "track",
+          "start": 4.5,
+          "end": 4.98
+        },
+        {
+          "text": "every",
+          "start": 4.98,
+          "end": 5.28
+        },
+        {
+          "text": "rupee",
+          "start": 5.28,
+          "end": 5.98
+        },
+        {
+          "text": "you",
+          "start": 5.98,
+          "end": 6.22
+        },
+        {
+          "text": "spend",
+          "start": 6.22,
+          "end": 6.48
+        },
+        {
+          "text": "for",
+          "start": 6.48,
+          "end": 6.8
+        },
+        {
+          "text": "one",
+          "start": 6.8,
+          "end": 7.02
+        },
+        {
+          "text": "week.",
+          "start": 7.02,
+          "end": 7.28
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "text": "You will be surprised where your money goes.",
+      "start": 7.65,
+      "end": 12.04,
+      "duration": 4.39,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "wallet with cash",
+      "queries": [
+        "counting banknotes",
+        "coins on a wooden table",
+        "wallet with cash"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "50625",
+      "page_url": "https://pixabay.com/videos/id-50625/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Hassas_Arts on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.258 >= 0.22 for query 'wallet with cash' (best of 20 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.04)",
+      "relevance_score": 0.2583,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_001.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0043,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 1.95,
+            "logo_prob": 0.027,
+            "scene_score": 0.2313,
+            "result": "ok"
+          },
+          {
+            "time": 5.84,
+            "logo_prob": 0.0121,
+            "scene_score": 0.2468,
+            "result": "ok"
+          },
+          {
+            "time": 9.74,
+            "logo_prob": 0.044,
+            "scene_score": 0.2572,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:50625",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2020/09/23/50625-460909297_medium.mp4",
+        "final_score": 0.2983,
+        "width": 1280,
+        "height": 720,
+        "duration": 12.0
+      },
+      "understanding": {
+        "queries": [
+          "counting banknotes",
+          "coins on a wooden table",
+          "wallet with cash"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "rules: keywords of the line",
+        "source": "rules",
+        "names": [],
+        "number": null,
+        "keyword": "surprised money",
+        "card": {
+          "headline": "SURPRISED MONEY",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "66415b96be233dd2"
+      },
+      "safety": {
+        "queries": [
+          "counting banknotes",
+          "coins on a wooden table",
+          "wallet with cash"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_001_960821e175c8edc9.mp4",
+          "cache_key": "960821e175c8edc9",
+          "frames": 131,
+          "look": "eq=brightness=-0.120:saturation=0.859",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_001_124059af393f78df.mp4",
+          "cache_key": "124059af393f78df",
+          "frames": 131,
+          "look": "eq=brightness=-0.120:saturation=0.859",
+          "caption_font": "Arial",
+          "framing": "subject crop (left)",
+          "crop": {
+            "method": "clip",
+            "choice": "left",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2058,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.161
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2115
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2157
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'left' chosen (0.211; best window 0.216; whole frame 0.206; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "You",
+          "start": 8.02,
+          "end": 8.12
+        },
+        {
+          "text": "will",
+          "start": 8.12,
+          "end": 8.3
+        },
+        {
+          "text": "be",
+          "start": 8.3,
+          "end": 8.5
+        },
+        {
+          "text": "surprised",
+          "start": 8.5,
+          "end": 9.02
+        },
+        {
+          "text": "where",
+          "start": 9.02,
+          "end": 9.98
+        },
+        {
+          "text": "your",
+          "start": 9.98,
+          "end": 10.52
+        },
+        {
+          "text": "money",
+          "start": 10.52,
+          "end": 10.82
+        },
+        {
+          "text": "goes.",
+          "start": 10.82,
+          "end": 11.52
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "text": "Next, set a simple budget and put aside 10 % of your income before you spend anything.",
+      "start": 12.04,
+      "end": 19.46,
+      "duration": 7.42,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "calculator and notebook budget",
+      "queries": [
+        "calculator and notebook budget",
+        "receipt and calculator on table",
+        "planning finances on paper"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": true,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "generated",
+      "clip_id": "card-002-c63b3519",
+      "page_url": "",
+      "licence": "Generated by broll-engine (FFmpeg motion card)",
+      "licence_url": "",
+      "attribution": "",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": true,
+      "reason": "statistic line: number card '10%' taken from the narration (GENERATED_FOR_STATISTICS=true)",
+      "relevance_score": null,
+      "card_text": "10%",
+      "card_subtitle": "set a simple budget",
+      "card_source": "narration",
+      "card_numbers": [
+        "10%"
+      ],
+      "thumbnail": "thumb_002.jpg",
+      "logo_check": null,
+      "clip_details": {
+        "uid": "generated:card-002-c63b3519",
+        "kind": "generated",
+        "title": "10% set a simple budget",
+        "source_url": "",
+        "final_score": null,
+        "width": 0,
+        "height": 0,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "calculator and notebook budget",
+          "receipt and calculator on table",
+          "planning finances on paper"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": true,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "rules: keywords of the line",
+        "source": "rules",
+        "names": [],
+        "number": "10%",
+        "keyword": "next set simple budget put aside income",
+        "card": {
+          "headline": "10%",
+          "subtitle": "set a simple budget",
+          "number": "10%",
+          "kind": "percent",
+          "source": "narration",
+          "numbers_shown": [
+            "10%"
+          ]
+        },
+        "fingerprint": "f733b01d68d5074f"
+      },
+      "safety": {
+        "queries": [
+          "calculator and notebook budget",
+          "receipt and calculator on table",
+          "planning finances on paper"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_002_e28569d490ac3521.mp4",
+          "cache_key": "e28569d490ac3521",
+          "frames": 223,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_002_407637b89494f977.mp4",
+          "cache_key": "407637b89494f977",
+          "frames": 223,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Next,",
+          "start": 12.56,
+          "end": 12.98
+        },
+        {
+          "text": "set",
+          "start": 13.24,
+          "end": 13.48
+        },
+        {
+          "text": "a",
+          "start": 13.48,
+          "end": 13.68
+        },
+        {
+          "text": "simple",
+          "start": 13.68,
+          "end": 13.96
+        },
+        {
+          "text": "budget",
+          "start": 13.96,
+          "end": 14.38
+        },
+        {
+          "text": "and",
+          "start": 14.38,
+          "end": 15.0
+        },
+        {
+          "text": "put",
+          "start": 15.0,
+          "end": 15.4
+        },
+        {
+          "text": "aside",
+          "start": 15.4,
+          "end": 15.76
+        },
+        {
+          "text": "10",
+          "start": 15.76,
+          "end": 16.3
+        },
+        {
+          "text": "%",
+          "start": 16.3,
+          "end": 16.72
+        },
+        {
+          "text": "of",
+          "start": 16.72,
+          "end": 17.04
+        },
+        {
+          "text": "your",
+          "start": 17.04,
+          "end": 17.22
+        },
+        {
+          "text": "income",
+          "start": 17.22,
+          "end": 17.66
+        },
+        {
+          "text": "before",
+          "start": 17.66,
+          "end": 18.28
+        },
+        {
+          "text": "you",
+          "start": 18.28,
+          "end": 18.5
+        },
+        {
+          "text": "spend",
+          "start": 18.5,
+          "end": 18.76
+        },
+        {
+          "text": "anything.",
+          "start": 18.76,
+          "end": 19.14
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "text": "Small habits repeated every month make a big difference.",
+      "start": 19.46,
+      "end": 24.875,
+      "duration": 5.415,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "small habits repeated",
+      "queries": [
+        "small habits repeated",
+        "habits repeated",
+        "small habits"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "generated",
+      "clip_id": "card-003-44826bf9",
+      "page_url": "",
+      "licence": "Generated by broll-engine (FFmpeg motion card)",
+      "licence_url": "",
+      "attribution": "",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": true,
+      "reason": "no stock source passed the rule (pixabay_video: best score 0.217 < 0.22; pixabay_image_motion: logo check rejected 1, best: pixabay_image_motion:8561797 (logo prob 0.93, scene 0.244) (1 checked); pixabay_image_motion: best score 0.215 < 0.22; wikimedia: best score 0.183 < 0.22) -> generated motion card 'SMALL HABITS'",
+      "relevance_score": null,
+      "card_text": "SMALL HABITS",
+      "card_subtitle": "",
+      "card_source": "narration",
+      "card_numbers": [],
+      "thumbnail": "thumb_003.jpg",
+      "logo_check": null,
+      "clip_details": {
+        "uid": "generated:card-003-44826bf9",
+        "kind": "generated",
+        "title": "SMALL HABITS",
+        "source_url": "",
+        "final_score": null,
+        "width": 0,
+        "height": 0,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "small habits repeated",
+          "habits repeated",
+          "small habits"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "rules: keywords of the line",
+        "source": "rules",
+        "names": [],
+        "number": null,
+        "keyword": "small habits",
+        "card": {
+          "headline": "SMALL HABITS",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "2afc844ac71741ed"
+      },
+      "safety": {
+        "queries": [
+          "small habits repeated",
+          "habits repeated",
+          "small habits"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_003_0a95e34d787299b0.mp4",
+          "cache_key": "0a95e34d787299b0",
+          "frames": 162,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_003_4bd2b83f34b35efd.mp4",
+          "cache_key": "4bd2b83f34b35efd",
+          "frames": 162,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Small",
+          "start": 19.78,
+          "end": 20.14
+        },
+        {
+          "text": "habits",
+          "start": 20.14,
+          "end": 20.64
+        },
+        {
+          "text": "repeated",
+          "start": 20.64,
+          "end": 21.56
+        },
+        {
+          "text": "every",
+          "start": 21.56,
+          "end": 21.92
+        },
+        {
+          "text": "month",
+          "start": 21.92,
+          "end": 22.24
+        },
+        {
+          "text": "make",
+          "start": 22.24,
+          "end": 22.8
+        },
+        {
+          "text": "a",
+          "start": 22.8,
+          "end": 22.98
+        },
+        {
+          "text": "big",
+          "start": 22.98,
+          "end": 23.12
+        },
+        {
+          "text": "difference.",
+          "start": 23.12,
+          "end": 23.56
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "aspect_ratio": "16:9",
+      "file": "video_16x9.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 24.867
+    },
+    {
+      "aspect_ratio": "9:16",
+      "file": "video_9x16.mp4",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "duration": 24.867
+    }
+  ]
+}

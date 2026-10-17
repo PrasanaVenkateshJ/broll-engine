@@ -29,6 +29,7 @@ import hashlib
 import json
 import logging
 import re
+import shutil
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -64,6 +65,54 @@ def orientation_of(ratio: str) -> str:
 
 # ---------- Burned captions (ASS subtitle format, drawn by FFmpeg's libass) ----------
 
+# Fonts we ship (app/fonts, SIL OFL): the same files on Windows, Docker and Modal, so Tamil and Hindi
+# captions never depend on which system fonts happen to be installed (Docker has none for them).
+FONTS_DIR = Path(__file__).resolve().parent.parent / "fonts"
+# Unicode block of each script we have a font for -> the language code used in CAPTION_FONTS_BY_LANGUAGE.
+SCRIPT_LANGUAGES = (("ta", 0x0B80, 0x0BFF), ("hi", 0x0900, 0x097F))
+
+
+def script_language(text: str) -> str | None:
+    """"ta" if the text holds Tamil letters, "hi" for Devanagari, else None."""
+    for lang, low, high in SCRIPT_LANGUAGES:
+        if any(low <= ord(ch) <= high for ch in text):
+            return lang
+    return None
+
+
+def caption_font(language: str | None, text: str = "") -> str:
+    """Font for a caption: by the caption language first (Whisper code, e.g. "ta"), then by the script
+    of the text itself (a safety net if the language code is missing), else CAPTION_FONT."""
+    s = get_settings()
+    fonts = s.caption_fonts_by_language
+    lang = (language or "").strip().lower()
+    if lang in fonts:
+        return fonts[lang]
+    return fonts.get(script_language(text) or "", s.CAPTION_FONT)
+
+
+def font_scale(font: str) -> float:
+    """Size factor for this font (CAPTION_FONT_SCALES), 1.0 if none is set."""
+    return get_settings().caption_font_scales.get(font, 1.0)
+
+
+def fonts_dir() -> Path:
+    s = get_settings()
+    return Path(s.CAPTION_FONTS_DIR) if s.CAPTION_FONTS_DIR else FONTS_DIR
+
+
+def subtitles_filter(ass_name: str, folder: Path) -> str:
+    """The FFmpeg filter that burns `ass_name` (a file in `folder`) with our fonts.
+    The fonts are copied next to it once, so the filter only holds bare relative names
+    (a Windows path such as C:/work/... breaks FFmpeg's filter syntax)."""
+    source = fonts_dir()
+    if source.is_dir():
+        if not (folder / "fonts").is_dir():
+            shutil.copytree(source, folder / "fonts")
+        return f"subtitles=filename={ass_name}:fontsdir=fonts"
+    return f"subtitles=filename={ass_name}"
+
+
 def _ass_time(seconds: float) -> str:
     """ASS times look like 0:00:12.34 (hours:minutes:seconds.hundredths)."""
     cs = int(round(max(seconds, 0.0) * 100))
@@ -94,14 +143,16 @@ def _ass_header(width: int, height: int, styles: list[str]) -> list[str]:
     ]
 
 
-def write_segment_ass(cues: list[Cue], scene: Scene, width: int, height: int, path: Path) -> Path:
-    """Captions for ONE scene, with times counted from the start of that scene."""
-    s = get_settings()
-    font_size = round(min(height * 0.055, width * 0.045))  # fits ~42 characters across a 1080-wide frame
+def write_segment_ass(cues: list[Cue], scene: Scene, width: int, height: int, path: Path,
+                      language: str | None = None) -> Path:
+    """Captions for ONE scene, with times counted from the start of that scene.
+    language = the caption language (Whisper code); it picks the font (caption_font)."""
+    font = caption_font(language, " ".join(" ".join(c.lines) for c in cues if c.scene_index == scene.index))
+    font_size = round(min(height * 0.055, width * 0.045) * font_scale(font))  # ~42 characters across 1080 px
     outline = max(2, font_size // 14)
     # White bold text, black outline, bottom centre (Alignment 2).
     lines = _ass_header(width, height, [
-        f"Style: Default,{s.CAPTION_FONT},{font_size},&H00FFFFFF,&H000000FF,&H00000000,&H80000000,-1,0,0,0,100,100,"
+        f"Style: Default,{font},{font_size},&H00FFFFFF,&H000000FF,&H00000000,&H80000000,-1,0,0,0,100,100,"
         f"0,0,1,{outline},1,2,{round(width * 0.05)},{round(width * 0.05)},{round(height * 0.06)},1"])
     for cue in cues:
         if cue.scene_index != scene.index:
@@ -114,26 +165,27 @@ def write_segment_ass(cues: list[Cue], scene: Scene, width: int, height: int, pa
 
 def write_card_ass(card: dict, width: int, height: int, seconds: float, path: Path) -> Path:
     """The text of a generated card: a big headline + a small label, both exactly as given.
+    Each part gets the font of its own script (a Tamil label -> Noto Sans Tamil; "40%" -> CAPTION_FONT).
 
     The headline fades in and grows very slightly. There is NO count-up animation: counting 0% -> 40%
     drew numbers the narration never says (a poster frame at 0.4 s showed "21%")."""
-    s = get_settings()
-    head_size = round(min(width, height) * 0.2)
-    label_size = round(min(width, height) * 0.065)
+    headline, label = str(card.get("headline") or ""), str(card.get("label") or "")
+    head_font, label_font = caption_font(None, headline), caption_font(None, label)
+    head_size = round(min(width, height) * 0.2 * font_scale(head_font))
+    label_size = round(min(width, height) * 0.065 * font_scale(label_font))
     cx, head_y = width // 2, round(height * 0.44)
     label_y = head_y + round(head_size * 0.75)
     lines = _ass_header(width, height, [
-        f"Style: Head,{s.CAPTION_FONT},{head_size},&H00FFFFFF,&H000000FF,&H00000000,&H60000000,-1,0,0,0,100,100,"
+        f"Style: Head,{head_font},{head_size},&H00FFFFFF,&H000000FF,&H00000000,&H60000000,-1,0,0,0,100,100,"
         f"0,0,1,0,4,5,0,0,0,1",
-        f"Style: Label,{s.CAPTION_FONT},{label_size},&H00F0F0F0,&H000000FF,&H00000000,&H60000000,0,0,0,0,100,100,"
+        f"Style: Label,{label_font},{label_size},&H00F0F0F0,&H000000FF,&H00000000,&H60000000,0,0,0,0,100,100,"
         f"2,0,1,0,2,5,0,0,0,1"])
     end = _ass_time(seconds + 1)
-    headline = str(card.get("headline") or "")
     lines.append(f"Dialogue: 0,0:00:00.00,{end},Head,,0,0,0,,{{\\pos({cx},{head_y})\\fad(300,0)"
                  f"\\t(0,{round(seconds * 1000)},\\fscx106\\fscy106)}}{_ass_text([headline])}")
-    if card.get("label"):
+    if label:
         lines.append(f"Dialogue: 0,0:00:00.30,{end},Label,,0,0,0,,{{\\pos({cx},{label_y})\\fad(500,0)}}"
-                     f"{_ass_text([str(card['label'])])}")
+                     f"{_ass_text([label])}")
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
     return path
 
@@ -424,12 +476,14 @@ def frame_counts(scenes: list[Scene], fps: int) -> list[int]:
     return [max(1, c) for c in counts]
 
 
-def segment_key(info: SourceInfo, scene: Scene, ratio: str, cues: list[Cue], burn_captions: bool) -> str:
+def segment_key(info: SourceInfo, scene: Scene, ratio: str, cues: list[Cue], burn_captions: bool,
+                language: str | None = None) -> str:
     """Same key = same picture, so the cached segment can be reused."""
     s = get_settings()
     caption_text = [(c.start, c.end, c.lines) for c in cues if c.scene_index == scene.index] if burn_captions else []
+    font = caption_font(language, json.dumps(caption_text, ensure_ascii=False))
     data = [info.uid, scene.start, scene.end, ratio, caption_text, s.RENDER_FPS, s.VIDEO_PRESET, s.VIDEO_CRF,
-            s.TARGET_LUMA, s.TARGET_SATURATION, s.KEN_BURNS_ZOOM, s.MAX_SLOWDOWN, s.CAPTION_FONT,
+            s.TARGET_LUMA, s.TARGET_SATURATION, s.KEN_BURNS_ZOOM, s.MAX_SLOWDOWN, font, font_scale(font),
             # The crop depends on the scene meaning and on whether CLIP looked at it.
             info.crop_texts, getattr(info.scorer, "name", None), s.CROP_SAMPLE_FRAMES, s.CROP_BLUR_MARGIN,
             s.CROP_TIE_MARGIN]
@@ -481,13 +535,14 @@ def _frame_chain(framing: Framing, width: int, height: int) -> tuple[str, str]:
 
 
 def render_segment(info: SourceInfo, scene: Scene, ratio: str, cues: list[Cue], folder: Path, frames: int,
-                   burn_captions: bool) -> tuple[Path, dict]:
-    """Render (or reuse) the segment for one scene + ratio. Returns (path, facts for timeline.json)."""
+                   burn_captions: bool, language: str | None = None) -> tuple[Path, dict]:
+    """Render (or reuse) the segment for one scene + ratio. Returns (path, facts for timeline.json).
+    language = the caption language (picks the caption / card font)."""
     s = get_settings()
     width, height = RESOLUTIONS[ratio]
     fps = s.RENDER_FPS
     seconds = frames / fps
-    key = segment_key(info, scene, ratio, cues, burn_captions)
+    key = segment_key(info, scene, ratio, cues, burn_captions, language)
     name = f"seg_{scene.index:03d}_{key}.mp4"
     facts_file = folder / f"seg_{scene.index:03d}_{key}.json"  # the facts, so a cached segment keeps them
     if (folder / name).exists() and facts_file.exists():
@@ -499,10 +554,13 @@ def render_segment(info: SourceInfo, scene: Scene, ratio: str, cues: list[Cue], 
         facts["look"] = look
     if info.kind == "generated":
         write_card_ass(info.card or {}, width, height, seconds, folder / f"card_{scene.index:03d}.ass")
-        finish.append(f"subtitles=filename=card_{scene.index:03d}.ass")
+        finish.append(subtitles_filter(f"card_{scene.index:03d}.ass", folder))
     if burn_captions and scene.words:
-        ass = write_segment_ass(cues, scene, width, height, folder / f"seg_{scene.index:03d}_{ratio_slug(ratio)}.ass")
-        finish.append(f"subtitles=filename={ass.name}")  # bare name: Windows paths break filter syntax
+        ass = write_segment_ass(cues, scene, width, height, folder / f"seg_{scene.index:03d}_{ratio_slug(ratio)}.ass",
+                                language)
+        finish.append(subtitles_filter(ass.name, folder))  # bare names: Windows paths break filter syntax
+        facts["caption_font"] = caption_font(language, " ".join(" ".join(c.lines) for c in cues
+                                                                 if c.scene_index == scene.index))
     # JPEG photos are full range ("yuvj420p"); convert every segment to normal limited (tv) range
     # so all segments match and players show the right brightness.
     finish.append("setsar=1,scale=out_range=tv,format=yuv420p")

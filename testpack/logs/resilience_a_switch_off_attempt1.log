@@ -1,0 +1,5 @@
+2026-10-17T13:36:51.662081+00:00  job submitted  {'input': 'res_a_switch_off'}
+2026-10-17T13:38:29.329259+00:00  provider switched OFF via override file  {'provider': 'pixabay_video', 'file': 'data\\providers_override.json', 'job_id': 'fd1d98fe2cd54c34aa1d86a617868833', 'job_stage': 'footage', 'job_progress': 61}
+2026-10-17T13:40:08.307927+00:00  override file removed (provider back on)  {'file': 'data\\providers_override.json'}
+2026-10-17T13:40:08.310383+00:00  job ended  {'job_id': 'fd1d98fe2cd54c34aa1d86a617868833', 'status': 'succeeded', 'error_code': '', 'turnaround_seconds': 196.31}
+2026-10-17T13:40:08.312384+00:00  scene sources  {'scenes': [{'index': 0, 'provider': 'pixabay_video', 'skipped_note': True}, {'index': 1, 'provider': 'pixabay_video', 'skipped_note': True}, {'index': 2, 'provider': 'pixabay_image_motion', 'skipped_note': True}, {'index': 3, 'provider': 'pixabay_image_motion', 'skipped_note': True}, {'index': 4, 'provider': 'pixabay_image_motion', 'skipped_note': True}, {'index': 5, 'provider': 'pixabay_image_motion', 'skipped_note': True}, {'index': 6, 'provider': 'pixabay_image_motion', 'skipped_note': True}]}

@@ -1,0 +1,36 @@
+{
+  "job_id": "328aacac8eba4e13bf7ecdaeb6b7e861",
+  "status": "succeeded",
+  "progress": 100,
+  "stage": "done",
+  "input_type": "script",
+  "parent_job_id": null,
+  "warnings": [
+    "Scene 0 mentions a named person (Satya Nadella, Microsoft): using generic related footage with no faces",
+    "Scene 0 mentions a brand (Satya Nadella, Microsoft): using generic footage without logos",
+    "Scene 1 mentions a named person (Sachin Tendulkar): using generic related footage with no faces",
+    "Scene 2 mentions a brand (a brand): using generic footage without logos",
+    "Scene 3 mentions a brand (a brand): using generic footage without logos",
+    "Scene 3: clip pixabay_image_motion:3105631 shows a logo in the picture of the downloaded clip (logo prob 0.70 > 0.60); tried the next candidate"
+  ],
+  "error": null,
+  "result": {
+    "files": {
+      "video_16x9.mp4": "http://localhost:8000/api/v1/jobs/328aacac8eba4e13bf7ecdaeb6b7e861/files/video_16x9.mp4?expires=1792242916&sig=8ba0d44fa9c6cf6d7786561ef9ee6092e432c45f27e96d2e0ce8f5757b665008",
+      "video_9x16.mp4": "http://localhost:8000/api/v1/jobs/328aacac8eba4e13bf7ecdaeb6b7e861/files/video_9x16.mp4?expires=1792242916&sig=b85528f6ce0454be3372316a5fefddedc004729c9182c4cfd7043a6f2dc8e248",
+      "captions.srt": "http://localhost:8000/api/v1/jobs/328aacac8eba4e13bf7ecdaeb6b7e861/files/captions.srt?expires=1792242916&sig=1acb207b6fe2e90c3d01063df1057bcfcfebc84e4256d26c350c1ebede65a782",
+      "timeline.json": "http://localhost:8000/api/v1/jobs/328aacac8eba4e13bf7ecdaeb6b7e861/files/timeline.json?expires=1792242916&sig=63babd980356e364e4a5ad39817e0dce0d2f61ace6d42d5447e37d0b00997c6b",
+      "manifest.json": "http://localhost:8000/api/v1/jobs/328aacac8eba4e13bf7ecdaeb6b7e861/files/manifest.json?expires=1792242916&sig=4b244f2e7e98cf3967c97631bd7fd0d690c3c74704913022f008647b54735031",
+      "thumb_000.jpg": "http://localhost:8000/api/v1/jobs/328aacac8eba4e13bf7ecdaeb6b7e861/files/thumb_000.jpg?expires=1792242916&sig=ebe24fa4a17f65faaee930d7694e68ebd2c6595c443101fc372f71bec00ca655",
+      "thumb_001.jpg": "http://localhost:8000/api/v1/jobs/328aacac8eba4e13bf7ecdaeb6b7e861/files/thumb_001.jpg?expires=1792242916&sig=f5e8510d4a09d157b6a795fea533ee9471baf958534929450e729a0d24a844e1",
+      "thumb_002.jpg": "http://localhost:8000/api/v1/jobs/328aacac8eba4e13bf7ecdaeb6b7e861/files/thumb_002.jpg?expires=1792242916&sig=007c00a701ee3730775e1a34fcfea93e3ec6f064d83437ba6a09b0a596c2765f",
+      "thumb_003.jpg": "http://localhost:8000/api/v1/jobs/328aacac8eba4e13bf7ecdaeb6b7e861/files/thumb_003.jpg?expires=1792242916&sig=5b0788ac1cf411917462393039f09b59c8291b87efee11341c24434050fdc7de"
+    }
+  },
+  "created_at": "2026-10-17T12:13:46.145410+00:00",
+  "started_at": "2026-10-17T12:13:46.959011+00:00",
+  "finished_at": "2026-10-17T12:15:16.201978+00:00",
+  "links": {
+    "self": "http://localhost:8000/api/v1/jobs/328aacac8eba4e13bf7ecdaeb6b7e861"
+  }
+}

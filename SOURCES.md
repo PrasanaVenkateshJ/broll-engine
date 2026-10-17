@@ -22,6 +22,8 @@
 | CTranslate2 (installed by faster-whisper) | 4.8.3 | runs the Whisper model on CPU | MIT |
 | Silero VAD (bundled in faster-whisper) | bundled | skips non-voice parts | MIT |
 | DejaVu fonts (`fonts-dejavu-core`, Docker) | distro | font for burned-in captions | Bitstream Vera / public domain |
+| Noto Sans Tamil (Regular + Bold, static TTF, from github.com/notofonts/notofonts.github.io) | 2022 release, bundled in `app/fonts` | Tamil captions and card labels (Windows, Docker, Modal) | SIL OFL 1.1 (`app/fonts/OFL-NotoSansTamil.txt`) |
+| Noto Sans Devanagari (Regular + Bold, static TTF, same source) | 2022 release, bundled in `app/fonts` | Hindi (Devanagari) captions and card labels | SIL OFL 1.1 (`app/fonts/OFL-NotoSansDevanagari.txt`) |
 | open_clip_torch | 3.3.0 | scores footage previews against scene meaning | MIT |
 | open_clip `ViT-B-32` weights `laion2b_s34b_b79k` (`laion/CLIP-ViT-B-32-laion2B-s34B-b79K`) | downloaded at first use | CLIP model for ranking | MIT |
 | NumPy | 2.4.6 | edge/motion energy for the salient 9:16 crop | BSD-3-Clause |

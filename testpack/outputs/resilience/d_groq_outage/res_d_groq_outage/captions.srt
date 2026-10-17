@@ -1,0 +1,19 @@
+1
+00:00:00,000 --> 00:00:05,020
+Cloud computing lets small businesses rent
+powerful servers instead of buying them.
+
+2
+00:00:05,380 --> 00:00:08,730
+Their files are stored
+safely in large data centers.
+
+3
+00:00:09,100 --> 00:00:12,420
+Teams can work together from
+anywhere with an internet connection,
+
+4
+00:00:12,740 --> 00:00:16,580
+and when the business grows, it
+simply rents more computing power.

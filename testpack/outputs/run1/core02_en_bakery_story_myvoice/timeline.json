@@ -1,0 +1,760 @@
+{
+  "job_id": "b0bcc3d4915e4373b7a920d5d35fc162",
+  "input_type": "upload",
+  "duration": 19.861,
+  "language": "en",
+  "scenes": [
+    {
+      "index": 0,
+      "text": "Last summer, a small bakery in Chennai started selling online.",
+      "start": 0.0,
+      "end": 6.54,
+      "duration": 6.54,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "fresh pastries being packaged",
+      "queries": [
+        "small bakery storefront",
+        "online order laptop screen",
+        "fresh pastries being packaged"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_image_motion",
+      "clip_id": "1868925",
+      "page_url": "https://pixabay.com/photos/bakery-breads-assorted-assortment-1868925/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Pexels on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_image_motion: score 0.279 >= 0.22 for query 'fresh pastries being packaged' (best of 24 candidates, order bonus +0.04); logo check ok (logo prob 0.02); 1 clip frame(s) passed the logo check (max logo prob 0.05); earlier: pixabay_video: best score 0.216 < 0.22; pixabay_image_motion: logo check rejected 2, best: pixabay_image_motion:1867459 (logo prob 0.67, scene 0.259), pixabay_image_motion:4992402 (logo prob 0.99, scene 0.241) (4 checked)",
+      "relevance_score": 0.2788,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_000.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0219,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.0492,
+            "scene_score": 0.273,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_image_motion:1868925",
+        "kind": "image",
+        "title": "",
+        "source_url": "https://pixabay.com/get/gfd5b623104348f75a36f7d2219ab7fddb7963437ff93d8b91e242f8d35b39d7a10de536749d3dd267786a29abad6cf46eed0ea87c18152712ec3c2686345a0cf_1280.jpg",
+        "final_score": 0.3188,
+        "width": 1280,
+        "height": 948,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "small bakery storefront",
+          "online order laptop screen",
+          "fresh pastries being packaged"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows a small bakery and its shift to online sales.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "last summer",
+        "card": {
+          "headline": "LAST SUMMER",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "a613740ebfa33832"
+      },
+      "safety": {
+        "queries": [
+          "small bakery storefront",
+          "online order laptop screen",
+          "fresh pastries being packaged"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_000_567e035d678c072b.mp4",
+          "cache_key": "567e035d678c072b",
+          "frames": 196,
+          "look": "eq=saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "y",
+            "window_fraction": 0.7595,
+            "full_frame_score": 0.2574,
+            "windows": {
+              "centre": {
+                "start": 0.1203,
+                "score": 0.2559
+              },
+              "top": {
+                "start": 0.0,
+                "score": 0.2373
+              },
+              "bottom": {
+                "start": 0.2405,
+                "score": 0.27
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'centre' chosen (0.256; best window 0.270; whole frame 0.257; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_000_c500b73eae69d16f.mp4",
+          "cache_key": "c500b73eae69d16f",
+          "frames": 196,
+          "look": "eq=saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.4166,
+            "full_frame_score": 0.2574,
+            "windows": {
+              "centre": {
+                "start": 0.2917,
+                "score": 0.254
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2667
+              },
+              "right": {
+                "start": 0.5834,
+                "score": 0.2553
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'centre' chosen (0.254; best window 0.267; whole frame 0.257; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Last",
+          "start": 0.53,
+          "end": 1.27
+        },
+        {
+          "text": "summer,",
+          "start": 1.27,
+          "end": 1.75
+        },
+        {
+          "text": "a",
+          "start": 2.33,
+          "end": 2.49
+        },
+        {
+          "text": "small",
+          "start": 2.49,
+          "end": 2.79
+        },
+        {
+          "text": "bakery",
+          "start": 2.79,
+          "end": 3.25
+        },
+        {
+          "text": "in",
+          "start": 3.25,
+          "end": 3.71
+        },
+        {
+          "text": "Chennai",
+          "start": 3.71,
+          "end": 4.21
+        },
+        {
+          "text": "started",
+          "start": 4.21,
+          "end": 5.23
+        },
+        {
+          "text": "selling",
+          "start": 5.23,
+          "end": 5.61
+        },
+        {
+          "text": "online.",
+          "start": 5.61,
+          "end": 6.07
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "text": "Within three months, their orders doubled.",
+      "start": 6.54,
+      "end": 10.16,
+      "duration": 3.62,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "order volume chart rising",
+      "queries": [
+        "order volume chart rising",
+        "growing list of deliveries",
+        "busy kitchen processing orders"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": true,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "generated",
+      "clip_id": "card-001-5a0933c8",
+      "page_url": "",
+      "licence": "Generated by broll-engine (FFmpeg motion card)",
+      "licence_url": "",
+      "attribution": "",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": true,
+      "reason": "statistic line: number card 'DOUBLED' taken from the narration (GENERATED_FOR_STATISTICS=true)",
+      "relevance_score": null,
+      "card_text": "DOUBLED",
+      "card_subtitle": "their orders doubled",
+      "card_source": "narration",
+      "card_numbers": [],
+      "thumbnail": "thumb_001.jpg",
+      "logo_check": null,
+      "clip_details": {
+        "uid": "generated:card-001-5a0933c8",
+        "kind": "generated",
+        "title": "DOUBLED their orders doubled",
+        "source_url": "",
+        "final_score": null,
+        "width": 0,
+        "height": 0,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "order volume chart rising",
+          "growing list of deliveries",
+          "busy kitchen processing orders"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": true,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Visualizes the rapid increase in orders.",
+        "source": "groq",
+        "names": [],
+        "number": "doubled",
+        "keyword": "within three months orders doubled",
+        "card": {
+          "headline": "DOUBLED",
+          "subtitle": "their orders doubled",
+          "number": null,
+          "kind": "change",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "212c20eae674ea54"
+      },
+      "safety": {
+        "queries": [
+          "order volume chart rising",
+          "growing list of deliveries",
+          "busy kitchen processing orders"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_001_cf28ec5540229d1f.mp4",
+          "cache_key": "cf28ec5540229d1f",
+          "frames": 109,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_001_9da684f4ae665577.mp4",
+          "cache_key": "9da684f4ae665577",
+          "frames": 109,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Within",
+          "start": 7.01,
+          "end": 7.25
+        },
+        {
+          "text": "three",
+          "start": 7.25,
+          "end": 7.65
+        },
+        {
+          "text": "months,",
+          "start": 7.65,
+          "end": 7.95
+        },
+        {
+          "text": "their",
+          "start": 8.61,
+          "end": 8.77
+        },
+        {
+          "text": "orders",
+          "start": 8.77,
+          "end": 9.11
+        },
+        {
+          "text": "doubled.",
+          "start": 9.11,
+          "end": 9.65
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "text": "The owner says the secret was simple, good photos,",
+      "start": 10.16,
+      "end": 15.02,
+      "duration": 4.86,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "stylish bakery product images",
+      "queries": [
+        "high-quality food photography",
+        "close-up pastry shots",
+        "stylish bakery product images"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "4315",
+      "page_url": "https://pixabay.com/videos/id-4315/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "bottlein on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.237 >= 0.22 for query 'stylish bakery product images' (best of 24 candidates, order bonus +0.04); logo check ok (logo prob 0.07); 3 clip frame(s) passed the logo check (max logo prob 0.05)",
+      "relevance_score": 0.2367,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_002.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0719,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 4.58,
+            "logo_prob": 0.0485,
+            "scene_score": 0.1915,
+            "result": "ok"
+          },
+          {
+            "time": 13.75,
+            "logo_prob": 0.0371,
+            "scene_score": 0.2004,
+            "result": "ok"
+          },
+          {
+            "time": 22.91,
+            "logo_prob": 0.0389,
+            "scene_score": 0.2021,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:4315",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2016/08/08/4315-178218581_medium.mp4",
+        "final_score": 0.2767,
+        "width": 1280,
+        "height": 720,
+        "duration": 27.0
+      },
+      "understanding": {
+        "queries": [
+          "high-quality food photography",
+          "close-up pastry shots",
+          "stylish bakery product images"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Highlights the importance of attractive product photos.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "owner says",
+        "card": {
+          "headline": "OWNER SAYS",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "895afae734336ea0"
+      },
+      "safety": {
+        "queries": [
+          "high-quality food photography",
+          "close-up pastry shots",
+          "stylish bakery product images"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_002_4029d5d7be085441.mp4",
+          "cache_key": "4029d5d7be085441",
+          "frames": 146,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_002_face9494b7a1d7ff.mp4",
+          "cache_key": "face9494b7a1d7ff",
+          "frames": 146,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2223,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2395
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.201
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.1533
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.239; best window 0.239; whole frame 0.222; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "The",
+          "start": 10.67,
+          "end": 10.89
+        },
+        {
+          "text": "owner",
+          "start": 10.89,
+          "end": 11.19
+        },
+        {
+          "text": "says",
+          "start": 11.19,
+          "end": 11.61
+        },
+        {
+          "text": "the",
+          "start": 11.61,
+          "end": 12.21
+        },
+        {
+          "text": "secret",
+          "start": 12.21,
+          "end": 12.57
+        },
+        {
+          "text": "was",
+          "start": 12.57,
+          "end": 12.91
+        },
+        {
+          "text": "simple,",
+          "start": 12.91,
+          "end": 13.35
+        },
+        {
+          "text": "good",
+          "start": 13.97,
+          "end": 14.19
+        },
+        {
+          "text": "photos,",
+          "start": 14.19,
+          "end": 14.71
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "text": "honest prices and replying to every customer quickly.",
+      "start": 15.02,
+      "end": 19.861,
+      "duration": 4.841,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "clear price tags displayed",
+      "queries": [
+        "clear price tags displayed",
+        "friendly chat support screen",
+        "quick email response notification"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "generated",
+      "clip_id": "card-003-ab7e3858",
+      "page_url": "",
+      "licence": "Generated by broll-engine (FFmpeg motion card)",
+      "licence_url": "",
+      "attribution": "",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": true,
+      "reason": "no stock source passed the rule (pixabay_video: best score 0.159 < 0.22; pixabay_image_motion: best score 0.215 < 0.22; wikimedia: best score 0.108 < 0.22) -> generated motion card 'HONEST'",
+      "relevance_score": null,
+      "card_text": "HONEST",
+      "card_subtitle": "",
+      "card_source": "narration",
+      "card_numbers": [],
+      "thumbnail": "thumb_003.jpg",
+      "logo_check": null,
+      "clip_details": {
+        "uid": "generated:card-003-ab7e3858",
+        "kind": "generated",
+        "title": "HONEST",
+        "source_url": "",
+        "final_score": null,
+        "width": 0,
+        "height": 0,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "clear price tags displayed",
+          "friendly chat support screen",
+          "quick email response notification"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Depicts transparent pricing and fast customer communication.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "honest",
+        "card": {
+          "headline": "HONEST",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "72f32908fb3f5cb7"
+      },
+      "safety": {
+        "queries": [
+          "clear price tags displayed",
+          "friendly chat support screen",
+          "quick email response notification"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_003_a25ffc5c6a0608f5.mp4",
+          "cache_key": "a25ffc5c6a0608f5",
+          "frames": 145,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_003_6f46d4696b3cedaa.mp4",
+          "cache_key": "6f46d4696b3cedaa",
+          "frames": 145,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "honest",
+          "start": 15.33,
+          "end": 15.63
+        },
+        {
+          "text": "prices",
+          "start": 15.63,
+          "end": 16.27
+        },
+        {
+          "text": "and",
+          "start": 16.27,
+          "end": 16.99
+        },
+        {
+          "text": "replying",
+          "start": 16.99,
+          "end": 17.41
+        },
+        {
+          "text": "to",
+          "start": 17.41,
+          "end": 17.69
+        },
+        {
+          "text": "every",
+          "start": 17.69,
+          "end": 18.21
+        },
+        {
+          "text": "customer",
+          "start": 18.21,
+          "end": 18.67
+        },
+        {
+          "text": "quickly.",
+          "start": 18.67,
+          "end": 19.13
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "aspect_ratio": "16:9",
+      "file": "video_16x9.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 19.867
+    },
+    {
+      "aspect_ratio": "9:16",
+      "file": "video_9x16.mp4",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "duration": 19.866
+    }
+  ]
+}

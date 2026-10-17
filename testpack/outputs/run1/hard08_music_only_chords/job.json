@@ -1,0 +1,28 @@
+{
+  "job_id": "eb199c3009f246a498b1bbd1dff9612b",
+  "status": "failed",
+  "progress": 25,
+  "stage": "failed",
+  "input_type": "upload",
+  "parent_job_id": null,
+  "warnings": [],
+  "error": {
+    "code": "MUSIC_ONLY_AUDIO",
+    "message": "The audio has sound but almost no speech (music only?)",
+    "retryable": false,
+    "details": {
+      "words": 0,
+      "words_per_minute": 0.0,
+      "no_speech_prob": 1.0,
+      "mean_word_prob": 0.0,
+      "sound_seconds": 30.0
+    }
+  },
+  "result": null,
+  "created_at": "2026-10-17T12:49:46.787852+00:00",
+  "started_at": "2026-10-17T12:49:46.882987+00:00",
+  "finished_at": "2026-10-17T12:49:54.471834+00:00",
+  "links": {
+    "self": "http://localhost:8000/api/v1/jobs/eb199c3009f246a498b1bbd1dff9612b"
+  }
+}

@@ -1,0 +1,1672 @@
+{
+  "job_id": "a62288037a4f4b5bb95f5b01325c3e0a",
+  "input_type": "script",
+  "duration": 25.45,
+  "language": "en",
+  "scenes": [
+    {
+      "index": 0,
+      "text": "Meet the bottle that goes everywhere you go.",
+      "start": 0.0,
+      "end": 2.71,
+      "duration": 2.71,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "traveling water bottle",
+      "queries": [
+        "traveling water bottle",
+        "portable stainless steel bottle",
+        "bottle on the move"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "19543",
+      "page_url": "https://pixabay.com/videos/id-19543/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Matthias_Groeneveld on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.295 >= 0.22 for query 'traveling water bottle' (best of 22 candidates, order bonus +0.04); logo check ok (logo prob 0.02); 3 clip frame(s) passed the logo check (max logo prob 0.03)",
+      "relevance_score": 0.2955,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_000.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0216,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 3.63,
+            "logo_prob": 0.0126,
+            "scene_score": 0.2692,
+            "result": "ok"
+          },
+          {
+            "time": 10.89,
+            "logo_prob": 0.0253,
+            "scene_score": 0.272,
+            "result": "ok"
+          },
+          {
+            "time": 18.15,
+            "logo_prob": 0.033,
+            "scene_score": 0.2698,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:19543",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2018/11/24/19543-302628044_medium.mp4",
+        "final_score": 0.3355,
+        "width": 1280,
+        "height": 720,
+        "duration": 22.0
+      },
+      "understanding": {
+        "queries": [
+          "traveling water bottle",
+          "portable stainless steel bottle",
+          "bottle on the move"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows a portable bottle being carried, indicating it goes everywhere.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "meet bottle",
+        "card": {
+          "headline": "MEET BOTTLE",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "38eb3ecab946ab50"
+      },
+      "safety": {
+        "queries": [
+          "traveling water bottle",
+          "portable stainless steel bottle",
+          "bottle on the move"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_000_0be7234a58ba8ee5.mp4",
+          "cache_key": "0be7234a58ba8ee5",
+          "frames": 81,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_000_322ddb62e8a76f61.mp4",
+          "cache_key": "322ddb62e8a76f61",
+          "frames": 81,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (right)",
+          "crop": {
+            "method": "clip",
+            "choice": "right",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2854,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2561
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2116
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2938
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'right' chosen (0.294; best window 0.294; whole frame 0.285; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "1:1": {
+          "file": "seg_000_4bec991ac4dad050.mp4",
+          "cache_key": "4bec991ac4dad050",
+          "frames": 81,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.5625,
+            "full_frame_score": 0.2854,
+            "windows": {
+              "centre": {
+                "start": 0.2188,
+                "score": 0.2865
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2721
+              },
+              "right": {
+                "start": 0.4375,
+                "score": 0.2765
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.286; best window 0.286; whole frame 0.285; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Meet",
+          "start": 0.05,
+          "end": 0.55
+        },
+        {
+          "text": "the",
+          "start": 0.55,
+          "end": 0.73
+        },
+        {
+          "text": "bottle",
+          "start": 0.73,
+          "end": 1.07
+        },
+        {
+          "text": "that",
+          "start": 1.07,
+          "end": 1.29
+        },
+        {
+          "text": "goes",
+          "start": 1.29,
+          "end": 1.53
+        },
+        {
+          "text": "everywhere",
+          "start": 1.53,
+          "end": 1.87
+        },
+        {
+          "text": "you",
+          "start": 1.87,
+          "end": 2.19
+        },
+        {
+          "text": "go.",
+          "start": 2.19,
+          "end": 2.45
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "text": "It is made of double -walled steel, so your water stays cold for a full day and your tea stays hot all morning.",
+      "start": 2.71,
+      "end": 9.44,
+      "duration": 6.73,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "steam from hot tea",
+      "queries": [
+        "insulated steel bottle",
+        "cold water condensation",
+        "steam from hot tea"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "3595",
+      "page_url": "https://pixabay.com/videos/id-3595/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Life-Of-Vids on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.255 >= 0.22 for query 'steam from hot tea' (best of 23 candidates, order bonus +0.04); logo check ok (logo prob 0.02); 3 clip frame(s) passed the logo check (max logo prob 0.03)",
+      "relevance_score": 0.2552,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_001.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0161,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 7.32,
+            "logo_prob": 0.0187,
+            "scene_score": 0.2153,
+            "result": "ok"
+          },
+          {
+            "time": 21.97,
+            "logo_prob": 0.0135,
+            "scene_score": 0.2168,
+            "result": "ok"
+          },
+          {
+            "time": 36.62,
+            "logo_prob": 0.0267,
+            "scene_score": 0.2151,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:3595",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2016/06/27/3595-172488292_medium.mp4",
+        "final_score": 0.2952,
+        "width": 1280,
+        "height": 720,
+        "duration": 44.0
+      },
+      "understanding": {
+        "queries": [
+          "insulated steel bottle",
+          "cold water condensation",
+          "steam from hot tea"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Highlights the double‑wall steel insulation that keeps drinks cold or hot.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "double walled",
+        "card": {
+          "headline": "DOUBLE WALLED",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "4d6d01357784de19"
+      },
+      "safety": {
+        "queries": [
+          "insulated steel bottle",
+          "cold water condensation",
+          "steam from hot tea"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_001_52620aa9ad29812a.mp4",
+          "cache_key": "52620aa9ad29812a",
+          "frames": 202,
+          "look": "eq=brightness=0.051:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_001_45dfda4460a23e5f.mp4",
+          "cache_key": "45dfda4460a23e5f",
+          "frames": 202,
+          "look": "eq=brightness=0.051:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2541,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2581
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2067
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2501
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.258; best window 0.258; whole frame 0.254; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "1:1": {
+          "file": "seg_001_755b43b9ef50492b.mp4",
+          "cache_key": "755b43b9ef50492b",
+          "frames": 202,
+          "look": "eq=brightness=0.051:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.5625,
+            "full_frame_score": 0.2541,
+            "windows": {
+              "salient": {
+                "start": 0.3806,
+                "score": 0.2558
+              },
+              "centre": {
+                "start": 0.2188,
+                "score": 0.2608
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.248
+              },
+              "right": {
+                "start": 0.4375,
+                "score": 0.2487
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'salient' chosen (0.256; best window 0.261; whole frame 0.254; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "It",
+          "start": 2.97,
+          "end": 3.09
+        },
+        {
+          "text": "is",
+          "start": 3.09,
+          "end": 3.21
+        },
+        {
+          "text": "made",
+          "start": 3.21,
+          "end": 3.43
+        },
+        {
+          "text": "of",
+          "start": 3.43,
+          "end": 3.55
+        },
+        {
+          "text": "double",
+          "start": 3.55,
+          "end": 3.81
+        },
+        {
+          "text": "-walled",
+          "start": 3.81,
+          "end": 4.15
+        },
+        {
+          "text": "steel,",
+          "start": 4.15,
+          "end": 4.59
+        },
+        {
+          "text": "so",
+          "start": 4.97,
+          "end": 5.15
+        },
+        {
+          "text": "your",
+          "start": 5.15,
+          "end": 5.27
+        },
+        {
+          "text": "water",
+          "start": 5.27,
+          "end": 5.61
+        },
+        {
+          "text": "stays",
+          "start": 5.61,
+          "end": 5.97
+        },
+        {
+          "text": "cold",
+          "start": 5.97,
+          "end": 6.39
+        },
+        {
+          "text": "for",
+          "start": 6.39,
+          "end": 6.63
+        },
+        {
+          "text": "a",
+          "start": 6.63,
+          "end": 6.75
+        },
+        {
+          "text": "full",
+          "start": 6.75,
+          "end": 6.91
+        },
+        {
+          "text": "day",
+          "start": 6.91,
+          "end": 7.25
+        },
+        {
+          "text": "and",
+          "start": 7.25,
+          "end": 7.47
+        },
+        {
+          "text": "your",
+          "start": 7.47,
+          "end": 7.59
+        },
+        {
+          "text": "tea",
+          "start": 7.59,
+          "end": 7.83
+        },
+        {
+          "text": "stays",
+          "start": 7.83,
+          "end": 8.15
+        },
+        {
+          "text": "hot",
+          "start": 8.15,
+          "end": 8.49
+        },
+        {
+          "text": "all",
+          "start": 8.49,
+          "end": 8.71
+        },
+        {
+          "text": "morning.",
+          "start": 8.71,
+          "end": 9.09
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "text": "The lid is leak -proof, so you can throw it in your bag without worry.",
+      "start": 9.44,
+      "end": 13.71,
+      "duration": 4.27,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "no spill water bottle",
+      "queries": [
+        "sealed bottle lid",
+        "bottle in backpack",
+        "no spill water bottle"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "179588",
+      "page_url": "https://pixabay.com/videos/id-179588/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "NickyPe on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.287 >= 0.22 for query 'no spill water bottle' (best of 16 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.00)",
+      "relevance_score": 0.2866,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_002.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0047,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.09,
+            "logo_prob": 0.0002,
+            "scene_score": 0.1864,
+            "result": "ok"
+          },
+          {
+            "time": 6.27,
+            "logo_prob": 0.0001,
+            "scene_score": 0.2337,
+            "result": "ok"
+          },
+          {
+            "time": 10.45,
+            "logo_prob": 0.0023,
+            "scene_score": 0.1952,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:179588",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2023/09/08/179588-862589764_medium.mp4",
+        "final_score": 0.3266,
+        "width": 2560,
+        "height": 1440,
+        "duration": 12.0
+      },
+      "understanding": {
+        "queries": [
+          "sealed bottle lid",
+          "bottle in backpack",
+          "no spill water bottle"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Emphasizes the leak‑proof sealed lid and safe placement in a bag.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "lid leak",
+        "card": {
+          "headline": "LID LEAK",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "c9c7d0517c874109"
+      },
+      "safety": {
+        "queries": [
+          "sealed bottle lid",
+          "bottle in backpack",
+          "no spill water bottle"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_002_56c5541a3b278337.mp4",
+          "cache_key": "56c5541a3b278337",
+          "frames": 128,
+          "look": "eq=brightness=0.102:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_002_56c8e0bc5d4c6519.mp4",
+          "cache_key": "56c8e0bc5d4c6519",
+          "frames": 128,
+          "look": "eq=brightness=0.102:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.1985,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2481
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.1715
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.1955
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.248; best window 0.248; whole frame 0.199; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "1:1": {
+          "file": "seg_002_eb6c7c30a69cc6bf.mp4",
+          "cache_key": "eb6c7c30a69cc6bf",
+          "frames": 128,
+          "look": "eq=brightness=0.102:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.5625,
+            "full_frame_score": 0.1985,
+            "windows": {
+              "centre": {
+                "start": 0.2188,
+                "score": 0.2335
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2361
+              },
+              "right": {
+                "start": 0.4375,
+                "score": 0.2519
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.234; best window 0.252; whole frame 0.199; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "The",
+          "start": 9.79,
+          "end": 9.89
+        },
+        {
+          "text": "lid",
+          "start": 9.89,
+          "end": 10.07
+        },
+        {
+          "text": "is",
+          "start": 10.07,
+          "end": 10.27
+        },
+        {
+          "text": "leak",
+          "start": 10.27,
+          "end": 10.49
+        },
+        {
+          "text": "-proof,",
+          "start": 10.49,
+          "end": 10.79
+        },
+        {
+          "text": "so",
+          "start": 11.13,
+          "end": 11.43
+        },
+        {
+          "text": "you",
+          "start": 11.43,
+          "end": 11.55
+        },
+        {
+          "text": "can",
+          "start": 11.55,
+          "end": 11.69
+        },
+        {
+          "text": "throw",
+          "start": 11.69,
+          "end": 11.97
+        },
+        {
+          "text": "it",
+          "start": 11.97,
+          "end": 12.11
+        },
+        {
+          "text": "in",
+          "start": 12.11,
+          "end": 12.19
+        },
+        {
+          "text": "your",
+          "start": 12.19,
+          "end": 12.29
+        },
+        {
+          "text": "bag",
+          "start": 12.29,
+          "end": 12.63
+        },
+        {
+          "text": "without",
+          "start": 12.63,
+          "end": 12.93
+        },
+        {
+          "text": "worry.",
+          "start": 12.93,
+          "end": 13.39
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "text": "It is easy to clean and it replaces hundreds of plastic bottles every year.",
+      "start": 13.71,
+      "end": 18.61,
+      "duration": 4.9,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "reusable bottle replacing plastic",
+      "queries": [
+        "bottle being washed",
+        "reusable bottle replacing plastic",
+        "stack of disposable plastic bottles"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": true,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "218339",
+      "page_url": "https://pixabay.com/videos/id-218339/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "NickyPe on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.288 >= 0.22 for query 'reusable bottle replacing plastic' (best of 13 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.00); earlier: pixabay_video: logo check rejected 1, best: pixabay_video:41869 (logo prob 0.75, scene 0.282) (2 checked)",
+      "relevance_score": 0.288,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_003.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0001,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.98,
+            "logo_prob": 0.0002,
+            "scene_score": 0.2862,
+            "result": "ok"
+          },
+          {
+            "time": 8.94,
+            "logo_prob": 0.0003,
+            "scene_score": 0.2632,
+            "result": "ok"
+          },
+          {
+            "time": 14.9,
+            "logo_prob": 0.0007,
+            "scene_score": 0.2852,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:218339",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2024/06/26/218339_medium.mp4",
+        "final_score": 0.328,
+        "width": 2560,
+        "height": 1440,
+        "duration": 17.0
+      },
+      "understanding": {
+        "queries": [
+          "bottle being washed",
+          "reusable bottle replacing plastic",
+          "stack of disposable plastic bottles"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": true,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Depicts easy cleaning and replacing many disposable bottles, illustrating waste reduction.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "easy clean",
+        "card": {
+          "headline": "EASY CLEAN",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "5c82976de73cddcb"
+      },
+      "safety": {
+        "queries": [
+          "bottle being washed",
+          "reusable bottle replacing plastic",
+          "stack of disposable plastic bottles"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_003_4bee70e98e9af643.mp4",
+          "cache_key": "4bee70e98e9af643",
+          "frames": 147,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_003_8575b8d183b2c7f6.mp4",
+          "cache_key": "8575b8d183b2c7f6",
+          "frames": 147,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2223,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2224
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.25
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.1857
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.222; best window 0.250; whole frame 0.222; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "1:1": {
+          "file": "seg_003_a08c8bf0e1309c67.mp4",
+          "cache_key": "a08c8bf0e1309c67",
+          "frames": 147,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.5625,
+            "full_frame_score": 0.2223,
+            "windows": {
+              "centre": {
+                "start": 0.2188,
+                "score": 0.2863
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2535
+              },
+              "right": {
+                "start": 0.4375,
+                "score": 0.1875
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.286; best window 0.286; whole frame 0.222; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "It",
+          "start": 14.03,
+          "end": 14.15
+        },
+        {
+          "text": "is",
+          "start": 14.15,
+          "end": 14.27
+        },
+        {
+          "text": "easy",
+          "start": 14.27,
+          "end": 14.63
+        },
+        {
+          "text": "to",
+          "start": 14.63,
+          "end": 14.81
+        },
+        {
+          "text": "clean",
+          "start": 14.81,
+          "end": 15.17
+        },
+        {
+          "text": "and",
+          "start": 15.17,
+          "end": 15.49
+        },
+        {
+          "text": "it",
+          "start": 15.49,
+          "end": 15.59
+        },
+        {
+          "text": "replaces",
+          "start": 15.59,
+          "end": 15.99
+        },
+        {
+          "text": "hundreds",
+          "start": 15.99,
+          "end": 16.51
+        },
+        {
+          "text": "of",
+          "start": 16.51,
+          "end": 16.75
+        },
+        {
+          "text": "plastic",
+          "start": 16.75,
+          "end": 17.15
+        },
+        {
+          "text": "bottles",
+          "start": 17.15,
+          "end": 17.61
+        },
+        {
+          "text": "every",
+          "start": 17.61,
+          "end": 17.95
+        },
+        {
+          "text": "year.",
+          "start": 17.95,
+          "end": 18.35
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "text": "Take it to the gym, the office, or a long hike in the hills.",
+      "start": 18.61,
+      "end": 22.39,
+      "duration": 3.78,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "bottle on mountain trail",
+      "queries": [
+        "bottle on gym bench",
+        "bottle on office desk",
+        "bottle on mountain trail"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "wikimedia",
+      "clip_id": "66937901",
+      "page_url": "https://commons.wikimedia.org/wiki/File:Jebel_Qihwi_(16730241816).jpg",
+      "licence": "CC BY 2.0",
+      "licence_url": "https://creativecommons.org/licenses/by/2.0",
+      "attribution": "Laith Wark from Dubai, United Arab Emirates, via Wikimedia Commons, CC BY 2.0",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "wikimedia: score 0.258 >= 0.22 for query 'bottle on mountain trail' (best of 10 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 1 clip frame(s) passed the logo check (max logo prob 0.00); earlier: pixabay_video: best score 0.154 < 0.22; pixabay_image_motion: best score 0.216 < 0.22",
+      "relevance_score": 0.2576,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_004.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0027,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.0035,
+            "scene_score": 0.2842,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "wikimedia:66937901",
+        "kind": "image",
+        "title": "Jebel Qihwi (16730241816)",
+        "source_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Jebel_Qihwi_%2816730241816%29.jpg/1920px-Jebel_Qihwi_%2816730241816%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "final_score": 0.2976,
+        "width": 1920,
+        "height": 1272,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "bottle on gym bench",
+          "bottle on office desk",
+          "bottle on mountain trail"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows the bottle being used in gym, office, and hiking environments.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "take gym",
+        "card": {
+          "headline": "TAKE GYM",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "03e38266b9235386"
+      },
+      "safety": {
+        "queries": [
+          "bottle on gym bench",
+          "bottle on office desk",
+          "bottle on mountain trail"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_004_f2f0855a25295cce.mp4",
+          "cache_key": "f2f0855a25295cce",
+          "frames": 114,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "y",
+            "window_fraction": 0.8491,
+            "full_frame_score": 0.1993,
+            "windows": {
+              "centre": {
+                "start": 0.0755,
+                "score": 0.1938
+              },
+              "top": {
+                "start": 0.0,
+                "score": 0.2057
+              },
+              "bottom": {
+                "start": 0.1509,
+                "score": 0.2133
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'centre' chosen (0.194; best window 0.213; whole frame 0.199; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_004_ba4a238d34fa4739.mp4",
+          "cache_key": "ba4a238d34fa4739",
+          "frames": 114,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3727,
+            "full_frame_score": 0.1993,
+            "windows": {
+              "centre": {
+                "start": 0.3137,
+                "score": 0.3013
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.1705
+              },
+              "right": {
+                "start": 0.6273,
+                "score": 0.1827
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'centre' chosen (0.301; best window 0.301; whole frame 0.199; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        },
+        "1:1": {
+          "file": "seg_004_6b404ef5f0cbde12.mp4",
+          "cache_key": "6b404ef5f0cbde12",
+          "frames": 114,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.6625,
+            "full_frame_score": 0.1993,
+            "windows": {
+              "centre": {
+                "start": 0.1688,
+                "score": 0.2863
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2361
+              },
+              "right": {
+                "start": 0.3375,
+                "score": 0.2851
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'centre' chosen (0.286; best window 0.286; whole frame 0.199; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Take",
+          "start": 18.87,
+          "end": 19.07
+        },
+        {
+          "text": "it",
+          "start": 19.07,
+          "end": 19.17
+        },
+        {
+          "text": "to",
+          "start": 19.17,
+          "end": 19.27
+        },
+        {
+          "text": "the",
+          "start": 19.27,
+          "end": 19.39
+        },
+        {
+          "text": "gym,",
+          "start": 19.39,
+          "end": 19.67
+        },
+        {
+          "text": "the",
+          "start": 19.93,
+          "end": 19.99
+        },
+        {
+          "text": "office,",
+          "start": 19.99,
+          "end": 20.39
+        },
+        {
+          "text": "or",
+          "start": 20.67,
+          "end": 20.81
+        },
+        {
+          "text": "a",
+          "start": 20.81,
+          "end": 20.93
+        },
+        {
+          "text": "long",
+          "start": 20.93,
+          "end": 21.25
+        },
+        {
+          "text": "hike",
+          "start": 21.25,
+          "end": 21.53
+        },
+        {
+          "text": "in",
+          "start": 21.53,
+          "end": 21.69
+        },
+        {
+          "text": "the",
+          "start": 21.69,
+          "end": 21.81
+        },
+        {
+          "text": "hills.",
+          "start": 21.81,
+          "end": 22.07
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "text": "Stay refreshed and waste less.",
+      "start": 22.39,
+      "end": 25.45,
+      "duration": 3.06,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "water splash close-up",
+      "queries": [
+        "water splash close-up",
+        "environmental waste reduction",
+        "refreshing sip outdoors"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "223266",
+      "page_url": "https://pixabay.com/videos/id-223266/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Mario_Krimer on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.245 >= 0.22 for query 'water splash close-up' (best of 22 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.01)",
+      "relevance_score": 0.2448,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_005.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0004,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 6.73,
+            "logo_prob": 0.0132,
+            "scene_score": 0.2316,
+            "result": "ok"
+          },
+          {
+            "time": 20.19,
+            "logo_prob": 0.0048,
+            "scene_score": 0.2178,
+            "result": "ok"
+          },
+          {
+            "time": 33.65,
+            "logo_prob": 0.0006,
+            "scene_score": 0.2266,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:223266",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2024/07/26/223266_medium.mp4",
+        "final_score": 0.2848,
+        "width": 1280,
+        "height": 720,
+        "duration": 40.0
+      },
+      "understanding": {
+        "queries": [
+          "water splash close-up",
+          "environmental waste reduction",
+          "refreshing sip outdoors"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Conveys the feeling of refreshment while emphasizing less waste.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "stay refreshed",
+        "card": {
+          "headline": "STAY REFRESHED",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "fbab10567501787a"
+      },
+      "safety": {
+        "queries": [
+          "water splash close-up",
+          "environmental waste reduction",
+          "refreshing sip outdoors"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_005_3d1fd1f6d9f8861d.mp4",
+          "cache_key": "3d1fd1f6d9f8861d",
+          "frames": 92,
+          "look": "eq=brightness=-0.088:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_005_7c03e430d78ac420.mp4",
+          "cache_key": "7c03e430d78ac420",
+          "frames": 92,
+          "look": "eq=brightness=-0.088:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2374,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.242
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2355
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2395
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.242; best window 0.242; whole frame 0.237; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "1:1": {
+          "file": "seg_005_8092842a5b2f1f9b.mp4",
+          "cache_key": "8092842a5b2f1f9b",
+          "frames": 92,
+          "look": "eq=brightness=-0.088:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.5625,
+            "full_frame_score": 0.2374,
+            "windows": {
+              "centre": {
+                "start": 0.2188,
+                "score": 0.2305
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2395
+              },
+              "right": {
+                "start": 0.4375,
+                "score": 0.2306
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.231; best window 0.239; whole frame 0.237; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Stay",
+          "start": 22.71,
+          "end": 23.05
+        },
+        {
+          "text": "refreshed",
+          "start": 23.05,
+          "end": 23.61
+        },
+        {
+          "text": "and",
+          "start": 23.61,
+          "end": 23.97
+        },
+        {
+          "text": "waste",
+          "start": 23.97,
+          "end": 24.29
+        },
+        {
+          "text": "less.",
+          "start": 24.29,
+          "end": 24.65
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "aspect_ratio": "16:9",
+      "file": "video_16x9.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 25.467
+    },
+    {
+      "aspect_ratio": "9:16",
+      "file": "video_9x16.mp4",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "duration": 25.467
+    },
+    {
+      "aspect_ratio": "1:1",
+      "file": "video_1x1.mp4",
+      "width": 1080,
+      "height": 1080,
+      "fps": 30,
+      "duration": 25.467
+    }
+  ]
+}

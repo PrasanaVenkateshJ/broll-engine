@@ -1,0 +1,1 @@
+{"error":{"code":"UNSUPPORTED_FILE_TYPE","message":"The file is not an audio file","retryable":false,"details":{"allowed":["m4a","mp3","wav"]}}}

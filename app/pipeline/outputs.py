@@ -120,6 +120,8 @@ def build_timeline(job_id: str, input_type: str, duration: float, language: str,
         out.append({
             "index": scene.index, "text": scene.text, "start": scene.start, "end": scene.end,
             "duration": scene.duration, "visual_hint": scene.visual_hint,
+            # Non-English narration: the English meaning used ONLY for footage search (None otherwise).
+            "search_text": getattr(scene, "search_text", None),
             "query": clip["query"] or (plan.queries[0] if plan.queries else ""), "queries": plan.queries,
             "flags": meaning.flags,
             "provider": clip["provider"], "clip_id": clip["clip_id"], "page_url": clip["page_url"],

@@ -1,0 +1,939 @@
+{
+  "job_id": "328aacac8eba4e13bf7ecdaeb6b7e861",
+  "input_type": "script",
+  "duration": 19.525,
+  "language": "en",
+  "scenes": [
+    {
+      "index": 0,
+      "text": "Satya Nadella has been the chief executive of Microsoft since 2014.",
+      "start": 0.0,
+      "end": 5.18,
+      "duration": 5.18,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "modern corporate office building",
+      "queries": [
+        "modern corporate office building",
+        "executive boardroom meeting",
+        "company headquarters exterior"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": true,
+        "brand": true,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "45986",
+      "page_url": "https://pixabay.com/videos/id-45986/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Silaeff on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.224 >= 0.22 for query 'modern corporate office building' (best of 24 candidates, order bonus +0.04); logo check ok (logo prob 0.14); 3 clip frame(s) passed the logo check (max logo prob 0.03); earlier: pixabay_video: logo check rejected 2, best: pixabay_video:272519 (logo prob 0.87, scene 0.236), pixabay_video:34318 (logo prob 0.98, scene 0.227) (3 checked)",
+      "relevance_score": 0.2244,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_000.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.1367,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 1.32,
+            "logo_prob": 0.0278,
+            "scene_score": 0.2383,
+            "result": "ok"
+          },
+          {
+            "time": 3.96,
+            "logo_prob": 0.0332,
+            "scene_score": 0.2174,
+            "result": "ok"
+          },
+          {
+            "time": 6.6,
+            "logo_prob": 0.0339,
+            "scene_score": 0.2358,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:45986",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2020/07/30/45986-447087693_medium.mp4",
+        "final_score": 0.2644,
+        "width": 1280,
+        "height": 720,
+        "duration": 8.0
+      },
+      "understanding": {
+        "queries": [
+          "modern corporate office building",
+          "executive boardroom meeting",
+          "company headquarters exterior"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": true,
+          "brand": true,
+          "sensitive": false
+        },
+        "reason": "groq: Shows corporate leadership and headquarters without using brand or person names.",
+        "source": "groq",
+        "names": [
+          "Satya Nadella",
+          "Microsoft"
+        ],
+        "number": null,
+        "keyword": "chief executive",
+        "card": {
+          "headline": "2014",
+          "subtitle": "",
+          "number": "2014",
+          "kind": "year",
+          "source": "narration",
+          "numbers_shown": [
+            "2014"
+          ]
+        },
+        "fingerprint": "2552710f4efd4ff1"
+      },
+      "safety": {
+        "queries": [
+          "modern corporate office building",
+          "executive boardroom meeting",
+          "company headquarters exterior"
+        ],
+        "exclude_terms": [
+          "satya nadella",
+          "microsoft",
+          "face",
+          "faces",
+          "portrait",
+          "portraits",
+          "close-up",
+          "closeup",
+          "close up",
+          "headshot",
+          "selfie",
+          "person close-up",
+          "logo",
+          "logos",
+          "brand",
+          "trademark"
+        ],
+        "no_faces": true,
+        "notes": [
+          "named person: no faces, name removed from queries",
+          "brand: logos excluded, brand removed from queries"
+        ]
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_000_500d9904b0772217.mp4",
+          "cache_key": "500d9904b0772217",
+          "frames": 155,
+          "look": "eq=brightness=-0.057",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_000_ac840a9732372dce.mp4",
+          "cache_key": "ac840a9732372dce",
+          "frames": 155,
+          "look": "eq=brightness=-0.057",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2291,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2295
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2261
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2296
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.230; best window 0.230; whole frame 0.229; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Satya",
+          "start": 0.0,
+          "end": 0.58
+        },
+        {
+          "text": "Nadella",
+          "start": 0.58,
+          "end": 1.08
+        },
+        {
+          "text": "has",
+          "start": 1.08,
+          "end": 1.56
+        },
+        {
+          "text": "been",
+          "start": 1.56,
+          "end": 1.7
+        },
+        {
+          "text": "the",
+          "start": 1.7,
+          "end": 1.84
+        },
+        {
+          "text": "chief",
+          "start": 1.84,
+          "end": 2.06
+        },
+        {
+          "text": "executive",
+          "start": 2.06,
+          "end": 2.58
+        },
+        {
+          "text": "of",
+          "start": 2.58,
+          "end": 2.84
+        },
+        {
+          "text": "Microsoft",
+          "start": 2.84,
+          "end": 3.3
+        },
+        {
+          "text": "since",
+          "start": 3.3,
+          "end": 3.98
+        },
+        {
+          "text": "2014.",
+          "start": 3.98,
+          "end": 4.76
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "text": "Sachin Tendulkar scored 100 international centuries in his cricket career.",
+      "start": 5.18,
+      "end": 10.7,
+      "duration": 5.52,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "cricket stadium cheering crowd",
+      "queries": [
+        "cricket stadium cheering crowd",
+        "batsman celebrating century",
+        "scoreboard showing 100 runs"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": true,
+        "named_person": true,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "generated",
+      "clip_id": "card-001-e321b85a",
+      "page_url": "",
+      "licence": "Generated by broll-engine (FFmpeg motion card)",
+      "licence_url": "",
+      "attribution": "",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": true,
+      "reason": "statistic line: number card '100' taken from the narration (GENERATED_FOR_STATISTICS=true)",
+      "relevance_score": null,
+      "card_text": "100",
+      "card_subtitle": "international centuries",
+      "card_source": "narration",
+      "card_numbers": [
+        "100"
+      ],
+      "thumbnail": "thumb_001.jpg",
+      "logo_check": null,
+      "clip_details": {
+        "uid": "generated:card-001-e321b85a",
+        "kind": "generated",
+        "title": "100 international centuries",
+        "source_url": "",
+        "final_score": null,
+        "width": 0,
+        "height": 0,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "cricket stadium cheering crowd",
+          "batsman celebrating century",
+          "scoreboard showing 100 runs"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": true,
+          "named_person": true,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Illustrates cricket achievements and the 100‑century statistic.",
+        "source": "groq",
+        "names": [
+          "Sachin Tendulkar"
+        ],
+        "number": "100",
+        "keyword": "scored international centuries cricket c",
+        "card": {
+          "headline": "100",
+          "subtitle": "international centuries",
+          "number": "100",
+          "kind": "number",
+          "source": "narration",
+          "numbers_shown": [
+            "100"
+          ],
+          "subtitle_from": "llm, every word checked against the line"
+        },
+        "fingerprint": "bb99b9e9fd81c0bc"
+      },
+      "safety": {
+        "queries": [
+          "cricket stadium cheering crowd",
+          "batsman celebrating century",
+          "scoreboard showing 100 runs"
+        ],
+        "exclude_terms": [
+          "sachin tendulkar",
+          "face",
+          "faces",
+          "portrait",
+          "portraits",
+          "close-up",
+          "closeup",
+          "close up",
+          "headshot",
+          "selfie",
+          "person close-up"
+        ],
+        "no_faces": true,
+        "notes": [
+          "named person: no faces, name removed from queries"
+        ]
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_001_e3bdba67fad7de40.mp4",
+          "cache_key": "e3bdba67fad7de40",
+          "frames": 166,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_001_7a0dc2ae8cf91bfe.mp4",
+          "cache_key": "7a0dc2ae8cf91bfe",
+          "frames": 166,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Sachin",
+          "start": 5.6,
+          "end": 5.96
+        },
+        {
+          "text": "Tendulkar",
+          "start": 5.96,
+          "end": 6.56
+        },
+        {
+          "text": "scored",
+          "start": 6.56,
+          "end": 7.04
+        },
+        {
+          "text": "100",
+          "start": 7.04,
+          "end": 7.72
+        },
+        {
+          "text": "international",
+          "start": 7.72,
+          "end": 8.26
+        },
+        {
+          "text": "centuries",
+          "start": 8.26,
+          "end": 9.02
+        },
+        {
+          "text": "in",
+          "start": 9.02,
+          "end": 9.54
+        },
+        {
+          "text": "his",
+          "start": 9.54,
+          "end": 9.66
+        },
+        {
+          "text": "cricket",
+          "start": 9.66,
+          "end": 9.92
+        },
+        {
+          "text": "career.",
+          "start": 9.92,
+          "end": 10.44
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "text": "Many people wrote their first lines of code on an Apple computer.",
+      "start": 10.7,
+      "end": 14.93,
+      "duration": 4.23,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "young programmer typing code",
+      "queries": [
+        "home desk computer setup",
+        "young programmer typing code",
+        "coding tutorial on screen"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": true,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "4733",
+      "page_url": "https://pixabay.com/videos/id-4733/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Coverr-Free-Footage on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.278 >= 0.22 for query 'young programmer typing code' (best of 22 candidates, order bonus +0.04); logo check ok (logo prob 0.02); 3 clip frame(s) passed the logo check (max logo prob 0.35)",
+      "relevance_score": 0.278,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_002.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.018,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.49,
+            "logo_prob": 0.0361,
+            "scene_score": 0.2622,
+            "result": "ok"
+          },
+          {
+            "time": 7.48,
+            "logo_prob": 0.3457,
+            "scene_score": 0.2622,
+            "result": "ok"
+          },
+          {
+            "time": 12.47,
+            "logo_prob": 0.0533,
+            "scene_score": 0.2673,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:4733",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2016/08/22/4733-179738669_medium.mp4",
+        "final_score": 0.318,
+        "width": 1280,
+        "height": 720,
+        "duration": 15.0
+      },
+      "understanding": {
+        "queries": [
+          "home desk computer setup",
+          "young programmer typing code",
+          "coding tutorial on screen"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": true,
+          "sensitive": false
+        },
+        "reason": "groq: Depicts people coding on personal computers, representing first coding experiences.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "people wrote",
+        "card": {
+          "headline": "PEOPLE WROTE",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "e7f7ac762e69f8f9"
+      },
+      "safety": {
+        "queries": [
+          "home desk computer setup",
+          "young programmer typing code",
+          "coding tutorial on screen"
+        ],
+        "exclude_terms": [
+          "logo",
+          "logos",
+          "brand",
+          "trademark"
+        ],
+        "no_faces": false,
+        "notes": [
+          "brand: logos excluded, brand removed from queries"
+        ]
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_002_3d84e376b92979f9.mp4",
+          "cache_key": "3d84e376b92979f9",
+          "frames": 127,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_002_938e44ea800d8835.mp4",
+          "cache_key": "938e44ea800d8835",
+          "frames": 127,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.258,
+            "windows": {
+              "salient": {
+                "start": 0.067,
+                "score": 0.2404
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2354
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.258
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.1841
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'salient' chosen (0.240; best window 0.258; whole frame 0.258; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Many",
+          "start": 10.96,
+          "end": 11.16
+        },
+        {
+          "text": "people",
+          "start": 11.16,
+          "end": 11.5
+        },
+        {
+          "text": "wrote",
+          "start": 11.5,
+          "end": 11.78
+        },
+        {
+          "text": "their",
+          "start": 11.78,
+          "end": 11.98
+        },
+        {
+          "text": "first",
+          "start": 11.98,
+          "end": 12.3
+        },
+        {
+          "text": "lines",
+          "start": 12.3,
+          "end": 12.68
+        },
+        {
+          "text": "of",
+          "start": 12.68,
+          "end": 12.86
+        },
+        {
+          "text": "code",
+          "start": 12.86,
+          "end": 13.24
+        },
+        {
+          "text": "on",
+          "start": 13.24,
+          "end": 13.72
+        },
+        {
+          "text": "an",
+          "start": 13.72,
+          "end": 13.84
+        },
+        {
+          "text": "Apple",
+          "start": 13.84,
+          "end": 14.06
+        },
+        {
+          "text": "computer.",
+          "start": 14.06,
+          "end": 14.6
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "text": "Coca -Cola is sold in almost every country in the world.",
+      "start": 14.93,
+      "end": 19.525,
+      "duration": 4.595,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "global supermarket beverage aisle",
+      "queries": [
+        "global supermarket beverage aisle",
+        "people enjoying soft drink",
+        "world map with product icons"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": true,
+        "sensitive": false
+      },
+      "provider": "pixabay_image_motion",
+      "clip_id": "2411667",
+      "page_url": "https://pixabay.com/photos/happy-holidays-shopping-bottle-2411667/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "kc0uvb on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_image_motion: score 0.255 >= 0.22 for query 'global supermarket beverage aisle' (best of 23 candidates, order bonus +0.04); logo check ok (logo prob 0.04); 1 clip frame(s) passed the logo check (max logo prob 0.12); earlier: pixabay_video: best score 0.193 < 0.22; pixabay_image_motion:3105631 rejected by the frame logo check (in the picture, logo prob 0.70)",
+      "relevance_score": 0.255,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_003.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.041,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.1225,
+            "scene_score": 0.2557,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_image_motion:2411667",
+        "kind": "image",
+        "title": "",
+        "source_url": "https://pixabay.com/get/ge34d5c42fe75847fdfdbea5e4ffbead08441aad6fac598067afcae655c9f82c4eb453fb5480f5069132128cb69fc64dedf17722293e5334f6299c242c49a795e_1280.jpg",
+        "final_score": 0.295,
+        "width": 1280,
+        "height": 848,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "global supermarket beverage aisle",
+          "people enjoying soft drink",
+          "world map with product icons"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": true,
+          "sensitive": false
+        },
+        "reason": "groq: Represents worldwide distribution of a popular soft drink without showing brand logos.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "coca cola",
+        "card": {
+          "headline": "COCA COLA",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "d320235d7228cb35"
+      },
+      "safety": {
+        "queries": [
+          "global supermarket beverage aisle",
+          "people enjoying soft drink",
+          "world map with product icons"
+        ],
+        "exclude_terms": [
+          "logo",
+          "logos",
+          "brand",
+          "trademark"
+        ],
+        "no_faces": false,
+        "notes": [
+          "brand: logos excluded, brand removed from queries"
+        ]
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_003_aa1a87f47b321c2d.mp4",
+          "cache_key": "aa1a87f47b321c2d",
+          "frames": 138,
+          "look": "eq=brightness=0.044:saturation=0.972",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "y",
+            "window_fraction": 0.8491,
+            "full_frame_score": 0.2435,
+            "windows": {
+              "salient": {
+                "start": 0.0,
+                "score": 0.2458
+              },
+              "centre": {
+                "start": 0.0755,
+                "score": 0.2463
+              },
+              "bottom": {
+                "start": 0.1509,
+                "score": 0.2159
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'salient' chosen (0.246; best window 0.246; whole frame 0.243; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_003_814a3f98573ca06f.mp4",
+          "cache_key": "814a3f98573ca06f",
+          "frames": 138,
+          "look": "eq=brightness=0.044:saturation=0.972",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3727,
+            "full_frame_score": 0.2435,
+            "windows": {
+              "centre": {
+                "start": 0.3137,
+                "score": 0.2645
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2572
+              },
+              "right": {
+                "start": 0.6273,
+                "score": 0.2385
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'centre' chosen (0.265; best window 0.265; whole frame 0.243; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Coca",
+          "start": 15.26,
+          "end": 15.44
+        },
+        {
+          "text": "-Cola",
+          "start": 15.44,
+          "end": 15.88
+        },
+        {
+          "text": "is",
+          "start": 15.88,
+          "end": 16.24
+        },
+        {
+          "text": "sold",
+          "start": 16.24,
+          "end": 16.6
+        },
+        {
+          "text": "in",
+          "start": 16.6,
+          "end": 16.96
+        },
+        {
+          "text": "almost",
+          "start": 16.96,
+          "end": 17.28
+        },
+        {
+          "text": "every",
+          "start": 17.28,
+          "end": 17.72
+        },
+        {
+          "text": "country",
+          "start": 17.72,
+          "end": 18.16
+        },
+        {
+          "text": "in",
+          "start": 18.16,
+          "end": 18.4
+        },
+        {
+          "text": "the",
+          "start": 18.4,
+          "end": 18.5
+        },
+        {
+          "text": "world.",
+          "start": 18.5,
+          "end": 18.84
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "aspect_ratio": "16:9",
+      "file": "video_16x9.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 19.532
+    },
+    {
+      "aspect_ratio": "9:16",
+      "file": "video_9x16.mp4",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "duration": 19.532
+    }
+  ]
+}

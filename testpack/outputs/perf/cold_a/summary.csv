@@ -1,0 +1,2 @@
+input,job_id,status,error_code,narration_seconds,turnaround_seconds,scenes,warnings_count
+perf_a_gardening,bad1ac51618144d2ae505780a5ca44e8,succeeded,,49.025,250.53,10,0

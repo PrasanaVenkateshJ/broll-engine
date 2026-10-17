@@ -1,0 +1,2839 @@
+{
+  "job_id": "987be7c4fff34b4fb185c478d61cbfe3",
+  "input_type": "script",
+  "duration": 54.05,
+  "language": "en",
+  "scenes": [
+    {
+      "index": 0,
+      "text": "Cycling to work is good for your health, your wallet and your city.",
+      "start": 0.0,
+      "end": 3.43,
+      "duration": 3.43,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "people riding bicycles to work",
+      "queries": [
+        "commuter cyclists on city streets",
+        "people riding bicycles to work",
+        "urban bike commuting scene"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "3579",
+      "page_url": "https://pixabay.com/videos/id-3579/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Pexels on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.294 >= 0.22 for query 'people riding bicycles to work' (best of 21 candidates, order bonus +0.04); logo check ok (logo prob 0.10); 3 clip frame(s) passed the logo check (max logo prob 0.35)",
+      "relevance_score": 0.294,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_000.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0966,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 1.81,
+            "logo_prob": 0.3195,
+            "scene_score": 0.2665,
+            "result": "ok"
+          },
+          {
+            "time": 5.44,
+            "logo_prob": 0.3478,
+            "scene_score": 0.2866,
+            "result": "ok"
+          },
+          {
+            "time": 9.07,
+            "logo_prob": 0.1247,
+            "scene_score": 0.2243,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:3579",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2016/06/27/3579-172488170_medium.mp4",
+        "final_score": 0.334,
+        "width": 1280,
+        "height": 720,
+        "duration": 11.0
+      },
+      "understanding": {
+        "queries": [
+          "commuter cyclists on city streets",
+          "people riding bicycles to work",
+          "urban bike commuting scene"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows healthy, economical, city‑friendly commuting by bike",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "cycling work",
+        "card": {
+          "headline": "CYCLING WORK",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "14e418ecbc71b23f"
+      },
+      "safety": {
+        "queries": [
+          "commuter cyclists on city streets",
+          "people riding bicycles to work",
+          "urban bike commuting scene"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_000_c6bb69568980c533.mp4",
+          "cache_key": "c6bb69568980c533",
+          "frames": 103,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_000_7380819b1a919a16.mp4",
+          "cache_key": "7380819b1a919a16",
+          "frames": 103,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2665,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2813
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2213
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2747
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.281; best window 0.281; whole frame 0.267; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Cycling",
+          "start": 0.0,
+          "end": 0.64
+        },
+        {
+          "text": "to",
+          "start": 0.64,
+          "end": 0.86
+        },
+        {
+          "text": "work",
+          "start": 0.86,
+          "end": 1.02
+        },
+        {
+          "text": "is",
+          "start": 1.02,
+          "end": 1.16
+        },
+        {
+          "text": "good",
+          "start": 1.16,
+          "end": 1.36
+        },
+        {
+          "text": "for",
+          "start": 1.36,
+          "end": 1.54
+        },
+        {
+          "text": "your",
+          "start": 1.54,
+          "end": 1.64
+        },
+        {
+          "text": "health,",
+          "start": 1.64,
+          "end": 1.94
+        },
+        {
+          "text": "your",
+          "start": 2.1,
+          "end": 2.2
+        },
+        {
+          "text": "wallet",
+          "start": 2.2,
+          "end": 2.56
+        },
+        {
+          "text": "and",
+          "start": 2.56,
+          "end": 2.78
+        },
+        {
+          "text": "your",
+          "start": 2.78,
+          "end": 2.92
+        },
+        {
+          "text": "city.",
+          "start": 2.92,
+          "end": 3.14
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "text": "A short ride every morning wakes up your body and clears your mind before the day begins.",
+      "start": 3.43,
+      "end": 7.92,
+      "duration": 4.49,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "sunrise bike ride on path",
+      "queries": [
+        "sunrise bike ride on path",
+        "early morning cyclist on quiet road",
+        "cyclist breathing fresh air"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "82636",
+      "page_url": "https://pixabay.com/videos/id-82636/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "22426646 on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.288 >= 0.22 for query 'sunrise bike ride on path' (best of 23 candidates, order bonus +0.04); logo check ok (logo prob 0.03); 3 clip frame(s) passed the logo check (max logo prob 0.10)",
+      "relevance_score": 0.2876,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_001.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0293,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.21,
+            "logo_prob": 0.0282,
+            "scene_score": 0.2818,
+            "result": "ok"
+          },
+          {
+            "time": 6.63,
+            "logo_prob": 0.096,
+            "scene_score": 0.1762,
+            "result": "ok"
+          },
+          {
+            "time": 11.05,
+            "logo_prob": 0.0315,
+            "scene_score": 0.2966,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:82636",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2021/07/24/82636-580974567_medium.mp4",
+        "final_score": 0.3276,
+        "width": 1280,
+        "height": 720,
+        "duration": 13.0
+      },
+      "understanding": {
+        "queries": [
+          "sunrise bike ride on path",
+          "early morning cyclist on quiet road",
+          "cyclist breathing fresh air"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Depicts a short morning ride that energises body and mind",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "short ride",
+        "card": {
+          "headline": "SHORT RIDE",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "a32a5042a6bef839"
+      },
+      "safety": {
+        "queries": [
+          "sunrise bike ride on path",
+          "early morning cyclist on quiet road",
+          "cyclist breathing fresh air"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_001_0b3fd1a4a29c5058.mp4",
+          "cache_key": "0b3fd1a4a29c5058",
+          "frames": 135,
+          "look": "eq=brightness=-0.068",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_001_95028e1a7e62b1ed.mp4",
+          "cache_key": "95028e1a7e62b1ed",
+          "frames": 135,
+          "look": "eq=brightness=-0.068",
+          "caption_font": "Arial",
+          "framing": "blurred fit",
+          "crop": {
+            "method": "clip",
+            "choice": "blurred fit",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2673,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2258
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2184
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.1903
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "best window 'centre' 0.226 is more than 0.02 below the whole frame 0.267: every window cuts the subject -> blurred fit"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "A",
+          "start": 3.72,
+          "end": 3.86
+        },
+        {
+          "text": "short",
+          "start": 3.86,
+          "end": 4.08
+        },
+        {
+          "text": "ride",
+          "start": 4.08,
+          "end": 4.34
+        },
+        {
+          "text": "every",
+          "start": 4.34,
+          "end": 4.62
+        },
+        {
+          "text": "morning",
+          "start": 4.62,
+          "end": 4.94
+        },
+        {
+          "text": "wakes",
+          "start": 4.94,
+          "end": 5.22
+        },
+        {
+          "text": "up",
+          "start": 5.22,
+          "end": 5.38
+        },
+        {
+          "text": "your",
+          "start": 5.38,
+          "end": 5.48
+        },
+        {
+          "text": "body",
+          "start": 5.48,
+          "end": 5.76
+        },
+        {
+          "text": "and",
+          "start": 5.76,
+          "end": 5.98
+        },
+        {
+          "text": "clears",
+          "start": 5.98,
+          "end": 6.22
+        },
+        {
+          "text": "your",
+          "start": 6.22,
+          "end": 6.42
+        },
+        {
+          "text": "mind",
+          "start": 6.42,
+          "end": 6.68
+        },
+        {
+          "text": "before",
+          "start": 6.68,
+          "end": 6.92
+        },
+        {
+          "text": "the",
+          "start": 6.92,
+          "end": 7.08
+        },
+        {
+          "text": "day",
+          "start": 7.08,
+          "end": 7.24
+        },
+        {
+          "text": "begins.",
+          "start": 7.24,
+          "end": 7.6
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "text": "You skip the traffic jams, you never search for parking and you spend almost nothing on fuel.",
+      "start": 7.92,
+      "end": 13.08,
+      "duration": 5.16,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "bike rider passing traffic jam",
+      "queries": [
+        "bike rider passing traffic jam",
+        "cyclist parking bike easily",
+        "hand holding empty fuel gauge"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "generated",
+      "clip_id": "card-002-2fd45106",
+      "page_url": "",
+      "licence": "Generated by broll-engine (FFmpeg motion card)",
+      "licence_url": "",
+      "attribution": "",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": true,
+      "reason": "no stock source passed the rule (pixabay_video: best score 0.208 < 0.22; pixabay_image_motion: best score 0.214 < 0.22; wikimedia: no usable results (0 found, all excluded or already used)) -> generated motion card 'SKIP TRAFFIC'",
+      "relevance_score": null,
+      "card_text": "SKIP TRAFFIC",
+      "card_subtitle": "",
+      "card_source": "narration",
+      "card_numbers": [],
+      "thumbnail": "thumb_002.jpg",
+      "logo_check": null,
+      "clip_details": {
+        "uid": "generated:card-002-2fd45106",
+        "kind": "generated",
+        "title": "SKIP TRAFFIC",
+        "source_url": "",
+        "final_score": null,
+        "width": 0,
+        "height": 0,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "bike rider passing traffic jam",
+          "cyclist parking bike easily",
+          "hand holding empty fuel gauge"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Illustrates avoiding traffic, parking hassles and low fuel cost",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "skip traffic",
+        "card": {
+          "headline": "SKIP TRAFFIC",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "e4d98e3429bf303f"
+      },
+      "safety": {
+        "queries": [
+          "bike rider passing traffic jam",
+          "cyclist parking bike easily",
+          "hand holding empty fuel gauge"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_002_44b069f54148d4f2.mp4",
+          "cache_key": "44b069f54148d4f2",
+          "frames": 154,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_002_64341f883a2b7ee0.mp4",
+          "cache_key": "64341f883a2b7ee0",
+          "frames": 154,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "You",
+          "start": 8.24,
+          "end": 8.38
+        },
+        {
+          "text": "skip",
+          "start": 8.38,
+          "end": 8.52
+        },
+        {
+          "text": "the",
+          "start": 8.52,
+          "end": 8.7
+        },
+        {
+          "text": "traffic",
+          "start": 8.7,
+          "end": 8.94
+        },
+        {
+          "text": "jams,",
+          "start": 8.94,
+          "end": 9.38
+        },
+        {
+          "text": "you",
+          "start": 9.7,
+          "end": 9.82
+        },
+        {
+          "text": "never",
+          "start": 9.82,
+          "end": 9.98
+        },
+        {
+          "text": "search",
+          "start": 9.98,
+          "end": 10.24
+        },
+        {
+          "text": "for",
+          "start": 10.24,
+          "end": 10.44
+        },
+        {
+          "text": "parking",
+          "start": 10.44,
+          "end": 10.76
+        },
+        {
+          "text": "and",
+          "start": 10.76,
+          "end": 11.3
+        },
+        {
+          "text": "you",
+          "start": 11.3,
+          "end": 11.4
+        },
+        {
+          "text": "spend",
+          "start": 11.4,
+          "end": 11.54
+        },
+        {
+          "text": "almost",
+          "start": 11.54,
+          "end": 11.92
+        },
+        {
+          "text": "nothing",
+          "start": 11.92,
+          "end": 12.28
+        },
+        {
+          "text": "on",
+          "start": 12.28,
+          "end": 12.5
+        },
+        {
+          "text": "fuel.",
+          "start": 12.5,
+          "end": 12.78
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "text": "Start with a simple, comfortable bicycle and a helmet that fits well.",
+      "start": 13.08,
+      "end": 16.95,
+      "duration": 3.87,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "smooth road bike ride",
+      "queries": [
+        "close-up of comfortable bike frame",
+        "person adjusting bicycle helmet",
+        "smooth road bike ride"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "85339",
+      "page_url": "https://pixabay.com/videos/id-85339/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "AlexKopeykin on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.229 >= 0.22 for query 'smooth road bike ride' (best of 22 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.05)",
+      "relevance_score": 0.2292,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_003.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0017,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.52,
+            "logo_prob": 0.0496,
+            "scene_score": 0.1826,
+            "result": "ok"
+          },
+          {
+            "time": 7.56,
+            "logo_prob": 0.0116,
+            "scene_score": 0.1139,
+            "result": "ok"
+          },
+          {
+            "time": 12.6,
+            "logo_prob": 0.0021,
+            "scene_score": 0.1968,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:85339",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2021/08/16/85339-590730585_medium.mp4",
+        "final_score": 0.2692,
+        "width": 1280,
+        "height": 720,
+        "duration": 15.0
+      },
+      "understanding": {
+        "queries": [
+          "close-up of comfortable bike frame",
+          "person adjusting bicycle helmet",
+          "smooth road bike ride"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Emphasises starting with a simple bike and well‑fitting helmet",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "start simple",
+        "card": {
+          "headline": "START SIMPLE",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "21b79d35cbadcbff"
+      },
+      "safety": {
+        "queries": [
+          "close-up of comfortable bike frame",
+          "person adjusting bicycle helmet",
+          "smooth road bike ride"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_003_4eaf58a3cdda7a5b.mp4",
+          "cache_key": "4eaf58a3cdda7a5b",
+          "frames": 116,
+          "look": "eq=brightness=0.066:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_003_2a07b853f2112390.mp4",
+          "cache_key": "2a07b853f2112390",
+          "frames": 116,
+          "look": "eq=brightness=0.066:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.1835,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.18
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.1951
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.1676
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.180; best window 0.195; whole frame 0.183; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Start",
+          "start": 13.38,
+          "end": 13.64
+        },
+        {
+          "text": "with",
+          "start": 13.64,
+          "end": 13.82
+        },
+        {
+          "text": "a",
+          "start": 13.82,
+          "end": 13.94
+        },
+        {
+          "text": "simple,",
+          "start": 13.94,
+          "end": 14.26
+        },
+        {
+          "text": "comfortable",
+          "start": 14.56,
+          "end": 14.78
+        },
+        {
+          "text": "bicycle",
+          "start": 14.78,
+          "end": 15.28
+        },
+        {
+          "text": "and",
+          "start": 15.28,
+          "end": 15.6
+        },
+        {
+          "text": "a",
+          "start": 15.6,
+          "end": 15.7
+        },
+        {
+          "text": "helmet",
+          "start": 15.7,
+          "end": 15.92
+        },
+        {
+          "text": "that",
+          "start": 15.92,
+          "end": 16.18
+        },
+        {
+          "text": "fits",
+          "start": 16.18,
+          "end": 16.4
+        },
+        {
+          "text": "well.",
+          "start": 16.4,
+          "end": 16.68
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "text": "Plan a route on quieter streets or bike lanes and try it once on a weekend before your first working day.",
+      "start": 16.95,
+      "end": 22.73,
+      "duration": 5.78,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "quiet residential street with bike lane",
+      "queries": [
+        "map planning bike route on tablet",
+        "quiet residential street with bike lane",
+        "weekend cyclist testing new route"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "205925",
+      "page_url": "https://pixabay.com/videos/id-205925/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "useche360 on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.259 >= 0.22 for query 'quiet residential street with bike lane' (best of 17 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.09); earlier: pixabay_video: logo check rejected 1, best: pixabay_video:27268 (logo prob 0.92, scene 0.251) (4 checked)",
+      "relevance_score": 0.2587,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_004.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0034,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.5,
+            "logo_prob": 0.0812,
+            "scene_score": 0.2166,
+            "result": "ok"
+          },
+          {
+            "time": 7.5,
+            "logo_prob": 0.0079,
+            "scene_score": 0.2289,
+            "result": "ok"
+          },
+          {
+            "time": 12.5,
+            "logo_prob": 0.0874,
+            "scene_score": 0.2116,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:205925",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2024/03/28/205925_medium.mp4",
+        "final_score": 0.2987,
+        "width": 2560,
+        "height": 1440,
+        "duration": 15.0
+      },
+      "understanding": {
+        "queries": [
+          "map planning bike route on tablet",
+          "quiet residential street with bike lane",
+          "weekend cyclist testing new route"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows planning a safe, quiet route and trial ride before work",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "plan route",
+        "card": {
+          "headline": "PLAN ROUTE",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "e322036e4d297e59"
+      },
+      "safety": {
+        "queries": [
+          "map planning bike route on tablet",
+          "quiet residential street with bike lane",
+          "weekend cyclist testing new route"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_004_9d65e9166445cc69.mp4",
+          "cache_key": "9d65e9166445cc69",
+          "frames": 174,
+          "look": "eq=brightness=0.053:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_004_820ddb75560d2604.mp4",
+          "cache_key": "820ddb75560d2604",
+          "frames": 174,
+          "look": "eq=brightness=0.053:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2316,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2668
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2021
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.1429
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.267; best window 0.267; whole frame 0.232; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Plan",
+          "start": 17.22,
+          "end": 17.44
+        },
+        {
+          "text": "a",
+          "start": 17.44,
+          "end": 17.58
+        },
+        {
+          "text": "route",
+          "start": 17.58,
+          "end": 17.78
+        },
+        {
+          "text": "on",
+          "start": 17.78,
+          "end": 17.96
+        },
+        {
+          "text": "quieter",
+          "start": 17.96,
+          "end": 18.24
+        },
+        {
+          "text": "streets",
+          "start": 18.24,
+          "end": 18.6
+        },
+        {
+          "text": "or",
+          "start": 18.6,
+          "end": 18.86
+        },
+        {
+          "text": "bike",
+          "start": 18.86,
+          "end": 19.08
+        },
+        {
+          "text": "lanes",
+          "start": 19.08,
+          "end": 19.46
+        },
+        {
+          "text": "and",
+          "start": 19.46,
+          "end": 20.0
+        },
+        {
+          "text": "try",
+          "start": 20.0,
+          "end": 20.22
+        },
+        {
+          "text": "it",
+          "start": 20.22,
+          "end": 20.36
+        },
+        {
+          "text": "once",
+          "start": 20.36,
+          "end": 20.48
+        },
+        {
+          "text": "on",
+          "start": 20.48,
+          "end": 20.64
+        },
+        {
+          "text": "a",
+          "start": 20.64,
+          "end": 20.72
+        },
+        {
+          "text": "weekend",
+          "start": 20.72,
+          "end": 20.98
+        },
+        {
+          "text": "before",
+          "start": 20.98,
+          "end": 21.38
+        },
+        {
+          "text": "your",
+          "start": 21.38,
+          "end": 21.58
+        },
+        {
+          "text": "first",
+          "start": 21.58,
+          "end": 21.86
+        },
+        {
+          "text": "working",
+          "start": 21.86,
+          "end": 22.14
+        },
+        {
+          "text": "day.",
+          "start": 22.14,
+          "end": 22.42
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "text": "Carry a small bag with a spare tube, a pump and a rain jacket.",
+      "start": 22.73,
+      "end": 26.72,
+      "duration": 3.99,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "cyclist packing small repair bag",
+      "queries": [
+        "cyclist packing small repair bag",
+        "close-up of spare bike tube",
+        "rain jacket hanging on bike"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "generated",
+      "clip_id": "card-005-c8eb584d",
+      "page_url": "",
+      "licence": "Generated by broll-engine (FFmpeg motion card)",
+      "licence_url": "",
+      "attribution": "",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": true,
+      "reason": "no stock source passed the rule (pixabay_video: best score 0.212 < 0.22; pixabay_image_motion: best score 0.196 < 0.22; wikimedia: best score 0.197 < 0.22) -> generated motion card 'CARRY SMALL'",
+      "relevance_score": null,
+      "card_text": "CARRY SMALL",
+      "card_subtitle": "",
+      "card_source": "narration",
+      "card_numbers": [],
+      "thumbnail": "thumb_005.jpg",
+      "logo_check": null,
+      "clip_details": {
+        "uid": "generated:card-005-c8eb584d",
+        "kind": "generated",
+        "title": "CARRY SMALL",
+        "source_url": "",
+        "final_score": null,
+        "width": 0,
+        "height": 0,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "cyclist packing small repair bag",
+          "close-up of spare bike tube",
+          "rain jacket hanging on bike"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Displays essential gear: spare tube, pump, rain jacket",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "carry small",
+        "card": {
+          "headline": "CARRY SMALL",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "c2967a7aee374626"
+      },
+      "safety": {
+        "queries": [
+          "cyclist packing small repair bag",
+          "close-up of spare bike tube",
+          "rain jacket hanging on bike"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_005_640d9fcc9039b9b4.mp4",
+          "cache_key": "640d9fcc9039b9b4",
+          "frames": 120,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_005_f12d4c04127cd847.mp4",
+          "cache_key": "f12d4c04127cd847",
+          "frames": 120,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Carry",
+          "start": 23.04,
+          "end": 23.28
+        },
+        {
+          "text": "a",
+          "start": 23.28,
+          "end": 23.42
+        },
+        {
+          "text": "small",
+          "start": 23.42,
+          "end": 23.64
+        },
+        {
+          "text": "bag",
+          "start": 23.64,
+          "end": 24.04
+        },
+        {
+          "text": "with",
+          "start": 24.04,
+          "end": 24.22
+        },
+        {
+          "text": "a",
+          "start": 24.22,
+          "end": 24.34
+        },
+        {
+          "text": "spare",
+          "start": 24.34,
+          "end": 24.5
+        },
+        {
+          "text": "tube,",
+          "start": 24.5,
+          "end": 24.84
+        },
+        {
+          "text": "a",
+          "start": 25.18,
+          "end": 25.34
+        },
+        {
+          "text": "pump",
+          "start": 25.34,
+          "end": 25.56
+        },
+        {
+          "text": "and",
+          "start": 25.56,
+          "end": 25.76
+        },
+        {
+          "text": "a",
+          "start": 25.76,
+          "end": 25.88
+        },
+        {
+          "text": "rain",
+          "start": 25.88,
+          "end": 26.06
+        },
+        {
+          "text": "jacket.",
+          "start": 26.06,
+          "end": 26.42
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "text": "Use lights at the front and back when it gets dark and always signal before you turn.",
+      "start": 26.72,
+      "end": 31.31,
+      "duration": 4.59,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "cyclist hand signaling turn",
+      "queries": [
+        "bike with front and rear lights",
+        "cyclist hand signaling turn",
+        "nighttime cyclist illuminated bike"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "207800",
+      "page_url": "https://pixabay.com/videos/id-207800/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "useche360 on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.248 >= 0.22 for query 'cyclist hand signaling turn' (best of 17 candidates, order bonus +0.04); logo check ok (logo prob 0.01); 3 clip frame(s) passed the logo check (max logo prob 0.01)",
+      "relevance_score": 0.2478,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_006.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0148,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.5,
+            "logo_prob": 0.0051,
+            "scene_score": 0.2518,
+            "result": "ok"
+          },
+          {
+            "time": 7.5,
+            "logo_prob": 0.0128,
+            "scene_score": 0.2523,
+            "result": "ok"
+          },
+          {
+            "time": 12.5,
+            "logo_prob": 0.0135,
+            "scene_score": 0.2656,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:207800",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2024/04/12/207800_medium.mp4",
+        "final_score": 0.2878,
+        "width": 1280,
+        "height": 720,
+        "duration": 15.0
+      },
+      "understanding": {
+        "queries": [
+          "bike with front and rear lights",
+          "cyclist hand signaling turn",
+          "nighttime cyclist illuminated bike"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Highlights safety lights and hand signals for dark conditions",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "use lights",
+        "card": {
+          "headline": "USE LIGHTS",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "e32b52f8d34fb97a"
+      },
+      "safety": {
+        "queries": [
+          "bike with front and rear lights",
+          "cyclist hand signaling turn",
+          "nighttime cyclist illuminated bike"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_006_afb133c623dedf2f.mp4",
+          "cache_key": "afb133c623dedf2f",
+          "frames": 137,
+          "look": "eq=saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_006_13406f569626a122.mp4",
+          "cache_key": "13406f569626a122",
+          "frames": 137,
+          "look": "eq=saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.25,
+            "windows": {
+              "salient": {
+                "start": 0.3941,
+                "score": 0.2685
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2707
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.189
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2474
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'salient' chosen (0.269; best window 0.271; whole frame 0.250; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Use",
+          "start": 27.02,
+          "end": 27.5
+        },
+        {
+          "text": "lights",
+          "start": 27.5,
+          "end": 27.78
+        },
+        {
+          "text": "at",
+          "start": 27.78,
+          "end": 27.92
+        },
+        {
+          "text": "the",
+          "start": 27.92,
+          "end": 28.0
+        },
+        {
+          "text": "front",
+          "start": 28.0,
+          "end": 28.2
+        },
+        {
+          "text": "and",
+          "start": 28.2,
+          "end": 28.32
+        },
+        {
+          "text": "back",
+          "start": 28.32,
+          "end": 28.58
+        },
+        {
+          "text": "when",
+          "start": 28.58,
+          "end": 28.72
+        },
+        {
+          "text": "it",
+          "start": 28.72,
+          "end": 28.82
+        },
+        {
+          "text": "gets",
+          "start": 28.82,
+          "end": 28.98
+        },
+        {
+          "text": "dark",
+          "start": 28.98,
+          "end": 29.3
+        },
+        {
+          "text": "and",
+          "start": 29.3,
+          "end": 29.58
+        },
+        {
+          "text": "always",
+          "start": 29.58,
+          "end": 29.88
+        },
+        {
+          "text": "signal",
+          "start": 29.88,
+          "end": 30.26
+        },
+        {
+          "text": "before",
+          "start": 30.26,
+          "end": 30.58
+        },
+        {
+          "text": "you",
+          "start": 30.58,
+          "end": 30.78
+        },
+        {
+          "text": "turn.",
+          "start": 30.78,
+          "end": 31.02
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "text": "If your office is far away, ride to a train or bus station and finish the journey there.",
+      "start": 31.31,
+      "end": 36.28,
+      "duration": 4.97,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "bike parked near bus stop",
+      "queries": [
+        "cyclist arriving at train station",
+        "bike parked near bus stop",
+        "multimodal commute bike and train"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "21782",
+      "page_url": "https://pixabay.com/videos/id-21782/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "SAHN_VIT on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.258 >= 0.22 for query 'bike parked near bus stop' (best of 18 candidates, order bonus +0.04); logo check ok (logo prob 0.02); 3 clip frame(s) passed the logo check (max logo prob 0.02); earlier: pixabay_video: logo check rejected 1, best: pixabay_video:38590 (logo prob 0.95, scene 0.245) (4 checked)",
+      "relevance_score": 0.2578,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_007.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0241,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 7.4,
+            "logo_prob": 0.0205,
+            "scene_score": 0.2307,
+            "result": "ok"
+          },
+          {
+            "time": 22.21,
+            "logo_prob": 0.0217,
+            "scene_score": 0.2104,
+            "result": "ok"
+          },
+          {
+            "time": 37.01,
+            "logo_prob": 0.0133,
+            "scene_score": 0.243,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:21782",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2019/03/04/21782-321298091_medium.mp4",
+        "final_score": 0.2978,
+        "width": 1280,
+        "height": 720,
+        "duration": 44.0
+      },
+      "understanding": {
+        "queries": [
+          "cyclist arriving at train station",
+          "bike parked near bus stop",
+          "multimodal commute bike and train"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows combining cycling with public transport for longer commutes",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "office far",
+        "card": {
+          "headline": "OFFICE FAR",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "e03ef60db99f332e"
+      },
+      "safety": {
+        "queries": [
+          "cyclist arriving at train station",
+          "bike parked near bus stop",
+          "multimodal commute bike and train"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_007_adb00d9c2473965c.mp4",
+          "cache_key": "adb00d9c2473965c",
+          "frames": 149,
+          "look": "eq=brightness=0.085:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_007_89490ded286b271e.mp4",
+          "cache_key": "89490ded286b271e",
+          "frames": 149,
+          "look": "eq=brightness=0.085:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (right)",
+          "crop": {
+            "method": "clip",
+            "choice": "right",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2132,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.1746
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.1516
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2829
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'right' chosen (0.283; best window 0.283; whole frame 0.213; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "If",
+          "start": 31.6,
+          "end": 31.74
+        },
+        {
+          "text": "your",
+          "start": 31.74,
+          "end": 31.86
+        },
+        {
+          "text": "office",
+          "start": 31.86,
+          "end": 32.18
+        },
+        {
+          "text": "is",
+          "start": 32.18,
+          "end": 32.36
+        },
+        {
+          "text": "far",
+          "start": 32.36,
+          "end": 32.58
+        },
+        {
+          "text": "away,",
+          "start": 32.58,
+          "end": 32.84
+        },
+        {
+          "text": "ride",
+          "start": 33.24,
+          "end": 33.4
+        },
+        {
+          "text": "to",
+          "start": 33.4,
+          "end": 33.56
+        },
+        {
+          "text": "a",
+          "start": 33.56,
+          "end": 33.66
+        },
+        {
+          "text": "train",
+          "start": 33.66,
+          "end": 33.98
+        },
+        {
+          "text": "or",
+          "start": 33.98,
+          "end": 34.22
+        },
+        {
+          "text": "bus",
+          "start": 34.22,
+          "end": 34.44
+        },
+        {
+          "text": "station",
+          "start": 34.44,
+          "end": 34.82
+        },
+        {
+          "text": "and",
+          "start": 34.82,
+          "end": 35.06
+        },
+        {
+          "text": "finish",
+          "start": 35.06,
+          "end": 35.32
+        },
+        {
+          "text": "the",
+          "start": 35.32,
+          "end": 35.46
+        },
+        {
+          "text": "journey",
+          "start": 35.46,
+          "end": 35.74
+        },
+        {
+          "text": "there.",
+          "start": 35.74,
+          "end": 36.0
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "text": "After a few weeks, the ride will feel easy and you may even look forward to it.",
+      "start": 36.28,
+      "end": 40.68,
+      "duration": 4.4,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "smooth ride on bike path",
+      "queries": [
+        "confident cyclist smiling on bike",
+        "smooth ride on bike path",
+        "person enjoying morning commute"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "171959",
+      "page_url": "https://pixabay.com/videos/id-171959/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "KIMDAEJEUNG on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.231 >= 0.22 for query 'smooth ride on bike path' (best of 18 candidates, order bonus +0.04); logo check ok (logo prob 0.01); 3 clip frame(s) passed the logo check (max logo prob 0.00); earlier: pixabay_video:132311 rejected by the frame logo check (at 34.7 s, logo prob 0.80)",
+      "relevance_score": 0.2309,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_008.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.007,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 5.17,
+            "logo_prob": 0.0023,
+            "scene_score": 0.2405,
+            "result": "ok"
+          },
+          {
+            "time": 15.52,
+            "logo_prob": 0.0038,
+            "scene_score": 0.218,
+            "result": "ok"
+          },
+          {
+            "time": 25.86,
+            "logo_prob": 0.0021,
+            "scene_score": 0.2104,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:171959",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2023/07/17/171959-846471974_medium.mp4",
+        "final_score": 0.2709,
+        "width": 2560,
+        "height": 1440,
+        "duration": 31.0
+      },
+      "understanding": {
+        "queries": [
+          "confident cyclist smiling on bike",
+          "smooth ride on bike path",
+          "person enjoying morning commute"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Conveys growing ease and enjoyment after weeks of riding",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "weeks ride",
+        "card": {
+          "headline": "WEEKS RIDE",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "47d9edc3d1c7e68b"
+      },
+      "safety": {
+        "queries": [
+          "confident cyclist smiling on bike",
+          "smooth ride on bike path",
+          "person enjoying morning commute"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_008_e1f494f36f4b602d.mp4",
+          "cache_key": "e1f494f36f4b602d",
+          "frames": 132,
+          "look": "eq=brightness=-0.019:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_008_89fdfeb47604da28.mp4",
+          "cache_key": "89fdfeb47604da28",
+          "frames": 132,
+          "look": "eq=brightness=-0.019:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2238,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2297
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2334
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.1345
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.230; best window 0.233; whole frame 0.224; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "After",
+          "start": 36.56,
+          "end": 36.82
+        },
+        {
+          "text": "a",
+          "start": 36.82,
+          "end": 36.98
+        },
+        {
+          "text": "few",
+          "start": 36.98,
+          "end": 37.08
+        },
+        {
+          "text": "weeks,",
+          "start": 37.08,
+          "end": 37.36
+        },
+        {
+          "text": "the",
+          "start": 37.6,
+          "end": 37.66
+        },
+        {
+          "text": "ride",
+          "start": 37.66,
+          "end": 37.84
+        },
+        {
+          "text": "will",
+          "start": 37.84,
+          "end": 37.98
+        },
+        {
+          "text": "feel",
+          "start": 37.98,
+          "end": 38.2
+        },
+        {
+          "text": "easy",
+          "start": 38.2,
+          "end": 38.6
+        },
+        {
+          "text": "and",
+          "start": 38.6,
+          "end": 39.06
+        },
+        {
+          "text": "you",
+          "start": 39.06,
+          "end": 39.18
+        },
+        {
+          "text": "may",
+          "start": 39.18,
+          "end": 39.3
+        },
+        {
+          "text": "even",
+          "start": 39.3,
+          "end": 39.58
+        },
+        {
+          "text": "look",
+          "start": 39.58,
+          "end": 39.76
+        },
+        {
+          "text": "forward",
+          "start": 39.76,
+          "end": 40.06
+        },
+        {
+          "text": "to",
+          "start": 40.06,
+          "end": 40.24
+        },
+        {
+          "text": "it.",
+          "start": 40.24,
+          "end": 40.42
+        }
+      ]
+    },
+    {
+      "index": 9,
+      "text": "Fewer cars on the road also means cleaner air for everyone.",
+      "start": 40.68,
+      "end": 44.2,
+      "duration": 3.52,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "clear blue sky over city",
+      "queries": [
+        "clear blue sky over city",
+        "trees with fresh air",
+        "traffic‑free street with cyclists"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "generated",
+      "clip_id": "card-009-0910cd0c",
+      "page_url": "",
+      "licence": "Generated by broll-engine (FFmpeg motion card)",
+      "licence_url": "",
+      "attribution": "",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": true,
+      "reason": "no stock source passed the rule (pixabay_video: best score 0.197 < 0.22; pixabay_image_motion: best score 0.204 < 0.22; wikimedia: best score 0.183 < 0.22) -> generated motion card 'FEWER CARS'",
+      "relevance_score": null,
+      "card_text": "FEWER CARS",
+      "card_subtitle": "",
+      "card_source": "narration",
+      "card_numbers": [],
+      "thumbnail": "thumb_009.jpg",
+      "logo_check": null,
+      "clip_details": {
+        "uid": "generated:card-009-0910cd0c",
+        "kind": "generated",
+        "title": "FEWER CARS",
+        "source_url": "",
+        "final_score": null,
+        "width": 0,
+        "height": 0,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "clear blue sky over city",
+          "trees with fresh air",
+          "traffic‑free street with cyclists"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Illustrates cleaner air from fewer cars",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "fewer cars",
+        "card": {
+          "headline": "FEWER CARS",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "95c2836cda76c8da"
+      },
+      "safety": {
+        "queries": [
+          "clear blue sky over city",
+          "trees with fresh air",
+          "traffic‑free street with cyclists"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_009_6926ff8147419797.mp4",
+          "cache_key": "6926ff8147419797",
+          "frames": 106,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_009_abafbc8e873f49c1.mp4",
+          "cache_key": "abafbc8e873f49c1",
+          "frames": 106,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Fewer",
+          "start": 40.94,
+          "end": 41.22
+        },
+        {
+          "text": "cars",
+          "start": 41.22,
+          "end": 41.44
+        },
+        {
+          "text": "on",
+          "start": 41.44,
+          "end": 41.66
+        },
+        {
+          "text": "the",
+          "start": 41.66,
+          "end": 41.76
+        },
+        {
+          "text": "road",
+          "start": 41.76,
+          "end": 42.0
+        },
+        {
+          "text": "also",
+          "start": 42.0,
+          "end": 42.38
+        },
+        {
+          "text": "means",
+          "start": 42.38,
+          "end": 42.66
+        },
+        {
+          "text": "cleaner",
+          "start": 42.66,
+          "end": 43.02
+        },
+        {
+          "text": "air",
+          "start": 43.02,
+          "end": 43.32
+        },
+        {
+          "text": "for",
+          "start": 43.32,
+          "end": 43.52
+        },
+        {
+          "text": "everyone.",
+          "start": 43.52,
+          "end": 43.9
+        }
+      ]
+    },
+    {
+      "index": 10,
+      "text": "Many cities now add new bike lanes every year so the ride keeps getting safer.",
+      "start": 44.2,
+      "end": 49.0,
+      "duration": 4.8,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "bicycle lane sign on street",
+      "queries": [
+        "construction of new bike lane",
+        "city workers painting bike lane",
+        "bicycle lane sign on street"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "36606",
+      "page_url": "https://pixabay.com/videos/id-36606/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "530MediaFilms on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.292 >= 0.22 for query 'bicycle lane sign on street' (best of 13 candidates, order bonus +0.04); logo check ok (logo prob 0.02); 3 clip frame(s) passed the logo check (max logo prob 0.05)",
+      "relevance_score": 0.2925,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_010.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0184,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 5.71,
+            "logo_prob": 0.0237,
+            "scene_score": 0.2773,
+            "result": "ok"
+          },
+          {
+            "time": 17.14,
+            "logo_prob": 0.0158,
+            "scene_score": 0.2813,
+            "result": "ok"
+          },
+          {
+            "time": 28.57,
+            "logo_prob": 0.0506,
+            "scene_score": 0.2936,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:36606",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2020/04/19/36606-411363841_medium.mp4",
+        "final_score": 0.3325,
+        "width": 2560,
+        "height": 1440,
+        "duration": 34.0
+      },
+      "understanding": {
+        "queries": [
+          "construction of new bike lane",
+          "city workers painting bike lane",
+          "bicycle lane sign on street"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Depicts cities adding bike lanes, making rides safer",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "cities add",
+        "card": {
+          "headline": "CITIES ADD",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "3175bdb3ec6d4eb2"
+      },
+      "safety": {
+        "queries": [
+          "construction of new bike lane",
+          "city workers painting bike lane",
+          "bicycle lane sign on street"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_010_fcfca50f4dd2e2c8.mp4",
+          "cache_key": "fcfca50f4dd2e2c8",
+          "frames": 144,
+          "look": "eq=brightness=-0.062:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_010_505f5eedebd01a58.mp4",
+          "cache_key": "505f5eedebd01a58",
+          "frames": 144,
+          "look": "eq=brightness=-0.062:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2642,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.3034
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2307
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.1983
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.303; best window 0.303; whole frame 0.264; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Many",
+          "start": 44.5,
+          "end": 44.72
+        },
+        {
+          "text": "cities",
+          "start": 44.72,
+          "end": 44.98
+        },
+        {
+          "text": "now",
+          "start": 44.98,
+          "end": 45.28
+        },
+        {
+          "text": "add",
+          "start": 45.28,
+          "end": 45.54
+        },
+        {
+          "text": "new",
+          "start": 45.54,
+          "end": 45.72
+        },
+        {
+          "text": "bike",
+          "start": 45.72,
+          "end": 45.92
+        },
+        {
+          "text": "lanes",
+          "start": 45.92,
+          "end": 46.32
+        },
+        {
+          "text": "every",
+          "start": 46.32,
+          "end": 46.64
+        },
+        {
+          "text": "year",
+          "start": 46.64,
+          "end": 46.94
+        },
+        {
+          "text": "so",
+          "start": 46.94,
+          "end": 47.36
+        },
+        {
+          "text": "the",
+          "start": 47.36,
+          "end": 47.5
+        },
+        {
+          "text": "ride",
+          "start": 47.5,
+          "end": 47.7
+        },
+        {
+          "text": "keeps",
+          "start": 47.7,
+          "end": 48.02
+        },
+        {
+          "text": "getting",
+          "start": 48.02,
+          "end": 48.3
+        },
+        {
+          "text": "safer.",
+          "start": 48.3,
+          "end": 48.7
+        }
+      ]
+    },
+    {
+      "index": 11,
+      "text": "Check your tires and brakes once a month and your bicycle will serve you well for years.",
+      "start": 49.0,
+      "end": 54.05,
+      "duration": 5.05,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "maintenance tools beside bicycle",
+      "queries": [
+        "cyclist inspecting bike tires",
+        "hand tightening bike brake",
+        "maintenance tools beside bicycle"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "186364",
+      "page_url": "https://pixabay.com/videos/id-186364/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "KIMDAEJEUNG on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.221 >= 0.22 for query 'maintenance tools beside bicycle' (best of 16 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.00)",
+      "relevance_score": 0.2209,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_011.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0009,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 7.06,
+            "logo_prob": 0.0011,
+            "scene_score": 0.176,
+            "result": "ok"
+          },
+          {
+            "time": 21.19,
+            "logo_prob": 0.001,
+            "scene_score": 0.1235,
+            "result": "ok"
+          },
+          {
+            "time": 35.32,
+            "logo_prob": 0.0018,
+            "scene_score": 0.135,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:186364",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2023/10/24/186364-877727696_medium.mp4",
+        "final_score": 0.2609,
+        "width": 2560,
+        "height": 1440,
+        "duration": 42.0
+      },
+      "understanding": {
+        "queries": [
+          "cyclist inspecting bike tires",
+          "hand tightening bike brake",
+          "maintenance tools beside bicycle"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Encourages regular tire and brake checks for long‑term bike health",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "check tires",
+        "card": {
+          "headline": "CHECK TIRES",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "157b5534c35a328a"
+      },
+      "safety": {
+        "queries": [
+          "cyclist inspecting bike tires",
+          "hand tightening bike brake",
+          "maintenance tools beside bicycle"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_011_276971c7d3c39983.mp4",
+          "cache_key": "276971c7d3c39983",
+          "frames": 152,
+          "look": "eq=brightness=0.035:saturation=0.875",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_011_402c9c4a949d19c9.mp4",
+          "cache_key": "402c9c4a949d19c9",
+          "frames": 152,
+          "look": "eq=brightness=0.035:saturation=0.875",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2071,
+            "windows": {
+              "salient": {
+                "start": 0.4128,
+                "score": 0.2259
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2259
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.1433
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.1418
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'salient' chosen (0.226; best window 0.226; whole frame 0.207; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Check",
+          "start": 49.3,
+          "end": 49.5
+        },
+        {
+          "text": "your",
+          "start": 49.5,
+          "end": 49.64
+        },
+        {
+          "text": "tires",
+          "start": 49.64,
+          "end": 49.98
+        },
+        {
+          "text": "and",
+          "start": 49.98,
+          "end": 50.24
+        },
+        {
+          "text": "brakes",
+          "start": 50.24,
+          "end": 50.46
+        },
+        {
+          "text": "once",
+          "start": 50.46,
+          "end": 50.74
+        },
+        {
+          "text": "a",
+          "start": 50.74,
+          "end": 50.9
+        },
+        {
+          "text": "month",
+          "start": 50.9,
+          "end": 51.12
+        },
+        {
+          "text": "and",
+          "start": 51.12,
+          "end": 51.48
+        },
+        {
+          "text": "your",
+          "start": 51.48,
+          "end": 51.58
+        },
+        {
+          "text": "bicycle",
+          "start": 51.58,
+          "end": 52.0
+        },
+        {
+          "text": "will",
+          "start": 52.0,
+          "end": 52.24
+        },
+        {
+          "text": "serve",
+          "start": 52.24,
+          "end": 52.54
+        },
+        {
+          "text": "you",
+          "start": 52.54,
+          "end": 52.7
+        },
+        {
+          "text": "well",
+          "start": 52.7,
+          "end": 52.88
+        },
+        {
+          "text": "for",
+          "start": 52.88,
+          "end": 53.06
+        },
+        {
+          "text": "years.",
+          "start": 53.06,
+          "end": 53.32
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "aspect_ratio": "16:9",
+      "file": "video_16x9.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 54.065
+    },
+    {
+      "aspect_ratio": "9:16",
+      "file": "video_9x16.mp4",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "duration": 54.065
+    }
+  ]
+}

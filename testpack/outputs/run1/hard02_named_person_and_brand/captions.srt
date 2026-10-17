@@ -1,0 +1,19 @@
+1
+00:00:00,000 --> 00:00:05,160
+Satya Nadella has been the chief
+executive of Microsoft since 2014.
+
+2
+00:00:05,600 --> 00:00:10,700
+Sachin Tendulkar scored 100 international
+centuries in his cricket career.
+
+3
+00:00:10,960 --> 00:00:14,930
+Many people wrote their first
+lines of code on an Apple computer.
+
+4
+00:00:15,260 --> 00:00:19,240
+Coca -Cola is sold in almost
+every country in the world.

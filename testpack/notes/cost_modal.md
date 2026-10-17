@@ -95,3 +95,14 @@ starts, and fails with `JOB_INTERRUPTED` (retryable) if it is cut off a second t
 - Image builds (each `modal deploy` after a code change re-runs the offline model check): not stated on the
   pricing page.
 - Groq and Pixabay calls are free-tier APIs outside Modal.
+
+## 7. Update 2026-10-17 (measured locally during the test pack, not on Modal)
+
+- One job at a time (run1, 19 real jobs incl. the 5-minute voiceover): worker exact peak **4,109 MB**; worker memory
+  was above 3.5 GB in 591 one-second samples spread over several ordinary jobs, not only the long one
+  (`testpack/logs/memory_perf_and_run1_part2.csv`, `testpack/logs/peaks_after_run1.txt`).
+- So the 3 GiB request above is often exceeded; Modal then bills the real use (up to the 6 GiB limit, which was
+  never reached). A fairer per-second price while a job runs is closer to the 4 GiB figure:
+  2 x 0.0000131 + 4 x 0.00000222 = $0.0000351 / s.
+- Measured processing time on this PC: median 365 s per narration minute (run1, 16:9 + 9:16), see `testpack/metrics.md`.
+  Modal times are still NOT measured.

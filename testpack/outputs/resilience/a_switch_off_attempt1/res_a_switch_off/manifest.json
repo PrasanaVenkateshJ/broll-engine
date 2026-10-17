@@ -1,0 +1,263 @@
+{
+  "job_id": "fd1d98fe2cd54c34aa1d86a617868833",
+  "created_at": "2026-10-17T13:40:07.445777+00:00",
+  "app": {
+    "name": "broll-engine",
+    "version": "0.2.0"
+  },
+  "input": {
+    "type": "script",
+    "source_kind": "wav",
+    "source_codec": "pcm_s16le",
+    "duration": 26.05,
+    "voice": "en-GB-female",
+    "style": null,
+    "avoid": []
+  },
+  "models": {
+    "tts": {
+      "provider": "kokoro",
+      "model": "hexgrad/Kokoro-82M",
+      "version": "0.9.4",
+      "licence": "Apache-2.0",
+      "voice": "en-GB-female"
+    },
+    "transcribe": {
+      "provider": "faster-whisper",
+      "model": "small",
+      "version": "1.2.1",
+      "compute_type": "int8",
+      "licence": "MIT"
+    },
+    "understand": {
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "endpoint": "https://api.groq.com/openai/v1",
+      "temperature": 0.0,
+      "seed": 1234,
+      "prompt_version": "b74f0fff50",
+      "tokens_used": 1966
+    },
+    "ranker": {
+      "scorer": "clip",
+      "library": "open_clip_torch",
+      "version": "3.3.0",
+      "model": "ViT-B-32",
+      "pretrained": "laion2b_s34b_b79k",
+      "footage_workers": 4,
+      "pass1_search_score_seconds": 39.06,
+      "pass2_select_download_seconds": 75.354
+    },
+    "ffmpeg": "ffmpeg version 9.0.2-full_build-www.gyan.dev"
+  },
+  "providers": {
+    "pixabay_video": {
+      "name": "pixabay_video",
+      "api": "Pixabay Videos API (pixabay.com/api/videos)",
+      "status": "switched off by ./data/providers_override.json",
+      "scenes_used": 2
+    },
+    "pixabay_image_motion": {
+      "name": "pixabay_image_motion",
+      "api": "Pixabay Images API (pixabay.com/api) + FFmpeg Ken Burns motion",
+      "status": "on",
+      "scenes_used": 5
+    },
+    "wikimedia": {
+      "name": "wikimedia",
+      "api": "Wikimedia Commons API (commons.wikimedia.org/w/api.php) + FFmpeg Ken Burns motion",
+      "status": "on",
+      "scenes_used": 0
+    },
+    "generated": {
+      "name": "generated",
+      "api": "FFmpeg gradients + libass text (made locally)",
+      "status": "on",
+      "scenes_used": 0
+    }
+  },
+  "settings": {
+    "SEED": 1234,
+    "MIN_SCENE_SECONDS": 2.0,
+    "MAX_SCENE_SECONDS": 8.0,
+    "PAUSE_SECONDS": 0.35,
+    "UNDERSTAND_PROVIDER": "groq",
+    "LLM_MODEL": "openai/gpt-oss-120b",
+    "PROVIDER_ORDER": "pixabay_video,pixabay_image_motion,wikimedia,generated",
+    "PROVIDERS_DISABLED": "",
+    "RANK_SCORER": "clip",
+    "CLIP_MODEL": "ViT-B-32",
+    "CLIP_PRETRAINED": "laion2b_s34b_b79k",
+    "STOCK_MIN_SCORE": 0.22,
+    "DURATION_BONUS": 0.02,
+    "ORIENTATION_BONUS": 0.02,
+    "GENERATED_FOR_STATISTICS": true,
+    "MAX_SLOWDOWN": 0.25,
+    "KEN_BURNS_ZOOM": 1.12,
+    "TARGET_LUMA": 110.0,
+    "TARGET_SATURATION": 18.0,
+    "QA_BLACK_SECONDS": 0.5,
+    "QA_FREEZE_SECONDS": 2.0,
+    "QA_MAX_DRIFT_SECONDS": 0.1,
+    "QA_RETRIES": 1,
+    "RENDER_FPS": 30,
+    "VIDEO_PRESET": "veryfast",
+    "VIDEO_CRF": 23,
+    "AUDIO_SAMPLE_RATE": 48000,
+    "AUDIO_BITRATE": "192k",
+    "CAPTION_MAX_CHARS_PER_LINE": 42,
+    "CAPTION_MAX_LINES": 2,
+    "LOGO_CHECK": true,
+    "LOGO_CROP_GRID": 3,
+    "LOGO_REJECT_PROB": 0.6,
+    "LOGO_PENALTY_PROB": 0.4,
+    "LOGO_PENALTY": 0.03,
+    "LOGO_FRAME_COUNT": 3
+  },
+  "seed": 1234,
+  "speech_check": {
+    "max_volume_db": -4.3,
+    "sound_seconds": 24.144,
+    "words": 84,
+    "no_speech_prob": 0.015,
+    "language": "en",
+    "language_probability": 1
+  },
+  "timings_seconds": {
+    "intake": 0.0,
+    "tts": 16.021,
+    "transcribe": 9.475,
+    "scenes": 0.003,
+    "understand": 3.786,
+    "footage": 114.416,
+    "render": 49.625
+  },
+  "timings_note": "seconds per stage, measured up to the moment this file was written (upload not included)",
+  "cost_estimate": {
+    "total_usd": 0.0,
+    "llm_tokens": 1966,
+    "method": "0 USD: every service used here is free - Groq free tier for the LLM (tokens counted in llm_tokens), Pixabay and Wikimedia Commons APIs are free, and Kokoro, Whisper, open_clip and FFmpeg run locally on the CPU. On paid plans: cost = llm_tokens x the LLM price per token + compute time (timings_seconds) x the server price."
+  },
+  "warnings": [
+    "Scene 0: clip pixabay_video:345706 shows a logo at 15.5 s of the downloaded clip (logo prob 0.62 > 0.60); tried the next candidate"
+  ],
+  "rights": {
+    "licences": {
+      "Pixabay Content License": 7
+    },
+    "all_commercial_use": true,
+    "any_watermark": false,
+    "attribution_required": [],
+    "credits": [
+      {
+        "scene": 0,
+        "provider": "pixabay_video",
+        "attribution": "AlexKopeykin on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-39836/"
+      },
+      {
+        "scene": 1,
+        "provider": "pixabay_video",
+        "attribution": "JustYøu on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-66836/"
+      },
+      {
+        "scene": 2,
+        "provider": "pixabay_image_motion",
+        "attribution": "LifeLyric on Pixabay",
+        "page_url": "https://pixabay.com/photos/children-childhood-play-young-fun-9368356/"
+      },
+      {
+        "scene": 3,
+        "provider": "pixabay_image_motion",
+        "attribution": "T_Tide on Pixabay",
+        "page_url": "https://pixabay.com/photos/people-park-picnic-grass-asian-5580755/"
+      },
+      {
+        "scene": 4,
+        "provider": "pixabay_image_motion",
+        "attribution": "adamupchurch32 on Pixabay",
+        "page_url": "https://pixabay.com/photos/leaves-autumn-fall-nature-colors-101329/"
+      },
+      {
+        "scene": 5,
+        "provider": "pixabay_image_motion",
+        "attribution": "TanteTati on Pixabay",
+        "page_url": "https://pixabay.com/photos/fog-park-nature-landscape-forest-1901407/"
+      },
+      {
+        "scene": 6,
+        "provider": "pixabay_image_motion",
+        "attribution": "guvo59 on Pixabay",
+        "page_url": "https://pixabay.com/photos/man-umbrella-rain-hail-storm-run-3581659/"
+      }
+    ]
+  },
+  "footage_mix": {
+    "scenes": 7,
+    "counts": {
+      "video": 2,
+      "photo_motion": 5,
+      "generated_card": 0
+    },
+    "share": {
+      "video": 0.286,
+      "photo_motion": 0.714,
+      "generated_card": 0.0
+    },
+    "statistic_cards": 0,
+    "share_without_statistic_cards": {
+      "video": 0.286,
+      "photo_motion": 0.714,
+      "generated_card": 0.0
+    }
+  },
+  "ai_generated": {
+    "narration": true,
+    "visuals": false,
+    "generated_cards": 0,
+    "note": "generated cards are drawn by FFmpeg (gradient + text), not by an AI model"
+  },
+  "qa": {
+    "16:9": {
+      "video_seconds": 26.066,
+      "audio_seconds": 26.05,
+      "drift_seconds": 0.016,
+      "codec": "h264",
+      "pix_fmt": "yuv420p",
+      "fps": 30.0,
+      "audio_codec": "aac",
+      "audio_sample_rate": "48000",
+      "problems": []
+    },
+    "9:16": {
+      "video_seconds": 26.066,
+      "audio_seconds": 26.05,
+      "drift_seconds": 0.016,
+      "codec": "h264",
+      "pix_fmt": "yuv420p",
+      "fps": 30.0,
+      "audio_codec": "aac",
+      "audio_sample_rate": "48000",
+      "problems": []
+    }
+  },
+  "outputs": [
+    {
+      "aspect_ratio": "16:9",
+      "file": "video_16x9.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 26.066
+    },
+    {
+      "aspect_ratio": "9:16",
+      "file": "video_9x16.mp4",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "duration": 26.066
+    }
+  ]
+}

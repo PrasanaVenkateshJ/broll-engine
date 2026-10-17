@@ -1,0 +1,31 @@
+{
+  "job_id": "0a20fb2898c84e25ab7044d27640c40e",
+  "status": "succeeded",
+  "progress": 100,
+  "stage": "done",
+  "input_type": "script",
+  "parent_job_id": null,
+  "warnings": [
+    "Scene understanding with Groq failed (HTTP 401); used the offline rules instead"
+  ],
+  "error": null,
+  "result": {
+    "files": {
+      "video_16x9.mp4": "http://localhost:8000/api/v1/jobs/0a20fb2898c84e25ab7044d27640c40e/files/video_16x9.mp4?expires=1792245583&sig=228276a6136b09d8a7c86a3e44be6d1fd53dab5203c42158086ca73fd574ce52",
+      "video_9x16.mp4": "http://localhost:8000/api/v1/jobs/0a20fb2898c84e25ab7044d27640c40e/files/video_9x16.mp4?expires=1792245583&sig=312617cacb30aae2033ea91361204c4e31bc501ac121d521cebc284e2c2b5250",
+      "captions.srt": "http://localhost:8000/api/v1/jobs/0a20fb2898c84e25ab7044d27640c40e/files/captions.srt?expires=1792245583&sig=a1b06c27699e3b9e2aa811249cda5ec7e3e25c434ba83dd1712842fd7b6d4026",
+      "timeline.json": "http://localhost:8000/api/v1/jobs/0a20fb2898c84e25ab7044d27640c40e/files/timeline.json?expires=1792245583&sig=9514d2e37fa7f742ac7b9661b21cb76def121ecd0b7d0f57525cb35028e1c031",
+      "manifest.json": "http://localhost:8000/api/v1/jobs/0a20fb2898c84e25ab7044d27640c40e/files/manifest.json?expires=1792245583&sig=02cfb56970c95e6eb7c2ef4a8cbe94f99a181020e6936f26b4e96e73f7aee5cf",
+      "thumb_000.jpg": "http://localhost:8000/api/v1/jobs/0a20fb2898c84e25ab7044d27640c40e/files/thumb_000.jpg?expires=1792245583&sig=adac29c6d60a2a0203fcd1a25f9e4fb706c4fd3c35173f906206a34d7232deb9",
+      "thumb_001.jpg": "http://localhost:8000/api/v1/jobs/0a20fb2898c84e25ab7044d27640c40e/files/thumb_001.jpg?expires=1792245583&sig=5169be022bec2e4d2baff4832d4c82751c054166e70c9874a36197d673217c8c",
+      "thumb_002.jpg": "http://localhost:8000/api/v1/jobs/0a20fb2898c84e25ab7044d27640c40e/files/thumb_002.jpg?expires=1792245583&sig=da1f535ec00448bb682a463a17d26f00e86583e14bf6ebb441c88b81e4b7fc55",
+      "thumb_003.jpg": "http://localhost:8000/api/v1/jobs/0a20fb2898c84e25ab7044d27640c40e/files/thumb_003.jpg?expires=1792245583&sig=603f9606d5e65e2f76bd1700b8afcc6603e5763b1c16da771fe7580537c9aa1b"
+    }
+  },
+  "created_at": "2026-10-17T12:57:32.064070+00:00",
+  "started_at": "2026-10-17T12:57:32.086057+00:00",
+  "finished_at": "2026-10-17T12:59:41.998937+00:00",
+  "links": {
+    "self": "http://localhost:8000/api/v1/jobs/0a20fb2898c84e25ab7044d27640c40e"
+  }
+}

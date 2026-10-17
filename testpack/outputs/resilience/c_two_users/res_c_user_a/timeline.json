@@ -1,0 +1,1188 @@
+{
+  "job_id": "97e030c86669491f9c35276b4b5ffa8e",
+  "input_type": "script",
+  "duration": 19.2,
+  "language": "en",
+  "scenes": [
+    {
+      "index": 0,
+      "text": "Fresh bread starts with just four things, flour, water, salt, and yeast.",
+      "start": 0.0,
+      "end": 5.0,
+      "duration": 5.0,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "adding yeast packet",
+      "queries": [
+        "measuring flour bowl",
+        "adding yeast packet",
+        "sprinkling salt shaker"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "65278",
+      "page_url": "https://pixabay.com/videos/id-65278/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "assadalit on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.272 >= 0.22 for query 'adding yeast packet' (best of 24 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.06)",
+      "relevance_score": 0.2723,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_000.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0011,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 1.24,
+            "logo_prob": 0.0208,
+            "scene_score": 0.2613,
+            "result": "ok"
+          },
+          {
+            "time": 3.72,
+            "logo_prob": 0.0068,
+            "scene_score": 0.2688,
+            "result": "ok"
+          },
+          {
+            "time": 6.2,
+            "logo_prob": 0.0577,
+            "scene_score": 0.2621,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:65278",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2021/02/15/65278-514138802_medium.mp4",
+        "final_score": 0.3123,
+        "width": 1280,
+        "height": 720,
+        "duration": 7.0
+      },
+      "understanding": {
+        "queries": [
+          "measuring flour bowl",
+          "adding yeast packet",
+          "sprinkling salt shaker"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows the four basic ingredients being prepared for bread.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "fresh bread",
+        "card": {
+          "headline": "FRESH BREAD",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "0977ebc8a673fcd1"
+      },
+      "safety": {
+        "queries": [
+          "measuring flour bowl",
+          "adding yeast packet",
+          "sprinkling salt shaker"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_000_2fd4f1c0ddc7153a.mp4",
+          "cache_key": "2fd4f1c0ddc7153a",
+          "frames": 150,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_000_84f7a7d199a37ca7.mp4",
+          "cache_key": "84f7a7d199a37ca7",
+          "frames": 150,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2552,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2728
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2571
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2087
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.273; best window 0.273; whole frame 0.255; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Fresh",
+          "start": 0.0,
+          "end": 0.52
+        },
+        {
+          "text": "bread",
+          "start": 0.52,
+          "end": 0.78
+        },
+        {
+          "text": "starts",
+          "start": 0.78,
+          "end": 1.1
+        },
+        {
+          "text": "with",
+          "start": 1.1,
+          "end": 1.38
+        },
+        {
+          "text": "just",
+          "start": 1.38,
+          "end": 1.56
+        },
+        {
+          "text": "four",
+          "start": 1.56,
+          "end": 1.84
+        },
+        {
+          "text": "things,",
+          "start": 1.84,
+          "end": 2.16
+        },
+        {
+          "text": "flour,",
+          "start": 2.54,
+          "end": 2.92
+        },
+        {
+          "text": "water,",
+          "start": 3.28,
+          "end": 3.56
+        },
+        {
+          "text": "salt,",
+          "start": 3.92,
+          "end": 4.12
+        },
+        {
+          "text": "and",
+          "start": 4.36,
+          "end": 4.38
+        },
+        {
+          "text": "yeast.",
+          "start": 4.38,
+          "end": 4.74
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "text": "Mix them into a soft dough and knead it until it feels smooth.",
+      "start": 5.0,
+      "end": 8.49,
+      "duration": 3.49,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "hands kneading dough",
+      "queries": [
+        "hands kneading dough",
+        "soft dough being stretched",
+        "close‑up dough texture"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "250784",
+      "page_url": "https://pixabay.com/videos/id-250784/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "u_7xgcof5pvg on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.337 >= 0.22 for query 'hands kneading dough' (best of 17 candidates, order bonus +0.04); logo check ok (logo prob 0.01); 3 clip frame(s) passed the logo check (max logo prob 0.03)",
+      "relevance_score": 0.3373,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_001.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0093,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.16,
+            "logo_prob": 0.0146,
+            "scene_score": 0.3093,
+            "result": "ok"
+          },
+          {
+            "time": 6.49,
+            "logo_prob": 0.0297,
+            "scene_score": 0.3122,
+            "result": "ok"
+          },
+          {
+            "time": 10.82,
+            "logo_prob": 0.0223,
+            "scene_score": 0.3125,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:250784",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2025/01/04/250784_medium.mp4",
+        "final_score": 0.3773,
+        "width": 1280,
+        "height": 720,
+        "duration": 12.0
+      },
+      "understanding": {
+        "queries": [
+          "hands kneading dough",
+          "soft dough being stretched",
+          "close‑up dough texture"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Depicts the mixing and kneading process until the dough feels smooth.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "mix soft",
+        "card": {
+          "headline": "MIX SOFT",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "e7f76ce8e0702ffa"
+      },
+      "safety": {
+        "queries": [
+          "hands kneading dough",
+          "soft dough being stretched",
+          "close‑up dough texture"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_001_89effa8e7873372e.mp4",
+          "cache_key": "89effa8e7873372e",
+          "frames": 105,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_001_4eb8abe220f63bd2.mp4",
+          "cache_key": "4eb8abe220f63bd2",
+          "frames": 105,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.299,
+            "windows": {
+              "salient": {
+                "start": 0.043,
+                "score": 0.3061
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.3033
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.3025
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2581
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'salient' chosen (0.306; best window 0.306; whole frame 0.299; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Mix",
+          "start": 5.26,
+          "end": 5.46
+        },
+        {
+          "text": "them",
+          "start": 5.46,
+          "end": 5.66
+        },
+        {
+          "text": "into",
+          "start": 5.66,
+          "end": 5.84
+        },
+        {
+          "text": "a",
+          "start": 5.84,
+          "end": 6.0
+        },
+        {
+          "text": "soft",
+          "start": 6.0,
+          "end": 6.3
+        },
+        {
+          "text": "dough",
+          "start": 6.3,
+          "end": 6.6
+        },
+        {
+          "text": "and",
+          "start": 6.6,
+          "end": 6.86
+        },
+        {
+          "text": "knead",
+          "start": 6.86,
+          "end": 7.06
+        },
+        {
+          "text": "it",
+          "start": 7.06,
+          "end": 7.2
+        },
+        {
+          "text": "until",
+          "start": 7.2,
+          "end": 7.42
+        },
+        {
+          "text": "it",
+          "start": 7.42,
+          "end": 7.56
+        },
+        {
+          "text": "feels",
+          "start": 7.56,
+          "end": 7.78
+        },
+        {
+          "text": "smooth.",
+          "start": 7.78,
+          "end": 8.16
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "text": "Let it rise in a warm place for an hour.",
+      "start": 8.49,
+      "end": 11.05,
+      "duration": 2.56,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "dough rising in warm bowl",
+      "queries": [
+        "dough rising in warm bowl",
+        "proofing dough covered",
+        "hourglass timer counting"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "208477",
+      "page_url": "https://pixabay.com/videos/id-208477/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Kaffeesüchtig on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.257 >= 0.22 for query 'dough rising in warm bowl' (best of 19 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.06)",
+      "relevance_score": 0.257,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_002.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0009,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 1.89,
+            "logo_prob": 0.0594,
+            "scene_score": 0.2184,
+            "result": "ok"
+          },
+          {
+            "time": 5.68,
+            "logo_prob": 0.0144,
+            "scene_score": 0.2431,
+            "result": "ok"
+          },
+          {
+            "time": 9.47,
+            "logo_prob": 0.0022,
+            "scene_score": 0.241,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:208477",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2024/04/18/208477_medium.mp4",
+        "final_score": 0.297,
+        "width": 2560,
+        "height": 1440,
+        "duration": 11.0
+      },
+      "understanding": {
+        "queries": [
+          "dough rising in warm bowl",
+          "proofing dough covered",
+          "hourglass timer counting"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Illustrates the dough resting in a warm place for about an hour.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "rise warm",
+        "card": {
+          "headline": "RISE WARM",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "5d7b623d333957bc"
+      },
+      "safety": {
+        "queries": [
+          "dough rising in warm bowl",
+          "proofing dough covered",
+          "hourglass timer counting"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_002_7e30114bead0bd93.mp4",
+          "cache_key": "7e30114bead0bd93",
+          "frames": 77,
+          "look": "eq=brightness=-0.120:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_002_010cd82375502e4f.mp4",
+          "cache_key": "010cd82375502e4f",
+          "frames": 77,
+          "look": "eq=brightness=-0.120:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.256,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2642
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.213
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2129
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.264; best window 0.264; whole frame 0.256; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Let",
+          "start": 8.82,
+          "end": 9.0
+        },
+        {
+          "text": "it",
+          "start": 9.0,
+          "end": 9.12
+        },
+        {
+          "text": "rise",
+          "start": 9.12,
+          "end": 9.38
+        },
+        {
+          "text": "in",
+          "start": 9.38,
+          "end": 9.58
+        },
+        {
+          "text": "a",
+          "start": 9.58,
+          "end": 9.66
+        },
+        {
+          "text": "warm",
+          "start": 9.66,
+          "end": 9.94
+        },
+        {
+          "text": "place",
+          "start": 9.94,
+          "end": 10.26
+        },
+        {
+          "text": "for",
+          "start": 10.26,
+          "end": 10.46
+        },
+        {
+          "text": "an",
+          "start": 10.46,
+          "end": 10.58
+        },
+        {
+          "text": "hour.",
+          "start": 10.58,
+          "end": 10.76
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "text": "Shape the loaf, then bake it in a hot oven until the crust turns golden brown.",
+      "start": 11.05,
+      "end": 15.76,
+      "duration": 4.71,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "shaping bread loaf",
+      "queries": [
+        "shaping bread loaf",
+        "bread placed in hot oven",
+        "golden crust baking"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "14239",
+      "page_url": "https://pixabay.com/videos/id-14239/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "AlekseiyPovar on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.298 >= 0.22 for query 'shaping bread loaf' (best of 23 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.00)",
+      "relevance_score": 0.2979,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_003.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0024,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 3.53,
+            "logo_prob": 0.0024,
+            "scene_score": 0.2796,
+            "result": "ok"
+          },
+          {
+            "time": 10.6,
+            "logo_prob": 0.0013,
+            "scene_score": 0.281,
+            "result": "ok"
+          },
+          {
+            "time": 17.67,
+            "logo_prob": 0.0027,
+            "scene_score": 0.2905,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:14239",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2018/02/10/14239-255658087_medium.mp4",
+        "final_score": 0.3379,
+        "width": 1280,
+        "height": 720,
+        "duration": 21.0
+      },
+      "understanding": {
+        "queries": [
+          "shaping bread loaf",
+          "bread placed in hot oven",
+          "golden crust baking"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows the loaf being formed and baked until the crust turns golden brown.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "shape loaf",
+        "card": {
+          "headline": "SHAPE LOAF",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "60ee4178e7075b5f"
+      },
+      "safety": {
+        "queries": [
+          "shaping bread loaf",
+          "bread placed in hot oven",
+          "golden crust baking"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_003_aa1917725249e87c.mp4",
+          "cache_key": "aa1917725249e87c",
+          "frames": 141,
+          "look": "eq=brightness=-0.120:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_003_d9a2f21f329ea8a5.mp4",
+          "cache_key": "d9a2f21f329ea8a5",
+          "frames": 141,
+          "look": "eq=brightness=-0.120:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2998,
+            "windows": {
+              "salient": {
+                "start": 0.2236,
+                "score": 0.305
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2978
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2966
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.3022
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'salient' chosen (0.305; best window 0.305; whole frame 0.300; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Shape",
+          "start": 11.34,
+          "end": 11.6
+        },
+        {
+          "text": "the",
+          "start": 11.6,
+          "end": 11.78
+        },
+        {
+          "text": "loaf,",
+          "start": 11.78,
+          "end": 12.0
+        },
+        {
+          "text": "then",
+          "start": 12.42,
+          "end": 12.52
+        },
+        {
+          "text": "bake",
+          "start": 12.52,
+          "end": 12.76
+        },
+        {
+          "text": "it",
+          "start": 12.76,
+          "end": 12.86
+        },
+        {
+          "text": "in",
+          "start": 12.86,
+          "end": 12.94
+        },
+        {
+          "text": "a",
+          "start": 12.94,
+          "end": 13.04
+        },
+        {
+          "text": "hot",
+          "start": 13.04,
+          "end": 13.28
+        },
+        {
+          "text": "oven",
+          "start": 13.28,
+          "end": 13.56
+        },
+        {
+          "text": "until",
+          "start": 13.56,
+          "end": 13.88
+        },
+        {
+          "text": "the",
+          "start": 13.88,
+          "end": 14.02
+        },
+        {
+          "text": "crust",
+          "start": 14.02,
+          "end": 14.34
+        },
+        {
+          "text": "turns",
+          "start": 14.34,
+          "end": 14.74
+        },
+        {
+          "text": "golden",
+          "start": 14.74,
+          "end": 15.08
+        },
+        {
+          "text": "brown.",
+          "start": 15.08,
+          "end": 15.46
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "text": "Nothing smells better than bread straight from the oven.",
+      "start": 15.76,
+      "end": 19.2,
+      "duration": 3.44,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "steam rising from loaf",
+      "queries": [
+        "steam rising from loaf",
+        "freshly baked bread on board",
+        "golden crust close‑up"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "63066",
+      "page_url": "https://pixabay.com/videos/id-63066/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "AlexKopeykin on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.276 >= 0.22 for query 'steam rising from loaf' (best of 22 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.01)",
+      "relevance_score": 0.2761,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_004.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0002,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 3.66,
+            "logo_prob": 0.0054,
+            "scene_score": 0.254,
+            "result": "ok"
+          },
+          {
+            "time": 10.98,
+            "logo_prob": 0.0002,
+            "scene_score": 0.2556,
+            "result": "ok"
+          },
+          {
+            "time": 18.3,
+            "logo_prob": 0.0021,
+            "scene_score": 0.2595,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:63066",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2021/01/27/63066-505518648_medium.mp4",
+        "final_score": 0.3161,
+        "width": 2560,
+        "height": 1440,
+        "duration": 22.0
+      },
+      "understanding": {
+        "queries": [
+          "steam rising from loaf",
+          "freshly baked bread on board",
+          "golden crust close‑up"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Conveys the appealing aroma and appearance of bread straight from the oven.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "nothing smells",
+        "card": {
+          "headline": "NOTHING SMELLS",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "a5b84a09df8907ee"
+      },
+      "safety": {
+        "queries": [
+          "steam rising from loaf",
+          "freshly baked bread on board",
+          "golden crust close‑up"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_004_089334378731bbb0.mp4",
+          "cache_key": "089334378731bbb0",
+          "frames": 103,
+          "look": "eq=brightness=0.052:saturation=0.869",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_004_5e33a59e67ee2496.mp4",
+          "cache_key": "5e33a59e67ee2496",
+          "frames": 103,
+          "look": "eq=brightness=0.052:saturation=0.869",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2749,
+            "windows": {
+              "salient": {
+                "start": 0.5372,
+                "score": 0.2874
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2857
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2102
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2623
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'salient' chosen (0.287; best window 0.287; whole frame 0.275; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Nothing",
+          "start": 16.06,
+          "end": 16.36
+        },
+        {
+          "text": "smells",
+          "start": 16.36,
+          "end": 16.72
+        },
+        {
+          "text": "better",
+          "start": 16.72,
+          "end": 17.18
+        },
+        {
+          "text": "than",
+          "start": 17.18,
+          "end": 17.4
+        },
+        {
+          "text": "bread",
+          "start": 17.4,
+          "end": 17.66
+        },
+        {
+          "text": "straight",
+          "start": 17.66,
+          "end": 18.0
+        },
+        {
+          "text": "from",
+          "start": 18.0,
+          "end": 18.22
+        },
+        {
+          "text": "the",
+          "start": 18.22,
+          "end": 18.34
+        },
+        {
+          "text": "oven.",
+          "start": 18.34,
+          "end": 18.56
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "aspect_ratio": "16:9",
+      "file": "video_16x9.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 19.2
+    },
+    {
+      "aspect_ratio": "9:16",
+      "file": "video_9x16.mp4",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "duration": 19.2
+    }
+  ]
+}

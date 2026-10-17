@@ -1,0 +1,965 @@
+{
+  "job_id": "36c9f35f0ad842b981478dc447ba29e2",
+  "input_type": "upload",
+  "duration": 18.45,
+  "language": "hi",
+  "scenes": [
+    {
+      "index": 0,
+      "text": "पैसे बचाना कोई मुष्किल काम नहीं है सबसे पहले,",
+      "start": 0.0,
+      "end": 3.72,
+      "duration": 3.72,
+      "visual_hint": null,
+      "search_text": "It is not difficult to save money. First of all, write",
+      "query": "simple budgeting notebook",
+      "queries": [
+        "hand writing budget",
+        "simple budgeting notebook",
+        "person noting expenses"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "4952",
+      "page_url": "https://pixabay.com/videos/id-4952/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "klimkin on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.242 >= 0.22 for query 'simple budgeting notebook' (best of 22 candidates, order bonus +0.04); logo check ok (logo prob 0.01); 3 clip frame(s) passed the logo check (max logo prob 0.01)",
+      "relevance_score": 0.2423,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_000.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0074,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.65,
+            "logo_prob": 0.0038,
+            "scene_score": 0.2086,
+            "result": "ok"
+          },
+          {
+            "time": 7.95,
+            "logo_prob": 0.0078,
+            "scene_score": 0.2076,
+            "result": "ok"
+          },
+          {
+            "time": 13.24,
+            "logo_prob": 0.0063,
+            "scene_score": 0.187,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:4952",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2016/09/05/4952-181538531_medium.mp4",
+        "final_score": 0.2823,
+        "width": 1280,
+        "height": 720,
+        "duration": 16.0
+      },
+      "understanding": {
+        "queries": [
+          "hand writing budget",
+          "simple budgeting notebook",
+          "person noting expenses"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows a person writing down a budget, illustrating the easy first step of saving money.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "keep watching",
+        "card": {
+          "headline": "KEEP WATCHING",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "8b68dc752731a070"
+      },
+      "safety": {
+        "queries": [
+          "hand writing budget",
+          "simple budgeting notebook",
+          "person noting expenses"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_000_80e676ce5929430a.mp4",
+          "cache_key": "80e676ce5929430a",
+          "frames": 112,
+          "look": "eq=brightness=-0.048:saturation=0.850",
+          "caption_font": "Noto Sans Devanagari",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_000_e6345f00e6d11acb.mp4",
+          "cache_key": "e6345f00e6d11acb",
+          "frames": 112,
+          "look": "eq=brightness=-0.048:saturation=0.850",
+          "caption_font": "Noto Sans Devanagari",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.224,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2497
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.1752
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.222
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.250; best window 0.250; whole frame 0.224; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "पैसे",
+          "start": 0.14,
+          "end": 0.82
+        },
+        {
+          "text": "बचाना",
+          "start": 0.82,
+          "end": 1.3
+        },
+        {
+          "text": "कोई",
+          "start": 1.3,
+          "end": 1.58
+        },
+        {
+          "text": "मुष्किल",
+          "start": 1.58,
+          "end": 2.0
+        },
+        {
+          "text": "काम",
+          "start": 2.0,
+          "end": 2.3
+        },
+        {
+          "text": "नहीं",
+          "start": 2.3,
+          "end": 2.6
+        },
+        {
+          "text": "है",
+          "start": 2.6,
+          "end": 2.74
+        },
+        {
+          "text": "सबसे",
+          "start": 2.74,
+          "end": 3.16
+        },
+        {
+          "text": "पहले,",
+          "start": 3.16,
+          "end": 3.58
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "text": "एक हबते तक हर खरज को एक कोपी में, लिखिये आप हैरान होंगे कि आपका पैसा कहा जाता है.",
+      "start": 3.72,
+      "end": 9.8,
+      "duration": 6.08,
+      "visual_hint": null,
+      "search_text": "every expense in a copy for a week. You will be surprised to know where your money",
+      "query": "stack of receipts",
+      "queries": [
+        "weekly expense tracker",
+        "stack of receipts",
+        "money flow diagram"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_image_motion",
+      "clip_id": "1372960",
+      "page_url": "https://pixabay.com/photos/receipts-receipt-pay-shopping-1372960/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "sabinevanerp on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_image_motion: score 0.294 >= 0.22 for query 'stack of receipts' (best of 24 candidates, order bonus +0.04); logo check ok (logo prob 0.15); 1 clip frame(s) passed the logo check (max logo prob 0.23); earlier: pixabay_video: best score 0.210 < 0.22",
+      "relevance_score": 0.2945,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_001.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.1522,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.2298,
+            "scene_score": 0.3006,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_image_motion:1372960",
+        "kind": "image",
+        "title": "",
+        "source_url": "https://pixabay.com/get/g0f2fc882aadec27db780c6c8c61463e45f44e47419b3774b1cb945e8179c762003ca2300aef4195efcc39c8512044952d43a33952553bb7aea3e35564cd4ba3d_1280.jpg",
+        "final_score": 0.3345,
+        "width": 1280,
+        "height": 853,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "weekly expense tracker",
+          "stack of receipts",
+          "money flow diagram"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Depicts tracking weekly expenses and visualizing where money is spent.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "keep watching",
+        "card": {
+          "headline": "KEEP WATCHING",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "32c931c89fe59a41"
+      },
+      "safety": {
+        "queries": [
+          "weekly expense tracker",
+          "stack of receipts",
+          "money flow diagram"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_001_4bb12ef081cbd05c.mp4",
+          "cache_key": "4bb12ef081cbd05c",
+          "frames": 182,
+          "look": "eq=brightness=-0.043:saturation=1.200",
+          "caption_font": "Noto Sans Devanagari",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "y",
+            "window_fraction": 0.8441,
+            "full_frame_score": 0.3011,
+            "windows": {
+              "salient": {
+                "start": 0.1457,
+                "score": 0.3018
+              },
+              "centre": {
+                "start": 0.078,
+                "score": 0.3012
+              },
+              "top": {
+                "start": 0.0,
+                "score": 0.3071
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'salient' chosen (0.302; best window 0.307; whole frame 0.301; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_001_f176b61de5de448d.mp4",
+          "cache_key": "f176b61de5de448d",
+          "frames": 182,
+          "look": "eq=brightness=-0.043:saturation=1.200",
+          "caption_font": "Noto Sans Devanagari",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3749,
+            "full_frame_score": 0.3011,
+            "windows": {
+              "centre": {
+                "start": 0.3126,
+                "score": 0.3063
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2813
+              },
+              "right": {
+                "start": 0.6251,
+                "score": 0.2946
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'centre' chosen (0.306; best window 0.306; whole frame 0.301; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "एक",
+          "start": 3.86,
+          "end": 4.04
+        },
+        {
+          "text": "हबते",
+          "start": 4.04,
+          "end": 4.38
+        },
+        {
+          "text": "तक",
+          "start": 4.38,
+          "end": 4.58
+        },
+        {
+          "text": "हर",
+          "start": 4.58,
+          "end": 4.78
+        },
+        {
+          "text": "खरज",
+          "start": 4.78,
+          "end": 5.1
+        },
+        {
+          "text": "को",
+          "start": 5.1,
+          "end": 5.34
+        },
+        {
+          "text": "एक",
+          "start": 5.34,
+          "end": 5.72
+        },
+        {
+          "text": "कोपी",
+          "start": 5.72,
+          "end": 6.04
+        },
+        {
+          "text": "में,",
+          "start": 6.04,
+          "end": 6.44
+        },
+        {
+          "text": "लिखिये",
+          "start": 6.5,
+          "end": 6.9
+        },
+        {
+          "text": "आप",
+          "start": 6.9,
+          "end": 7.14
+        },
+        {
+          "text": "हैरान",
+          "start": 7.14,
+          "end": 7.62
+        },
+        {
+          "text": "होंगे",
+          "start": 7.62,
+          "end": 7.94
+        },
+        {
+          "text": "कि",
+          "start": 7.94,
+          "end": 8.2
+        },
+        {
+          "text": "आपका",
+          "start": 8.2,
+          "end": 8.64
+        },
+        {
+          "text": "पैसा",
+          "start": 8.64,
+          "end": 9.0
+        },
+        {
+          "text": "कहा",
+          "start": 9.0,
+          "end": 9.26
+        },
+        {
+          "text": "जाता",
+          "start": 9.26,
+          "end": 9.62
+        },
+        {
+          "text": "है.",
+          "start": 9.62,
+          "end": 9.8
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "text": "फिर हर महीने आपनी कमाई का दस प्रतिषत अलग रक दीजिये",
+      "start": 9.8,
+      "end": 14.22,
+      "duration": 4.42,
+      "visual_hint": null,
+      "search_text": "goes. Then, every month, give 10% of your earnings separately,",
+      "query": "monthly 10 percent savings",
+      "queries": [
+        "monthly 10 percent savings",
+        "piggy bank with coins",
+        "calendar marking savings"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": true,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "93550",
+      "page_url": "https://pixabay.com/videos/id-93550/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "NickyPe on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.272 >= 0.22 for query 'monthly 10 percent savings' (best of 18 candidates, order bonus +0.04); logo check ok (logo prob 0.04); 3 clip frame(s) passed the logo check (max logo prob 0.39)",
+      "relevance_score": 0.2721,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_002.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0402,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 1.58,
+            "logo_prob": 0.3935,
+            "scene_score": 0.2427,
+            "result": "ok"
+          },
+          {
+            "time": 4.75,
+            "logo_prob": 0.3025,
+            "scene_score": 0.2512,
+            "result": "ok"
+          },
+          {
+            "time": 7.91,
+            "logo_prob": 0.3462,
+            "scene_score": 0.2421,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:93550",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2021/10/27/93550-640240281_medium.mp4",
+        "final_score": 0.3121,
+        "width": 2560,
+        "height": 1440,
+        "duration": 9.0
+      },
+      "understanding": {
+        "queries": [
+          "monthly 10 percent savings",
+          "piggy bank with coins",
+          "calendar marking savings"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": true,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Illustrates allocating a 10% monthly portion of income to a savings container.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "keep watching",
+        "card": {
+          "headline": "KEEP WATCHING",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "ce6e652503f7aeeb"
+      },
+      "safety": {
+        "queries": [
+          "monthly 10 percent savings",
+          "piggy bank with coins",
+          "calendar marking savings"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_002_67711211943271f1.mp4",
+          "cache_key": "67711211943271f1",
+          "frames": 133,
+          "look": "eq=brightness=0.081:saturation=1.200",
+          "caption_font": "Noto Sans Devanagari",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_002_224c2da3c71d23e0.mp4",
+          "cache_key": "224c2da3c71d23e0",
+          "frames": 133,
+          "look": "eq=brightness=0.081:saturation=1.200",
+          "caption_font": "Noto Sans Devanagari",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2346,
+            "windows": {
+              "salient": {
+                "start": 0.6836,
+                "score": 0.2486
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2399
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2286
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'salient' chosen (0.249; best window 0.249; whole frame 0.235; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "फिर",
+          "start": 9.8,
+          "end": 10.22
+        },
+        {
+          "text": "हर",
+          "start": 10.22,
+          "end": 10.4
+        },
+        {
+          "text": "महीने",
+          "start": 10.4,
+          "end": 11.06
+        },
+        {
+          "text": "आपनी",
+          "start": 11.06,
+          "end": 11.46
+        },
+        {
+          "text": "कमाई",
+          "start": 11.46,
+          "end": 11.88
+        },
+        {
+          "text": "का",
+          "start": 11.88,
+          "end": 12.1
+        },
+        {
+          "text": "दस",
+          "start": 12.1,
+          "end": 12.28
+        },
+        {
+          "text": "प्रतिषत",
+          "start": 12.28,
+          "end": 12.94
+        },
+        {
+          "text": "अलग",
+          "start": 12.94,
+          "end": 13.3
+        },
+        {
+          "text": "रक",
+          "start": 13.3,
+          "end": 13.6
+        },
+        {
+          "text": "दीजिये",
+          "start": 13.6,
+          "end": 14.22
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "text": "चोटी -चोटी बचत मिलकर एक दिन बडी रकम बन जाती है.",
+      "start": 14.22,
+      "end": 18.45,
+      "duration": 4.23,
+      "visual_hint": null,
+      "search_text": "with small savings and it becomes a big amount.",
+      "query": "savings jar filling up",
+      "queries": [
+        "growing pile of coins",
+        "savings jar filling up",
+        "graph rising savings"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "138315",
+      "page_url": "https://pixabay.com/videos/id-138315/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "NickyPe on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.276 >= 0.22 for query 'savings jar filling up' (best of 22 candidates, order bonus +0.04); logo check ok (logo prob 0.01); 3 clip frame(s) passed the logo check (max logo prob 0.01)",
+      "relevance_score": 0.2761,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_003.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0059,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 4.66,
+            "logo_prob": 0.0009,
+            "scene_score": 0.2596,
+            "result": "ok"
+          },
+          {
+            "time": 13.99,
+            "logo_prob": 0.0034,
+            "scene_score": 0.2575,
+            "result": "ok"
+          },
+          {
+            "time": 23.32,
+            "logo_prob": 0.009,
+            "scene_score": 0.2657,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:138315",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2022/11/09/138315-769163810_medium.mp4",
+        "final_score": 0.3161,
+        "width": 1280,
+        "height": 720,
+        "duration": 27.0
+      },
+      "understanding": {
+        "queries": [
+          "growing pile of coins",
+          "savings jar filling up",
+          "graph rising savings"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows small savings accumulating into a larger amount over time.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "keep watching",
+        "card": {
+          "headline": "KEEP WATCHING",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "647bb3a6fa076b78"
+      },
+      "safety": {
+        "queries": [
+          "growing pile of coins",
+          "savings jar filling up",
+          "graph rising savings"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_003_cd9d85ce4e06e0d7.mp4",
+          "cache_key": "cd9d85ce4e06e0d7",
+          "frames": 127,
+          "look": "eq=brightness=-0.026",
+          "caption_font": "Noto Sans Devanagari",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_003_79f1a68c52a70e59.mp4",
+          "cache_key": "79f1a68c52a70e59",
+          "frames": 127,
+          "look": "eq=brightness=-0.026",
+          "caption_font": "Noto Sans Devanagari",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.27,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2782
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2661
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2775
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.278; best window 0.278; whole frame 0.270; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "चोटी",
+          "start": 14.22,
+          "end": 14.6
+        },
+        {
+          "text": "-चोटी",
+          "start": 14.6,
+          "end": 14.98
+        },
+        {
+          "text": "बचत",
+          "start": 14.98,
+          "end": 15.36
+        },
+        {
+          "text": "मिलकर",
+          "start": 15.36,
+          "end": 15.86
+        },
+        {
+          "text": "एक",
+          "start": 15.86,
+          "end": 16.32
+        },
+        {
+          "text": "दिन",
+          "start": 16.32,
+          "end": 16.5
+        },
+        {
+          "text": "बडी",
+          "start": 16.5,
+          "end": 16.78
+        },
+        {
+          "text": "रकम",
+          "start": 16.78,
+          "end": 17.12
+        },
+        {
+          "text": "बन",
+          "start": 17.12,
+          "end": 17.36
+        },
+        {
+          "text": "जाती",
+          "start": 17.36,
+          "end": 17.72
+        },
+        {
+          "text": "है.",
+          "start": 17.72,
+          "end": 17.88
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "aspect_ratio": "16:9",
+      "file": "video_16x9.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 18.467
+    },
+    {
+      "aspect_ratio": "9:16",
+      "file": "video_9x16.mp4",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "duration": 18.467
+    }
+  ]
+}

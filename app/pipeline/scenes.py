@@ -22,7 +22,7 @@ from dataclasses import dataclass, field
 from app.config import get_settings
 from app.pipeline.transcribe import Word
 
-SENTENCE_END = re.compile(r"[.!?…]+[\"'”’)\]]*$")
+SENTENCE_END = re.compile(r"[.!?…।॥]+[\"'”’)\]]*$")  # । ॥ = Hindi (Devanagari) full stops
 CLAUSE_END = re.compile(r"[,;:—–][\"'”’)\]]*$")
 ABBREVIATIONS = {"mr.", "mrs.", "ms.", "dr.", "prof.", "st.", "jr.", "sr.", "vs.", "etc.", "e.g.", "i.e."}
 
@@ -38,6 +38,9 @@ class Scene:
     text: str
     words: list[Word] = field(default_factory=list)
     visual_hint: str | None = None
+    # Non-English narration only: the English meaning of this scene (Whisper translation), used ONLY to
+    # search for footage. Captions and cards always use `text`, the words as spoken.
+    search_text: str | None = None
 
     @property
     def duration(self) -> float:
@@ -45,8 +48,25 @@ class Scene:
 
     def to_dict(self) -> dict:
         return {"index": self.index, "start": self.start, "end": self.end, "duration": self.duration,
-                "text": self.text, "visual_hint": self.visual_hint,
+                "text": self.text, "visual_hint": self.visual_hint, "search_text": self.search_text,
                 "words": [{"text": w.text, "start": w.start, "end": w.end} for w in self.words]}
+
+
+def attach_search_text(scenes: list[Scene], translation: list[tuple[str, float, float]]) -> None:
+    """Give every scene the English words spoken during it.
+
+    The translation comes in pieces (text, start, end) that do not line up with our scenes. Each piece's
+    words are spread evenly over its time span, and every word goes to the scene that holds its moment.
+    A scene that gets no word keeps search_text None (footage search then uses its own text)."""
+    buckets: list[list[str]] = [[] for _ in scenes]
+    for text, start, end in translation:
+        words = text.split()
+        for k, word in enumerate(words):
+            moment = start + (end - start) * (k + 0.5) / len(words)
+            i = next((j for j, sc in enumerate(scenes) if moment < sc.end), len(scenes) - 1)
+            buckets[i].append(word)
+    for scene, words in zip(scenes, buckets):
+        scene.search_text = " ".join(words) or None
 
 
 def boundary_strength(word: Word, next_word: Word, pause_seconds: float) -> int:

@@ -1,0 +1,1681 @@
+{
+  "job_id": "fd1d98fe2cd54c34aa1d86a617868833",
+  "input_type": "script",
+  "duration": 26.05,
+  "language": "en",
+  "scenes": [
+    {
+      "index": 0,
+      "text": "A city park changes with every season.",
+      "start": 0.0,
+      "end": 2.44,
+      "duration": 2.44,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "city park throughout year",
+      "queries": [
+        "park seasonal changes",
+        "city park throughout year",
+        "park four seasons"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "39836",
+      "page_url": "https://pixabay.com/videos/id-39836/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "AlexKopeykin on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.246 >= 0.22 for query 'city park throughout year' (best of 22 candidates, order bonus +0.04); logo check ok (logo prob 0.38); 3 clip frame(s) passed the logo check (max logo prob 0.41); earlier: pixabay_video:345706 rejected by the frame logo check (at 15.5 s, logo prob 0.62)",
+      "relevance_score": 0.246,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_000.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.381,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 3.98,
+            "logo_prob": 0.0801,
+            "scene_score": 0.2018,
+            "result": "ok"
+          },
+          {
+            "time": 11.94,
+            "logo_prob": 0.4087,
+            "scene_score": 0.2223,
+            "result": "penalised"
+          },
+          {
+            "time": 19.9,
+            "logo_prob": 0.0366,
+            "scene_score": 0.2286,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:39836",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2020/05/22/39836-424360861_medium.mp4",
+        "final_score": 0.286,
+        "width": 2560,
+        "height": 1440,
+        "duration": 24.0
+      },
+      "understanding": {
+        "queries": [
+          "park seasonal changes",
+          "city park throughout year",
+          "park four seasons"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows the park transforming across the year to match the line about changing with every season.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "city park",
+        "card": {
+          "headline": "CITY PARK",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "8c889a1008bc87c6"
+      },
+      "safety": {
+        "queries": [
+          "park seasonal changes",
+          "city park throughout year",
+          "park four seasons"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_000_f14fe71bbfef9feb.mp4",
+          "cache_key": "f14fe71bbfef9feb",
+          "frames": 73,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_000_af136885ac03acf8.mp4",
+          "cache_key": "af136885ac03acf8",
+          "frames": 73,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2474,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2281
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2163
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2343
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.228; best window 0.234; whole frame 0.247; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "A",
+          "start": 0.0,
+          "end": 0.4
+        },
+        {
+          "text": "city",
+          "start": 0.4,
+          "end": 0.58
+        },
+        {
+          "text": "park",
+          "start": 0.58,
+          "end": 0.86
+        },
+        {
+          "text": "changes",
+          "start": 0.86,
+          "end": 1.26
+        },
+        {
+          "text": "with",
+          "start": 1.26,
+          "end": 1.52
+        },
+        {
+          "text": "every",
+          "start": 1.52,
+          "end": 1.78
+        },
+        {
+          "text": "season.",
+          "start": 1.78,
+          "end": 2.16
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "text": "In spring, cherry trees bloom along the walking paths.",
+      "start": 2.44,
+      "end": 5.52,
+      "duration": 3.08,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "cherry blossoms park path",
+      "queries": [
+        "cherry blossoms park path",
+        "spring cherry trees walkway",
+        "blooming cherry trees trail"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "66836",
+      "page_url": "https://pixabay.com/videos/id-66836/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "JustYøu on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.286 >= 0.22 for query 'cherry blossoms park path' (best of 13 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.00)",
+      "relevance_score": 0.2865,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_001.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0002,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 10.02,
+            "logo_prob": 0.0002,
+            "scene_score": 0.2709,
+            "result": "ok"
+          },
+          {
+            "time": 30.07,
+            "logo_prob": 0.0002,
+            "scene_score": 0.2753,
+            "result": "ok"
+          },
+          {
+            "time": 50.12,
+            "logo_prob": 0.0001,
+            "scene_score": 0.2791,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:66836",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2021/03/03/66836-520427439_small.mp4",
+        "final_score": 0.3265,
+        "width": 1920,
+        "height": 1080,
+        "duration": 60.0
+      },
+      "understanding": {
+        "queries": [
+          "cherry blossoms park path",
+          "spring cherry trees walkway",
+          "blooming cherry trees trail"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Depicts cherry trees in bloom along walking paths, illustrating the spring scene.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "spring cherry",
+        "card": {
+          "headline": "SPRING CHERRY",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "f569b7340a8c47eb"
+      },
+      "safety": {
+        "queries": [
+          "cherry blossoms park path",
+          "spring cherry trees walkway",
+          "blooming cherry trees trail"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_001_6d69a2a90d48c6ea.mp4",
+          "cache_key": "6d69a2a90d48c6ea",
+          "frames": 93,
+          "look": "eq=brightness=-0.012:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_001_d528052faf966baa.mp4",
+          "cache_key": "d528052faf966baa",
+          "frames": 93,
+          "look": "eq=brightness=-0.012:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2806,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2702
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.1761
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2759
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.270; best window 0.276; whole frame 0.281; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "In",
+          "start": 2.72,
+          "end": 2.86
+        },
+        {
+          "text": "spring,",
+          "start": 2.86,
+          "end": 3.14
+        },
+        {
+          "text": "cherry",
+          "start": 3.44,
+          "end": 3.58
+        },
+        {
+          "text": "trees",
+          "start": 3.58,
+          "end": 3.94
+        },
+        {
+          "text": "bloom",
+          "start": 3.94,
+          "end": 4.2
+        },
+        {
+          "text": "along",
+          "start": 4.2,
+          "end": 4.4
+        },
+        {
+          "text": "the",
+          "start": 4.4,
+          "end": 4.62
+        },
+        {
+          "text": "walking",
+          "start": 4.62,
+          "end": 4.82
+        },
+        {
+          "text": "paths.",
+          "start": 4.82,
+          "end": 5.24
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "text": "Children run across the green grass while their parents sit on wooden benches.",
+      "start": 5.52,
+      "end": 9.36,
+      "duration": 3.84,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "children playing grass",
+      "queries": [
+        "children playing grass",
+        "parents sitting bench park",
+        "kids running lawn"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_image_motion",
+      "clip_id": "9368356",
+      "page_url": "https://pixabay.com/photos/children-childhood-play-young-fun-9368356/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "LifeLyric on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_image_motion: score 0.256 >= 0.22 for query 'children playing grass' (best of 24 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 1 clip frame(s) passed the logo check (max logo prob 0.00); earlier: pixabay_video skipped (switched off by ./data/providers_override.json)",
+      "relevance_score": 0.2555,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_002.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0005,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.0028,
+            "scene_score": 0.2444,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_image_motion:9368356",
+        "kind": "image",
+        "title": "",
+        "source_url": "https://pixabay.com/get/g712cc0ecd0cafc1125396a05dc9e9534ffb4fff70bcce72ea926890b1ff8a08d8a52738633e3aa33b05dc031237297bb9fe33d6f28aaa14a09584f938aec9e55_1280.jpg",
+        "final_score": 0.2955,
+        "width": 1280,
+        "height": 886,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "children playing grass",
+          "parents sitting bench park",
+          "kids running lawn"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows kids running on green grass while adults relax on benches, matching the family activity.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "children run",
+        "card": {
+          "headline": "CHILDREN RUN",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "cc20561f92deedb2"
+      },
+      "safety": {
+        "queries": [
+          "children playing grass",
+          "parents sitting bench park",
+          "kids running lawn"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_002_e79cb47c2fa246f0.mp4",
+          "cache_key": "e79cb47c2fa246f0",
+          "frames": 115,
+          "look": "eq=brightness=-0.045:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "y",
+            "window_fraction": 0.8126,
+            "full_frame_score": 0.2669,
+            "windows": {
+              "centre": {
+                "start": 0.0937,
+                "score": 0.2717
+              },
+              "top": {
+                "start": 0.0,
+                "score": 0.2562
+              },
+              "bottom": {
+                "start": 0.1874,
+                "score": 0.2801
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'centre' chosen (0.272; best window 0.280; whole frame 0.267; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_002_909cf010a4f3cf99.mp4",
+          "cache_key": "909cf010a4f3cf99",
+          "frames": 115,
+          "look": "eq=brightness=-0.045:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "blurred fit",
+          "crop": {
+            "method": "clip",
+            "choice": "blurred fit",
+            "axis": "x",
+            "window_fraction": 0.3894,
+            "full_frame_score": 0.2669,
+            "windows": {
+              "centre": {
+                "start": 0.3053,
+                "score": 0.2386
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.1992
+              },
+              "right": {
+                "start": 0.6106,
+                "score": 0.2193
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "best window 'centre' 0.239 is more than 0.02 below the whole frame 0.267: every window cuts the subject -> blurred fit"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Children",
+          "start": 5.8,
+          "end": 6.06
+        },
+        {
+          "text": "run",
+          "start": 6.06,
+          "end": 6.4
+        },
+        {
+          "text": "across",
+          "start": 6.4,
+          "end": 6.62
+        },
+        {
+          "text": "the",
+          "start": 6.62,
+          "end": 6.86
+        },
+        {
+          "text": "green",
+          "start": 6.86,
+          "end": 7.02
+        },
+        {
+          "text": "grass",
+          "start": 7.02,
+          "end": 7.34
+        },
+        {
+          "text": "while",
+          "start": 7.34,
+          "end": 7.54
+        },
+        {
+          "text": "their",
+          "start": 7.54,
+          "end": 7.68
+        },
+        {
+          "text": "parents",
+          "start": 7.68,
+          "end": 8.0
+        },
+        {
+          "text": "sit",
+          "start": 8.0,
+          "end": 8.24
+        },
+        {
+          "text": "on",
+          "start": 8.24,
+          "end": 8.4
+        },
+        {
+          "text": "wooden",
+          "start": 8.4,
+          "end": 8.58
+        },
+        {
+          "text": "benches.",
+          "start": 8.58,
+          "end": 9.06
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "text": "In summer, families spread picnic blankets in the shade of tall trees, ducks swim slowly across the pond.",
+      "start": 9.36,
+      "end": 15.22,
+      "duration": 5.86,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "family picnic under trees",
+      "queries": [
+        "family picnic under trees",
+        "ducks swimming pond",
+        "summer park picnic scene"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_image_motion",
+      "clip_id": "5580755",
+      "page_url": "https://pixabay.com/photos/people-park-picnic-grass-asian-5580755/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "T_Tide on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_image_motion: score 0.287 >= 0.22 for query 'family picnic under trees' (best of 21 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 1 clip frame(s) passed the logo check (max logo prob 0.00); earlier: pixabay_video skipped (switched off by ./data/providers_override.json)",
+      "relevance_score": 0.2866,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_003.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0004,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.0014,
+            "scene_score": 0.2744,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_image_motion:5580755",
+        "kind": "image",
+        "title": "",
+        "source_url": "https://pixabay.com/get/g29d4446a9f903148bbfa93360ea0626ba000d68b2e9b64076abd123a0846e0b0e1b870451004b7a83db99858048a97a03714d8bac5fec78237f71dc073fe025b_1280.jpg",
+        "final_score": 0.3266,
+        "width": 1280,
+        "height": 853,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "family picnic under trees",
+          "ducks swimming pond",
+          "summer park picnic scene"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Combines a shaded family picnic with ducks gliding on a pond, reflecting the summer description.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "slowly",
+        "card": {
+          "headline": "SLOWLY",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "0aff35e3765de143"
+      },
+      "safety": {
+        "queries": [
+          "family picnic under trees",
+          "ducks swimming pond",
+          "summer park picnic scene"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_003_4220933f8519dd1f.mp4",
+          "cache_key": "4220933f8519dd1f",
+          "frames": 176,
+          "look": "eq=brightness=0.120:saturation=0.883",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "y",
+            "window_fraction": 0.8441,
+            "full_frame_score": 0.3049,
+            "windows": {
+              "salient": {
+                "start": 0.1559,
+                "score": 0.3042
+              },
+              "centre": {
+                "start": 0.078,
+                "score": 0.2957
+              },
+              "top": {
+                "start": 0.0,
+                "score": 0.3033
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'salient' chosen (0.304; best window 0.304; whole frame 0.305; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_003_754baa9fabbd1d16.mp4",
+          "cache_key": "754baa9fabbd1d16",
+          "frames": 176,
+          "look": "eq=brightness=0.120:saturation=0.883",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3749,
+            "full_frame_score": 0.3049,
+            "windows": {
+              "centre": {
+                "start": 0.3126,
+                "score": 0.3025
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2897
+              },
+              "right": {
+                "start": 0.6251,
+                "score": 0.2978
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'centre' chosen (0.302; best window 0.302; whole frame 0.305; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "In",
+          "start": 9.66,
+          "end": 9.82
+        },
+        {
+          "text": "summer,",
+          "start": 9.82,
+          "end": 10.06
+        },
+        {
+          "text": "families",
+          "start": 10.3,
+          "end": 10.54
+        },
+        {
+          "text": "spread",
+          "start": 10.54,
+          "end": 10.86
+        },
+        {
+          "text": "picnic",
+          "start": 10.86,
+          "end": 11.16
+        },
+        {
+          "text": "blankets",
+          "start": 11.16,
+          "end": 11.62
+        },
+        {
+          "text": "in",
+          "start": 11.62,
+          "end": 11.84
+        },
+        {
+          "text": "the",
+          "start": 11.84,
+          "end": 11.94
+        },
+        {
+          "text": "shade",
+          "start": 11.94,
+          "end": 12.12
+        },
+        {
+          "text": "of",
+          "start": 12.12,
+          "end": 12.24
+        },
+        {
+          "text": "tall",
+          "start": 12.24,
+          "end": 12.44
+        },
+        {
+          "text": "trees,",
+          "start": 12.44,
+          "end": 12.82
+        },
+        {
+          "text": "ducks",
+          "start": 13.34,
+          "end": 13.5
+        },
+        {
+          "text": "swim",
+          "start": 13.5,
+          "end": 13.76
+        },
+        {
+          "text": "slowly",
+          "start": 13.76,
+          "end": 14.24
+        },
+        {
+          "text": "across",
+          "start": 14.24,
+          "end": 14.46
+        },
+        {
+          "text": "the",
+          "start": 14.46,
+          "end": 14.7
+        },
+        {
+          "text": "pond.",
+          "start": 14.7,
+          "end": 14.96
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "text": "In autumn the leaves turn orange and red and fall onto the paths.",
+      "start": 15.22,
+      "end": 18.7,
+      "duration": 3.48,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "orange red leaves ground",
+      "queries": [
+        "autumn leaves on path",
+        "fall foliage park walkway",
+        "orange red leaves ground"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_image_motion",
+      "clip_id": "101329",
+      "page_url": "https://pixabay.com/photos/leaves-autumn-fall-nature-colors-101329/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "adamupchurch32 on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_image_motion: score 0.301 >= 0.22 for query 'orange red leaves ground' (best of 24 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 1 clip frame(s) passed the logo check (max logo prob 0.00); earlier: pixabay_video skipped (switched off by ./data/providers_override.json)",
+      "relevance_score": 0.3012,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_004.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.0001,
+            "scene_score": 0.3002,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_image_motion:101329",
+        "kind": "image",
+        "title": "",
+        "source_url": "https://pixabay.com/get/gb21924f03dd511353d5b097e1e6bbee695f358220974029bec71c19aacc465cc71c76b72cf1e666c12f4f993d9cf7104c7c6507a8c88b93b00a96e94a824b0e8_1280.jpg",
+        "final_score": 0.3412,
+        "width": 1280,
+        "height": 850,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "autumn leaves on path",
+          "fall foliage park walkway",
+          "orange red leaves ground"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Visualizes orange and red leaves covering park paths during autumn.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "autumn leaves",
+        "card": {
+          "headline": "AUTUMN LEAVES",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "c7645be166b59103"
+      },
+      "safety": {
+        "queries": [
+          "autumn leaves on path",
+          "fall foliage park walkway",
+          "orange red leaves ground"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_004_388f4ef7026a4aac.mp4",
+          "cache_key": "388f4ef7026a4aac",
+          "frames": 104,
+          "look": "eq=brightness=0.120:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "y",
+            "window_fraction": 0.8471,
+            "full_frame_score": 0.2928,
+            "windows": {
+              "salient": {
+                "start": 0.0845,
+                "score": 0.2987
+              },
+              "top": {
+                "start": 0.0,
+                "score": 0.2961
+              },
+              "bottom": {
+                "start": 0.1529,
+                "score": 0.2956
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'salient' chosen (0.299; best window 0.299; whole frame 0.293; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_004_98d723a3e7fb4ef7.mp4",
+          "cache_key": "98d723a3e7fb4ef7",
+          "frames": 104,
+          "look": "eq=brightness=0.120:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3735,
+            "full_frame_score": 0.2928,
+            "windows": {
+              "centre": {
+                "start": 0.3132,
+                "score": 0.2981
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2993
+              },
+              "right": {
+                "start": 0.6265,
+                "score": 0.2979
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'centre' chosen (0.298; best window 0.299; whole frame 0.293; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "In",
+          "start": 15.48,
+          "end": 15.64
+        },
+        {
+          "text": "autumn",
+          "start": 15.64,
+          "end": 15.88
+        },
+        {
+          "text": "the",
+          "start": 15.88,
+          "end": 16.1
+        },
+        {
+          "text": "leaves",
+          "start": 16.1,
+          "end": 16.34
+        },
+        {
+          "text": "turn",
+          "start": 16.34,
+          "end": 16.6
+        },
+        {
+          "text": "orange",
+          "start": 16.6,
+          "end": 16.92
+        },
+        {
+          "text": "and",
+          "start": 16.92,
+          "end": 17.16
+        },
+        {
+          "text": "red",
+          "start": 17.16,
+          "end": 17.36
+        },
+        {
+          "text": "and",
+          "start": 17.36,
+          "end": 17.54
+        },
+        {
+          "text": "fall",
+          "start": 17.54,
+          "end": 17.72
+        },
+        {
+          "text": "onto",
+          "start": 17.72,
+          "end": 17.94
+        },
+        {
+          "text": "the",
+          "start": 17.94,
+          "end": 18.08
+        },
+        {
+          "text": "paths.",
+          "start": 18.08,
+          "end": 18.4
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "text": "In winter the park is quiet, covered in a thin layer of frost.",
+      "start": 18.7,
+      "end": 22.25,
+      "duration": 3.55,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "quiet park morning frost",
+      "queries": [
+        "frost covered park winter",
+        "quiet park morning frost",
+        "park frost early morning"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_image_motion",
+      "clip_id": "1901407",
+      "page_url": "https://pixabay.com/photos/fog-park-nature-landscape-forest-1901407/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "TanteTati on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_image_motion: score 0.290 >= 0.22 for query 'quiet park morning frost' (best of 24 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 1 clip frame(s) passed the logo check (max logo prob 0.01); earlier: pixabay_video skipped (switched off by ./data/providers_override.json)",
+      "relevance_score": 0.2901,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_005.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0013,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.0061,
+            "scene_score": 0.288,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_image_motion:1901407",
+        "kind": "image",
+        "title": "",
+        "source_url": "https://pixabay.com/get/g95108c35deb5735147246b0008cf365b2d95d9cd0a300f498410fd1d2e3fce146e0dacca6151175239783b57de2669a9cb4796af238b81b4a85cbf3d868bb541_1280.jpg",
+        "final_score": 0.3301,
+        "width": 1280,
+        "height": 853,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "frost covered park winter",
+          "quiet park morning frost",
+          "park frost early morning"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Conveys a quiet, frost‑kissed park in winter.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "winter park",
+        "card": {
+          "headline": "WINTER PARK",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "3b2ea081b502cb9c"
+      },
+      "safety": {
+        "queries": [
+          "frost covered park winter",
+          "quiet park morning frost",
+          "park frost early morning"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_005_b80d7e56833532ec.mp4",
+          "cache_key": "b80d7e56833532ec",
+          "frames": 107,
+          "look": "eq=brightness=-0.078:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "y",
+            "window_fraction": 0.8441,
+            "full_frame_score": 0.2757,
+            "windows": {
+              "centre": {
+                "start": 0.078,
+                "score": 0.2745
+              },
+              "top": {
+                "start": 0.0,
+                "score": 0.2735
+              },
+              "bottom": {
+                "start": 0.1559,
+                "score": 0.2808
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'centre' chosen (0.275; best window 0.281; whole frame 0.276; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_005_fa6a17a7394d48f6.mp4",
+          "cache_key": "fa6a17a7394d48f6",
+          "frames": 107,
+          "look": "eq=brightness=-0.078:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3749,
+            "full_frame_score": 0.2757,
+            "windows": {
+              "centre": {
+                "start": 0.3126,
+                "score": 0.2819
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2827
+              },
+              "right": {
+                "start": 0.6251,
+                "score": 0.2961
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'centre' chosen (0.282; best window 0.296; whole frame 0.276; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "In",
+          "start": 19.0,
+          "end": 19.14
+        },
+        {
+          "text": "winter",
+          "start": 19.14,
+          "end": 19.38
+        },
+        {
+          "text": "the",
+          "start": 19.38,
+          "end": 19.56
+        },
+        {
+          "text": "park",
+          "start": 19.56,
+          "end": 19.84
+        },
+        {
+          "text": "is",
+          "start": 19.84,
+          "end": 19.98
+        },
+        {
+          "text": "quiet,",
+          "start": 19.98,
+          "end": 20.3
+        },
+        {
+          "text": "covered",
+          "start": 20.6,
+          "end": 20.8
+        },
+        {
+          "text": "in",
+          "start": 20.8,
+          "end": 20.98
+        },
+        {
+          "text": "a",
+          "start": 20.98,
+          "end": 21.06
+        },
+        {
+          "text": "thin",
+          "start": 21.06,
+          "end": 21.26
+        },
+        {
+          "text": "layer",
+          "start": 21.26,
+          "end": 21.48
+        },
+        {
+          "text": "of",
+          "start": 21.48,
+          "end": 21.68
+        },
+        {
+          "text": "frost.",
+          "start": 21.68,
+          "end": 21.86
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "text": "Every season the park gives the city a place to breathe.",
+      "start": 22.25,
+      "end": 26.05,
+      "duration": 3.8,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "city park oasis",
+      "queries": [
+        "city park oasis",
+        "people enjoying park",
+        "urban green space breathing"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_image_motion",
+      "clip_id": "3581659",
+      "page_url": "https://pixabay.com/photos/man-umbrella-rain-hail-storm-run-3581659/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "guvo59 on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_image_motion: score 0.264 >= 0.22 for query 'city park oasis' (best of 24 candidates, order bonus +0.04); logo check ok (logo prob 0.03); 1 clip frame(s) passed the logo check (max logo prob 0.04); earlier: pixabay_video skipped (switched off by ./data/providers_override.json)",
+      "relevance_score": 0.2636,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_006.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0285,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.0354,
+            "scene_score": 0.2492,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_image_motion:3581659",
+        "kind": "image",
+        "title": "",
+        "source_url": "https://pixabay.com/get/g5c4eeb2bf68c9b86adb7a86bd733eae80e6a46707f66402f186f39680df266a3930a0234a517619378fd94847e9002587b88130e485bfff400e47b5bb0b4c156_1280.jpg",
+        "final_score": 0.3036,
+        "width": 1280,
+        "height": 853,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "city park oasis",
+          "people enjoying park",
+          "urban green space breathing"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Illustrates the park as a breathing, relaxing green space for the city throughout all seasons.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "season park",
+        "card": {
+          "headline": "SEASON PARK",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "53d926e24564d89d"
+      },
+      "safety": {
+        "queries": [
+          "city park oasis",
+          "people enjoying park",
+          "urban green space breathing"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_006_af6a25b9444ac51b.mp4",
+          "cache_key": "af6a25b9444ac51b",
+          "frames": 114,
+          "look": "eq=saturation=0.892",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "y",
+            "window_fraction": 0.8441,
+            "full_frame_score": 0.2691,
+            "windows": {
+              "centre": {
+                "start": 0.078,
+                "score": 0.2598
+              },
+              "top": {
+                "start": 0.0,
+                "score": 0.2636
+              },
+              "bottom": {
+                "start": 0.1559,
+                "score": 0.2685
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'centre' chosen (0.260; best window 0.269; whole frame 0.269; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_006_086877e921232e73.mp4",
+          "cache_key": "086877e921232e73",
+          "frames": 114,
+          "look": "eq=saturation=0.892",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3749,
+            "full_frame_score": 0.2691,
+            "windows": {
+              "centre": {
+                "start": 0.3126,
+                "score": 0.2377
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2617
+              },
+              "right": {
+                "start": 0.6251,
+                "score": 0.2484
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'centre' chosen (0.238; best window 0.262; whole frame 0.269; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Every",
+          "start": 22.64,
+          "end": 22.9
+        },
+        {
+          "text": "season",
+          "start": 22.9,
+          "end": 23.28
+        },
+        {
+          "text": "the",
+          "start": 23.28,
+          "end": 23.5
+        },
+        {
+          "text": "park",
+          "start": 23.5,
+          "end": 23.74
+        },
+        {
+          "text": "gives",
+          "start": 23.74,
+          "end": 23.98
+        },
+        {
+          "text": "the",
+          "start": 23.98,
+          "end": 24.14
+        },
+        {
+          "text": "city",
+          "start": 24.14,
+          "end": 24.32
+        },
+        {
+          "text": "a",
+          "start": 24.32,
+          "end": 24.46
+        },
+        {
+          "text": "place",
+          "start": 24.46,
+          "end": 24.68
+        },
+        {
+          "text": "to",
+          "start": 24.68,
+          "end": 24.88
+        },
+        {
+          "text": "breathe.",
+          "start": 24.88,
+          "end": 25.12
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "aspect_ratio": "16:9",
+      "file": "video_16x9.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 26.066
+    },
+    {
+      "aspect_ratio": "9:16",
+      "file": "video_9x16.mp4",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "duration": 26.066
+    }
+  ]
+}

@@ -118,3 +118,16 @@ def test_batch_run_does_not_wait_for_a_job_cap(tmp_path, monkeypatch):
 def test_cli_without_inputs_exits_with_code_2(tmp_path):
     (tmp_path / "empty").mkdir()
     assert main([str(tmp_path / "empty"), "--out", str(tmp_path / "out")]) == 2
+
+
+def test_keep_input_ratios_lets_a_json_input_keep_its_own_ratios(tmp_path):
+    from tools.batch_run import Item, ratios_for
+
+    own = Item(name="own", source="own.json", body={"script": "Hi.", "aspect_ratios": ["16:9", "9:16", "1:1"]})
+    plain = Item(name="plain", source="plain.txt", body={"script": "Hi."})
+    audio = Item(name="voice", source="voice.wav", audio=tmp_path / "voice.wav")
+    wanted = ["16:9", "9:16"]
+    assert ratios_for(own, wanted) == wanted                                 # default: --ratios wins
+    assert ratios_for(own, wanted, keep_input_ratios=True) is None           # the input keeps its own
+    assert ratios_for(plain, wanted, keep_input_ratios=True) == wanted
+    assert ratios_for(audio, wanted, keep_input_ratios=True) == wanted

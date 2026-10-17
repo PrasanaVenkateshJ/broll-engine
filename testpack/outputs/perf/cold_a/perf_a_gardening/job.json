@@ -1,0 +1,35 @@
+{
+  "job_id": "bad1ac51618144d2ae505780a5ca44e8",
+  "status": "succeeded",
+  "progress": 100,
+  "stage": "done",
+  "input_type": "script",
+  "parent_job_id": null,
+  "warnings": [],
+  "error": null,
+  "result": {
+    "files": {
+      "video_16x9.mp4": "http://localhost:8000/api/v1/jobs/bad1ac51618144d2ae505780a5ca44e8/files/video_16x9.mp4?expires=1792239218&sig=9fbc76861ae97e7503dcce37a554e97636fe3e18e0f9d429c565f73dde97a26f",
+      "video_9x16.mp4": "http://localhost:8000/api/v1/jobs/bad1ac51618144d2ae505780a5ca44e8/files/video_9x16.mp4?expires=1792239218&sig=bd5049931673fcd4d92f432eaa285222503a3db1233e0bec8b644749b27a2d03",
+      "captions.srt": "http://localhost:8000/api/v1/jobs/bad1ac51618144d2ae505780a5ca44e8/files/captions.srt?expires=1792239218&sig=a4afc0ec9369ebff711d69b306e8f8fcea882cc8e89e3174476c643a048902b0",
+      "timeline.json": "http://localhost:8000/api/v1/jobs/bad1ac51618144d2ae505780a5ca44e8/files/timeline.json?expires=1792239218&sig=987cfc1ba80a469a98abb22a32bcd0d3ece55660ee472c42a269e2bc47e669f3",
+      "manifest.json": "http://localhost:8000/api/v1/jobs/bad1ac51618144d2ae505780a5ca44e8/files/manifest.json?expires=1792239218&sig=e964874aebb9ba3b2e18f6dee38ca00b354394c31b83390d1eb27fbfc0e82099",
+      "thumb_000.jpg": "http://localhost:8000/api/v1/jobs/bad1ac51618144d2ae505780a5ca44e8/files/thumb_000.jpg?expires=1792239218&sig=1885837214f36dc73e7d25ed19bdda718eb3206a75d83ed259ec25df7b783b7b",
+      "thumb_001.jpg": "http://localhost:8000/api/v1/jobs/bad1ac51618144d2ae505780a5ca44e8/files/thumb_001.jpg?expires=1792239218&sig=8ce6845abe334ad04781801281d53ab9c22e40d4d478e649fa07433f01fe13a2",
+      "thumb_002.jpg": "http://localhost:8000/api/v1/jobs/bad1ac51618144d2ae505780a5ca44e8/files/thumb_002.jpg?expires=1792239218&sig=a633e5b7f98fc91579bdd7c80a57d1fb57471fb6e2ce5b41c13bab4724e0db58",
+      "thumb_003.jpg": "http://localhost:8000/api/v1/jobs/bad1ac51618144d2ae505780a5ca44e8/files/thumb_003.jpg?expires=1792239218&sig=f78edcedbc976016d3786724f42d88597b597587b15979a0451c47735e06363b",
+      "thumb_004.jpg": "http://localhost:8000/api/v1/jobs/bad1ac51618144d2ae505780a5ca44e8/files/thumb_004.jpg?expires=1792239218&sig=023237aaa1d35317d4c68e718b5a85f6c16a35b862b66c8f52af36ae9e4a5375",
+      "thumb_005.jpg": "http://localhost:8000/api/v1/jobs/bad1ac51618144d2ae505780a5ca44e8/files/thumb_005.jpg?expires=1792239218&sig=94bb026ff2f725994bd9e53e46efdd7ec7e06e1f44fb172ac5de9499d086551d",
+      "thumb_006.jpg": "http://localhost:8000/api/v1/jobs/bad1ac51618144d2ae505780a5ca44e8/files/thumb_006.jpg?expires=1792239218&sig=cb45c219842e6729e39f42b7bbb40292073b288ab9c95bce47ce67d5ea1ff58d",
+      "thumb_007.jpg": "http://localhost:8000/api/v1/jobs/bad1ac51618144d2ae505780a5ca44e8/files/thumb_007.jpg?expires=1792239218&sig=6a960470682188c906d97c31d2dde2d3f5b707d2cbd300467077c4c0e2533d6e",
+      "thumb_008.jpg": "http://localhost:8000/api/v1/jobs/bad1ac51618144d2ae505780a5ca44e8/files/thumb_008.jpg?expires=1792239218&sig=dd71b09edae43c76b40964c912dd87e1079b0b17845460bf9998307e076cc256",
+      "thumb_009.jpg": "http://localhost:8000/api/v1/jobs/bad1ac51618144d2ae505780a5ca44e8/files/thumb_009.jpg?expires=1792239218&sig=1026f1eae8791fd1c0ff44dd97894791034908e8266a78e05f7d24ab735e36d5"
+    }
+  },
+  "created_at": "2026-10-17T11:09:30.291086+00:00",
+  "started_at": "2026-10-17T11:09:31.025842+00:00",
+  "finished_at": "2026-10-17T11:13:35.770495+00:00",
+  "links": {
+    "self": "http://localhost:8000/api/v1/jobs/bad1ac51618144d2ae505780a5ca44e8"
+  }
+}

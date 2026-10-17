@@ -1,6 +1,8 @@
 """Voice -> words with start/end times. Same adapter pattern as tts.py.
 
 - WhisperTranscriber: faster-whisper (MIT), word timestamps, language auto-detect, CPU int8.
+                      For non-English speech it can also TRANSLATE to English (Whisper's "translate"
+                      task): that English is used only to search for footage, captions stay as spoken.
 - MockTranscriber:    no model. Spreads known text evenly over the audio (tests only).
 
 Plus the two speech checks:
@@ -47,8 +49,10 @@ class SoundCheck:
 
 
 # Hints = text we already know, with the time span it covers: [(text, start, end), ...].
-# Only the mock uses them; Whisper always listens to the audio itself.
+# The mock uses them as its words; Whisper still listens to the audio itself (the text only steers its spelling).
 Hints = list[tuple[str, float, float]]
+# English translation of the speech, in pieces with their times: [(text, start, end), ...].
+Translation = list[tuple[str, float, float]]
 
 
 def _package_version(name: str) -> str:
@@ -61,14 +65,20 @@ def _package_version(name: str) -> str:
 class Transcriber:
     name = "base"
 
-    def transcribe(self, audio_path: Path, duration: float, hints: Hints | None = None) -> Transcript:
+    def transcribe(self, audio_path: Path, duration: float, hints: Hints | None = None,
+                   language: str | None = None) -> Transcript:
+        """language = the spoken language if we already know it (e.g. "hi" for a Hindi TTS voice)."""
         raise NotImplementedError
+
+    def translate(self, audio_path: Path, language: str) -> Translation:
+        """The speech in English, for footage search only. [] = this adapter cannot translate."""
+        return []
 
 
 class MockTranscriber(Transcriber):
     name = "mock"
 
-    def transcribe(self, audio_path, duration, hints=None):
+    def transcribe(self, audio_path, duration, hints=None, language=None):
         hints = hints or [(get_settings().MOCK_TRANSCRIPT, 0.0, duration)]
         words: list[Word] = []
         for text, start, end in hints:
@@ -84,7 +94,7 @@ class MockTranscriber(Transcriber):
                 length = weight * per_unit
                 words.append(Word(token, round(t, 3), round(t + length * 0.85, 3)))  # small gap between words
                 t += length
-        return Transcript(words=words, language="en", language_probability=1.0, no_speech_prob=0.0,
+        return Transcript(words=words, language=language or "en", language_probability=1.0, no_speech_prob=0.0,
                           info={"provider": "mock", "model": "even-spread", "version": "1"})
 
 
@@ -103,14 +113,19 @@ class WhisperTranscriber(Transcriber):
             self._model = WhisperModel(s.WHISPER_MODEL, device=s.WHISPER_DEVICE, compute_type=s.WHISPER_COMPUTE_TYPE)
         return self._model
 
-    def transcribe(self, audio_path, duration, hints=None):
+    def transcribe(self, audio_path, duration, hints=None, language=None):
         s = get_settings()
+        # Non-English TTS script: the known text steers Whisper's spelling and script (e.g. Devanagari, not
+        # Urdu letters, for Hindi). Whisper reads at most ~224 tokens of it, so keep it short. English
+        # transcription is left exactly as before (no prompt).
+        prompt = (" ".join(text for text, _, _ in hints)[:400]
+                  if hints and language and language != "en" else None)
         with self._lock:
             try:
                 model = self._load()
                 segments, info = model.transcribe(
-                    str(audio_path), word_timestamps=True, language=s.WHISPER_LANGUAGE or None,
-                    beam_size=s.WHISPER_BEAM_SIZE, vad_filter=s.WHISPER_VAD_FILTER)
+                    str(audio_path), word_timestamps=True, language=s.WHISPER_LANGUAGE or language or None,
+                    beam_size=s.WHISPER_BEAM_SIZE, vad_filter=s.WHISPER_VAD_FILTER, initial_prompt=prompt)
                 segments = list(segments)  # the real work happens while we read the segments
             except Exception as e:
                 raise AppError(ErrorCode.PROVIDER_UNAVAILABLE, f"Transcription failed ({type(e).__name__})", 503,
@@ -137,6 +152,21 @@ class WhisperTranscriber(Transcriber):
                           info={"provider": "faster-whisper", "model": s.WHISPER_MODEL,
                                 "version": _package_version("faster-whisper"), "compute_type": s.WHISPER_COMPUTE_TYPE,
                                 "licence": "MIT"})
+
+    def translate(self, audio_path, language):
+        s = get_settings()
+        with self._lock:
+            try:
+                segments, _ = self._load().transcribe(str(audio_path), task="translate", language=language,
+                                                      beam_size=s.WHISPER_BEAM_SIZE, vad_filter=s.WHISPER_VAD_FILTER)
+                return [(seg.text.strip(), round(seg.start, 3), round(seg.end, 3)) for seg in segments
+                        if seg.text.strip()]
+            except Exception as e:  # footage search can fall back to the original text: never fail the job
+                raise TranslateError(type(e).__name__) from e
+
+
+class TranslateError(Exception):
+    """The English translation for footage search failed (the job goes on without it)."""
 
 
 _adapters: dict[str, Transcriber] = {}

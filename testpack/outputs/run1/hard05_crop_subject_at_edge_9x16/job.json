@@ -1,0 +1,31 @@
+{
+  "job_id": "a2d1c52631c2476dbf1480efc97e9b07",
+  "status": "succeeded",
+  "progress": 100,
+  "stage": "done",
+  "input_type": "scenes",
+  "parent_job_id": null,
+  "warnings": [
+    "Could not save the clip-swap cache (FileNotFoundError); swapping a clip will not work for this job"
+  ],
+  "error": null,
+  "result": {
+    "files": {
+      "video_16x9.mp4": "http://localhost:8000/api/v1/jobs/a2d1c52631c2476dbf1480efc97e9b07/files/video_16x9.mp4?expires=1792243394&sig=555ed7108c5cd86bff8b09544e567f3df999480f013079c6a946d5002abc07a9",
+      "video_9x16.mp4": "http://localhost:8000/api/v1/jobs/a2d1c52631c2476dbf1480efc97e9b07/files/video_9x16.mp4?expires=1792243394&sig=cf003dc0d740e8274c51a2a86534fd55e02379c6d70229158d3fef40166c556a",
+      "captions.srt": "http://localhost:8000/api/v1/jobs/a2d1c52631c2476dbf1480efc97e9b07/files/captions.srt?expires=1792243394&sig=09cee3b43f709052d0bf649da5806c2213c9abb3a3c9030bd3214a4d502b2e23",
+      "timeline.json": "http://localhost:8000/api/v1/jobs/a2d1c52631c2476dbf1480efc97e9b07/files/timeline.json?expires=1792243394&sig=1467f921dcc050936fa7ee241519ab58be7f61b217a182ddfe8339383bd1d75b",
+      "manifest.json": "http://localhost:8000/api/v1/jobs/a2d1c52631c2476dbf1480efc97e9b07/files/manifest.json?expires=1792243394&sig=8f807f5d60022b08876d5a6e88db7d95f4dd028d01cde8831357fe467aa497ed",
+      "thumb_000.jpg": "http://localhost:8000/api/v1/jobs/a2d1c52631c2476dbf1480efc97e9b07/files/thumb_000.jpg?expires=1792243394&sig=990d911a3871241b49d58b32a5cd86a6c882f6a637e4c681047df409f218b7d7",
+      "thumb_001.jpg": "http://localhost:8000/api/v1/jobs/a2d1c52631c2476dbf1480efc97e9b07/files/thumb_001.jpg?expires=1792243394&sig=3857d33d363907e2735b866a8f915f07fd4a4740f5a88887b8be6ed262cc7fef",
+      "thumb_002.jpg": "http://localhost:8000/api/v1/jobs/a2d1c52631c2476dbf1480efc97e9b07/files/thumb_002.jpg?expires=1792243394&sig=6ac03e8043950b75b0cb5a6265d31c676c0440806dcf2a3945d0b721cdc4cb56",
+      "thumb_003.jpg": "http://localhost:8000/api/v1/jobs/a2d1c52631c2476dbf1480efc97e9b07/files/thumb_003.jpg?expires=1792243394&sig=e6d05033deceafefdb5c8e32bcddc028b0c46941cb4099fd980ef9f4ad021456"
+    }
+  },
+  "created_at": "2026-10-17T12:21:19.684888+00:00",
+  "started_at": "2026-10-17T12:21:19.927089+00:00",
+  "finished_at": "2026-10-17T12:23:05.564606+00:00",
+  "links": {
+    "self": "http://localhost:8000/api/v1/jobs/a2d1c52631c2476dbf1480efc97e9b07"
+  }
+}

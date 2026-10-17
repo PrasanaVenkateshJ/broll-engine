@@ -1,0 +1,11 @@
+# Batch run summary
+
+- API: http://localhost:8000
+- Inputs: 2 | succeeded: 2 | failed / rejected / other: 0
+- Narration total (succeeded): 113.8 s
+- Turnaround of succeeded jobs: mean 468.1 s, max 483.6 s
+
+| input | job_id | status | error_code | narration_seconds | turnaround_seconds | scenes | warnings_count |
+|---|---|---|---|---|---|---|---|
+| perf_a_gardening_L2_r2 | 2b3bb66cdb8b4abbbe761d47d6ba2c8b | succeeded |  | 59.5 | 483.57 | 12 | 0 |
+| perf_b_sleep_L2_r2 | cc46cfa8eb434eaf85ba05296226d27a | succeeded |  | 54.35 | 452.57 | 11 | 0 |

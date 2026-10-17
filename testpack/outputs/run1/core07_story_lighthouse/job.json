@@ -1,0 +1,39 @@
+{
+  "job_id": "f04ac333b96e449f98f6fa9e7302e10d",
+  "status": "succeeded",
+  "progress": 100,
+  "stage": "done",
+  "input_type": "script",
+  "parent_job_id": null,
+  "warnings": [
+    "Scene 6: clip pixabay_video:21698 shows a logo at 24.3 s of the downloaded clip (logo prob 0.71 > 0.60); tried the next candidate"
+  ],
+  "error": null,
+  "result": {
+    "files": {
+      "video_16x9.mp4": "http://localhost:8000/api/v1/jobs/f04ac333b96e449f98f6fa9e7302e10d/files/video_16x9.mp4?expires=1792241405&sig=2c075cb5a058372811b0e8154d20aae3b9add61ce42414c351d9990a27986109",
+      "video_9x16.mp4": "http://localhost:8000/api/v1/jobs/f04ac333b96e449f98f6fa9e7302e10d/files/video_9x16.mp4?expires=1792241405&sig=f5b2256c8278dff2e98a125c1abc406750e90aae69db92ff7a8d531ca50a1474",
+      "captions.srt": "http://localhost:8000/api/v1/jobs/f04ac333b96e449f98f6fa9e7302e10d/files/captions.srt?expires=1792241405&sig=d33110243ca87b988a08ca292e05886fef1eece096c280966e51964ff54e4548",
+      "timeline.json": "http://localhost:8000/api/v1/jobs/f04ac333b96e449f98f6fa9e7302e10d/files/timeline.json?expires=1792241405&sig=b72738f479f08d8f3029ee392fd421cee5c7fc97e44899732c7544517e4ab3f6",
+      "manifest.json": "http://localhost:8000/api/v1/jobs/f04ac333b96e449f98f6fa9e7302e10d/files/manifest.json?expires=1792241405&sig=de7dd5aa2fca86e98fff24eb855d018b17ba935da68c6fff84fc0d54f0542c75",
+      "thumb_000.jpg": "http://localhost:8000/api/v1/jobs/f04ac333b96e449f98f6fa9e7302e10d/files/thumb_000.jpg?expires=1792241405&sig=56e668547a72ee60c90458eb219884fdd357f6c00a39fbdf09eb97af86204c8a",
+      "thumb_001.jpg": "http://localhost:8000/api/v1/jobs/f04ac333b96e449f98f6fa9e7302e10d/files/thumb_001.jpg?expires=1792241405&sig=0112e7c5f786696de631824296c9d6127e0da624348d6c2ba9b4df7c25ad0f10",
+      "thumb_002.jpg": "http://localhost:8000/api/v1/jobs/f04ac333b96e449f98f6fa9e7302e10d/files/thumb_002.jpg?expires=1792241405&sig=beebd8fa312f0cf6fb8c08a0e1449a410369ad42d9f99073082edc8595bb4783",
+      "thumb_003.jpg": "http://localhost:8000/api/v1/jobs/f04ac333b96e449f98f6fa9e7302e10d/files/thumb_003.jpg?expires=1792241405&sig=88e967edb4336c930d40cbe8388780dd3f284eb47dce77a130b874696ba8f97f",
+      "thumb_004.jpg": "http://localhost:8000/api/v1/jobs/f04ac333b96e449f98f6fa9e7302e10d/files/thumb_004.jpg?expires=1792241405&sig=49621c41fcb29f9df1d848506772bc8e1767b0c52cb64dbbb5de95c348c6797d",
+      "thumb_005.jpg": "http://localhost:8000/api/v1/jobs/f04ac333b96e449f98f6fa9e7302e10d/files/thumb_005.jpg?expires=1792241405&sig=88eca94c44e0976ac2d6ed685ba560d7fe9dd43e85ab1265e95e077f7c6fbab6",
+      "thumb_006.jpg": "http://localhost:8000/api/v1/jobs/f04ac333b96e449f98f6fa9e7302e10d/files/thumb_006.jpg?expires=1792241405&sig=7f4f107916b7ec48d0c688ac51bef28c07bfd8fc5916156d9c3654ad012d40ce",
+      "thumb_007.jpg": "http://localhost:8000/api/v1/jobs/f04ac333b96e449f98f6fa9e7302e10d/files/thumb_007.jpg?expires=1792241405&sig=e0303be534fe79bbdd321914161a485f482f200c116131258a688ff7ef32c574",
+      "thumb_008.jpg": "http://localhost:8000/api/v1/jobs/f04ac333b96e449f98f6fa9e7302e10d/files/thumb_008.jpg?expires=1792241405&sig=b2a6c59b09dfd504346622f0963f2c726e8118fd452e713f327cb7a0fe885cb5",
+      "thumb_009.jpg": "http://localhost:8000/api/v1/jobs/f04ac333b96e449f98f6fa9e7302e10d/files/thumb_009.jpg?expires=1792241405&sig=ff76823460a7c97ae77e9207b13cd94d8ea7c12902a2660efbdaf5e666b1a04f",
+      "thumb_010.jpg": "http://localhost:8000/api/v1/jobs/f04ac333b96e449f98f6fa9e7302e10d/files/thumb_010.jpg?expires=1792241405&sig=0a611e9cdd0a60817da93df940f22a4b875dc681f8a312909e10506c148807d7",
+      "thumb_011.jpg": "http://localhost:8000/api/v1/jobs/f04ac333b96e449f98f6fa9e7302e10d/files/thumb_011.jpg?expires=1792241405&sig=7e795e140861d27e5ffe08e406192aab9df67ea553e273e1886fe37e73b99c0a"
+    }
+  },
+  "created_at": "2026-10-17T11:45:21.563637+00:00",
+  "started_at": "2026-10-17T11:45:21.935502+00:00",
+  "finished_at": "2026-10-17T11:49:57.389435+00:00",
+  "links": {
+    "self": "http://localhost:8000/api/v1/jobs/f04ac333b96e449f98f6fa9e7302e10d"
+  }
+}

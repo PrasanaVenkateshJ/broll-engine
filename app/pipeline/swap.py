@@ -110,7 +110,8 @@ def _already_used(clip: str, scene: int) -> AppError:
 
 
 def _load(state: dict) -> SimpleNamespace:
-    scenes = [Scene(d["index"], d["start"], d["end"], d["text"], [Word(**w) for w in d["words"]], d.get("visual_hint"))
+    scenes = [Scene(d["index"], d["start"], d["end"], d["text"], [Word(**w) for w in d["words"]], d.get("visual_hint"),
+                    d.get("search_text"))
               for d in state["scenes"]]
     return SimpleNamespace(
         scenes=scenes,
@@ -271,7 +272,8 @@ def run_swap(job_id: str, request: dict) -> list[str]:
             chosen = [new]
             rendered = _render_segments(run, [scene], data.cues, ratios, chosen, [data.meanings[index]],
                                         [data.plans[index]], ctx, burn_captions=state["captions"],
-                                        retry_with_next=req.choice == "next_best")
+                                        retry_with_next=req.choice == "next_best",
+                                        language=state.get("language"))
             data.selections[index] = chosen[0]  # a QA retry may have picked another clip
             data.segments[index] = rendered[index]
             set_progress(job_id, 75, "render")

@@ -1,0 +1,1506 @@
+{
+  "job_id": "b84bb7185bf84e50822079a4169644a3",
+  "input_type": "script",
+  "duration": 36.525,
+  "language": "en",
+  "scenes": [
+    {
+      "index": 0,
+      "text": "Here is your city news summary for this week.",
+      "start": 0.0,
+      "end": 2.43,
+      "duration": 2.43,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "city skyline sunrise",
+      "queries": [
+        "city skyline sunrise",
+        "news studio graphics",
+        "urban street montage"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_image_motion",
+      "clip_id": "1867772",
+      "page_url": "https://pixabay.com/photos/buildings-skyline-city-urban-1867772/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Pexels on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_image_motion: score 0.224 >= 0.22 for query 'city skyline sunrise' (best of 24 candidates, order bonus +0.04); logo check ok (logo prob 0.28); 1 clip frame(s) passed the logo check (max logo prob 0.53); earlier: pixabay_video: best score 0.207 < 0.22",
+      "relevance_score": 0.2235,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_000.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.2844,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.5323,
+            "scene_score": 0.2159,
+            "result": "penalised"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_image_motion:1867772",
+        "kind": "image",
+        "title": "",
+        "source_url": "https://pixabay.com/get/g995cc6ffa307416b98273ee5bcf3631e6d079ed748b3922408d9358083beb43114dac4f6d2527fcf90406ea41006c7eee1229eff3fb62562ccdb4eae2594615b_1280.jpg",
+        "final_score": 0.2635,
+        "width": 1280,
+        "height": 853,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "city skyline sunrise",
+          "news studio graphics",
+          "urban street montage"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows a generic city overview and news‑style presentation for the weekly summary.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "city news",
+        "card": {
+          "headline": "CITY NEWS",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "b5bb5011a0918b94"
+      },
+      "safety": {
+        "queries": [
+          "city skyline sunrise",
+          "news studio graphics",
+          "urban street montage"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_000_09cfb40f7c3f2224.mp4",
+          "cache_key": "09cfb40f7c3f2224",
+          "frames": 73,
+          "look": "eq=brightness=-0.067:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "y",
+            "window_fraction": 0.8441,
+            "full_frame_score": 0.2323,
+            "windows": {
+              "salient": {
+                "start": 0.1559,
+                "score": 0.2365
+              },
+              "centre": {
+                "start": 0.078,
+                "score": 0.2332
+              },
+              "top": {
+                "start": 0.0,
+                "score": 0.2407
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'salient' chosen (0.236; best window 0.241; whole frame 0.232; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_000_266f8b013728ba3e.mp4",
+          "cache_key": "266f8b013728ba3e",
+          "frames": 73,
+          "look": "eq=brightness=-0.067:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3749,
+            "full_frame_score": 0.2323,
+            "windows": {
+              "centre": {
+                "start": 0.3126,
+                "score": 0.2366
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2316
+              },
+              "right": {
+                "start": 0.6251,
+                "score": 0.2327
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'centre' chosen (0.237; best window 0.237; whole frame 0.232; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Here",
+          "start": 0.0,
+          "end": 0.42
+        },
+        {
+          "text": "is",
+          "start": 0.42,
+          "end": 0.56
+        },
+        {
+          "text": "your",
+          "start": 0.56,
+          "end": 0.68
+        },
+        {
+          "text": "city",
+          "start": 0.68,
+          "end": 0.86
+        },
+        {
+          "text": "news",
+          "start": 0.86,
+          "end": 1.16
+        },
+        {
+          "text": "summary",
+          "start": 1.16,
+          "end": 1.56
+        },
+        {
+          "text": "for",
+          "start": 1.56,
+          "end": 1.78
+        },
+        {
+          "text": "this",
+          "start": 1.78,
+          "end": 1.94
+        },
+        {
+          "text": "week.",
+          "start": 1.94,
+          "end": 2.16
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "text": "The city council approved 12km of new protected bike lanes with work starting next spring.",
+      "start": 2.43,
+      "end": 8.27,
+      "duration": 5.84,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "protected bike lane construction",
+      "queries": [
+        "protected bike lane construction",
+        "city council meeting",
+        "urban cyclists on new lane"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": true,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "generated",
+      "clip_id": "card-001-07552649",
+      "page_url": "",
+      "licence": "Generated by broll-engine (FFmpeg motion card)",
+      "licence_url": "",
+      "attribution": "",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": true,
+      "reason": "no stock source passed the rule (pixabay_video: best score 0.214 < 0.22; pixabay_image_motion: best score 0.205 < 0.22; wikimedia: logo check rejected 1, best: wikimedia:76851218 (logo prob 0.93, scene 0.231) (1 checked); wikimedia: best score 0.184 < 0.22) -> generated motion card 'CITY COUNCIL'",
+      "relevance_score": null,
+      "card_text": "CITY COUNCIL",
+      "card_subtitle": "",
+      "card_source": "narration",
+      "card_numbers": [],
+      "thumbnail": "thumb_001.jpg",
+      "logo_check": null,
+      "clip_details": {
+        "uid": "generated:card-001-07552649",
+        "kind": "generated",
+        "title": "CITY COUNCIL",
+        "source_url": "",
+        "final_score": null,
+        "width": 0,
+        "height": 0,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "protected bike lane construction",
+          "city council meeting",
+          "urban cyclists on new lane"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": true,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Illustrates the council decision and the upcoming protected bike lanes, highlighting the 12 km figure.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "city council",
+        "card": {
+          "headline": "CITY COUNCIL",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "bebd76de2bd84bc5"
+      },
+      "safety": {
+        "queries": [
+          "protected bike lane construction",
+          "city council meeting",
+          "urban cyclists on new lane"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_001_657bb4e11a56af5b.mp4",
+          "cache_key": "657bb4e11a56af5b",
+          "frames": 175,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_001_7c86ecee3240d9bd.mp4",
+          "cache_key": "7c86ecee3240d9bd",
+          "frames": 175,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "The",
+          "start": 2.7,
+          "end": 2.78
+        },
+        {
+          "text": "city",
+          "start": 2.78,
+          "end": 2.94
+        },
+        {
+          "text": "council",
+          "start": 2.94,
+          "end": 3.32
+        },
+        {
+          "text": "approved",
+          "start": 3.32,
+          "end": 3.86
+        },
+        {
+          "text": "12km",
+          "start": 3.86,
+          "end": 4.46
+        },
+        {
+          "text": "of",
+          "start": 4.46,
+          "end": 4.88
+        },
+        {
+          "text": "new",
+          "start": 4.88,
+          "end": 5.04
+        },
+        {
+          "text": "protected",
+          "start": 5.04,
+          "end": 5.44
+        },
+        {
+          "text": "bike",
+          "start": 5.44,
+          "end": 5.78
+        },
+        {
+          "text": "lanes",
+          "start": 5.78,
+          "end": 6.26
+        },
+        {
+          "text": "with",
+          "start": 6.26,
+          "end": 6.8
+        },
+        {
+          "text": "work",
+          "start": 6.8,
+          "end": 7.0
+        },
+        {
+          "text": "starting",
+          "start": 7.0,
+          "end": 7.28
+        },
+        {
+          "text": "next",
+          "start": 7.28,
+          "end": 7.62
+        },
+        {
+          "text": "spring.",
+          "start": 7.62,
+          "end": 7.96
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "text": "The central library will now stay open until 9 in the evening on weekdays after many requests from students.",
+      "start": 8.27,
+      "end": 14.43,
+      "duration": 6.16,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "library interior evening",
+      "queries": [
+        "library interior evening",
+        "students studying after hours",
+        "clock showing 9pm"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": true,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "generated",
+      "clip_id": "card-002-c618655f",
+      "page_url": "",
+      "licence": "Generated by broll-engine (FFmpeg motion card)",
+      "licence_url": "",
+      "attribution": "",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": true,
+      "reason": "statistic line: number card '9' taken from the narration (GENERATED_FOR_STATISTICS=true)",
+      "relevance_score": null,
+      "card_text": "9",
+      "card_subtitle": "central library will now stay",
+      "card_source": "narration",
+      "card_numbers": [
+        "9"
+      ],
+      "thumbnail": "thumb_002.jpg",
+      "logo_check": null,
+      "clip_details": {
+        "uid": "generated:card-002-c618655f",
+        "kind": "generated",
+        "title": "9 central library will now stay",
+        "source_url": "",
+        "final_score": null,
+        "width": 0,
+        "height": 0,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "library interior evening",
+          "students studying after hours",
+          "clock showing 9pm"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": true,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Conveys the extended evening hours of the library and students using it.",
+        "source": "groq",
+        "names": [],
+        "number": "9",
+        "keyword": "central library stay open evening weekda",
+        "card": {
+          "headline": "9",
+          "subtitle": "central library will now stay",
+          "number": "9",
+          "kind": "number",
+          "source": "narration",
+          "numbers_shown": [
+            "9"
+          ]
+        },
+        "fingerprint": "e7e0c9c169becf39"
+      },
+      "safety": {
+        "queries": [
+          "library interior evening",
+          "students studying after hours",
+          "clock showing 9pm"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_002_21f21e9ff4588707.mp4",
+          "cache_key": "21f21e9ff4588707",
+          "frames": 185,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_002_7b9d4f79eca1b8cb.mp4",
+          "cache_key": "7b9d4f79eca1b8cb",
+          "frames": 185,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "The",
+          "start": 8.58,
+          "end": 8.68
+        },
+        {
+          "text": "central",
+          "start": 8.68,
+          "end": 8.96
+        },
+        {
+          "text": "library",
+          "start": 8.96,
+          "end": 9.32
+        },
+        {
+          "text": "will",
+          "start": 9.32,
+          "end": 9.62
+        },
+        {
+          "text": "now",
+          "start": 9.62,
+          "end": 9.78
+        },
+        {
+          "text": "stay",
+          "start": 9.78,
+          "end": 10.02
+        },
+        {
+          "text": "open",
+          "start": 10.02,
+          "end": 10.34
+        },
+        {
+          "text": "until",
+          "start": 10.34,
+          "end": 10.68
+        },
+        {
+          "text": "9",
+          "start": 10.68,
+          "end": 10.96
+        },
+        {
+          "text": "in",
+          "start": 10.96,
+          "end": 11.12
+        },
+        {
+          "text": "the",
+          "start": 11.12,
+          "end": 11.22
+        },
+        {
+          "text": "evening",
+          "start": 11.22,
+          "end": 11.48
+        },
+        {
+          "text": "on",
+          "start": 11.48,
+          "end": 11.68
+        },
+        {
+          "text": "weekdays",
+          "start": 11.68,
+          "end": 12.24
+        },
+        {
+          "text": "after",
+          "start": 12.24,
+          "end": 12.8
+        },
+        {
+          "text": "many",
+          "start": 12.8,
+          "end": 13.04
+        },
+        {
+          "text": "requests",
+          "start": 13.04,
+          "end": 13.44
+        },
+        {
+          "text": "from",
+          "start": 13.44,
+          "end": 13.68
+        },
+        {
+          "text": "students.",
+          "start": 13.68,
+          "end": 14.1
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "text": "Farmers at the weekend market report an early mango season and prices have already started to fall.",
+      "start": 14.43,
+      "end": 20.19,
+      "duration": 5.76,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "ripe mangoes at market",
+      "queries": [
+        "ripe mangoes at market",
+        "farmers arranging fruit",
+        "price tag decreasing"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "151",
+      "page_url": "https://pixabay.com/videos/id-151/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Coverr-Free-Footage on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.232 >= 0.22 for query 'ripe mangoes at market' (best of 24 candidates, order bonus +0.04); logo check ok (logo prob 0.16); 3 clip frame(s) passed the logo check (max logo prob 0.10)",
+      "relevance_score": 0.232,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_003.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.1635,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.08,
+            "logo_prob": 0.0751,
+            "scene_score": 0.2217,
+            "result": "ok"
+          },
+          {
+            "time": 6.24,
+            "logo_prob": 0.1013,
+            "scene_score": 0.1344,
+            "result": "ok"
+          },
+          {
+            "time": 10.4,
+            "logo_prob": 0.0619,
+            "scene_score": 0.211,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:151",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2015/08/08/151-135737478_medium.mp4",
+        "final_score": 0.272,
+        "width": 1280,
+        "height": 720,
+        "duration": 12.0
+      },
+      "understanding": {
+        "queries": [
+          "ripe mangoes at market",
+          "farmers arranging fruit",
+          "price tag decreasing"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Depicts early mango season at a market and the falling prices.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "farmers weekend",
+        "card": {
+          "headline": "FARMERS WEEKEND",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "40ec2c182ab106b8"
+      },
+      "safety": {
+        "queries": [
+          "ripe mangoes at market",
+          "farmers arranging fruit",
+          "price tag decreasing"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_003_70ebc9f59bae02b2.mp4",
+          "cache_key": "70ebc9f59bae02b2",
+          "frames": 173,
+          "look": "eq=brightness=-0.087:saturation=0.949",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_003_77428dba3cf2e228.mp4",
+          "cache_key": "77428dba3cf2e228",
+          "frames": 173,
+          "look": "eq=brightness=-0.087:saturation=0.949",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2313,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2319
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2412
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2046
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.232; best window 0.241; whole frame 0.231; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Farmers",
+          "start": 14.76,
+          "end": 15.06
+        },
+        {
+          "text": "at",
+          "start": 15.06,
+          "end": 15.16
+        },
+        {
+          "text": "the",
+          "start": 15.16,
+          "end": 15.24
+        },
+        {
+          "text": "weekend",
+          "start": 15.24,
+          "end": 15.44
+        },
+        {
+          "text": "market",
+          "start": 15.44,
+          "end": 15.9
+        },
+        {
+          "text": "report",
+          "start": 15.9,
+          "end": 16.38
+        },
+        {
+          "text": "an",
+          "start": 16.38,
+          "end": 16.62
+        },
+        {
+          "text": "early",
+          "start": 16.62,
+          "end": 16.86
+        },
+        {
+          "text": "mango",
+          "start": 16.86,
+          "end": 17.2
+        },
+        {
+          "text": "season",
+          "start": 17.2,
+          "end": 17.64
+        },
+        {
+          "text": "and",
+          "start": 17.64,
+          "end": 18.2
+        },
+        {
+          "text": "prices",
+          "start": 18.2,
+          "end": 18.54
+        },
+        {
+          "text": "have",
+          "start": 18.54,
+          "end": 18.78
+        },
+        {
+          "text": "already",
+          "start": 18.78,
+          "end": 19.08
+        },
+        {
+          "text": "started",
+          "start": 19.08,
+          "end": 19.46
+        },
+        {
+          "text": "to",
+          "start": 19.46,
+          "end": 19.68
+        },
+        {
+          "text": "fall.",
+          "start": 19.68,
+          "end": 19.98
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "text": "Meanwhile, the weather office expects light rain on Thursday and clear skies through the weekend.",
+      "start": 20.19,
+      "end": 26.06,
+      "duration": 5.87,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "light rain over city",
+      "queries": [
+        "light rain over city",
+        "umbrella on street",
+        "sunny weekend park"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_image_motion",
+      "clip_id": "4602505",
+      "page_url": "https://pixabay.com/photos/couple-pedestrian-rain-raining-4602505/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Horacio30 on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_image_motion: score 0.254 >= 0.22 for query 'light rain over city' (best of 24 candidates, order bonus +0.04); logo check ok (logo prob 0.11); 1 clip frame(s) passed the logo check (max logo prob 0.09); earlier: pixabay_video: best score 0.219 < 0.22; pixabay_image_motion: logo check rejected 1, best: pixabay_image_motion:8270869 (logo prob 0.77, scene 0.249) (4 checked)",
+      "relevance_score": 0.2542,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_004.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.1057,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.0894,
+            "scene_score": 0.2462,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_image_motion:4602505",
+        "kind": "image",
+        "title": "",
+        "source_url": "https://pixabay.com/get/g174b9f429b64d72cc08441c1701c55c98a583e6007853e4d04fac8cc8a1e98542c002e4568c99a675a483be0ab6bbc223edcaf9164e5b86cc8b05e7b53123e1b_1280.jpg",
+        "final_score": 0.2942,
+        "width": 1280,
+        "height": 853,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "light rain over city",
+          "umbrella on street",
+          "sunny weekend park"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Represents the forecast of light rain Thursday and clear skies for the weekend.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "meanwhile weather",
+        "card": {
+          "headline": "MEANWHILE WEATHER",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "28867cbee07bc95a"
+      },
+      "safety": {
+        "queries": [
+          "light rain over city",
+          "umbrella on street",
+          "sunny weekend park"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_004_f8bea201b6f54370.mp4",
+          "cache_key": "f8bea201b6f54370",
+          "frames": 176,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "y",
+            "window_fraction": 0.8441,
+            "full_frame_score": 0.2491,
+            "windows": {
+              "salient": {
+                "start": 0.0697,
+                "score": 0.2455
+              },
+              "top": {
+                "start": 0.0,
+                "score": 0.2474
+              },
+              "bottom": {
+                "start": 0.1559,
+                "score": 0.2347
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'salient' chosen (0.245; best window 0.247; whole frame 0.249; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_004_3f15b3905da271ed.mp4",
+          "cache_key": "3f15b3905da271ed",
+          "frames": 176,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.3749,
+            "full_frame_score": 0.2491,
+            "windows": {
+              "salient": {
+                "start": 0.4911,
+                "score": 0.2244
+              },
+              "centre": {
+                "start": 0.3126,
+                "score": 0.2528
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2494
+              },
+              "right": {
+                "start": 0.6251,
+                "score": 0.2261
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'salient' chosen (0.224; best window 0.253; whole frame 0.249; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Meanwhile,",
+          "start": 20.4,
+          "end": 20.86
+        },
+        {
+          "text": "the",
+          "start": 21.34,
+          "end": 21.38
+        },
+        {
+          "text": "weather",
+          "start": 21.38,
+          "end": 21.58
+        },
+        {
+          "text": "office",
+          "start": 21.58,
+          "end": 21.96
+        },
+        {
+          "text": "expects",
+          "start": 21.96,
+          "end": 22.38
+        },
+        {
+          "text": "light",
+          "start": 22.38,
+          "end": 22.72
+        },
+        {
+          "text": "rain",
+          "start": 22.72,
+          "end": 23.06
+        },
+        {
+          "text": "on",
+          "start": 23.06,
+          "end": 23.22
+        },
+        {
+          "text": "Thursday",
+          "start": 23.22,
+          "end": 23.62
+        },
+        {
+          "text": "and",
+          "start": 23.62,
+          "end": 24.22
+        },
+        {
+          "text": "clear",
+          "start": 24.22,
+          "end": 24.54
+        },
+        {
+          "text": "skies",
+          "start": 24.54,
+          "end": 24.84
+        },
+        {
+          "text": "through",
+          "start": 24.84,
+          "end": 25.28
+        },
+        {
+          "text": "the",
+          "start": 25.28,
+          "end": 25.4
+        },
+        {
+          "text": "weekend.",
+          "start": 25.4,
+          "end": 25.68
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "text": "Finally, volunteers planted more than 2 ,000 trees along the river path on Sunday morning.",
+      "start": 26.06,
+      "end": 32.83,
+      "duration": 6.77,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "volunteers planting trees",
+      "queries": [
+        "volunteers planting trees",
+        "river path lined with saplings",
+        "group planting along water"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": true,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "generated",
+      "clip_id": "card-005-3b38ee31",
+      "page_url": "",
+      "licence": "Generated by broll-engine (FFmpeg motion card)",
+      "licence_url": "",
+      "attribution": "",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": true,
+      "reason": "statistic line: number card '2' taken from the narration (GENERATED_FOR_STATISTICS=true)",
+      "relevance_score": null,
+      "card_text": "2",
+      "card_subtitle": "volunteers planted",
+      "card_source": "narration",
+      "card_numbers": [
+        "2"
+      ],
+      "thumbnail": "thumb_005.jpg",
+      "logo_check": null,
+      "clip_details": {
+        "uid": "generated:card-005-3b38ee31",
+        "kind": "generated",
+        "title": "2 volunteers planted",
+        "source_url": "",
+        "final_score": null,
+        "width": 0,
+        "height": 0,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "volunteers planting trees",
+          "river path lined with saplings",
+          "group planting along water"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": true,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows community volunteers planting over 2,000 trees along the river path.",
+        "source": "groq",
+        "names": [],
+        "number": "2",
+        "keyword": "finally volunteers planted trees along r",
+        "card": {
+          "headline": "2",
+          "subtitle": "volunteers planted",
+          "number": "2",
+          "kind": "number",
+          "source": "narration",
+          "numbers_shown": [
+            "2"
+          ]
+        },
+        "fingerprint": "48c160908ac1d8ad"
+      },
+      "safety": {
+        "queries": [
+          "volunteers planting trees",
+          "river path lined with saplings",
+          "group planting along water"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_005_4602730c1c3c0a6d.mp4",
+          "cache_key": "4602730c1c3c0a6d",
+          "frames": 203,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_005_3de185306595b54b.mp4",
+          "cache_key": "3de185306595b54b",
+          "frames": 203,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Finally,",
+          "start": 26.44,
+          "end": 27.12
+        },
+        {
+          "text": "volunteers",
+          "start": 27.46,
+          "end": 27.9
+        },
+        {
+          "text": "planted",
+          "start": 27.9,
+          "end": 28.38
+        },
+        {
+          "text": "more",
+          "start": 28.38,
+          "end": 28.72
+        },
+        {
+          "text": "than",
+          "start": 28.72,
+          "end": 28.88
+        },
+        {
+          "text": "2",
+          "start": 28.88,
+          "end": 29.2
+        },
+        {
+          "text": ",000",
+          "start": 29.2,
+          "end": 29.64
+        },
+        {
+          "text": "trees",
+          "start": 29.64,
+          "end": 30.02
+        },
+        {
+          "text": "along",
+          "start": 30.02,
+          "end": 30.6
+        },
+        {
+          "text": "the",
+          "start": 30.6,
+          "end": 30.8
+        },
+        {
+          "text": "river",
+          "start": 30.8,
+          "end": 30.94
+        },
+        {
+          "text": "path",
+          "start": 30.94,
+          "end": 31.38
+        },
+        {
+          "text": "on",
+          "start": 31.38,
+          "end": 31.72
+        },
+        {
+          "text": "Sunday",
+          "start": 31.72,
+          "end": 32.12
+        },
+        {
+          "text": "morning.",
+          "start": 32.12,
+          "end": 32.54
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "text": "That is all for this week. Thank you for listening.",
+      "start": 32.83,
+      "end": 36.525,
+      "duration": 3.695,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "city sunset silhouette",
+      "queries": [
+        "city sunset silhouette",
+        "microphone on desk",
+        "thank you graphic"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "generated",
+      "clip_id": "card-006-678fc5c4",
+      "page_url": "",
+      "licence": "Generated by broll-engine (FFmpeg motion card)",
+      "licence_url": "",
+      "attribution": "",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": true,
+      "reason": "no stock source passed the rule (pixabay_video: best score 0.194 < 0.22; pixabay_image_motion: best score 0.202 < 0.22; wikimedia: best score 0.177 < 0.22) -> generated motion card 'WEEK THANK'",
+      "relevance_score": null,
+      "card_text": "WEEK THANK",
+      "card_subtitle": "",
+      "card_source": "narration",
+      "card_numbers": [],
+      "thumbnail": "thumb_006.jpg",
+      "logo_check": null,
+      "clip_details": {
+        "uid": "generated:card-006-678fc5c4",
+        "kind": "generated",
+        "title": "WEEK THANK",
+        "source_url": "",
+        "final_score": null,
+        "width": 0,
+        "height": 0,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "city sunset silhouette",
+          "microphone on desk",
+          "thank you graphic"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Provides a closing visual cue and gratitude message for the weekly roundup.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "week thank",
+        "card": {
+          "headline": "WEEK THANK",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "915cfecde89c332c"
+      },
+      "safety": {
+        "queries": [
+          "city sunset silhouette",
+          "microphone on desk",
+          "thank you graphic"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_006_a8a9825941edaaf9.mp4",
+          "cache_key": "a8a9825941edaaf9",
+          "frames": 111,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_006_efed2ca0761312a0.mp4",
+          "cache_key": "efed2ca0761312a0",
+          "frames": 111,
+          "caption_font": "Arial",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "That",
+          "start": 33.12,
+          "end": 33.32
+        },
+        {
+          "text": "is",
+          "start": 33.32,
+          "end": 33.5
+        },
+        {
+          "text": "all",
+          "start": 33.5,
+          "end": 33.74
+        },
+        {
+          "text": "for",
+          "start": 33.74,
+          "end": 33.94
+        },
+        {
+          "text": "this",
+          "start": 33.94,
+          "end": 34.12
+        },
+        {
+          "text": "week.",
+          "start": 34.12,
+          "end": 34.36
+        },
+        {
+          "text": "Thank",
+          "start": 34.96,
+          "end": 35.08
+        },
+        {
+          "text": "you",
+          "start": 35.08,
+          "end": 35.28
+        },
+        {
+          "text": "for",
+          "start": 35.28,
+          "end": 35.42
+        },
+        {
+          "text": "listening.",
+          "start": 35.42,
+          "end": 35.74
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "aspect_ratio": "16:9",
+      "file": "video_16x9.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 36.533
+    },
+    {
+      "aspect_ratio": "9:16",
+      "file": "video_9x16.mp4",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "duration": 36.533
+    }
+  ]
+}

@@ -1,0 +1,1211 @@
+{
+  "job_id": "d4f43327f85b478e96a9f8e32c14c43e",
+  "input_type": "upload",
+  "duration": 28.331,
+  "language": "ta",
+  "scenes": [
+    {
+      "index": 0,
+      "text": "தினமும் காலையில் கண்திரக்கும் முன்டே நாம் மோபைலைத் திரக்கிறோம்.",
+      "start": 0.0,
+      "end": 6.06,
+      "duration": 6.06,
+      "visual_hint": null,
+      "search_text": "The day before the dawn, we turn the phone.",
+      "query": "phone screen glowing in dark",
+      "queries": [
+        "person checking phone in dim bedroom",
+        "early morning sunrise through window",
+        "phone screen glowing in dark"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_image_motion",
+      "clip_id": "5537230",
+      "page_url": "https://pixabay.com/photos/iphone-hand-phone-mobile-phone-5537230/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "tranmautritam on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_image_motion: score 0.220 >= 0.22 for query 'phone screen glowing in dark' (best of 23 candidates, order bonus +0.04); logo check ok (logo prob 0.25); 1 clip frame(s) passed the logo check (max logo prob 0.12); earlier: pixabay_video: best score 0.202 < 0.22",
+      "relevance_score": 0.2203,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_000.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.2524,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.1156,
+            "scene_score": 0.2131,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_image_motion:5537230",
+        "kind": "image",
+        "title": "",
+        "source_url": "https://pixabay.com/get/ga7b1c9ca2b983779c61bab615c79ff4a31f004e5918fe120a7958ef97da589037c4d71348d269073f9bd3fb4d6706a79dde5e8f81a6d3aaf11f948e3d2dd9c83_1280.jpg",
+        "final_score": 0.2603,
+        "width": 1280,
+        "height": 853,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "person checking phone in dim bedroom",
+          "early morning sunrise through window",
+          "phone screen glowing in dark"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows the habit of reaching for the phone before dawn.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "keep watching",
+        "card": {
+          "headline": "KEEP WATCHING",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "6ee4557d2496562f"
+      },
+      "safety": {
+        "queries": [
+          "person checking phone in dim bedroom",
+          "early morning sunrise through window",
+          "phone screen glowing in dark"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_000_d80fdcfcec9a1a99.mp4",
+          "cache_key": "d80fdcfcec9a1a99",
+          "frames": 182,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "caption_font": "Noto Sans Tamil",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "y",
+            "window_fraction": 0.8441,
+            "full_frame_score": 0.2329,
+            "windows": {
+              "salient": {
+                "start": 0.1559,
+                "score": 0.2193
+              },
+              "centre": {
+                "start": 0.078,
+                "score": 0.2349
+              },
+              "top": {
+                "start": 0.0,
+                "score": 0.2382
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'salient' chosen (0.219; best window 0.238; whole frame 0.233; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_000_b55fdc3e5d31260c.mp4",
+          "cache_key": "b55fdc3e5d31260c",
+          "frames": 182,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "caption_font": "Noto Sans Tamil",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.3749,
+            "full_frame_score": 0.2329,
+            "windows": {
+              "salient": {
+                "start": 0.226,
+                "score": 0.2245
+              },
+              "centre": {
+                "start": 0.3126,
+                "score": 0.2172
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2019
+              },
+              "right": {
+                "start": 0.6251,
+                "score": 0.1701
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "reason": "window 'salient' chosen (0.225; best window 0.225; whole frame 0.233; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "தினமும்",
+          "start": 0.91,
+          "end": 1.87
+        },
+        {
+          "text": "காலையில்",
+          "start": 1.87,
+          "end": 2.61
+        },
+        {
+          "text": "கண்திரக்கும்",
+          "start": 2.61,
+          "end": 3.43
+        },
+        {
+          "text": "முன்டே",
+          "start": 3.43,
+          "end": 4.09
+        },
+        {
+          "text": "நாம்",
+          "start": 4.09,
+          "end": 4.57
+        },
+        {
+          "text": "மோபைலைத்",
+          "start": 4.57,
+          "end": 5.11
+        },
+        {
+          "text": "திரக்கிறோம்.",
+          "start": 5.11,
+          "end": 5.81
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "text": "2025 'ல் ஒருவர் சராசரியாக ஒரு",
+      "start": 6.06,
+      "end": 10.07,
+      "duration": 4.01,
+      "visual_hint": null,
+      "search_text": "In 2025, one day in a",
+      "query": "calendar showing year 2025",
+      "queries": [
+        "calendar showing year 2025",
+        "average person using smartphone",
+        "statistics graphic of daily screen time"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "generated",
+      "clip_id": "card-001-3b7eff01",
+      "page_url": "",
+      "licence": "Generated by broll-engine (FFmpeg motion card)",
+      "licence_url": "",
+      "attribution": "",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": true,
+      "reason": "no stock source passed the rule (pixabay_video: best score 0.202 < 0.22; pixabay_image_motion: logo check rejected 1, best: pixabay_image_motion:3819833 (logo prob 0.76, scene 0.228) (1 checked); pixabay_image_motion: best score 0.206 < 0.22; wikimedia: best score 0.198 < 0.22) -> generated motion card '2025'",
+      "relevance_score": null,
+      "card_text": "2025",
+      "card_subtitle": "ல் ஒருவர் சராசரியாக ஒரு",
+      "card_source": "narration",
+      "card_numbers": [
+        "2025"
+      ],
+      "thumbnail": "thumb_001.jpg",
+      "logo_check": null,
+      "clip_details": {
+        "uid": "generated:card-001-3b7eff01",
+        "kind": "generated",
+        "title": "2025 ல் ஒருவர் சராசரியாக ஒரு",
+        "source_url": "",
+        "final_score": null,
+        "width": 0,
+        "height": 0,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "calendar showing year 2025",
+          "average person using smartphone",
+          "statistics graphic of daily screen time"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Sets the future context and the idea of average phone usage.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "keep watching",
+        "card": {
+          "headline": "2025",
+          "subtitle": "ல் ஒருவர் சராசரியாக ஒரு",
+          "number": "2025",
+          "kind": "year",
+          "source": "narration",
+          "numbers_shown": [
+            "2025"
+          ]
+        },
+        "fingerprint": "10ea998415f54097"
+      },
+      "safety": {
+        "queries": [
+          "calendar showing year 2025",
+          "average person using smartphone",
+          "statistics graphic of daily screen time"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_001_9ea9f60c61c0b92d.mp4",
+          "cache_key": "9ea9f60c61c0b92d",
+          "frames": 120,
+          "caption_font": "Noto Sans Tamil",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_001_947bd61b582c984b.mp4",
+          "cache_key": "947bd61b582c984b",
+          "frames": 120,
+          "caption_font": "Noto Sans Tamil",
+          "timing": "generated",
+          "framing": "card",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "2025",
+          "start": 6.31,
+          "end": 7.21
+        },
+        {
+          "text": "'ல்",
+          "start": 7.21,
+          "end": 8.51
+        },
+        {
+          "text": "ஒருவர்",
+          "start": 8.51,
+          "end": 8.89
+        },
+        {
+          "text": "சராசரியாக",
+          "start": 8.89,
+          "end": 9.69
+        },
+        {
+          "text": "ஒரு",
+          "start": 9.69,
+          "end": 10.07
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "text": "நாளைக்கு நாங்கு மணி நேரத்துக்கும் மேல் திரையைப் பார்க்கிறார்.",
+      "start": 10.07,
+      "end": 14.58,
+      "duration": 4.51,
+      "visual_hint": null,
+      "search_text": "row, he looks up at the time of 4",
+      "query": "clock showing four hours",
+      "queries": [
+        "clock showing four hours",
+        "person watching phone for hours",
+        "timer counting up to four hours"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": true,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "37006",
+      "page_url": "https://pixabay.com/videos/id-37006/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Conserjedeluniverso on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.270 >= 0.22 for query 'clock showing four hours' (best of 19 candidates, order bonus +0.04); logo check ok (logo prob 0.24); 3 clip frame(s) passed the logo check (max logo prob 0.12)",
+      "relevance_score": 0.2699,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_002.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.2446,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.96,
+            "logo_prob": 0.1104,
+            "scene_score": 0.2103,
+            "result": "ok"
+          },
+          {
+            "time": 8.88,
+            "logo_prob": 0.1151,
+            "scene_score": 0.2441,
+            "result": "ok"
+          },
+          {
+            "time": 14.81,
+            "logo_prob": 0.0897,
+            "scene_score": 0.2443,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:37006",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2020/04/23/37006-413208203_medium.mp4",
+        "final_score": 0.3099,
+        "width": 1280,
+        "height": 720,
+        "duration": 18.0
+      },
+      "understanding": {
+        "queries": [
+          "clock showing four hours",
+          "person watching phone for hours",
+          "timer counting up to four hours"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": true,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Visualizes the statistic of more than four hours of screen time per day.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "keep watching",
+        "card": {
+          "headline": "KEEP WATCHING",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "113785ecadbb9d27"
+      },
+      "safety": {
+        "queries": [
+          "clock showing four hours",
+          "person watching phone for hours",
+          "timer counting up to four hours"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_002_f7c60b931880af50.mp4",
+          "cache_key": "f7c60b931880af50",
+          "frames": 135,
+          "look": "eq=brightness=0.032:saturation=1.200",
+          "caption_font": "Noto Sans Tamil",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_002_e862b67d485eb2ef.mp4",
+          "cache_key": "e862b67d485eb2ef",
+          "frames": 135,
+          "look": "eq=brightness=0.032:saturation=1.200",
+          "caption_font": "Noto Sans Tamil",
+          "framing": "blurred fit",
+          "crop": {
+            "method": "clip",
+            "choice": "blurred fit",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2542,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.211
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2054
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2276
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "best window 'right' 0.228 is more than 0.02 below the whole frame 0.254: every window cuts the subject -> blurred fit"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "நாளைக்கு",
+          "start": 10.07,
+          "end": 11.05
+        },
+        {
+          "text": "நாங்கு",
+          "start": 11.05,
+          "end": 11.55
+        },
+        {
+          "text": "மணி",
+          "start": 11.55,
+          "end": 11.77
+        },
+        {
+          "text": "நேரத்துக்கும்",
+          "start": 11.77,
+          "end": 12.71
+        },
+        {
+          "text": "மேல்",
+          "start": 12.71,
+          "end": 13.05
+        },
+        {
+          "text": "திரையைப்",
+          "start": 13.05,
+          "end": 13.53
+        },
+        {
+          "text": "பார்க்கிறார்.",
+          "start": 13.53,
+          "end": 14.23
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "text": "ஆனால் நேரம் என்பது திரும்ப பெரமுடியாத செல்வம்.",
+      "start": 14.58,
+      "end": 18.37,
+      "duration": 3.79,
+      "visual_hint": null,
+      "search_text": "o'clock. But the time cannot be",
+      "query": "close-up of ticking clock hands",
+      "queries": [
+        "hourglass sand flowing",
+        "close-up of ticking clock hands",
+        "gold coins beside a watch"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "136740",
+      "page_url": "https://pixabay.com/videos/id-136740/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "fotoblend on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.254 >= 0.22 for query 'close-up of ticking clock hands' (best of 24 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.00)",
+      "relevance_score": 0.2538,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_003.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.44,
+            "logo_prob": 0.0001,
+            "scene_score": 0.2514,
+            "result": "ok"
+          },
+          {
+            "time": 7.32,
+            "logo_prob": 0.0001,
+            "scene_score": 0.2496,
+            "result": "ok"
+          },
+          {
+            "time": 12.19,
+            "logo_prob": 0.0002,
+            "scene_score": 0.253,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:136740",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2022/10/27/136740-764817305_medium.mp4",
+        "final_score": 0.2938,
+        "width": 2560,
+        "height": 1440,
+        "duration": 14.0
+      },
+      "understanding": {
+        "queries": [
+          "hourglass sand flowing",
+          "close-up of ticking clock hands",
+          "gold coins beside a watch"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Represents time as a valuable, non‑recoverable resource.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "keep watching",
+        "card": {
+          "headline": "KEEP WATCHING",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "4e265371799440be"
+      },
+      "safety": {
+        "queries": [
+          "hourglass sand flowing",
+          "close-up of ticking clock hands",
+          "gold coins beside a watch"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_003_df3c94a1cf24e22c.mp4",
+          "cache_key": "df3c94a1cf24e22c",
+          "frames": 114,
+          "look": "eq=brightness=-0.039:saturation=0.850",
+          "caption_font": "Noto Sans Tamil",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_003_cce66b3a19ab387c.mp4",
+          "cache_key": "cce66b3a19ab387c",
+          "frames": 114,
+          "look": "eq=brightness=-0.039:saturation=0.850",
+          "caption_font": "Noto Sans Tamil",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2592,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2437
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2434
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2519
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.244; best window 0.252; whole frame 0.259; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "ஆனால்",
+          "start": 14.93,
+          "end": 15.73
+        },
+        {
+          "text": "நேரம்",
+          "start": 15.73,
+          "end": 16.19
+        },
+        {
+          "text": "என்பது",
+          "start": 16.19,
+          "end": 16.59
+        },
+        {
+          "text": "திரும்ப",
+          "start": 16.59,
+          "end": 16.95
+        },
+        {
+          "text": "பெரமுடியாத",
+          "start": 16.95,
+          "end": 17.67
+        },
+        {
+          "text": "செல்வம்.",
+          "start": 17.67,
+          "end": 18.37
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "text": "காலையில் எழுந்ததும் முதல் ஒரு மணி நேரம் முபைலை வேறு அறையில் வையுங்கள்.",
+      "start": 18.37,
+      "end": 24.67,
+      "duration": 6.3,
+      "visual_hint": null,
+      "search_text": "returned. When you wake up in the morning, keep the phone in the other room at 1",
+      "query": "person leaving phone on shelf",
+      "queries": [
+        "phone placed on nightstand across room",
+        "morning sunlight entering bedroom",
+        "person leaving phone on shelf"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "43459",
+      "page_url": "https://pixabay.com/videos/id-43459/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Nicolas_Garay on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.238 >= 0.22 for query 'person leaving phone on shelf' (best of 18 candidates, order bonus +0.04); logo check ok (logo prob 0.02); 3 clip frame(s) passed the logo check (max logo prob 0.01)",
+      "relevance_score": 0.2384,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_004.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0207,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 1.5,
+            "logo_prob": 0.0076,
+            "scene_score": 0.1668,
+            "result": "ok"
+          },
+          {
+            "time": 4.51,
+            "logo_prob": 0.0073,
+            "scene_score": 0.1621,
+            "result": "ok"
+          },
+          {
+            "time": 7.52,
+            "logo_prob": 0.0042,
+            "scene_score": 0.156,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:43459",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2020/06/30/43459-436106182_medium.mp4",
+        "final_score": 0.2784,
+        "width": 2560,
+        "height": 1440,
+        "duration": 9.0
+      },
+      "understanding": {
+        "queries": [
+          "phone placed on nightstand across room",
+          "morning sunlight entering bedroom",
+          "person leaving phone on shelf"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Illustrates the tip to keep the phone in another room for the first hour.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "keep watching",
+        "card": {
+          "headline": "KEEP WATCHING",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "da1b9533c6481a96"
+      },
+      "safety": {
+        "queries": [
+          "phone placed on nightstand across room",
+          "morning sunlight entering bedroom",
+          "person leaving phone on shelf"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_004_f8ce468ef9294011.mp4",
+          "cache_key": "f8ce468ef9294011",
+          "frames": 189,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "caption_font": "Noto Sans Tamil",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_004_d2416e454f3c75d1.mp4",
+          "cache_key": "d2416e454f3c75d1",
+          "frames": 189,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "caption_font": "Noto Sans Tamil",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2319,
+            "windows": {
+              "salient": {
+                "start": 0.2025,
+                "score": 0.2325
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2263
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2305
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.113
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'salient' chosen (0.233; best window 0.233; whole frame 0.232; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "காலையில்",
+          "start": 18.37,
+          "end": 19.65
+        },
+        {
+          "text": "எழுந்ததும்",
+          "start": 19.65,
+          "end": 20.73
+        },
+        {
+          "text": "முதல்",
+          "start": 20.73,
+          "end": 21.11
+        },
+        {
+          "text": "ஒரு",
+          "start": 21.11,
+          "end": 21.35
+        },
+        {
+          "text": "மணி",
+          "start": 21.35,
+          "end": 21.55
+        },
+        {
+          "text": "நேரம்",
+          "start": 21.55,
+          "end": 22.25
+        },
+        {
+          "text": "முபைலை",
+          "start": 22.25,
+          "end": 22.75
+        },
+        {
+          "text": "வேறு",
+          "start": 22.75,
+          "end": 23.15
+        },
+        {
+          "text": "அறையில்",
+          "start": 23.15,
+          "end": 23.61
+        },
+        {
+          "text": "வையுங்கள்.",
+          "start": 23.61,
+          "end": 24.67
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "text": "சிறிய எல்லைகள் உங்கள் கவனத்தைக் காக்கும்.",
+      "start": 24.67,
+      "end": 28.331,
+      "duration": 3.661,
+      "visual_hint": null,
+      "search_text": "o'clock. The small details will protect your attention.",
+      "query": "hand writing in notebook focused",
+      "queries": [
+        "minimalist desk with closed laptop",
+        "quiet workspace with no phone",
+        "hand writing in notebook focused"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "3145",
+      "page_url": "https://pixabay.com/videos/id-3145/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Life-Of-Vids on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.243 >= 0.22 for query 'hand writing in notebook focused' (best of 24 candidates, order bonus +0.04); logo check ok (logo prob 0.12); 3 clip frame(s) passed the logo check (max logo prob 0.19); earlier: pixabay_video: logo check rejected 1, best: pixabay_video:368623 (logo prob 0.69, scene 0.260) (4 checked)",
+      "relevance_score": 0.2427,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_005.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.1241,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 7.1,
+            "logo_prob": 0.1919,
+            "scene_score": 0.2063,
+            "result": "ok"
+          },
+          {
+            "time": 21.29,
+            "logo_prob": 0.0983,
+            "scene_score": 0.2039,
+            "result": "ok"
+          },
+          {
+            "time": 35.48,
+            "logo_prob": 0.127,
+            "scene_score": 0.2255,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:3145",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2016/05/12/3145-166335957_medium.mp4",
+        "final_score": 0.2827,
+        "width": 1280,
+        "height": 720,
+        "duration": 43.0
+      },
+      "understanding": {
+        "queries": [
+          "minimalist desk with closed laptop",
+          "quiet workspace with no phone",
+          "hand writing in notebook focused"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows how small boundaries help protect attention.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "keep watching",
+        "card": {
+          "headline": "KEEP WATCHING",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "32b56cd050bfaaab"
+      },
+      "safety": {
+        "queries": [
+          "minimalist desk with closed laptop",
+          "quiet workspace with no phone",
+          "hand writing in notebook focused"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_005_d25dc29ef7a24ee1.mp4",
+          "cache_key": "d25dc29ef7a24ee1",
+          "frames": 110,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Noto Sans Tamil",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_005_1bca7fabaf96bf54.mp4",
+          "cache_key": "1bca7fabaf96bf54",
+          "frames": 110,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Noto Sans Tamil",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2576,
+            "windows": {
+              "salient": {
+                "start": 0.3774,
+                "score": 0.2518
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2475
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.1727
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2155
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'salient' chosen (0.252; best window 0.252; whole frame 0.258; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "சிறிய",
+          "start": 24.67,
+          "end": 25.11
+        },
+        {
+          "text": "எல்லைகள்",
+          "start": 25.11,
+          "end": 26.05
+        },
+        {
+          "text": "உங்கள்",
+          "start": 26.05,
+          "end": 26.53
+        },
+        {
+          "text": "கவனத்தைக்",
+          "start": 26.53,
+          "end": 27.17
+        },
+        {
+          "text": "காக்கும்.",
+          "start": 27.17,
+          "end": 27.83
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "aspect_ratio": "16:9",
+      "file": "video_16x9.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 28.333
+    },
+    {
+      "aspect_ratio": "9:16",
+      "file": "video_9x16.mp4",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "duration": 28.333
+    }
+  ]
+}

@@ -30,8 +30,8 @@ from app.pipeline.render import (RESOLUTIONS, analyse_source, concat_segments, f
                                  ratio_slug, render_failed, render_segment, save_thumbnail, thumbnail_filename,
                                  video_filename)
 from app.pipeline.safety import plan_search
-from app.pipeline.scenes import scenes_from_list, split_into_scenes
-from app.pipeline.transcribe import check_sound, check_speech, get_transcriber
+from app.pipeline.scenes import attach_search_text, scenes_from_list, split_into_scenes
+from app.pipeline.transcribe import TranslateError, check_sound, check_speech, get_transcriber
 from app.pipeline.tts import get_tts
 from app.pipeline.understand import understand_scenes
 from app.storage import cache_key, get_storage, output_key
@@ -144,7 +144,9 @@ def run_pipeline(job_id: str, request: dict[str, Any], input_type: str, input_ke
             else:
                 hints = None
             transcriber = get_transcriber()
-            transcript = transcriber.transcribe(audio.path, audio.duration, hints)
+            # A TTS voice tells us the language ("hi-IN-female" -> "hi"); an upload is auto-detected.
+            language_hint = voice.split("-")[0].lower() if input_type in ("script", "scenes") else None
+            transcript = transcriber.transcribe(audio.path, audio.duration, hints, language_hint)
             run.models["transcribe"] = transcript.info
             check_speech(transcript, sound)
 
@@ -163,6 +165,8 @@ def run_pipeline(job_id: str, request: dict[str, Any], input_type: str, input_ke
 
         # 4. What should each scene show? (meaning + safety rules)
         with run.stage("understand", 48):
+            if transcript.language != "en" and s.TRANSLATE_FOR_SEARCH:
+                _english_for_search(run, transcriber, audio.path, transcript.language, scenes)
             full_text = text if input_type == "script" else " ".join(sc.text for sc in scenes)
             meanings, understand_info, understand_warnings = understand_scenes(scenes, full_text,
                                                                                request.get("style"),
@@ -189,7 +193,8 @@ def run_pipeline(job_id: str, request: dict[str, Any], input_type: str, input_ke
         # 6. Render every scene segment (with QA), then one video per aspect ratio.
         with run.stage("render", 70):
             segments = _render_segments(run, scenes, cues, ratios, selections, meanings, plans, ctx,
-                                        burn_captions=request.get("captions", True))
+                                        burn_captions=request.get("captions", True),
+                                        language=transcript.language)
             videos, qa_report = [], {}
             for ratio in ratios:
                 videos.append(_join_video(run, scenes, segments, ratio, audio))
@@ -249,11 +254,29 @@ def save_swap_cache(job_id, work, request, input_type, duration, language, scene
     storage.put_bytes(cache_key(job_id, "state.json"), json.dumps(state, ensure_ascii=False).encode("utf-8"))
 
 
+def _english_for_search(run: Run, transcriber, audio_path: Path, language: str, scenes) -> None:
+    """Non-English narration: give each scene its English meaning (scene.search_text) for footage search.
+    Captions keep the spoken words. If the translation fails, search uses the original text + a warning."""
+    started = time.perf_counter()
+    try:
+        translation = transcriber.translate(audio_path, language)
+    except TranslateError as e:
+        run.warn(f"English translation for footage search failed ({e}); searching with the {language} text")
+        translation = []
+    attach_search_text(scenes, translation)
+    run.models.setdefault("transcribe", {})["translate_for_search"] = {
+        "task": "translate", "from_language": language, "to_language": "en",
+        "pieces": len(translation), "scenes_with_english": sum(1 for sc in scenes if sc.search_text),
+        "seconds": round(time.perf_counter() - started, 3),
+        "used_for": "footage search queries only; captions stay in the spoken language"}
+
+
 def _render_segments(run: Run, scenes, cues, ratios, selections, meanings, plans, ctx, burn_captions,
-                     retry_with_next: bool = True) -> dict:
+                     retry_with_next: bool = True, language: str | None = None) -> dict:
     """Render each scene for every ratio and check it. A segment that fails QA gets another clip
     (up to QA_RETRIES times); if it still fails, we keep it and add a warning.
     retry_with_next=False (a clip the user chose in a swap): never replace it, only warn.
+    language = the caption language (picks the caption font, e.g. Noto Sans Tamil for "ta").
 
     Returns {scene index: {ratio: facts about the segment}} and updates `selections` in place.
     """
@@ -275,7 +298,8 @@ def _render_segments(run: Run, scenes, cues, ratios, selections, meanings, plans
             try:
                 info = analyse_source(selection, frames / s.RENDER_FPS, plans[i].queries, ctx.scorer)
                 for ratio in ratios:
-                    path, facts = render_segment(info, scene, ratio, cues, folders[ratio], frames, burn_captions)
+                    path, facts = render_segment(info, scene, ratio, cues, folders[ratio], frames, burn_captions,
+                                                 language)
                     found = qa.check_segment(path, frames)
                     rendered[ratio] = {**facts, "qa_problems": found}
                     problems += [f"{ratio}: {p}" for p in found]

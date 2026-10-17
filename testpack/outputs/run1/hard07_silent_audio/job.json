@@ -1,0 +1,25 @@
+{
+  "job_id": "69f6b740db9b479db68b4ddea8469cd7",
+  "status": "failed",
+  "progress": 25,
+  "stage": "failed",
+  "input_type": "upload",
+  "parent_job_id": null,
+  "warnings": [],
+  "error": {
+    "code": "NO_SPEECH_DETECTED",
+    "message": "The audio is silent: no speech was found",
+    "retryable": false,
+    "details": {
+      "max_volume_db": -91.0,
+      "sound_seconds": 0.0
+    }
+  },
+  "result": null,
+  "created_at": "2026-10-17T12:49:44.577389+00:00",
+  "started_at": "2026-10-17T12:49:45.490156+00:00",
+  "finished_at": "2026-10-17T12:49:45.846034+00:00",
+  "links": {
+    "self": "http://localhost:8000/api/v1/jobs/69f6b740db9b479db68b4ddea8469cd7"
+  }
+}

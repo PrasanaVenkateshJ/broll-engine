@@ -18,6 +18,8 @@ At the end: --out/summary.csv and --out/summary.md.
 
     python tools/batch_run.py testpack/inputs --out testpack/outputs/run1
     python tools/batch_run.py inputs.jsonl --out out --api https://my-space.hf.space --token XYZ --ratios 16:9,9:16
+    python tools/batch_run.py testpack/inputs --out testpack/outputs/run1 --ratios 16:9,9:16 --keep-input-ratios
+      (--keep-input-ratios: a .json input with its own "aspect_ratios" keeps them; the rest get --ratios)
 """
 import argparse
 import csv
@@ -112,6 +114,14 @@ def collect_inputs(path: Path) -> list[Item]:
         else:
             seen[item.name] = 1
     return items
+
+
+def ratios_for(item: Item, ratios: list[str] | None, keep_input_ratios: bool = False) -> list[str] | None:
+    """The --ratios to send for this input (None = leave the input as it is).
+    keep_input_ratios: an input body that names its own aspect_ratios keeps them."""
+    if keep_input_ratios and item.body is not None and item.body.get("aspect_ratios"):
+        return None
+    return ratios
 
 
 def idempotency_key(item: Item, ratios: list[str] | None) -> str:
@@ -244,10 +254,11 @@ def write_summary(results: list[Result], out: Path, api: str) -> None:
 
 def run_batch(items: list[Item], out: Path, client: httpx.Client, ratios: list[str] | None = None,
               concurrency: int = 2, timeout: float = 1800, poll: float = 2.0, api: str = "",
-              max_poll: float = 15.0) -> list[Result]:
+              max_poll: float = 15.0, keep_input_ratios: bool = False) -> list[Result]:
     out.mkdir(parents=True, exist_ok=True)
     with ThreadPoolExecutor(max_workers=max(1, concurrency)) as pool:
-        results = list(pool.map(lambda it: run_one(client, it, out, ratios, timeout, poll, max_poll), items))
+        results = list(pool.map(lambda it: run_one(client, it, out, ratios_for(it, ratios, keep_input_ratios),
+                                                   timeout, poll, max_poll), items))
     write_summary(results, out, api or str(client.base_url))
     return results
 
@@ -261,6 +272,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--token", default=os.environ.get("BROLL_API_TOKEN", "dev-token"),
                         help="bearer token (default: $BROLL_API_TOKEN or dev-token)")
     parser.add_argument("--ratios", default="", help="e.g. 16:9,9:16 (overrides each input's aspect_ratios)")
+    parser.add_argument("--keep-input-ratios", action="store_true",
+                        help="a .json input with its own aspect_ratios keeps them (--ratios is for the rest)")
     parser.add_argument("--concurrency", type=int, default=2, help="inputs running at the same time (default 2)")
     parser.add_argument("--timeout", type=float, default=1800, help="max seconds to wait for one job")
     parser.add_argument("--poll", type=float, default=2.0, help="first pause between status checks (seconds)")
@@ -277,7 +290,7 @@ def main(argv: list[str] | None = None) -> int:
     print(f"{len(items)} input(s) -> {args.api} (concurrency {args.concurrency})")
     with httpx.Client(base_url=args.api, headers=headers, timeout=120, follow_redirects=True) as client:
         results = run_batch(items, args.out, client, ratios, args.concurrency, args.timeout, args.poll, args.api,
-                            args.max_poll)
+                            args.max_poll, args.keep_input_ratios)
     for r in results:
         print(f"{r.input:30} {r.status:10} {r.error_code:24} {r.turnaround_seconds or '':>8} s  job {r.job_id}")
     print(f"summary: {args.out / 'summary.csv'} and {args.out / 'summary.md'}")

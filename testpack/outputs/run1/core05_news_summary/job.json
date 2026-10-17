@@ -1,0 +1,35 @@
+{
+  "job_id": "b84bb7185bf84e50822079a4169644a3",
+  "status": "succeeded",
+  "progress": 100,
+  "stage": "done",
+  "input_type": "script",
+  "parent_job_id": null,
+  "warnings": [
+    "Scene 1: the LLM suggested card text '12 km new protected bike lanes' with '12', which the narration does not say; ignored (a card shows only figures from the narration)",
+    "Scene 5: the LLM suggested card text '2,000 trees planted along river path' with '2,000', which the narration does not say; ignored (a card shows only figures from the narration)"
+  ],
+  "error": null,
+  "result": {
+    "files": {
+      "video_16x9.mp4": "http://localhost:8000/api/v1/jobs/b84bb7185bf84e50822079a4169644a3/files/video_16x9.mp4?expires=1792240933&sig=3af09245ebbf2c508f2eae3f1ddbfac9a69d44603e1600b16f1c62331fc99df7",
+      "video_9x16.mp4": "http://localhost:8000/api/v1/jobs/b84bb7185bf84e50822079a4169644a3/files/video_9x16.mp4?expires=1792240933&sig=4f73293df46fd2f0743c23f0bad920e299914d59b911dba299d0b485b12ac5c1",
+      "captions.srt": "http://localhost:8000/api/v1/jobs/b84bb7185bf84e50822079a4169644a3/files/captions.srt?expires=1792240933&sig=7e271217a05d3c714ab91c025e90972a6d6c1efdb9edd20fc7a52797a4d26d01",
+      "timeline.json": "http://localhost:8000/api/v1/jobs/b84bb7185bf84e50822079a4169644a3/files/timeline.json?expires=1792240933&sig=fde754cf50183f6fd491cd2596545313c3b4b3f36e9473bdd1fdb562bf9206bc",
+      "manifest.json": "http://localhost:8000/api/v1/jobs/b84bb7185bf84e50822079a4169644a3/files/manifest.json?expires=1792240933&sig=e11d621f9abf4a1db0f6c866485a4d1b8733644400b40faea57e12a35581d4d7",
+      "thumb_000.jpg": "http://localhost:8000/api/v1/jobs/b84bb7185bf84e50822079a4169644a3/files/thumb_000.jpg?expires=1792240933&sig=fd8cef3b6e71ed026817466fdd13174f9605e103b5be0a358f8cb8469833d41f",
+      "thumb_001.jpg": "http://localhost:8000/api/v1/jobs/b84bb7185bf84e50822079a4169644a3/files/thumb_001.jpg?expires=1792240933&sig=fb3cf567e6f60cadac8e9f6579f1ca52725ee04b2bba394eba57923705d13487",
+      "thumb_002.jpg": "http://localhost:8000/api/v1/jobs/b84bb7185bf84e50822079a4169644a3/files/thumb_002.jpg?expires=1792240933&sig=ffe71d8b8769444c15612cd148c14a937049b18b2ba56e993b605d8d84f08ee3",
+      "thumb_003.jpg": "http://localhost:8000/api/v1/jobs/b84bb7185bf84e50822079a4169644a3/files/thumb_003.jpg?expires=1792240933&sig=adca6d0dad1630b71fa34a910e18956a46b5deea6c794e2d412b54fe51881d15",
+      "thumb_004.jpg": "http://localhost:8000/api/v1/jobs/b84bb7185bf84e50822079a4169644a3/files/thumb_004.jpg?expires=1792240933&sig=43ba58ab8ccf22eb67f050304bfa90946a43216af0b322f9fbd498ffd7adfbfa",
+      "thumb_005.jpg": "http://localhost:8000/api/v1/jobs/b84bb7185bf84e50822079a4169644a3/files/thumb_005.jpg?expires=1792240933&sig=0bad73127bbadedbfc7733b7f96944752c16280ce5124ecf3a8b0ef479c99f0f",
+      "thumb_006.jpg": "http://localhost:8000/api/v1/jobs/b84bb7185bf84e50822079a4169644a3/files/thumb_006.jpg?expires=1792240933&sig=8d6d2cff9defdee1a217c924dfab875fe223d6917eefe14d7d0b861bf875677b"
+    }
+  },
+  "created_at": "2026-10-17T11:39:55.076967+00:00",
+  "started_at": "2026-10-17T11:39:55.245784+00:00",
+  "finished_at": "2026-10-17T11:42:10.604905+00:00",
+  "links": {
+    "self": "http://localhost:8000/api/v1/jobs/b84bb7185bf84e50822079a4169644a3"
+  }
+}

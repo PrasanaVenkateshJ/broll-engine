@@ -17,6 +17,10 @@ Adapters (picked by UNDERSTAND_PROVIDER), same idea as tts.py:
 The detectors for numbers, names, brands and sensitive topics are plain code and run for
 EVERY adapter, so safety never depends on the LLM getting it right.
 
+Non-English narration (e.g. Tamil, Hindi): a scene may carry `search_text`, Whisper's English
+translation of it. Queries are always English: the rules and mock adapters read the English, Groq gets
+both the original line and the English. Captions and card numbers always come from the spoken words.
+
 Repeatable: Groq is called with temperature LLM_TEMPERATURE (default 0), a fixed seed and a
 fixed prompt. Every scene's answer is stored in timeline.json with a fingerprint (hash of the
 text, script, style, provider, model and prompt). A re-render (or a clip swap) passes that
@@ -399,11 +403,31 @@ def scene_card(text: str, number: str | None, names: list[str] | tuple = ()) -> 
     return cards.build_card(text, card_keyword(text, number, names), names).to_dict()
 
 
-def safety_facts(text: str) -> dict:
-    """Run the code detectors (all adapters use these)."""
+def safety_facts(text: str, english: str | None = None) -> dict:
+    """Run the code detectors (all adapters use these).
+    english = the scene's English translation (non-English narration): names, brands and sensitive words
+    are looked for in it too. The number only ever comes from the spoken text (a card shows only what the
+    narration says; a machine translation can change numbers)."""
     people, brands = detect_names(text)
-    number = detect_statistic(text)
-    return {"people": people, "brands": brands, "number": number, "sensitive": detect_sensitive(text)}
+    sensitive = detect_sensitive(text)
+    if english:
+        more_people, more_brands = detect_names(english)
+        people = list(dict.fromkeys(people + more_people))
+        brands = list(dict.fromkeys(brands + more_brands))
+        sensitive = list(dict.fromkeys(sensitive + detect_sensitive(english)))
+    return {"people": people, "brands": brands, "number": detect_statistic(text), "sensitive": sensitive}
+
+
+def english_of(scene) -> str | None:
+    """The scene's English translation for footage search, or None (English narration / no translation)."""
+    return getattr(scene, "search_text", None) or None
+
+
+def english_script(scenes: list, full_text: str) -> str:
+    """The whole script in English for context: the translations if the scenes have them."""
+    if any(english_of(sc) for sc in scenes):
+        return " ".join(english_of(sc) or sc.text for sc in scenes)
+    return full_text
 
 
 class Understander:
@@ -419,10 +443,15 @@ class Understander:
 class RulesUnderstander(Understander):
     name = "rules"
 
-    def understand_one(self, index: int, text: str, full_text: str, visual_hint: str | None = None) -> SceneMeaning:
+    def understand_one(self, index: int, text: str, full_text: str, visual_hint: str | None = None,
+                       english: str | None = None) -> SceneMeaning:
+        """text = the line as spoken (card + number); english = its translation, if any. The queries are
+        built from the English (full_text should then be the English script too)."""
+        spoken = text
+        text = english or spoken  # what the queries are made from
         scene_words = tokens(text)
         script_words = tokens(full_text)
-        facts = safety_facts(text)
+        facts = safety_facts(spoken, english)
         queries: list[str] = []
         reasons: list[str] = []
         brand_sense = False
@@ -473,13 +502,16 @@ class RulesUnderstander(Understander):
             reasons.append(f"abstract idea ({', '.join(abstract_hits[:3])})")
         if not reasons:
             reasons.append("keywords of the line")
+        if english:
+            reasons.append("queries from the English translation")
         return SceneMeaning(index=index, queries=_three(queries), flags=flags, reason="rules: " + "; ".join(reasons),
                             source=self.name, names=facts["people"] + brands, number=facts["number"],
-                            keyword=card_keyword(text, facts["number"], facts["people"] + brands),
-                            card=scene_card(text, facts["number"], facts["people"] + brands))
+                            keyword=card_keyword(spoken, facts["number"], facts["people"] + brands),
+                            card=scene_card(spoken, facts["number"], facts["people"] + brands))
 
     def understand(self, scenes, full_text, style=None):
-        return [self.understand_one(sc.index, sc.text, full_text, sc.visual_hint) for sc in scenes]
+        english_full = english_script(scenes, full_text)
+        return [self.understand_one(sc.index, sc.text, english_full, sc.visual_hint, english_of(sc)) for sc in scenes]
 
 
 def _three(queries: list[str]) -> list[str]:
@@ -497,8 +529,8 @@ class MockUnderstander(Understander):
     def understand(self, scenes, full_text, style=None):
         out = []
         for sc in scenes:
-            words = content_words(sc.text) or ["background"]
-            facts = safety_facts(sc.text)
+            words = content_words(english_of(sc) or sc.text) or ["background"]
+            facts = safety_facts(sc.text, english_of(sc))
             queries = ([sc.visual_hint] if sc.visual_hint else []) + keyword_queries(words)
             out.append(SceneMeaning(
                 index=sc.index, queries=_three(queries), source=self.name, reason="mock: keywords of the line",
@@ -517,7 +549,9 @@ the line MEANS in the context of the whole script - not its literal words. Examp
 helps small firms" -> "data center server racks", never "sky". Use the visual_hint if one is given.
 Rules: never put a real person's name or a brand name in a query - describe generic related footage
 instead, without faces. For sad or sensitive topics choose calm, respectful imagery, nothing graphic.
-Respect the avoid list. Flags (true/false): abstract = an idea with no obvious physical subject;
+Respect the avoid list. A scene may also have "english": a machine translation of a non-English line
+(it can contain errors - follow the meaning of the original line). Queries are ALWAYS in English, even
+when the narration is not. Flags (true/false): abstract = an idea with no obvious physical subject;
 statistic = contains a number, percentage or amount; named_person = mentions a specific real person;
 brand = mentions a company or product brand; sensitive = death, illness, violence, disaster, abuse,
 tragedy or similar. reason = one short sentence on why these queries fit the meaning.
@@ -563,7 +597,8 @@ class GroqUnderstander(Understander):
         if not s.GROQ_API_KEY:
             raise UnderstandError("GROQ_API_KEY is empty")
         user = {"full_script": full_text, "style": style,
-                "scenes": [{"index": sc.index, "text": sc.text, "visual_hint": sc.visual_hint} for sc in scenes]}
+                "scenes": [{"index": sc.index, "text": sc.text, "visual_hint": sc.visual_hint,
+                            **({"english": english_of(sc)} if english_of(sc) else {})} for sc in scenes]}
         # Deterministic request: fixed prompt, keys always in the same order, temperature 0
         # (LLM_TEMPERATURE) and a fixed seed -> the same script gives the same request every time.
         payload = {"model": s.LLM_MODEL, "temperature": s.LLM_TEMPERATURE, "seed": s.SEED,
@@ -601,7 +636,7 @@ class GroqUnderstander(Understander):
                 queries = [hint] + [q for q in queries if q.lower() != hint.lower()]
                 reason += " (visual_hint used as the first query)"
             raw_flags = item.get("flags") or {}
-            facts = safety_facts(sc.text)
+            facts = safety_facts(sc.text, english_of(sc))
             # Safety flags: the LLM's answer OR the code detectors (never weaker than the rules).
             flags = {name: bool(raw_flags.get(name)) for name in FLAG_NAMES}
             flags["statistic"] |= facts["number"] is not None
@@ -651,6 +686,8 @@ def fingerprint(provider: str, scene, full_text: str, style: str | None) -> str:
     s = get_settings()
     data = {"provider": provider, "text": scene.text, "visual_hint": scene.visual_hint, "script": full_text,
             "style": style, "card_rules": cards.CARD_RULES_VERSION}
+    if english_of(scene):  # only for non-English narration, so English fingerprints stay as they were
+        data["english"] = english_of(scene)
     if provider == "groq":
         data.update(model=s.LLM_MODEL, prompt=PROMPT_VERSION, temperature=s.LLM_TEMPERATURE, seed=s.SEED)
     return hashlib.sha1(json.dumps(data, sort_keys=True, ensure_ascii=False).encode()).hexdigest()[:16]

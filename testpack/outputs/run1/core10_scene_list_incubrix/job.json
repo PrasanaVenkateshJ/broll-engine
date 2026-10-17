@@ -1,0 +1,34 @@
+{
+  "job_id": "c74fbe9be9cc4b6bbad8286375115502",
+  "status": "succeeded",
+  "progress": 100,
+  "stage": "done",
+  "input_type": "scenes",
+  "parent_job_id": null,
+  "warnings": [
+    "Could not save the clip-swap cache (FileNotFoundError); swapping a clip will not work for this job"
+  ],
+  "error": null,
+  "result": {
+    "files": {
+      "video_16x9.mp4": "http://localhost:8000/api/v1/jobs/c74fbe9be9cc4b6bbad8286375115502/files/video_16x9.mp4?expires=1792242208&sig=6ab46d55b4bf5d3ebbb9c53924c4919ead6d639d4d3cef217284e607d5f268fc",
+      "video_9x16.mp4": "http://localhost:8000/api/v1/jobs/c74fbe9be9cc4b6bbad8286375115502/files/video_9x16.mp4?expires=1792242208&sig=57192dc61c5fd67eae5f587d93c165516999ff6d46a7e76aeae740edf0f2a634",
+      "video_1x1.mp4": "http://localhost:8000/api/v1/jobs/c74fbe9be9cc4b6bbad8286375115502/files/video_1x1.mp4?expires=1792242208&sig=f0a00779f8c76b6482d8464112c9622c161ae512697c32c2623ec10f7f310673",
+      "captions.srt": "http://localhost:8000/api/v1/jobs/c74fbe9be9cc4b6bbad8286375115502/files/captions.srt?expires=1792242208&sig=f2740c315aded9831feba6b90c37100d76a3b59ed7e3567814e29a673843d142",
+      "timeline.json": "http://localhost:8000/api/v1/jobs/c74fbe9be9cc4b6bbad8286375115502/files/timeline.json?expires=1792242208&sig=06e9bf8869f15319079ec49c80b33dbf848f82dd035051df9cb2aedf420eef40",
+      "manifest.json": "http://localhost:8000/api/v1/jobs/c74fbe9be9cc4b6bbad8286375115502/files/manifest.json?expires=1792242208&sig=0de21c5be149c593b940d76e897212f751747eab4f46f686c773a7b6e156c0b7",
+      "thumb_000.jpg": "http://localhost:8000/api/v1/jobs/c74fbe9be9cc4b6bbad8286375115502/files/thumb_000.jpg?expires=1792242208&sig=de417280d2ecc8d92b854c0c956938f0103367e6395d176c4f0d75e65bc0e438",
+      "thumb_001.jpg": "http://localhost:8000/api/v1/jobs/c74fbe9be9cc4b6bbad8286375115502/files/thumb_001.jpg?expires=1792242208&sig=7a7f20cc91174c2a1ffedbccb3fd562f40f9c258511dd13440776d1960e21570",
+      "thumb_002.jpg": "http://localhost:8000/api/v1/jobs/c74fbe9be9cc4b6bbad8286375115502/files/thumb_002.jpg?expires=1792242208&sig=fc5c43fa58501f97aab5a93703b93802821c041260ccc6804c83b5bf74b42c9f",
+      "thumb_003.jpg": "http://localhost:8000/api/v1/jobs/c74fbe9be9cc4b6bbad8286375115502/files/thumb_003.jpg?expires=1792242208&sig=ac4ac48bc3297b8f3b55545554cb1c58d1027da6ba5f71f7fa9a78ac4a2b2b3f",
+      "thumb_004.jpg": "http://localhost:8000/api/v1/jobs/c74fbe9be9cc4b6bbad8286375115502/files/thumb_004.jpg?expires=1792242208&sig=dbb694cdd1aa5daff118c8176d6ea92719ea63515c4a0815748a05d196824813",
+      "thumb_005.jpg": "http://localhost:8000/api/v1/jobs/c74fbe9be9cc4b6bbad8286375115502/files/thumb_005.jpg?expires=1792242208&sig=3dc8062e1d26e6517df868b980b80f563fff759342aa19d05819a57a37d02b10"
+    }
+  },
+  "created_at": "2026-10-17T12:00:45.685679+00:00",
+  "started_at": "2026-10-17T12:00:46.382600+00:00",
+  "finished_at": "2026-10-17T12:03:27.400569+00:00",
+  "links": {
+    "self": "http://localhost:8000/api/v1/jobs/c74fbe9be9cc4b6bbad8286375115502"
+  }
+}

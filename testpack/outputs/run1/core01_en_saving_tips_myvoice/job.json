@@ -1,0 +1,31 @@
+{
+  "job_id": "2eea2c49161e40e3b2437e002956ef83",
+  "status": "succeeded",
+  "progress": 100,
+  "stage": "done",
+  "input_type": "upload",
+  "parent_job_id": null,
+  "warnings": [
+    "Scene understanding with Groq failed (the answer misses scene 3); used the offline rules instead"
+  ],
+  "error": null,
+  "result": {
+    "files": {
+      "video_16x9.mp4": "http://localhost:8000/api/v1/jobs/2eea2c49161e40e3b2437e002956ef83/files/video_16x9.mp4?expires=1792240268&sig=f20238d32c8abccc4e627ee34436e745437acd6843e4cd4c546a5c11b4c744b6",
+      "video_9x16.mp4": "http://localhost:8000/api/v1/jobs/2eea2c49161e40e3b2437e002956ef83/files/video_9x16.mp4?expires=1792240268&sig=02a8561d1a43a22c533dea426e7f62c2df17d5be58755b07d98a3bb045132454",
+      "captions.srt": "http://localhost:8000/api/v1/jobs/2eea2c49161e40e3b2437e002956ef83/files/captions.srt?expires=1792240268&sig=40f821c8e82c6b47b51a01f39cab8eb70cd874f824c4783bdcb26f4822851f35",
+      "timeline.json": "http://localhost:8000/api/v1/jobs/2eea2c49161e40e3b2437e002956ef83/files/timeline.json?expires=1792240268&sig=fae9d4823c33f0db7b3fb04094b1f8845a29b82e64542d586456819fa0fb5e99",
+      "manifest.json": "http://localhost:8000/api/v1/jobs/2eea2c49161e40e3b2437e002956ef83/files/manifest.json?expires=1792240268&sig=c1fb2fea263825b62f70a93acc4b69684608ce7a465f07486786b4931b89cc1a",
+      "thumb_000.jpg": "http://localhost:8000/api/v1/jobs/2eea2c49161e40e3b2437e002956ef83/files/thumb_000.jpg?expires=1792240268&sig=aad35848f1669eaae76f9c4f681ecc1497e2e45e0b028382c8a38725bd4a99b4",
+      "thumb_001.jpg": "http://localhost:8000/api/v1/jobs/2eea2c49161e40e3b2437e002956ef83/files/thumb_001.jpg?expires=1792240268&sig=e8ddb2e6f9d6f84a4a2dad0e6c4951bb87af1a3a9cd64fe83e22cb9299e8a993",
+      "thumb_002.jpg": "http://localhost:8000/api/v1/jobs/2eea2c49161e40e3b2437e002956ef83/files/thumb_002.jpg?expires=1792240268&sig=dd0f1978946faadd0277d4f180f878ae0755e1ec2a95e53352fb663f9eed81a8",
+      "thumb_003.jpg": "http://localhost:8000/api/v1/jobs/2eea2c49161e40e3b2437e002956ef83/files/thumb_003.jpg?expires=1792240268&sig=cf1a0f6ce47d6200793273206a2810dc9103c05c712e362f903091f0100565ca"
+    }
+  },
+  "created_at": "2026-10-17T11:29:38.085091+00:00",
+  "started_at": "2026-10-17T11:29:39.089540+00:00",
+  "finished_at": "2026-10-17T11:30:57.254360+00:00",
+  "links": {
+    "self": "http://localhost:8000/api/v1/jobs/2eea2c49161e40e3b2437e002956ef83"
+  }
+}

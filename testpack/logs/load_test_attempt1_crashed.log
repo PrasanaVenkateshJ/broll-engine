@@ -1,0 +1,18 @@
+level 1: 1 job(s) at once ...
+Traceback (most recent call last):
+  File "C:\dev\broll-engine\tools\load_test.py", line 111, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "C:\dev\broll-engine\tools\load_test.py", line 101, in main
+    result = run_level(level, inputs, args.out, client, ratios, args.memory_csv, args.timeout)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\dev\broll-engine\tools\load_test.py", line 74, in run_level
+    "memory_peak_mb": memory_peaks(memory_csv, start, end),
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\dev\broll-engine\tools\load_test.py", line 38, in memory_peaks
+    with csv_path.open(encoding="utf-8-sig") as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jkvan\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 1044, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'testpack\\logs\\memory_resilience_and_load.csv'

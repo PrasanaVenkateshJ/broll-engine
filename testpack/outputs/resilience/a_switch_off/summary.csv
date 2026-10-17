@@ -1,0 +1,2 @@
+input,job_id,status,error_code,narration_seconds,turnaround_seconds,scenes,warnings_count
+res_a_switch_off_run2,5c20bcc24d4f4624839788d10d4746f7,succeeded,,26.05,182.39,7,0

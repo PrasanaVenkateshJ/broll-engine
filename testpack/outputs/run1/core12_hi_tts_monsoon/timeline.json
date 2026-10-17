@@ -1,0 +1,1046 @@
+{
+  "job_id": "e03bcded93ac46f68ede9307264eecee",
+  "input_type": "upload",
+  "duration": 22.7,
+  "language": "hi",
+  "scenes": [
+    {
+      "index": 0,
+      "text": "मानसoons के महीनो में भरारत के की हिस्सो में भारी बारिष होती है, कि सान इसी बारिष का इन्चार करते हैंूसु।",
+      "start": 0.0,
+      "end": 7.78,
+      "duration": 7.78,
+      "visual_hint": null,
+      "search_text": "Many parts of India have heavy rains in the month of Mansoon. The farmers wait for this rain to come.",
+      "query": "heavy rain on crops",
+      "queries": [
+        "monsoon rain over fields",
+        "farmers watching sky",
+        "heavy rain on crops"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "26369",
+      "page_url": "https://pixabay.com/videos/id-26369/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Hans on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.259 >= 0.22 for query 'heavy rain on crops' (best of 23 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.00)",
+      "relevance_score": 0.2586,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_000.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0001,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 1.68,
+            "logo_prob": 0.0002,
+            "scene_score": 0.2678,
+            "result": "ok"
+          },
+          {
+            "time": 5.04,
+            "logo_prob": 0.0002,
+            "scene_score": 0.2628,
+            "result": "ok"
+          },
+          {
+            "time": 8.41,
+            "logo_prob": 0.0003,
+            "scene_score": 0.2549,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:26369",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2019/08/29/26369-357512454_medium.mp4",
+        "final_score": 0.2986,
+        "width": 2560,
+        "height": 1440,
+        "duration": 10.0
+      },
+      "understanding": {
+        "queries": [
+          "monsoon rain over fields",
+          "farmers watching sky",
+          "heavy rain on crops"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows the seasonal heavy rain and farmers waiting for it",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "oons",
+        "card": {
+          "headline": "OONS",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "1ee2417490901e05"
+      },
+      "safety": {
+        "queries": [
+          "monsoon rain over fields",
+          "farmers watching sky",
+          "heavy rain on crops"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_000_bc728186c88f1f0c.mp4",
+          "cache_key": "bc728186c88f1f0c",
+          "frames": 233,
+          "look": "eq=saturation=1.200",
+          "caption_font": "Noto Sans Devanagari",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_000_aa0967757d827e35.mp4",
+          "cache_key": "aa0967757d827e35",
+          "frames": 233,
+          "look": "eq=saturation=1.200",
+          "caption_font": "Noto Sans Devanagari",
+          "framing": "subject crop (right)",
+          "crop": {
+            "method": "clip",
+            "choice": "right",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2587,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2707
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2659
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.3077
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'right' chosen (0.308; best window 0.308; whole frame 0.259; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "मानसoons",
+          "start": 0.18,
+          "end": 1.02
+        },
+        {
+          "text": "के",
+          "start": 1.02,
+          "end": 1.22
+        },
+        {
+          "text": "महीनो",
+          "start": 1.22,
+          "end": 1.58
+        },
+        {
+          "text": "में",
+          "start": 1.58,
+          "end": 1.92
+        },
+        {
+          "text": "भरारत",
+          "start": 1.92,
+          "end": 2.24
+        },
+        {
+          "text": "के",
+          "start": 2.24,
+          "end": 2.44
+        },
+        {
+          "text": "की",
+          "start": 2.44,
+          "end": 2.6
+        },
+        {
+          "text": "हिस्सो",
+          "start": 2.6,
+          "end": 2.98
+        },
+        {
+          "text": "में",
+          "start": 2.98,
+          "end": 3.46
+        },
+        {
+          "text": "भारी",
+          "start": 3.46,
+          "end": 3.82
+        },
+        {
+          "text": "बारिष",
+          "start": 3.82,
+          "end": 4.18
+        },
+        {
+          "text": "होती",
+          "start": 4.18,
+          "end": 4.5
+        },
+        {
+          "text": "है,",
+          "start": 4.5,
+          "end": 4.66
+        },
+        {
+          "text": "कि",
+          "start": 4.88,
+          "end": 4.98
+        },
+        {
+          "text": "सान",
+          "start": 4.98,
+          "end": 5.28
+        },
+        {
+          "text": "इसी",
+          "start": 5.28,
+          "end": 5.84
+        },
+        {
+          "text": "बारिष",
+          "start": 5.84,
+          "end": 6.22
+        },
+        {
+          "text": "का",
+          "start": 6.22,
+          "end": 6.38
+        },
+        {
+          "text": "इन्चार",
+          "start": 6.38,
+          "end": 6.84
+        },
+        {
+          "text": "करते",
+          "start": 6.84,
+          "end": 7.18
+        },
+        {
+          "text": "हैंूसु।",
+          "start": 7.18,
+          "end": 7.78
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "text": "क्योंकी दान की फ़सल को बहत पानी चाही है, लेकिन शहरो में यही पानी सरको पऺर जाता है,",
+      "start": 7.78,
+      "end": 13.22,
+      "duration": 5.44,
+      "visual_hint": null,
+      "search_text": "Because the harvest of grain needs a lot of water. But in the cities, this water is filled on the streets.",
+      "query": "urban street water runoff",
+      "queries": [
+        "urban street water runoff",
+        "city streets flooded after rain",
+        "dry farmland needing irrigation"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "86625",
+      "page_url": "https://pixabay.com/videos/id-86625/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Kmeel_com on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.260 >= 0.22 for query 'urban street water runoff' (best of 22 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.01)",
+      "relevance_score": 0.2604,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_001.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0003,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.54,
+            "logo_prob": 0.0003,
+            "scene_score": 0.2422,
+            "result": "ok"
+          },
+          {
+            "time": 7.63,
+            "logo_prob": 0.0015,
+            "scene_score": 0.2383,
+            "result": "ok"
+          },
+          {
+            "time": 12.72,
+            "logo_prob": 0.0119,
+            "scene_score": 0.2363,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:86625",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2021/08/28/86625-594416691_medium.mp4",
+        "final_score": 0.3004,
+        "width": 2560,
+        "height": 1440,
+        "duration": 15.0
+      },
+      "understanding": {
+        "queries": [
+          "urban street water runoff",
+          "city streets flooded after rain",
+          "dry farmland needing irrigation"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Illustrates water being lost on city streets while farms need it",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "keep watching",
+        "card": {
+          "headline": "KEEP WATCHING",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "e27de189ff97f4b4"
+      },
+      "safety": {
+        "queries": [
+          "urban street water runoff",
+          "city streets flooded after rain",
+          "dry farmland needing irrigation"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_001_e1e84e2fae957235.mp4",
+          "cache_key": "e1e84e2fae957235",
+          "frames": 164,
+          "look": "eq=brightness=-0.091:saturation=1.200",
+          "caption_font": "Noto Sans Devanagari",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_001_651764fff4d3478f.mp4",
+          "cache_key": "651764fff4d3478f",
+          "frames": 164,
+          "look": "eq=brightness=-0.091:saturation=1.200",
+          "caption_font": "Noto Sans Devanagari",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2147,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.248
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.228
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2643
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.248; best window 0.264; whole frame 0.215; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "क्योंकी",
+          "start": 7.78,
+          "end": 8.0
+        },
+        {
+          "text": "दान",
+          "start": 8.0,
+          "end": 8.3
+        },
+        {
+          "text": "की",
+          "start": 8.3,
+          "end": 8.46
+        },
+        {
+          "text": "फ़सल",
+          "start": 8.46,
+          "end": 8.84
+        },
+        {
+          "text": "को",
+          "start": 8.84,
+          "end": 9.0
+        },
+        {
+          "text": "बहत",
+          "start": 9.0,
+          "end": 9.32
+        },
+        {
+          "text": "पानी",
+          "start": 9.32,
+          "end": 9.68
+        },
+        {
+          "text": "चाही",
+          "start": 9.68,
+          "end": 9.96
+        },
+        {
+          "text": "है,",
+          "start": 9.96,
+          "end": 10.04
+        },
+        {
+          "text": "लेकिन",
+          "start": 10.18,
+          "end": 10.52
+        },
+        {
+          "text": "शहरो",
+          "start": 10.52,
+          "end": 10.96
+        },
+        {
+          "text": "में",
+          "start": 10.96,
+          "end": 11.42
+        },
+        {
+          "text": "यही",
+          "start": 11.42,
+          "end": 11.66
+        },
+        {
+          "text": "पानी",
+          "start": 11.66,
+          "end": 12.0
+        },
+        {
+          "text": "सरको",
+          "start": 12.0,
+          "end": 12.34
+        },
+        {
+          "text": "पऺर",
+          "start": 12.34,
+          "end": 12.58
+        },
+        {
+          "text": "जाता",
+          "start": 12.58,
+          "end": 13.06
+        },
+        {
+          "text": "है,",
+          "start": 13.06,
+          "end": 13.22
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "text": "अगर हम चद पर गिरने वाले पानी को तंक्यो में जमा करे,",
+      "start": 13.22,
+      "end": 16.83,
+      "duration": 3.61,
+      "visual_hint": null,
+      "search_text": "If we collect the water that falls on the roof in the tanks, then",
+      "query": "water barrels under roof",
+      "queries": [
+        "rainwater harvesting rooftop",
+        "water barrels under roof",
+        "roof gutters filling tank"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "12437",
+      "page_url": "https://pixabay.com/videos/id-12437/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "roofimages on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.247 >= 0.22 for query 'water barrels under roof' (best of 22 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.01)",
+      "relevance_score": 0.2472,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_002.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0009,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.83,
+            "logo_prob": 0.0019,
+            "scene_score": 0.2263,
+            "result": "ok"
+          },
+          {
+            "time": 8.48,
+            "logo_prob": 0.0058,
+            "scene_score": 0.2303,
+            "result": "ok"
+          },
+          {
+            "time": 14.13,
+            "logo_prob": 0.0112,
+            "scene_score": 0.2567,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:12437",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2017/10/12/12437-238795767_medium.mp4",
+        "final_score": 0.2872,
+        "width": 1920,
+        "height": 1080,
+        "duration": 17.0
+      },
+      "understanding": {
+        "queries": [
+          "rainwater harvesting rooftop",
+          "water barrels under roof",
+          "roof gutters filling tank"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Depicts collecting rain from roofs into storage tanks",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "keep watching",
+        "card": {
+          "headline": "KEEP WATCHING",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "1cdf82af97fb2975"
+      },
+      "safety": {
+        "queries": [
+          "rainwater harvesting rooftop",
+          "water barrels under roof",
+          "roof gutters filling tank"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_002_5761e1ba7663d8ee.mp4",
+          "cache_key": "5761e1ba7663d8ee",
+          "frames": 108,
+          "look": "eq=saturation=1.200",
+          "caption_font": "Noto Sans Devanagari",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_002_4d5d7aa434480334.mp4",
+          "cache_key": "4d5d7aa434480334",
+          "frames": 108,
+          "look": "eq=saturation=1.200",
+          "caption_font": "Noto Sans Devanagari",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2404,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2498
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2567
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2554
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.250; best window 0.257; whole frame 0.240; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "अगर",
+          "start": 13.22,
+          "end": 13.78
+        },
+        {
+          "text": "हम",
+          "start": 13.78,
+          "end": 13.96
+        },
+        {
+          "text": "चद",
+          "start": 13.96,
+          "end": 14.18
+        },
+        {
+          "text": "पर",
+          "start": 14.18,
+          "end": 14.48
+        },
+        {
+          "text": "गिरने",
+          "start": 14.48,
+          "end": 14.82
+        },
+        {
+          "text": "वाले",
+          "start": 14.82,
+          "end": 15.14
+        },
+        {
+          "text": "पानी",
+          "start": 15.14,
+          "end": 15.44
+        },
+        {
+          "text": "को",
+          "start": 15.44,
+          "end": 15.6
+        },
+        {
+          "text": "तंक्यो",
+          "start": 15.6,
+          "end": 16.04
+        },
+        {
+          "text": "में",
+          "start": 16.04,
+          "end": 16.2
+        },
+        {
+          "text": "जमा",
+          "start": 16.2,
+          "end": 16.44
+        },
+        {
+          "text": "करे,",
+          "start": 16.44,
+          "end": 16.7
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "text": "तो गर्म्यो में पानी की कमी कम हो सकती है, हर बूंद किमती है, इसलिये पानी बचाए.",
+      "start": 16.83,
+      "end": 22.7,
+      "duration": 5.87,
+      "visual_hint": null,
+      "search_text": "there can be a shortage of water in the summers. Every drop is precious. That is why water should be saved.",
+      "query": "close faucet to save water",
+      "queries": [
+        "dry summer landscape",
+        "close faucet to save water",
+        "water droplet closeup"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "180728",
+      "page_url": "https://pixabay.com/videos/id-180728/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "E_S_Mayorga on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.230 >= 0.22 for query 'close faucet to save water' (best of 24 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.01)",
+      "relevance_score": 0.2304,
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_003.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0029,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 10.01,
+            "logo_prob": 0.0103,
+            "scene_score": 0.2219,
+            "result": "ok"
+          },
+          {
+            "time": 30.02,
+            "logo_prob": 0.0047,
+            "scene_score": 0.2242,
+            "result": "ok"
+          },
+          {
+            "time": 50.03,
+            "logo_prob": 0.0072,
+            "scene_score": 0.2254,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:180728",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2023/09/15/180728-864967837_medium.mp4",
+        "final_score": 0.2704,
+        "width": 1280,
+        "height": 720,
+        "duration": 60.0
+      },
+      "understanding": {
+        "queries": [
+          "dry summer landscape",
+          "close faucet to save water",
+          "water droplet closeup"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Conveys summer water scarcity and the value of every drop",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "keep watching",
+        "card": {
+          "headline": "KEEP WATCHING",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "fingerprint": "3d81a3509f7a987f"
+      },
+      "safety": {
+        "queries": [
+          "dry summer landscape",
+          "close faucet to save water",
+          "water droplet closeup"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_003_32298100e2924561.mp4",
+          "cache_key": "32298100e2924561",
+          "frames": 176,
+          "look": "eq=brightness=0.087:saturation=1.200",
+          "caption_font": "Noto Sans Devanagari",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_003_856617e98d4228d3.mp4",
+          "cache_key": "856617e98d4228d3",
+          "frames": 176,
+          "look": "eq=brightness=0.087:saturation=1.200",
+          "caption_font": "Noto Sans Devanagari",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2238,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2326
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2552
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.1935
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "reason": "window 'centre' chosen (0.233; best window 0.255; whole frame 0.224; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "तो",
+          "start": 16.96,
+          "end": 17.22
+        },
+        {
+          "text": "गर्म्यो",
+          "start": 17.22,
+          "end": 17.62
+        },
+        {
+          "text": "में",
+          "start": 17.62,
+          "end": 17.92
+        },
+        {
+          "text": "पानी",
+          "start": 17.92,
+          "end": 18.26
+        },
+        {
+          "text": "की",
+          "start": 18.26,
+          "end": 18.4
+        },
+        {
+          "text": "कमी",
+          "start": 18.4,
+          "end": 18.68
+        },
+        {
+          "text": "कम",
+          "start": 18.68,
+          "end": 18.9
+        },
+        {
+          "text": "हो",
+          "start": 18.9,
+          "end": 19.1
+        },
+        {
+          "text": "सकती",
+          "start": 19.1,
+          "end": 19.44
+        },
+        {
+          "text": "है,",
+          "start": 19.44,
+          "end": 19.56
+        },
+        {
+          "text": "हर",
+          "start": 19.64,
+          "end": 19.76
+        },
+        {
+          "text": "बूंद",
+          "start": 19.76,
+          "end": 20.1
+        },
+        {
+          "text": "किमती",
+          "start": 20.1,
+          "end": 20.48
+        },
+        {
+          "text": "है,",
+          "start": 20.48,
+          "end": 20.68
+        },
+        {
+          "text": "इसलिये",
+          "start": 21.04,
+          "end": 21.42
+        },
+        {
+          "text": "पानी",
+          "start": 21.42,
+          "end": 21.72
+        },
+        {
+          "text": "बचाए.",
+          "start": 21.72,
+          "end": 22.12
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "aspect_ratio": "16:9",
+      "file": "video_16x9.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 22.699
+    },
+    {
+      "aspect_ratio": "9:16",
+      "file": "video_9x16.mp4",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "duration": 22.699
+    }
+  ]
+}

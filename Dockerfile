@@ -12,7 +12,8 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     XDG_CACHE_HOME=/models/cache
 
 # ffmpeg = all audio/video work; espeak-ng = pronunciation helper used by Kokoro TTS;
-# fonts-dejavu-core = a font for the captions burned into the videos.
+# fonts-dejavu-core = a font for the (Latin) captions burned into the videos. Tamil / Devanagari fonts
+# (Noto, SIL OFL) come with the code in app/fonts.
 RUN apt-get update \
     && apt-get install -y --no-install-recommends ffmpeg espeak-ng fonts-dejavu-core \
     && rm -rf /var/lib/apt/lists/*

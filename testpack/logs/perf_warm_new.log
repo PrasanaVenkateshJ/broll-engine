@@ -1,0 +1,3 @@
+1 input(s) -> http://localhost:8000 (concurrency 1)
+perf_b_sleep                   succeeded                             256.56 s  job 446bf9123a1049d88dec2d8fc916abf2
+summary: testpack\outputs\perf\warm_new_script\summary.csv and testpack\outputs\perf\warm_new_script\summary.md
