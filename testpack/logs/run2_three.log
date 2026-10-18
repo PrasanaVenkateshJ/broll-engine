@@ -1,0 +1,5 @@
+3 input(s) -> http://localhost:8000 (concurrency 1)
+core11_hi_tts_saving           succeeded                             152.26 s  job 79bb42ab827046bea354b076714a6400
+hard01_abstract_and_statistics succeeded                             150.23 s  job 47cfab0c5f96495d92bc1b67d7a1c297
+hard04_sensitive_news          succeeded                             150.01 s  job c89d7d297edc433d80782931d956f912
+summary: testpack\outputs\run2\summary.csv and testpack\outputs\run2\summary.md

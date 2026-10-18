@@ -326,6 +326,7 @@ comments in [.env.example](.env.example). "Code default" is used when the variab
 | `KOKORO_SPEED` | `1.0` | `1.0` | Speaking speed for Kokoro (1.0 = normal). |
 | `TTS_VOICE_MAP` | `en-US-female=a:af_heart,en-US-male=a:am_michael,en-GB-fem...` | `en-US-female=a:af_heart,en-US-male=a:am_michael,en-GB-fem...` | Our voice names -&gt; kokoro "language code:voice id". en-IN uses a Hindi speaker voice reading English. |
 | `SCENE_PAUSE_SECONDS` | `0.3` | `0.3` | Scene-list input: seconds of silence after each scene's narration. |
+| `TTS_CACHE_DIR` | `./data/tts_cache` | `./data/tts_cache` | Finished TTS audio is reused for the same text + voice + model + speed. Empty = off. |
 | `MOCK_WORDS_PER_SECOND` | `2.5` | `2.5` | Mock TTS: words per second (sets the length of its tone). |
 | **Transcription** | | | |
 | `TRANSCRIBE_PROVIDER` | `mock` | `mock` | "whisper" (faster-whisper, MIT) or "mock" (spreads the known text evenly; tests / CI). |
@@ -363,6 +364,7 @@ comments in [.env.example](.env.example). "Code default" is used when the variab
 | `VIDEO_PRESET` | `veryfast` | `veryfast` | libx264 speed preset (ultrafast ... veryslow) and quality (lower CRF = better, bigger). |
 | `VIDEO_CRF` | `23` | `23` | libx264 speed preset (ultrafast ... veryslow) and quality (lower CRF = better, bigger). |
 | `AUDIO_BITRATE` | `192k` | `192k` | AAC audio bitrate of the output videos. |
+| `RENDER_WORKERS` | `3` | `3` | Scene segments rendered at the same time (each its own ffmpeg). 1 = one after the other. |
 | **Reproducibility** | | | |
 | `SEED` | `1234` | `1234` | One seed for LLM sampling, mock providers and generated card colours. |
 | **Network safety (SSRF)** | | | |
@@ -375,16 +377,33 @@ comments in [.env.example](.env.example). "Code default" is used when the variab
 | `LLM_TIMEOUT_SECONDS` | `30.0` | `30` | Seconds to wait for one LLM answer. |
 | `LLM_TEMPERATURE` | `0.0` | `0` | 0 = always the most likely answer, so the same script gives the same queries (repeatable). |
 | `LLM_RETRIES` | `1` | `1` | Extra tries after a failed LLM call. |
+| `LLM_BATCH_SIZE` | `6` | `6` | Scenes per LLM request (long scripts go in batches; each batch also gets the whole script). |
+| `LLM_MAX_RETRY_AFTER_SECONDS` | `30.0` | `30.0` | HTTP 429 from the LLM: wait its retry-after, at most this long per wait. |
+| `LLM_MAX_WAIT_SECONDS` | `120.0` | `120.0` | All rate-limit waits of one job together; after that the remaining scenes use the rules. |
+| `LLM_REASONING_EFFORT` | `` | `` | gpt-oss reasoning_effort (low / medium / high). Empty = the provider's default. |
+| `QUERIES_PER_SCENE` | `5` | `5` | Search queries per scene (meaning, metaphor, setting, action, mood). |
+| `QUALITY_MODE` | `balanced` | `balanced` | `fast` / `balanced` / `best`: fills in QUERIES_PER_SCENE, PROVIDER_PAGES, MAX_CANDIDATES_PER_SOURCE, EARLY_EXIT, MULTI_FRAME_TOP_K, VLM_TOP_K, VLM_MAX_SCENES_PER_JOB, VLM_JUDGE_CONFIDENT (see `QUALITY_PRESETS` in app/config.py) unless you set them yourself; `fast` also switches the judge off. Recorded in manifest.json. |
+| `STORY_SENSITIVE_MIN_SCENES` | `2` | `2` | The whole story is sensitive (calm rules for EVERY scene) from this many sensitive scenes. |
+| `STORY_SENSITIVE_MIN_SHARE` | `0.3` | `0.3` | ...or from this share of sensitive scenes (or when the LLM says so). |
 | **Footage providers** | | | |
-| `PROVIDER_ORDER` | `pixabay_video,pixabay_image_motion,wikimedia,generated` | `mock,generated` | Order in which sources are tried for each scene. Real order (my PC): pixabay_video,pixabay_image_motion,wikimedia,generated Docker / CI default: mock,generated (no keys, no network). Also available: pexels. |
+| `PROVIDER_ORDER` | `pixabay_video,pixabay_image_motion,wikimedia,openverse,generated` | `mock,generated` | Order in which sources are tried for each scene. Real order (my PC): pixabay_video,pixabay_image_motion,wikimedia,openverse,generated Docker / CI default: mock,generated (no keys, no network). Also available: pexels. |
 | `PROVIDERS_DISABLED` | *(empty)* | *(empty)* | Comma-separated providers to switch off, e.g. pixabay_video. |
 | `PROVIDERS_OVERRIDE_FILE` | `./data/providers_override.json` | `./data/providers_override.json` | JSON file re-read before every search, to switch a provider off DURING a job: {"disabled": ["pixabay_video"]} |
 | `PROVIDER_TIMEOUT_SECONDS` | `15.0` | `15` | Seconds to wait for one provider search. |
 | `PROVIDER_RESULTS_PER_QUERY` | `8` | `8` | Results asked for per search query. |
+| `PROVIDER_PAGES` | `1` | `1` | Result pages per query; fetched as ONE request of RESULTS x PAGES where the API allows (same results, fewer calls). |
+| `MAX_CANDIDATES_PER_SOURCE` | `15` | `15` | Most candidates of one source scored per scene, taken round-robin over the queries (every query's best hits first). CLIP is the slow part. 0 = no cap. |
+| `PREFETCH_CLIPS` | `true` | `true` | Pass 1 also downloads, verifies and frame-logo-checks each scene's likely winner in parallel; pass 2 reuses it when it picks that clip (same choices, less waiting). |
+| `EARLY_EXIT` | `true` | `true` | Score candidates EARLY_EXIT_STEP at a time and stop when one clearly passes (>= STOCK_MIN_SCORE + PREFER_VIDEO_MARGIN, logo check ok); the rest is scored only if pass 2 needs it. |
+| `EARLY_EXIT_STEP` | `6` | `6` | Candidates scored per early-exit step. |
+| `PROVIDER_MAX_QUERIES` | `wikimedia=3,openverse=2` | `wikimedia=3,openverse=2` | At most this many queries per scene for these sources (name=n,...): small free quotas. |
+| `PROVIDER_REQUESTS_PER_MINUTE` | `pixabay=90,openverse=18` | `pixabay=90,openverse=18` | Client-side request limit per API (name=n,...), so a long job waits instead of getting HTTP 429. |
+| `PROVIDER_COOLDOWN_SECONDS` | `60.0` | `60.0` | After an HTTP 429 a source is skipped for its retry-after, at least this long. |
+| `OPENVERSE_API_URL` | `https://api.openverse.org/v1/images/` | `https://api.openverse.org/v1/images/` | Openverse image search endpoint (no key; CC0 / Public Domain Mark / CC BY only). |
 | `FOOTAGE_WORKERS` | `4` | `4` | Scenes whose footage is searched + scored at the same time (pass 1). The choice (pass 2) is always made one scene at a time, in scene order, so the no-repeat rule and the result do not change. 1 = one after the other. |
 | `PREVIEW_WORKERS` | `8` | `8` | Preview pictures downloaded at the same time (per scene). |
 | `PREVIEW_TIMEOUT_SECONDS` | `8.0` | `8` | Time limit for one preview picture download. |
-| `FOOTAGE_CACHE_SECONDS` | `900` | `900` | Search results + preview pictures are reused by later jobs with the same query for this long (always within one job). 0 = off. |
+| `FOOTAGE_CACHE_SECONDS` | `86400` | `86400` | Search results + preview pictures are reused by later jobs with the same query for this long (Pixabay's terms ask for 24 h caching; always within one job). 0 = off. |
 | `FOOTAGE_CACHE_DIR` | `./data/footage_cache` | `./data/footage_cache` | Folder for the cached preview pictures. |
 | `CLIP_BATCH_SIZE` | `32` | `32` | Pictures CLIP looks at in one go. |
 | `CLIP_PRELOAD` | `true` | `true` | Load the CLIP model when the worker starts, not inside the first job. |
@@ -404,7 +423,28 @@ comments in [.env.example](.env.example). "Code default" is used when the variab
 | `STOCK_MIN_SCORE` | `0.22` | `0.22` | A stock clip is used only if its CLIP score is at least this. |
 | `DURATION_BONUS` | `0.02` | `0.02` | Small extra points that only change the ORDER of candidates (never pass/fail). |
 | `ORIENTATION_BONUS` | `0.02` | `0.02` | Small extra points that only change the ORDER of candidates (never pass/fail). |
-| `GENERATED_FOR_STATISTICS` | `true` | `true` | true = lines with a number/percentage get a number card (text from the narration only) instead of stock footage. |
+| `GENERATED_FOR_STATISTICS` | `true` | `true` | true = a line with a number/percentage always SHOWS the number (text from the narration only): as a badge on footage (STATISTIC_OVERLAY) or as a number card. |
+| `STATISTIC_OVERLAY` | `true` | `true` | true = a statistic line gets real footage of its topic with the number drawn on it as a badge; a plain number card only if no clip passes. false = straight to a number card. |
+| `CLIP_PROMPTS` | `a stock video of {q}\|a photo of {q}\|{q}` | `a stock video of {q}\|a photo of {q}\|{q}` | Prompt ensembling: each query is encoded with these prompts ({q} = the query) and averaged. |
+| `SCORE_TOP_QUERIES` | `3` | `3` | A candidate's score = mean of its best N query similarities. |
+| `MULTI_FRAME_TOP_K` | `2` | `2` | The best N video candidates per source also get extra frames; score = mean over thumbnail + frames. 0 = off. |
+| `MULTI_FRAME_POSITIONS` | `0.3,0.7` | `0.3,0.7` | Where the extra frames are taken (fractions of the clip length). |
+| `MULTI_FRAME_MAX_MB` | `15` | `15` | Largest small rendition downloaded for the extra frames. |
+| `TEXT_PROMPTS` | `a screenshot of a document full of text\|a presentation s...` | `a screenshot of a document full of text\|a presentation s...` | CLIP prompts for text-heavy pictures (slides, screenshots, posters), '/'-separated. |
+| `TEXT_PENALTY_PROB` | `0.5` | `0.5` | Text-heavy probability above this -> TEXT_PENALTY off the ORDER score (never the threshold). |
+| `TEXT_PENALTY` | `0.03` | `0.03` | Order-score penalty for a text-heavy picture. |
+| `PREFER_VIDEO_MARGIN` | `0.03` | `0.03` | A passing stock video beats photo-motion unless the photo scores more than this higher; a video at threshold + margin skips the photo search. |
+| `RELATIVE_MARGIN` | `0.12` | `0.12` | Adaptive threshold: if nothing passes, a candidate >= STOCK_MIN_SCORE x (1 - this) may be used ONLY if the VLM judge rates it >= VLM_ACCEPT_SCORE. |
+| `VLM_PROVIDER` | `none` | `none` | Independent vision-language judge: groq / mock / none (off). |
+| `VLM_MODEL` | `qwen/qwen3.8-27b` | `qwen/qwen3.8-27b` | Groq vision model for the judge (qwen/qwen3.8-27b: Apache-2.0 weights, a Groq preview model). |
+| `VLM_TIMEOUT_SECONDS` | `30.0` | `30.0` | Time limit for one judge request. |
+| `VLM_TOP_K` | `3` | `3` | Candidates judged per scene, drawn side by side in ONE picture (Groq counts 2,048 tokens per image). |
+| `VLM_PANEL_WIDTH` | `256` | `256` | Width in pixels of each candidate in the judge's picture. |
+| `VLM_MAX_SCENES_PER_JOB` | `3` | `3` | At most this many scenes judged per job, most uncertain first. 0 = all. |
+| `VLM_JUDGE_CONFIDENT` | `false` | `false` | Also judge confident scenes (best score >= STOCK_MIN_SCORE + PREFER_VIDEO_MARGIN); false = only close calls and near misses. |
+| `VLM_REJECT_SCORE` | `1` | `1` | A judged candidate rated this or lower (1-5) is dropped. |
+| `VLM_ACCEPT_SCORE` | `4` | `4` | Rating needed for the adaptive threshold. |
+| `VLM_MAX_RETRY_AFTER_SECONDS` | `0.0` | `0.0` | HTTP 429 from the judge: wait if retry-after is at most this, else stop judging for this job and keep the CLIP order. 0 = never wait. |
 | `LOGO_CHECK` | `true` | `true` | Logo check (only candidates that pass STOCK_MIN_SCORE): logo probability 0..1 = CLIP softmax over LOGO_PROMPTS + LOGO_NEUTRAL_PROMPTS, summed over the logo prompts, highest of the whole picture and its LOGO_CROP_GRID x LOGO_CROP_GRID crops. prob &gt; LOGO_REJECT_PROB -&gt; rejected; prob &gt; LOGO_PENALTY_PROB -&gt; kept, but LOGO_PENALTY is taken off its order score. Calibration: [logo_report.md](testpack/calibration/logo_report.md). false = off. |
 | `LOGO_PROMPTS` | `a photo of a laptop with an apple logo\|a photo of a shop...` | `a photo of a laptop with an apple logo\|a photo of a shop...` | Logo prompts ("\|"-separated): pictures that SHOW a logo / brand name. |
 | `LOGO_NEUTRAL_PROMPTS` | `a photo of a laptop\|a photo of a shop\|a photo of a city...` | `a photo of a laptop\|a photo of a shop\|a photo of a city...` | Neutral prompts: the same kinds of subjects WITHOUT a logo. (Prompts that only say "no logos" do not work: CLIP ignores the "no".) |
@@ -420,6 +460,8 @@ comments in [.env.example](.env.example). "Code default" is used when the variab
 | `CROP_SAMPLE_FRAMES` | `3` | `3` | Subject-aware crop (RANK_SCORER=clip): colour frames sampled per clip; each crop window (left / centre / right / salient) is scored with CLIP against the scene meaning. |
 | `CROP_BLUR_MARGIN` | `0.02` | `0.02` | Best window this much (or more) BELOW the whole frame -&gt; no window keeps the subject -&gt; blurred fit. |
 | `CROP_TIE_MARGIN` | `0.03` | `0.03` | Leave the salient / centre window only if another window scores more than this above it. |
+| `CROP_SUBJECT_LEVEL` | `0.5` | `0.5` | Subject span = where localised detail stays >= this x its peak (crop near-tie rule). |
+| `CROP_SUBJECT_PAD` | `0.06` | `0.06` | ...at least the peak +- this fraction of the frame. A near-tie window whose edge falls inside it loses. |
 | `TARGET_LUMA` | `110.0` | `110` | Brightness / colour normalisation: target mean luma (0-255), max brightness shift, target saturation. (Measured on real Pixabay clips in my first real run: YAVG 102-107, SATAVG 15-17.) |
 | `MAX_BRIGHTNESS_SHIFT` | `0.12` | `0.12` | Brightness / colour normalisation: target mean luma (0-255), max brightness shift, target saturation. (Measured on real Pixabay clips in my first real run: YAVG 102-107, SATAVG 15-17.) |
 | `TARGET_SATURATION` | `18.0` | `18` | Brightness / colour normalisation: target mean luma (0-255), max brightness shift, target saturation. (Measured on real Pixabay clips in my first real run: YAVG 102-107, SATAVG 15-17.) |

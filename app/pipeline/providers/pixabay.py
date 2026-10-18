@@ -6,6 +6,10 @@
 
 Licence: Pixabay Content License - commercial use allowed, no attribution required, no
 watermark on files downloaded through the API. We still record the creator's name.
+ai_generated: Pixabay marks AI-made media with "isAiGenerated" in each hit; we record it as given.
+Requests: PROVIDER_RESULTS_PER_QUERY x PROVIDER_PAGES results in ONE request (per_page up to 200 = the same
+results as asking page 1 and page 2), and at most 90 requests per minute for the whole job
+(PROVIDER_REQUESTS_PER_MINUTE; Pixabay allows 100 per 60 s per key).
 """
 from app.config import get_settings
 from app.pipeline.providers.base import Candidate, ClipNotUsable, Provider, ProviderError, get_json
@@ -14,6 +18,7 @@ LICENCE_NAME = "Pixabay Content License"
 LICENCE_URL = "https://pixabay.com/service/license-summary/"
 # Pixabay video sizes: large is often 4K, medium ~1920x1080, small ~1280x720, tiny ~960x540.
 VIDEO_SIZE_PREFERENCE = ("medium", "large", "small", "tiny")
+PROBE_SIZE_PREFERENCE = ("tiny", "small")  # the smallest file, only for scoring extra frames
 
 
 def _tags(text: str) -> list[str]:
@@ -23,21 +28,22 @@ def _tags(text: str) -> list[str]:
 class PixabayVideoProvider(Provider):
     name = "pixabay_video"
     key_setting = "PIXABAY_API_KEY"
+    rate_key = "pixabay"
     api_info = "Pixabay Videos API (pixabay.com/api/videos)"
 
     def search(self, query, orientation, min_duration):
         s = get_settings()
         data = get_json(s.PIXABAY_VIDEO_API_URL, {
             "key": s.PIXABAY_API_KEY, "q": query[:100], "safesearch": "true", "video_type": "film",
-            "per_page": max(3, min(200, s.PROVIDER_RESULTS_PER_QUERY)), "order": "popular"})
+            "per_page": max(3, self.results_per_request(200)), "order": "popular"}, rate_key=self.rate_key)
         return self._candidates(data, query, min_duration)
 
     def lookup(self, clip_id):
         s = get_settings()
         if not clip_id.isdigit():
             raise ClipNotUsable(f"Pixabay ids are numbers, got '{clip_id}'")
-        found = self._candidates(get_json(s.PIXABAY_VIDEO_API_URL, {"key": s.PIXABAY_API_KEY, "id": clip_id}),
-                                 f"pixabay video {clip_id}", 0.0)
+        found = self._candidates(get_json(s.PIXABAY_VIDEO_API_URL, {"key": s.PIXABAY_API_KEY, "id": clip_id},
+                                          rate_key=self.rate_key), f"pixabay video {clip_id}", 0.0)
         if not found:
             raise ClipNotUsable(f"Pixabay video {clip_id} not found")
         return found[0]
@@ -59,19 +65,23 @@ class PixabayVideoProvider(Provider):
             preview = (videos.get("small") or {}).get("thumbnail") or chosen.get("thumbnail") or ""
             if not preview:
                 continue  # nothing to score
+            probe = next(((videos.get(k) or {}).get("url") for k in PROBE_SIZE_PREFERENCE
+                          if (videos.get(k) or {}).get("url")), "")
             out.append(Candidate(
                 provider=self.name, id=str(hit.get("id")), kind="video", preview_url=preview,
                 download_url=chosen["url"], duration=duration, width=int(chosen.get("width") or 0),
                 height=int(chosen.get("height") or 0), tags=_tags(hit.get("tags", "")),
                 licence_name=LICENCE_NAME, licence_url=LICENCE_URL,
                 attribution=f"{hit.get('user', 'unknown')} on Pixabay", page_url=hit.get("pageURL", ""),
-                query=query))
+                ai_generated=bool(hit.get("isAiGenerated")), query=query, extra={"probe_url": probe} if probe else {}))
         return out
 
 
 class PixabayImageProvider(Provider):
     name = "pixabay_image_motion"
     key_setting = "PIXABAY_API_KEY"
+    rate_key = "pixabay"
+    media_kind = "image"
     api_info = "Pixabay Images API (pixabay.com/api) + FFmpeg Ken Burns motion"
 
     def search(self, query, orientation, min_duration):
@@ -79,15 +89,15 @@ class PixabayImageProvider(Provider):
         data = get_json(s.PIXABAY_IMAGE_API_URL, {
             "key": s.PIXABAY_API_KEY, "q": query[:100], "safesearch": "true", "image_type": "photo",
             "orientation": {"landscape": "horizontal", "portrait": "vertical"}.get(orientation, "all"),
-            "per_page": max(3, min(200, s.PROVIDER_RESULTS_PER_QUERY)), "order": "popular"})
+            "per_page": max(3, self.results_per_request(200)), "order": "popular"}, rate_key=self.rate_key)
         return self._candidates(data, query)
 
     def lookup(self, clip_id):
         s = get_settings()
         if not clip_id.isdigit():
             raise ClipNotUsable(f"Pixabay ids are numbers, got '{clip_id}'")
-        found = self._candidates(get_json(s.PIXABAY_IMAGE_API_URL, {"key": s.PIXABAY_API_KEY, "id": clip_id}),
-                                 f"pixabay image {clip_id}")
+        found = self._candidates(get_json(s.PIXABAY_IMAGE_API_URL, {"key": s.PIXABAY_API_KEY, "id": clip_id},
+                                          rate_key=self.rate_key), f"pixabay image {clip_id}")
         if not found:
             raise ClipNotUsable(f"Pixabay image {clip_id} not found")
         return found[0]
@@ -108,5 +118,5 @@ class PixabayImageProvider(Provider):
                 download_url=hit["largeImageURL"], width=round(w * scale), height=round(h * scale),
                 tags=_tags(hit.get("tags", "")), licence_name=LICENCE_NAME, licence_url=LICENCE_URL,
                 attribution=f"{hit.get('user', 'unknown')} on Pixabay", page_url=hit.get("pageURL", ""),
-                query=query))
+                ai_generated=bool(hit.get("isAiGenerated")), query=query))
         return out

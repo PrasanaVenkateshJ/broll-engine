@@ -129,6 +129,14 @@ def build_timeline(job_id: str, input_type: str, duration: float, language: str,
             "commercial_use": clip["commercial_use"], "watermark": clip["watermark"],
             "ai_generated": clip["ai_generated"], "generated": clip["generated"], "reason": clip["reason"],
             "relevance_score": clip["relevance_score"],
+            # Statistic line on real footage: the number badge drawn over the clip (narration only).
+            "overlay": bool(clip["overlay"]), "overlay_card": clip["overlay"],
+            # The independent VLM judge's rating 1-5 of THIS clip (None = not judged), and its full answer.
+            "vlm_score": (clip["vlm"] or {}).get("score"), "vlm": clip["vlm"],
+            # How the score was made: thumbnail + extra frames, text-heavy penalty, bonuses, adaptive pass.
+            "score_details": clip["score_details"],
+            "story_sensitive": getattr(meaning, "story_sensitive", False),
+            "query_roles": getattr(meaning, "query_roles", []),
             **card_facts(selection),
             "thumbnail": (thumbnails or {}).get(scene.index),
             # Thumbnail + downloaded-clip-frame logo test (None for generated cards / LOGO_CHECK=false).
@@ -193,6 +201,9 @@ def footage_mix(selections: list) -> dict:
     for sel in selections:
         counts[clip_type(sel)] += 1
     stat_cards = sum(1 for sel in selections if sel.candidate.generated and sel.reason.startswith("statistic line"))
+    overlays = sum(1 for sel in selections if getattr(sel, "overlay", None))
+    adaptive = sum(1 for sel in selections if (getattr(sel, "details", None) or {}).get("adaptive"))
+    judged = [sel.vlm["score"] for sel in selections if (getattr(sel, "vlm", None) or {}).get("score") is not None]
     others = {**counts, "generated_card": counts["generated_card"] - stat_cards}
     n, n_others = len(selections), len(selections) - stat_cards
     return {
@@ -200,21 +211,32 @@ def footage_mix(selections: list) -> dict:
         "counts": counts,
         "share": {t: round(counts[t] / n, 3) if n else 0.0 for t in types},
         "statistic_cards": stat_cards,
+        "statistic_overlays": overlays,
+        "adaptive_threshold_clips": adaptive,
+        "vlm_judged_clips": len(judged),
+        "vlm_mean_score": round(sum(judged) / len(judged), 2) if judged else None,
         "share_without_statistic_cards": {t: round(others[t] / n_others, 3) if n_others else 0.0 for t in types},
     }
 
 
 MANIFEST_SETTINGS = (
-    "SEED", "MIN_SCENE_SECONDS", "MAX_SCENE_SECONDS", "PAUSE_SECONDS", "UNDERSTAND_PROVIDER", "LLM_MODEL",
+    "QUALITY_MODE", "SEED", "MIN_SCENE_SECONDS", "MAX_SCENE_SECONDS", "PAUSE_SECONDS", "UNDERSTAND_PROVIDER", "LLM_MODEL",
     "PROVIDER_ORDER", "PROVIDERS_DISABLED", "RANK_SCORER", "CLIP_MODEL", "CLIP_PRETRAINED", "STOCK_MIN_SCORE",
     "DURATION_BONUS", "ORIENTATION_BONUS", "GENERATED_FOR_STATISTICS", "MAX_SLOWDOWN", "KEN_BURNS_ZOOM",
     "TARGET_LUMA", "TARGET_SATURATION", "QA_BLACK_SECONDS", "QA_FREEZE_SECONDS", "QA_MAX_DRIFT_SECONDS",
     "QA_RETRIES", "RENDER_FPS", "VIDEO_PRESET", "VIDEO_CRF", "AUDIO_SAMPLE_RATE", "AUDIO_BITRATE",
     "CAPTION_MAX_CHARS_PER_LINE", "CAPTION_MAX_LINES", "LOGO_CHECK", "LOGO_CROP_GRID", "LOGO_REJECT_PROB",
-    "LOGO_PENALTY_PROB", "LOGO_PENALTY", "LOGO_FRAME_COUNT")
+    "LOGO_PENALTY_PROB", "LOGO_PENALTY", "LOGO_FRAME_COUNT", "STATISTIC_OVERLAY", "QUERIES_PER_SCENE",
+    "PROVIDER_RESULTS_PER_QUERY", "PROVIDER_PAGES", "MAX_CANDIDATES_PER_SOURCE", "EARLY_EXIT", "EARLY_EXIT_STEP",
+    "PROVIDER_MAX_QUERIES", "CLIP_PROMPTS", "SCORE_TOP_QUERIES",
+    "MULTI_FRAME_TOP_K", "MULTI_FRAME_POSITIONS", "TEXT_PENALTY_PROB", "TEXT_PENALTY", "PREFER_VIDEO_MARGIN",
+    "RELATIVE_MARGIN", "VLM_PROVIDER", "VLM_MODEL", "VLM_TOP_K", "VLM_MAX_SCENES_PER_JOB", "VLM_JUDGE_CONFIDENT", "VLM_REJECT_SCORE",
+    "VLM_ACCEPT_SCORE", "LLM_BATCH_SIZE", "STORY_SENSITIVE_MIN_SCENES", "STORY_SENSITIVE_MIN_SHARE",
+    "CROP_TIE_MARGIN", "CROP_SUBJECT_LEVEL", "CROP_SUBJECT_PAD", "RENDER_WORKERS")
 
 COST_METHOD = ("0 USD: every service used here is free - Groq free tier for the LLM (tokens counted in "
-               "llm_tokens), Pixabay and Wikimedia Commons APIs are free, and Kokoro, Whisper, open_clip and "
+               "llm_tokens; the optional VLM judge too), Pixabay, Wikimedia Commons and Openverse APIs are free, and "
+               "Kokoro, Whisper, open_clip and "
                "FFmpeg run locally on the CPU. On paid plans: cost = llm_tokens x the LLM price per token + "
                "compute time (timings_seconds) x the server price.")
 
@@ -224,7 +246,8 @@ def build_manifest(*, job_id: str, created_at: str, app: dict, input_facts: dict
                    qa: dict) -> dict:
     """Everything needed to understand (and repeat) how this job was made."""
     s = get_settings()
-    llm_tokens = int((models.get("understand") or {}).get("tokens_used") or 0)
+    llm_tokens = (int((models.get("understand") or {}).get("tokens_used") or 0)
+                  + int((models.get("vlm_judge") or {}).get("tokens_used") or 0))
     return {
         "job_id": job_id,
         "created_at": created_at,
@@ -232,6 +255,7 @@ def build_manifest(*, job_id: str, created_at: str, app: dict, input_facts: dict
         "input": input_facts,
         "models": models,
         "providers": providers,
+        "quality_mode": s.QUALITY_MODE,
         "settings": {k: getattr(s, k) for k in MANIFEST_SETTINGS},
         "seed": s.SEED,
         "speech_check": speech_check,

@@ -64,18 +64,24 @@ class SceneMeaning:
     fingerprint: str = ""                              # what this answer depends on (see fingerprint())
     # The generated card's text, built by code from the narration ONLY (cards.build_card).
     card: dict = field(default_factory=dict)
+    # What each query is for (Groq: meaning, metaphor, setting, action, mood), same order as queries.
+    query_roles: list[str] = field(default_factory=list)
+    # The WHOLE story is sad / tragic (death, disaster, illness ...): calm, respectful rules for this scene
+    # too, even if the line alone looks neutral. Set by apply_story_sensitivity().
+    story_sensitive: bool = False
 
     def to_dict(self) -> dict:
-        return {"queries": self.queries, "flags": self.flags, "reason": self.reason, "source": self.source,
-                "names": self.names, "number": self.number, "keyword": self.keyword, "card": self.card,
-                "fingerprint": self.fingerprint}
+        return {"queries": self.queries, "query_roles": self.query_roles, "flags": self.flags, "reason": self.reason,
+                "source": self.source, "names": self.names, "number": self.number, "keyword": self.keyword,
+                "card": self.card, "story_sensitive": self.story_sensitive, "fingerprint": self.fingerprint}
 
     @classmethod
     def from_dict(cls, index: int, data: dict) -> "SceneMeaning":
         return cls(index=index, queries=list(data["queries"]), flags=dict(data["flags"]), reason=data["reason"],
                    source=data["source"], names=list(data.get("names") or []), number=data.get("number"),
                    keyword=data.get("keyword") or "", fingerprint=data.get("fingerprint") or "",
-                   card=dict(data.get("card") or {}))
+                   card=dict(data.get("card") or {}), query_roles=list(data.get("query_roles") or []),
+                   story_sensitive=bool(data.get("story_sensitive")))
 
 
 class UnderstandError(Exception):
@@ -192,12 +198,40 @@ SENSITIVE = re.compile(
     r"\b(death|deaths|dead|die|died|dying|kill\w*|cancer|war|wars|suicid\w*|abus\w*|assault\w*|attack\w*|shoot\w*|"
     r"terror\w*|disaster\w*|earthquake\w*|flood\w*|tsunami\w*|hurricane\w*|funeral\w*|grie\w*|mourn\w*|illness\w*|"
     r"disease\w*|pandemic\w*|covid|accident\w*|crash\w*|victim\w*|violen\w*|traged\w*|tragic|poverty|hunger|famine|"
-    r"refugee\w*|homeless\w*|depress\w*|addict\w*|overdos\w*|murder\w*|injur\w*|wounded|bomb\w*|hostage\w*)\b",
+    r"refugee\w*|homeless\w*|depress\w*|addict\w*|overdos\w*|murder\w*|injur\w*|wounded|bomb\w*|hostage\w*|"
+    # loss of life said gently: "lost their lives", "lost someone", "passed away", "loss of life"
+    r"lost (?:their|his|her|our|my|your) lives?|lost (?:someone|a loved one|loved ones)|passed away|loss of life)\b",
     re.I)
 
 
 def detect_sensitive(text: str) -> list[str]:
     return list(dict.fromkeys(m.group(1).lower() for m in SENSITIVE.finditer(text)))
+
+
+def story_is_sensitive(meanings: list["SceneMeaning"], llm_says: bool = False) -> tuple[bool, str]:
+    """Is the WHOLE story sad / tragic? (yes/no, why). Measurable rule: at least STORY_SENSITIVE_MIN_SCENES
+    sensitive scenes, or at least STORY_SENSITIVE_MIN_SHARE of all scenes, or the LLM says so."""
+    s = get_settings()
+    count = sum(1 for m in meanings if m.flags.get("sensitive"))
+    share = count / len(meanings) if meanings else 0.0
+    if count and count >= s.STORY_SENSITIVE_MIN_SCENES:
+        return True, f"{count} of {len(meanings)} scenes are sensitive (>= {s.STORY_SENSITIVE_MIN_SCENES})"
+    if count and share >= s.STORY_SENSITIVE_MIN_SHARE:
+        return True, f"{count} of {len(meanings)} scenes are sensitive ({share:.0%} >= {s.STORY_SENSITIVE_MIN_SHARE:.0%})"
+    if llm_says:
+        return True, "the LLM rated the whole script as sensitive"
+    return False, ""
+
+
+def apply_story_sensitivity(meanings: list["SceneMeaning"], llm_says: bool = False) -> str:
+    """Mark every scene of a sensitive story (safety.py then gives ALL of them calm, respectful queries).
+    Returns the reason ("" = the story is not sensitive)."""
+    sensitive, why = story_is_sensitive(meanings, llm_says)
+    for m in meanings:
+        m.story_sensitive = sensitive
+        if sensitive and not m.flags.get("sensitive"):
+            m.reason += f" (story is sensitive: {why} -> calm, respectful footage for this scene too)"
+    return why
 
 
 # ---------- Rules: the sense dictionary ----------
@@ -368,7 +402,56 @@ TOPICS: dict[str, tuple[list[str], bool]] = {
     "goal": (["arrow hitting a target", "mountain summit at sunrise", "runner crossing finish line"], True),
     "goals": (["arrow hitting a target", "mountain summit at sunrise", "runner crossing finish line"], True),
 }
-ABSTRACT_WORDS = {w for w, (_, abstract) in TOPICS.items() if abstract} | {
+# Abstract ideas -> CONCRETE, filmable visual metaphors (things a camera can actually see). Used by the rules
+# adapter before the TOPICS queries; Groq is asked for the same kind of metaphors in its prompt.
+METAPHORS: dict[str, list[str]] = {
+    "trust": ["two people shaking hands", "hand passing house keys", "friends helping each other climb",
+              "child holding a parent's hand", "team catching a falling colleague"],
+    "hope": ["sunrise over hills", "green sprout breaking through soil", "light through a window in a dark room",
+             "child looking at the sky", "candle glowing in the dark"],
+    "patience": ["hourglass with falling sand", "fisherman waiting by a lake", "seedling growing time lapse",
+                 "slow river flowing", "gardener watering young plants"],
+    "strength": ["tree standing in strong wind", "rock in crashing waves", "athlete lifting weights",
+                 "mountain peak above clouds", "hands gripping a rope"],
+    "success": ["climber reaching a mountain summit", "runner crossing a finish line", "team celebrating in office",
+                "trophy on a table", "arrow hitting a target"],
+    "time": ["clock ticking", "hourglass with sand", "calendar pages turning", "city time lapse day to night",
+             "old pocket watch close up"],
+    "future": ["sunrise over a city", "road leading to the horizon", "child looking through a telescope",
+               "seedling in an open hand", "modern city skyline at dawn"],
+    "freedom": ["bird flying in the open sky", "open road to the horizon", "person on a hilltop with open arms",
+                "kite flying high", "horses running in a field"],
+    "love": ["holding hands at sunset", "family hug at home", "elderly couple walking together",
+             "mother holding a baby's hand", "heart shape in hands"],
+    "wisdom": ["old books on a shelf", "elderly hands on a book", "chess pieces on a board", "owl on a branch",
+               "teacher with students"],
+    "change": ["autumn leaves changing color", "butterfly leaving a cocoon", "road with a turning point",
+               "seasons time lapse of a tree", "caterpillar on a leaf"],
+    "risk": ["tightrope walker", "dice rolling on a table", "climber on a steep cliff", "stormy sea waves",
+             "person standing at a cliff edge"],
+    "courage": ["person standing at a cliff edge", "firefighter walking into smoke", "climber on a steep rock",
+                "child jumping into a pool", "surfer riding a big wave"],
+    "growth": ["plant growing time lapse", "seedling in soil", "child measuring height on a wall",
+               "tree from sapling to tall", "rising stairs"],
+    "teamwork": ["team rowing a boat together", "hands stacked together", "people building together",
+                 "ants carrying food together", "relay race baton pass"],
+    "balance": ["stacked stones by the sea", "yoga pose on a beach", "tightrope walker", "scales balancing",
+                "person walking on a log"],
+    "honesty": ["handshake in an office", "open hands", "signing a document", "clear water in a stream",
+                "person looking into a mirror"],
+    "kindness": ["hands giving food to a neighbour", "helping an elderly person cross the street",
+                 "volunteers handing out supplies", "child sharing a toy", "hand holding a small bird"],
+    "goal": ["arrow hitting a target", "mountain summit at sunrise", "runner crossing finish line",
+             "darts hitting a bullseye", "writing goals in a notebook"],
+    "dream": ["child looking at the stars", "night sky full of stars", "paper plane flying", "person gazing out a window",
+              "hot air balloons at sunrise"],
+    "opportunity": ["door opening to bright light", "path through a forest", "keys in a hand",
+                    "sunrise over a road", "open window with a view"],
+}
+METAPHORS["dreams"], METAPHORS["goals"], METAPHORS["honest"] = METAPHORS["dream"], METAPHORS["goal"], METAPHORS["honesty"]
+METAPHORS["earned"], METAPHORS["slowly"] = METAPHORS["trust"][:2] + METAPHORS["patience"][:2], METAPHORS["patience"]
+
+ABSTRACT_WORDS = {w for w, (_, abstract) in TOPICS.items() if abstract} | set(METAPHORS) | {
     "meaning", "values", "integrity", "kindness", "courage", "faith", "truth", "justice", "respect", "dream",
     "dreams", "purpose", "opportunity", "potential", "balance", "mindset", "motivation", "confidence", "earned"}
 
@@ -471,16 +554,24 @@ class RulesUnderstander(Understander):
                 brand_sense = brand_sense or best.brand
                 concrete += 1
                 reasons.append(f"'{key}' read as {best.name}")
+        metaphors: list[str] = []
         for word in content_words(text):
             if word in TOPICS:
                 topic_queries, is_abstract = TOPICS[word]
-                queries += topic_queries
                 if is_abstract:
                     abstract_hits.append(word)
+                    metaphors += METAPHORS.get(word, topic_queries)
                 else:
+                    queries += topic_queries
                     concrete += 1
             elif word in ABSTRACT_WORDS:
                 abstract_hits.append(word)
+                metaphors += METAPHORS.get(word, [])
+        if concrete == 0 and metaphors:  # an abstract line: concrete metaphors are the best pictures it has
+            queries = queries[:1] + metaphors + queries[1:] if visual_hint else metaphors + queries
+            reasons.append("concrete metaphors for " + ", ".join(dict.fromkeys(abstract_hits)))
+        else:
+            queries += metaphors
         if facts["number"] and concrete == 0:
             reasons.append(f"statistic {facts['number']}")
 
@@ -504,7 +595,7 @@ class RulesUnderstander(Understander):
             reasons.append("keywords of the line")
         if english:
             reasons.append("queries from the English translation")
-        return SceneMeaning(index=index, queries=_three(queries), flags=flags, reason="rules: " + "; ".join(reasons),
+        return SceneMeaning(index=index, queries=pick_queries(queries), flags=flags, reason="rules: " + "; ".join(reasons),
                             source=self.name, names=facts["people"] + brands, number=facts["number"],
                             keyword=card_keyword(spoken, facts["number"], facts["people"] + brands),
                             card=scene_card(spoken, facts["number"], facts["people"] + brands))
@@ -514,12 +605,10 @@ class RulesUnderstander(Understander):
         return [self.understand_one(sc.index, sc.text, english_full, sc.visual_hint, english_of(sc)) for sc in scenes]
 
 
-def _three(queries: list[str]) -> list[str]:
-    """First 3 different queries, padded by repeating the last one if needed."""
-    unique = list(dict.fromkeys(q.strip() for q in queries if q and q.strip()))[:3]
-    while len(unique) < 3:
-        unique.append(unique[-1] if unique else "abstract background light")
-    return unique
+def pick_queries(queries: list[str]) -> list[str]:
+    """The first QUERIES_PER_SCENE different queries (never padded with repeats; at least one)."""
+    unique = list(dict.fromkeys(q.strip() for q in queries if q and q.strip()))
+    return unique[:max(1, get_settings().QUERIES_PER_SCENE)] or ["abstract background light"]
 
 
 class MockUnderstander(Understander):
@@ -533,7 +622,7 @@ class MockUnderstander(Understander):
             facts = safety_facts(sc.text, english_of(sc))
             queries = ([sc.visual_hint] if sc.visual_hint else []) + keyword_queries(words)
             out.append(SceneMeaning(
-                index=sc.index, queries=_three(queries), source=self.name, reason="mock: keywords of the line",
+                index=sc.index, queries=pick_queries(queries), source=self.name, reason="mock: keywords of the line",
                 flags={"abstract": False, "statistic": facts["number"] is not None,
                        "named_person": bool(facts["people"]), "brand": bool(facts["brands"]),
                        "sensitive": bool(facts["sensitive"])},
@@ -543,10 +632,23 @@ class MockUnderstander(Understander):
         return out
 
 
-GROQ_SYSTEM_PROMPT = """You choose B-roll (background stock footage) for a narrated video.
-For EACH scene write exactly 3 short stock-footage search queries (2-6 English words) that show what
+QUERY_ROLES = ("meaning", "metaphor", "setting", "action", "mood")
+
+
+def groq_system_prompt(n: int) -> str:
+    roles = ", ".join(f"{i + 1} {r}" for i, r in enumerate(QUERY_ROLES[:n]))
+    return f"""You choose B-roll (background stock footage) for a narrated video.
+For EACH scene write exactly {n} short stock-footage search queries (2-6 English words) that show what
 the line MEANS in the context of the whole script - not its literal words. Example: "Cloud computing
-helps small firms" -> "data center server racks", never "sky". Use the visual_hint if one is given.
+helps small firms" -> "data center server racks", never "sky". Give them in this order: {roles}
+(meaning = what the line means; metaphor = a concrete visual metaphor; setting = a fitting place;
+action = people or things doing something that fits; mood = a visual that carries the feeling).
+Every query must be something a camera can film. Abstract lines (an idea such as trust, hope,
+patience) get CONCRETE filmable metaphors, never the abstract word alone: "Trust is earned slowly" ->
+"two people shaking hands", "hand passing house keys", "friends helping each other climb".
+Statistic lines get footage of the TOPIC of the number, not charts: "Household savings grew by 40%" ->
+"coins dropping into a piggy bank", "family planning a budget at a kitchen table".
+Use the visual_hint if one is given.
 Rules: never put a real person's name or a brand name in a query - describe generic related footage
 instead, without faces. For sad or sensitive topics choose calm, respectful imagery, nothing graphic.
 Respect the avoid list. A scene may also have "english": a machine translation of a non-English line
@@ -555,34 +657,80 @@ when the narration is not. Flags (true/false): abstract = an idea with no obviou
 statistic = contains a number, percentage or amount; named_person = mentions a specific real person;
 brand = mentions a company or product brand; sensitive = death, illness, violence, disaster, abuse,
 tragedy or similar. reason = one short sentence on why these queries fit the meaning.
-Optional "card" (only for a statistic line): {"headline": the figure exactly as said in the line,
-"subtitle": 2-5 words copied from the same sentence}. Never write a number the line does not say.
+Optional "card" (only for a statistic line): {{"headline": the figure exactly as said in the line,
+"subtitle": 2-5 words copied from the same sentence}}. Never write a number the line does not say.
+"story_sensitive" = true if the WHOLE script is sad or tragic news (death, disaster, illness, violence),
+so even its neutral lines need calm, respectful footage.
 Prefer the most common, concrete stock-footage wording; list the scenes in index order.
 Answer with JSON only, in this shape:
-{"scenes": [{"index": 0, "queries": ["...", "...", "..."], "flags": {"abstract": false, "statistic": false,
-"named_person": false, "brand": false, "sensitive": false}, "reason": "..."}]}"""
-# Changes whenever the prompt text changes, so an answer stored in timeline.json is only reused
-# for the exact same prompt.
-PROMPT_VERSION = hashlib.sha1(GROQ_SYSTEM_PROMPT.encode()).hexdigest()[:10]
+{{"story_sensitive": false, "scenes": [{{"index": 0, "queries": ["...", "..."], "flags": {{"abstract": false,
+"statistic": false, "named_person": false, "brand": false, "sensitive": false}}, "reason": "..."}}]}}"""
+
+
+GROQ_SYSTEM_PROMPT = groq_system_prompt(5)
+
+
+def prompt_version() -> str:
+    """Changes whenever the prompt REALLY sent changes (its text depends on QUERIES_PER_SCENE), so an answer
+    stored in timeline.json is only reused for the exact same prompt."""
+    return hashlib.sha1(groq_system_prompt(get_settings().QUERIES_PER_SCENE).encode()).hexdigest()[:10]
+
+
+class RateLimited(UnderstandError):
+    """HTTP 429 from the LLM API; retry_after = the server's wait in seconds (None if it did not say)."""
+
+    def __init__(self, retry_after: float | None):
+        super().__init__("HTTP 429")
+        self.retry_after = retry_after
+
+
+def retry_after_seconds(headers) -> float | None:
+    """The retry-after header in seconds (Groq sends seconds), or None."""
+    try:
+        return max(0.0, float(headers.get("retry-after")))
+    except (TypeError, ValueError):
+        return None
 
 
 class GroqUnderstander(Understander):
+    """Asks the LLM in batches of LLM_BATCH_SIZE scenes (each batch also gets the whole script for context).
+
+    Robust to the free tier's limits:
+    - HTTP 429: waits the server's retry-after (each wait at most LLM_MAX_RETRY_AFTER_SECONDS, all waits of
+      the job together at most LLM_MAX_WAIT_SECONDS) and asks again; this does not use up LLM_RETRIES;
+    - other errors / bad JSON: LLM_RETRIES more tries per batch;
+    - an answer that misses some scenes: only the missing ones are asked again (once);
+    - whatever is still missing gets the offline rules PER SCENE (understand_scenes), not for the whole job.
+    """
     name = "groq"
 
     def __init__(self):
         self.tokens_used = 0
         self.warnings: list[str] = []  # e.g. a card suggestion with a number the narration does not say
+        self.calls = 0
+        self.rate_limited = 0
+        self.waited = 0.0
+        self.story_sensitive = False
+        self.missing: dict[int, str] = {}  # scene index -> why the LLM gave no usable answer
 
     def info(self):
         s = get_settings()
-        return {"provider": self.name, "model": s.LLM_MODEL, "endpoint": s.GROQ_BASE_URL,
-                "temperature": s.LLM_TEMPERATURE, "seed": s.SEED, "prompt_version": PROMPT_VERSION,
-                "tokens_used": self.tokens_used}
+        info = {"provider": self.name, "model": s.LLM_MODEL, "endpoint": s.GROQ_BASE_URL,
+                "temperature": s.LLM_TEMPERATURE, "seed": s.SEED, "prompt_version": prompt_version(),
+                "tokens_used": self.tokens_used, "batch_size": max(1, s.LLM_BATCH_SIZE), "calls": self.calls,
+                "rate_limited_answers": self.rate_limited, "seconds_waited_for_rate_limit": round(self.waited, 1)}
+        if s.LLM_REASONING_EFFORT:
+            info["reasoning_effort"] = s.LLM_REASONING_EFFORT
+        return info
 
     def _call(self, payload: dict) -> dict:
         s = get_settings()
+        self.calls += 1
         resp = httpx.post(f"{s.GROQ_BASE_URL.rstrip('/')}/chat/completions", json=payload,
                           headers={"Authorization": f"Bearer {s.GROQ_API_KEY}"}, timeout=s.LLM_TIMEOUT_SECONDS)
+        if resp.status_code == 429:
+            self.rate_limited += 1
+            raise RateLimited(retry_after_seconds(resp.headers))
         if resp.status_code != 200:
             raise UnderstandError(f"HTTP {resp.status_code}")
         body = resp.json()
@@ -592,10 +740,8 @@ class GroqUnderstander(Understander):
         except (KeyError, IndexError, TypeError, json.JSONDecodeError) as e:
             raise UnderstandError("the answer was not valid JSON") from e
 
-    def understand(self, scenes, full_text, style=None):
+    def _payload(self, scenes, full_text, style) -> dict:
         s = get_settings()
-        if not s.GROQ_API_KEY:
-            raise UnderstandError("GROQ_API_KEY is empty")
         user = {"full_script": full_text, "style": style,
                 "scenes": [{"index": sc.index, "text": sc.text, "visual_hint": sc.visual_hint,
                             **({"english": english_of(sc)} if english_of(sc) else {})} for sc in scenes]}
@@ -603,39 +749,105 @@ class GroqUnderstander(Understander):
         # (LLM_TEMPERATURE) and a fixed seed -> the same script gives the same request every time.
         payload = {"model": s.LLM_MODEL, "temperature": s.LLM_TEMPERATURE, "seed": s.SEED,
                    "response_format": {"type": "json_object"},
-                   "messages": [{"role": "system", "content": GROQ_SYSTEM_PROMPT},
+                   "messages": [{"role": "system", "content": groq_system_prompt(s.QUERIES_PER_SCENE)},
                                 {"role": "user", "content": json.dumps(user, ensure_ascii=False, sort_keys=True)}]}
+        if s.LLM_REASONING_EFFORT:
+            payload["reasoning_effort"] = s.LLM_REASONING_EFFORT
+        return payload
+
+    def _ask(self, scenes, full_text, style) -> dict:
+        """One batch: the parsed answer. 429 -> wait + ask again (within the wait budget)."""
+        s = get_settings()
+        payload = self._payload(scenes, full_text, style)
         last_error: Exception | None = None
-        for attempt in range(1 + max(0, s.LLM_RETRIES)):
+        tries = 0
+        while tries < 1 + max(0, s.LLM_RETRIES):
             try:
-                answer = self._call(payload)
-                return self._parse(answer, scenes)
+                return self._call(payload)
+            except RateLimited as e:
+                wait = min(e.retry_after if e.retry_after is not None else 2.0, s.LLM_MAX_RETRY_AFTER_SECONDS)
+                if self.waited + wait > s.LLM_MAX_WAIT_SECONDS:
+                    raise UnderstandError(f"HTTP 429 (rate limit; waited {self.waited:.0f} s in total, "
+                                          f"limit LLM_MAX_WAIT_SECONDS={s.LLM_MAX_WAIT_SECONDS:g})") from None
+                log.warning("groq rate limit: waiting %.1f s (retry-after %s)", wait, e.retry_after)
+                time.sleep(wait)
+                self.waited += wait
             except (UnderstandError, httpx.HTTPError, ValueError) as e:
-                last_error = e
-                log.warning("groq attempt %s failed: %s", attempt + 1, e)
-                if attempt < s.LLM_RETRIES:
+                last_error, tries = e, tries + 1
+                log.warning("groq attempt %s failed: %s", tries, e)
+                if tries < 1 + max(0, s.LLM_RETRIES):
                     time.sleep(1.0)
         raise UnderstandError(str(last_error) if not isinstance(last_error, httpx.HTTPError)
                               else type(last_error).__name__)
 
-    def _parse(self, answer: dict, scenes) -> list[SceneMeaning]:
-        items = {int(it.get("index", -1)): it for it in (answer.get("scenes") or []) if isinstance(it, dict)}
-        if not items:
-            raise UnderstandError("the answer has no scenes")
-        out = []
+    def understand(self, scenes, full_text, style=None):
+        """Meanings for the scenes the LLM answered. Raises UnderstandError only if it answered NONE of
+        them; scenes it could not answer are listed in self.missing (the caller uses the rules for them)."""
+        s = get_settings()
+        if not s.GROQ_API_KEY:
+            raise UnderstandError("GROQ_API_KEY is empty")
+        size = max(1, s.LLM_BATCH_SIZE)
+        answered: dict[int, SceneMeaning] = {}
+        first_error: str | None = None
+        for start in range(0, len(scenes), size):
+            pending = list(scenes[start:start + size])
+            for round_ in range(2):  # the batch, then once more for the scenes it missed
+                try:
+                    answer = self._ask(pending, full_text, style)
+                except UnderstandError as e:
+                    first_error = first_error or str(e)
+                    for sc in pending:
+                        self.missing[sc.index] = str(e)
+                    break
+                self.story_sensitive |= bool(isinstance(answer, dict) and answer.get("story_sensitive"))
+                got, problems = self._parse(answer, pending)
+                answered.update(got)
+                pending = [sc for sc in pending if sc.index not in got]
+                for sc in pending:
+                    self.missing[sc.index] = problems.get(sc.index, f"the answer misses scene {sc.index}")
+                if not pending:
+                    break
+                if round_ == 0:
+                    log.warning("groq answer missed scenes %s; asking again for those only",
+                                [sc.index for sc in pending])
+            for sc in scenes[start:start + size]:
+                if sc.index in answered:
+                    self.missing.pop(sc.index, None)
+        if not answered:
+            raise UnderstandError(first_error or next(iter(self.missing.values()), "the answer has no scenes"))
+        return [answered[sc.index] for sc in scenes if sc.index in answered]
+
+    def _parse(self, answer: dict, scenes) -> tuple[dict[int, SceneMeaning], dict[int, str]]:
+        """({scene index: meaning} for every usable scene answer, {scene index: problem} for unusable ones)."""
+        items = {}
+        for it in (answer.get("scenes") or []) if isinstance(answer, dict) else []:
+            if isinstance(it, dict):
+                try:
+                    items[int(it.get("index", -1))] = it
+                except (TypeError, ValueError):
+                    continue
+        out, problems = {}, {}
         for sc in scenes:
             item = items.get(sc.index)
             if item is None:
-                raise UnderstandError(f"the answer misses scene {sc.index}")
-            queries = [str(q).strip()[:80] for q in (item.get("queries") or []) if str(q).strip()]
+                problems[sc.index] = f"the answer misses scene {sc.index}"
+                continue
+            raw_queries = item.get("queries") or []
+            if not isinstance(raw_queries, list):
+                problems[sc.index] = f"scene {sc.index} has no query list"
+                continue
+            queries = [str(q).strip()[:80] for q in raw_queries if str(q).strip()]
             if not queries:
-                raise UnderstandError(f"scene {sc.index} has no queries")
+                problems[sc.index] = f"scene {sc.index} has no queries"
+                continue
+            roles = list(QUERY_ROLES[:len(queries)]) + ["extra"] * max(0, len(queries) - len(QUERY_ROLES))
             reason = "groq: " + str(item.get("reason") or "").strip()[:200]
             hint = (sc.visual_hint or "").strip()[:80]
             if hint:  # the caller's hint ALWAYS steers the search, even if the LLM left it out
-                queries = [hint] + [q for q in queries if q.lower() != hint.lower()]
+                kept = [(q, r) for q, r in zip(queries, roles) if q.lower() != hint.lower()]
+                queries, roles = [hint] + [q for q, _ in kept], ["visual_hint"] + [r for _, r in kept]
                 reason += " (visual_hint used as the first query)"
-            raw_flags = item.get("flags") or {}
+            raw_flags = item.get("flags") if isinstance(item.get("flags"), dict) else {}
             facts = safety_facts(sc.text, english_of(sc))
             # Safety flags: the LLM's answer OR the code detectors (never weaker than the rules).
             flags = {name: bool(raw_flags.get(name)) for name in FLAG_NAMES}
@@ -650,10 +862,18 @@ class GroqUnderstander(Understander):
                 self.warnings.append(f"Scene {sc.index}: {warning}")
             if subtitle and card["number"]:  # a checked LLM subtitle may replace ours; the figure never changes
                 card = {**card, "subtitle": subtitle, "subtitle_from": "llm, every word checked against the line"}
-            out.append(SceneMeaning(index=sc.index, queries=_three(queries), flags=flags, source=self.name,
-                                    reason=reason, names=names, number=facts["number"],
-                                    keyword=card_keyword(sc.text, facts["number"], names), card=card))
-        return out
+            unique = list(dict.fromkeys(zip(queries, roles)))
+            seen, pairs = set(), []
+            for q, r in unique:  # first QUERIES_PER_SCENE different queries, each with its role
+                if q not in seen:
+                    seen.add(q)
+                    pairs.append((q, r))
+            pairs = pairs[:max(1, get_settings().QUERIES_PER_SCENE)]
+            out[sc.index] = SceneMeaning(index=sc.index, queries=[q for q, _ in pairs], flags=flags, source=self.name,
+                                         reason=reason, names=names, number=facts["number"],
+                                         keyword=card_keyword(sc.text, facts["number"], names), card=card,
+                                         query_roles=[r for _, r in pairs])
+        return out, problems
 
 
 def check_card_suggestion(suggestion, scene_text: str, names: list[str]) -> tuple[str, str | None]:
@@ -685,11 +905,12 @@ def fingerprint(provider: str, scene, full_text: str, style: str | None) -> str:
     so a stored answer can be reused instead of asking again."""
     s = get_settings()
     data = {"provider": provider, "text": scene.text, "visual_hint": scene.visual_hint, "script": full_text,
-            "style": style, "card_rules": cards.CARD_RULES_VERSION}
+            "style": style, "card_rules": cards.CARD_RULES_VERSION, "queries_per_scene": s.QUERIES_PER_SCENE,
+            "story_rule": [s.STORY_SENSITIVE_MIN_SCENES, s.STORY_SENSITIVE_MIN_SHARE]}
     if english_of(scene):  # only for non-English narration, so English fingerprints stay as they were
         data["english"] = english_of(scene)
     if provider == "groq":
-        data.update(model=s.LLM_MODEL, prompt=PROMPT_VERSION, temperature=s.LLM_TEMPERATURE, seed=s.SEED)
+        data.update(model=s.LLM_MODEL, prompt=prompt_version(), temperature=s.LLM_TEMPERATURE, seed=s.SEED)
     return hashlib.sha1(json.dumps(data, sort_keys=True, ensure_ascii=False).encode()).hexdigest()[:16]
 
 
@@ -732,6 +953,28 @@ def understand_scenes(scenes: list, full_text: str, style: str | None = None,
         warning = f"Scene understanding with Groq failed ({e}); used the offline rules instead"
         meanings, info, warnings = (rules.understand(scenes, full_text, style), {**adapter.info(), "fallback": "rules"},
                                     [warning])
+    missing = dict(getattr(adapter, "missing", {}) or {})
+    if missing and len(meanings) < len(scenes):
+        # Groq answered SOME scenes: the rules fill in only the ones it could not answer.
+        rules, english_full = RulesUnderstander(), english_script(scenes, full_text)
+        got = {m.index: m for m in meanings}
+        for sc in scenes:
+            if sc.index not in got:
+                got[sc.index] = rules.understand_one(sc.index, sc.text, english_full, sc.visual_hint, english_of(sc))
+                got[sc.index].reason += f" (Groq gave no usable answer for this scene: {missing.get(sc.index, '?')})"
+        meanings = [got[sc.index] for sc in scenes]
+        indexes = ", ".join(str(i) for i in sorted(missing))
+        warnings.append(f"Scene understanding with Groq failed for scene(s) {indexes} "
+                        f"({next(iter(missing.values()))}); used the offline rules for those scenes only")
+        info = {**info, "fallback": "rules", "fallback_scenes": sorted(missing)}
+    elif "fallback" in info:
+        info = {**info, "fallback_scenes": [sc.index for sc in scenes]}
+    else:
+        info = {**info, "fallback_scenes": []}
+    story_reason = apply_story_sensitivity(meanings, bool(getattr(adapter, "story_sensitive", False)))
+    info["story_sensitive"] = bool(story_reason)
+    if story_reason:
+        info["story_sensitive_reason"] = story_reason
     for meaning, sc in zip(meanings, scenes):
         # Uses the provider that REALLY answered: a rules fallback is never reused as a Groq answer.
         meaning.fingerprint = fingerprint(meaning.source, sc, full_text, style)

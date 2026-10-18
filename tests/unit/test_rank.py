@@ -117,7 +117,8 @@ def test_below_threshold_moves_on_and_ends_with_generated(tmp_path, monkeypatch)
     assert "mock: best score 0.300 < 0.50" in sel.reason
 
 
-def test_statistic_line_gets_an_animated_number_card(tmp_path):
+def test_statistic_line_gets_an_animated_number_card_when_overlay_is_off(tmp_path, monkeypatch):
+    setenv(monkeypatch, STATISTIC_OVERLAY="false")
     scenes, meanings, plans = make(["In 2025, household savings grew by 40 percent."])
     sel = select_clip(scenes[0], meanings[0], plans[0], context(tmp_path))
     assert sel.candidate.provider == "generated"

@@ -22,6 +22,7 @@ class GeneratedProvider(Provider):
     name = "generated"
     api_info = "FFmpeg gradients + libass text (made locally)"
     cache_across_jobs = False  # made locally, nothing to cache
+    media_kind = "generated"
 
     def card(self, scene_index: int, headline: str, label: str = "") -> Candidate:
         palette = PALETTES[(get_settings().SEED + scene_index) % len(PALETTES)]

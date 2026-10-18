@@ -96,6 +96,10 @@ def main() -> None:
     # Ctrl+C or "docker stop" -> finish the current job, then exit.
     signal.signal(signal.SIGINT, lambda *_: stop.set())
     signal.signal(signal.SIGTERM, lambda *_: stop.set())
+    if s.RANK_SCORER == "clip" or s.TTS_PROVIDER == "kokoro":
+        # Import torch ONCE here, before any thread starts: two threads importing it for the first time at the
+        # same moment (CLIP preload + a job's Kokoro) failed with ImportError in a real run (2026-10-17).
+        import torch  # noqa: F401
     if s.RANK_SCORER == "clip" and s.CLIP_PRELOAD:
         # Load CLIP once for this process, in the background; a job that needs it first just waits for it.
         threading.Thread(target=ClipScorer.preload, name="clip-preload", daemon=True).start()

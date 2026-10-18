@@ -120,3 +120,20 @@ Sample files: memory_perf_and_run1.csv, memory_perf_and_run1_part2.csv, memory_r
 - Local (this PC): **$0** - Kokoro, Whisper, open_clip and FFmpeg run on the CPU; Groq (free tier) and the Pixabay / Wikimedia APIs are free. Groq tokens used: 3179 per narration minute (free tier, so $0 here).
 - Modal estimate: container price 0.00003286 $/s (2 cores + 3 GiB, from `testpack/notes/cost_modal.md`) x the median 365 s per narration minute measured HERE = **0.0120 $ per narration minute**, plus a cold start + 180 s idle tail per visit (see the notes). ESTIMATE: Modal run times were not measured; a 2-core Modal container may be slower than this 16-thread PC.
 
+
+## 6. Session 7B re-run (`run2`, 4 inputs, 2026-10-18)
+
+Added by hand from `testpack/compare_run1_run2.md` (made by `tools/compare_runs.py --pair ...` from the job
+folders; `tools/evaluate.py` above still covers `run1` only). One run each, `QUALITY_MODE=balanced`, VLM judge on.
+
+| Input | Turnaround s run1 -> run2 (job.json) | Candidates scored run2 | Plain cards run1 -> run2 |
+|---|---|---|---|
+| perf_a_gardening (60 s English, cold) | 324.9 -> 327.1 (client: 328.8 -> 339.7) | 150 | 0 -> 0 |
+| core11_hi_tts_saving (Hindi) | 118.5 -> 137.5 | 87 | 0 -> 0 |
+| hard01_abstract_and_statistics (numbers) | 98.7 -> 142.5 | 132 | 3 -> 0 (2 number badges on footage) |
+| hard04_sensitive_news (hard case) | 144.3 -> 146.8 | 125 | 1 -> 0 |
+
+60 s cold stages run2: TTS 64.8, transcribe 35.5, understand 9.6, footage 112.1, render 104.6 s (run1: 40 / 21 /
+4 / 132 / 127). Run 1 did not record candidates scored. The first full Session 7B try (today's `QUALITY_MODE=best`)
+scored 720 candidates and took 408 s cold (`outputs/perf_run2/cold_60s`). Peak memory run2: worker 3,259 MB,
+total 5,004 MB (`logs/memory_run2b.csv`).

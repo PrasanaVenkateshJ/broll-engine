@@ -1,0 +1,32 @@
+{
+  "job_id": "79bb42ab827046bea354b076714a6400",
+  "status": "succeeded",
+  "progress": 100,
+  "stage": "done",
+  "input_type": "upload",
+  "parent_job_id": null,
+  "warnings": [
+    "Scene 2: the LLM suggested card text '10% of your earnings' with '10%', which the narration does not say; ignored (a card shows only figures from the narration)",
+    "The VLM judge is unavailable (HTTP 429 (rate limited, retry-after 15 s)); the remaining scenes were not judged"
+  ],
+  "error": null,
+  "result": {
+    "files": {
+      "video_16x9.mp4": "http://localhost:8000/api/v1/jobs/79bb42ab827046bea354b076714a6400/files/video_16x9.mp4?expires=1792325378&sig=30b3049a7a0b83cdaa6b3fed20648b169272ed6d62531a32cd70fba6ef7908fe",
+      "video_9x16.mp4": "http://localhost:8000/api/v1/jobs/79bb42ab827046bea354b076714a6400/files/video_9x16.mp4?expires=1792325378&sig=40d855d821eebe429a165cb53a722583db788dfb13469787d75b46578f524cc6",
+      "captions.srt": "http://localhost:8000/api/v1/jobs/79bb42ab827046bea354b076714a6400/files/captions.srt?expires=1792325378&sig=1be885dddb3f371f5fc46bcc64bc4a3b3f645076d82e5c19d06fecc840a52b02",
+      "timeline.json": "http://localhost:8000/api/v1/jobs/79bb42ab827046bea354b076714a6400/files/timeline.json?expires=1792325378&sig=41f43f63e2ca5396c7d46cd95b17e51d05d5b693eef43aba13883f8aeecb38d5",
+      "manifest.json": "http://localhost:8000/api/v1/jobs/79bb42ab827046bea354b076714a6400/files/manifest.json?expires=1792325378&sig=49cfa94381c285951a09468baa4288014ea088d960b691c8aa5e955da30b8636",
+      "thumb_000.jpg": "http://localhost:8000/api/v1/jobs/79bb42ab827046bea354b076714a6400/files/thumb_000.jpg?expires=1792325378&sig=68424fdd983224e3dce051942d0c0b94e600f01b69a09159c0a4ef439bd3eb10",
+      "thumb_001.jpg": "http://localhost:8000/api/v1/jobs/79bb42ab827046bea354b076714a6400/files/thumb_001.jpg?expires=1792325378&sig=5a18a7eb660ffc61bfa419847473e6c9e5894d6e4ff553b78d53a045c742a8ad",
+      "thumb_002.jpg": "http://localhost:8000/api/v1/jobs/79bb42ab827046bea354b076714a6400/files/thumb_002.jpg?expires=1792325378&sig=15836c9fd6956880a41e542332233eae001045f23df32b64673f36030494d1f3",
+      "thumb_003.jpg": "http://localhost:8000/api/v1/jobs/79bb42ab827046bea354b076714a6400/files/thumb_003.jpg?expires=1792325378&sig=203c7e862e9155fdb23308d011e627b125d635cbfebaab5189e4aa75e1afc3aa"
+    }
+  },
+  "created_at": "2026-10-18T11:07:08.495949+00:00",
+  "started_at": "2026-10-18T11:07:09.145140+00:00",
+  "finished_at": "2026-10-18T11:09:25.949345+00:00",
+  "links": {
+    "self": "http://localhost:8000/api/v1/jobs/79bb42ab827046bea354b076714a6400"
+  }
+}

@@ -648,7 +648,7 @@ components:
         provider:
           type: [string, 'null']
           maxLength: 32
-          description: pixabay_video | pixabay_image_motion | wikimedia | mock
+          description: pixabay_video | pixabay_image_motion | wikimedia | openverse | mock
         clip_id: {type: [string, 'null'], minLength: 1, maxLength: 200}
         clip_url: {type: [string, 'null'], format: uri}
         user_supplied: {type: boolean, default: false}

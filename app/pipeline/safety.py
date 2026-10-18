@@ -8,6 +8,8 @@ Rules (from CLAUDE.md):
 - named person / brand -> never search for the name, never show faces or logos: use
   generic related footage, and add a warning.
 - sensitive topic        -> calm, respectful queries; graphic words are excluded.
+- sensitive STORY        -> the same for EVERY scene of a sad / tragic script (understand.apply_story_sensitivity),
+                            plus festive footage (party, fireworks ...) is excluded.
 - avoid list             -> each item becomes exclude terms (with obvious synonyms), e.g.
                             "people's faces" -> face, portrait, close-up, headshot, selfie.
 """
@@ -22,6 +24,9 @@ LOGO_TERMS = ["logo", "logos", "brand", "trademark"]
 GRAPHIC_TERMS = ["blood", "bloody", "gore", "corpse", "dead body", "injury", "wound", "wounded", "weapon", "gun",
                  "guns", "knife", "explosion", "violence", "violent", "fight", "riot", "crash", "victim", "war zone"]
 SENSITIVE_MODIFIER = "calm"
+# Footage that would feel wrong anywhere in a sad story.
+FESTIVE_TERMS = ["party", "parties", "celebration", "celebrating", "celebrate", "fireworks", "confetti", "dancing",
+                 "disco", "carnival", "birthday"]
 
 # Avoid-list words -> the extra terms they also block.
 AVOID_SYNONYMS = {
@@ -114,10 +119,16 @@ def plan_search(meaning: SceneMeaning, scene_text: str, avoid: list[str] | None 
         brands = ", ".join(meaning.names) or "a brand"
         warnings.append(f"Scene {meaning.index} mentions a brand ({brands}): using generic footage without logos")
         notes.append("brand: logos excluded, brand removed from queries")
-    if flags.get("sensitive"):
+    if flags.get("sensitive") or meaning.story_sensitive:
         queries = [q if q.lower().startswith(SENSITIVE_MODIFIER) else f"{SENSITIVE_MODIFIER} {q}" for q in queries]
         exclude += GRAPHIC_TERMS
-        notes.append("sensitive topic: calm queries, graphic content excluded")
+        if flags.get("sensitive"):
+            notes.append("sensitive topic: calm queries, graphic content excluded")
+        else:
+            notes.append("sensitive story: calm queries, graphic content excluded (the line alone looks neutral)")
+    if meaning.story_sensitive:
+        exclude += FESTIVE_TERMS
+        notes.append("sensitive story: festive footage excluded")
 
     # Drop queries that ask for something excluded; never end up with no query at all.
     kept = [q for q in queries if q and not find_excluded(q, exclude)]

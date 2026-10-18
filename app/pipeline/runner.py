@@ -25,15 +25,16 @@ from app.jobs import add_warning, set_progress
 from app.pipeline import intake, media, qa
 from app.pipeline.outputs import build_cues, build_manifest, build_timeline, write_json, write_srt
 from app.pipeline.providers import get_provider, provider_status
-from app.pipeline.rank import SelectionContext, get_scorer, select_clip, select_clips
+from app.pipeline.rank import SelectionContext, _pool_map, get_scorer, select_clip, select_clips
 from app.pipeline.render import (RESOLUTIONS, analyse_source, concat_segments, frame_counts, orientation_of,
-                                 ratio_slug, render_failed, render_segment, save_thumbnail, thumbnail_filename,
-                                 video_filename)
+                                 ratio_slug, render_failed, render_segment, save_thumbnail, subtitles_filter,
+                                 thumbnail_filename, video_filename)
 from app.pipeline.safety import plan_search
 from app.pipeline.scenes import attach_search_text, scenes_from_list, split_into_scenes
 from app.pipeline.transcribe import TranslateError, check_sound, check_speech, get_transcriber
-from app.pipeline.tts import get_tts
+from app.pipeline.tts import get_tts, synthesize_cached
 from app.pipeline.understand import understand_scenes
+from app.pipeline.vlm import get_judge
 from app.storage import cache_key, get_storage, output_key
 
 log = logging.getLogger("app.pipeline.runner")
@@ -77,8 +78,8 @@ def _narration_from_audio(run: Run, request: dict, input_type: str, input_key: s
 
 def _narration_from_script(run: Run, text: str, voice: str) -> intake.AudioInfo:
     tts = get_tts()
-    run.models["tts"] = {**tts.info(), "voice": voice}
-    result = tts.synthesize(text, voice, run.work / "tts.wav")
+    result, from_cache = synthesize_cached(tts, text, voice, run.work / "tts.wav")
+    run.models["tts"] = {**tts.info(), "voice": voice, "from_cache": from_cache}
     return intake.prepare_audio(result.path, run.work / "narration.wav")
 
 
@@ -86,13 +87,14 @@ def _narration_from_scene_list(run: Run, items: list[dict], voice: str) -> tuple
     """Speak each scene on its own, add a short pause, then join them. Returns the length of each part."""
     s = get_settings()
     tts = get_tts()
-    run.models["tts"] = {**tts.info(), "voice": voice}
-    parts, durations = [], []
+    parts, durations, hits = [], [], 0
     for i, item in enumerate(items):
-        raw = tts.synthesize(item["text"].strip(), voice, run.work / f"tts_{i:03d}.wav").path
+        result, from_cache = synthesize_cached(tts, item["text"].strip(), voice, run.work / f"tts_{i:03d}.wav")
+        raw, hits = result.path, hits + from_cache
         part = intake.convert_to_wav(raw, run.work / f"part_{i:03d}.wav", pad_seconds=s.SCENE_PAUSE_SECONDS)
         parts.append(part)
         durations.append(media.duration_of(part))
+    run.models["tts"] = {**tts.info(), "voice": voice, "from_cache": f"{hits} of {len(items)} scenes"}
     (run.work / "parts.txt").write_text("".join(f"file '{p.name}'\n" for p in parts), encoding="utf-8")
     try:  # all parts are the same WAV format, so they can be joined without re-encoding
         media.ffmpeg("-f", "concat", "-safe", "0", "-i", "parts.txt", "-c", "copy", "joined.wav", cwd=run.work)
@@ -182,13 +184,16 @@ def run_pipeline(job_id: str, request: dict[str, Any], input_type: str, input_ke
         # 5. Find one clip per scene (search, score, select, download, verify).
         ratios = request.get("aspect_ratios") or ["16:9"]
         ctx = SelectionContext(work=work, orientation=orientation_of(ratios[0]), warn=run.warn,
-                               scorer=get_scorer())
+                               scorer=get_scorer(), judge=get_judge())
         with run.stage("footage", 52):
             # Pass 1 (parallel) searches + scores every scene; pass 2 picks one clip per scene, in order.
             selections, footage_facts = select_clips(
                 scenes, meanings, plans, ctx,
                 on_scene_done=lambda i: set_progress(job_id, 60 + round(10 * (i + 1) / len(scenes)), "footage"))
+            vlm_facts = footage_facts.pop("vlm", {})
             run.models["ranker"] = {**ctx.scorer.info(), **footage_facts}
+            if vlm_facts.get("judge"):
+                run.models["vlm_judge"] = {**vlm_facts.pop("judge"), **vlm_facts}
 
         # 6. Render every scene segment (with QA), then one video per aspect ratio.
         with run.stage("render", 70):
@@ -289,26 +294,37 @@ def _render_segments(run: Run, scenes, cues, ratios, selections, meanings, plans
         folders[ratio] = run.work / f"render_{ratio_slug(ratio)}"
         folders[ratio].mkdir(parents=True, exist_ok=True)
 
+    for folder in folders.values():
+        subtitles_filter("fonts.ass", folder)  # copy the fonts once, before segments render side by side
+
+    def attempt(i: int) -> tuple[dict, list[str]]:
+        """Render scene i for every ratio + QA. Returns ({ratio: facts}, problems)."""
+        selection, scene, frames = selections[i], scenes[i], counts[i]
+        rendered, problems = {}, []
+        try:
+            info = analyse_source(selection, frames / s.RENDER_FPS, plans[i].queries, ctx.scorer)
+            for ratio in ratios:
+                path, facts = render_segment(info, scene, ratio, cues, folders[ratio], frames, burn_captions,
+                                             language)
+                found = qa.check_segment(path, frames)
+                rendered[ratio] = {**facts, "qa_problems": found}
+                problems += [f"{ratio}: {p}" for p in found]
+        except media.MediaError as e:
+            if selection.candidate.generated:
+                raise render_failed(ratios[0], e) from None
+            problems.append(f"could not be rendered ({e})")
+        return rendered, problems
+
+    # First try of every scene: RENDER_WORKERS scenes at the same time (each segment is its own ffmpeg).
+    # A scene that fails QA is retried afterwards, one at a time IN SCENE ORDER, so a replacement clip is
+    # chosen exactly as before (the no-repeat rule does not depend on thread timing).
+    first = _pool_map(attempt, list(range(len(scenes))), max(1, s.RENDER_WORKERS))
     segments: dict[int, dict] = {}
-    for i, (scene, frames) in enumerate(zip(scenes, counts)):
+    for i, scene in enumerate(scenes):
+        rendered, problems = first[i]
         retries = 0
-        while True:
+        while problems:
             selection = selections[i]
-            rendered, problems = {}, []
-            try:
-                info = analyse_source(selection, frames / s.RENDER_FPS, plans[i].queries, ctx.scorer)
-                for ratio in ratios:
-                    path, facts = render_segment(info, scene, ratio, cues, folders[ratio], frames, burn_captions,
-                                                 language)
-                    found = qa.check_segment(path, frames)
-                    rendered[ratio] = {**facts, "qa_problems": found}
-                    problems += [f"{ratio}: {p}" for p in found]
-            except media.MediaError as e:
-                if selection.candidate.generated:
-                    raise render_failed(ratios[0], e) from None
-                problems.append(f"could not be rendered ({e})")
-            if not problems:
-                break
             if selection.candidate.generated or retries >= s.QA_RETRIES or not retry_with_next:
                 if len(rendered) < len(ratios):  # some ratio has no segment at all
                     raise render_failed(ratios[0], media.MediaError("; ".join(problems)))
@@ -319,6 +335,7 @@ def _render_segments(run: Run, scenes, cues, ratios, selections, meanings, plans
             run.warn(f"Scene {scene.index}: clip {selection.candidate.uid} failed the quality check "
                      f"({problems[0]}); trying another clip")
             selections[i] = select_clip(scene, meanings[i], plans[i], ctx)  # the failed clip is in ctx.used
+            rendered, problems = attempt(i)
         segments[scene.index] = rendered
         if retry_with_next:  # a swap reports its own progress
             set_progress(run.job_id, 70 + round(20 * (i + 1) / len(scenes)), "render")

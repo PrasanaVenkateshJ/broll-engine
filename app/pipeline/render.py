@@ -15,10 +15,13 @@ For every scene and every aspect ratio we render ONE segment (a short mp4):
    clip on a blurred copy of itself ("blurred fit").
    Without CLIP (mock scorer, tests) the saliency window alone decides, and a subject wider
    than the crop (e.g. two people at both edges) also gives the blurred fit.
+   Near-ties (within CROP_TIE_MARGIN): a window whose edge falls INSIDE the subject (where detail is
+   localised, e.g. a boat on a calm sea) loses to one that keeps it whole (subject_span()).
    The choice and its scores are recorded per segment ("crop" in timeline.json).
 3. Look: measure mean brightness (YAVG) + colour (SATAVG) with signalstats, then pull them
    toward TARGET_LUMA / TARGET_SATURATION with the eq filter, so clips match each other.
-4. Burn that scene's captions. 30 fps, yuv420p, H.264.
+4. Statistic line on real footage: draw its number badge (text from the narration only, cards.py).
+5. Burn that scene's captions. 30 fps, yuv420p, H.264.
 Still images get a slow Ken Burns zoom/pan; `generated` cards are drawn here (gradient + text).
 
 Segments are cached by a key (clip + scene times + ratio + settings), so a later "swap
@@ -190,6 +193,31 @@ def write_card_ass(card: dict, width: int, height: int, seconds: float, path: Pa
     return path
 
 
+def write_badge_ass(badge: dict, width: int, height: int, seconds: float, path: Path) -> Path:
+    """A statistic's number as a clean badge over real footage: a dark box at the lower left, above the
+    captions; the figure big, its phrase small, both exactly as given (narration only).
+    It fades in at 0.3 s and stays; no count-up (that would show numbers nobody said)."""
+    headline, label = str(badge.get("headline") or ""), str(badge.get("subtitle") or "")
+    head_font, label_font = caption_font(None, headline), caption_font(None, label)
+    head_size = round(min(width, height) * 0.085 * font_scale(head_font))
+    label_size = round(min(width, height) * 0.038 * font_scale(label_font))
+    x, y = round(width * 0.06), round(height * (0.58 if height <= width else 0.62))
+    pad = max(8, head_size // 5)
+    # BorderStyle 3 = an opaque box behind the text (BackColour &H50101010 = dark grey, ~70% opaque).
+    lines = _ass_header(width, height, [
+        f"Style: Badge,{head_font},{head_size},&H00FFFFFF,&H000000FF,&H50101010,&H50101010,-1,0,0,0,100,100,"
+        f"0,0,3,{pad},0,7,0,0,0,1",
+        f"Style: BadgeLabel,{label_font},{label_size},&H00F0F0F0,&H000000FF,&H50101010,&H50101010,0,0,0,0,100,100,"
+        f"1,0,3,{pad},0,7,0,0,0,1"])
+    end = _ass_time(seconds + 1)
+    lines.append(f"Dialogue: 0,0:00:00.30,{end},Badge,,0,0,0,,{{\\pos({x},{y})\\fad(350,0)}}{_ass_text([headline])}")
+    if label:
+        lines.append(f"Dialogue: 0,0:00:00.45,{end},BadgeLabel,,0,0,0,,{{\\pos({x},{y + head_size + 2 * pad})"
+                     f"\\fad(450,0)}}{_ass_text([label])}")
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return path
+
+
 # ---------- Looking at a clip (once per clip, shared by all aspect ratios) ----------
 
 @dataclass
@@ -202,6 +230,9 @@ class SourceInfo:
     start: float = 0.0            # where we start reading the clip (seconds)
     col_energy: np.ndarray | None = None   # "how interesting" each column is (left -> right)
     row_energy: np.ndarray | None = None   # same for rows (top -> bottom)
+    col_local: np.ndarray | None = None    # how LOCALISED the detail of each column is (an object vs texture)
+    row_local: np.ndarray | None = None    # same for rows
+    overlay: dict | None = None            # number badge of a statistic line (rank.overlay_card)
     luma: float | None = None     # mean brightness 0-255 (signalstats YAVG)
     saturation: float | None = None  # mean colour strength (signalstats SATAVG)
     card: dict | None = None
@@ -264,6 +295,48 @@ def energy_profiles(frames: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
     return energy.sum(axis=0), energy.sum(axis=1)
 
 
+def localised_profiles(frames: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+    """How LOCALISED the detail is, per column and per row: the busiest 5% of a row's pixels minus the row's
+    median (and the same down each column). A small object on a calm background (a boat on the sea, a
+    lighthouse against the sky) scores high; texture that is busy everywhere (waves, grass, crowds) scores low."""
+    dx = np.abs(np.diff(frames, axis=2))[:, :-1, :]
+    dy = np.abs(np.diff(frames, axis=1))[:, :, :-1]
+    energy = (dx + dy).mean(axis=0)
+
+    def local(e: np.ndarray) -> np.ndarray:
+        k = max(1, e.shape[1] // 20)
+        return np.sort(e, axis=1)[:, -k:].mean(axis=1) - np.median(e, axis=1)
+
+    return local(energy.T), local(energy)
+
+
+def subject_span(profile: np.ndarray | None, level: float, pad: float) -> tuple[float, float] | None:
+    """(start, end) of the subject as fractions of the profile (a localised-detail profile), or None.
+    = the smoothed peak +- pad, widened to where the profile stays >= level x the peak."""
+    if profile is None or len(profile) < 8:
+        return None
+    profile = np.asarray(profile, dtype=np.float64)
+    n = len(profile)
+    smooth = np.convolve(np.clip(profile, 0, None), np.ones(5) / 5, mode="same")
+    peak = int(smooth.argmax())
+    if smooth[peak] <= 0:
+        return None
+    lo = hi = peak
+    while lo > 0 and smooth[lo - 1] >= level * smooth[peak]:
+        lo -= 1
+    while hi < n - 1 and smooth[hi + 1] >= level * smooth[peak]:
+        hi += 1
+    return max(0.0, min(lo / n, peak / n - pad)), min(1.0, max((hi + 1) / n, peak / n + pad))
+
+
+def cuts_subject(start: float, frac: float, span: tuple[float, float] | None, tolerance: float = 0.005) -> bool:
+    """Does a window [start, start + frac] start or end strictly inside the subject span?"""
+    if span is None:
+        return False
+    lo, hi = span
+    return any(lo + tolerance < edge < hi - tolerance for edge in (start, start + frac))
+
+
 def _signal_stats(info: SourceInfo, seconds: float) -> tuple[float | None, float | None]:
     """Mean YAVG (brightness) and SATAVG (colour) measured by FFmpeg's signalstats filter."""
     if info.kind == "image":
@@ -288,12 +361,15 @@ def analyse_source(selection: Selection, seconds: float, texts: list[str] | None
     probe = media.probe(selection.path) or {}
     stream = next((st for st in probe.get("streams", []) if st.get("codec_type") == "video"), {})
     info = SourceInfo(kind=c.kind, path=selection.path, width=int(stream.get("width") or c.width or 0),
-                      height=int(stream.get("height") or c.height or 0), uid=c.uid)
+                      height=int(stream.get("height") or c.height or 0), uid=c.uid,
+                      overlay=getattr(selection, "overlay", None))
     if c.kind == "video":
         info.duration = float(probe.get("format", {}).get("duration") or c.duration or seconds)
         info.start = _start_offset(info.duration, seconds)
     try:
-        info.col_energy, info.row_energy = energy_profiles(_sample_frames(info, seconds))
+        frames = _sample_frames(info, seconds)
+        info.col_energy, info.row_energy = energy_profiles(frames)
+        info.col_local, info.row_local = localised_profiles(frames)
     except media.MediaError as e:
         log.warning("saliency analysis failed for %s: %s", c.uid, e)
     if texts and scorer is not None and getattr(scorer, "needs_images", False):
@@ -350,15 +426,19 @@ class Framing:
 
 
 def pick_crop(window_scores: dict[str, float], full_frame_score: float, blur_margin: float,
-              tie_margin: float = 0.0) -> str:
+              tie_margin: float = 0.0, cut: set[str] | None = None) -> str:
     """The best-scoring window's name, or "blur" when even the best window scores more than
     blur_margin below the whole frame (= every window cuts the subject away).
     Near-ties (within tie_margin of the best) go to the window listed FIRST (salient, then centre):
-    the crop only moves to an edge when CLIP clearly prefers it."""
+    the crop only moves to an edge when CLIP clearly prefers it. cut = windows that slice the subject
+    (cuts_subject): among the near-ties, one that keeps the subject whole wins; if all of them cut it,
+    the first listed one is kept."""
     top = max(window_scores.values())
     if top < full_frame_score - blur_margin:
         return "blur"
-    return next(name for name, score in window_scores.items() if score >= top - tie_margin)
+    near = [name for name, score in window_scores.items() if score >= top - tie_margin]
+    whole = [name for name in near if name not in (cut or set())]
+    return (whole or near)[0]
 
 
 def _pad_square(picture: np.ndarray) -> np.ndarray:
@@ -406,7 +486,11 @@ def _clip_crop(info: SourceInfo, axis: str, frac: float, salient_start: float | 
     average = {name: round(float(np.mean([sc for o, sc in zip(owners, scores) if o == name])), 4)
                for name in ["whole frame", *windows]}
     full = average.pop("whole frame")
-    choice = pick_crop(average, full, s.CROP_BLUR_MARGIN, s.CROP_TIE_MARGIN)
+    local = info.col_local if axis == "x" else info.row_local
+    span = subject_span(local, s.CROP_SUBJECT_LEVEL, s.CROP_SUBJECT_PAD)
+    cut = {name for name, start in windows.items() if cuts_subject(start, frac, span)}
+    choice = pick_crop(average, full, s.CROP_BLUR_MARGIN, s.CROP_TIE_MARGIN, cut)
+    plain = pick_crop(average, full, s.CROP_BLUR_MARGIN, s.CROP_TIE_MARGIN)  # what the old rule would take
     best = max(average, key=average.get)
     if choice == "blur":
         reason = (f"best window '{best}' {average[best]:.3f} is more than {s.CROP_BLUR_MARGIN:g} below the whole "
@@ -414,10 +498,15 @@ def _clip_crop(info: SourceInfo, axis: str, frac: float, salient_start: float | 
     else:
         reason = (f"window '{choice}' chosen ({average[choice]:.3f}; best window {average[best]:.3f}; whole "
                   f"frame {full:.3f}; near-ties within {s.CROP_TIE_MARGIN:g} go to salient / centre)")
+        if choice != plain:
+            reason += (f"; '{plain}' was a near-tie but its edge falls inside the subject "
+                       f"({span[0]:.2f}-{span[1]:.2f}), so '{choice}' keeps it whole")
     facts = {"method": "clip", "choice": "blurred fit" if choice == "blur" else choice, "axis": axis,
              "window_fraction": round(frac, 4), "full_frame_score": full,
              "windows": {name: {"start": round(start, 4), "score": average[name]} for name, start in windows.items()},
-             "blur_margin": s.CROP_BLUR_MARGIN, "tie_margin": s.CROP_TIE_MARGIN, "frames": len(info.crop_frames or []), "reason": reason}
+             "blur_margin": s.CROP_BLUR_MARGIN, "tie_margin": s.CROP_TIE_MARGIN, "frames": len(info.crop_frames or []),
+             "subject_span": [round(span[0], 4), round(span[1], 4)] if span else None,
+             "windows_cutting_subject": sorted(cut), "reason": reason}
     return choice, windows.get(choice, (1 - frac) / 2), facts
 
 
@@ -486,7 +575,7 @@ def segment_key(info: SourceInfo, scene: Scene, ratio: str, cues: list[Cue], bur
             s.TARGET_LUMA, s.TARGET_SATURATION, s.KEN_BURNS_ZOOM, s.MAX_SLOWDOWN, font, font_scale(font),
             # The crop depends on the scene meaning and on whether CLIP looked at it.
             info.crop_texts, getattr(info.scorer, "name", None), s.CROP_SAMPLE_FRAMES, s.CROP_BLUR_MARGIN,
-            s.CROP_TIE_MARGIN]
+            s.CROP_TIE_MARGIN, s.CROP_SUBJECT_LEVEL, s.CROP_SUBJECT_PAD, info.overlay]
     return hashlib.sha1(json.dumps(data, default=str).encode()).hexdigest()[:16]
 
 
@@ -555,6 +644,12 @@ def render_segment(info: SourceInfo, scene: Scene, ratio: str, cues: list[Cue], 
     if info.kind == "generated":
         write_card_ass(info.card or {}, width, height, seconds, folder / f"card_{scene.index:03d}.ass")
         finish.append(subtitles_filter(f"card_{scene.index:03d}.ass", folder))
+    elif info.overlay:
+        badge = write_badge_ass(info.overlay, width, height, seconds,
+                                folder / f"badge_{scene.index:03d}_{ratio_slug(ratio)}.ass")
+        finish.append(subtitles_filter(badge.name, folder))
+        facts["overlay"] = {"headline": info.overlay.get("headline"), "subtitle": info.overlay.get("subtitle"),
+                            "source": "narration"}
     if burn_captions and scene.words:
         ass = write_segment_ass(cues, scene, width, height, folder / f"seg_{scene.index:03d}_{ratio_slug(ratio)}.ass",
                                 language)

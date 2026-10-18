@@ -46,9 +46,11 @@ def knob(name: str, default: str) -> str:
 CPU = float(knob("MODAL_CPU", "2"))  # physical cores (Modal bills per core-second)
 # Memory REQUEST (MiB, billed even when idle) and hard LIMIT (MiB, the container is stopped above it).
 # Modal bills max(request, real use), so a request near the IDLE use is cheapest; the limit only guards
-# against a runaway job. Measured locally: see testpack/notes/cost_modal.md.
-MEMORY_MB = int(knob("MODAL_MEMORY_MB", "3072"))
-MEMORY_LIMIT_MB = int(knob("MODAL_MEMORY_LIMIT_MB", "6144"))
+# against a runaway job. Measured locally (testpack/notes/cost_modal.md): the worker peaked at 4,264 MB in run 1
+# and was above 3.5 GB in hundreds of 1-second samples, so the old 3 GiB request was often exceeded (Modal then
+# bills the real use anyway). 4.5 GiB covers that peak with ~10% room; the 7 GiB limit only stops a runaway job.
+MEMORY_MB = int(knob("MODAL_MEMORY_MB", "4608"))
+MEMORY_LIMIT_MB = int(knob("MODAL_MEMORY_LIMIT_MB", "7168"))
 SCALEDOWN_SECONDS = int(knob("MODAL_SCALEDOWN_SECONDS", "180"))
 
 # The models, in ONE place: the image downloads exactly these and the app is told to use exactly these.
@@ -108,7 +110,12 @@ DEMO_ENV = {
     "TRANSCRIBE_PROVIDER": "whisper",
     "UNDERSTAND_PROVIDER": "groq",
     "RANK_SCORER": "clip",
-    "PROVIDER_ORDER": "pixabay_video,pixabay_image_motion,wikimedia,generated",
+    "PROVIDER_ORDER": "pixabay_video,pixabay_image_motion,wikimedia,openverse,generated",
+    "TTS_CACHE_DIR": "/tmp/broll/tts_cache",
+    # balanced: 15 candidates per source, early exit, judge (if VLM_PROVIDER is set) only for close calls.
+    "QUALITY_MODE": knob("DEMO_QUALITY_MODE", "balanced"),
+    # 2 cores: one ffmpeg segment at a time (each already uses both cores).
+    "RENDER_WORKERS": "1",
     # One job at a time; 2 scenes searched + scored in parallel; 2 threads per model.
     "WORKER_CONCURRENCY": "1",
     "FOOTAGE_WORKERS": "2",

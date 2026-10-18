@@ -4,7 +4,11 @@ and get_tts() picks one by the TTS_PROVIDER setting.
 - KokoroTTS: Kokoro-82M (Apache-2.0), runs on the CPU, downloads the model once.
 - MockTTS:   no model. Makes a plain tone as long as the text would take to say,
              so tests run fast, offline, with no keys.
+synthesize_cached(): the same text + voice + model + speed is spoken only once (TTS_CACHE_DIR).
 """
+import hashlib
+import json
+import shutil
 import threading
 import wave
 from dataclasses import dataclass
@@ -111,6 +115,34 @@ class KokoroTTS(TTSAdapter):
     def info(self):
         return {"provider": "kokoro", "model": get_settings().KOKORO_REPO_ID, "version": _package_version("kokoro"),
                 "licence": "Apache-2.0"}
+
+
+def cache_key(adapter: TTSAdapter, text: str, voice: str) -> str:
+    """Same key = the same audio: text, voice, engine + model + version and speed."""
+    data = json.dumps({"text": text, "voice": voice, "engine": adapter.info(), "speed": get_settings().KOKORO_SPEED},
+                      sort_keys=True, ensure_ascii=False)
+    return hashlib.sha1(data.encode("utf-8")).hexdigest()[:20]
+
+
+def synthesize_cached(adapter: TTSAdapter, text: str, voice: str, out_path: Path) -> tuple[TTSResult, bool]:
+    """Like adapter.synthesize, but a finished WAV for the same text + voice + model + speed is reused from
+    TTS_CACHE_DIR (empty = no cache). Returns (result, True if it came from the cache)."""
+    folder = get_settings().TTS_CACHE_DIR
+    if not folder:
+        return adapter.synthesize(text, voice, out_path), False
+    cached = Path(folder) / f"{cache_key(adapter, text, voice)}.wav"
+    if cached.is_file() and cached.stat().st_size > 44:  # more than a bare WAV header
+        shutil.copyfile(cached, out_path)
+        return TTSResult(path=out_path, voice=voice), True
+    result = adapter.synthesize(text, voice, out_path)
+    try:
+        cached.parent.mkdir(parents=True, exist_ok=True)
+        tmp = cached.with_suffix(f".{threading.get_ident()}.tmp")
+        shutil.copyfile(result.path, tmp)
+        tmp.replace(cached)  # atomic: another job never reads a half-written file
+    except OSError:
+        pass  # a cache problem only means "no reuse next time"
+    return result, False
 
 
 _adapters: dict[str, TTSAdapter] = {}

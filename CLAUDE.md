@@ -46,9 +46,10 @@ app/
     scenes.py        split words into scenes on sentence/phrase boundaries
     understand.py    adapters: groq | rules | mock -> visual queries + flags
     safety.py        named people, brands, sensitive topics, avoid-list rules
-    providers/       footage adapters: pixabay_video | pixabay_image_motion | wikimedia |
+    providers/       footage adapters: pixabay_video | pixabay_image_motion | wikimedia | openverse |
                      generated | mock (+ pexels, skipped while PEXELS_API_KEY is empty)
     rank.py          scoring + selection rule + no-repeat
+    vlm.py           optional independent judge: groq (vision model) | mock | none
     footage_cache.py search-result + preview caches (per job and across jobs)
     cards.py         motion-card text taken ONLY from the scene's own narration
     render.py        normalise, crop per ratio, colour, captions, concat, mux
@@ -108,8 +109,16 @@ RANGE_NOT_SATISFIABLE (download Range starts past the end of the file)
   use the best stock clip if its CLIP score >= STOCK_MIN_SCORE (default 0.22) and it is
   not already used; otherwise use the next provider; if nothing passes, use the
   `generated` source (FFmpeg motion card, e.g. animated "40%" for statistics), flagged
-  generated=true, ai_generated=false. Lines with a number/percentage go straight to an
-  animated number card (GENERATED_FOR_STATISTICS=true).
+  generated=true, ai_generated=false. Lines with a number/percentage always SHOW the number
+  (text only from the narration, cards.py): STATISTIC_OVERLAY=true -> real footage of the line's
+  topic with the number as a badge ("overlay": true), a plain number card only if no clip passes;
+  STATISTIC_OVERLAY=false -> straight to an animated number card.
+  Scoring: up to QUERIES_PER_SCENE (5) queries, CLIP prompt ensembling, mean of the best 3 query
+  similarities, extra frames for the best videos, text-heavy/logo penalties on the ORDER only.
+  A passing stock video beats photo-motion unless the photo is > PREFER_VIDEO_MARGIN higher.
+  Adaptive threshold: if nothing passes, a candidate >= STOCK_MIN_SCORE x (1 - RELATIVE_MARGIN)
+  may be used ONLY if the independent VLM judge (VLM_PROVIDER) rates it >= VLM_ACCEPT_SCORE.
+- A whole sad / tragic story (STORY_SENSITIVE_MIN_SCENES or _SHARE) gets calm rules for ALL scenes.
 - No clip id is used twice in one video.
 - A provider error or timeout never fails the job: log a warning, try the next provider.
 - Corrupted downloads (ffprobe fails) -> try the next candidate.
@@ -137,9 +146,11 @@ RANGE_NOT_SATISFIABLE (download Range starts past the end of the file)
   c) wikimedia - Wikimedia Commons API (no key; User-Agent MUST contain a contact email/URL).
      ONLY CC0, Public Domain, CC BY (any version). Reject CC BY-SA, NC, ND, GFDL-only, unknown.
      Record author + licence URL as attribution.
-  d) generated - FFmpeg motion card (number/keyword on a moving gradient, no faces, no logos);
+  d) openverse - Openverse API (no key, anonymous quota 20/min, 200/day): photos, Ken Burns.
+     ONLY CC0, Public Domain Mark, CC BY with a named creator; everything else rejected in code.
+  e) generated - FFmpeg motion card (number/keyword on a moving gradient, no faces, no logos);
      generated=true, ai_generated=false. Used for statistics and as the last fallback.
-  e) mock - local test clips for tests/CI.
+  f) mock - local test clips for tests/CI.
   Pexels has paused new API keys: do NOT depend on it. The pexels adapter stays but is
   skipped when PEXELS_API_KEY is empty.
 - API keys only in `.env` (git-ignored). Never print keys in logs. Never commit `.env`,

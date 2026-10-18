@@ -142,12 +142,14 @@ def test_the_queries_of_one_scene_are_searched_at_the_same_time(tmp_path, monkey
             return super().search(query, orientation, min_duration)
 
     monkeypatch.setitem(REGISTRY, "together", Together)
-    setenv(monkeypatch, PROVIDER_ORDER="together,generated")
+    setenv(monkeypatch, PROVIDER_ORDER="together,generated", QUERIES_PER_SCENE=3)
     selections, _, _ = run(tmp_path, texts=["Small shops open early every morning."])
     assert selections[0].candidate.provider == "together"
 
 
 def test_lazy_logo_check_picks_the_same_clips_as_checking_everything(tmp_path, monkeypatch):
+    monkeypatch.setenv("EARLY_EXIT", "false")  # early exit already logo-checks while scoring: compare without it
+    get_settings.cache_clear()
     scenes, _, plans = make(SCRIPT)
     # A few logos (rejected) and possible logos (penalised) among the candidates.
     ids = sorted({c.id for p in plans for q in p.queries for c in MockProvider().search(q, "landscape", 4)})

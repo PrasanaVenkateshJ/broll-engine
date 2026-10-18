@@ -93,6 +93,7 @@ def parse_pages(data: dict, query: str) -> tuple[list[Candidate], list[str]]:
 
 class WikimediaProvider(Provider):
     name = "wikimedia"
+    media_kind = "image"
     api_info = "Wikimedia Commons API (commons.wikimedia.org/w/api.php) + FFmpeg Ken Burns motion"
 
     def not_ready(self):
@@ -110,7 +111,7 @@ class WikimediaProvider(Provider):
         data = get_json(s.WIKIMEDIA_API_URL, {
             "action": "query", "format": "json", "formatversion": "2", "generator": "search",
             "gsrsearch": f"{query} filetype:bitmap", "gsrnamespace": "6",
-            "gsrlimit": str(max(1, min(50, s.PROVIDER_RESULTS_PER_QUERY))), "prop": "imageinfo",
+            "gsrlimit": str(self.results_per_request(50)), "prop": "imageinfo",
             "iiprop": "url|size|mime|extmetadata", "iiurlwidth": str(PREVIEW_WIDTH),
             "iiextmetadatafilter": METADATA_FIELDS}, headers=self.download_headers())
         if "error" in data:

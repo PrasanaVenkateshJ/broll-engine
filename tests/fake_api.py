@@ -13,7 +13,7 @@ from urllib.parse import parse_qs, urlsplit
 
 class FakeAPI:
     def __init__(self, answer, delay: float = 0.0):
-        """answer(method, path, query dict, body bytes) -> (status, JSON-able body, or bytes)."""
+        """answer(method, path, query dict, body bytes) -> (status, JSON-able body or bytes[, headers dict])."""
         self.calls: list[dict] = []
         fake = self
 
@@ -26,9 +26,11 @@ class FakeAPI:
                                    "headers": dict(self.headers), "body": body})
                 if delay:
                     time.sleep(delay)
-                status, payload = answer(method, parts.path, query, body)
+                status, payload, *extra = answer(method, parts.path, query, body)  # optional 3rd: headers
                 data = payload if isinstance(payload, bytes) else json.dumps(payload).encode()
                 self.send_response(status)
+                for name, value in (extra[0] if extra else {}).items():
+                    self.send_header(name, str(value))
                 self.send_header("Content-Length", str(len(data)))
                 self.end_headers()
                 self.wfile.write(data)

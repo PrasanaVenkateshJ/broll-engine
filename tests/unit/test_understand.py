@@ -33,7 +33,7 @@ def test_double_meaning_words_follow_the_context(text, expected, not_expected):
     joined = " ".join(meaning.queries).lower()
     assert expected in joined, meaning.queries
     assert not_expected not in joined, meaning.queries
-    assert len(meaning.queries) == 3
+    assert 3 <= len(meaning.queries) <= get_settings().QUERIES_PER_SCENE  # up to 5 since run 2
 
 
 def test_the_whole_script_gives_context_to_a_short_line():
@@ -251,6 +251,7 @@ def test_groq_answer_that_ignores_the_visual_hint_still_searches_it_first(monkey
         meanings, _, _ = understand_scenes(scenes, SCRIPT)
     finally:
         server.close()
-    assert meanings[0].queries == ["lighthouse at night", "data center server racks", "network cables"]
+    assert meanings[0].queries[:3] == ["lighthouse at night", "data center server racks", "network cables"]
+    assert meanings[0].query_roles[:3] == ["visual_hint", "meaning", "metaphor"]
     assert "visual_hint used as the first query" in meanings[0].reason
     assert meanings[1].queries[0] == "rising sales chart"  # no hint -> the LLM's own order

@@ -6,6 +6,7 @@ Every field here is also listed, with a comment, in .env.example.
 from functools import lru_cache
 from typing import Literal
 
+from pydantic import model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -108,6 +109,8 @@ class Settings(BaseSettings):
         "en-IN-female=a:hf_alpha,en-IN-male=a:hm_omega,"
         "hi-IN-female=h:hf_alpha,hi-IN-male=h:hm_omega"
     )
+    # Finished TTS audio is kept here and reused for the same text + voice + model + speed. Empty = off.
+    TTS_CACHE_DIR: str = "./data/tts_cache"
     # Scene-list input: silence added after each scene's narration.
     SCENE_PAUSE_SECONDS: float = 0.3
     # Mock TTS speaking speed (the length of its tone).
@@ -175,6 +178,8 @@ class Settings(BaseSettings):
     VIDEO_PRESET: str = "veryfast"
     VIDEO_CRF: int = 23
     AUDIO_BITRATE: str = "192k"
+    # Scene segments rendered at the same time (each is its own ffmpeg). 1 = one after the other.
+    RENDER_WORKERS: int = 3
 
     # --- Reproducibility ---
     # One seed for everything random-ish: LLM sampling, mock providers, card colours.
@@ -196,19 +201,62 @@ class Settings(BaseSettings):
     LLM_TEMPERATURE: float = 0.0
     # Extra tries after the first failed LLM call.
     LLM_RETRIES: int = 1
+    # Scenes sent to the LLM in one request. Long scripts are split into batches, so one answer never gets
+    # too big for the per-minute token limit (Groq free tier: 8,000 tokens per minute for this model).
+    # 6: with 12 the answer was cut short (scenes 8-11 missing) in 2 of 3 real runs on 2026-10-17.
+    LLM_BATCH_SIZE: int = 6
+    # HTTP 429: wait the server's retry-after (capped at this many seconds per wait) and try again. All the
+    # waits of one job together may not pass LLM_MAX_WAIT_SECONDS; after that the rest uses the rules.
+    LLM_MAX_RETRY_AFTER_SECONDS: float = 30.0
+    LLM_MAX_WAIT_SECONDS: float = 120.0
+    # gpt-oss "reasoning_effort" (low | medium | high). Empty = the provider's default.
+    LLM_REASONING_EFFORT: str = ""
+    # Search queries per scene (meaning, metaphor, setting, action, mood).
+    QUERIES_PER_SCENE: int = 5
+    # A whole story counts as sensitive (calm, respectful footage for EVERY scene) when at least this many
+    # of its scenes are sensitive, or at least STORY_SENSITIVE_MIN_SHARE of them, or the LLM says so.
+    STORY_SENSITIVE_MIN_SCENES: int = 2
+    STORY_SENSITIVE_MIN_SHARE: float = 0.3
+
+    # --- Quality mode: how hard the footage search tries (speed vs. thoroughness) ---
+    # fast | balanced | best. It fills in the settings in QUALITY_PRESETS below; a setting you set yourself
+    # (env / .env) always wins over the mode. fast also switches the VLM judge off.
+    QUALITY_MODE: Literal["fast", "balanced", "best"] = "balanced"
 
     # --- Footage providers ---
     # Tried in this order for every scene. Names: pixabay_video, pixabay_image_motion,
     # wikimedia, pexels, generated, mock. A provider without its API key is skipped.
-    PROVIDER_ORDER: str = "pixabay_video,pixabay_image_motion,wikimedia,generated"
+    PROVIDER_ORDER: str = "pixabay_video,pixabay_image_motion,wikimedia,openverse,generated"
     # Comma-separated providers to switch off (e.g. "pixabay_video").
     PROVIDERS_DISABLED: str = ""
     # JSON file re-read before every search, so a provider can be switched off DURING a job:
     # {"disabled": ["pixabay_video"]}
     PROVIDERS_OVERRIDE_FILE: str = "./data/providers_override.json"
     PROVIDER_TIMEOUT_SECONDS: float = 15.0
-    # Results asked for per search query.
+    # Results asked for per search query, and how many result pages. Where the API allows a bigger page,
+    # the pages are fetched as ONE request of RESULTS x PAGES results (the same results, fewer API calls).
     PROVIDER_RESULTS_PER_QUERY: int = 8
+    PROVIDER_PAGES: int = 1
+    # At most this many candidates of one source are scored per scene (CLIP is the slow part: ~25 pictures/s
+    # on an 8-core laptop CPU). They are taken round-robin over the queries (every query's 1st result, then
+    # every query's 2nd ...), so each query still brings its best hits. 0 = no cap.
+    MAX_CANDIDATES_PER_SOURCE: int = 15
+    # Pass 1 also downloads + checks each scene's likely winner, in parallel (same choices, less waiting).
+    PREFETCH_CLIPS: bool = True
+    # Early exit: score a source's candidates EARLY_EXIT_STEP at a time and stop as soon as one CLEARLY passes
+    # (score >= STOCK_MIN_SCORE + PREFER_VIDEO_MARGIN and not rejected by the logo check). The rest is scored
+    # later only if pass 2 needs it (that clip already used, a failed download, a QA retry, a clip swap).
+    EARLY_EXIT: bool = True
+    EARLY_EXIT_STEP: int = 6
+    # At most this many of a scene's queries per source ("name=n,..."); sources not listed use all of them.
+    # Openverse allows only 20 anonymous searches per minute and 200 per day.
+    PROVIDER_MAX_QUERIES: str = "wikimedia=3,openverse=2"
+    # Client-side request limits per minute ("name=n,..."), so a long job waits instead of getting HTTP 429.
+    # Pixabay: 100 requests per 60 s per key; Openverse (no key): 20 per minute.
+    PROVIDER_REQUESTS_PER_MINUTE: str = "pixabay=90,openverse=18"
+    # After a 429 answer a source is skipped until its retry-after has passed (at least this many seconds).
+    PROVIDER_COOLDOWN_SECONDS: float = 60.0
+    OPENVERSE_API_URL: str = "https://api.openverse.org/v1/images/"
 
     # --- Footage speed (same choices, less waiting) ---
     # Scenes whose footage is searched + scored at the same time (pass 1). The choice itself (pass 2)
@@ -219,8 +267,9 @@ class Settings(BaseSettings):
     PREVIEW_WORKERS: int = 8
     PREVIEW_TIMEOUT_SECONDS: float = 8.0
     # Search results + preview pictures are kept this long and reused by later jobs with the same
-    # query (Pixabay asks API users to cache results). Within one job they are always reused. 0 = off.
-    FOOTAGE_CACHE_SECONDS: int = 900
+    # query. Pixabay's API terms say "requests must be cached for 24 hours", hence 86400. Within one job they
+    # are always reused. 0 = off.
+    FOOTAGE_CACHE_SECONDS: int = 86400
     FOOTAGE_CACHE_DIR: str = "./data/footage_cache"
     # Pictures CLIP looks at in one go.
     CLIP_BATCH_SIZE: int = 32
@@ -248,8 +297,57 @@ class Settings(BaseSettings):
     # Small extra points (only used to order candidates, never to pass the threshold).
     DURATION_BONUS: float = 0.02
     ORIENTATION_BONUS: float = 0.02
-    # Lines with a number/percentage get a number card (text from the narration only) instead of stock footage.
+    # Lines with a number/percentage always SHOW the number (text from the narration only, cards.py).
     GENERATED_FOR_STATISTICS: bool = True
+    # How: true = look for real footage of the line's topic first and draw the number on it as a badge
+    # (lower third); a plain number card only if no clip passes the rule. false = straight to a number card.
+    STATISTIC_OVERLAY: bool = True
+    # CLIP scoring: every query is encoded with these prompts ("|"-separated, {q} = the query) and the text
+    # embeddings are averaged (prompt ensembling). A candidate's score = the mean of its best
+    # SCORE_TOP_QUERIES query similarities (3 keeps the same scale as the old "mean of 3 queries").
+    CLIP_PROMPTS: str = "a stock video of {q}|a photo of {q}|{q}"
+    SCORE_TOP_QUERIES: int = 3
+    # More frames per candidate: the best MULTI_FRAME_TOP_K video candidates of each source (by thumbnail score)
+    # also get frames at MULTI_FRAME_POSITIONS of their smallest rendition (a ~1 MB file); their score is
+    # then the mean over thumbnail + frames. 0 = thumbnail only.
+    MULTI_FRAME_TOP_K: int = 2
+    MULTI_FRAME_POSITIONS: str = "0.3,0.7"
+    MULTI_FRAME_MAX_MB: int = 15
+    # Text-heavy pictures (slides, screenshots, posters): CLIP probability over TEXT_PROMPTS vs
+    # LOGO_NEUTRAL_PROMPTS; above TEXT_PENALTY_PROB the ORDER score loses TEXT_PENALTY (never the threshold).
+    TEXT_PROMPTS: str = ("a screenshot of a document full of text|a presentation slide with text|"
+                         "a poster with large printed words|a page of a printed newspaper")
+    TEXT_PENALTY_PROB: float = 0.5
+    TEXT_PENALTY: float = 0.03
+    # A stock VIDEO that passes STOCK_MIN_SCORE is preferred over photo-motion: a photo wins only if its order
+    # score is more than PREFER_VIDEO_MARGIN higher. A video scoring STOCK_MIN_SCORE + PREFER_VIDEO_MARGIN or
+    # more is taken without searching photos (saves API calls).
+    PREFER_VIDEO_MARGIN: float = 0.03
+    # Adaptive threshold: if NO candidate of any source passes STOCK_MIN_SCORE, the best ones scoring at least
+    # STOCK_MIN_SCORE x (1 - RELATIVE_MARGIN) may still be used, but ONLY if the independent VLM judge rates
+    # one VLM_ACCEPT_SCORE or more. Without a judge, no adaptive pass.
+    RELATIVE_MARGIN: float = 0.12
+
+    # --- Independent vision-language judge (optional) ---
+    # "groq" = a vision model on Groq rates the top candidates 1-5 against the narration; "mock" = tests;
+    # "none" = off. Off by default: it uses Groq's per-minute token budget and the model is a Groq preview.
+    VLM_PROVIDER: Literal["groq", "mock", "none"] = "none"
+    VLM_MODEL: str = "qwen/qwen3.8-27b"
+    VLM_TIMEOUT_SECONDS: float = 30.0
+    # Candidates judged per scene: drawn side by side as ONE picture (Groq counts 2,048 tokens per image).
+    VLM_TOP_K: int = 3
+    VLM_PANEL_WIDTH: int = 256
+    # At most this many scenes judged per job (most uncertain first). 0 = every scene.
+    VLM_MAX_SCENES_PER_JOB: int = 3
+    # Also judge "confident" scenes (best score >= STOCK_MIN_SCORE + PREFER_VIDEO_MARGIN)? false = only close
+    # calls and near misses (below the threshold) are judged.
+    VLM_JUDGE_CONFIDENT: bool = False
+    # 1-5 rating: <= VLM_REJECT_SCORE -> the candidate is dropped; >= VLM_ACCEPT_SCORE -> allows the adaptive pass.
+    VLM_REJECT_SCORE: int = 1
+    VLM_ACCEPT_SCORE: int = 4
+    # HTTP 429: wait the retry-after if it is at most this long, else stop judging for this job (warning) and
+    # keep the CLIP order. 0 = never wait: the first 429 switches the judge off for the rest of the job.
+    VLM_MAX_RETRY_AFTER_SECONDS: float = 0.0
     # Logo check: logo probability = CLIP softmax over LOGO_PROMPTS + LOGO_NEUTRAL_PROMPTS ("|"-separated),
     # summed over the logo prompts (0 = surely clean, 1 = surely a logo), taken as the MAX over the whole
     # picture and a LOGO_CROP_GRID x LOGO_CROP_GRID grid of crops (small signs / laptop logos).
@@ -291,6 +389,13 @@ class Settings(BaseSettings):
     # Leave the salient / centre window only if another window scores more than this above it.
     # (Real run 2026-10-16: an edge window beat the correct centred subject by 0.024 - CLIP noise.)
     CROP_TIE_MARGIN: float = 0.03
+    # Near-tie windows that start or end INSIDE the subject lose to a near-tie window that keeps it whole.
+    # Subject = where detail is LOCALISED (a few columns of a row much busier than the rest of that row: a
+    # boat on a calm sea; waves or grass are busy everywhere and do not count). Its span = the peak
+    # +- CROP_SUBJECT_PAD (fraction of the frame), widened to where localised detail stays >= CROP_SUBJECT_LEVEL
+    # x the peak. (Real case, run 1: a 9:16 sailboat clip cut at the hull by a near-tie window.)
+    CROP_SUBJECT_LEVEL: float = 0.5
+    CROP_SUBJECT_PAD: float = 0.06
     # Brightness / colour normalisation targets (signalstats YAVG 0-255, SATAVG) and limits.
     # Real Pixabay clips measured YAVG 102-107 and SATAVG 15-17 in the first real run.
     TARGET_LUMA: float = 110.0
@@ -329,6 +434,50 @@ class Settings(BaseSettings):
     def logo_neutral_prompts(self) -> list[str]:
         return [p.strip() for p in self.LOGO_NEUTRAL_PROMPTS.split("|") if p.strip()]
 
+    @model_validator(mode="after")
+    def _apply_quality_mode(self) -> "Settings":
+        """Fill in the QUALITY_MODE preset, except for settings given explicitly (env / .env / arguments)."""
+        for name, value in QUALITY_PRESETS[self.QUALITY_MODE].items():
+            if name not in self.model_fields_set:
+                object.__setattr__(self, name, value)
+        return self
+
+    @property
+    def vlm_enabled(self) -> bool:
+        """The independent judge runs only if VLM_PROVIDER names one and the mode is not fast."""
+        return self.VLM_PROVIDER != "none" and self.QUALITY_MODE != "fast"
+
+    @property
+    def text_prompts(self) -> list[str]:
+        return [p.strip() for p in self.TEXT_PROMPTS.split("|") if p.strip()]
+
+    @property
+    def clip_prompts(self) -> list[str]:
+        prompts = [p.strip() for p in self.CLIP_PROMPTS.split("|") if p.strip()]
+        return [p if "{q}" in p else p + " {q}" for p in prompts] or ["a photo of {q}"]
+
+    @property
+    def multi_frame_positions(self) -> list[float]:
+        return [float(x) for x in self.MULTI_FRAME_POSITIONS.split(",") if x.strip()]
+
+    @staticmethod
+    def _name_numbers(text: str) -> dict[str, float]:
+        """"wikimedia=3,openverse=2" -> {"wikimedia": 3.0, "openverse": 2.0}"""
+        out = {}
+        for item in text.split(","):
+            name, _, value = item.partition("=")
+            if name.strip() and value.strip():
+                out[name.strip().lower()] = float(value)
+        return out
+
+    @property
+    def provider_max_queries(self) -> dict[str, int]:
+        return {k: int(v) for k, v in self._name_numbers(self.PROVIDER_MAX_QUERIES).items()}
+
+    @property
+    def provider_requests_per_minute(self) -> dict[str, float]:
+        return self._name_numbers(self.PROVIDER_REQUESTS_PER_MINUTE)
+
     @property
     def tts_voices(self) -> dict[str, tuple[str, str]]:
         """"en-US-female=a:af_heart,..." -> {"en-US-female": ("a", "af_heart"), ...}"""
@@ -359,6 +508,17 @@ class Settings(BaseSettings):
             if font.strip() and factor.strip():
                 scales[font.strip()] = float(factor)
         return scales
+
+
+# What each QUALITY_MODE sets (balanced = the defaults above; best = the full Session 7B search).
+QUALITY_PRESETS: dict[str, dict] = {
+    "fast": {"QUERIES_PER_SCENE": 3, "PROVIDER_PAGES": 1, "MAX_CANDIDATES_PER_SOURCE": 10, "EARLY_EXIT": True,
+             "MULTI_FRAME_TOP_K": 0, "VLM_TOP_K": 2, "VLM_MAX_SCENES_PER_JOB": 0, "VLM_JUDGE_CONFIDENT": False},
+    "balanced": {"QUERIES_PER_SCENE": 5, "PROVIDER_PAGES": 1, "MAX_CANDIDATES_PER_SOURCE": 15, "EARLY_EXIT": True,
+                 "MULTI_FRAME_TOP_K": 2, "VLM_TOP_K": 3, "VLM_MAX_SCENES_PER_JOB": 3, "VLM_JUDGE_CONFIDENT": False},
+    "best": {"QUERIES_PER_SCENE": 5, "PROVIDER_PAGES": 2, "MAX_CANDIDATES_PER_SOURCE": 48, "EARLY_EXIT": False,
+             "MULTI_FRAME_TOP_K": 3, "VLM_TOP_K": 3, "VLM_MAX_SCENES_PER_JOB": 4, "VLM_JUDGE_CONFIDENT": True},
+}
 
 
 @lru_cache

@@ -7,7 +7,8 @@ A provider is used only if ALL of these are true:
    read again every time we ask, so you can switch a provider off DURING a job:
        {"disabled": ["pixabay_video"]}
 4. it has what it needs: its API key (pexels without PEXELS_API_KEY is skipped), or for
-   wikimedia a User-Agent with a contact.
+   wikimedia a User-Agent with a contact,
+5. it is not cooling down after an HTTP 429 (rate limit) answer.
 """
 import json
 import logging
@@ -17,6 +18,7 @@ from app.config import get_settings
 from app.pipeline.providers.base import Candidate, ClipNotUsable, Provider, ProviderError
 from app.pipeline.providers.generated import GeneratedProvider
 from app.pipeline.providers.mock import MockProvider
+from app.pipeline.providers.openverse import OpenverseProvider
 from app.pipeline.providers.pexels import PexelsProvider
 from app.pipeline.providers.pixabay import PixabayImageProvider, PixabayVideoProvider
 from app.pipeline.providers.wikimedia import WikimediaProvider
@@ -24,8 +26,8 @@ from app.pipeline.providers.wikimedia import WikimediaProvider
 log = logging.getLogger("app.pipeline.providers")
 
 REGISTRY: dict[str, type[Provider]] = {
-    p.name: p for p in (PixabayVideoProvider, PixabayImageProvider, WikimediaProvider, PexelsProvider,
-                        GeneratedProvider, MockProvider)
+    p.name: p for p in (PixabayVideoProvider, PixabayImageProvider, WikimediaProvider, OpenverseProvider,
+                        PexelsProvider, GeneratedProvider, MockProvider)
 }
 
 __all__ = ["Candidate", "ClipNotUsable", "Provider", "ProviderError", "REGISTRY", "get_provider", "override_disabled",

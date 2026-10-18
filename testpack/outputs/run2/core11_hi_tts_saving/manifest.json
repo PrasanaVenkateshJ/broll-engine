@@ -1,0 +1,321 @@
+{
+  "job_id": "79bb42ab827046bea354b076714a6400",
+  "created_at": "2026-10-18T11:09:25.669194+00:00",
+  "app": {
+    "name": "broll-engine",
+    "version": "0.2.0"
+  },
+  "input": {
+    "type": "upload",
+    "source_kind": "m4a",
+    "source_codec": "aac",
+    "duration": 18.45,
+    "voice": null,
+    "style": null,
+    "avoid": []
+  },
+  "models": {
+    "transcribe": {
+      "provider": "faster-whisper",
+      "model": "small",
+      "version": "1.2.1",
+      "compute_type": "int8",
+      "licence": "MIT",
+      "translate_for_search": {
+        "task": "translate",
+        "from_language": "hi",
+        "to_language": "en",
+        "pieces": 4,
+        "scenes_with_english": 4,
+        "seconds": 6.588,
+        "used_for": "footage search queries only; captions stay in the spoken language"
+      }
+    },
+    "understand": {
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "endpoint": "https://api.groq.com/openai/v1",
+      "temperature": 0.0,
+      "seed": 1234,
+      "prompt_version": "c87d081779",
+      "tokens_used": 3979,
+      "batch_size": 6,
+      "calls": 2,
+      "rate_limited_answers": 0,
+      "seconds_waited_for_rate_limit": 0.0,
+      "fallback_scenes": [],
+      "story_sensitive": false
+    },
+    "ranker": {
+      "scorer": "clip",
+      "library": "open_clip_torch",
+      "version": "3.3.0",
+      "model": "ViT-B-32",
+      "pretrained": "laion2b_s34b_b79k",
+      "prompts": [
+        "a stock video of {q}",
+        "a photo of {q}",
+        "{q}"
+      ],
+      "score": "mean of the best 3 query similarities (prompt-ensembled)",
+      "multi_frame_top_k": 2,
+      "multi_frame_positions": [
+        0.3,
+        0.7
+      ],
+      "quality_mode": "balanced",
+      "footage_workers": 4,
+      "early_exit_rankings": 2,
+      "pass1_search_score_seconds": 49.888,
+      "pass1_5_vlm_seconds": 2.764,
+      "pass2_select_download_seconds": 0.009,
+      "candidates_scored": 87
+    },
+    "vlm_judge": {
+      "provider": "groq",
+      "model": "qwen/qwen3.8-27b",
+      "endpoint": "https://api.groq.com/openai/v1",
+      "temperature": 0,
+      "seed": 1234,
+      "top_k": 3,
+      "panel_width": 256,
+      "calls": 3,
+      "tokens_used": 2611,
+      "rate_limited_answers": 1,
+      "seconds_waited_for_rate_limit": 0.0,
+      "model_licence": "Apache-2.0 (Qwen weights); Groq marks this model as a preview",
+      "scenes_wanting_a_rating": 3,
+      "scenes_judged": 2,
+      "seconds": 2.762
+    },
+    "ffmpeg": "ffmpeg version 9.0.2-full_build-www.gyan.dev"
+  },
+  "providers": {
+    "pixabay_video": {
+      "name": "pixabay_video",
+      "api": "Pixabay Videos API (pixabay.com/api/videos)",
+      "status": "on",
+      "scenes_used": 3
+    },
+    "pixabay_image_motion": {
+      "name": "pixabay_image_motion",
+      "api": "Pixabay Images API (pixabay.com/api) + FFmpeg Ken Burns motion",
+      "status": "on",
+      "scenes_used": 1
+    },
+    "wikimedia": {
+      "name": "wikimedia",
+      "api": "Wikimedia Commons API (commons.wikimedia.org/w/api.php) + FFmpeg Ken Burns motion",
+      "status": "on",
+      "scenes_used": 0
+    },
+    "generated": {
+      "name": "generated",
+      "api": "FFmpeg gradients + libass text (made locally)",
+      "status": "on",
+      "scenes_used": 0
+    }
+  },
+  "quality_mode": "balanced",
+  "settings": {
+    "QUALITY_MODE": "balanced",
+    "SEED": 1234,
+    "MIN_SCENE_SECONDS": 2.0,
+    "MAX_SCENE_SECONDS": 8.0,
+    "PAUSE_SECONDS": 0.35,
+    "UNDERSTAND_PROVIDER": "groq",
+    "LLM_MODEL": "openai/gpt-oss-120b",
+    "PROVIDER_ORDER": "pixabay_video,pixabay_image_motion,wikimedia,generated",
+    "PROVIDERS_DISABLED": "",
+    "RANK_SCORER": "clip",
+    "CLIP_MODEL": "ViT-B-32",
+    "CLIP_PRETRAINED": "laion2b_s34b_b79k",
+    "STOCK_MIN_SCORE": 0.22,
+    "DURATION_BONUS": 0.02,
+    "ORIENTATION_BONUS": 0.02,
+    "GENERATED_FOR_STATISTICS": true,
+    "MAX_SLOWDOWN": 0.25,
+    "KEN_BURNS_ZOOM": 1.12,
+    "TARGET_LUMA": 110.0,
+    "TARGET_SATURATION": 18.0,
+    "QA_BLACK_SECONDS": 0.5,
+    "QA_FREEZE_SECONDS": 2.0,
+    "QA_MAX_DRIFT_SECONDS": 0.1,
+    "QA_RETRIES": 1,
+    "RENDER_FPS": 30,
+    "VIDEO_PRESET": "veryfast",
+    "VIDEO_CRF": 23,
+    "AUDIO_SAMPLE_RATE": 48000,
+    "AUDIO_BITRATE": "192k",
+    "CAPTION_MAX_CHARS_PER_LINE": 42,
+    "CAPTION_MAX_LINES": 2,
+    "LOGO_CHECK": true,
+    "LOGO_CROP_GRID": 3,
+    "LOGO_REJECT_PROB": 0.6,
+    "LOGO_PENALTY_PROB": 0.4,
+    "LOGO_PENALTY": 0.03,
+    "LOGO_FRAME_COUNT": 3,
+    "STATISTIC_OVERLAY": true,
+    "QUERIES_PER_SCENE": 5,
+    "PROVIDER_RESULTS_PER_QUERY": 8,
+    "PROVIDER_PAGES": 1,
+    "MAX_CANDIDATES_PER_SOURCE": 15,
+    "EARLY_EXIT": true,
+    "EARLY_EXIT_STEP": 6,
+    "PROVIDER_MAX_QUERIES": "wikimedia=3,openverse=2",
+    "CLIP_PROMPTS": "a stock video of {q}|a photo of {q}|{q}",
+    "SCORE_TOP_QUERIES": 3,
+    "MULTI_FRAME_TOP_K": 2,
+    "MULTI_FRAME_POSITIONS": "0.3,0.7",
+    "TEXT_PENALTY_PROB": 0.5,
+    "TEXT_PENALTY": 0.03,
+    "PREFER_VIDEO_MARGIN": 0.03,
+    "RELATIVE_MARGIN": 0.12,
+    "VLM_PROVIDER": "groq",
+    "VLM_MODEL": "qwen/qwen3.8-27b",
+    "VLM_TOP_K": 3,
+    "VLM_MAX_SCENES_PER_JOB": 3,
+    "VLM_JUDGE_CONFIDENT": false,
+    "VLM_REJECT_SCORE": 1,
+    "VLM_ACCEPT_SCORE": 4,
+    "LLM_BATCH_SIZE": 6,
+    "STORY_SENSITIVE_MIN_SCENES": 2,
+    "STORY_SENSITIVE_MIN_SHARE": 0.3,
+    "CROP_TIE_MARGIN": 0.03,
+    "CROP_SUBJECT_LEVEL": 0.5,
+    "CROP_SUBJECT_PAD": 0.06,
+    "RENDER_WORKERS": 3
+  },
+  "seed": 1234,
+  "speech_check": {
+    "max_volume_db": -4.1,
+    "sound_seconds": 17.374,
+    "words": 50,
+    "no_speech_prob": 0.441,
+    "language": "hi",
+    "language_probability": 0.962
+  },
+  "timings_seconds": {
+    "intake": 0.197,
+    "transcribe": 33.268,
+    "scenes": 0.006,
+    "understand": 13.092,
+    "footage": 52.664,
+    "render": 35.948
+  },
+  "timings_note": "seconds per stage, measured up to the moment this file was written (upload not included)",
+  "cost_estimate": {
+    "total_usd": 0.0,
+    "llm_tokens": 6590,
+    "method": "0 USD: every service used here is free - Groq free tier for the LLM (tokens counted in llm_tokens; the optional VLM judge too), Pixabay, Wikimedia Commons and Openverse APIs are free, and Kokoro, Whisper, open_clip and FFmpeg run locally on the CPU. On paid plans: cost = llm_tokens x the LLM price per token + compute time (timings_seconds) x the server price."
+  },
+  "warnings": [
+    "Scene 2: the LLM suggested card text '10% of your earnings' with '10%', which the narration does not say; ignored (a card shows only figures from the narration)",
+    "The VLM judge is unavailable (HTTP 429 (rate limited, retry-after 15 s)); the remaining scenes were not judged"
+  ],
+  "rights": {
+    "licences": {
+      "Pixabay Content License": 4
+    },
+    "all_commercial_use": true,
+    "any_watermark": false,
+    "attribution_required": [],
+    "credits": [
+      {
+        "scene": 0,
+        "provider": "pixabay_video",
+        "attribution": "Coverr-Free-Footage on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-1046/"
+      },
+      {
+        "scene": 1,
+        "provider": "pixabay_image_motion",
+        "attribution": "shameersrk on Pixabay",
+        "page_url": "https://pixabay.com/photos/india-rupee-occupation-3887568/"
+      },
+      {
+        "scene": 2,
+        "provider": "pixabay_video",
+        "attribution": "rashed7671 on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-172894/"
+      },
+      {
+        "scene": 3,
+        "provider": "pixabay_video",
+        "attribution": "NickyPe on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-93550/"
+      }
+    ]
+  },
+  "footage_mix": {
+    "scenes": 4,
+    "counts": {
+      "video": 3,
+      "photo_motion": 1,
+      "generated_card": 0
+    },
+    "share": {
+      "video": 0.75,
+      "photo_motion": 0.25,
+      "generated_card": 0.0
+    },
+    "statistic_cards": 0,
+    "statistic_overlays": 0,
+    "adaptive_threshold_clips": 0,
+    "vlm_judged_clips": 1,
+    "vlm_mean_score": 4.0,
+    "share_without_statistic_cards": {
+      "video": 0.75,
+      "photo_motion": 0.25,
+      "generated_card": 0.0
+    }
+  },
+  "ai_generated": {
+    "narration": false,
+    "visuals": false,
+    "generated_cards": 0,
+    "note": "generated cards are drawn by FFmpeg (gradient + text), not by an AI model"
+  },
+  "qa": {
+    "16:9": {
+      "video_seconds": 18.467,
+      "audio_seconds": 18.45,
+      "drift_seconds": 0.017,
+      "codec": "h264",
+      "pix_fmt": "yuv420p",
+      "fps": 30.0,
+      "audio_codec": "aac",
+      "audio_sample_rate": "48000",
+      "problems": []
+    },
+    "9:16": {
+      "video_seconds": 18.467,
+      "audio_seconds": 18.45,
+      "drift_seconds": 0.017,
+      "codec": "h264",
+      "pix_fmt": "yuv420p",
+      "fps": 30.0,
+      "audio_codec": "aac",
+      "audio_sample_rate": "48000",
+      "problems": []
+    }
+  },
+  "outputs": [
+    {
+      "aspect_ratio": "16:9",
+      "file": "video_16x9.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 18.467
+    },
+    {
+      "aspect_ratio": "9:16",
+      "file": "video_9x16.mp4",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "duration": 18.467
+    }
+  ]
+}

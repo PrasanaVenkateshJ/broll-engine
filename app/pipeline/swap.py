@@ -44,7 +44,7 @@ from app.storage import StorageNotFound, cache_key, get_storage, output_key
 
 PIXABAY_HOSTS = {"pixabay.com", "cdn.pixabay.com"}
 WIKIMEDIA_HOSTS = {"upload.wikimedia.org", "commons.wikimedia.org"}
-LOOKUP_PROVIDERS = ("pixabay_video", "pixabay_image_motion", "wikimedia", "mock")
+LOOKUP_PROVIDERS = ("pixabay_video", "pixabay_image_motion", "wikimedia", "openverse", "mock")
 IMAGE_SUFFIXES = (".jpg", ".jpeg", ".png", ".webp")
 
 

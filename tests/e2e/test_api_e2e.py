@@ -59,7 +59,10 @@ def test_full_job_all_ratios_with_mocks(client, worker, tmp_path):
     clip_ids = [(sc["provider"], sc["clip_id"]) for sc in scenes]
     assert len(clip_ids) == len(set(clip_ids))  # no clip twice
     stat = next(sc for sc in scenes if "40 percent" in sc["text"])
-    assert stat["flags"]["statistic"] and stat["generated"] and stat["provider"] == "generated"
+    # Statistic line: real (mock) footage with the narration's number drawn on it as a badge.
+    assert stat["flags"]["statistic"] and stat["overlay"] is True and stat["provider"] == "mock"
+    assert stat["overlay_card"]["headline"] == "40%" and stat["overlay_card"]["source"] == "narration"
+    assert all(seg["overlay"]["headline"] == "40%" for seg in stat["segments"].values())
     assert any(sc["provider"] == "mock" and sc["relevance_score"] >= 0.22 for sc in scenes)
     assert all("portrait" not in q for sc in scenes for q in sc["queries"])  # avoid list honoured
 
@@ -76,16 +79,18 @@ def test_full_job_all_ratios_with_mocks(client, worker, tmp_path):
     assert manifest["models"]["understand"]["provider"] == "mock"
     assert manifest["models"]["ranker"]["scorer"] == "mock"
     assert manifest["models"]["ffmpeg"].startswith("ffmpeg version")
-    assert manifest["providers"]["mock"]["scenes_used"] >= 1 and manifest["providers"]["generated"]["scenes_used"] >= 1
+    assert manifest["providers"]["mock"]["scenes_used"] >= 1 and "generated" in manifest["providers"]
+    assert manifest["footage_mix"]["statistic_overlays"] == 1
     assert manifest["seed"] == 1234 and manifest["settings"]["STOCK_MIN_SCORE"] == 0.22
     assert {"tts", "transcribe", "scenes", "understand", "footage", "render"} <= set(manifest["timings_seconds"])
     assert manifest["cost_estimate"]["total_usd"] == 0.0 and "free" in manifest["cost_estimate"]["method"]
     assert manifest["rights"]["all_commercial_use"] is True and manifest["rights"]["any_watermark"] is False
     mix = manifest["footage_mix"]
     assert mix["scenes"] == len(scenes) and sum(mix["counts"].values()) == len(scenes)
-    assert mix["counts"]["video"] >= 1 and mix["statistic_cards"] == 1  # mock clips are videos; "40%" is a card
+    # mock clips are videos; "40%" is now a badge on real (mock) footage, not a card
+    assert mix["counts"]["video"] >= 1 and mix["statistic_cards"] == 0 and mix["statistic_overlays"] == 1
     assert manifest["settings"]["LOGO_REJECT_PROB"] == 0.6
-    assert manifest["ai_generated"]["visuals"] is False and manifest["ai_generated"]["generated_cards"] >= 1
+    assert manifest["ai_generated"]["visuals"] is False and manifest["ai_generated"]["generated_cards"] >= 0
     assert all(q["problems"] == [] and q["drift_seconds"] < 0.1 for q in manifest["qa"].values())
     assert fetch(client, final, "captions.srt", tmp_path).read_text(encoding="utf-8").startswith("1\n00:00:00")
 

@@ -1,0 +1,1682 @@
+{
+  "job_id": "47cfab0c5f96495d92bc1b67d7a1c297",
+  "input_type": "script",
+  "duration": 19.25,
+  "language": "en",
+  "scenes": [
+    {
+      "index": 0,
+      "text": "Trust is earned slowly and lost quickly.",
+      "start": 0.0,
+      "end": 2.73,
+      "duration": 2.73,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "people shaking hands slowly",
+      "queries": [
+        "two hands exchanging keys",
+        "building a wooden bridge",
+        "corporate conference room",
+        "people shaking hands slowly",
+        "soft warm lighting"
+      ],
+      "flags": {
+        "abstract": true,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "31654",
+      "page_url": "https://pixabay.com/videos/id-31654/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "loilamtan on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.242 >= 0.22 for query 'people shaking hands slowly' (best of 15 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.240); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.02)",
+      "relevance_score": 0.2417,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2417,
+        "thumbnail_score": 0.2405,
+        "frame_scores": [
+          0.2405,
+          0.271,
+          0.2135
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0001,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.2817,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_000.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0007,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 5.05,
+            "logo_prob": 0.0198,
+            "scene_score": 0.2535,
+            "result": "ok"
+          },
+          {
+            "time": 15.16,
+            "logo_prob": 0.023,
+            "scene_score": 0.2304,
+            "result": "ok"
+          },
+          {
+            "time": 25.26,
+            "logo_prob": 0.0092,
+            "scene_score": 0.228,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:31654",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2020/01/28/31654-387926643_medium.mp4",
+        "final_score": 0.2817,
+        "width": 1280,
+        "height": 720,
+        "duration": 30.0
+      },
+      "understanding": {
+        "queries": [
+          "two hands exchanging keys",
+          "building a wooden bridge",
+          "corporate conference room",
+          "people shaking hands slowly",
+          "soft warm lighting"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": true,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows trust being built, visual metaphor, appropriate setting, action and mood.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "trust",
+        "card": {
+          "headline": "TRUST",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "c03493f0513fa7be"
+      },
+      "safety": {
+        "queries": [
+          "two hands exchanging keys",
+          "building a wooden bridge",
+          "corporate conference room",
+          "people shaking hands slowly",
+          "soft warm lighting"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_000_528ed3c766e24679.mp4",
+          "cache_key": "528ed3c766e24679",
+          "frames": 82,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_000_41fda209a3399121.mp4",
+          "cache_key": "41fda209a3399121",
+          "frames": 82,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.226,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2283
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2048
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.1828
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "subject_span": [
+              0.0814,
+              0.3822
+            ],
+            "windows_cutting_subject": [
+              "centre",
+              "left"
+            ],
+            "reason": "window 'centre' chosen (0.228; best window 0.228; whole frame 0.226; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Trust",
+          "start": 0.0,
+          "end": 0.48
+        },
+        {
+          "text": "is",
+          "start": 0.48,
+          "end": 0.78
+        },
+        {
+          "text": "earned",
+          "start": 0.78,
+          "end": 1.02
+        },
+        {
+          "text": "slowly",
+          "start": 1.02,
+          "end": 1.46
+        },
+        {
+          "text": "and",
+          "start": 1.46,
+          "end": 1.76
+        },
+        {
+          "text": "lost",
+          "start": 1.76,
+          "end": 2.04
+        },
+        {
+          "text": "quickly.",
+          "start": 2.04,
+          "end": 2.4
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "text": "Our sales grew 40 % in 2025.",
+      "start": 2.73,
+      "end": 5.61,
+      "duration": 2.88,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "balloon with dollar signs",
+      "queries": [
+        "cash flowing into business",
+        "balloon with dollar signs",
+        "busy retail storefront",
+        "employees loading boxes onto truck",
+        "bright optimistic atmosphere"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": true,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "172888",
+      "page_url": "https://pixabay.com/videos/id-172888/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "rashed7671 on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "statistic line on real footage: number badge '40%' from the narration drawn over the clip (STATISTIC_OVERLAY=true); pixabay_video: score 0.245 >= 0.22 for query 'balloon with dollar signs' (best of 6 candidates, order bonus +0.01); score over 3 frames (thumbnail 0.240); logo check penalised (logo prob 0.52); 3 clip frame(s) passed the logo check (max logo prob 0.12); video preferred over photo-motion (pixabay_image_motion best 0.276 is not more than 0.03 above 0.256)",
+      "relevance_score": 0.2455,
+      "overlay": true,
+      "overlay_card": {
+        "headline": "40%",
+        "subtitle": "our sales grew",
+        "kind": "percent",
+        "source": "narration",
+        "numbers_shown": [
+          "40%"
+        ],
+        "style": "badge (lower third, fades in)"
+      },
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2455,
+        "thumbnail_score": 0.2405,
+        "frame_scores": [
+          0.2405,
+          0.249,
+          0.2469
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0011,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.03,
+        "order_score": 0.2555,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_001.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.5248,
+          "result": "penalised",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.03
+        },
+        "frames": [
+          {
+            "time": 1.83,
+            "logo_prob": 0.0119,
+            "scene_score": 0.247,
+            "result": "ok"
+          },
+          {
+            "time": 5.5,
+            "logo_prob": 0.1216,
+            "scene_score": 0.2447,
+            "result": "ok"
+          },
+          {
+            "time": 9.17,
+            "logo_prob": 0.0123,
+            "scene_score": 0.2378,
+            "result": "ok"
+          }
+        ],
+        "result": "penalised"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:172888",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2023/07/23/172888-848187873_medium.mp4",
+        "final_score": 0.2555,
+        "width": 1280,
+        "height": 720,
+        "duration": 11.0
+      },
+      "understanding": {
+        "queries": [
+          "cash flowing into business",
+          "balloon with dollar signs",
+          "busy retail storefront",
+          "employees loading boxes onto truck",
+          "bright optimistic atmosphere"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": true,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Illustrates sales growth with concrete money flow, metaphor, retail setting, loading action and upbeat mood.",
+        "source": "groq",
+        "names": [],
+        "number": "40%",
+        "keyword": "sales grew",
+        "card": {
+          "headline": "40%",
+          "subtitle": "our sales grew",
+          "number": "40%",
+          "kind": "percent",
+          "source": "narration",
+          "numbers_shown": [
+            "40%"
+          ]
+        },
+        "story_sensitive": false,
+        "fingerprint": "274fa698765684c6"
+      },
+      "safety": {
+        "queries": [
+          "cash flowing into business",
+          "balloon with dollar signs",
+          "busy retail storefront",
+          "employees loading boxes onto truck",
+          "bright optimistic atmosphere"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_001_8c5ee9ff91b62603.mp4",
+          "cache_key": "8c5ee9ff91b62603",
+          "frames": 86,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "overlay": {
+            "headline": "40%",
+            "subtitle": "our sales grew",
+            "source": "narration"
+          },
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_001_c33ae518f92dcdf4.mp4",
+          "cache_key": "c33ae518f92dcdf4",
+          "frames": 86,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "overlay": {
+            "headline": "40%",
+            "subtitle": "our sales grew",
+            "source": "narration"
+          },
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2388,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2385
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2325
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.1889
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "subject_span": [
+              0.0052,
+              0.445
+            ],
+            "windows_cutting_subject": [
+              "centre",
+              "left"
+            ],
+            "reason": "window 'centre' chosen (0.238; best window 0.238; whole frame 0.239; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Our",
+          "start": 3.06,
+          "end": 3.16
+        },
+        {
+          "text": "sales",
+          "start": 3.16,
+          "end": 3.5
+        },
+        {
+          "text": "grew",
+          "start": 3.5,
+          "end": 3.76
+        },
+        {
+          "text": "40",
+          "start": 3.76,
+          "end": 4.1
+        },
+        {
+          "text": "%",
+          "start": 4.1,
+          "end": 4.46
+        },
+        {
+          "text": "in",
+          "start": 4.46,
+          "end": 4.68
+        },
+        {
+          "text": "2025.",
+          "start": 4.68,
+          "end": 5.22
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "text": "Customer complaints fell by half in just six months.",
+      "start": 5.61,
+      "end": 8.89,
+      "duration": 3.28,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "dominoes toppling down",
+      "queries": [
+        "empty complaint suggestion box",
+        "dominoes toppling down",
+        "call center office space",
+        "agents marking resolved tickets",
+        "calm relieved atmosphere"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": true,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "28659",
+      "page_url": "https://pixabay.com/videos/id-28659/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Hucklebarry on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.262 >= 0.22 for query 'dominoes toppling down' (best of 15 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.239); logo check ok (logo prob 0.27); 3 clip frame(s) passed the logo check (max logo prob 0.24); video scored >= 0.25: photo sources not searched",
+      "relevance_score": 0.2616,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2616,
+        "thumbnail_score": 0.2389,
+        "frame_scores": [
+          0.2389,
+          0.2648,
+          0.281
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.3016,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_002.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.2701,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 1.05,
+            "logo_prob": 0.2434,
+            "scene_score": 0.2405,
+            "result": "ok"
+          },
+          {
+            "time": 3.16,
+            "logo_prob": 0.2275,
+            "scene_score": 0.2375,
+            "result": "ok"
+          },
+          {
+            "time": 5.26,
+            "logo_prob": 0.1769,
+            "scene_score": 0.263,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:28659",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2019/11/03/28659-370964591_medium.mp4",
+        "final_score": 0.3016,
+        "width": 1280,
+        "height": 720,
+        "duration": 6.0
+      },
+      "understanding": {
+        "queries": [
+          "empty complaint suggestion box",
+          "dominoes toppling down",
+          "call center office space",
+          "agents marking resolved tickets",
+          "calm relieved atmosphere"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": true,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Depicts reduction in complaints via empty box, falling dominoes metaphor, call center setting, ticket resolution action, calm mood.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "customer complaints",
+        "card": {
+          "headline": "CUSTOMER COMPLAINTS",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "fcb5267a3287f419"
+      },
+      "safety": {
+        "queries": [
+          "empty complaint suggestion box",
+          "dominoes toppling down",
+          "call center office space",
+          "agents marking resolved tickets",
+          "calm relieved atmosphere"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_002_e70dccf41fc3e985.mp4",
+          "cache_key": "e70dccf41fc3e985",
+          "frames": 99,
+          "look": "eq=brightness=0.038:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_002_0abaf3dda547d624.mp4",
+          "cache_key": "0abaf3dda547d624",
+          "frames": 99,
+          "look": "eq=brightness=0.038:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (left)",
+          "crop": {
+            "method": "clip",
+            "choice": "left",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.236,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2285
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2482
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2278
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "subject_span": [
+              0.5945,
+              0.7145
+            ],
+            "windows_cutting_subject": [
+              "centre",
+              "right"
+            ],
+            "reason": "window 'left' chosen (0.248; best window 0.248; whole frame 0.236; near-ties within 0.03 go to salient / centre); 'centre' was a near-tie but its edge falls inside the subject (0.59-0.71), so 'left' keeps it whole"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Customer",
+          "start": 6.0,
+          "end": 6.36
+        },
+        {
+          "text": "complaints",
+          "start": 6.36,
+          "end": 6.86
+        },
+        {
+          "text": "fell",
+          "start": 6.86,
+          "end": 7.08
+        },
+        {
+          "text": "by",
+          "start": 7.08,
+          "end": 7.3
+        },
+        {
+          "text": "half",
+          "start": 7.3,
+          "end": 7.66
+        },
+        {
+          "text": "in",
+          "start": 7.66,
+          "end": 7.84
+        },
+        {
+          "text": "just",
+          "start": 7.84,
+          "end": 8.0
+        },
+        {
+          "text": "six",
+          "start": 8.0,
+          "end": 8.3
+        },
+        {
+          "text": "months.",
+          "start": 8.3,
+          "end": 8.58
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "text": "Patience is a quiet kind of strength.",
+      "start": 8.89,
+      "end": 11.47,
+      "duration": 2.58,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "person meditating by window",
+      "queries": [
+        "person meditating by window",
+        "tree roots growing slowly",
+        "peaceful garden bench",
+        "someone calmly reading a book",
+        "soft golden sunrise light"
+      ],
+      "flags": {
+        "abstract": true,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "43459",
+      "page_url": "https://pixabay.com/videos/id-43459/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Nicolas_Garay on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.239 >= 0.22 for query 'person meditating by window' (best of 15 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.239); logo check ok (logo prob 0.02); 3 clip frame(s) passed the logo check (max logo prob 0.01); VLM judge 4/5 (judged 2 candidates, higher rating first); video preferred over photo-motion (pixabay_image_motion best 0.289 is not more than 0.03 above 0.279)",
+      "relevance_score": 0.239,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": 4,
+      "vlm": {
+        "score": 4,
+        "judged": {
+          "pixabay_video:43459": 4,
+          "pixabay_video:185092": 3
+        },
+        "why": "The calm, solitary figure in A conveys quiet strength and patience, while the still book in B is only loosely related.",
+        "priority": "close call",
+        "model": "qwen/qwen3.8-27b"
+      },
+      "score_details": {
+        "score": 0.239,
+        "thumbnail_score": 0.2392,
+        "frame_scores": [
+          0.2392,
+          0.2408,
+          0.2369
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0022,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.279,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_003.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0207,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 1.5,
+            "logo_prob": 0.0076,
+            "scene_score": 0.2189,
+            "result": "ok"
+          },
+          {
+            "time": 4.51,
+            "logo_prob": 0.0073,
+            "scene_score": 0.2013,
+            "result": "ok"
+          },
+          {
+            "time": 7.52,
+            "logo_prob": 0.0042,
+            "scene_score": 0.2002,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:43459",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2020/06/30/43459-436106182_medium.mp4",
+        "final_score": 0.279,
+        "width": 2560,
+        "height": 1440,
+        "duration": 9.0
+      },
+      "understanding": {
+        "queries": [
+          "person meditating by window",
+          "tree roots growing slowly",
+          "peaceful garden bench",
+          "someone calmly reading a book",
+          "soft golden sunrise light"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": true,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Conveys patience as quiet strength through meditation, growing roots metaphor, serene setting, reading action, gentle lighting mood.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "patience",
+        "card": {
+          "headline": "PATIENCE",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "b5bc62211532ff64"
+      },
+      "safety": {
+        "queries": [
+          "person meditating by window",
+          "tree roots growing slowly",
+          "peaceful garden bench",
+          "someone calmly reading a book",
+          "soft golden sunrise light"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_003_b380dea6521480a6.mp4",
+          "cache_key": "b380dea6521480a6",
+          "frames": 77,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_003_4d1315563716418b.mp4",
+          "cache_key": "4d1315563716418b",
+          "frames": 77,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.26,
+            "windows": {
+              "salient": {
+                "start": 0.2007,
+                "score": 0.2445
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2346
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.253
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.1396
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "subject_span": [
+              0.5054,
+              0.6254
+            ],
+            "windows_cutting_subject": [
+              "salient"
+            ],
+            "reason": "window 'centre' chosen (0.235; best window 0.253; whole frame 0.260; near-ties within 0.03 go to salient / centre); 'salient' was a near-tie but its edge falls inside the subject (0.51-0.63), so 'centre' keeps it whole"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Patience",
+          "start": 9.2,
+          "end": 9.68
+        },
+        {
+          "text": "is",
+          "start": 9.68,
+          "end": 9.98
+        },
+        {
+          "text": "a",
+          "start": 9.98,
+          "end": 10.06
+        },
+        {
+          "text": "quiet",
+          "start": 10.06,
+          "end": 10.44
+        },
+        {
+          "text": "kind",
+          "start": 10.44,
+          "end": 10.72
+        },
+        {
+          "text": "of",
+          "start": 10.72,
+          "end": 10.86
+        },
+        {
+          "text": "strength.",
+          "start": 10.86,
+          "end": 11.14
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "text": "Today, three out of four buyers read reviews before they spend a single rupee.",
+      "start": 11.47,
+      "end": 16.38,
+      "duration": 4.91,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "home office desk",
+      "queries": [
+        "person scrolling product reviews",
+        "magnifying glass over star rating",
+        "home office desk",
+        "hand tapping on laptop screen",
+        "focused attentive vibe"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": true,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "42305",
+      "page_url": "https://pixabay.com/videos/id-42305/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "CycleZyklusCiclo on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "statistic line on real footage: number badge '3 out of 4' from the narration drawn over the clip (STATISTIC_OVERLAY=true); pixabay_video: score 0.272 >= 0.22 for query 'home office desk' (best of 6 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.279); logo check ok (logo prob 0.17); 3 clip frame(s) passed the logo check (max logo prob 0.19); video scored >= 0.25: photo sources not searched",
+      "relevance_score": 0.2724,
+      "overlay": true,
+      "overlay_card": {
+        "headline": "3 out of 4",
+        "subtitle": "buyers read reviews before they",
+        "kind": "ratio",
+        "source": "narration",
+        "numbers_shown": [
+          "3 out of 4"
+        ],
+        "style": "badge (lower third, fades in)"
+      },
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2724,
+        "thumbnail_score": 0.2791,
+        "frame_scores": [
+          0.2791,
+          0.2715,
+          0.2665
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0001,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.3124,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_004.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.1708,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.49,
+            "logo_prob": 0.0894,
+            "scene_score": 0.2535,
+            "result": "ok"
+          },
+          {
+            "time": 7.48,
+            "logo_prob": 0.1931,
+            "scene_score": 0.2578,
+            "result": "ok"
+          },
+          {
+            "time": 12.47,
+            "logo_prob": 0.1231,
+            "scene_score": 0.2608,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:42305",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2020/06/16/42305-431511171_medium.mp4",
+        "final_score": 0.3124,
+        "width": 1280,
+        "height": 720,
+        "duration": 15.0
+      },
+      "understanding": {
+        "queries": [
+          "person scrolling product reviews",
+          "magnifying glass over star rating",
+          "home office desk",
+          "hand tapping on laptop screen",
+          "focused attentive vibe"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": true,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows buyers checking reviews with scrolling action, magnifying glass metaphor, home office setting, tapping action, focused mood.",
+        "source": "groq",
+        "names": [],
+        "number": "3 out of 4",
+        "keyword": "today three four buyers read reviews spe",
+        "card": {
+          "headline": "3 out of 4",
+          "subtitle": "buyers read reviews before they",
+          "number": "3 out of 4",
+          "kind": "ratio",
+          "source": "narration",
+          "numbers_shown": [
+            "3 out of 4"
+          ]
+        },
+        "story_sensitive": false,
+        "fingerprint": "688f229f3dd61ca0"
+      },
+      "safety": {
+        "queries": [
+          "person scrolling product reviews",
+          "magnifying glass over star rating",
+          "home office desk",
+          "hand tapping on laptop screen",
+          "focused attentive vibe"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_004_04f17012ad6ce294.mp4",
+          "cache_key": "04f17012ad6ce294",
+          "frames": 147,
+          "look": "eq=brightness=-0.078:saturation=1.200",
+          "overlay": {
+            "headline": "3 out of 4",
+            "subtitle": "buyers read reviews before they",
+            "source": "narration"
+          },
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_004_77ce1549f75fd2bb.mp4",
+          "cache_key": "77ce1549f75fd2bb",
+          "frames": 147,
+          "look": "eq=brightness=-0.078:saturation=1.200",
+          "overlay": {
+            "headline": "3 out of 4",
+            "subtitle": "buyers read reviews before they",
+            "source": "narration"
+          },
+          "caption_font": "Arial",
+          "framing": "subject crop (left)",
+          "crop": {
+            "method": "clip",
+            "choice": "left",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2707,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2412
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2958
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2675
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "subject_span": [
+              0.5969,
+              0.7459
+            ],
+            "windows_cutting_subject": [
+              "centre",
+              "right"
+            ],
+            "reason": "window 'left' chosen (0.296; best window 0.296; whole frame 0.271; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Today,",
+          "start": 11.8,
+          "end": 12.0
+        },
+        {
+          "text": "three",
+          "start": 12.42,
+          "end": 12.58
+        },
+        {
+          "text": "out",
+          "start": 12.58,
+          "end": 12.76
+        },
+        {
+          "text": "of",
+          "start": 12.76,
+          "end": 12.88
+        },
+        {
+          "text": "four",
+          "start": 12.88,
+          "end": 13.1
+        },
+        {
+          "text": "buyers",
+          "start": 13.1,
+          "end": 13.52
+        },
+        {
+          "text": "read",
+          "start": 13.52,
+          "end": 13.9
+        },
+        {
+          "text": "reviews",
+          "start": 13.9,
+          "end": 14.34
+        },
+        {
+          "text": "before",
+          "start": 14.34,
+          "end": 14.7
+        },
+        {
+          "text": "they",
+          "start": 14.7,
+          "end": 14.96
+        },
+        {
+          "text": "spend",
+          "start": 14.96,
+          "end": 15.22
+        },
+        {
+          "text": "a",
+          "start": 15.22,
+          "end": 15.36
+        },
+        {
+          "text": "single",
+          "start": 15.36,
+          "end": 15.62
+        },
+        {
+          "text": "rupee.",
+          "start": 15.62,
+          "end": 16.06
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "text": "Hope is what keeps a small team going.",
+      "start": 16.38,
+      "end": 19.25,
+      "duration": 2.87,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "small team huddling together",
+      "queries": [
+        "small team huddling together",
+        "light shining through tunnel",
+        "cozy startup workspace",
+        "team members high-fiving",
+        "uplifting hopeful atmosphere"
+      ],
+      "flags": {
+        "abstract": true,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_image_motion",
+      "clip_id": "2444978",
+      "page_url": "https://pixabay.com/photos/team-grass-cheer-field-game-sport-2444978/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "luvmybry on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_image_motion: score 0.238 >= 0.22 for query 'small team huddling together' (best of 15 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 1 clip frame(s) passed the logo check (max logo prob 0.00); VLM judge 5/5 (judged 3 candidates, higher rating first); earlier: pixabay_video: logo check rejected 1, best: pixabay_video:3132 (logo prob 0.99, scene 0.247) (1 checked); pixabay_video: best score 0.202 < 0.22",
+      "relevance_score": 0.2377,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": 5,
+      "vlm": {
+        "score": 5,
+        "judged": {
+          "pixabay_image_motion:2444978": 5,
+          "pixabay_image_motion:386673": 4,
+          "pixabay_image_motion:5382501": 3
+        },
+        "why": "A shows a small team celebrating together, directly matching the line; B shows unity but not a team; C is a generic office scene.",
+        "priority": "close call",
+        "model": "qwen/qwen3.8-27b"
+      },
+      "score_details": {
+        "score": 0.2377,
+        "thumbnail_score": 0.2377,
+        "frame_scores": null,
+        "frames_scored": 1,
+        "text_prob": 0.0003,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.2777
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_005.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0023,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.0035,
+            "scene_score": 0.2344,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_image_motion:2444978",
+        "kind": "image",
+        "title": "",
+        "source_url": "https://pixabay.com/get/g574605fbe3fcbd5f4dbc95268d9ad387aa9e7fe166c7625d9b7942e37abbd111f84253d76c1812d32f6c0eeca426a8e500fc6d0260472f6545868894160cad98_1280.jpg",
+        "final_score": 0.2777,
+        "width": 1280,
+        "height": 853,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "small team huddling together",
+          "light shining through tunnel",
+          "cozy startup workspace",
+          "team members high-fiving",
+          "uplifting hopeful atmosphere"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": true,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Represents hope keeping a team going via huddle, light tunnel metaphor, workspace setting, high‑five action, hopeful mood.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "hope",
+        "card": {
+          "headline": "HOPE",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "ee5b5bdbd0a935ae"
+      },
+      "safety": {
+        "queries": [
+          "small team huddling together",
+          "light shining through tunnel",
+          "cozy startup workspace",
+          "team members high-fiving",
+          "uplifting hopeful atmosphere"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_005_59b3d38d4390a196.mp4",
+          "cache_key": "59b3d38d4390a196",
+          "frames": 87,
+          "look": "eq=saturation=1.115",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "y",
+            "window_fraction": 0.8441,
+            "full_frame_score": 0.2375,
+            "windows": {
+              "centre": {
+                "start": 0.078,
+                "score": 0.2397
+              },
+              "top": {
+                "start": 0.0,
+                "score": 0.2269
+              },
+              "bottom": {
+                "start": 0.1559,
+                "score": 0.2255
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "subject_span": [
+              0.3071,
+              0.8976
+            ],
+            "windows_cutting_subject": [
+              "top"
+            ],
+            "reason": "window 'centre' chosen (0.240; best window 0.240; whole frame 0.237; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_005_1da8602befb58c00.mp4",
+          "cache_key": "1da8602befb58c00",
+          "frames": 87,
+          "look": "eq=saturation=1.115",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.3749,
+            "full_frame_score": 0.2375,
+            "windows": {
+              "salient": {
+                "start": 0.356,
+                "score": 0.2494
+              },
+              "centre": {
+                "start": 0.3126,
+                "score": 0.2413
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.155
+              },
+              "right": {
+                "start": 0.6251,
+                "score": 0.1884
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "subject_span": [
+              0.4688,
+              0.5888
+            ],
+            "windows_cutting_subject": [],
+            "reason": "window 'salient' chosen (0.249; best window 0.249; whole frame 0.237; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Hope",
+          "start": 16.7,
+          "end": 16.9
+        },
+        {
+          "text": "is",
+          "start": 16.9,
+          "end": 17.14
+        },
+        {
+          "text": "what",
+          "start": 17.14,
+          "end": 17.28
+        },
+        {
+          "text": "keeps",
+          "start": 17.28,
+          "end": 17.5
+        },
+        {
+          "text": "a",
+          "start": 17.5,
+          "end": 17.66
+        },
+        {
+          "text": "small",
+          "start": 17.66,
+          "end": 17.96
+        },
+        {
+          "text": "team",
+          "start": 17.96,
+          "end": 18.26
+        },
+        {
+          "text": "going.",
+          "start": 18.26,
+          "end": 18.6
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "aspect_ratio": "16:9",
+      "file": "video_16x9.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 19.267
+    },
+    {
+      "aspect_ratio": "9:16",
+      "file": "video_9x16.mp4",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "duration": 19.267
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+1 input(s) -> http://localhost:8000 (concurrency 1)
+perf_a_gardening               succeeded                             339.67 s  job 99a258ee6bfb4fce8cc6439a81854ae7
+summary: testpack\outputs\run2\summary.csv and testpack\outputs\run2\summary.md
