@@ -1,0 +1,15 @@
+waiting for https://prasanavenkateshj--broll-studio.us-east.modal.run/ready (cold start) ...
+first /ready answer: HTTP 200 after 6.9 s
+cold start: /ready answered after 6.9 s
+GET /health: HTTP 200 in 424 ms
+GET /ready: HTTP 200 in 434 ms
+job: 23 words, ratios 16:9,9:16 ... (polling politely)
+job -: rejected UNAUTHORIZED
+details: data\live_check\live-20261018-201152\job.json
+SOME CHECKS FAILED
+
+NOTE (written by Claude Code, not by the tool): the cold start (6.9 s, container started from zero running tasks right after
+`modal deploy`) and /health + /ready passed. The job step was rejected with UNAUTHORIZED because the API token in the Modal secret
+`broll-secrets` is not the one in the local .env (the secret values cannot be read from here). The job + download + Range
+checks therefore still have to be run once with the demo token:  $env:BROLL_API_TOKEN = Read-Host "token"; then
+.venv\Scripts\python tools\live_check.py --url https://prasanavenkateshj--broll-studio.us-east.modal.run

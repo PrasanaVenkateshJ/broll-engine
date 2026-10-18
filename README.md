@@ -46,10 +46,13 @@ flowchart LR
 - **api** and **worker** are separate processes sharing one SQLite file. The API only validates and queues
   (`202 + job_id`); the worker claims queued jobs with an atomic `UPDATE ... WHERE status='queued'`, so two
   workers never take the same job.
-- **Selection rule** (stored per scene in `timeline.json` as `reason`): statistic lines get a number
-  card; otherwise the best stock candidate whose CLIP score is `>= STOCK_MIN_SCORE` and that is not used yet
-  in this video, trying sources in `PROVIDER_ORDER`; if none passes, a `generated` motion card. A provider
-  error never fails the job (warning + next source); a corrupted download is skipped.
+- **Selection rule** (stored per scene in `timeline.json` as `reason`): the best stock candidate whose CLIP score
+  is `>= STOCK_MIN_SCORE` and that is not used yet in this video, trying sources in `PROVIDER_ORDER` (a stock
+  video beats photo-motion unless the photo is clearly better); a statistic line gets the same footage with its
+  number drawn as a badge (`STATISTIC_OVERLAY`); a near miss is used only if the independent vision judge agrees;
+  then the best usable clip with a keyword badge; a plain `generated` card only when no footage is usable. A
+  provider error never fails the job (warning + next source); a corrupted download is skipped. `QUALITY_MODE`
+  (`fast` / `balanced` / `best`) sets how many candidates are scored.
 - **Card text comes only from the narration** (`app/pipeline/cards.py`): code reads every figure in the scene's
   own words (`40%`, `40 percent`, `forty percent`, `$1.2 million` -> `$1.2M`, `Rs 500`, `3x`, `2025`), shows the
   main one (a percentage or money before a year) and a short phrase from the same sentence. An LLM suggestion is
@@ -71,6 +74,19 @@ flowchart LR
   saved understanding, chosen clips). A swap downloads it, picks the new clip, renders **only that scene** for
   each ratio, joins all segments again with stream copy, re-runs QA and writes new `timeline.json` /
   `manifest.json` with a `swaps` history (swap time next to the full render time).
+
+## Quick start
+
+```powershell
+Copy-Item .env.example .env                 # every setting is listed there; the defaults use mock adapters
+docker compose up --build                   # API + worker + MinIO, then open http://localhost:8000/
+docker compose run --rm api pytest          # all tests, no API keys
+```
+
+Real mode needs these names in `.env` (values never go in the repository): `GROQ_API_KEY`, `PIXABAY_API_KEY`,
+`WIKIMEDIA_USER_AGENT` (a contact e-mail / URL), `API_TOKENS`, `FILE_LINK_SECRET`, `CALLBACK_SECRET`; optional:
+`VLM_PROVIDER=groq` (vision judge), `QUALITY_MODE`. More: [REPORT.md](REPORT.md) (what was built and measured),
+[SOURCES.md](SOURCES.md) (licences), [testpack/INDEX.md](testpack/INDEX.md) (evidence for every form row).
 
 ## Setup
 
@@ -191,9 +207,11 @@ the public API above, so everything it shows comes from the job, `timeline.json`
   the demo reads `API_TOKENS`, `FILE_LINK_SECRET`, `CALLBACK_SECRET`, `PIXABAY_API_KEY`, `GROQ_API_KEY` and
   `WIKIMEDIA_USER_AGENT` from the Modal secret `broll-secrets` and refuses to start without the first three.
 - **Where it runs:** [Modal](https://modal.com), [deploy/modal/modal_app.py](deploy/modal/modal_app.py). ONE container
-  (`max_containers=1`, 2 CPU cores, 3 GiB memory request / 6 GiB limit) runs the API and the worker as a background
-  thread (`WORKER_CONCURRENCY=1`, `FOOTAGE_WORKERS=2`). Real adapters: Kokoro, faster-whisper small, Groq, Pixabay
-  video / photo, Wikimedia, generated cards, CLIP.
+  (`max_containers=1`, 2 CPU cores, 5 GiB memory request / 8 GiB limit, sized from the measured peak of 4.4 GB with
+  one render worker) runs the API and the worker as a background thread (`WORKER_CONCURRENCY=1`,
+  `FOOTAGE_WORKERS=2`, `RENDER_WORKERS=1`, `QUALITY_MODE=balanced`). Real adapters: Kokoro, faster-whisper small,
+  Groq (+ the optional vision judge when `VLM_PROVIDER` is set), Pixabay video / photo, Wikimedia, Openverse,
+  generated cards, CLIP.
 - **Cold start:** it scales to zero (`min_containers=0`): with no traffic there is no container and no cost. The first
   request after a quiet time waits until a container has started (the request is held open, about a minute is
   expected; measure it with `tools/live_check.py --cold`). All models are baked into the image at build time and
@@ -523,5 +541,7 @@ Every error has the same shape: `{"error": {"code", "message", "retryable", "det
 - [deploy/hf-space/](deploy/hf-space/) - the Hugging Face Space (not used any more; see Live demo) and
   [tools/deploy_hf.py](tools/deploy_hf.py).
 - [tests/](tests/) - unit, integration and e2e tests (mock adapters).
+- [REPORT.md](REPORT.md) - the 2-4 page report: problem, design, hosting story, measured results, limits.
+- [testpack/INDEX.md](testpack/INDEX.md) - every Submission Form row with its evidence files.
 - [SOURCES.md](SOURCES.md) - every library, model, API and media source with its licence.
 - [AI_USE.md](AI_USE.md) - how AI tools were used.

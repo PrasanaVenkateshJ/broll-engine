@@ -1,0 +1,217 @@
+Building image im-raGzbL41uW42lPKM5afBYx
+
+=> Step 0: FROM base
+
+=> Step 1: COPY . /
+Saving image...
+Image saved, took 1.14s
+
+Built image im-raGzbL41uW42lPKM5afBYx in 3.32s
+
+
+Building image im-1KpojnujbXA3KXsTGku4T7
+
+=> Step 0: FROM base
+
+=> Step 1: WORKDIR /app
+Saving image...
+Image saved, took 891.88ms
+
+Built image im-1KpojnujbXA3KXsTGku4T7 in 1.88s
+
+
+Building image im-FroqXWsXKNGHvUxjwuTVt3
+
+=> Step 0: FROM base
+
+=> Step 1: ENV PYTHONPATH=/app
+
+=> Step 2: ENV PYTHONDONTWRITEBYTECODE=1
+
+=> Step 3: ENV PYTHONUNBUFFERED=1
+Saving image...
+Image saved, took 806.47ms
+
+Built image im-FroqXWsXKNGHvUxjwuTVt3 in 1.70s
+
+
+Building image im-Erl4J1MLr0ZlGgEQP8yRWi
+
+=> Step 0: FROM base
+
+=> Step 1: RUN HF_HUB_OFFLINE=1 python /app/deploy/hf-space/preload_models.py
+preload: whisper small ok (1.7 s)
+/usr/local/lib/python3.11/site-packages/torch/nn/modules/rnn.py:1011: UserWarning: dropout option adds dropout after all but last recurrent layer, so non-zero dropout expects num_layers greater than 1, but got dropout=0.2 and num_layers=1
+  super().__init__("LSTM", *args, **kwargs)
+/usr/local/lib/python3.11/site-packages/torch/nn/utils/weight_norm.py:145: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+/usr/local/lib/python3.11/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+[W1018 14:41:10.284744928 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:10.287029910 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:10.292913574 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:10.295075386 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:10.295571956 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:10.298002658 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:10.300384350 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:10.305744364 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:10.305844444 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:10.316771913 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:10.317943424 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:10.331196404 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:10.345866616 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:10.360642058 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:10.372881197 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:11.671361343 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+preload:   voice en-US-female ok
+[W1018 14:41:11.310240116 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:11.312512257 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:11.318553092 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:11.320794694 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:11.321293044 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:11.323691436 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:11.326070448 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:11.330347621 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:11.330450932 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:11.350568227 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:11.351959588 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:11.370583133 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:12.387262486 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:12.406574441 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:12.419125241 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:12.718074306 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+preload:   voice en-US-male ok
+[W1018 14:41:13.912190872 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:13.914154364 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:13.919424348 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:13.921363140 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:13.921858800 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:13.924267892 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:13.926664434 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:13.931005587 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:13.931119647 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:13.940585835 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:13.941745326 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:13.956619827 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:13.969911278 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:13.984960809 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:13.995922408 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:13.234598844 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+preload:   voice en-GB-female ok
+[W1018 14:41:14.689857567 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:14.692158529 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:14.698192494 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:14.700426855 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:14.700893506 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:14.703279608 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:14.705646349 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:14.709948223 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:14.710057983 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:14.719491910 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:14.720847971 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:14.737506594 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:14.756922379 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:14.772008811 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:14.783193730 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:14.061636997 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+preload:   voice en-GB-male ok
+[W1018 14:41:15.603917195 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:15.606250167 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:15.612482052 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:15.614768644 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:15.615269754 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:15.617680866 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:15.620128128 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:15.624470121 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:15.624572251 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:15.637594862 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:15.638791703 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:15.655570936 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:15.673831470 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:15.692510515 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:15.705159785 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:15.015361180 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+preload:   voice en-IN-female ok
+[W1018 14:41:16.603328635 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:16.605631187 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:16.611604711 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:16.613823203 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:16.614316333 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:16.616714805 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:16.619097627 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:16.623472131 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:16.623570531 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:16.633062738 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:16.634407669 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:16.646971869 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:16.662123650 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:16.677008232 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:16.688011150 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:16.966716916 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+preload:   voice en-IN-male ok
+[W1018 14:41:17.540938256 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:17.543295547 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:17.549563432 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:17.551883714 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:17.552389765 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:17.554785636 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:17.557169008 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:17.561559382 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:17.561658672 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:17.572820761 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:17.574167492 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:17.588196383 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:17.604014175 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:17.619569287 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:17.632741087 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:17.952825068 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+preload:   voice hi-IN-female ok
+[W1018 14:41:18.557122012 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:18.559344373 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:18.565600238 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:18.567809280 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:18.568308190 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:18.570705782 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:18.573104164 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:18.577395548 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:18.577505008 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:18.588299216 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:18.589340287 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:18.602908688 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:18.617879299 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:18.634521192 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:18.646653792 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1018 14:41:18.949001839 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+preload:   voice hi-IN-male ok
+preload: kokoro hexgrad/Kokoro-82M ok (17.8 s)
+preload: open_clip ViT-B-32 / laion2b_s34b_b79k ok (2.7 s)
+preload: spacy en_core_web_sm ok (0.3 s)
+Saving image...
+Image saved, took 690.01ms
+
+Built image im-Erl4J1MLr0ZlGgEQP8yRWi in 26.10s
+
+
+Building image im-Y412yM8nehP2hqxUlnbICN
+
+=> Step 0: FROM base
+
+=> Step 1: ENV HF_HUB_OFFLINE=1
+Saving image...
+Image saved, took 860.17ms
+
+Built image im-Y412yM8nehP2hqxUlnbICN in 2.01s
+
+
+✓ Created objects.
+├── ✓ Uploaded C:\dev\broll-engine\deploy\modal\modal_app.py
+├── ✓ Uploaded C:\dev\broll-engine\deploy\modal\download_models.py
+├── ✓ Uploaded C:\dev\broll-engine
+└── ✓ Created Function BrollStudio.*.
+    └── BrollStudio.web -> 
+        https://prasanavenkateshj--broll-studio.us-east.modal.run 
+        (unauthenticated)
+✓ App deployed in 56.779s! 🎉
+
+View Deployment: 
+https://modal.com/apps/prasanavenkateshj/main/deployed/broll-studio

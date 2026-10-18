@@ -46,11 +46,12 @@ def knob(name: str, default: str) -> str:
 CPU = float(knob("MODAL_CPU", "2"))  # physical cores (Modal bills per core-second)
 # Memory REQUEST (MiB, billed even when idle) and hard LIMIT (MiB, the container is stopped above it).
 # Modal bills max(request, real use), so a request near the IDLE use is cheapest; the limit only guards
-# against a runaway job. Measured locally (testpack/notes/cost_modal.md): the worker peaked at 4,264 MB in run 1
-# and was above 3.5 GB in hundreds of 1-second samples, so the old 3 GiB request was often exceeded (Modal then
-# bills the real use anyway). 4.5 GiB covers that peak with ~10% room; the 7 GiB limit only stops a runaway job.
-MEMORY_MB = int(knob("MODAL_MEMORY_MB", "4608"))
-MEMORY_LIMIT_MB = int(knob("MODAL_MEMORY_LIMIT_MB", "7168"))
+# against a runaway job. Measured locally with ONE render worker and one job at a time (run 1, 19 jobs incl. the
+# 5-minute voiceover; testpack/notes/cost_modal.md section 8): worker peak 4,109 MB, worker + ffmpeg together at
+# most 4,396 MB in 1-second samples. 5 GiB (5,120 MiB) covers that with ~15% room. With 3 parallel render workers
+# (this PC's default, not used on Modal) the total reached 5,204 MB, so the 8 GiB limit leaves room even then.
+MEMORY_MB = int(knob("MODAL_MEMORY_MB", "5120"))
+MEMORY_LIMIT_MB = int(knob("MODAL_MEMORY_LIMIT_MB", "8192"))
 SCALEDOWN_SECONDS = int(knob("MODAL_SCALEDOWN_SECONDS", "180"))
 
 # The models, in ONE place: the image downloads exactly these and the app is told to use exactly these.

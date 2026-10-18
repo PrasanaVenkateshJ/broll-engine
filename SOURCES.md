@@ -57,5 +57,7 @@
 
 | Name | Used for | Terms |
 |---|---|---|
-| Hugging Face Spaces (Docker, CPU basic, free) | public live demo of the API + Studio | Hugging Face Terms of Service. Secrets are set in the Space settings, never in the repository. |
-| GitHub Actions (`keepalive.yml`) | GET /health every 6 hours so the free Space does not sleep | GitHub Terms; free minutes of the account |
+| Modal (see above) | the live demo that is actually used | Per-second billing against the account's free monthly credit; see `testpack/notes/cost_modal.md`. |
+| Hugging Face Spaces (Docker) | **not used**: Docker Spaces became paid in July 2026; `deploy/hf-space/` stays in the repo unchanged | Hugging Face Terms of Service. |
+| Microsoft Azure | **not used**: evaluated for hosting and rejected | - |
+| GitHub Actions (`keepalive.yml`) | no schedule any more; refuses `*.modal.run` URLs (a ping would start a paid container) | GitHub Terms |

@@ -4,6 +4,9 @@ Status: **estimate**. Prices are Modal's published prices; container times on Mo
 (the app has not been deployed when this was written). Replace the assumed times below with real ones from
 `tools/live_check.py --cold` and the `modal container stopped ... uptime_seconds` log line.
 
+**Current request (since 2026-10-18): 2 cores, 5 GiB request / 8 GiB limit, `RENDER_WORKERS=1`; see section 8.** Sections 2-7 keep
+the earlier 3 GiB numbers for the record.
+
 ## 1. Prices (modal.com/pricing, read 2026-10-16)
 
 | Resource | Published price | Note |
@@ -106,3 +109,28 @@ starts, and fails with `JOB_INTERRUPTED` (retryable) if it is cut off a second t
   2 x 0.0000131 + 4 x 0.00000222 = $0.0000351 / s.
 - Measured processing time on this PC: median 365 s per narration minute (run1, 16:9 + 9:16), see `testpack/metrics.md`.
   Modal times are still NOT measured.
+
+## 8. Update 2026-10-18: memory sized for one render worker, redeployed
+
+**Measured locally (this PC, Windows; NOT on Modal), one job at a time, one render worker** (run 1, 19 real jobs incl. the
+5-minute voiceover; `testpack/logs/memory_perf_and_run1_part2.csv`, `peaks_after_run1.txt`): worker exact peak
+**4,109 MB**; worker + ffmpeg together at most **4,396 MB** in 1-second samples (ffmpeg up to 876 MB).
+With 3 parallel render workers (this PC's default since Session 7B, not used on Modal) the total reached 5,204 MB
+(`testpack/logs/memory_run3.csv`, ffmpeg alone 2,250 MB), so the extra render workers cost memory, not much else.
+
+**Setting:** `MODAL_MEMORY_MB=5120` request (4,396 MB + ~15%), `MODAL_MEMORY_LIMIT_MB=8192`, `RENDER_WORKERS=1`,
+`QUALITY_MODE=balanced`. Limits of the measurement: the sampler can miss short spikes; Linux on Modal may differ;
+the Groq vision judge and Openverse add little memory but were not sampled alone.
+
+```
+CPU     2 cores  x $0.0000131    = $0.0000262  / s
+Memory  5 GiB    x $0.00000222   = $0.0000111  / s
+Total                            = $0.0000373  / s   = $0.1343 / hour      ($1 = 26,810 s = 7.4 hours)
+```
+
+Estimate per cold one-job visit = cold start + job + idle tail. Cold start **measured on Modal 2026-10-18: `/ready` answered
+after 6.9 s** (`testpack/live/live_check_2026-10-18_cold.txt`; the models are baked into the image). The job time on Modal is
+**not measured with this code** (the last real Modal job, 2026-10-16 with the old code, was 44 s for 8.75 s of narration);
+assuming 120 s: (7 + 120 + 180) s x 0.0000373 = **$0.0115**; 35 such visits (the monthly cap) = **$0.40** of the ~$1 credit.
+Cost per narration minute at the median 365 s per minute measured on this PC: 365 x 0.0000373 = **$0.0136** (estimate; a
+2-core Modal container may be slower than this 16-thread PC).
