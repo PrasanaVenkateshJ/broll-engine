@@ -9,6 +9,7 @@ testpack/ratings/ratings.csv and run tools/evaluate.py.
 
     .venv\\Scripts\\python tools\\make_rating_page.py                      (testpack/outputs/run1)
     .venv\\Scripts\\python tools\\make_rating_page.py --runs testpack/outputs/run1 testpack/outputs/resilience
+    .venv\\Scripts\\python tools\\make_rating_page.py --jobs testpack/outputs/run2/hard01_abstract_and_statistics ...
 """
 import argparse
 import html
@@ -28,38 +29,41 @@ def job_name(run: Path, folder: Path) -> str:
     return f"{run.name}/{folder.name}"
 
 
-def collect_scenes(runs: list[Path], page_dir: Path) -> tuple[list[dict], list[dict]]:
-    """(jobs, scenes) of every succeeded job that has a timeline.json and a video."""
+def collect_scenes(runs: list[Path], page_dir: Path,
+                   folders: list[Path] | None = None) -> tuple[list[dict], list[dict]]:
+    """(jobs, scenes) of every succeeded job that has a timeline.json and a video: all jobs of `runs`,
+    or only the job folders in `folders` (each one's run = its parent folder)."""
     jobs, scenes = [], []
-    for run in runs:
-        for folder in sorted(p for p in run.iterdir() if p.is_dir()):
-            job_file, timeline_file = folder / "job.json", folder / "timeline.json"
-            if not (job_file.is_file() and timeline_file.is_file()):
-                continue
-            if json.loads(job_file.read_text(encoding="utf-8")).get("status") != "succeeded":
-                continue
-            timeline = json.loads(timeline_file.read_text(encoding="utf-8"))
-            video = next((folder / v for v in VIDEO_PREFERENCE if (folder / v).is_file()), None)
-            if video is None:
-                continue
-            rel = lambda p: Path(os.path.relpath(p, page_dir)).as_posix()  # noqa: E731
-            name = job_name(run, folder)
-            jobs.append({"job": name, "job_id": timeline.get("job_id"), "language": timeline.get("language"),
-                         "duration": timeline.get("duration"), "video": rel(video), "scenes": len(timeline["scenes"])})
-            for sc in timeline["scenes"]:
-                thumb = folder / sc["thumbnail"] if sc.get("thumbnail") else None
-                scenes.append({
-                    "job": name, "scene": sc["index"], "language": timeline.get("language"),
-                    "start": sc["start"], "end": sc["end"], "text": sc["text"],
-                    "search_text": sc.get("search_text"), "query": sc.get("query"), "queries": sc.get("queries") or [],
-                    "provider": sc.get("provider"), "clip_id": sc.get("clip_id"),
-                    "clip_score": sc.get("relevance_score"), "generated": bool(sc.get("generated")),
-                    "card_text": sc.get("card_text"), "licence": sc.get("licence"),
-                    "licence_url": sc.get("licence_url"), "attribution": sc.get("attribution"),
-                    "page_url": sc.get("page_url"), "visual_hint": sc.get("visual_hint"),
-                    "flags": [k for k, v in (sc.get("flags") or {}).items() if v],
-                    "video": rel(video), "thumb": rel(thumb) if thumb and thumb.is_file() else None,
-                })
+    pairs = ([(f.parent, f) for f in folders] if folders else
+             [(run, f) for run in runs for f in sorted(p for p in run.iterdir() if p.is_dir())])
+    for run, folder in pairs:
+        job_file, timeline_file = folder / "job.json", folder / "timeline.json"
+        if not (job_file.is_file() and timeline_file.is_file()):
+            continue
+        if json.loads(job_file.read_text(encoding="utf-8")).get("status") != "succeeded":
+            continue
+        timeline = json.loads(timeline_file.read_text(encoding="utf-8"))
+        video = next((folder / v for v in VIDEO_PREFERENCE if (folder / v).is_file()), None)
+        if video is None:
+            continue
+        rel = lambda p: Path(os.path.relpath(p, page_dir)).as_posix()  # noqa: E731
+        name = job_name(run, folder)
+        jobs.append({"job": name, "job_id": timeline.get("job_id"), "language": timeline.get("language"),
+                     "duration": timeline.get("duration"), "video": rel(video), "scenes": len(timeline["scenes"])})
+        for sc in timeline["scenes"]:
+            thumb = folder / sc["thumbnail"] if sc.get("thumbnail") else None
+            scenes.append({
+                "job": name, "scene": sc["index"], "language": timeline.get("language"),
+                "start": sc["start"], "end": sc["end"], "text": sc["text"],
+                "search_text": sc.get("search_text"), "query": sc.get("query"), "queries": sc.get("queries") or [],
+                "provider": sc.get("provider"), "clip_id": sc.get("clip_id"),
+                "clip_score": sc.get("relevance_score"), "generated": bool(sc.get("generated")),
+                "card_text": sc.get("card_text"), "licence": sc.get("licence"),
+                "licence_url": sc.get("licence_url"), "attribution": sc.get("attribution"),
+                "page_url": sc.get("page_url"), "visual_hint": sc.get("visual_hint"),
+                "flags": [k for k, v in (sc.get("flags") or {}).items() if v],
+                "video": rel(video), "thumb": rel(thumb) if thumb and thumb.is_file() else None,
+            })
     return jobs, scenes
 
 
@@ -71,10 +75,12 @@ def render_page(jobs: list[dict], scenes: list[dict], title: str) -> str:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Make the static scene rating page.")
     parser.add_argument("--runs", type=Path, nargs="+", default=DEFAULT_RUNS, help="batch output folders")
+    parser.add_argument("--jobs", type=Path, nargs="+", help="only these job folders (instead of --runs)")
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT, help="where to write rate.html")
     args = parser.parse_args(argv)
     args.out.parent.mkdir(parents=True, exist_ok=True)
-    jobs, scenes = collect_scenes([r.resolve() for r in args.runs], args.out.parent.resolve())
+    jobs, scenes = collect_scenes([r.resolve() for r in args.runs], args.out.parent.resolve(),
+                                  [j.resolve() for j in args.jobs] if args.jobs else None)
     if not scenes:
         print("no succeeded jobs with a timeline.json + video found", file=sys.stderr)
         return 2

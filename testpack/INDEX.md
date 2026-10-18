@@ -81,7 +81,8 @@ honest answer: **Yes** = evidence in this repo; **Partial** = some evidence, the
 
 | What | Path |
 |---|---|
-| Inputs (23) + what each tests | `testpack/inputs/`, `testpack/inputs/README.md`, expected outcomes `testpack/expected.json` |
+| Inputs (23) + what each tests | `testpack/inputs/`, `testpack/inputs/README.md`, expected outcomes `testpack/expected.json`. My own voice recordings (`core01`-`core03` `*_myvoice.m4a` and `inputs/my_voice/`) are NOT in the repo, for privacy (`.gitignore`); their outputs (timeline, captions, manifest) are in `run1/core01-03` |
+| Rating page (80 scenes: the 4 run2 jobs + run1 hard01, hard04, core03 Tamil, core13 Hindi, core09, core07) | `testpack/ratings/rate.html` (made by `tools/make_rating_page.py --jobs ...`; videos play from the local git-ignored outputs) |
 | Main run | `testpack/outputs/run1/` |
 | Session 7B re-run (4 inputs) | `testpack/outputs/run2/` (`summary_60s.*` = the 60 s job, `summary.*` = the other 3) |
 | Production runs | `testpack/outputs/perf/` (run1), `outputs/perf_run2/` (first Session 7B try with the full search = today's `QUALITY_MODE=best`, kept for the record; `warm_new_script` was stopped half-way and is not used) |

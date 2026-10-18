@@ -60,3 +60,11 @@ def test_report_says_not_measured_without_evidence(tmp_path):
     report = evaluate.build_report(args)
     assert "| Average relevance (1-5) | not measured |" in report
     assert "Repeat-clip rate (same clip twice in ONE video): **0.0%**" in report
+
+
+def test_rating_page_can_take_single_job_folders(tmp_path):
+    fake_run(tmp_path, "core01")
+    picked = fake_run(tmp_path, "hard04")
+    jobs, scenes = collect_scenes([], tmp_path / "ratings", [picked])
+    assert [j["job"] for j in jobs] == ["run1/hard04"]
+    assert [(s["job"], s["scene"]) for s in scenes] == [("run1/hard04", 0), ("run1/hard04", 1)]

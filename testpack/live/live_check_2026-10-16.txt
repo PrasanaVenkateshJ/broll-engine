@@ -1,0 +1,10 @@
+(.venv) PS C:\dev\broll-engine> .venv\Scripts\python tools\live_check.py --url https://prasanavenkateshj--broll-studio.us-east.modal.run
+GET /health: HTTP 200 in 1246 ms
+GET /ready: HTTP 200 in 301 ms
+job: 23 words, ratios 16:9,9:16 ... (polling politely)
+job db12fbd704e0447cbedfdd07e9a93e69: succeeded
+turnaround (POST -> succeeded): 44.04 s for 8.75 s of narration, 2 scenes, 0 warnings
+downloaded 7 files to data\live_check\live-20261016-191838
+range request: HTTP 206, 1024 bytes, Content-Range bytes 0-1023/952981 -> ok
+stage timings (manifest.json): {"intake": 0.0, "tts": 9.184, "transcribe": 6.814, "scenes": 0.001, "understand": 1.47, "footage": 7.914, "render": 12.544}
+ALL CHECKS PASSED
