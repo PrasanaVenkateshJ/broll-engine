@@ -12,7 +12,7 @@ Traceback (most recent call last):
   File "C:\dev\broll-engine\tools\load_test.py", line 38, in memory_peaks
     with csv_path.open(encoding="utf-8-sig") as f:
          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\jkvan\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 1044, in open
+  File "C:\Users\<user>\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 1044, in open
     return io.open(self, mode, buffering, encoding, errors, newline)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 PermissionError: [Errno 13] Permission denied: 'testpack\\logs\\memory_resilience_and_load.csv'

@@ -29,7 +29,7 @@
 | NumPy | 2.4.6 | edge/motion energy for the salient 9:16 crop | BSD-3-Clause |
 | Pillow | 12.3.0 | opens preview images for CLIP | MIT-CMU (HPND) |
 | FFmpeg (Debian package) | distro | audio/video processing, called as a separate program | LGPL/GPL (separate binary) |
-| espeak-ng (Debian package) | distro | phonemes for Kokoro, separate program | GPL-3.0 (separate binary) — review |
+| espeak-ng (Debian package) | distro | phonemes for Kokoro, separate program | GPL-3.0, used only as a separate unmodified program called by the phonemizer at runtime; not linked or distributed with this repo |
 | MinIO server (`pgsty/minio` image) | RELEASE.2026-08-04 | S3 storage service in docker compose, and the same unmodified binary copied into the Hugging Face Space image (internal storage only) | AGPL-3.0 (allowed only as the storage service) |
 | python:3.11-slim image | 3.11 | container base | PSF + Debian licences |
 | git, curl (Debian packages, Space image only) | distro | clone the code at build time; health checks in start.sh | GPL-2.0 / curl licence (separate programs) |

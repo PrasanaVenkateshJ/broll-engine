@@ -1,3 +1,3 @@
 1 input(s) -> http://localhost:8000 (concurrency 1)
 fresh03_cyber_fraud            succeeded                              83.76 s  job 81365c66e9874f4083418eb58207a0b0
-summary: C:\Users\jkvan\AppData\Local\Temp\claude\c--dev-broll-engine\da124160-8338-43a2-ad4d-cde92382910c\scratchpad\f3out\summary.csv and C:\Users\jkvan\AppData\Local\Temp\claude\c--dev-broll-engine\da124160-8338-43a2-ad4d-cde92382910c\scratchpad\f3out\summary.md
+summary: C:\Users\<user>\AppData\Local\Temp\claude\c--dev-broll-engine\da124160-8338-43a2-ad4d-cde92382910c\scratchpad\f3out\summary.csv and C:\Users\<user>\AppData\Local\Temp\claude\c--dev-broll-engine\da124160-8338-43a2-ad4d-cde92382910c\scratchpad\f3out\summary.md
