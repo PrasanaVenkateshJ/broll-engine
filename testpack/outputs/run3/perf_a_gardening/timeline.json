@@ -1,0 +1,3652 @@
+{
+  "job_id": "4fd22f140e8e4fa2b914a7c58436ff68",
+  "input_type": "script",
+  "duration": 59.5,
+  "language": "en",
+  "scenes": [
+    {
+      "index": 0,
+      "text": "Growing your own vegetables is easier than most people think.",
+      "start": 0.0,
+      "end": 3.45,
+      "duration": 3.45,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "seedling breaking through soil",
+      "queries": [
+        "person planting vegetables in pots",
+        "seedling breaking through soil",
+        "sunlit balcony with pots",
+        "hands scooping soil into pot",
+        "warm morning light over garden"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "260395",
+      "page_url": "https://pixabay.com/videos/id-260395/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "adege on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.264 >= 0.22 for query 'seedling breaking through soil' (best of 15 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.245); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.31); video scored >= 0.25: photo sources not searched",
+      "relevance_score": 0.2643,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2643,
+        "thumbnail_score": 0.2448,
+        "frame_scores": [
+          0.2448,
+          0.2786,
+          0.2695
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.3043,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_000.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0038,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 6.79,
+            "logo_prob": 0.3098,
+            "scene_score": 0.2744,
+            "result": "ok"
+          },
+          {
+            "time": 20.36,
+            "logo_prob": 0.1502,
+            "scene_score": 0.2474,
+            "result": "ok"
+          },
+          {
+            "time": 33.93,
+            "logo_prob": 0.1822,
+            "scene_score": 0.2549,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:260395",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2025/02/23/260395_medium.mp4",
+        "final_score": 0.3043,
+        "width": 2560,
+        "height": 1440,
+        "duration": 40.0
+      },
+      "understanding": {
+        "queries": [
+          "person planting vegetables in pots",
+          "seedling breaking through soil",
+          "sunlit balcony with pots",
+          "hands scooping soil into pot",
+          "warm morning light over garden"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows a simple balcony garden being started, illustrating the ease of growing vegetables.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "growing vegetables",
+        "card": {
+          "headline": "GROWING VEGETABLES",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "c38dacd337113ec1"
+      },
+      "safety": {
+        "queries": [
+          "person planting vegetables in pots",
+          "seedling breaking through soil",
+          "sunlit balcony with pots",
+          "hands scooping soil into pot",
+          "warm morning light over garden"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_000_31358b1ff53352d9.mp4",
+          "cache_key": "31358b1ff53352d9",
+          "frames": 104,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_000_5f2d738705bbcd8b.mp4",
+          "cache_key": "5f2d738705bbcd8b",
+          "frames": 104,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2006,
+            "windows": {
+              "salient": {
+                "start": 0.2703,
+                "score": 0.2348
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2552
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.1514
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.1827
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "subject_span": [
+              0.2199,
+              0.6283
+            ],
+            "windows_cutting_subject": [
+              "centre",
+              "left",
+              "salient"
+            ],
+            "reason": "window 'salient' chosen (0.235; best window 0.255; whole frame 0.201; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Growing",
+          "start": 0.0,
+          "end": 0.56
+        },
+        {
+          "text": "your",
+          "start": 0.56,
+          "end": 0.78
+        },
+        {
+          "text": "own",
+          "start": 0.78,
+          "end": 1.0
+        },
+        {
+          "text": "vegetables",
+          "start": 1.0,
+          "end": 1.42
+        },
+        {
+          "text": "is",
+          "start": 1.42,
+          "end": 1.76
+        },
+        {
+          "text": "easier",
+          "start": 1.76,
+          "end": 2.14
+        },
+        {
+          "text": "than",
+          "start": 2.14,
+          "end": 2.4
+        },
+        {
+          "text": "most",
+          "start": 2.4,
+          "end": 2.66
+        },
+        {
+          "text": "people",
+          "start": 2.66,
+          "end": 2.94
+        },
+        {
+          "text": "think.",
+          "start": 2.94,
+          "end": 3.24
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "text": "You do not need a big garden. A sunny balcony and a few large pots are enough to start.",
+      "start": 3.45,
+      "end": 8.43,
+      "duration": 4.98,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "balcony container gardening",
+      "queries": [
+        "compact balcony vegetable garden",
+        "mini garden oasis",
+        "sunny city balcony with pots",
+        "person placing pots on railing",
+        "soft golden light on balcony"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_image_motion",
+      "clip_id": "357702",
+      "page_url": "https://pixabay.com/photos/balcony-plants-flower-box-pansy-357702/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Hans on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_image_motion: score 0.291 >= 0.22 for query 'balcony container gardening' (best of 23 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 1 clip frame(s) passed the logo check (max logo prob 0.01); photo-motion preferred: order score 0.331 > best video 0.284 + PREFER_VIDEO_MARGIN 0.03; borderline (best 0.244 < BORDERLINE_SCORE 0.25): also searched the rewritten query 'balcony container gardening' (groq), +14 candidates scored on the original queries",
+      "relevance_score": 0.2913,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2913,
+        "thumbnail_score": 0.2913,
+        "frame_scores": null,
+        "frames_scored": 1,
+        "text_prob": 0.0002,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.3313
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_001.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0038,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.0073,
+            "scene_score": 0.2911,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_image_motion:357702",
+        "kind": "image",
+        "title": "",
+        "source_url": "https://pixabay.com/get/g15c57169ee4f312b2cb7010b9a46dceb2a9cb63ea5563ba88cfd1844452ddc62cbea6c4787692533a9da92ead7a664c8a3620420261e97feaa9607333c2d2135_1280.jpg",
+        "final_score": 0.3313,
+        "width": 1280,
+        "height": 960,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "compact balcony vegetable garden",
+          "mini garden oasis",
+          "sunny city balcony with pots",
+          "person placing pots on railing",
+          "soft golden light on balcony"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Depicts a small sunny balcony with pots, emphasizing that a large garden isn’t required.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "need big",
+        "card": {
+          "headline": "NEED BIG",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "595ab1c487e460a9"
+      },
+      "safety": {
+        "queries": [
+          "compact balcony vegetable garden",
+          "mini garden oasis",
+          "sunny city balcony with pots",
+          "person placing pots on railing",
+          "soft golden light on balcony"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_001_8c8b7f967d780b8f.mp4",
+          "cache_key": "8c8b7f967d780b8f",
+          "frames": 149,
+          "look": "eq=brightness=0.120:saturation=1.092",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "y",
+            "window_fraction": 0.75,
+            "full_frame_score": 0.2891,
+            "windows": {
+              "centre": {
+                "start": 0.125,
+                "score": 0.2816
+              },
+              "top": {
+                "start": 0.0,
+                "score": 0.2796
+              },
+              "bottom": {
+                "start": 0.25,
+                "score": 0.2665
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "subject_span": [
+              0.1568,
+              0.993
+            ],
+            "windows_cutting_subject": [
+              "bottom",
+              "centre",
+              "top"
+            ],
+            "reason": "window 'centre' chosen (0.282; best window 0.282; whole frame 0.289; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_001_01bb82833bbd28ea.mp4",
+          "cache_key": "01bb82833bbd28ea",
+          "frames": 149,
+          "look": "eq=brightness=0.120:saturation=1.092",
+          "caption_font": "Arial",
+          "framing": "subject crop (left)",
+          "crop": {
+            "method": "clip",
+            "choice": "left",
+            "axis": "x",
+            "window_fraction": 0.4219,
+            "full_frame_score": 0.2891,
+            "windows": {
+              "centre": {
+                "start": 0.2891,
+                "score": 0.2571
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2792
+              },
+              "right": {
+                "start": 0.5781,
+                "score": 0.2924
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "subject_span": [
+              0.8168,
+              1.0
+            ],
+            "windows_cutting_subject": [],
+            "reason": "window 'left' chosen (0.279; best window 0.292; whole frame 0.289; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "You",
+          "start": 3.66,
+          "end": 3.78
+        },
+        {
+          "text": "do",
+          "start": 3.78,
+          "end": 3.86
+        },
+        {
+          "text": "not",
+          "start": 3.86,
+          "end": 4.0
+        },
+        {
+          "text": "need",
+          "start": 4.0,
+          "end": 4.18
+        },
+        {
+          "text": "a",
+          "start": 4.18,
+          "end": 4.32
+        },
+        {
+          "text": "big",
+          "start": 4.32,
+          "end": 4.44
+        },
+        {
+          "text": "garden.",
+          "start": 4.44,
+          "end": 4.78
+        },
+        {
+          "text": "A",
+          "start": 5.38,
+          "end": 5.48
+        },
+        {
+          "text": "sunny",
+          "start": 5.48,
+          "end": 5.72
+        },
+        {
+          "text": "balcony",
+          "start": 5.72,
+          "end": 6.08
+        },
+        {
+          "text": "and",
+          "start": 6.08,
+          "end": 6.4
+        },
+        {
+          "text": "a",
+          "start": 6.4,
+          "end": 6.52
+        },
+        {
+          "text": "few",
+          "start": 6.52,
+          "end": 6.64
+        },
+        {
+          "text": "large",
+          "start": 6.64,
+          "end": 6.9
+        },
+        {
+          "text": "pots",
+          "start": 6.9,
+          "end": 7.24
+        },
+        {
+          "text": "are",
+          "start": 7.24,
+          "end": 7.46
+        },
+        {
+          "text": "enough",
+          "start": 7.46,
+          "end": 7.66
+        },
+        {
+          "text": "to",
+          "start": 7.66,
+          "end": 7.86
+        },
+        {
+          "text": "start.",
+          "start": 7.86,
+          "end": 8.14
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "text": "Choose easy plants first, like tomatoes, chilies, spinach and mint.",
+      "start": 8.43,
+      "end": 13.29,
+      "duration": 4.86,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "beginner-friendly vegetable seedlings",
+      "queries": [
+        "beginner-friendly vegetable seedlings",
+        "simple garden starter kit",
+        "kitchen counter with seed packets",
+        "hand selecting tomato seed packet",
+        "bright hopeful gardening vibe"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_image_motion",
+      "clip_id": "5315602",
+      "page_url": "https://pixabay.com/photos/garden-working-hands-dirt-earthing-5315602/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Lynniet17 on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_image_motion: score 0.275 >= 0.22 for query 'beginner-friendly vegetable seedlings' (best of 6 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 1 clip frame(s) passed the logo check (max logo prob 0.00); photo-motion preferred: order score 0.315 > best video 0.267 + PREFER_VIDEO_MARGIN 0.03",
+      "relevance_score": 0.2746,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": {
+        "score": null,
+        "judged": {
+          "pixabay_video:72884": 2,
+          "pixabay_video:22983": 2,
+          "pixabay_video:151": 4
+        },
+        "why": "None of the candidates clearly show the specific plants mentioned (tomatoes, chilies, spinach, mint); C is a market scene with produce that loosely relates to the topic of easy plants, while A and B s",
+        "priority": "close call",
+        "model": "qwen/qwen3.8-27b"
+      },
+      "score_details": {
+        "score": 0.2746,
+        "thumbnail_score": 0.2746,
+        "frame_scores": null,
+        "frames_scored": 1,
+        "text_prob": 0.0002,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.3146
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_002.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0004,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.0005,
+            "scene_score": 0.2661,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_image_motion:5315602",
+        "kind": "image",
+        "title": "",
+        "source_url": "https://pixabay.com/get/gac29d53b81aaecfef1fed8268d31c7e01a6a1588af9690a2f3a8ad2646e7000130e3c603e2de15db06668e1f22d45ccfbaeb48cf2a3d8126a741a289fde4842a_1280.jpg",
+        "final_score": 0.3146,
+        "width": 1280,
+        "height": 853,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "beginner-friendly vegetable seedlings",
+          "simple garden starter kit",
+          "kitchen counter with seed packets",
+          "hand selecting tomato seed packet",
+          "bright hopeful gardening vibe"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Illustrates choosing easy-to-grow plants like tomatoes and herbs as a starter selection.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "choose easy",
+        "card": {
+          "headline": "CHOOSE EASY",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "3e862eb05b33d98a"
+      },
+      "safety": {
+        "queries": [
+          "beginner-friendly vegetable seedlings",
+          "simple garden starter kit",
+          "kitchen counter with seed packets",
+          "hand selecting tomato seed packet",
+          "bright hopeful gardening vibe"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_002_761542fb361ffc2e.mp4",
+          "cache_key": "761542fb361ffc2e",
+          "frames": 146,
+          "look": "eq=brightness=0.092:saturation=0.881",
+          "caption_font": "Arial",
+          "framing": "subject crop (top)",
+          "crop": {
+            "method": "clip",
+            "choice": "top",
+            "axis": "y",
+            "window_fraction": 0.8441,
+            "full_frame_score": 0.2742,
+            "windows": {
+              "centre": {
+                "start": 0.078,
+                "score": 0.2687
+              },
+              "top": {
+                "start": 0.0,
+                "score": 0.2699
+              },
+              "bottom": {
+                "start": 0.1559,
+                "score": 0.2668
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "subject_span": [
+              0.0079,
+              0.8425
+            ],
+            "windows_cutting_subject": [
+              "bottom",
+              "centre"
+            ],
+            "reason": "window 'top' chosen (0.270; best window 0.270; whole frame 0.274; near-ties within 0.03 go to salient / centre); 'centre' was a near-tie but its edge falls inside the subject (0.01-0.84), so 'top' keeps it whole"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_002_377d0b1c0e7d3c90.mp4",
+          "cache_key": "377d0b1c0e7d3c90",
+          "frames": 146,
+          "look": "eq=brightness=0.092:saturation=0.881",
+          "caption_font": "Arial",
+          "framing": "subject crop (left)",
+          "crop": {
+            "method": "clip",
+            "choice": "left",
+            "axis": "x",
+            "window_fraction": 0.3749,
+            "full_frame_score": 0.2742,
+            "windows": {
+              "salient": {
+                "start": 0.3179,
+                "score": 0.2677
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2561
+              },
+              "right": {
+                "start": 0.6251,
+                "score": 0.2683
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "subject_span": [
+              0.4555,
+              0.8953
+            ],
+            "windows_cutting_subject": [
+              "right",
+              "salient"
+            ],
+            "reason": "window 'left' chosen (0.256; best window 0.268; whole frame 0.274; near-ties within 0.03 go to salient / centre); 'salient' was a near-tie but its edge falls inside the subject (0.46-0.90), so 'left' keeps it whole"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Choose",
+          "start": 8.72,
+          "end": 8.98
+        },
+        {
+          "text": "easy",
+          "start": 8.98,
+          "end": 9.36
+        },
+        {
+          "text": "plants",
+          "start": 9.36,
+          "end": 9.66
+        },
+        {
+          "text": "first,",
+          "start": 9.66,
+          "end": 9.98
+        },
+        {
+          "text": "like",
+          "start": 10.42,
+          "end": 10.58
+        },
+        {
+          "text": "tomatoes,",
+          "start": 10.58,
+          "end": 10.96
+        },
+        {
+          "text": "chilies,",
+          "start": 11.48,
+          "end": 11.82
+        },
+        {
+          "text": "spinach",
+          "start": 12.2,
+          "end": 12.42
+        },
+        {
+          "text": "and",
+          "start": 12.42,
+          "end": 12.76
+        },
+        {
+          "text": "mint.",
+          "start": 12.76,
+          "end": 12.98
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "text": "Fill each pot with good soil mixed with compost and make sure there are holes at the bottom so extra water can drain away.",
+      "start": 13.29,
+      "end": 20.45,
+      "duration": 7.16,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "close-up of pot preparation",
+      "queries": [
+        "pot filled with rich compost soil",
+        "foundation layer for plant growth",
+        "close-up of pot preparation",
+        "hands pouring soil into pot",
+        "calm focused gardening scene"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "364898",
+      "page_url": "https://pixabay.com/videos/id-364898/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Matias_Luge on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.268 >= 0.22 for query 'close-up of pot preparation' (best of 6 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.254); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.10); video scored >= 0.25: photo sources not searched",
+      "relevance_score": 0.2676,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2676,
+        "thumbnail_score": 0.2535,
+        "frame_scores": [
+          0.2535,
+          0.2798,
+          0.2694
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.3076,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_003.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0004,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.41,
+            "logo_prob": 0.0987,
+            "scene_score": 0.2725,
+            "result": "ok"
+          },
+          {
+            "time": 7.24,
+            "logo_prob": 0.0374,
+            "scene_score": 0.2644,
+            "result": "ok"
+          },
+          {
+            "time": 12.07,
+            "logo_prob": 0.0707,
+            "scene_score": 0.245,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:364898",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2026/07/19/364898_medium.mp4",
+        "final_score": 0.3076,
+        "width": 2560,
+        "height": 1440,
+        "duration": 14.0
+      },
+      "understanding": {
+        "queries": [
+          "pot filled with rich compost soil",
+          "foundation layer for plant growth",
+          "close-up of pot preparation",
+          "hands pouring soil into pot",
+          "calm focused gardening scene"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows the step of adding soil and compost and ensuring drainage holes in each pot.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "fill pot",
+        "card": {
+          "headline": "FILL POT",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "8b0e3db45ac38fe5"
+      },
+      "safety": {
+        "queries": [
+          "pot filled with rich compost soil",
+          "foundation layer for plant growth",
+          "close-up of pot preparation",
+          "hands pouring soil into pot",
+          "calm focused gardening scene"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_003_b5ecfa38a22950ff.mp4",
+          "cache_key": "b5ecfa38a22950ff",
+          "frames": 215,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_003_e4436b80948c9982.mp4",
+          "cache_key": "e4436b80948c9982",
+          "frames": 215,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (left)",
+          "crop": {
+            "method": "clip",
+            "choice": "left",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2612,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2722
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2471
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.1982
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "subject_span": [
+              0.445,
+              0.7173
+            ],
+            "windows_cutting_subject": [
+              "centre",
+              "right"
+            ],
+            "reason": "window 'left' chosen (0.247; best window 0.272; whole frame 0.261; near-ties within 0.03 go to salient / centre); 'centre' was a near-tie but its edge falls inside the subject (0.45-0.72), so 'left' keeps it whole"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Fill",
+          "start": 13.6,
+          "end": 13.82
+        },
+        {
+          "text": "each",
+          "start": 13.82,
+          "end": 14.04
+        },
+        {
+          "text": "pot",
+          "start": 14.04,
+          "end": 14.38
+        },
+        {
+          "text": "with",
+          "start": 14.38,
+          "end": 14.62
+        },
+        {
+          "text": "good",
+          "start": 14.62,
+          "end": 14.84
+        },
+        {
+          "text": "soil",
+          "start": 14.84,
+          "end": 15.18
+        },
+        {
+          "text": "mixed",
+          "start": 15.18,
+          "end": 15.52
+        },
+        {
+          "text": "with",
+          "start": 15.52,
+          "end": 15.74
+        },
+        {
+          "text": "compost",
+          "start": 15.74,
+          "end": 16.14
+        },
+        {
+          "text": "and",
+          "start": 16.14,
+          "end": 16.84
+        },
+        {
+          "text": "make",
+          "start": 16.84,
+          "end": 17.0
+        },
+        {
+          "text": "sure",
+          "start": 17.0,
+          "end": 17.2
+        },
+        {
+          "text": "there",
+          "start": 17.2,
+          "end": 17.32
+        },
+        {
+          "text": "are",
+          "start": 17.32,
+          "end": 17.42
+        },
+        {
+          "text": "holes",
+          "start": 17.42,
+          "end": 17.68
+        },
+        {
+          "text": "at",
+          "start": 17.68,
+          "end": 17.88
+        },
+        {
+          "text": "the",
+          "start": 17.88,
+          "end": 17.94
+        },
+        {
+          "text": "bottom",
+          "start": 17.94,
+          "end": 18.24
+        },
+        {
+          "text": "so",
+          "start": 18.24,
+          "end": 18.54
+        },
+        {
+          "text": "extra",
+          "start": 18.54,
+          "end": 18.98
+        },
+        {
+          "text": "water",
+          "start": 18.98,
+          "end": 19.28
+        },
+        {
+          "text": "can",
+          "start": 19.28,
+          "end": 19.58
+        },
+        {
+          "text": "drain",
+          "start": 19.58,
+          "end": 19.8
+        },
+        {
+          "text": "away.",
+          "start": 19.8,
+          "end": 20.1
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "text": "Plant the seeds about as deep as twice their size, then water them gently.",
+      "start": 20.45,
+      "end": 25.28,
+      "duration": 4.83,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "hand gently watering new seeds",
+      "queries": [
+        "seeds planted at proper depth",
+        "seed nestled like tiny pearl",
+        "pot surface with seeds being placed",
+        "hand gently watering new seeds",
+        "soft tranquil gardening ambience"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "5635",
+      "page_url": "https://pixabay.com/videos/id-5635/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Coverr-Free-Footage on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.268 >= 0.22 for query 'hand gently watering new seeds' (best of 12 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.276); logo check ok (logo prob 0.01); 3 clip frame(s) passed the logo check (max logo prob 0.00); video scored >= 0.25: photo sources not searched",
+      "relevance_score": 0.2675,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2675,
+        "thumbnail_score": 0.2758,
+        "frame_scores": [
+          0.2758,
+          0.2869,
+          0.2399
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.3075,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_004.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0054,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.39,
+            "logo_prob": 0.0006,
+            "scene_score": 0.2878,
+            "result": "ok"
+          },
+          {
+            "time": 7.18,
+            "logo_prob": 0.0006,
+            "scene_score": 0.2943,
+            "result": "ok"
+          },
+          {
+            "time": 11.97,
+            "logo_prob": 0.0007,
+            "scene_score": 0.2455,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:5635",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2016/09/22/5635-183850259_medium.mp4",
+        "final_score": 0.3075,
+        "width": 1280,
+        "height": 720,
+        "duration": 14.0
+      },
+      "understanding": {
+        "queries": [
+          "seeds planted at proper depth",
+          "seed nestled like tiny pearl",
+          "pot surface with seeds being placed",
+          "hand gently watering new seeds",
+          "soft tranquil gardening ambience"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Visualizes sowing seeds at the right depth and watering them gently.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "plant seeds",
+        "card": {
+          "headline": "PLANT SEEDS",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "b1586d9090666711"
+      },
+      "safety": {
+        "queries": [
+          "seeds planted at proper depth",
+          "seed nestled like tiny pearl",
+          "pot surface with seeds being placed",
+          "hand gently watering new seeds",
+          "soft tranquil gardening ambience"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_004_b41f9d57f37968ca.mp4",
+          "cache_key": "b41f9d57f37968ca",
+          "frames": 144,
+          "look": "eq=brightness=0.101:saturation=1.184",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_004_5b293be84ebd4b70.mp4",
+          "cache_key": "5b293be84ebd4b70",
+          "frames": 144,
+          "look": "eq=brightness=0.101:saturation=1.184",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2893,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2703
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2615
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.273
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "subject_span": [
+              0.3927,
+              0.6335
+            ],
+            "windows_cutting_subject": [],
+            "reason": "window 'centre' chosen (0.270; best window 0.273; whole frame 0.289; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Plant",
+          "start": 20.8,
+          "end": 21.0
+        },
+        {
+          "text": "the",
+          "start": 21.0,
+          "end": 21.2
+        },
+        {
+          "text": "seeds",
+          "start": 21.2,
+          "end": 21.5
+        },
+        {
+          "text": "about",
+          "start": 21.5,
+          "end": 21.76
+        },
+        {
+          "text": "as",
+          "start": 21.76,
+          "end": 22.0
+        },
+        {
+          "text": "deep",
+          "start": 22.0,
+          "end": 22.24
+        },
+        {
+          "text": "as",
+          "start": 22.24,
+          "end": 22.46
+        },
+        {
+          "text": "twice",
+          "start": 22.46,
+          "end": 22.68
+        },
+        {
+          "text": "their",
+          "start": 22.68,
+          "end": 22.96
+        },
+        {
+          "text": "size,",
+          "start": 22.96,
+          "end": 23.36
+        },
+        {
+          "text": "then",
+          "start": 23.68,
+          "end": 23.94
+        },
+        {
+          "text": "water",
+          "start": 23.94,
+          "end": 24.24
+        },
+        {
+          "text": "them",
+          "start": 24.24,
+          "end": 24.46
+        },
+        {
+          "text": "gently.",
+          "start": 24.46,
+          "end": 24.8
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "text": "Most vegetables need at least five hours of direct sunlight every day so place the pots where the light is strongest.",
+      "start": 25.28,
+      "end": 31.84,
+      "duration": 6.56,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "plants reaching toward bright sun",
+      "queries": [
+        "pots positioned for maximum sunlight",
+        "plants reaching toward bright sun",
+        "sunlit windowsill with garden pots",
+        "person moving pot into light",
+        "vibrant sunny garden atmosphere"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "218951",
+      "page_url": "https://pixabay.com/videos/id-218951/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "NickyPe on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.268 >= 0.22 for query 'plants reaching toward bright sun' (best of 5 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.253); logo check ok (logo prob 0.01); 3 clip frame(s) passed the logo check (max logo prob 0.01); video scored >= 0.25: photo sources not searched",
+      "relevance_score": 0.2676,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2676,
+        "thumbnail_score": 0.2529,
+        "frame_scores": [
+          0.2529,
+          0.2716,
+          0.2783
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.3076,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_005.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0053,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.36,
+            "logo_prob": 0.0086,
+            "scene_score": 0.2749,
+            "result": "ok"
+          },
+          {
+            "time": 7.09,
+            "logo_prob": 0.0086,
+            "scene_score": 0.2747,
+            "result": "ok"
+          },
+          {
+            "time": 11.82,
+            "logo_prob": 0.0099,
+            "scene_score": 0.2716,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:218951",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2024/07/01/218951_medium.mp4",
+        "final_score": 0.3076,
+        "width": 2560,
+        "height": 1440,
+        "duration": 14.0
+      },
+      "understanding": {
+        "queries": [
+          "pots positioned for maximum sunlight",
+          "plants reaching toward bright sun",
+          "sunlit windowsill with garden pots",
+          "person moving pot into light",
+          "vibrant sunny garden atmosphere"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Demonstrates placing pots where they receive at least five hours of direct sun each day.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "vegetables need",
+        "card": {
+          "headline": "VEGETABLES NEED",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "84ed002f32bfac92"
+      },
+      "safety": {
+        "queries": [
+          "pots positioned for maximum sunlight",
+          "plants reaching toward bright sun",
+          "sunlit windowsill with garden pots",
+          "person moving pot into light",
+          "vibrant sunny garden atmosphere"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_005_a1e6b7a251df70bd.mp4",
+          "cache_key": "a1e6b7a251df70bd",
+          "frames": 197,
+          "look": "eq=saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_005_7226572dda9d9978.mp4",
+          "cache_key": "7226572dda9d9978",
+          "frames": 197,
+          "look": "eq=saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2611,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2603
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2601
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.244
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "subject_span": [
+              0.9243,
+              1.0
+            ],
+            "windows_cutting_subject": [],
+            "reason": "window 'centre' chosen (0.260; best window 0.260; whole frame 0.261; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Most",
+          "start": 25.76,
+          "end": 26.08
+        },
+        {
+          "text": "vegetables",
+          "start": 26.08,
+          "end": 26.44
+        },
+        {
+          "text": "need",
+          "start": 26.44,
+          "end": 26.8
+        },
+        {
+          "text": "at",
+          "start": 26.8,
+          "end": 26.94
+        },
+        {
+          "text": "least",
+          "start": 26.94,
+          "end": 27.08
+        },
+        {
+          "text": "five",
+          "start": 27.08,
+          "end": 27.4
+        },
+        {
+          "text": "hours",
+          "start": 27.4,
+          "end": 27.76
+        },
+        {
+          "text": "of",
+          "start": 27.76,
+          "end": 27.92
+        },
+        {
+          "text": "direct",
+          "start": 27.92,
+          "end": 28.24
+        },
+        {
+          "text": "sunlight",
+          "start": 28.24,
+          "end": 28.68
+        },
+        {
+          "text": "every",
+          "start": 28.68,
+          "end": 28.98
+        },
+        {
+          "text": "day",
+          "start": 28.98,
+          "end": 29.32
+        },
+        {
+          "text": "so",
+          "start": 29.32,
+          "end": 29.78
+        },
+        {
+          "text": "place",
+          "start": 29.78,
+          "end": 30.04
+        },
+        {
+          "text": "the",
+          "start": 30.04,
+          "end": 30.2
+        },
+        {
+          "text": "pots",
+          "start": 30.2,
+          "end": 30.44
+        },
+        {
+          "text": "where",
+          "start": 30.44,
+          "end": 30.6
+        },
+        {
+          "text": "the",
+          "start": 30.6,
+          "end": 30.72
+        },
+        {
+          "text": "light",
+          "start": 30.72,
+          "end": 30.92
+        },
+        {
+          "text": "is",
+          "start": 30.92,
+          "end": 31.1
+        },
+        {
+          "text": "strongest.",
+          "start": 31.1,
+          "end": 31.48
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "text": "Water in the early morning or the evening when the sun is not too hot.",
+      "start": 31.84,
+      "end": 35.93,
+      "duration": 4.09,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "watering balcony plants at dawn",
+      "queries": [
+        "watering balcony plants at dawn",
+        "gentle rain over seedlings",
+        "sunlit balcony with pots",
+        "person pouring water into pots",
+        "soft morning light ambience"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "31953",
+      "page_url": "https://pixabay.com/videos/id-31953/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "u_rjjehevu on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.308 >= 0.22 for query 'watering balcony plants at dawn' (best of 5 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.297); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.00); video scored >= 0.25: photo sources not searched",
+      "relevance_score": 0.3079,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.3079,
+        "thumbnail_score": 0.2974,
+        "frame_scores": [
+          0.2974,
+          0.3201,
+          0.3063
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.3479,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_006.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0001,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 5.01,
+            "logo_prob": 0.0003,
+            "scene_score": 0.3038,
+            "result": "ok"
+          },
+          {
+            "time": 15.04,
+            "logo_prob": 0.0014,
+            "scene_score": 0.3015,
+            "result": "ok"
+          },
+          {
+            "time": 25.07,
+            "logo_prob": 0.0018,
+            "scene_score": 0.2903,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:31953",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2020/02/05/31953-389724688_medium.mp4",
+        "final_score": 0.3479,
+        "width": 1280,
+        "height": 720,
+        "duration": 30.0
+      },
+      "understanding": {
+        "queries": [
+          "watering balcony plants at dawn",
+          "gentle rain over seedlings",
+          "sunlit balcony with pots",
+          "person pouring water into pots",
+          "soft morning light ambience"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows the practical act of watering plants during cooler times, using a visual metaphor of gentle rain, a balcony setting, a person pouring water, and a calm morning mood.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "water early",
+        "card": {
+          "headline": "WATER EARLY",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "0948ce7a49e7bc00"
+      },
+      "safety": {
+        "queries": [
+          "watering balcony plants at dawn",
+          "gentle rain over seedlings",
+          "sunlit balcony with pots",
+          "person pouring water into pots",
+          "soft morning light ambience"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_006_60352d87cdb853d5.mp4",
+          "cache_key": "60352d87cdb853d5",
+          "frames": 123,
+          "look": "eq=brightness=0.062:saturation=0.944",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_006_3470e20f4104013e.mp4",
+          "cache_key": "3470e20f4104013e",
+          "frames": 123,
+          "look": "eq=brightness=0.062:saturation=0.944",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2888,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2908
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2662
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2549
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "subject_span": [
+              0.2304,
+              0.6335
+            ],
+            "windows_cutting_subject": [
+              "centre",
+              "left"
+            ],
+            "reason": "window 'centre' chosen (0.291; best window 0.291; whole frame 0.289; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Water",
+          "start": 32.2,
+          "end": 32.5
+        },
+        {
+          "text": "in",
+          "start": 32.5,
+          "end": 32.68
+        },
+        {
+          "text": "the",
+          "start": 32.68,
+          "end": 32.76
+        },
+        {
+          "text": "early",
+          "start": 32.76,
+          "end": 32.96
+        },
+        {
+          "text": "morning",
+          "start": 32.96,
+          "end": 33.28
+        },
+        {
+          "text": "or",
+          "start": 33.28,
+          "end": 33.52
+        },
+        {
+          "text": "the",
+          "start": 33.52,
+          "end": 33.64
+        },
+        {
+          "text": "evening",
+          "start": 33.64,
+          "end": 33.92
+        },
+        {
+          "text": "when",
+          "start": 33.92,
+          "end": 34.42
+        },
+        {
+          "text": "the",
+          "start": 34.42,
+          "end": 34.54
+        },
+        {
+          "text": "sun",
+          "start": 34.54,
+          "end": 34.76
+        },
+        {
+          "text": "is",
+          "start": 34.76,
+          "end": 34.94
+        },
+        {
+          "text": "not",
+          "start": 34.94,
+          "end": 35.14
+        },
+        {
+          "text": "too",
+          "start": 35.14,
+          "end": 35.34
+        },
+        {
+          "text": "hot.",
+          "start": 35.34,
+          "end": 35.64
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "text": "Check the leaves every few days for insects and remove them by hand.",
+      "start": 35.93,
+      "end": 40.0,
+      "duration": 4.07,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "hand plucking insects from leaves",
+      "queries": [
+        "examining plant leaves for bugs",
+        "hand picking tiny insects",
+        "close-up of leafy balcony garden",
+        "hand plucking insects from leaves",
+        "focused attentive care"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "294709",
+      "page_url": "https://pixabay.com/videos/id-294709/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Kaffeesüchtig on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.244 >= 0.22 for query 'hand plucking insects from leaves' (best of 15 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.231); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.00); video preferred over photo-motion (pixabay_image_motion best 0.293 is not more than 0.03 above 0.284)",
+      "relevance_score": 0.2438,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2438,
+        "thumbnail_score": 0.2306,
+        "frame_scores": [
+          0.2306,
+          0.2476,
+          0.2532
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.2838,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_007.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 1.14,
+            "logo_prob": 0.0005,
+            "scene_score": 0.271,
+            "result": "ok"
+          },
+          {
+            "time": 3.43,
+            "logo_prob": 0.0006,
+            "scene_score": 0.2617,
+            "result": "ok"
+          },
+          {
+            "time": 5.72,
+            "logo_prob": 0.0005,
+            "scene_score": 0.2665,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:294709",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2025/08/01/294709_medium.mp4",
+        "final_score": 0.2838,
+        "width": 2560,
+        "height": 1440,
+        "duration": 6.0
+      },
+      "understanding": {
+        "queries": [
+          "examining plant leaves for bugs",
+          "hand picking tiny insects",
+          "close-up of leafy balcony garden",
+          "hand plucking insects from leaves",
+          "focused attentive care"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Depicts checking leaves for pests, metaphorically illustrated by a hand picking insects, set on a balcony garden, with a hand removing bugs, conveying careful attention.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "check leaves",
+        "card": {
+          "headline": "CHECK LEAVES",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "3dab6ef991edab24"
+      },
+      "safety": {
+        "queries": [
+          "examining plant leaves for bugs",
+          "hand picking tiny insects",
+          "close-up of leafy balcony garden",
+          "hand plucking insects from leaves",
+          "focused attentive care"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_007_5ba956c503e9756c.mp4",
+          "cache_key": "5ba956c503e9756c",
+          "frames": 122,
+          "look": "eq=brightness=-0.046:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_007_a703baccf4ad933b.mp4",
+          "cache_key": "a703baccf4ad933b",
+          "frames": 122,
+          "look": "eq=brightness=-0.046:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "subject crop (left)",
+          "crop": {
+            "method": "clip",
+            "choice": "left",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2161,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2095
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2322
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2352
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "subject_span": [
+              0.3822,
+              0.7958
+            ],
+            "windows_cutting_subject": [
+              "centre",
+              "right"
+            ],
+            "reason": "window 'left' chosen (0.232; best window 0.235; whole frame 0.216; near-ties within 0.03 go to salient / centre); 'centre' was a near-tie but its edge falls inside the subject (0.38-0.80), so 'left' keeps it whole"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Check",
+          "start": 36.22,
+          "end": 36.46
+        },
+        {
+          "text": "the",
+          "start": 36.46,
+          "end": 36.66
+        },
+        {
+          "text": "leaves",
+          "start": 36.66,
+          "end": 36.9
+        },
+        {
+          "text": "every",
+          "start": 36.9,
+          "end": 37.22
+        },
+        {
+          "text": "few",
+          "start": 37.22,
+          "end": 37.46
+        },
+        {
+          "text": "days",
+          "start": 37.46,
+          "end": 37.7
+        },
+        {
+          "text": "for",
+          "start": 37.7,
+          "end": 37.96
+        },
+        {
+          "text": "insects",
+          "start": 37.96,
+          "end": 38.32
+        },
+        {
+          "text": "and",
+          "start": 38.32,
+          "end": 38.7
+        },
+        {
+          "text": "remove",
+          "start": 38.7,
+          "end": 39.0
+        },
+        {
+          "text": "them",
+          "start": 39.0,
+          "end": 39.18
+        },
+        {
+          "text": "by",
+          "start": 39.18,
+          "end": 39.34
+        },
+        {
+          "text": "hand.",
+          "start": 39.34,
+          "end": 39.7
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "text": "In a few weeks, you will see the first flowers and soon after, your first harvest.",
+      "start": 40.0,
+      "end": 44.81,
+      "duration": 4.81,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "balcony pots with flowering plants",
+      "queries": [
+        "first garden flowers blooming",
+        "budding flowers turning into ripe vegetables",
+        "balcony pots with flowering plants",
+        "hand harvesting ripe tomatoes",
+        "joyful anticipation atmosphere"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "47551",
+      "page_url": "https://pixabay.com/videos/id-47551/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "deeanaarts on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.270 >= 0.22 for query 'balcony pots with flowering plants' (best of 12 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.254); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.01); video scored >= 0.25: photo sources not searched",
+      "relevance_score": 0.2702,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2702,
+        "thumbnail_score": 0.2536,
+        "frame_scores": [
+          0.2536,
+          0.2901,
+          0.267
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.3102,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_008.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0042,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 1.69,
+            "logo_prob": 0.0075,
+            "scene_score": 0.2776,
+            "result": "ok"
+          },
+          {
+            "time": 5.08,
+            "logo_prob": 0.0016,
+            "scene_score": 0.2984,
+            "result": "ok"
+          },
+          {
+            "time": 8.46,
+            "logo_prob": 0.0023,
+            "scene_score": 0.2733,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:47551",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2020/08/18/47551-451623797_medium.mp4",
+        "final_score": 0.3102,
+        "width": 1272,
+        "height": 720,
+        "duration": 10.0
+      },
+      "understanding": {
+        "queries": [
+          "first garden flowers blooming",
+          "budding flowers turning into ripe vegetables",
+          "balcony pots with flowering plants",
+          "hand harvesting ripe tomatoes",
+          "joyful anticipation atmosphere"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Illustrates the transition from first flowers to harvest, using a blooming metaphor, balcony setting, harvesting action, and a joyful mood.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "weeks see",
+        "card": {
+          "headline": "WEEKS SEE",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "80f56d14fe145a8f"
+      },
+      "safety": {
+        "queries": [
+          "first garden flowers blooming",
+          "budding flowers turning into ripe vegetables",
+          "balcony pots with flowering plants",
+          "hand harvesting ripe tomatoes",
+          "joyful anticipation atmosphere"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_008_9dbacdddb489301b.mp4",
+          "cache_key": "9dbacdddb489301b",
+          "frames": 144,
+          "look": "eq=brightness=0.095:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_008_a951e7ad5e29b0ba.mp4",
+          "cache_key": "a951e7ad5e29b0ba",
+          "frames": 144,
+          "look": "eq=brightness=0.095:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3184,
+            "full_frame_score": 0.26,
+            "windows": {
+              "centre": {
+                "start": 0.3408,
+                "score": 0.2565
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2517
+              },
+              "right": {
+                "start": 0.6816,
+                "score": 0.1836
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "subject_span": [
+              0.7435,
+              1.0
+            ],
+            "windows_cutting_subject": [],
+            "reason": "window 'centre' chosen (0.257; best window 0.257; whole frame 0.260; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "In",
+          "start": 40.3,
+          "end": 40.4
+        },
+        {
+          "text": "a",
+          "start": 40.4,
+          "end": 40.5
+        },
+        {
+          "text": "few",
+          "start": 40.5,
+          "end": 40.62
+        },
+        {
+          "text": "weeks,",
+          "start": 40.62,
+          "end": 40.92
+        },
+        {
+          "text": "you",
+          "start": 41.24,
+          "end": 41.38
+        },
+        {
+          "text": "will",
+          "start": 41.38,
+          "end": 41.48
+        },
+        {
+          "text": "see",
+          "start": 41.48,
+          "end": 41.62
+        },
+        {
+          "text": "the",
+          "start": 41.62,
+          "end": 41.76
+        },
+        {
+          "text": "first",
+          "start": 41.76,
+          "end": 42.0
+        },
+        {
+          "text": "flowers",
+          "start": 42.0,
+          "end": 42.4
+        },
+        {
+          "text": "and",
+          "start": 42.4,
+          "end": 42.9
+        },
+        {
+          "text": "soon",
+          "start": 42.9,
+          "end": 43.14
+        },
+        {
+          "text": "after,",
+          "start": 43.14,
+          "end": 43.46
+        },
+        {
+          "text": "your",
+          "start": 43.76,
+          "end": 43.84
+        },
+        {
+          "text": "first",
+          "start": 43.84,
+          "end": 44.1
+        },
+        {
+          "text": "harvest.",
+          "start": 44.1,
+          "end": 44.42
+        }
+      ]
+    },
+    {
+      "index": 9,
+      "text": "Save a few seeds from your best plants for next season and share the extra harvest with your neighbors.",
+      "start": 44.81,
+      "end": 50.48,
+      "duration": 5.67,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "kitchen table with seed packets",
+      "queries": [
+        "collecting seeds from mature vegetables",
+        "hand holding handful of seeds",
+        "kitchen table with seed packets",
+        "passing basket of vegetables to neighbor",
+        "community generosity vibe"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_image_motion",
+      "clip_id": "1117865",
+      "page_url": "https://pixabay.com/photos/gardening-seeds-sowing-sow-rake-1117865/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Hans on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_image_motion: score 0.261 >= 0.22 for query 'kitchen table with seed packets' (best of 4 candidates, order bonus +0.04); logo check ok (logo prob 0.03); 1 clip frame(s) passed the logo check (max logo prob 0.04); photo-motion preferred: order score 0.301 > best video 0.263 + PREFER_VIDEO_MARGIN 0.03",
+      "relevance_score": 0.2611,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": {
+        "score": null,
+        "judged": {
+          "pixabay_video:11606": 2,
+          "pixabay_video:73847": 4
+        },
+        "why": "Image B shows hands holding a pile of small seeds, which directly relates to saving seeds, while Image A shows a blurry pot with indistinct contents.",
+        "priority": "close call",
+        "model": "qwen/qwen3.8-27b"
+      },
+      "score_details": {
+        "score": 0.2611,
+        "thumbnail_score": 0.2611,
+        "frame_scores": null,
+        "frames_scored": 1,
+        "text_prob": 0.0114,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.3011
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_009.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0313,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.0404,
+            "scene_score": 0.2617,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_image_motion:1117865",
+        "kind": "image",
+        "title": "",
+        "source_url": "https://pixabay.com/get/g84d90b0e8c87898622b690ee67c5d5c4cc9f6f294ec35d30bcf8ecb5f6e48de03f0d5b904c96747c0adcb9f825c12ba482ec1f2e6e46e542cd5f0c5086e82f8b_1280.jpg",
+        "final_score": 0.3011,
+        "width": 1280,
+        "height": 960,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "collecting seeds from mature vegetables",
+          "hand holding handful of seeds",
+          "kitchen table with seed packets",
+          "passing basket of vegetables to neighbor",
+          "community generosity vibe"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows seed saving and sharing, with concrete seed collection, a hand-held seed metaphor, domestic setting, neighborly exchange, and a generous mood.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "save seeds",
+        "card": {
+          "headline": "SAVE SEEDS",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "8b35fd395d9a1931"
+      },
+      "safety": {
+        "queries": [
+          "collecting seeds from mature vegetables",
+          "hand holding handful of seeds",
+          "kitchen table with seed packets",
+          "passing basket of vegetables to neighbor",
+          "community generosity vibe"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_009_f0d1bacff3cdab96.mp4",
+          "cache_key": "f0d1bacff3cdab96",
+          "frames": 170,
+          "look": "eq=brightness=-0.120:saturation=1.167",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "y",
+            "window_fraction": 0.75,
+            "full_frame_score": 0.2491,
+            "windows": {
+              "salient": {
+                "start": 0.1226,
+                "score": 0.2336
+              },
+              "top": {
+                "start": 0.0,
+                "score": 0.2369
+              },
+              "bottom": {
+                "start": 0.25,
+                "score": 0.2361
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "subject_span": [
+              0.0909,
+              0.7832
+            ],
+            "windows_cutting_subject": [
+              "bottom",
+              "salient",
+              "top"
+            ],
+            "reason": "window 'salient' chosen (0.234; best window 0.237; whole frame 0.249; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_009_5a7fabd6d84ec3bc.mp4",
+          "cache_key": "5a7fabd6d84ec3bc",
+          "frames": 170,
+          "look": "eq=brightness=-0.120:saturation=1.167",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.4219,
+            "full_frame_score": 0.2491,
+            "windows": {
+              "salient": {
+                "start": 0.3726,
+                "score": 0.2651
+              },
+              "centre": {
+                "start": 0.2891,
+                "score": 0.2797
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2314
+              },
+              "right": {
+                "start": 0.5781,
+                "score": 0.2288
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "subject_span": [
+              0.1152,
+              0.7225
+            ],
+            "windows_cutting_subject": [
+              "centre",
+              "left",
+              "right",
+              "salient"
+            ],
+            "reason": "window 'salient' chosen (0.265; best window 0.280; whole frame 0.249; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Save",
+          "start": 45.2,
+          "end": 45.4
+        },
+        {
+          "text": "a",
+          "start": 45.4,
+          "end": 45.58
+        },
+        {
+          "text": "few",
+          "start": 45.58,
+          "end": 45.7
+        },
+        {
+          "text": "seeds",
+          "start": 45.7,
+          "end": 46.0
+        },
+        {
+          "text": "from",
+          "start": 46.0,
+          "end": 46.22
+        },
+        {
+          "text": "your",
+          "start": 46.22,
+          "end": 46.34
+        },
+        {
+          "text": "best",
+          "start": 46.34,
+          "end": 46.54
+        },
+        {
+          "text": "plants",
+          "start": 46.54,
+          "end": 46.86
+        },
+        {
+          "text": "for",
+          "start": 46.86,
+          "end": 47.04
+        },
+        {
+          "text": "next",
+          "start": 47.04,
+          "end": 47.24
+        },
+        {
+          "text": "season",
+          "start": 47.24,
+          "end": 47.66
+        },
+        {
+          "text": "and",
+          "start": 47.66,
+          "end": 48.16
+        },
+        {
+          "text": "share",
+          "start": 48.16,
+          "end": 48.4
+        },
+        {
+          "text": "the",
+          "start": 48.4,
+          "end": 48.56
+        },
+        {
+          "text": "extra",
+          "start": 48.56,
+          "end": 48.92
+        },
+        {
+          "text": "harvest",
+          "start": 48.92,
+          "end": 49.26
+        },
+        {
+          "text": "with",
+          "start": 49.26,
+          "end": 49.58
+        },
+        {
+          "text": "your",
+          "start": 49.58,
+          "end": 49.74
+        },
+        {
+          "text": "neighbors.",
+          "start": 49.74,
+          "end": 50.02
+        }
+      ]
+    },
+    {
+      "index": 10,
+      "text": "Gardening also teaches patience because every plant grows at its own pace.",
+      "start": 50.48,
+      "end": 55.44,
+      "duration": 4.96,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "watching plants grow slowly",
+      "queries": [
+        "watching plants grow slowly",
+        "hourglass beside growing seedlings",
+        "sunlit balcony with growing pots",
+        "person gently adjusting plant support",
+        "calm reflective atmosphere"
+      ],
+      "flags": {
+        "abstract": true,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_image_motion",
+      "clip_id": "6226263",
+      "page_url": "https://pixabay.com/photos/greenhouse-planting-spring-beds-6226263/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Katya_Ershova on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_image_motion: score 0.273 >= 0.22 for query 'watching plants grow slowly' (best of 6 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 1 clip frame(s) passed the logo check (max logo prob 0.00); photo-motion preferred: order score 0.313 > best video 0.273 + PREFER_VIDEO_MARGIN 0.03",
+      "relevance_score": 0.2731,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2731,
+        "thumbnail_score": 0.2731,
+        "frame_scores": null,
+        "frames_scored": 1,
+        "text_prob": 0.0022,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.3131
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_010.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.003,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.0015,
+            "scene_score": 0.2661,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_image_motion:6226263",
+        "kind": "image",
+        "title": "",
+        "source_url": "https://pixabay.com/get/g284864126da33cf5bfbb3895a2c5bafd6c465643ba755f0753b6f354088c7893052a5f64b1afb0628803b9c502372d6781dfd5981646052a4fb3840689ae590b_1280.jpg",
+        "final_score": 0.3131,
+        "width": 1280,
+        "height": 853,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "watching plants grow slowly",
+          "hourglass beside growing seedlings",
+          "sunlit balcony with growing pots",
+          "person gently adjusting plant support",
+          "calm reflective atmosphere"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": true,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Conveys the abstract lesson of patience through visual metaphors like an hourglass, a setting of growing pots, gentle care actions, and a calm mood.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "patience",
+        "card": {
+          "headline": "PATIENCE",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "cfa7e3bcf3386f87"
+      },
+      "safety": {
+        "queries": [
+          "watching plants grow slowly",
+          "hourglass beside growing seedlings",
+          "sunlit balcony with growing pots",
+          "person gently adjusting plant support",
+          "calm reflective atmosphere"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_010_d33967b281aa7c53.mp4",
+          "cache_key": "d33967b281aa7c53",
+          "frames": 149,
+          "look": "eq=brightness=0.080:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (top)",
+          "crop": {
+            "method": "clip",
+            "choice": "top",
+            "axis": "y",
+            "window_fraction": 0.8441,
+            "full_frame_score": 0.2653,
+            "windows": {
+              "salient": {
+                "start": 0.0831,
+                "score": 0.2599
+              },
+              "top": {
+                "start": 0.0,
+                "score": 0.2627
+              },
+              "bottom": {
+                "start": 0.1559,
+                "score": 0.2561
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "subject_span": [
+              0.0157,
+              0.8425
+            ],
+            "windows_cutting_subject": [
+              "bottom",
+              "salient"
+            ],
+            "reason": "window 'top' chosen (0.263; best window 0.263; whole frame 0.265; near-ties within 0.03 go to salient / centre); 'salient' was a near-tie but its edge falls inside the subject (0.02-0.84), so 'top' keeps it whole"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_010_2df34112000921ee.mp4",
+          "cache_key": "2df34112000921ee",
+          "frames": 149,
+          "look": "eq=brightness=0.080:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3749,
+            "full_frame_score": 0.2653,
+            "windows": {
+              "centre": {
+                "start": 0.3126,
+                "score": 0.2658
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2368
+              },
+              "right": {
+                "start": 0.6251,
+                "score": 0.287
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "subject_span": [
+              0.1152,
+              0.9948
+            ],
+            "windows_cutting_subject": [
+              "centre",
+              "left",
+              "right"
+            ],
+            "reason": "window 'centre' chosen (0.266; best window 0.287; whole frame 0.265; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Gardening",
+          "start": 50.94,
+          "end": 51.42
+        },
+        {
+          "text": "also",
+          "start": 51.42,
+          "end": 51.9
+        },
+        {
+          "text": "teaches",
+          "start": 51.9,
+          "end": 52.34
+        },
+        {
+          "text": "patience",
+          "start": 52.34,
+          "end": 52.92
+        },
+        {
+          "text": "because",
+          "start": 52.92,
+          "end": 53.54
+        },
+        {
+          "text": "every",
+          "start": 53.54,
+          "end": 53.9
+        },
+        {
+          "text": "plant",
+          "start": 53.9,
+          "end": 54.22
+        },
+        {
+          "text": "grows",
+          "start": 54.22,
+          "end": 54.6
+        },
+        {
+          "text": "at",
+          "start": 54.6,
+          "end": 54.82
+        },
+        {
+          "text": "its",
+          "start": 54.82,
+          "end": 54.98
+        },
+        {
+          "text": "own",
+          "start": 54.98,
+          "end": 55.16
+        },
+        {
+          "text": "pace.",
+          "start": 55.16,
+          "end": 55.44
+        }
+      ]
+    },
+    {
+      "index": 11,
+      "text": "There is nothing quite like eating a tomato you grew yourself.",
+      "start": 55.44,
+      "end": 59.5,
+      "duration": 4.06,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "hand holding ripe tomato like a jewel",
+      "queries": [
+        "taking bite of homegrown tomato",
+        "hand holding ripe tomato like a jewel",
+        "kitchen counter with fresh tomatoes",
+        "person slicing tomato for salad",
+        "satisfied happy expression"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "3510",
+      "page_url": "https://pixabay.com/videos/id-3510/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Skylent on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.274 >= 0.22 for query 'hand holding ripe tomato like a jewel' (best of 6 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.259); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.00); video scored >= 0.25: photo sources not searched",
+      "relevance_score": 0.2739,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2739,
+        "thumbnail_score": 0.2592,
+        "frame_scores": [
+          0.2592,
+          0.2752,
+          0.2872
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.3139,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_011.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 1.67,
+            "logo_prob": 0.0,
+            "scene_score": 0.262,
+            "result": "ok"
+          },
+          {
+            "time": 5.0,
+            "logo_prob": 0.0,
+            "scene_score": 0.2753,
+            "result": "ok"
+          },
+          {
+            "time": 8.34,
+            "logo_prob": 0.0,
+            "scene_score": 0.2655,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:3510",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2016/06/20/3510-171566772_medium.mp4",
+        "final_score": 0.3139,
+        "width": 1280,
+        "height": 720,
+        "duration": 10.0
+      },
+      "understanding": {
+        "queries": [
+          "taking bite of homegrown tomato",
+          "hand holding ripe tomato like a jewel",
+          "kitchen counter with fresh tomatoes",
+          "person slicing tomato for salad",
+          "satisfied happy expression"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Captures the pleasure of eating a self‑grown tomato with direct eating action, a jewel metaphor, kitchen setting, slicing action, and a satisfied mood.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "nothing quite",
+        "card": {
+          "headline": "NOTHING QUITE",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "030541386bebe927"
+      },
+      "safety": {
+        "queries": [
+          "taking bite of homegrown tomato",
+          "hand holding ripe tomato like a jewel",
+          "kitchen counter with fresh tomatoes",
+          "person slicing tomato for salad",
+          "satisfied happy expression"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_011_0be608c206c4ece5.mp4",
+          "cache_key": "0be608c206c4ece5",
+          "frames": 122,
+          "look": "eq=brightness=0.113:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_011_2e60eb0c4671e679.mp4",
+          "cache_key": "2e60eb0c4671e679",
+          "frames": 122,
+          "look": "eq=brightness=0.113:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2149,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2727
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.1494
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2446
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "subject_span": [
+              0.0,
+              0.1019
+            ],
+            "windows_cutting_subject": [],
+            "reason": "window 'centre' chosen (0.273; best window 0.273; whole frame 0.215; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "There",
+          "start": 55.44,
+          "end": 56.16
+        },
+        {
+          "text": "is",
+          "start": 56.16,
+          "end": 56.3
+        },
+        {
+          "text": "nothing",
+          "start": 56.3,
+          "end": 56.52
+        },
+        {
+          "text": "quite",
+          "start": 56.52,
+          "end": 56.88
+        },
+        {
+          "text": "like",
+          "start": 56.88,
+          "end": 57.12
+        },
+        {
+          "text": "eating",
+          "start": 57.12,
+          "end": 57.42
+        },
+        {
+          "text": "a",
+          "start": 57.42,
+          "end": 57.62
+        },
+        {
+          "text": "tomato",
+          "start": 57.62,
+          "end": 58.0
+        },
+        {
+          "text": "you",
+          "start": 58.0,
+          "end": 58.24
+        },
+        {
+          "text": "grew",
+          "start": 58.24,
+          "end": 58.44
+        },
+        {
+          "text": "yourself.",
+          "start": 58.44,
+          "end": 58.8
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "aspect_ratio": "16:9",
+      "file": "video_16x9.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 59.5
+    },
+    {
+      "aspect_ratio": "9:16",
+      "file": "video_9x16.mp4",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "duration": 59.499
+    }
+  ]
+}

@@ -118,7 +118,12 @@ RANGE_NOT_SATISFIABLE (download Range starts past the end of the file)
   A passing stock video beats photo-motion unless the photo is > PREFER_VIDEO_MARGIN higher.
   Adaptive threshold: if nothing passes, a candidate >= STOCK_MIN_SCORE x (1 - RELATIVE_MARGIN)
   may be used ONLY if the independent VLM judge (VLM_PROVIDER) rates it >= VLM_ACCEPT_SCORE.
-- A whole sad / tragic story (STORY_SENSITIVE_MIN_SCENES or _SHARE) gets calm rules for ALL scenes.
+  Still nothing: the best clip >= BEST_EFFORT_MIN_SCORE with the keyword / number as a badge; a plain card
+  only when no usable footage exists. Best score < BORDERLINE_SCORE: one more concrete query is searched.
+- A whole sad / tragic story (STORY_SENSITIVE_MIN_SCENES or _SHARE): ALL scenes exclude graphic and festive
+  footage; queries still show each line's real subject (no "calm" prefix).
+- Non-English narration: each scene's own text is translated to English (Groq) for search; Whisper's
+  whole-audio translation is only the fallback.
 - No clip id is used twice in one video.
 - A provider error or timeout never fails the job: log a warning, try the next provider.
 - Corrupted downloads (ffprobe fails) -> try the next candidate.

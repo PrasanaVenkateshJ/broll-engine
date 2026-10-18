@@ -40,7 +40,10 @@ THE SELECTION RULE (its result and reason are written to timeline.json):
 6. Adaptive threshold: nothing passed anywhere -> the candidates scoring at least
    STOCK_MIN_SCORE x (1 - RELATIVE_MARGIN) may still be used, but ONLY one the judge rated
    VLM_ACCEPT_SCORE or more (best rating first). No judge -> no adaptive pass.
-7. Still nothing -> a `generated` motion card.
+7. Still nothing -> the best clip scoring >= BEST_EFFORT_MIN_SCORE with the line's keyword / number as a badge
+   ("best_effort": true); only if there is no usable footage at all, a `generated` motion card.
+Borderline (pass 1b): a scene whose best candidate scores < BORDERLINE_SCORE gets ONE more concrete query
+(Groq, else the line's own words); its results are scored on the ORIGINAL queries and compete with the rest.
 
 "Measurable" = the decision only depends on numbers we store (scores, frames, ratings, thresholds), so you
 can re-check every choice from timeline.json.
@@ -75,7 +78,7 @@ from app.pipeline.providers import Candidate, ProviderError, get_provider, provi
 from app.pipeline.providers.base import safe_name
 from app.pipeline.providers.generated import GeneratedProvider
 from app.pipeline.safety import SearchPlan, find_excluded
-from app.pipeline.understand import SceneMeaning
+from app.pipeline.understand import SceneMeaning, concrete_queries
 from app.pipeline.vlm import JudgeError, JudgeUnavailable
 
 log = logging.getLogger("app.pipeline.rank")
@@ -373,6 +376,7 @@ class SelectionContext:
     judge: object | None = None                            # vlm.Judge or None (VLM_PROVIDER=none)
     vlm: dict = field(default_factory=dict)                # scene index -> what the judge said (pass 1.5)
     prefetched: dict = field(default_factory=dict)         # uid -> downloaded + checked in pass 1 (see _prefetch)
+    rewrites: dict = field(default_factory=dict)           # scene index -> borderline rewrite facts
 
 
 def fit_bonus(c: Candidate, scene_seconds: float, orientation: str) -> float:
@@ -1048,6 +1052,109 @@ def _adaptive(scene, plan: SearchPlan, ctx: SelectionContext, notes: list[str], 
     return None
 
 
+def _best_effort(scene, meaning: SceneMeaning, plan: SearchPlan, ctx: SelectionContext, notes: list[str],
+                 names: list[str]) -> Selection | None:
+    """Step 6b: still nothing. Rather than a plain card, the best clip scoring >= BEST_EFFORT_MIN_SCORE (logo check
+    ok, not dropped by the judge, not used yet) with the line's keyword as a badge (a statistic line gets its
+    number badge in select_clip). Plain cards were my lowest-rated scenes (average 1.88 of 5, 2026-10-18)."""
+    s = get_settings()
+    if s.BEST_EFFORT_MIN_SCORE <= 0:
+        return None
+    judged = (ctx.vlm.get(scene.index) or {}).get("scores") or {}
+    rows = sorted(((n, r) for n in names for r in (ctx.rankings[(scene.index, n)].rows
+                                                   if (scene.index, n) in ctx.rankings else [])
+                   if r.score >= s.BEST_EFFORT_MIN_SCORE and r.candidate.uid not in ctx.used
+                   and judged.get(r.candidate.uid, 5) > s.VLM_REJECT_SCORE),
+                  key=lambda nr: (-nr[1].best_possible, nr[1].position))
+    download_notes: list[str] = []
+    tries = 0
+    for name, row in rows:
+        if tries >= MAX_DOWNLOAD_TRIES:
+            break
+        if s.LOGO_CHECK and not row.checked:
+            _check_logos([row], ctx.scorer)
+        if row.decision()[0] == "rejected":
+            continue
+        tries += 1
+        got = _fetch_and_check(name, get_provider(name), row, scene, plan, ctx, download_notes)
+        if got is None:
+            continue
+        path, logo_report, frame_note = got
+        cand = row.candidate
+        ctx.used.add(cand.uid)
+        card = _card(scene, meaning, ctx.warn)
+        reason = (f"best available footage (no plain card while usable footage exists): nothing passed "
+                  f"{s.STOCK_MIN_SCORE:.2f}; {name} {cand.uid} scored {row.score:.3f} >= BEST_EFFORT_MIN_SCORE "
+                  f"{s.BEST_EFFORT_MIN_SCORE:.2f} for query '{cand.query}'; text badge '{card.extra['headline']}' "
+                  f"from the narration{frame_note}")
+        if notes + download_notes:
+            reason += "; earlier: " + "; ".join(notes + download_notes)
+        badge = {"headline": card.extra["headline"], "subtitle": card.extra.get("subtitle", ""), "kind": "keyword",
+                 "source": "narration", "numbers_shown": card.extra.get("numbers_shown", []),
+                 "style": "badge (lower third, fades in)"}
+        return Selection(scene.index, cand, path, row.score, row.final, reason, cand.query, logo_report,
+                         vlm=_vlm_facts(ctx, scene.index, cand.uid), overlay=badge,
+                         details={**row.details(), "best_effort": True,
+                                  "best_effort_min_score": s.BEST_EFFORT_MIN_SCORE})
+    notes += download_notes
+    return None
+
+
+def rewrite_borderline(scenes: list, meanings: list[SceneMeaning], plans: list[SearchPlan],
+                       ctx: SelectionContext) -> dict:
+    """Pass 1b: scenes whose best candidate scores below BORDERLINE_SCORE get ONE more concrete query (Groq, else
+    the line's own words). Each searched source of the scene searches it once; the new candidates are scored on
+    the scene's ORIGINAL queries (same scale as the others) and join its Ranking, so pass 2 picks the better one."""
+    s = get_settings()
+    if s.BORDERLINE_SCORE <= 0:
+        return {"borderline_scenes": 0}
+    names = [n for n in s.provider_order if n != "generated" and not provider_status(n)]
+    todo = []
+    for scene, meaning, plan in zip(scenes, meanings, plans):
+        if _statistic_card_line(meaning):
+            continue
+        rankings = [ctx.rankings[(scene.index, n)] for n in names if (scene.index, n) in ctx.rankings]
+        scores = [r.score for rk in rankings for r in rk.rows if r.decision()[0] != "rejected"]
+        best = max(scores, default=None)
+        if rankings and (best is None or best < s.BORDERLINE_SCORE):
+            todo.append((scene, plan, best))
+    if not todo:
+        return {"borderline_scenes": 0}
+    queries, facts = concrete_queries([(sc.index, getattr(sc, "search_text", None) or sc.text, list(plan.queries))
+                                       for sc, plan, _ in todo])
+
+    def extend(item) -> None:
+        scene, plan, best = item
+        q = queries.get(scene.index)
+        if not q:
+            return
+        added = 0
+        for name in names:
+            ranking = ctx.rankings.get((scene.index, name))
+            if ranking is None:
+                continue
+            provider = get_provider(name)
+            found, errors = _search(provider, [q[0]], ctx, scene.duration)
+            known = {r.candidate.uid for r in ranking.rows} | set(ranking.usable_uids)
+            new = [c for c in found if c.uid not in known and not find_excluded(c.search_text(), plan.exclude_terms)]
+            cap = s.MAX_CANDIDATES_PER_SOURCE
+            new = new[:cap] if cap > 0 else new
+            rows = _rows(_score(provider, new, plan.queries, ctx), scene, ctx, len(ranking.rows))
+            _multi_frame(provider, rows, plan.queries, ctx)
+            ranking.rows += rows
+            ranking.usable_uids += [c.uid for c in new]
+            ranking.found += len(new)
+            added += len(rows)
+        best_after = max((r.score for n in names if (scene.index, n) in ctx.rankings
+                          for r in ctx.rankings[(scene.index, n)].rows), default=None)
+        with ctx.lock:
+            ctx.rewrites[scene.index] = {"best_before": best, "query": q[0], "source": q[1], "added": added,
+                                         "best_after": best_after}
+
+    _pool_map(extend, todo, s.FOOTAGE_WORKERS)
+    return {"borderline_scenes": len(todo), "rewritten": len(ctx.rewrites), "rewrite_llm": facts}
+
+
 def select_clip(scene, meaning: SceneMeaning, plan: SearchPlan, ctx: SelectionContext) -> Selection:
     """Apply the selection rule for one scene (pass 2). Never raises for provider trouble.
 
@@ -1118,6 +1225,14 @@ def select_clip(scene, meaning: SceneMeaning, plan: SearchPlan, ctx: SelectionCo
 
     if chosen is None:
         chosen = _adaptive(scene, plan, ctx, notes, active)
+    if chosen is None:
+        chosen = _best_effort(scene, meaning, plan, ctx, notes, active)
+    rewrite = ctx.rewrites.get(scene.index)
+    if chosen is not None and rewrite:
+        before = "nothing" if rewrite["best_before"] is None else f"{rewrite['best_before']:.3f}"
+        chosen.reason += (f"; borderline (best {before} < BORDERLINE_SCORE {s.BORDERLINE_SCORE:.2f}): also searched "
+                          f"the rewritten query '{rewrite['query']}' ({rewrite['source']}), +{rewrite['added']} "
+                          f"candidates scored on the original queries")
 
     if chosen is not None:
         if mode == "overlay":
@@ -1254,6 +1369,7 @@ def select_clips(scenes: list, meanings: list[SceneMeaning], plans: list[SearchP
     footage_cache.prune()
     t0 = time.perf_counter()
     prepare_rankings(scenes, meanings, plans, ctx)
+    rewrite_facts = rewrite_borderline(scenes, meanings, plans, ctx)
     t1 = time.perf_counter()
     vlm_facts = judge_scenes(scenes, meanings, ctx)
     t2 = time.perf_counter()
@@ -1265,6 +1381,7 @@ def select_clips(scenes: list, meanings: list[SceneMeaning], plans: list[SearchP
     s = get_settings()
     facts = {"quality_mode": s.QUALITY_MODE, "footage_workers": max(1, s.FOOTAGE_WORKERS),
              "early_exit_rankings": sum(1 for r in ctx.rankings.values() if r.stopped_after),
+             "borderline": rewrite_facts,
              "pass1_search_score_seconds": round(t1 - t0, 3),
              "pass1_5_vlm_seconds": round(t2 - t1, 3),
              "pass2_select_download_seconds": round(time.perf_counter() - t2, 3),

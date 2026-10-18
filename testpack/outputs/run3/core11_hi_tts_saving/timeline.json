@@ -1,0 +1,1142 @@
+{
+  "job_id": "8c90bc9b7a0a48ecb2248436f84a538b",
+  "input_type": "upload",
+  "duration": 18.45,
+  "language": "hi",
+  "scenes": [
+    {
+      "index": 0,
+      "text": "पैसे बचाना कोई मुष्किल काम नहीं है सबसे पहले,",
+      "start": 0.0,
+      "end": 3.72,
+      "duration": 3.72,
+      "visual_hint": null,
+      "search_text": "Saving money is not a difficult task, first of all,",
+      "query": "hand writing in notebook",
+      "queries": [
+        "person budgeting at table",
+        "coins sprouting seedlings",
+        "home office desk",
+        "hand writing in notebook",
+        "calm focused atmosphere"
+      ],
+      "flags": {
+        "abstract": true,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "12040",
+      "page_url": "https://pixabay.com/videos/id-12040/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "chayka1270 on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.254 >= 0.22 for query 'hand writing in notebook' (best of 15 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.256); logo check ok (logo prob 0.01); 3 clip frame(s) passed the logo check (max logo prob 0.08); video scored >= 0.25: photo sources not searched",
+      "relevance_score": 0.2539,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2539,
+        "thumbnail_score": 0.2555,
+        "frame_scores": [
+          0.2555,
+          0.2614,
+          0.2448
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.3301,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.2939,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_000.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0084,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 1.67,
+            "logo_prob": 0.0789,
+            "scene_score": 0.2638,
+            "result": "ok"
+          },
+          {
+            "time": 5.02,
+            "logo_prob": 0.007,
+            "scene_score": 0.2511,
+            "result": "ok"
+          },
+          {
+            "time": 8.37,
+            "logo_prob": 0.0189,
+            "scene_score": 0.2371,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:12040",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2017/09/17/12040-236265335_medium.mp4",
+        "final_score": 0.2939,
+        "width": 1280,
+        "height": 720,
+        "duration": 10.0
+      },
+      "understanding": {
+        "queries": [
+          "person budgeting at table",
+          "coins sprouting seedlings",
+          "home office desk",
+          "hand writing in notebook",
+          "calm focused atmosphere"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": true,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows the idea of saving money through budgeting, using a growth metaphor, a home setting, writing action, and a calm mood.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "keep watching",
+        "card": {
+          "headline": "KEEP WATCHING",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "17075f150c77d074"
+      },
+      "safety": {
+        "queries": [
+          "person budgeting at table",
+          "coins sprouting seedlings",
+          "home office desk",
+          "hand writing in notebook",
+          "calm focused atmosphere"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_000_388d67e50037e2fc.mp4",
+          "cache_key": "388d67e50037e2fc",
+          "frames": 112,
+          "look": "eq=brightness=-0.033:saturation=1.200",
+          "caption_font": "Noto Sans Devanagari",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_000_701994fb9cb642df.mp4",
+          "cache_key": "701994fb9cb642df",
+          "frames": 112,
+          "look": "eq=brightness=-0.033:saturation=1.200",
+          "caption_font": "Noto Sans Devanagari",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2477,
+            "windows": {
+              "salient": {
+                "start": 0.0997,
+                "score": 0.2199
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.263
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2121
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2515
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "subject_span": [
+              0.0052,
+              0.2565
+            ],
+            "windows_cutting_subject": [
+              "salient"
+            ],
+            "reason": "window 'centre' chosen (0.263; best window 0.263; whole frame 0.248; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "पैसे",
+          "start": 0.14,
+          "end": 0.82
+        },
+        {
+          "text": "बचाना",
+          "start": 0.82,
+          "end": 1.3
+        },
+        {
+          "text": "कोई",
+          "start": 1.3,
+          "end": 1.58
+        },
+        {
+          "text": "मुष्किल",
+          "start": 1.58,
+          "end": 2.0
+        },
+        {
+          "text": "काम",
+          "start": 2.0,
+          "end": 2.3
+        },
+        {
+          "text": "नहीं",
+          "start": 2.3,
+          "end": 2.6
+        },
+        {
+          "text": "है",
+          "start": 2.6,
+          "end": 2.74
+        },
+        {
+          "text": "सबसे",
+          "start": 2.74,
+          "end": 3.16
+        },
+        {
+          "text": "पहले,",
+          "start": 3.16,
+          "end": 3.58
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "text": "एक हबते तक हर खरज को एक कोपी में, लिखिये आप हैरान होंगे कि आपका पैसा कहा जाता है.",
+      "start": 3.72,
+      "end": 9.8,
+      "duration": 6.08,
+      "visual_hint": null,
+      "search_text": "For a week, record every expense in a notebook; you'll be surprised where your money goes.",
+      "query": "money trail on paper",
+      "queries": [
+        "tracking daily expenses",
+        "money trail on paper",
+        "kitchen table notebook",
+        "hand writing expense list",
+        "curious investigative vibe"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "20857",
+      "page_url": "https://pixabay.com/videos/id-20857/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "RoyBuri on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.261 >= 0.22 for query 'money trail on paper' (best of 12 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.246); logo check ok (logo prob 0.03); 3 clip frame(s) passed the logo check (max logo prob 0.27); video scored >= 0.25: photo sources not searched",
+      "relevance_score": 0.2607,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2607,
+        "thumbnail_score": 0.2461,
+        "frame_scores": [
+          0.2461,
+          0.2653,
+          0.2707
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0025,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.3007,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_001.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0291,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 3.91,
+            "logo_prob": 0.2301,
+            "scene_score": 0.284,
+            "result": "ok"
+          },
+          {
+            "time": 11.72,
+            "logo_prob": 0.2706,
+            "scene_score": 0.2886,
+            "result": "ok"
+          },
+          {
+            "time": 19.54,
+            "logo_prob": 0.0693,
+            "scene_score": 0.2198,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:20857",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2019/01/20/20857-312437286_medium.mp4",
+        "final_score": 0.3007,
+        "width": 2560,
+        "height": 1440,
+        "duration": 23.0
+      },
+      "understanding": {
+        "queries": [
+          "tracking daily expenses",
+          "money trail on paper",
+          "kitchen table notebook",
+          "hand writing expense list",
+          "curious investigative vibe"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Depicts recording expenses, visual metaphor of a money trail, a kitchen setting, writing action, and a curious mood.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "keep watching",
+        "card": {
+          "headline": "KEEP WATCHING",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "5cd283af69cc0e75"
+      },
+      "safety": {
+        "queries": [
+          "tracking daily expenses",
+          "money trail on paper",
+          "kitchen table notebook",
+          "hand writing expense list",
+          "curious investigative vibe"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_001_8a9af5004c709317.mp4",
+          "cache_key": "8a9af5004c709317",
+          "frames": 182,
+          "look": "eq=brightness=-0.099:saturation=1.200",
+          "caption_font": "Noto Sans Devanagari",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_001_a55c6b66e4785472.mp4",
+          "cache_key": "a55c6b66e4785472",
+          "frames": 182,
+          "look": "eq=brightness=-0.099:saturation=1.200",
+          "caption_font": "Noto Sans Devanagari",
+          "framing": "subject crop (right)",
+          "crop": {
+            "method": "clip",
+            "choice": "right",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2581,
+            "windows": {
+              "salient": {
+                "start": 0.3344,
+                "score": 0.2631
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.1639
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2969
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "subject_span": [
+              0.5759,
+              0.7749
+            ],
+            "windows_cutting_subject": [
+              "right",
+              "salient"
+            ],
+            "reason": "window 'right' chosen (0.297; best window 0.297; whole frame 0.258; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "एक",
+          "start": 3.86,
+          "end": 4.04
+        },
+        {
+          "text": "हबते",
+          "start": 4.04,
+          "end": 4.38
+        },
+        {
+          "text": "तक",
+          "start": 4.38,
+          "end": 4.58
+        },
+        {
+          "text": "हर",
+          "start": 4.58,
+          "end": 4.78
+        },
+        {
+          "text": "खरज",
+          "start": 4.78,
+          "end": 5.1
+        },
+        {
+          "text": "को",
+          "start": 5.1,
+          "end": 5.34
+        },
+        {
+          "text": "एक",
+          "start": 5.34,
+          "end": 5.72
+        },
+        {
+          "text": "कोपी",
+          "start": 5.72,
+          "end": 6.04
+        },
+        {
+          "text": "में,",
+          "start": 6.04,
+          "end": 6.44
+        },
+        {
+          "text": "लिखिये",
+          "start": 6.5,
+          "end": 6.9
+        },
+        {
+          "text": "आप",
+          "start": 6.9,
+          "end": 7.14
+        },
+        {
+          "text": "हैरान",
+          "start": 7.14,
+          "end": 7.62
+        },
+        {
+          "text": "होंगे",
+          "start": 7.62,
+          "end": 7.94
+        },
+        {
+          "text": "कि",
+          "start": 7.94,
+          "end": 8.2
+        },
+        {
+          "text": "आपका",
+          "start": 8.2,
+          "end": 8.64
+        },
+        {
+          "text": "पैसा",
+          "start": 8.64,
+          "end": 9.0
+        },
+        {
+          "text": "कहा",
+          "start": 9.0,
+          "end": 9.26
+        },
+        {
+          "text": "जाता",
+          "start": 9.26,
+          "end": 9.62
+        },
+        {
+          "text": "है.",
+          "start": 9.62,
+          "end": 9.8
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "text": "फिर हर महीने आपनी कमाई का दस प्रतिषत अलग रक दीजिये",
+      "start": 9.8,
+      "end": 14.22,
+      "duration": 4.42,
+      "visual_hint": null,
+      "search_text": "Then each month set aside ten percent of your earnings separately.",
+      "query": "pouring coins into jar",
+      "queries": [
+        "setting aside monthly savings",
+        "pouring coins into jar",
+        "bedroom drawer",
+        "hand placing cash aside",
+        "determined hopeful tone"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": true,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_image_motion",
+      "clip_id": "2696228",
+      "page_url": "https://pixabay.com/photos/money-profit-finance-business-2696228/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "nattanan23 on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_image_motion: score 0.249 >= 0.22 for query 'pouring coins into jar' (best of 15 candidates, order bonus +0.04); logo check ok (logo prob 0.01); 1 clip frame(s) passed the logo check (max logo prob 0.01); earlier: pixabay_video: best score 0.198 < 0.22",
+      "relevance_score": 0.2487,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2487,
+        "thumbnail_score": 0.2487,
+        "frame_scores": null,
+        "frames_scored": 1,
+        "text_prob": 0.0003,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.2887
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_002.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0081,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.0066,
+            "scene_score": 0.2365,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_image_motion:2696228",
+        "kind": "image",
+        "title": "",
+        "source_url": "https://pixabay.com/get/geeaec08476e18a76e6886c131dc2f3512bfc8f4596e328e952d35771d72490864f9a9ed1d177c36244a0bf0288f21f99dae09fd4f74b72cae80883426c15ebaf_1280.jpg",
+        "final_score": 0.2887,
+        "width": 1280,
+        "height": 725,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "setting aside monthly savings",
+          "pouring coins into jar",
+          "bedroom drawer",
+          "hand placing cash aside",
+          "determined hopeful tone"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": true,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Illustrates the 10% statistic by showing monthly savings being set aside, using a jar metaphor, a bedroom setting, the action of placing cash, and a determined mood.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "keep watching",
+        "card": {
+          "headline": "KEEP WATCHING",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "47eaa52dfdb2db5c"
+      },
+      "safety": {
+        "queries": [
+          "setting aside monthly savings",
+          "pouring coins into jar",
+          "bedroom drawer",
+          "hand placing cash aside",
+          "determined hopeful tone"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_002_74f57094287a7d93.mp4",
+          "cache_key": "74f57094287a7d93",
+          "frames": 133,
+          "look": "eq=brightness=-0.120:saturation=0.850",
+          "caption_font": "Noto Sans Devanagari",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_002_6ac17b0cc263abcd.mp4",
+          "cache_key": "6ac17b0cc263abcd",
+          "frames": 133,
+          "look": "eq=brightness=-0.120:saturation=0.850",
+          "caption_font": "Noto Sans Devanagari",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3186,
+            "full_frame_score": 0.2488,
+            "windows": {
+              "centre": {
+                "start": 0.3407,
+                "score": 0.2506
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2686
+              },
+              "right": {
+                "start": 0.6814,
+                "score": 0.2412
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "subject_span": [
+              0.089,
+              0.3455
+            ],
+            "windows_cutting_subject": [
+              "left"
+            ],
+            "reason": "window 'centre' chosen (0.251; best window 0.269; whole frame 0.249; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "फिर",
+          "start": 9.8,
+          "end": 10.22
+        },
+        {
+          "text": "हर",
+          "start": 10.22,
+          "end": 10.4
+        },
+        {
+          "text": "महीने",
+          "start": 10.4,
+          "end": 11.06
+        },
+        {
+          "text": "आपनी",
+          "start": 11.06,
+          "end": 11.46
+        },
+        {
+          "text": "कमाई",
+          "start": 11.46,
+          "end": 11.88
+        },
+        {
+          "text": "का",
+          "start": 11.88,
+          "end": 12.1
+        },
+        {
+          "text": "दस",
+          "start": 12.1,
+          "end": 12.28
+        },
+        {
+          "text": "प्रतिषत",
+          "start": 12.28,
+          "end": 12.94
+        },
+        {
+          "text": "अलग",
+          "start": 12.94,
+          "end": 13.3
+        },
+        {
+          "text": "रक",
+          "start": 13.3,
+          "end": 13.6
+        },
+        {
+          "text": "दीजिये",
+          "start": 13.6,
+          "end": 14.22
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "text": "चोटी -चोटी बचत मिलकर एक दिन बडी रकम बन जाती है.",
+      "start": 14.22,
+      "end": 18.45,
+      "duration": 4.23,
+      "visual_hint": null,
+      "search_text": "Even the smallest savings add up to become a large amount one day.",
+      "query": "kitchen countertop piggy bank",
+      "queries": [
+        "coins filling a jar",
+        "tiny droplets forming river",
+        "kitchen countertop piggy bank",
+        "hand dropping coins into jar",
+        "warm sunrise lighting jar"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "93550",
+      "page_url": "https://pixabay.com/videos/id-93550/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "NickyPe on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.255 >= 0.22 for query 'kitchen countertop piggy bank' (best of 15 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.248); logo check ok (logo prob 0.04); 3 clip frame(s) passed the logo check (max logo prob 0.39); video scored >= 0.25: photo sources not searched",
+      "relevance_score": 0.2552,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2552,
+        "thumbnail_score": 0.2482,
+        "frame_scores": [
+          0.2482,
+          0.2671,
+          0.2502
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.2952,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_003.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0402,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 1.58,
+            "logo_prob": 0.3935,
+            "scene_score": 0.2557,
+            "result": "ok"
+          },
+          {
+            "time": 4.75,
+            "logo_prob": 0.3025,
+            "scene_score": 0.2671,
+            "result": "ok"
+          },
+          {
+            "time": 7.91,
+            "logo_prob": 0.3462,
+            "scene_score": 0.2742,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:93550",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2021/10/27/93550-640240281_medium.mp4",
+        "final_score": 0.2952,
+        "width": 2560,
+        "height": 1440,
+        "duration": 9.0
+      },
+      "understanding": {
+        "queries": [
+          "coins filling a jar",
+          "tiny droplets forming river",
+          "kitchen countertop piggy bank",
+          "hand dropping coins into jar",
+          "warm sunrise lighting jar"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: These clips visually illustrate how small savings accumulate into a large sum: coins gathering, a droplet metaphor, a home setting, the act of saving, and a hopeful mood.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "keep watching",
+        "card": {
+          "headline": "KEEP WATCHING",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "ee1ce5b45a02449a"
+      },
+      "safety": {
+        "queries": [
+          "coins filling a jar",
+          "tiny droplets forming river",
+          "kitchen countertop piggy bank",
+          "hand dropping coins into jar",
+          "warm sunrise lighting jar"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_003_26d501d8ebc2aef5.mp4",
+          "cache_key": "26d501d8ebc2aef5",
+          "frames": 127,
+          "look": "eq=brightness=0.081:saturation=1.200",
+          "caption_font": "Noto Sans Devanagari",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_003_1532b0d5f39f50ce.mp4",
+          "cache_key": "1532b0d5f39f50ce",
+          "frames": 127,
+          "look": "eq=brightness=0.081:saturation=1.200",
+          "caption_font": "Noto Sans Devanagari",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2343,
+            "windows": {
+              "salient": {
+                "start": 0.6765,
+                "score": 0.268
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2135
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.285
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "subject_span": [
+              0.0,
+              0.7958
+            ],
+            "windows_cutting_subject": [
+              "centre",
+              "left",
+              "salient"
+            ],
+            "reason": "window 'salient' chosen (0.268; best window 0.285; whole frame 0.234; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "चोटी",
+          "start": 14.22,
+          "end": 14.6
+        },
+        {
+          "text": "-चोटी",
+          "start": 14.6,
+          "end": 14.98
+        },
+        {
+          "text": "बचत",
+          "start": 14.98,
+          "end": 15.36
+        },
+        {
+          "text": "मिलकर",
+          "start": 15.36,
+          "end": 15.86
+        },
+        {
+          "text": "एक",
+          "start": 15.86,
+          "end": 16.32
+        },
+        {
+          "text": "दिन",
+          "start": 16.32,
+          "end": 16.5
+        },
+        {
+          "text": "बडी",
+          "start": 16.5,
+          "end": 16.78
+        },
+        {
+          "text": "रकम",
+          "start": 16.78,
+          "end": 17.12
+        },
+        {
+          "text": "बन",
+          "start": 17.12,
+          "end": 17.36
+        },
+        {
+          "text": "जाती",
+          "start": 17.36,
+          "end": 17.72
+        },
+        {
+          "text": "है.",
+          "start": 17.72,
+          "end": 17.88
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "aspect_ratio": "16:9",
+      "file": "video_16x9.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 18.467
+    },
+    {
+      "aspect_ratio": "9:16",
+      "file": "video_9x16.mp4",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "duration": 18.467
+    }
+  ]
+}

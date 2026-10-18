@@ -327,6 +327,13 @@ class Settings(BaseSettings):
     # STOCK_MIN_SCORE x (1 - RELATIVE_MARGIN) may still be used, but ONLY if the independent VLM judge rates
     # one VLM_ACCEPT_SCORE or more. Without a judge, no adaptive pass.
     RELATIVE_MARGIN: float = 0.12
+    # Borderline scenes: if the best candidate scores below BORDERLINE_SCORE, ONE more concrete query is written
+    # (Groq, else the line's own words) and searched; its results are scored on the scene's original queries and
+    # compete with the others. 0 = off.
+    BORDERLINE_SCORE: float = 0.25
+    # No plain card while usable footage exists: if nothing passes (not even the adaptive pass), the best clip
+    # scoring at least BEST_EFFORT_MIN_SCORE is used with the line's keyword / number as a badge. 0 = off.
+    BEST_EFFORT_MIN_SCORE: float = 0.17
 
     # --- Independent vision-language judge (optional) ---
     # "groq" = a vision model on Groq rates the top candidates 1-5 against the narration; "mock" = tests;

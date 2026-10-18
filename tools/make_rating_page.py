@@ -125,6 +125,7 @@ main { max-width:1100px; margin:0 auto; padding:16px; }
 .scene.rated { border-left:4px solid var(--good); }
 video { width:100%; aspect-ratio:16/9; background:#000; border-radius:6px; display:block; }
 .text { font-size:16px; margin:0 0 6px; }
+.english { font-size:15px; margin:0 0 6px; padding-left:8px; border-left:3px solid var(--accent); }
 .meta { font-size:13px; color:var(--muted); margin:2px 0; word-break:break-word; }
 .chip { display:inline-block; background:var(--chip); border-radius:10px; padding:0 8px; margin-right:4px;
   font-size:12px; color:var(--ink); }
@@ -208,7 +209,11 @@ a { color:var(--accent); }
     left.appendChild(el("div", "meta", "scene " + s.scene + " · " + s.start.toFixed(2) + "–" + s.end.toFixed(2) + " s"));
     var right = el("div");
     right.appendChild(el("p", "text", s.text));
-    if (s.search_text) right.appendChild(el("p", "meta", "English used for search: " + s.search_text));
+    if (s.search_text && (s.language === "hi" || s.language === "ta")) {
+      right.appendChild(el("p", "english", "English meaning: " + s.search_text));  // the pipeline's own translation
+    } else if (s.search_text) {
+      right.appendChild(el("p", "meta", "English used for search: " + s.search_text));
+    }
     if (s.visual_hint) right.appendChild(el("p", "meta", "visual hint: " + s.visual_hint));
     right.appendChild(el("p", "meta", "query: " + (s.query || "") + (s.queries.length ? "  (all: " + s.queries.join(" | ") + ")" : "")));
     var src = el("p", "meta");

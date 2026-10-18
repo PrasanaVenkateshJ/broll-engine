@@ -1,0 +1,1695 @@
+{
+  "job_id": "2aef1df3842740e8ab09c5d16e96382f",
+  "input_type": "script",
+  "duration": 19.25,
+  "language": "en",
+  "scenes": [
+    {
+      "index": 0,
+      "text": "Trust is earned slowly and lost quickly.",
+      "start": 0.0,
+      "end": 2.73,
+      "duration": 2.73,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "colleagues shaking hands",
+      "queries": [
+        "colleagues shaking hands",
+        "hands tying a knot",
+        "modern office conference room",
+        "team reviewing contract papers",
+        "soft golden sunrise lighting"
+      ],
+      "flags": {
+        "abstract": true,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_image_motion",
+      "clip_id": "1979261",
+      "page_url": "https://pixabay.com/photos/people-business-meeting-1979261/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "089photoshootings on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_image_motion: score 0.267 >= 0.22 for query 'colleagues shaking hands' (best of 5 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 1 clip frame(s) passed the logo check (max logo prob 0.00); photo-motion preferred: order score 0.307 > best video 0.277 + PREFER_VIDEO_MARGIN 0.03",
+      "relevance_score": 0.2667,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2667,
+        "thumbnail_score": 0.2667,
+        "frame_scores": null,
+        "frames_scored": 1,
+        "text_prob": 0.0001,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.3067
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_000.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0022,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.0018,
+            "scene_score": 0.2649,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_image_motion:1979261",
+        "kind": "image",
+        "title": "",
+        "source_url": "https://pixabay.com/get/g2d25ef76a74952f415d0fcee44d13fff9115e92693d281fd5b12c160e4a4e6965f4b562b322b98be8bee7b21f86758e1e40640894a812234d27f634df953fca5_1280.jpg",
+        "final_score": 0.3067,
+        "width": 1280,
+        "height": 853,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "colleagues shaking hands",
+          "hands tying a knot",
+          "modern office conference room",
+          "team reviewing contract papers",
+          "soft golden sunrise lighting"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": true,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows trust being built (handshake), visual metaphor of a knot, office setting, people reviewing documents, calm warm mood.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "trust",
+        "card": {
+          "headline": "TRUST",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "1016f70f63be678f"
+      },
+      "safety": {
+        "queries": [
+          "colleagues shaking hands",
+          "hands tying a knot",
+          "modern office conference room",
+          "team reviewing contract papers",
+          "soft golden sunrise lighting"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_000_b74f73f9e5b3a4f8.mp4",
+          "cache_key": "b74f73f9e5b3a4f8",
+          "frames": 82,
+          "look": "eq=brightness=-0.067:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "y",
+            "window_fraction": 0.8441,
+            "full_frame_score": 0.2588,
+            "windows": {
+              "salient": {
+                "start": 0.0657,
+                "score": 0.2557
+              },
+              "top": {
+                "start": 0.0,
+                "score": 0.2595
+              },
+              "bottom": {
+                "start": 0.1559,
+                "score": 0.2728
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "subject_span": [
+              0.0472,
+              0.9606
+            ],
+            "windows_cutting_subject": [
+              "bottom",
+              "salient",
+              "top"
+            ],
+            "reason": "window 'salient' chosen (0.256; best window 0.273; whole frame 0.259; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_000_a2561fbd4cb657c6.mp4",
+          "cache_key": "a2561fbd4cb657c6",
+          "frames": 82,
+          "look": "eq=brightness=-0.067:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3749,
+            "full_frame_score": 0.2588,
+            "windows": {
+              "centre": {
+                "start": 0.3126,
+                "score": 0.2451
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2598
+              },
+              "right": {
+                "start": 0.6251,
+                "score": 0.2408
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "subject_span": [
+              0.0942,
+              0.8796
+            ],
+            "windows_cutting_subject": [
+              "centre",
+              "left",
+              "right"
+            ],
+            "reason": "window 'centre' chosen (0.245; best window 0.260; whole frame 0.259; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Trust",
+          "start": 0.0,
+          "end": 0.48
+        },
+        {
+          "text": "is",
+          "start": 0.48,
+          "end": 0.78
+        },
+        {
+          "text": "earned",
+          "start": 0.78,
+          "end": 1.02
+        },
+        {
+          "text": "slowly",
+          "start": 1.02,
+          "end": 1.46
+        },
+        {
+          "text": "and",
+          "start": 1.46,
+          "end": 1.76
+        },
+        {
+          "text": "lost",
+          "start": 1.76,
+          "end": 2.04
+        },
+        {
+          "text": "quickly.",
+          "start": 2.04,
+          "end": 2.4
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "text": "Our sales grew 40 % in 2025.",
+      "start": 2.73,
+      "end": 5.61,
+      "duration": 2.88,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "arrow moving upward",
+      "queries": [
+        "cash register display",
+        "arrow moving upward",
+        "busy retail storefront",
+        "employees stacking product boxes",
+        "bright optimistic lighting"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": true,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "198",
+      "page_url": "https://pixabay.com/videos/id-198/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Life-Of-Vids on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "statistic line on real footage: number badge '40%' from the narration drawn over the clip (STATISTIC_OVERLAY=true); pixabay_video: score 0.249 >= 0.22 for query 'arrow moving upward' (best of 23 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.243); logo check ok (logo prob 0.01); 3 clip frame(s) passed the logo check (max logo prob 0.02); borderline (best 0.249 < BORDERLINE_SCORE 0.25): also searched the rewritten query 'growing line chart' (groq), +16 candidates scored on the original queries",
+      "relevance_score": 0.2489,
+      "overlay": true,
+      "overlay_card": {
+        "headline": "40%",
+        "subtitle": "sales grew 40%",
+        "kind": "percent",
+        "source": "narration",
+        "numbers_shown": [
+          "40%"
+        ],
+        "style": "badge (lower third, fades in)"
+      },
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2489,
+        "thumbnail_score": 0.2432,
+        "frame_scores": [
+          0.2432,
+          0.2661,
+          0.2374
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0001,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.2889,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_001.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0071,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.57,
+            "logo_prob": 0.0076,
+            "scene_score": 0.2393,
+            "result": "ok"
+          },
+          {
+            "time": 7.71,
+            "logo_prob": 0.01,
+            "scene_score": 0.2405,
+            "result": "ok"
+          },
+          {
+            "time": 12.85,
+            "logo_prob": 0.0192,
+            "scene_score": 0.2509,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:198",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2015/08/10/198-135846853_medium.mp4",
+        "final_score": 0.2889,
+        "width": 1280,
+        "height": 720,
+        "duration": 15.0
+      },
+      "understanding": {
+        "queries": [
+          "cash register display",
+          "arrow moving upward",
+          "busy retail storefront",
+          "employees stacking product boxes",
+          "bright optimistic lighting"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": true,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Depicts sales growth via register, upward arrow metaphor, store setting, packing action, upbeat lighting.",
+        "source": "groq",
+        "names": [],
+        "number": "40%",
+        "keyword": "sales grew",
+        "card": {
+          "headline": "40%",
+          "subtitle": "sales grew 40%",
+          "number": "40%",
+          "kind": "percent",
+          "source": "narration",
+          "numbers_shown": [
+            "40%"
+          ],
+          "subtitle_from": "llm, every word checked against the line"
+        },
+        "story_sensitive": false,
+        "fingerprint": "d0b794fa68704bc8"
+      },
+      "safety": {
+        "queries": [
+          "cash register display",
+          "arrow moving upward",
+          "busy retail storefront",
+          "employees stacking product boxes",
+          "bright optimistic lighting"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_001_c69b830dda2094d0.mp4",
+          "cache_key": "c69b830dda2094d0",
+          "frames": 86,
+          "look": "eq=brightness=0.021:saturation=1.200",
+          "overlay": {
+            "headline": "40%",
+            "subtitle": "sales grew 40%",
+            "source": "narration"
+          },
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_001_d98a13c48fd9aaef.mp4",
+          "cache_key": "d98a13c48fd9aaef",
+          "frames": 86,
+          "look": "eq=brightness=0.021:saturation=1.200",
+          "overlay": {
+            "headline": "40%",
+            "subtitle": "sales grew 40%",
+            "source": "narration"
+          },
+          "caption_font": "Arial",
+          "framing": "subject crop (right)",
+          "crop": {
+            "method": "clip",
+            "choice": "right",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2237,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2188
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2091
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2254
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "subject_span": [
+              0.0,
+              0.4555
+            ],
+            "windows_cutting_subject": [
+              "centre",
+              "left"
+            ],
+            "reason": "window 'right' chosen (0.225; best window 0.225; whole frame 0.224; near-ties within 0.03 go to salient / centre); 'centre' was a near-tie but its edge falls inside the subject (0.00-0.46), so 'right' keeps it whole"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Our",
+          "start": 3.06,
+          "end": 3.16
+        },
+        {
+          "text": "sales",
+          "start": 3.16,
+          "end": 3.5
+        },
+        {
+          "text": "grew",
+          "start": 3.5,
+          "end": 3.76
+        },
+        {
+          "text": "40",
+          "start": 3.76,
+          "end": 4.1
+        },
+        {
+          "text": "%",
+          "start": 4.1,
+          "end": 4.46
+        },
+        {
+          "text": "in",
+          "start": 4.46,
+          "end": 4.68
+        },
+        {
+          "text": "2025.",
+          "start": 4.68,
+          "end": 5.22
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "text": "Customer complaints fell by half in just six months.",
+      "start": 5.61,
+      "end": 8.89,
+      "duration": 3.28,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "agents closing support tickets",
+      "queries": [
+        "customer service inbox empty",
+        "scale tipping downwards",
+        "call center workspace",
+        "agents closing support tickets",
+        "calm relaxed atmosphere"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": true,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "31782",
+      "page_url": "https://pixabay.com/videos/id-31782/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Expatsiam on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.225 >= 0.22 for query 'agents closing support tickets' (best of 23 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.219); logo check ok (logo prob 0.03); 3 clip frame(s) passed the logo check (max logo prob 0.07); VLM judge 4/5 (judged 2 candidates, higher rating first); video preferred over photo-motion (pixabay_image_motion best 0.265 is not more than 0.03 above 0.265); borderline (best 0.225 < BORDERLINE_SCORE 0.25): also searched the rewritten query 'stack of complaint letters shrinking' (groq), +16 candidates scored on the original queries",
+      "relevance_score": 0.2247,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": 4,
+      "vlm": {
+        "score": 4,
+        "judged": {
+          "pixabay_video:143683": 2,
+          "pixabay_video:31782": 4
+        },
+        "why": "Candidate B shows a customer service or checkout environment, which is contextually relevant to customer complaints, while Candidate A is just a stack of books with no clear connection.",
+        "priority": "close call",
+        "model": "qwen/qwen3.8-27b"
+      },
+      "score_details": {
+        "score": 0.2247,
+        "thumbnail_score": 0.2188,
+        "frame_scores": [
+          0.2188,
+          0.2302,
+          0.2251
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0001,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.2647,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_002.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0349,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.09,
+            "logo_prob": 0.0236,
+            "scene_score": 0.1981,
+            "result": "ok"
+          },
+          {
+            "time": 6.28,
+            "logo_prob": 0.0748,
+            "scene_score": 0.2276,
+            "result": "ok"
+          },
+          {
+            "time": 10.47,
+            "logo_prob": 0.0722,
+            "scene_score": 0.2082,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:31782",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2020/01/30/31782-388997475_medium.mp4",
+        "final_score": 0.2647,
+        "width": 1280,
+        "height": 720,
+        "duration": 13.0
+      },
+      "understanding": {
+        "queries": [
+          "customer service inbox empty",
+          "scale tipping downwards",
+          "call center workspace",
+          "agents closing support tickets",
+          "calm relaxed atmosphere"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": true,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Illustrates reduced complaints with empty inbox, downward scale metaphor, call center setting, agents resolving tickets, calm mood.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "customer complaints",
+        "card": {
+          "headline": "CUSTOMER COMPLAINTS",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "fe91e56c7b47fc6a"
+      },
+      "safety": {
+        "queries": [
+          "customer service inbox empty",
+          "scale tipping downwards",
+          "call center workspace",
+          "agents closing support tickets",
+          "calm relaxed atmosphere"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_002_2a744f9822663481.mp4",
+          "cache_key": "2a744f9822663481",
+          "frames": 99,
+          "look": "eq=brightness=0.020:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_002_466b8ed0782eb815.mp4",
+          "cache_key": "466b8ed0782eb815",
+          "frames": 99,
+          "look": "eq=brightness=0.020:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2152,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2358
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.19
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2282
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "subject_span": [
+              0.377,
+              0.9738
+            ],
+            "windows_cutting_subject": [
+              "centre",
+              "right"
+            ],
+            "reason": "window 'centre' chosen (0.236; best window 0.236; whole frame 0.215; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Customer",
+          "start": 6.0,
+          "end": 6.36
+        },
+        {
+          "text": "complaints",
+          "start": 6.36,
+          "end": 6.86
+        },
+        {
+          "text": "fell",
+          "start": 6.86,
+          "end": 7.08
+        },
+        {
+          "text": "by",
+          "start": 7.08,
+          "end": 7.3
+        },
+        {
+          "text": "half",
+          "start": 7.3,
+          "end": 7.66
+        },
+        {
+          "text": "in",
+          "start": 7.66,
+          "end": 7.84
+        },
+        {
+          "text": "just",
+          "start": 7.84,
+          "end": 8.0
+        },
+        {
+          "text": "six",
+          "start": 8.0,
+          "end": 8.3
+        },
+        {
+          "text": "months.",
+          "start": 8.3,
+          "end": 8.58
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "text": "Patience is a quiet kind of strength.",
+      "start": 8.89,
+      "end": 11.47,
+      "duration": 2.58,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "person meditating quietly",
+      "queries": [
+        "person meditating quietly",
+        "tree bending in wind",
+        "serene garden bench",
+        "hand slowly turning page",
+        "soft pastel sunrise"
+      ],
+      "flags": {
+        "abstract": true,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "43633",
+      "page_url": "https://pixabay.com/videos/id-43633/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "GreenCardShow on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.227 >= 0.22 for query 'person meditating quietly' (best of 23 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.215); logo check ok (logo prob 0.01); 3 clip frame(s) passed the logo check (max logo prob 0.06); VLM judge 2/5 (judged 1 candidates, higher rating first); borderline (best 0.227 < BORDERLINE_SCORE 0.25): also searched the rewritten query 'steady candle flame' (groq), +16 candidates scored on the original queries",
+      "relevance_score": 0.2274,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": 2,
+      "vlm": {
+        "score": 2,
+        "judged": {
+          "pixabay_video:43633": 2
+        },
+        "why": "The image is an abstract close-up of hair that is too vague to clearly convey the concept of patience or strength.",
+        "priority": "close call",
+        "model": "qwen/qwen3.8-27b"
+      },
+      "score_details": {
+        "score": 0.2274,
+        "thumbnail_score": 0.2153,
+        "frame_scores": [
+          0.2153,
+          0.2358,
+          0.2312
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.2674,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_003.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0069,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.85,
+            "logo_prob": 0.0636,
+            "scene_score": 0.2159,
+            "result": "ok"
+          },
+          {
+            "time": 8.56,
+            "logo_prob": 0.0345,
+            "scene_score": 0.2056,
+            "result": "ok"
+          },
+          {
+            "time": 14.27,
+            "logo_prob": 0.0557,
+            "scene_score": 0.2107,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:43633",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2020/07/02/43633-436237650_medium.mp4",
+        "final_score": 0.2674,
+        "width": 1280,
+        "height": 720,
+        "duration": 17.0
+      },
+      "understanding": {
+        "queries": [
+          "person meditating quietly",
+          "tree bending in wind",
+          "serene garden bench",
+          "hand slowly turning page",
+          "soft pastel sunrise"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": true,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Conveys patience as quiet strength via meditation, resilient tree metaphor, garden setting, slow page turn, gentle sunrise mood.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "patience",
+        "card": {
+          "headline": "PATIENCE",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "01810b87d192204e"
+      },
+      "safety": {
+        "queries": [
+          "person meditating quietly",
+          "tree bending in wind",
+          "serene garden bench",
+          "hand slowly turning page",
+          "soft pastel sunrise"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_003_fe1e2d4baa23a509.mp4",
+          "cache_key": "fe1e2d4baa23a509",
+          "frames": 77,
+          "look": "eq=brightness=-0.059:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_003_34d7cac40302396a.mp4",
+          "cache_key": "34d7cac40302396a",
+          "frames": 77,
+          "look": "eq=brightness=-0.059:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2313,
+            "windows": {
+              "salient": {
+                "start": 0.6174,
+                "score": 0.2303
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2396
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2477
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2147
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "subject_span": [
+              0.7044,
+              0.8272
+            ],
+            "windows_cutting_subject": [],
+            "reason": "window 'salient' chosen (0.230; best window 0.248; whole frame 0.231; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Patience",
+          "start": 9.2,
+          "end": 9.68
+        },
+        {
+          "text": "is",
+          "start": 9.68,
+          "end": 9.98
+        },
+        {
+          "text": "a",
+          "start": 9.98,
+          "end": 10.06
+        },
+        {
+          "text": "quiet",
+          "start": 10.06,
+          "end": 10.44
+        },
+        {
+          "text": "kind",
+          "start": 10.44,
+          "end": 10.72
+        },
+        {
+          "text": "of",
+          "start": 10.72,
+          "end": 10.86
+        },
+        {
+          "text": "strength.",
+          "start": 10.86,
+          "end": 11.14
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "text": "Today, three out of four buyers read reviews before they spend a single rupee.",
+      "start": 11.47,
+      "end": 16.38,
+      "duration": 4.91,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "home office desk",
+      "queries": [
+        "person reading product reviews",
+        "magnifying glass over price tag",
+        "home office desk",
+        "clicking thumbs up on screen",
+        "focused attentive lighting"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": true,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "42305",
+      "page_url": "https://pixabay.com/videos/id-42305/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "CycleZyklusCiclo on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "statistic line on real footage: number badge '3 out of 4' from the narration drawn over the clip (STATISTIC_OVERLAY=true); pixabay_video: score 0.258 >= 0.22 for query 'home office desk' (best of 6 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.264); logo check ok (logo prob 0.17); 3 clip frame(s) passed the logo check (max logo prob 0.19); video scored >= 0.25: photo sources not searched",
+      "relevance_score": 0.2581,
+      "overlay": true,
+      "overlay_card": {
+        "headline": "3 out of 4",
+        "subtitle": "three out of four buyers",
+        "kind": "ratio",
+        "source": "narration",
+        "numbers_shown": [
+          "3 out of 4"
+        ],
+        "style": "badge (lower third, fades in)"
+      },
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2581,
+        "thumbnail_score": 0.2636,
+        "frame_scores": [
+          0.2636,
+          0.2603,
+          0.2504
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0001,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.2981,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_004.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.1708,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.49,
+            "logo_prob": 0.0894,
+            "scene_score": 0.2313,
+            "result": "ok"
+          },
+          {
+            "time": 7.48,
+            "logo_prob": 0.1931,
+            "scene_score": 0.2388,
+            "result": "ok"
+          },
+          {
+            "time": 12.47,
+            "logo_prob": 0.1231,
+            "scene_score": 0.2345,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:42305",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2020/06/16/42305-431511171_medium.mp4",
+        "final_score": 0.2981,
+        "width": 1280,
+        "height": 720,
+        "duration": 15.0
+      },
+      "understanding": {
+        "queries": [
+          "person reading product reviews",
+          "magnifying glass over price tag",
+          "home office desk",
+          "clicking thumbs up on screen",
+          "focused attentive lighting"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": true,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows buyers checking reviews, magnifying glass metaphor, home office setting, clicking action, focused lighting.",
+        "source": "groq",
+        "names": [],
+        "number": "3 out of 4",
+        "keyword": "today three four buyers read reviews spe",
+        "card": {
+          "headline": "3 out of 4",
+          "subtitle": "three out of four buyers",
+          "number": "3 out of 4",
+          "kind": "ratio",
+          "source": "narration",
+          "numbers_shown": [
+            "3 out of 4"
+          ],
+          "subtitle_from": "llm, every word checked against the line"
+        },
+        "story_sensitive": false,
+        "fingerprint": "ccfddba533f2b99f"
+      },
+      "safety": {
+        "queries": [
+          "person reading product reviews",
+          "magnifying glass over price tag",
+          "home office desk",
+          "clicking thumbs up on screen",
+          "focused attentive lighting"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_004_1bf08aecd670448c.mp4",
+          "cache_key": "1bf08aecd670448c",
+          "frames": 147,
+          "look": "eq=brightness=-0.078:saturation=1.200",
+          "overlay": {
+            "headline": "3 out of 4",
+            "subtitle": "three out of four buyers",
+            "source": "narration"
+          },
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_004_8c029924a9c2ae5f.mp4",
+          "cache_key": "8c029924a9c2ae5f",
+          "frames": 147,
+          "look": "eq=brightness=-0.078:saturation=1.200",
+          "overlay": {
+            "headline": "3 out of 4",
+            "subtitle": "three out of four buyers",
+            "source": "narration"
+          },
+          "caption_font": "Arial",
+          "framing": "subject crop (left)",
+          "crop": {
+            "method": "clip",
+            "choice": "left",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2546,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2318
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2765
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2642
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "subject_span": [
+              0.5969,
+              0.7459
+            ],
+            "windows_cutting_subject": [
+              "centre",
+              "right"
+            ],
+            "reason": "window 'left' chosen (0.277; best window 0.277; whole frame 0.255; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Today,",
+          "start": 11.8,
+          "end": 12.0
+        },
+        {
+          "text": "three",
+          "start": 12.42,
+          "end": 12.58
+        },
+        {
+          "text": "out",
+          "start": 12.58,
+          "end": 12.76
+        },
+        {
+          "text": "of",
+          "start": 12.76,
+          "end": 12.88
+        },
+        {
+          "text": "four",
+          "start": 12.88,
+          "end": 13.1
+        },
+        {
+          "text": "buyers",
+          "start": 13.1,
+          "end": 13.52
+        },
+        {
+          "text": "read",
+          "start": 13.52,
+          "end": 13.9
+        },
+        {
+          "text": "reviews",
+          "start": 13.9,
+          "end": 14.34
+        },
+        {
+          "text": "before",
+          "start": 14.34,
+          "end": 14.7
+        },
+        {
+          "text": "they",
+          "start": 14.7,
+          "end": 14.96
+        },
+        {
+          "text": "spend",
+          "start": 14.96,
+          "end": 15.22
+        },
+        {
+          "text": "a",
+          "start": 15.22,
+          "end": 15.36
+        },
+        {
+          "text": "single",
+          "start": 15.36,
+          "end": 15.62
+        },
+        {
+          "text": "rupee.",
+          "start": 15.62,
+          "end": 16.06
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "text": "Hope is what keeps a small team going.",
+      "start": 16.38,
+      "end": 19.25,
+      "duration": 2.87,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "cozy startup office",
+      "queries": [
+        "small team huddling",
+        "light at tunnel end",
+        "cozy startup office",
+        "team brainstorming on whiteboard",
+        "warm hopeful glow"
+      ],
+      "flags": {
+        "abstract": true,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_image_motion",
+      "clip_id": "5382501",
+      "page_url": "https://pixabay.com/photos/job-office-team-business-internet-5382501/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "RonaldCandonga on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_image_motion: score 0.221 >= 0.22 for query 'cozy startup office' (best of 21 candidates, order bonus +0.04); logo check ok (logo prob 0.24); 1 clip frame(s) passed the logo check (max logo prob 0.03); earlier: pixabay_video: logo check rejected 1, best: pixabay_video:3132 (logo prob 0.99, scene 0.237) (1 checked); pixabay_video: best score 0.214 < 0.22; borderline (best 0.231 < BORDERLINE_SCORE 0.25): also searched the rewritten query 'team members passing a baton' (groq), +14 candidates scored on the original queries",
+      "relevance_score": 0.2205,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2205,
+        "thumbnail_score": 0.2205,
+        "frame_scores": null,
+        "frames_scored": 1,
+        "text_prob": 0.0006,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.2605
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_005.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.2397,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.0311,
+            "scene_score": 0.2189,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_image_motion:5382501",
+        "kind": "image",
+        "title": "",
+        "source_url": "https://pixabay.com/get/g706c48c5ed614bc6b70e8748bf61c9f80de0df17b0a8166f742b513109fe1231db42b74b587b98901c9f4fbf1f647d1707fa2616a34f8b1b25fbce6a81c7a1b9_1280.jpg",
+        "final_score": 0.2605,
+        "width": 1280,
+        "height": 771,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "small team huddling",
+          "light at tunnel end",
+          "cozy startup office",
+          "team brainstorming on whiteboard",
+          "warm hopeful glow"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": true,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Represents hope keeping a team together via huddle, light tunnel metaphor, office setting, brainstorming action, hopeful glow.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "hope",
+        "card": {
+          "headline": "HOPE",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "0f0345b187c7432b"
+      },
+      "safety": {
+        "queries": [
+          "small team huddling",
+          "light at tunnel end",
+          "cozy startup office",
+          "team brainstorming on whiteboard",
+          "warm hopeful glow"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_005_d97787069a37ebe8.mp4",
+          "cache_key": "d97787069a37ebe8",
+          "frames": 87,
+          "look": "eq=brightness=-0.076:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (top)",
+          "crop": {
+            "method": "clip",
+            "choice": "top",
+            "axis": "y",
+            "window_fraction": 0.9339,
+            "full_frame_score": 0.2257,
+            "windows": {
+              "salient": {
+                "start": 0.0661,
+                "score": 0.2387
+              },
+              "centre": {
+                "start": 0.0331,
+                "score": 0.2291
+              },
+              "top": {
+                "start": 0.0,
+                "score": 0.2226
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "subject_span": [
+              0.0,
+              0.8522
+            ],
+            "windows_cutting_subject": [
+              "centre",
+              "salient"
+            ],
+            "reason": "window 'top' chosen (0.223; best window 0.239; whole frame 0.226; near-ties within 0.03 go to salient / centre); 'salient' was a near-tie but its edge falls inside the subject (0.00-0.85), so 'top' keeps it whole"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_005_c0761e6c789575ed.mp4",
+          "cache_key": "c0761e6c789575ed",
+          "frames": 87,
+          "look": "eq=brightness=-0.076:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3388,
+            "full_frame_score": 0.2257,
+            "windows": {
+              "centre": {
+                "start": 0.3306,
+                "score": 0.1862
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.1756
+              },
+              "right": {
+                "start": 0.6612,
+                "score": 0.2097
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "subject_span": [
+              0.0052,
+              0.9948
+            ],
+            "windows_cutting_subject": [
+              "centre",
+              "left",
+              "right"
+            ],
+            "reason": "window 'centre' chosen (0.186; best window 0.210; whole frame 0.226; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Hope",
+          "start": 16.7,
+          "end": 16.9
+        },
+        {
+          "text": "is",
+          "start": 16.9,
+          "end": 17.14
+        },
+        {
+          "text": "what",
+          "start": 17.14,
+          "end": 17.28
+        },
+        {
+          "text": "keeps",
+          "start": 17.28,
+          "end": 17.5
+        },
+        {
+          "text": "a",
+          "start": 17.5,
+          "end": 17.66
+        },
+        {
+          "text": "small",
+          "start": 17.66,
+          "end": 17.96
+        },
+        {
+          "text": "team",
+          "start": 17.96,
+          "end": 18.26
+        },
+        {
+          "text": "going.",
+          "start": 18.26,
+          "end": 18.6
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "aspect_ratio": "16:9",
+      "file": "video_16x9.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 19.266
+    },
+    {
+      "aspect_ratio": "9:16",
+      "file": "video_9x16.mp4",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "duration": 19.267
+    }
+  ]
+}

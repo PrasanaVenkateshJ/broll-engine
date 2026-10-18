@@ -1,0 +1,17 @@
+# Batch run summary
+
+- API: http://localhost:8000
+- Inputs: 8 | succeeded: 8 | failed / rejected / other: 0
+- Narration total (succeeded): 307.6 s
+- Turnaround of succeeded jobs: mean 241.9 s, max 491.3 s
+
+| input | job_id | status | error_code | narration_seconds | turnaround_seconds | scenes | warnings_count |
+|---|---|---|---|---|---|---|---|
+| core03_ta_screen_time_myvoice | ecd9de5f04374ee49cfa95cec0e317bb | succeeded |  | 28.331 | 271.27 | 5 | 1 |
+| core07_story_lighthouse | 75aa298587dd4541995aeca9559deccb | succeeded |  | 46.625 | 286.43 | 12 | 1 |
+| core09_explainer_solar | 9400a83325b74683928e8b0f5e127034 | succeeded |  | 87.35 | 491.27 | 17 | 1 |
+| core11_hi_tts_saving | 8c90bc9b7a0a48ecb2248436f84a538b | succeeded |  | 18.45 | 115.83 | 4 | 1 |
+| core13_hi_script_tea | ca7196287501483fa9dda4993d82df8b | succeeded |  | 21.925 | 132.89 | 4 | 0 |
+| hard01_abstract_and_statistics | 2aef1df3842740e8ab09c5d16e96382f | succeeded |  | 19.25 | 132.87 | 6 | 1 |
+| hard04_sensitive_news | eb74dac70e4642758a19067091f67b84 | succeeded |  | 26.15 | 218.15 | 6 | 1 |
+| perf_a_gardening | 4fd22f140e8e4fa2b914a7c58436ff68 | succeeded |  | 59.5 | 286.24 | 12 | 1 |

@@ -147,7 +147,7 @@ SAD_STORY = ["Heavy floods this week forced thousands of families to leave their
              "Our thoughts are with every family who has lost someone."]
 
 
-def test_a_sensitive_story_makes_every_scene_calm_and_respectful():
+def test_a_sensitive_story_filters_every_scene_but_keeps_the_real_subject():
     scenes = scenes_of(SAD_STORY)
     meanings, info, _ = understand_scenes(scenes, " ".join(SAD_STORY))  # mock adapter + the code detectors
     assert [m.flags["sensitive"] for m in meanings] == [True, True, False, False, False, True]
@@ -155,7 +155,7 @@ def test_a_sensitive_story_makes_every_scene_calm_and_respectful():
     assert all(m.story_sensitive for m in meanings)
     for m, sc in zip(meanings, scenes):
         plan = plan_search(m, sc.text)
-        assert all(q.startswith("calm ") for q in plan.queries), plan.queries
+        assert not any(q.startswith("calm ") for q in plan.queries), plan.queries  # real subject, no prefix
         assert "blood" in plan.exclude_terms and set(FESTIVE_TERMS) <= set(plan.exclude_terms)
     neutral = plan_search(meanings[3], scenes[3].text)  # "Doctors are visiting the camps..."
     assert "sensitive story" in " ".join(neutral.notes)

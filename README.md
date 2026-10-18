@@ -435,6 +435,8 @@ comments in [.env.example](.env.example). "Code default" is used when the variab
 | `TEXT_PENALTY` | `0.03` | `0.03` | Order-score penalty for a text-heavy picture. |
 | `PREFER_VIDEO_MARGIN` | `0.03` | `0.03` | A passing stock video beats photo-motion unless the photo scores more than this higher; a video at threshold + margin skips the photo search. |
 | `RELATIVE_MARGIN` | `0.12` | `0.12` | Adaptive threshold: if nothing passes, a candidate >= STOCK_MIN_SCORE x (1 - this) may be used ONLY if the VLM judge rates it >= VLM_ACCEPT_SCORE. |
+| `BORDERLINE_SCORE` | `0.25` | `0.25` | Best candidate of a scene below this: ONE more concrete query (Groq, else the line's own words) is searched; its results are scored on the original queries and compete with the rest. 0 = off. |
+| `BEST_EFFORT_MIN_SCORE` | `0.17` | `0.17` | Nothing passes (not even the adaptive pass): the best clip scoring at least this is used with the line's keyword / number as a badge instead of a plain card. 0 = off. |
 | `VLM_PROVIDER` | `none` | `none` | Independent vision-language judge: groq / mock / none (off). |
 | `VLM_MODEL` | `qwen/qwen3.8-27b` | `qwen/qwen3.8-27b` | Groq vision model for the judge (qwen/qwen3.8-27b: Apache-2.0 weights, a Groq preview model). |
 | `VLM_TIMEOUT_SECONDS` | `30.0` | `30.0` | Time limit for one judge request. |

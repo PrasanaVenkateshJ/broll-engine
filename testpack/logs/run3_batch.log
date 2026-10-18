@@ -1,0 +1,10 @@
+8 input(s) -> http://localhost:8000 (concurrency 1)
+core03_ta_screen_time_myvoice  succeeded                             271.27 s  job ecd9de5f04374ee49cfa95cec0e317bb
+core07_story_lighthouse        succeeded                             286.43 s  job 75aa298587dd4541995aeca9559deccb
+core09_explainer_solar         succeeded                             491.27 s  job 9400a83325b74683928e8b0f5e127034
+core11_hi_tts_saving           succeeded                             115.83 s  job 8c90bc9b7a0a48ecb2248436f84a538b
+core13_hi_script_tea           succeeded                             132.89 s  job ca7196287501483fa9dda4993d82df8b
+hard01_abstract_and_statistics succeeded                             132.87 s  job 2aef1df3842740e8ab09c5d16e96382f
+hard04_sensitive_news          succeeded                             218.15 s  job eb74dac70e4642758a19067091f67b84
+perf_a_gardening               succeeded                             286.24 s  job 4fd22f140e8e4fa2b914a7c58436ff68
+summary: testpack\outputs\run3\summary.csv and testpack\outputs\run3\summary.md

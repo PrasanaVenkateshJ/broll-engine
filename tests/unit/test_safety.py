@@ -34,9 +34,9 @@ def test_brand_excludes_logos_and_warns():
     assert "brand (Nike)" in plan.warnings[0]
 
 
-def test_sensitive_topic_adds_calm_modifier_and_blocks_graphic_terms():
+def test_sensitive_topic_keeps_the_real_subject_and_blocks_graphic_terms():
     plan = plan_search(meaning(["white flowers at a memorial", "candle light"], sensitive=True), "He died.")
-    assert all(q.startswith("calm ") for q in plan.queries)
+    assert plan.queries == ["white flowers at a memorial", "candle light"]  # no "calm" prefix
     assert set(GRAPHIC_TERMS) <= set(plan.exclude_terms)
     assert find_excluded("rescue blood injury", plan.exclude_terms) == "blood"
 

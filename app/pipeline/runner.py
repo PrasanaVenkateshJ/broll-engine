@@ -33,7 +33,7 @@ from app.pipeline.safety import plan_search
 from app.pipeline.scenes import attach_search_text, scenes_from_list, split_into_scenes
 from app.pipeline.transcribe import TranslateError, check_sound, check_speech, get_transcriber
 from app.pipeline.tts import get_tts, synthesize_cached
-from app.pipeline.understand import understand_scenes
+from app.pipeline.understand import translate_scenes, understand_scenes
 from app.pipeline.vlm import get_judge
 from app.storage import cache_key, get_storage, output_key
 
@@ -261,17 +261,31 @@ def save_swap_cache(job_id, work, request, input_type, duration, language, scene
 
 def _english_for_search(run: Run, transcriber, audio_path: Path, language: str, scenes) -> None:
     """Non-English narration: give each scene its English meaning (scene.search_text) for footage search.
-    Captions keep the spoken words. If the translation fails, search uses the original text + a warning."""
+    Each scene's OWN text is translated (Groq, per scene), so no words shift to a neighbouring scene. Scenes
+    Groq does not answer get Whisper's translation of the whole audio, split by time (the old way).
+    Captions keep the spoken words. If both fail, search uses the original text + a warning."""
     started = time.perf_counter()
-    try:
-        translation = transcriber.translate(audio_path, language)
-    except TranslateError as e:
-        run.warn(f"English translation for footage search failed ({e}); searching with the {language} text")
-        translation = []
-    attach_search_text(scenes, translation)
+    english, groq_facts = translate_scenes(scenes, language)
+    for sc in scenes:
+        sc.search_text = english.get(sc.index)
+    missing = [sc for sc in scenes if not sc.search_text]
+    pieces = 0
+    if missing:
+        try:
+            translation = transcriber.translate(audio_path, language)
+        except TranslateError as e:
+            run.warn(f"English translation for footage search failed ({e}); searching with the {language} text")
+            translation = []
+        pieces = len(translation)
+        attach_search_text(scenes, translation)  # split by time over ALL scenes, then Groq's answers win
+        for sc in scenes:
+            if sc.index in english:
+                sc.search_text = english[sc.index]
     run.models.setdefault("transcribe", {})["translate_for_search"] = {
-        "task": "translate", "from_language": language, "to_language": "en",
-        "pieces": len(translation), "scenes_with_english": sum(1 for sc in scenes if sc.search_text),
+        "method": "each scene's own text translated by Groq; Whisper whole-audio translation only for the rest",
+        "from_language": language, "to_language": "en", "groq": groq_facts,
+        "scenes_by_groq": len(english), "scenes_by_whisper": sum(1 for sc in missing if sc.search_text),
+        "whisper_pieces": pieces, "scenes_with_english": sum(1 for sc in scenes if sc.search_text),
         "seconds": round(time.perf_counter() - started, 3),
         "used_for": "footage search queries only; captions stay in the spoken language"}
 

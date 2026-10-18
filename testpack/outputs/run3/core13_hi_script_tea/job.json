@@ -1,0 +1,29 @@
+{
+  "job_id": "ca7196287501483fa9dda4993d82df8b",
+  "status": "succeeded",
+  "progress": 100,
+  "stage": "done",
+  "input_type": "script",
+  "parent_job_id": null,
+  "warnings": [],
+  "error": null,
+  "result": {
+    "files": {
+      "video_16x9.mp4": "http://localhost:8000/api/v1/jobs/ca7196287501483fa9dda4993d82df8b/files/video_16x9.mp4?expires=1792334003&sig=9bbf49b811b29889d872a957e4c389c5e1dbbf33f1d65854e03baec06eaa80f9",
+      "video_9x16.mp4": "http://localhost:8000/api/v1/jobs/ca7196287501483fa9dda4993d82df8b/files/video_9x16.mp4?expires=1792334003&sig=60efe6cf5f3ed8046d1e64d8ad536e862e493d4b49ef5aa5b72b843914befd98",
+      "captions.srt": "http://localhost:8000/api/v1/jobs/ca7196287501483fa9dda4993d82df8b/files/captions.srt?expires=1792334003&sig=4a7ce16e2fef36f862bc5bd15bffc46799d1f0ce0d9d42518c25eea6c7e332fa",
+      "timeline.json": "http://localhost:8000/api/v1/jobs/ca7196287501483fa9dda4993d82df8b/files/timeline.json?expires=1792334003&sig=171fcce68a405b4fb2cc7ead3a444cb3df19cd51adad3b379ef56eae804295d9",
+      "manifest.json": "http://localhost:8000/api/v1/jobs/ca7196287501483fa9dda4993d82df8b/files/manifest.json?expires=1792334003&sig=6faaa650e6ea95316bd0d6c2cb9792a24de172e3ce83731bca34faa79e1bcca7",
+      "thumb_000.jpg": "http://localhost:8000/api/v1/jobs/ca7196287501483fa9dda4993d82df8b/files/thumb_000.jpg?expires=1792334003&sig=5dcfdf9880fabdb90b36de1d7857e8cce830d51dc14cb3a5120e157450122499",
+      "thumb_001.jpg": "http://localhost:8000/api/v1/jobs/ca7196287501483fa9dda4993d82df8b/files/thumb_001.jpg?expires=1792334003&sig=79329f6c3e728c432c7d2ef135268b6567668b19696d9541e19a32a2cfe6fdab",
+      "thumb_002.jpg": "http://localhost:8000/api/v1/jobs/ca7196287501483fa9dda4993d82df8b/files/thumb_002.jpg?expires=1792334003&sig=8d8d4346b1db1633890679511bb870b91b6c10047d807f1256da06e6212febc9",
+      "thumb_003.jpg": "http://localhost:8000/api/v1/jobs/ca7196287501483fa9dda4993d82df8b/files/thumb_003.jpg?expires=1792334003&sig=f143936ae9d7947352a5958d97222bc9a0a6e0c732d3a3bd66baa0cd65142e93"
+    }
+  },
+  "created_at": "2026-10-18T13:31:10.963324+00:00",
+  "started_at": "2026-10-18T13:31:11.698713+00:00",
+  "finished_at": "2026-10-18T13:33:21.938122+00:00",
+  "links": {
+    "self": "http://localhost:8000/api/v1/jobs/ca7196287501483fa9dda4993d82df8b"
+  }
+}

@@ -650,7 +650,8 @@ Statistic lines get footage of the TOPIC of the number, not charts: "Household s
 "coins dropping into a piggy bank", "family planning a budget at a kitchen table".
 Use the visual_hint if one is given.
 Rules: never put a real person's name or a brand name in a query - describe generic related footage
-instead, without faces. For sad or sensitive topics choose calm, respectful imagery, nothing graphic.
+instead, without faces. For sad or sensitive topics show the line's real subject respectfully (floods ->
+"flooded street", shelters -> "volunteers serving food in a hall"), nothing graphic, nothing festive.
 Respect the avoid list. A scene may also have "english": a machine translation of a non-English line
 (it can contain errors - follow the meaning of the original line). Queries are ALWAYS in English, even
 when the narration is not. Flags (true/false): abstract = an idea with no obvious physical subject;
@@ -660,7 +661,7 @@ tragedy or similar. reason = one short sentence on why these queries fit the mea
 Optional "card" (only for a statistic line): {{"headline": the figure exactly as said in the line,
 "subtitle": 2-5 words copied from the same sentence}}. Never write a number the line does not say.
 "story_sensitive" = true if the WHOLE script is sad or tragic news (death, disaster, illness, violence),
-so even its neutral lines need calm, respectful footage.
+so no line may get festive or graphic footage (still search each line's real subject).
 Prefer the most common, concrete stock-footage wording; list the scenes in index order.
 Answer with JSON only, in this shape:
 {{"story_sensitive": false, "scenes": [{{"index": 0, "queries": ["...", "..."], "flags": {{"abstract": false,
@@ -757,8 +758,11 @@ class GroqUnderstander(Understander):
 
     def _ask(self, scenes, full_text, style) -> dict:
         """One batch: the parsed answer. 429 -> wait + ask again (within the wait budget)."""
+        return self.ask_payload(self._payload(scenes, full_text, style))
+
+    def ask_payload(self, payload: dict) -> dict:
+        """Send one request with the retry / rate-limit rules above; the parsed JSON answer."""
         s = get_settings()
-        payload = self._payload(scenes, full_text, style)
         last_error: Exception | None = None
         tries = 0
         while tries < 1 + max(0, s.LLM_RETRIES):
@@ -874,6 +878,80 @@ class GroqUnderstander(Understander):
                                          keyword=card_keyword(sc.text, facts["number"], names), card=card,
                                          query_roles=[r for _, r in pairs])
         return out, problems
+
+
+TRANSLATE_PROMPT = """Translate each scene's text into plain, faithful English for a stock-footage search.
+Translate ONLY that scene's own text: never move words to or from another scene, never add anything.
+Answer with JSON only: {"scenes": [{"index": 0, "english": "..."}]}"""
+
+REWRITE_PROMPT = """The stock-footage searches for these scenes found only weak matches. For EACH scene write
+ONE new search query (2-5 English words) that a camera can film: the concrete, literal main subject of the
+line (people, places, objects, actions), different from the queries already tried. Sad or sensitive lines:
+the real subject shown respectfully, nothing graphic, nothing festive. No names of real people or brands.
+Answer with JSON only: {"scenes": [{"index": 0, "query": "..."}]}"""
+
+
+def _groq_batches(prompt: str, items: list[dict], key: str, context: dict | None = None) -> tuple[dict[int, str], dict]:
+    """Ask Groq `prompt` for every item ({"index", ...}) in LLM_BATCH_SIZE batches. Returns ({index: answer[key]},
+    facts). A failed batch is simply missing from the result (the caller falls back for those)."""
+    s = get_settings()
+    if s.UNDERSTAND_PROVIDER != "groq" or not s.GROQ_API_KEY:
+        return {}, {"provider": "none (UNDERSTAND_PROVIDER is not groq or GROQ_API_KEY is empty)"}
+    groq = GroqUnderstander()
+    out: dict[int, str] = {}
+    errors = []
+    size = max(1, s.LLM_BATCH_SIZE)
+    for start in range(0, len(items), size):
+        user = {**(context or {}), "scenes": items[start:start + size]}
+        payload = {"model": s.LLM_MODEL, "temperature": s.LLM_TEMPERATURE, "seed": s.SEED,
+                   "response_format": {"type": "json_object"},
+                   "messages": [{"role": "system", "content": prompt},
+                                {"role": "user", "content": json.dumps(user, ensure_ascii=False, sort_keys=True)}]}
+        try:
+            answer = groq.ask_payload(payload)
+        except UnderstandError as e:
+            errors.append(str(e))
+            continue
+        for item in answer.get("scenes") or []:
+            try:
+                value = str(item.get(key) or "").strip()
+                if value:
+                    out[int(item["index"])] = value
+            except (KeyError, TypeError, ValueError, AttributeError):
+                continue
+    return out, {"provider": "groq", "model": s.LLM_MODEL, "calls": groq.calls, "tokens_used": groq.tokens_used,
+                 "errors": errors}
+
+
+def translate_scenes(scenes: list, language: str) -> tuple[dict[int, str], dict]:
+    """Each scene's OWN text in English (Groq, one entry per scene, so nothing shifts to a neighbouring scene).
+    Returns ({scene index: English}, facts); scenes Groq could not answer are missing (caller falls back)."""
+    items = [{"index": sc.index, "text": sc.text} for sc in scenes]
+    return _groq_batches(TRANSLATE_PROMPT, items, "english", {"language": language})
+
+
+def rules_concrete_query(text: str, tried: list[str]) -> str | None:
+    """Offline rewrite: the line's own content words (first 3, then every other window of 3 and 2 words), not
+    already tried."""
+    lowered = {q.lower() for q in tried}
+    words = content_words(text)
+    windows = [" ".join(words[i:i + k]) for k in (3, 2) for i in range(len(words) - k + 1)]
+    return next((q for q in keyword_queries(words) + windows if q and q.lower() not in lowered), None)
+
+
+def concrete_queries(items: list[tuple[int, str, list[str]]]) -> tuple[dict[int, tuple[str, str]], dict]:
+    """One more concrete query per weak scene: [(index, English text, queries tried)] ->
+    ({index: (query, "groq" | "rules")}, facts). Groq first; the offline rules for anything it did not answer."""
+    asked = [{"index": i, "text": text, "tried": tried} for i, text, tried in items]
+    answers, facts = _groq_batches(REWRITE_PROMPT, asked, "query")
+    out: dict[int, tuple[str, str]] = {}
+    for i, text, tried in items:
+        q = answers.get(i)
+        if q and q.lower() not in {t.lower() for t in tried}:
+            out[i] = (q, "groq")
+        elif (rule := rules_concrete_query(text, tried)):
+            out[i] = (rule, "rules")
+    return out, facts
 
 
 def check_card_suggestion(suggestion, scene_text: str, names: list[str]) -> tuple[str, str | None]:

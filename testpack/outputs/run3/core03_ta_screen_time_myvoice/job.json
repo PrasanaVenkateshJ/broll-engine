@@ -1,0 +1,32 @@
+{
+  "job_id": "ecd9de5f04374ee49cfa95cec0e317bb",
+  "status": "succeeded",
+  "progress": 100,
+  "stage": "done",
+  "input_type": "upload",
+  "parent_job_id": null,
+  "warnings": [
+    "Scene 0 mentions a named person (Watching Vihali): using generic related footage with no faces"
+  ],
+  "error": null,
+  "result": {
+    "files": {
+      "video_16x9.mp4": "http://localhost:8000/api/v1/jobs/ecd9de5f04374ee49cfa95cec0e317bb/files/video_16x9.mp4?expires=1792332976&sig=f3c991a7e6ae2c18ff4309a9373bd2ea114455342e90090db178edbea60c6769",
+      "video_9x16.mp4": "http://localhost:8000/api/v1/jobs/ecd9de5f04374ee49cfa95cec0e317bb/files/video_9x16.mp4?expires=1792332976&sig=0775ebca4cce391de981a6a42a907149562deaf1dbe61ee9064b02d89a12802e",
+      "captions.srt": "http://localhost:8000/api/v1/jobs/ecd9de5f04374ee49cfa95cec0e317bb/files/captions.srt?expires=1792332976&sig=46f9e2c85ed8af62a6d042d440071ac1ecc433f2c57b35a087c89ec326d48a8e",
+      "timeline.json": "http://localhost:8000/api/v1/jobs/ecd9de5f04374ee49cfa95cec0e317bb/files/timeline.json?expires=1792332976&sig=330055147cba79efdec0d7c91b6d31b871d479124810dbd826c4d7c9a4ca89fb",
+      "manifest.json": "http://localhost:8000/api/v1/jobs/ecd9de5f04374ee49cfa95cec0e317bb/files/manifest.json?expires=1792332976&sig=2ff8bc7e06ee80eb66a1afb184dbe3c79414adee8b64d8ed5e248800e1a3417c",
+      "thumb_000.jpg": "http://localhost:8000/api/v1/jobs/ecd9de5f04374ee49cfa95cec0e317bb/files/thumb_000.jpg?expires=1792332976&sig=7eb7452919021350f65781c613158ef3bb14c16c2d8adbad35b7bcf35e8f6de4",
+      "thumb_001.jpg": "http://localhost:8000/api/v1/jobs/ecd9de5f04374ee49cfa95cec0e317bb/files/thumb_001.jpg?expires=1792332976&sig=df75793be0d202ac89c00a8479506f70bcadbe2cab24dcc64a7801c587ea7efe",
+      "thumb_002.jpg": "http://localhost:8000/api/v1/jobs/ecd9de5f04374ee49cfa95cec0e317bb/files/thumb_002.jpg?expires=1792332976&sig=7319bed37b31ca65b521657b474c852d75b0554c26d5476dcdcbbbae5e9d3ce2",
+      "thumb_003.jpg": "http://localhost:8000/api/v1/jobs/ecd9de5f04374ee49cfa95cec0e317bb/files/thumb_003.jpg?expires=1792332976&sig=c9c1ed59221531d916a19fe23e4482bffb5fcdd58183e03b44f9f3eb6ef4c6f5",
+      "thumb_004.jpg": "http://localhost:8000/api/v1/jobs/ecd9de5f04374ee49cfa95cec0e317bb/files/thumb_004.jpg?expires=1792332976&sig=f65137b96fdcdd33656a86faec589449f69a2ae0331ebeb2d02db0bbce6d2f6f"
+    }
+  },
+  "created_at": "2026-10-18T13:11:47.059227+00:00",
+  "started_at": "2026-10-18T13:11:48.051439+00:00",
+  "finished_at": "2026-10-18T13:16:01.771173+00:00",
+  "links": {
+    "self": "http://localhost:8000/api/v1/jobs/ecd9de5f04374ee49cfa95cec0e317bb"
+  }
+}

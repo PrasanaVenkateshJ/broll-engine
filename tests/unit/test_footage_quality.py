@@ -182,6 +182,7 @@ def test_a_text_heavy_picture_loses_a_near_tie(tmp_path, monkeypatch, two_source
 def test_without_a_judge_a_near_miss_is_not_used(tmp_path, monkeypatch, two_sources):
     monkeypatch.setattr(Scored, "SCORES", [0.20])
     monkeypatch.setattr(Photo, "SCORES", [0.19])
+    setenv(monkeypatch, BEST_EFFORT_MIN_SCORE=0)  # the adaptive pass alone (best-effort footage tested elsewhere)
     scenes, meanings, plans = make([LINE])
     sel = select_clip(scenes[0], meanings[0], plans[0], context(tmp_path))
     assert sel.candidate.generated and "adaptive pass off" in sel.reason
@@ -206,7 +207,7 @@ def test_a_near_miss_the_judge_dislikes_is_not_used(tmp_path, monkeypatch, two_s
     monkeypatch.setattr(Scored, "SCORES", [0.20])
     monkeypatch.setattr(Scored, "VLM", [2])
     monkeypatch.setattr(Photo, "SCORES", [0.10])
-    setenv(monkeypatch, VLM_PROVIDER="mock")
+    setenv(monkeypatch, VLM_PROVIDER="mock", BEST_EFFORT_MIN_SCORE=0)
     scenes, meanings, plans = make([LINE])
     selections, _ = select_clips(scenes, meanings, plans, context(tmp_path, judge=vlm.get_judge()))
     assert selections[0].candidate.generated and "rated the near-miss candidates below 4/5" in selections[0].reason

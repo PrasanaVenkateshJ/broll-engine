@@ -110,7 +110,7 @@ def test_corrupted_download_is_skipped_for_the_next_candidate(tmp_path, monkeypa
 
 
 def test_below_threshold_moves_on_and_ends_with_generated(tmp_path, monkeypatch):
-    setenv(monkeypatch, STOCK_MIN_SCORE="0.5")  # mock scores are at most 0.30
+    setenv(monkeypatch, STOCK_MIN_SCORE="0.5", BEST_EFFORT_MIN_SCORE="0.5")  # mock scores are at most 0.30
     scenes, meanings, plans = make(["Small shops open early."])
     sel = select_clip(scenes[0], meanings[0], plans[0], context(tmp_path))
     assert sel.candidate.provider == "generated"
