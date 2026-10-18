@@ -1,0 +1,12 @@
+1
+00:00:00,000 --> 00:00:05,200
+When turbines turn slowly on a green
+hill, engineers climb a tower to check the
+
+2
+00:00:05,200 --> 00:00:05,840
+blades.
+
+3
+00:00:06,080 --> 00:00:08,780
+Clean electricity flows to the town below.

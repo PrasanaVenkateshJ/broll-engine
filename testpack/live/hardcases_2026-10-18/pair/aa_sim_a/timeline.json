@@ -1,0 +1,507 @@
+{
+  "job_id": "c98590e4e691491e834d29caf6ad407c",
+  "input_type": "script",
+  "duration": 9.725,
+  "language": "en",
+  "scenes": [
+    {
+      "index": 0,
+      "text": "A small bakery opens at dawn.",
+      "start": 0.0,
+      "end": 2.25,
+      "duration": 2.25,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "baker unlocking bakery door",
+      "queries": [
+        "small bakery doors opening",
+        "golden sunrise over street",
+        "bakery interior with morning light",
+        "baker unlocking bakery door",
+        "soft golden light flooding street"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "43653",
+      "page_url": "https://pixabay.com/videos/id-43653/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "aghyadnajjar on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.253 >= 0.22 for query 'baker unlocking bakery door' (best of 15 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.247); logo check ok (logo prob 0.01); 3 clip frame(s) passed the logo check (max logo prob 0.04); video scored >= 0.25: photo sources not searched",
+      "relevance_score": 0.2528,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2528,
+        "thumbnail_score": 0.2473,
+        "frame_scores": [
+          0.2473,
+          0.2502,
+          0.261
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0001,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.2928,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_000.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0089,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.16,
+            "logo_prob": 0.0218,
+            "scene_score": 0.2997,
+            "result": "ok"
+          },
+          {
+            "time": 6.49,
+            "logo_prob": 0.0226,
+            "scene_score": 0.2977,
+            "result": "ok"
+          },
+          {
+            "time": 10.82,
+            "logo_prob": 0.0405,
+            "scene_score": 0.2896,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:43653",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2020/07/02/43653-436237688_medium.mp4",
+        "final_score": 0.2928,
+        "width": 1280,
+        "height": 720,
+        "duration": 13.0
+      },
+      "understanding": {
+        "queries": [
+          "small bakery doors opening",
+          "golden sunrise over street",
+          "bakery interior with morning light",
+          "baker unlocking bakery door",
+          "soft golden light flooding street"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: The queries show the bakery beginning its day at dawn: the opening doors convey the literal action, sunrise acts as a visual metaphor for dawn, the interior lighting sets the place, the baker unlockin",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "small bakery",
+        "card": {
+          "headline": "SMALL BAKERY",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "48b336d82f9d562a"
+      },
+      "safety": {
+        "queries": [
+          "small bakery doors opening",
+          "golden sunrise over street",
+          "bakery interior with morning light",
+          "baker unlocking bakery door",
+          "soft golden light flooding street"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_000_6117d480ae48ae5a.mp4",
+          "cache_key": "6117d480ae48ae5a",
+          "frames": 68,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "A",
+          "start": 0.0,
+          "end": 0.38
+        },
+        {
+          "text": "small",
+          "start": 0.38,
+          "end": 0.68
+        },
+        {
+          "text": "bakery",
+          "start": 0.68,
+          "end": 1.06
+        },
+        {
+          "text": "opens",
+          "start": 1.06,
+          "end": 1.54
+        },
+        {
+          "text": "at",
+          "start": 1.54,
+          "end": 1.72
+        },
+        {
+          "text": "dawn.",
+          "start": 1.72,
+          "end": 1.96
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "text": "The baker needs dough and slides trays of bread into a hot oven, neighbors queue outside for the first warm loaves.",
+      "start": 2.25,
+      "end": 9.725,
+      "duration": 7.475,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "steam rising from oven",
+      "queries": [
+        "baker kneading dough",
+        "steam rising from oven",
+        "cozy bakery kitchen interior",
+        "people queuing outside bakery",
+        "warm glow of fresh bread"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "267",
+      "page_url": "https://pixabay.com/videos/id-267/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Life-Of-Vids on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.267 >= 0.22 for query 'steam rising from oven' (best of 5 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.264); logo check ok (logo prob 0.01); 3 clip frame(s) passed the logo check (max logo prob 0.03); video scored >= 0.25: photo sources not searched",
+      "relevance_score": 0.2665,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2665,
+        "thumbnail_score": 0.2638,
+        "frame_scores": [
+          0.2638,
+          0.2673,
+          0.2683
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0001,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.3065,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_001.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0057,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 4.22,
+            "logo_prob": 0.0271,
+            "scene_score": 0.2603,
+            "result": "ok"
+          },
+          {
+            "time": 12.67,
+            "logo_prob": 0.0267,
+            "scene_score": 0.2642,
+            "result": "ok"
+          },
+          {
+            "time": 21.12,
+            "logo_prob": 0.0179,
+            "scene_score": 0.2666,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:267",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2015/08/10/267-135875613_medium.mp4",
+        "final_score": 0.3065,
+        "width": 1280,
+        "height": 720,
+        "duration": 25.0
+      },
+      "understanding": {
+        "queries": [
+          "baker kneading dough",
+          "steam rising from oven",
+          "cozy bakery kitchen interior",
+          "people queuing outside bakery",
+          "warm glow of fresh bread"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: These clips illustrate the baker preparing bread and customers waiting: kneading dough captures the core activity, steam provides a metaphor for heat, the kitchen setting grounds the scene, the queue ",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "baker needs",
+        "card": {
+          "headline": "BAKER NEEDS",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "15a3245150227053"
+      },
+      "safety": {
+        "queries": [
+          "baker kneading dough",
+          "steam rising from oven",
+          "cozy bakery kitchen interior",
+          "people queuing outside bakery",
+          "warm glow of fresh bread"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_001_8c2b1f4016445efd.mp4",
+          "cache_key": "8c2b1f4016445efd",
+          "frames": 224,
+          "look": "eq=brightness=-0.100:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "The",
+          "start": 2.54,
+          "end": 2.6
+        },
+        {
+          "text": "baker",
+          "start": 2.6,
+          "end": 2.86
+        },
+        {
+          "text": "needs",
+          "start": 2.86,
+          "end": 3.18
+        },
+        {
+          "text": "dough",
+          "start": 3.18,
+          "end": 3.52
+        },
+        {
+          "text": "and",
+          "start": 3.52,
+          "end": 3.84
+        },
+        {
+          "text": "slides",
+          "start": 3.84,
+          "end": 4.18
+        },
+        {
+          "text": "trays",
+          "start": 4.18,
+          "end": 4.54
+        },
+        {
+          "text": "of",
+          "start": 4.54,
+          "end": 4.82
+        },
+        {
+          "text": "bread",
+          "start": 4.82,
+          "end": 5.08
+        },
+        {
+          "text": "into",
+          "start": 5.08,
+          "end": 5.32
+        },
+        {
+          "text": "a",
+          "start": 5.32,
+          "end": 5.48
+        },
+        {
+          "text": "hot",
+          "start": 5.48,
+          "end": 5.7
+        },
+        {
+          "text": "oven,",
+          "start": 5.7,
+          "end": 5.96
+        },
+        {
+          "text": "neighbors",
+          "start": 6.56,
+          "end": 6.92
+        },
+        {
+          "text": "queue",
+          "start": 6.92,
+          "end": 7.28
+        },
+        {
+          "text": "outside",
+          "start": 7.28,
+          "end": 7.66
+        },
+        {
+          "text": "for",
+          "start": 7.66,
+          "end": 8.02
+        },
+        {
+          "text": "the",
+          "start": 8.02,
+          "end": 8.14
+        },
+        {
+          "text": "first",
+          "start": 8.14,
+          "end": 8.4
+        },
+        {
+          "text": "warm",
+          "start": 8.4,
+          "end": 8.72
+        },
+        {
+          "text": "loaves.",
+          "start": 8.72,
+          "end": 9.22
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "aspect_ratio": "16:9",
+      "file": "video_16x9.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 9.734
+    }
+  ]
+}

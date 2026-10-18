@@ -158,3 +158,7 @@ minutes, so a few more 10-minute jobs (about $0.17 each) would use the rest; kee
 The 3 h timeout is about twice the estimated time of the longest allowed job; if a job were cut off, the container is
 restarted and the job is queued once more, then fails with `JOB_INTERRUPTED` (section 4).
 
+Measured afterwards (2026-10-18, live hard-case run): the 587 s narration took **1,747.57 s** on Modal (3.0x real time, not the
+4,650 s assumed above), so it cost about 1,748 x $0.0000373 = **$0.065**, not $0.17; the two simultaneous short jobs took 67.9 s and
+99.9 s. Estimates in the table above are therefore on the safe (high) side for long audio.
+

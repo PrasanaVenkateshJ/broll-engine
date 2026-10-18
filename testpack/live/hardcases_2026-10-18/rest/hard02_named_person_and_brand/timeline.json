@@ -1,0 +1,1018 @@
+{
+  "job_id": "03f8f34611824c189e91cf24644460ab",
+  "input_type": "script",
+  "duration": 19.525,
+  "language": "en",
+  "scenes": [
+    {
+      "index": 0,
+      "text": "Satya Nadella has been the chief executive of Microsoft since 2014.",
+      "start": 0.0,
+      "end": 5.16,
+      "duration": 5.16,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "corporate leader in office",
+      "queries": [
+        "corporate leader in office",
+        "captain steering a ship",
+        "modern office building lobby",
+        "executive reviewing strategy documents",
+        "confident business atmosphere"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": true,
+        "brand": true,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "1035",
+      "page_url": "https://pixabay.com/videos/id-1035/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Coverr-Free-Footage on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.257 >= 0.22 for query 'corporate leader in office' (best of 15 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.245); logo check ok (logo prob 0.02); 3 clip frame(s) passed the logo check (max logo prob 0.06); video scored >= 0.25: photo sources not searched",
+      "relevance_score": 0.2574,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2574,
+        "thumbnail_score": 0.2453,
+        "frame_scores": [
+          0.2453,
+          0.2561,
+          0.2709
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0002,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.2974,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_000.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0228,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.6,
+            "logo_prob": 0.0486,
+            "scene_score": 0.2565,
+            "result": "ok"
+          },
+          {
+            "time": 7.8,
+            "logo_prob": 0.0533,
+            "scene_score": 0.2582,
+            "result": "ok"
+          },
+          {
+            "time": 13.0,
+            "logo_prob": 0.0593,
+            "scene_score": 0.2564,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:1035",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2015/10/16/1035-142621331_medium.mp4",
+        "final_score": 0.2974,
+        "width": 1280,
+        "height": 720,
+        "duration": 16.0
+      },
+      "understanding": {
+        "queries": [
+          "corporate leader in office",
+          "captain steering a ship",
+          "modern office building lobby",
+          "executive reviewing strategy documents",
+          "confident business atmosphere"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": true,
+          "brand": true,
+          "sensitive": false
+        },
+        "reason": "groq: Shows a tech CEO’s leadership role without naming brands or people.",
+        "source": "groq",
+        "names": [
+          "Satya Nadella",
+          "Microsoft"
+        ],
+        "number": null,
+        "keyword": "chief executive",
+        "card": {
+          "headline": "2014",
+          "subtitle": "",
+          "number": "2014",
+          "kind": "year",
+          "source": "narration",
+          "numbers_shown": [
+            "2014"
+          ]
+        },
+        "story_sensitive": false,
+        "fingerprint": "69cd84a25d5cabb9"
+      },
+      "safety": {
+        "queries": [
+          "corporate leader in office",
+          "captain steering a ship",
+          "modern office building lobby",
+          "executive reviewing strategy documents",
+          "confident business atmosphere"
+        ],
+        "exclude_terms": [
+          "satya nadella",
+          "microsoft",
+          "face",
+          "faces",
+          "portrait",
+          "portraits",
+          "close-up",
+          "closeup",
+          "close up",
+          "headshot",
+          "selfie",
+          "person close-up",
+          "logo",
+          "logos",
+          "brand",
+          "trademark"
+        ],
+        "no_faces": true,
+        "notes": [
+          "named person: no faces, name removed from queries",
+          "brand: logos excluded, brand removed from queries"
+        ]
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_000_bd5241fa91e4cd26.mp4",
+          "cache_key": "bd5241fa91e4cd26",
+          "frames": 155,
+          "look": "eq=brightness=-0.038:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Satya",
+          "start": 0.0,
+          "end": 0.58
+        },
+        {
+          "text": "Nadella",
+          "start": 0.58,
+          "end": 1.08
+        },
+        {
+          "text": "has",
+          "start": 1.08,
+          "end": 1.56
+        },
+        {
+          "text": "been",
+          "start": 1.56,
+          "end": 1.7
+        },
+        {
+          "text": "the",
+          "start": 1.7,
+          "end": 1.84
+        },
+        {
+          "text": "chief",
+          "start": 1.84,
+          "end": 2.06
+        },
+        {
+          "text": "executive",
+          "start": 2.06,
+          "end": 2.58
+        },
+        {
+          "text": "of",
+          "start": 2.58,
+          "end": 2.84
+        },
+        {
+          "text": "Microsoft",
+          "start": 2.84,
+          "end": 3.28
+        },
+        {
+          "text": "since",
+          "start": 3.28,
+          "end": 3.98
+        },
+        {
+          "text": "2014.",
+          "start": 3.98,
+          "end": 4.74
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "text": "Sachin Tendulkar scored 100 international centuries in his cricket career.",
+      "start": 5.16,
+      "end": 10.73,
+      "duration": 5.57,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "large cricket stadium",
+      "queries": [
+        "cricket player celebrating century",
+        "mountain of trophies",
+        "large cricket stadium",
+        "batsman hitting a ball",
+        "triumphant crowd cheering"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": true,
+        "named_person": true,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "wikimedia",
+      "clip_id": "176397849",
+      "page_url": "https://commons.wikimedia.org/wiki/File:Bangladesh_vs_West_Indies_cricket_match_Sher-e-Bangla_National_Cricket_Stadium_Mirpur_Dhaka_2021-01-20_(PID-0031430).jpg",
+      "licence": "Public domain",
+      "licence_url": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "attribution": "Press Information Department, via Wikimedia Commons, Public domain",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "statistic line on real footage: number badge '100' from the narration drawn over the clip (STATISTIC_OVERLAY=true); wikimedia: score 0.248 >= 0.22 for query 'large cricket stadium' (best of 15 candidates, order bonus +0.04); logo check ok (logo prob 0.03); 1 clip frame(s) passed the logo check (max logo prob 0.04); earlier: pixabay_video: best score 0.213 < 0.22; pixabay_image_motion:7015983 download failed (HTTP 429); pixabay_image_motion:7874036 download failed (HTTP 429); pixabay_image_motion: no passing candidate could be downloaded; pixabay_image_motion: early exit had stopped after 6 candidates; scored the other 9; pixabay_image_motion:8444899 download failed (HTTP 429); pixabay_image_motion:7015983 download failed (HTTP 429); pixabay_image_motion:5365719 download failed (HTTP 429); pixabay_image_motion: no passing candidate could be downloaded; wikimedia: logo check rejected 1, best: wikimedia:176397786 (logo prob 0.82, scene 0.265) (2 checked)",
+      "relevance_score": 0.2483,
+      "overlay": true,
+      "overlay_card": {
+        "headline": "100",
+        "subtitle": "international centuries in his cricket",
+        "kind": "number",
+        "source": "narration",
+        "numbers_shown": [
+          "100"
+        ],
+        "style": "badge (lower third, fades in)"
+      },
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2483,
+        "thumbnail_score": 0.2483,
+        "frame_scores": null,
+        "frames_scored": 1,
+        "text_prob": 0.0007,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.2883
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_001.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0275,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.0407,
+            "scene_score": 0.2268,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "wikimedia:176397849",
+        "kind": "image",
+        "title": "Bangladesh vs West Indies cricket match Sher-e-Bangla National Cricket Stadium Mirpur Dhaka 2021-01-20 (PID-0031430)",
+        "source_url": "https://upload.wikimedia.org/wikipedia/commons/a/a6/Bangladesh_vs_West_Indies_cricket_match_Sher-e-Bangla_National_Cricket_Stadium_Mirpur_Dhaka_2021-01-20_%28PID-0031430%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "final_score": 0.2883,
+        "width": 1800,
+        "height": 1037,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "cricket player celebrating century",
+          "mountain of trophies",
+          "large cricket stadium",
+          "batsman hitting a ball",
+          "triumphant crowd cheering"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": true,
+          "named_person": true,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Visually represents the record‑breaking cricket achievement.",
+        "source": "groq",
+        "names": [
+          "Sachin Tendulkar"
+        ],
+        "number": "100",
+        "keyword": "scored international centuries cricket c",
+        "card": {
+          "headline": "100",
+          "subtitle": "international centuries in his cricket",
+          "number": "100",
+          "kind": "number",
+          "source": "narration",
+          "numbers_shown": [
+            "100"
+          ]
+        },
+        "story_sensitive": false,
+        "fingerprint": "aaba7410a02f43d4"
+      },
+      "safety": {
+        "queries": [
+          "cricket player celebrating century",
+          "mountain of trophies",
+          "large cricket stadium",
+          "batsman hitting a ball",
+          "triumphant crowd cheering"
+        ],
+        "exclude_terms": [
+          "sachin tendulkar",
+          "face",
+          "faces",
+          "portrait",
+          "portraits",
+          "close-up",
+          "closeup",
+          "close up",
+          "headshot",
+          "selfie",
+          "person close-up"
+        ],
+        "no_faces": true,
+        "notes": [
+          "named person: no faces, name removed from queries"
+        ]
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_001_88017b6c14f0f1b4.mp4",
+          "cache_key": "88017b6c14f0f1b4",
+          "frames": 167,
+          "look": "eq=brightness=-0.077:saturation=0.899",
+          "overlay": {
+            "headline": "100",
+            "subtitle": "international centuries in his cricket",
+            "source": "narration"
+          },
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "y",
+            "window_fraction": 0.9764,
+            "full_frame_score": 0.237,
+            "windows": {
+              "centre": {
+                "start": 0.0118,
+                "score": 0.236
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "subject_span": [
+              0.4,
+              0.8545
+            ],
+            "windows_cutting_subject": [],
+            "reason": "window 'centre' chosen (0.236; best window 0.236; whole frame 0.237; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Sachin",
+          "start": 5.58,
+          "end": 5.96
+        },
+        {
+          "text": "Tendulkar",
+          "start": 5.96,
+          "end": 6.54
+        },
+        {
+          "text": "scored",
+          "start": 6.54,
+          "end": 7.04
+        },
+        {
+          "text": "100",
+          "start": 7.04,
+          "end": 7.72
+        },
+        {
+          "text": "international",
+          "start": 7.72,
+          "end": 8.24
+        },
+        {
+          "text": "centuries",
+          "start": 8.24,
+          "end": 9.04
+        },
+        {
+          "text": "in",
+          "start": 9.04,
+          "end": 9.54
+        },
+        {
+          "text": "his",
+          "start": 9.54,
+          "end": 9.68
+        },
+        {
+          "text": "cricket",
+          "start": 9.68,
+          "end": 9.92
+        },
+        {
+          "text": "career.",
+          "start": 9.92,
+          "end": 10.44
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "text": "Many people wrote their first lines of code on an Apple computer.",
+      "start": 10.73,
+      "end": 14.93,
+      "duration": 4.2,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "beginners coding on laptops",
+      "queries": [
+        "beginners coding on laptops",
+        "seedling growing from keyboard",
+        "home office desk",
+        "hands typing on laptop",
+        "curious hopeful vibe"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": true,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "43559",
+      "page_url": "https://pixabay.com/videos/id-43559/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "PhotoDhaba on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.286 >= 0.22 for query 'beginners coding on laptops' (best of 6 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.266); logo check ok (logo prob 0.19); 3 clip frame(s) passed the logo check (max logo prob 0.10); video scored >= 0.25: photo sources not searched",
+      "relevance_score": 0.2861,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2861,
+        "thumbnail_score": 0.266,
+        "frame_scores": [
+          0.266,
+          0.297,
+          0.2952
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.3261,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_002.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.1875,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.99,
+            "logo_prob": 0.0816,
+            "scene_score": 0.2855,
+            "result": "ok"
+          },
+          {
+            "time": 8.98,
+            "logo_prob": 0.0952,
+            "scene_score": 0.2793,
+            "result": "ok"
+          },
+          {
+            "time": 14.97,
+            "logo_prob": 0.0419,
+            "scene_score": 0.2914,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:43559",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2020/07/01/43559-436237492_medium.mp4",
+        "final_score": 0.3261,
+        "width": 1280,
+        "height": 720,
+        "duration": 18.0
+      },
+      "understanding": {
+        "queries": [
+          "beginners coding on laptops",
+          "seedling growing from keyboard",
+          "home office desk",
+          "hands typing on laptop",
+          "curious hopeful vibe"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": true,
+          "sensitive": false
+        },
+        "reason": "groq: Depicts people learning to code on personal computers without showing brand logos.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "people wrote",
+        "card": {
+          "headline": "PEOPLE WROTE",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "09ecef4f71e51483"
+      },
+      "safety": {
+        "queries": [
+          "beginners coding on laptops",
+          "seedling growing from keyboard",
+          "home office desk",
+          "hands typing on laptop",
+          "curious hopeful vibe"
+        ],
+        "exclude_terms": [
+          "logo",
+          "logos",
+          "brand",
+          "trademark"
+        ],
+        "no_faces": false,
+        "notes": [
+          "brand: logos excluded, brand removed from queries"
+        ]
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_002_f4a6c2602caaad19.mp4",
+          "cache_key": "f4a6c2602caaad19",
+          "frames": 126,
+          "look": "eq=brightness=0.063:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Many",
+          "start": 11.02,
+          "end": 11.16
+        },
+        {
+          "text": "people",
+          "start": 11.16,
+          "end": 11.5
+        },
+        {
+          "text": "wrote",
+          "start": 11.5,
+          "end": 11.78
+        },
+        {
+          "text": "their",
+          "start": 11.78,
+          "end": 11.98
+        },
+        {
+          "text": "first",
+          "start": 11.98,
+          "end": 12.3
+        },
+        {
+          "text": "lines",
+          "start": 12.3,
+          "end": 12.68
+        },
+        {
+          "text": "of",
+          "start": 12.68,
+          "end": 12.86
+        },
+        {
+          "text": "code",
+          "start": 12.86,
+          "end": 13.22
+        },
+        {
+          "text": "on",
+          "start": 13.22,
+          "end": 13.72
+        },
+        {
+          "text": "an",
+          "start": 13.72,
+          "end": 13.84
+        },
+        {
+          "text": "Apple",
+          "start": 13.84,
+          "end": 14.06
+        },
+        {
+          "text": "computer.",
+          "start": 14.06,
+          "end": 14.6
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "text": "Coca -Cola is sold in almost every country in the world.",
+      "start": 14.93,
+      "end": 19.525,
+      "duration": 4.595,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "international airport duty-free",
+      "queries": [
+        "soft drink bottles worldwide",
+        "world map of soda cans",
+        "international airport duty-free",
+        "workers stocking beverage cases",
+        "bright bustling commercial"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": true,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "30872",
+      "page_url": "https://pixabay.com/videos/id-30872/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Expatsiam on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.227 >= 0.22 for query 'international airport duty-free' (best of 15 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.225); logo check ok (logo prob 0.01); 3 clip frame(s) passed the logo check (max logo prob 0.04); video preferred over photo-motion (pixabay_image_motion best 0.290 is not more than 0.03 above 0.267)",
+      "relevance_score": 0.2267,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2267,
+        "thumbnail_score": 0.2253,
+        "frame_scores": [
+          0.2253,
+          0.2289,
+          0.226
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.2667,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_003.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0118,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 3.34,
+            "logo_prob": 0.0237,
+            "scene_score": 0.2312,
+            "result": "ok"
+          },
+          {
+            "time": 10.01,
+            "logo_prob": 0.0349,
+            "scene_score": 0.2073,
+            "result": "ok"
+          },
+          {
+            "time": 16.68,
+            "logo_prob": 0.04,
+            "scene_score": 0.2316,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:30872",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2020/01/04/30872-382770848_medium.mp4",
+        "final_score": 0.2667,
+        "width": 1280,
+        "height": 720,
+        "duration": 20.0
+      },
+      "understanding": {
+        "queries": [
+          "soft drink bottles worldwide",
+          "world map of soda cans",
+          "international airport duty-free",
+          "workers stocking beverage cases",
+          "bright bustling commercial"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": true,
+          "sensitive": false
+        },
+        "reason": "groq: Illustrates the global reach of a popular beverage without using brand names.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "coca cola",
+        "card": {
+          "headline": "COCA COLA",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "b81f3b6462aa8e25"
+      },
+      "safety": {
+        "queries": [
+          "soft drink bottles worldwide",
+          "world map of soda cans",
+          "international airport duty-free",
+          "workers stocking beverage cases",
+          "bright bustling commercial"
+        ],
+        "exclude_terms": [
+          "logo",
+          "logos",
+          "brand",
+          "trademark"
+        ],
+        "no_faces": false,
+        "notes": [
+          "brand: logos excluded, brand removed from queries"
+        ]
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_003_225deddfffda3aac.mp4",
+          "cache_key": "225deddfffda3aac",
+          "frames": 138,
+          "look": "eq=brightness=0.010:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Coca",
+          "start": 15.26,
+          "end": 15.44
+        },
+        {
+          "text": "-Cola",
+          "start": 15.44,
+          "end": 15.88
+        },
+        {
+          "text": "is",
+          "start": 15.88,
+          "end": 16.24
+        },
+        {
+          "text": "sold",
+          "start": 16.24,
+          "end": 16.6
+        },
+        {
+          "text": "in",
+          "start": 16.6,
+          "end": 16.96
+        },
+        {
+          "text": "almost",
+          "start": 16.96,
+          "end": 17.28
+        },
+        {
+          "text": "every",
+          "start": 17.28,
+          "end": 17.72
+        },
+        {
+          "text": "country",
+          "start": 17.72,
+          "end": 18.16
+        },
+        {
+          "text": "in",
+          "start": 18.16,
+          "end": 18.4
+        },
+        {
+          "text": "the",
+          "start": 18.4,
+          "end": 18.5
+        },
+        {
+          "text": "world.",
+          "start": 18.5,
+          "end": 18.86
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "aspect_ratio": "16:9",
+      "file": "video_16x9.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 19.534
+    }
+  ]
+}

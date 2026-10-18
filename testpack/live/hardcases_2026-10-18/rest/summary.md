@@ -1,0 +1,16 @@
+# Batch run summary
+
+- API: https://prasanavenkateshj--broll-studio.us-east.modal.run
+- Inputs: 7 | succeeded: 3 | failed / rejected / other: 4
+- Narration total (succeeded): 636.7 s
+- Turnaround of succeeded jobs: mean 650.4 s, max 1747.6 s
+
+| input | job_id | status | error_code | narration_seconds | turnaround_seconds | scenes | warnings_count |
+|---|---|---|---|---|---|---|---|
+| hard02_named_person_and_brand | 03f8f34611824c189e91cf24644460ab | succeeded |  | 19.525 | 78.48 | 4 | 5 |
+| hard03_double_meanings | 5f6a40965ca646e5953fcd7844365041 | succeeded |  | 30.175 | 125.25 | 9 | 0 |
+| hard07_silent_audio | 1ee1577968134da5a4782d2a24f548e0 | failed | NO_SPEECH_DETECTED |  | 7.58 |  | 0 |
+| hard08_music_only_chords | f7c8a9d368f944f294924c05e408e7e1 | failed | MUSIC_ONLY_AUDIO |  | 11.31 |  | 0 |
+| hard09_ten_minute | 201a0401c2f842fba61dabda62013a09 | succeeded |  | 587.008 | 1747.57 | 123 | 12 |
+| hard09_wrong_type_text_renamed |  | rejected | UNSUPPORTED_FILE_TYPE |  |  |  | 0 |
+| hard10_empty_script |  | rejected | EMPTY_SCRIPT |  |  |  | 0 |

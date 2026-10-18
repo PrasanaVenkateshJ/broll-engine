@@ -119,8 +119,8 @@ and about $0.0115 per cold one-job visit [`testpack/notes/cost_modal.md` section
 - Tamil is still below English; one Tamil scene failed because Whisper misheard the speech itself.
 - The judge is a Groq *preview* model with a small free quota, so it rates only a few uncertain scenes per job.
 - Story moments ("a storm rolled in") and lines naming specific items stay hard for stock footage.
-- A 60 s job takes about 5.5 minutes on this PC; on Modal's 2 cores it is probably slower (only an 8.75 s job was
-  measured there: 59.99 s).
+- A 60 s job takes about 5.5 minutes on this PC; on Modal's 2 cores a 587 s narration took 1,747.57 s (3.0x real time) and an 8.75 s one 59.99 s
+  [`testpack/live/hardcases_2026-10-18/`]; in that long job Groq's rate limit forced the offline rules for 81 of 123 scenes.
 - Docker Compose and the MinIO test were not re-run in the last sessions; clip swap was not re-timed in the test pack
   (earlier real run: full render 108.9 s vs swap 23.5 s); the sailboat crop fix is tested but was not re-rendered.
 

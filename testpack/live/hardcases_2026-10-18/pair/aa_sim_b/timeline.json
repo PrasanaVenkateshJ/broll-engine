@@ -1,0 +1,487 @@
+{
+  "job_id": "a912a8cb650c4f8eb9f9142f01bf286c",
+  "input_type": "script",
+  "duration": 9.075,
+  "language": "en",
+  "scenes": [
+    {
+      "index": 0,
+      "text": "When turbines turn slowly on a green hill, engineers climb a tower to check the blades.",
+      "start": 0.0,
+      "end": 5.84,
+      "duration": 5.84,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "green hill countryside",
+      "queries": [
+        "wind turbines generating power",
+        "spinning white blades",
+        "green hill countryside",
+        "engineer climbing tower",
+        "calm sunrise over fields"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "22477",
+      "page_url": "https://pixabay.com/videos/id-22477/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Lionheart84 on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.245 >= 0.22 for query 'green hill countryside' (best of 15 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.241); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.00); video preferred over photo-motion (pixabay_image_motion best 0.295 is not more than 0.03 above 0.285)",
+      "relevance_score": 0.245,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.245,
+        "thumbnail_score": 0.2406,
+        "frame_scores": [
+          0.2406,
+          0.2453,
+          0.2492
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.285,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_000.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0001,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 6.48,
+            "logo_prob": 0.0002,
+            "scene_score": 0.2475,
+            "result": "ok"
+          },
+          {
+            "time": 19.43,
+            "logo_prob": 0.0002,
+            "scene_score": 0.2563,
+            "result": "ok"
+          },
+          {
+            "time": 32.39,
+            "logo_prob": 0.0003,
+            "scene_score": 0.2533,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:22477",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2019/03/31/22477-328008678_medium.mp4",
+        "final_score": 0.285,
+        "width": 2560,
+        "height": 1440,
+        "duration": 39.0
+      },
+      "understanding": {
+        "queries": [
+          "wind turbines generating power",
+          "spinning white blades",
+          "green hill countryside",
+          "engineer climbing tower",
+          "calm sunrise over fields"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows turbines producing renewable energy, uses spinning blades as a concrete metaphor, places the scene on a green hill, depicts an engineer climbing to inspect the blades, and conveys a calm, hopefu",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "slowly",
+        "card": {
+          "headline": "SLOWLY",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "af53668a50049dc9"
+      },
+      "safety": {
+        "queries": [
+          "wind turbines generating power",
+          "spinning white blades",
+          "green hill countryside",
+          "engineer climbing tower",
+          "calm sunrise over fields"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_000_3592501d9903e404.mp4",
+          "cache_key": "3592501d9903e404",
+          "frames": 175,
+          "look": "eq=brightness=-0.031:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "When",
+          "start": 0.0,
+          "end": 0.52
+        },
+        {
+          "text": "turbines",
+          "start": 0.52,
+          "end": 1.0
+        },
+        {
+          "text": "turn",
+          "start": 1.0,
+          "end": 1.42
+        },
+        {
+          "text": "slowly",
+          "start": 1.42,
+          "end": 1.9
+        },
+        {
+          "text": "on",
+          "start": 1.9,
+          "end": 2.16
+        },
+        {
+          "text": "a",
+          "start": 2.16,
+          "end": 2.28
+        },
+        {
+          "text": "green",
+          "start": 2.28,
+          "end": 2.44
+        },
+        {
+          "text": "hill,",
+          "start": 2.44,
+          "end": 2.82
+        },
+        {
+          "text": "engineers",
+          "start": 3.32,
+          "end": 3.7
+        },
+        {
+          "text": "climb",
+          "start": 3.7,
+          "end": 4.16
+        },
+        {
+          "text": "a",
+          "start": 4.16,
+          "end": 4.28
+        },
+        {
+          "text": "tower",
+          "start": 4.28,
+          "end": 4.62
+        },
+        {
+          "text": "to",
+          "start": 4.62,
+          "end": 4.82
+        },
+        {
+          "text": "check",
+          "start": 4.82,
+          "end": 5.02
+        },
+        {
+          "text": "the",
+          "start": 5.02,
+          "end": 5.2
+        },
+        {
+          "text": "blades.",
+          "start": 5.2,
+          "end": 5.6
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "text": "Clean electricity flows to the town below.",
+      "start": 5.84,
+      "end": 9.075,
+      "duration": 3.235,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "suburban town streets",
+      "queries": [
+        "clean electricity powering town",
+        "bright light flowing",
+        "suburban town streets",
+        "power lines transmitting energy",
+        "hopeful bright evening"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "31094",
+      "page_url": "https://pixabay.com/videos/id-31094/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Preditorcuts on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.263 >= 0.22 for query 'suburban town streets' (best of 12 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.253); logo check ok (logo prob 0.06); 3 clip frame(s) passed the logo check (max logo prob 0.10); video scored >= 0.25: photo sources not searched",
+      "relevance_score": 0.2625,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2625,
+        "thumbnail_score": 0.2525,
+        "frame_scores": [
+          0.2525,
+          0.2655,
+          0.2695
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.3025,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_001.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0607,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.5,
+            "logo_prob": 0.0388,
+            "scene_score": 0.2663,
+            "result": "ok"
+          },
+          {
+            "time": 7.51,
+            "logo_prob": 0.0505,
+            "scene_score": 0.2689,
+            "result": "ok"
+          },
+          {
+            "time": 12.52,
+            "logo_prob": 0.0994,
+            "scene_score": 0.251,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:31094",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2020/01/09/31094-384511744_medium.mp4",
+        "final_score": 0.3025,
+        "width": 1280,
+        "height": 720,
+        "duration": 15.0
+      },
+      "understanding": {
+        "queries": [
+          "clean electricity powering town",
+          "bright light flowing",
+          "suburban town streets",
+          "power lines transmitting energy",
+          "hopeful bright evening"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Illustrates clean power being delivered to a community, uses bright light as a visual metaphor, sets the scene in a suburban town, shows power lines transmitting energy, and creates a hopeful, bright ",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "clean electricity",
+        "card": {
+          "headline": "CLEAN ELECTRICITY",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "290db41cd6de8fba"
+      },
+      "safety": {
+        "queries": [
+          "clean electricity powering town",
+          "bright light flowing",
+          "suburban town streets",
+          "power lines transmitting energy",
+          "hopeful bright evening"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_001_13c81fddf12bf7f0.mp4",
+          "cache_key": "13c81fddf12bf7f0",
+          "frames": 97,
+          "look": "eq=brightness=-0.021:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Clean",
+          "start": 6.08,
+          "end": 6.38
+        },
+        {
+          "text": "electricity",
+          "start": 6.38,
+          "end": 6.98
+        },
+        {
+          "text": "flows",
+          "start": 6.98,
+          "end": 7.48
+        },
+        {
+          "text": "to",
+          "start": 7.48,
+          "end": 7.74
+        },
+        {
+          "text": "the",
+          "start": 7.74,
+          "end": 7.82
+        },
+        {
+          "text": "town",
+          "start": 7.82,
+          "end": 8.08
+        },
+        {
+          "text": "below.",
+          "start": 8.08,
+          "end": 8.38
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "aspect_ratio": "16:9",
+      "file": "video_16x9.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 9.067
+    }
+  ]
+}

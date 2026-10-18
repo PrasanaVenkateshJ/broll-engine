@@ -1,0 +1,1131 @@
+{
+  "job_id": "201a0401c2f842fba61dabda62013a09",
+  "created_at": "2026-10-18T16:34:54.295923+00:00",
+  "app": {
+    "name": "broll-engine",
+    "version": "0.2.0"
+  },
+  "input": {
+    "type": "upload",
+    "source_kind": "m4a",
+    "source_codec": "aac",
+    "duration": 587.008,
+    "voice": null,
+    "style": null,
+    "avoid": []
+  },
+  "models": {
+    "transcribe": {
+      "provider": "faster-whisper",
+      "model": "small",
+      "version": "1.2.1",
+      "compute_type": "int8",
+      "licence": "MIT"
+    },
+    "understand": {
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "endpoint": "https://api.groq.com/openai/v1",
+      "temperature": 0.0,
+      "seed": 1234,
+      "prompt_version": "4d1a71db9d",
+      "tokens_used": 30126,
+      "batch_size": 6,
+      "calls": 27,
+      "rate_limited_answers": 20,
+      "seconds_waited_for_rate_limit": 110.0,
+      "fallback": "rules",
+      "fallback_scenes": [
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122
+      ],
+      "story_sensitive": true,
+      "story_sensitive_reason": "2 of 123 scenes are sensitive (>= 2)"
+    },
+    "ranker": {
+      "scorer": "clip",
+      "library": "open_clip_torch",
+      "version": "3.3.0",
+      "model": "ViT-B-32",
+      "pretrained": "laion2b_s34b_b79k",
+      "prompts": [
+        "a stock video of {q}",
+        "a photo of {q}",
+        "{q}"
+      ],
+      "score": "mean of the best 3 query similarities (prompt-ensembled)",
+      "multi_frame_top_k": 2,
+      "multi_frame_positions": [
+        0.3,
+        0.7
+      ],
+      "quality_mode": "balanced",
+      "footage_workers": 2,
+      "early_exit_rankings": 100,
+      "borderline": {
+        "borderline_scenes": 29,
+        "rewritten": 29,
+        "rewrite_llm": {
+          "provider": "groq",
+          "model": "openai/gpt-oss-120b",
+          "calls": 5,
+          "tokens_used": 6195,
+          "errors": []
+        }
+      },
+      "pass1_search_score_seconds": 627.979,
+      "pass1_5_vlm_seconds": 0.0,
+      "pass2_select_download_seconds": 322.475,
+      "candidates_scored": 1953
+    },
+    "ffmpeg": "ffmpeg version 5.1.9-0+deb12u1"
+  },
+  "providers": {
+    "pixabay_video": {
+      "name": "pixabay_video",
+      "api": "Pixabay Videos API (pixabay.com/api/videos)",
+      "status": "on",
+      "scenes_used": 107
+    },
+    "pixabay_image_motion": {
+      "name": "pixabay_image_motion",
+      "api": "Pixabay Images API (pixabay.com/api) + FFmpeg Ken Burns motion",
+      "status": "on",
+      "scenes_used": 10
+    },
+    "wikimedia": {
+      "name": "wikimedia",
+      "api": "Wikimedia Commons API (commons.wikimedia.org/w/api.php) + FFmpeg Ken Burns motion",
+      "status": "on",
+      "scenes_used": 5
+    },
+    "openverse": {
+      "name": "openverse",
+      "api": "Openverse API (api.openverse.org/v1/images, anonymous) + FFmpeg Ken Burns motion",
+      "status": "on",
+      "scenes_used": 1
+    },
+    "generated": {
+      "name": "generated",
+      "api": "FFmpeg gradients + libass text (made locally)",
+      "status": "on",
+      "scenes_used": 0
+    }
+  },
+  "quality_mode": "balanced",
+  "settings": {
+    "QUALITY_MODE": "balanced",
+    "SEED": 1234,
+    "MIN_SCENE_SECONDS": 2.0,
+    "MAX_SCENE_SECONDS": 8.0,
+    "PAUSE_SECONDS": 0.35,
+    "UNDERSTAND_PROVIDER": "groq",
+    "LLM_MODEL": "openai/gpt-oss-120b",
+    "PROVIDER_ORDER": "pixabay_video,pixabay_image_motion,wikimedia,openverse,generated",
+    "PROVIDERS_DISABLED": "",
+    "RANK_SCORER": "clip",
+    "CLIP_MODEL": "ViT-B-32",
+    "CLIP_PRETRAINED": "laion2b_s34b_b79k",
+    "STOCK_MIN_SCORE": 0.22,
+    "DURATION_BONUS": 0.02,
+    "ORIENTATION_BONUS": 0.02,
+    "GENERATED_FOR_STATISTICS": true,
+    "MAX_SLOWDOWN": 0.25,
+    "KEN_BURNS_ZOOM": 1.12,
+    "TARGET_LUMA": 110.0,
+    "TARGET_SATURATION": 18.0,
+    "QA_BLACK_SECONDS": 0.5,
+    "QA_FREEZE_SECONDS": 2.0,
+    "QA_MAX_DRIFT_SECONDS": 0.1,
+    "QA_RETRIES": 1,
+    "RENDER_FPS": 30,
+    "VIDEO_PRESET": "veryfast",
+    "VIDEO_CRF": 23,
+    "AUDIO_SAMPLE_RATE": 48000,
+    "AUDIO_BITRATE": "192k",
+    "CAPTION_MAX_CHARS_PER_LINE": 42,
+    "CAPTION_MAX_LINES": 2,
+    "LOGO_CHECK": true,
+    "LOGO_CROP_GRID": 3,
+    "LOGO_REJECT_PROB": 0.6,
+    "LOGO_PENALTY_PROB": 0.4,
+    "LOGO_PENALTY": 0.03,
+    "LOGO_FRAME_COUNT": 3,
+    "STATISTIC_OVERLAY": true,
+    "QUERIES_PER_SCENE": 5,
+    "PROVIDER_RESULTS_PER_QUERY": 8,
+    "PROVIDER_PAGES": 1,
+    "MAX_CANDIDATES_PER_SOURCE": 15,
+    "EARLY_EXIT": true,
+    "EARLY_EXIT_STEP": 6,
+    "PROVIDER_MAX_QUERIES": "wikimedia=3,openverse=2",
+    "CLIP_PROMPTS": "a stock video of {q}|a photo of {q}|{q}",
+    "SCORE_TOP_QUERIES": 3,
+    "MULTI_FRAME_TOP_K": 2,
+    "MULTI_FRAME_POSITIONS": "0.3,0.7",
+    "TEXT_PENALTY_PROB": 0.5,
+    "TEXT_PENALTY": 0.03,
+    "PREFER_VIDEO_MARGIN": 0.03,
+    "RELATIVE_MARGIN": 0.12,
+    "BORDERLINE_SCORE": 0.25,
+    "BEST_EFFORT_MIN_SCORE": 0.17,
+    "VLM_PROVIDER": "none",
+    "VLM_MODEL": "qwen/qwen3.8-27b",
+    "VLM_TOP_K": 3,
+    "VLM_MAX_SCENES_PER_JOB": 3,
+    "VLM_JUDGE_CONFIDENT": false,
+    "VLM_REJECT_SCORE": 1,
+    "VLM_ACCEPT_SCORE": 4,
+    "LLM_BATCH_SIZE": 6,
+    "STORY_SENSITIVE_MIN_SCENES": 2,
+    "STORY_SENSITIVE_MIN_SHARE": 0.3,
+    "CROP_TIE_MARGIN": 0.03,
+    "CROP_SUBJECT_LEVEL": 0.5,
+    "CROP_SUBJECT_PAD": 0.06,
+    "RENDER_WORKERS": 1
+  },
+  "seed": 1234,
+  "speech_check": {
+    "max_volume_db": -2.9,
+    "sound_seconds": 517.017,
+    "words": 1598,
+    "no_speech_prob": 0.028,
+    "language": "en",
+    "language_probability": 0.999
+  },
+  "timings_seconds": {
+    "intake": 0.738,
+    "transcribe": 127.589,
+    "scenes": 0.015,
+    "understand": 140.51,
+    "footage": 950.475,
+    "render": 490.714
+  },
+  "timings_note": "seconds per stage, measured up to the moment this file was written (upload not included)",
+  "cost_estimate": {
+    "total_usd": 0.0,
+    "llm_tokens": 30126,
+    "method": "0 USD: every service used here is free - Groq free tier for the LLM (tokens counted in llm_tokens; the optional VLM judge too), Pixabay, Wikimedia Commons and Openverse APIs are free, and Kokoro, Whisper, open_clip and FFmpeg run locally on the CPU. On paid plans: cost = llm_tokens x the LLM price per token + compute time (timings_seconds) x the server price."
+  },
+  "warnings": [
+    "Scene understanding with Groq failed for scene(s) 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122 (HTTP 429 (rate limit; waited 110 s in total, limit LLM_MAX_WAIT_SECONDS=120)); used the offline rules for those scenes only",
+    "Scene 25: clip pixabay_video:343478 shows a logo at 19.1 s of the downloaded clip (logo prob 0.72 > 0.60); tried the next candidate",
+    "Footage source openverse failed (timed out after 15 s); used the next source",
+    "Scene 30: clip wikimedia:107891818 shows a logo in the picture of the downloaded clip (logo prob 0.84 > 0.60); tried the next candidate",
+    "Scene 38: clip pixabay_image_motion:4013068 shows a logo in the picture of the downloaded clip (logo prob 0.63 > 0.60); tried the next candidate",
+    "Scene 48: clip pixabay_video:3188 shows a logo at 7.1 s of the downloaded clip (logo prob 0.84 > 0.60); tried the next candidate",
+    "Scene 57: clip pixabay_video:335735 shows a logo at 23.6 s of the downloaded clip (logo prob 0.97 > 0.60); tried the next candidate",
+    "Scene 94: clip pixabay_video:214661 shows a logo at 5.6 s of the downloaded clip (logo prob 0.79 > 0.60); tried the next candidate",
+    "Scene 107: clip pixabay_video:14385 shows a logo at 2.5 s of the downloaded clip (logo prob 0.81 > 0.60); tried the next candidate",
+    "Scene 108: clip pixabay_video:1311 shows a logo at 14.2 s of the downloaded clip (logo prob 0.64 > 0.60); tried the next candidate",
+    "Scene 111: clip pixabay_video:139400 shows a logo at 1.7 s of the downloaded clip (logo prob 0.64 > 0.60); tried the next candidate",
+    "Scene 55: clip pixabay_video:122 failed the quality check (16:9: black frames from 0.00 s to 0.60 s); trying another clip"
+  ],
+  "rights": {
+    "licences": {
+      "Pixabay Content License": 117,
+      "CC BY 2.0": 3,
+      "CC0": 2,
+      "CC BY 4.0": 1
+    },
+    "all_commercial_use": true,
+    "any_watermark": false,
+    "attribution_required": [
+      {
+        "scene": 15,
+        "attribution": "Department of Foreign Affairs and Trade, via Wikimedia Commons, CC BY 2.0",
+        "licence": "CC BY 2.0",
+        "licence_url": "https://creativecommons.org/licenses/by/2.0"
+      },
+      {
+        "scene": 32,
+        "attribution": "SylvieShang, via Wikimedia Commons, CC BY 4.0",
+        "licence": "CC BY 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by/4.0"
+      },
+      {
+        "scene": 33,
+        "attribution": "sergejf, via Wikimedia Commons, CC BY 2.0",
+        "licence": "CC BY 2.0",
+        "licence_url": "https://creativecommons.org/licenses/by/2.0"
+      },
+      {
+        "scene": 107,
+        "attribution": "\"888 = August 8, 2008, 8-8-8, 8/8/8, 8.8.8, 08.08.08, 08082008 or 080808 - morning, Chicago Loop - HDR - flickr888 Day or\" by doug.siefken, CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/), via Openverse / flickr",
+        "licence": "CC BY 2.0",
+        "licence_url": "https://creativecommons.org/licenses/by/2.0/"
+      }
+    ],
+    "credits": [
+      {
+        "scene": 0,
+        "provider": "pixabay_video",
+        "attribution": "waiguobox on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-5277/"
+      },
+      {
+        "scene": 1,
+        "provider": "pixabay_image_motion",
+        "attribution": "jarmoluk on Pixabay",
+        "page_url": "https://pixabay.com/photos/room-lecture-hall-assembly-hall-2775439/"
+      },
+      {
+        "scene": 2,
+        "provider": "pixabay_video",
+        "attribution": "AttilaPergel on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-111280/"
+      },
+      {
+        "scene": 3,
+        "provider": "pixabay_video",
+        "attribution": "FilipFilipovic on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-120734/"
+      },
+      {
+        "scene": 4,
+        "provider": "pixabay_video",
+        "attribution": "RicardoVallejos on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-31956/"
+      },
+      {
+        "scene": 5,
+        "provider": "pixabay_video",
+        "attribution": "Life-Of-Vids on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-4753/"
+      },
+      {
+        "scene": 6,
+        "provider": "pixabay_video",
+        "attribution": "kalmankovats on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-15979/"
+      },
+      {
+        "scene": 7,
+        "provider": "pixabay_image_motion",
+        "attribution": "PublicDomainPictures on Pixabay",
+        "page_url": "https://pixabay.com/photos/alley-street-night-evening-city-89197/"
+      },
+      {
+        "scene": 8,
+        "provider": "pixabay_video",
+        "attribution": "Matthias_Groeneveld on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-111101/"
+      },
+      {
+        "scene": 9,
+        "provider": "pixabay_video",
+        "attribution": "healing_nature_369 on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-348922/"
+      },
+      {
+        "scene": 10,
+        "provider": "pixabay_video",
+        "attribution": "Kost9n4 on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-262186/"
+      },
+      {
+        "scene": 11,
+        "provider": "pixabay_video",
+        "attribution": "bellergy on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-18241/"
+      },
+      {
+        "scene": 12,
+        "provider": "pixabay_image_motion",
+        "attribution": "12019 on Pixabay",
+        "page_url": "https://pixabay.com/photos/brussels-belgium-sidewalk-walkway-92700/"
+      },
+      {
+        "scene": 13,
+        "provider": "pixabay_video",
+        "attribution": "Coverr-Free-Footage on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-3627/"
+      },
+      {
+        "scene": 14,
+        "provider": "pixabay_video",
+        "attribution": "AlexKopeykin on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-40353/"
+      },
+      {
+        "scene": 15,
+        "provider": "wikimedia",
+        "attribution": "Department of Foreign Affairs and Trade, via Wikimedia Commons, CC BY 2.0",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Construction_worker_on_a_building_site_in_Tulaghi,_Central_Province._(10690383443).jpg"
+      },
+      {
+        "scene": 16,
+        "provider": "pixabay_video",
+        "attribution": "Vimeo-Free-Videos on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-729/"
+      },
+      {
+        "scene": 17,
+        "provider": "pixabay_image_motion",
+        "attribution": "jillrose999 on Pixabay",
+        "page_url": "https://pixabay.com/photos/electric-meter-electricity-meter-5229750/"
+      },
+      {
+        "scene": 18,
+        "provider": "pixabay_video",
+        "attribution": "Life-Of-Vids on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-2337/"
+      },
+      {
+        "scene": 19,
+        "provider": "pixabay_video",
+        "attribution": "adege on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-260395/"
+      },
+      {
+        "scene": 20,
+        "provider": "pixabay_video",
+        "attribution": "Coverr-Free-Footage on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-142/"
+      },
+      {
+        "scene": 21,
+        "provider": "pixabay_video",
+        "attribution": "BlenderTimer on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-253423/"
+      },
+      {
+        "scene": 22,
+        "provider": "pixabay_video",
+        "attribution": "Kanenori on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-357782/"
+      },
+      {
+        "scene": 23,
+        "provider": "pixabay_video",
+        "attribution": "josemdelaa on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-3518/"
+      },
+      {
+        "scene": 24,
+        "provider": "pixabay_video",
+        "attribution": "alexborodai on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-84973/"
+      },
+      {
+        "scene": 25,
+        "provider": "pixabay_video",
+        "attribution": "caelan on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-48687/"
+      },
+      {
+        "scene": 26,
+        "provider": "pixabay_video",
+        "attribution": "roofimages on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-12437/"
+      },
+      {
+        "scene": 27,
+        "provider": "pixabay_video",
+        "attribution": "Coverr-Free-Footage on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-3164/"
+      },
+      {
+        "scene": 28,
+        "provider": "pixabay_video",
+        "attribution": "Coverr-Free-Footage on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-1028/"
+      },
+      {
+        "scene": 29,
+        "provider": "pixabay_video",
+        "attribution": "Life-Of-Vids on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-3150/"
+      },
+      {
+        "scene": 30,
+        "provider": "wikimedia",
+        "attribution": "Syced, via Wikimedia Commons, CC0",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Farm_on_rooftop_of_Ebisu_Atre.jpg"
+      },
+      {
+        "scene": 31,
+        "provider": "pixabay_video",
+        "attribution": "caelan on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-32598/"
+      },
+      {
+        "scene": 32,
+        "provider": "wikimedia",
+        "attribution": "SylvieShang, via Wikimedia Commons, CC BY 4.0",
+        "page_url": "https://commons.wikimedia.org/wiki/File:GreenRoof_SevernTrentWaterCoventry.jpg"
+      },
+      {
+        "scene": 33,
+        "provider": "wikimedia",
+        "attribution": "sergejf, via Wikimedia Commons, CC BY 2.0",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Buenos_Aires-_beautiful_ivy-covered_facade_(33999574226).jpg"
+      },
+      {
+        "scene": 34,
+        "provider": "pixabay_video",
+        "attribution": "NickyPe on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-91064/"
+      },
+      {
+        "scene": 35,
+        "provider": "pixabay_video",
+        "attribution": "ninosouza on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-23334/"
+      },
+      {
+        "scene": 36,
+        "provider": "wikimedia",
+        "attribution": "Ms Sarah Welch, via Wikimedia Commons, CC0",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Ranod_monastery,_Khokai_Matha,_Rannod_Madhya_Pradesh_012.jpg"
+      },
+      {
+        "scene": 37,
+        "provider": "pixabay_video",
+        "attribution": "caelan on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-39270/"
+      },
+      {
+        "scene": 38,
+        "provider": "pixabay_image_motion",
+        "attribution": "jarmoluk on Pixabay",
+        "page_url": "https://pixabay.com/photos/building-professional-employee-2762319/"
+      },
+      {
+        "scene": 39,
+        "provider": "pixabay_video",
+        "attribution": "AlexKopeykin on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-67463/"
+      },
+      {
+        "scene": 40,
+        "provider": "pixabay_image_motion",
+        "attribution": "ClaireDiaz on Pixabay",
+        "page_url": "https://pixabay.com/photos/arches-building-tunnel-hallway-5959457/"
+      },
+      {
+        "scene": 41,
+        "provider": "pixabay_video",
+        "attribution": "Coverr-Free-Footage on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-96/"
+      },
+      {
+        "scene": 42,
+        "provider": "pixabay_video",
+        "attribution": "chayka1270 on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-12040/"
+      },
+      {
+        "scene": 43,
+        "provider": "pixabay_video",
+        "attribution": "lawlaw91 on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-28236/"
+      },
+      {
+        "scene": 44,
+        "provider": "pixabay_video",
+        "attribution": "RuslanSikunov on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-203923/"
+      },
+      {
+        "scene": 45,
+        "provider": "pixabay_video",
+        "attribution": "soultrain on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-173137/"
+      },
+      {
+        "scene": 46,
+        "provider": "pixabay_video",
+        "attribution": "SAHN_VIT on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-21985/"
+      },
+      {
+        "scene": 47,
+        "provider": "pixabay_video",
+        "attribution": "klimkin on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-846/"
+      },
+      {
+        "scene": 48,
+        "provider": "pixabay_video",
+        "attribution": "conte_public on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-204526/"
+      },
+      {
+        "scene": 49,
+        "provider": "pixabay_video",
+        "attribution": "RoyBuri on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-85712/"
+      },
+      {
+        "scene": 50,
+        "provider": "pixabay_video",
+        "attribution": "Coverr-Free-Footage on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-6387/"
+      },
+      {
+        "scene": 51,
+        "provider": "pixabay_video",
+        "attribution": "Elcin_Qarayev on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-122355/"
+      },
+      {
+        "scene": 52,
+        "provider": "pixabay_video",
+        "attribution": "GodsFavoriteArts on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-278670/"
+      },
+      {
+        "scene": 53,
+        "provider": "pixabay_video",
+        "attribution": "Coverr-Free-Footage on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-1000/"
+      },
+      {
+        "scene": 54,
+        "provider": "pixabay_video",
+        "attribution": "3593622 on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-6096/"
+      },
+      {
+        "scene": 55,
+        "provider": "pixabay_video",
+        "attribution": "RaniRamli on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-22130/"
+      },
+      {
+        "scene": 56,
+        "provider": "pixabay_video",
+        "attribution": "adege on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-33687/"
+      },
+      {
+        "scene": 57,
+        "provider": "pixabay_video",
+        "attribution": "monirulislam_bd on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-335736/"
+      },
+      {
+        "scene": 58,
+        "provider": "pixabay_video",
+        "attribution": "JustYøu on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-73847/"
+      },
+      {
+        "scene": 59,
+        "provider": "pixabay_video",
+        "attribution": "Coverr-Free-Footage on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-3171/"
+      },
+      {
+        "scene": 60,
+        "provider": "pixabay_video",
+        "attribution": "Kaffeesüchtig on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-277363/"
+      },
+      {
+        "scene": 61,
+        "provider": "pixabay_video",
+        "attribution": "Media_Hopper_Studio on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-376755/"
+      },
+      {
+        "scene": 62,
+        "provider": "pixabay_video",
+        "attribution": "Engin_Akyurt on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-84583/"
+      },
+      {
+        "scene": 63,
+        "provider": "pixabay_video",
+        "attribution": "AVISOtaON on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-296240/"
+      },
+      {
+        "scene": 64,
+        "provider": "pixabay_video",
+        "attribution": "Dx21 on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-131993/"
+      },
+      {
+        "scene": 65,
+        "provider": "pixabay_video",
+        "attribution": "monirulislam_bd on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-335734/"
+      },
+      {
+        "scene": 66,
+        "provider": "pixabay_video",
+        "attribution": "SciQuestYT on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-192281/"
+      },
+      {
+        "scene": 67,
+        "provider": "pixabay_video",
+        "attribution": "GEMPI on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-179685/"
+      },
+      {
+        "scene": 68,
+        "provider": "pixabay_video",
+        "attribution": "Kaffeesüchtig on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-91282/"
+      },
+      {
+        "scene": 69,
+        "provider": "pixabay_video",
+        "attribution": "MattHrusc on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-26452/"
+      },
+      {
+        "scene": 70,
+        "provider": "pixabay_video",
+        "attribution": "santorihan on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-238381/"
+      },
+      {
+        "scene": 71,
+        "provider": "pixabay_video",
+        "attribution": "invisiblepower on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-11490/"
+      },
+      {
+        "scene": 72,
+        "provider": "pixabay_video",
+        "attribution": "VariousPhotography on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-2165/"
+      },
+      {
+        "scene": 73,
+        "provider": "pixabay_video",
+        "attribution": "Life-Of-Vids on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-2334/"
+      },
+      {
+        "scene": 74,
+        "provider": "pixabay_video",
+        "attribution": "Matthias_Groeneveld on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-189813/"
+      },
+      {
+        "scene": 75,
+        "provider": "pixabay_video",
+        "attribution": "KlausHausmann on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-8625/"
+      },
+      {
+        "scene": 76,
+        "provider": "pixabay_video",
+        "attribution": "Christopher_OToole_Images on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-21531/"
+      },
+      {
+        "scene": 77,
+        "provider": "pixabay_video",
+        "attribution": "genesis2019 on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-36724/"
+      },
+      {
+        "scene": 78,
+        "provider": "pixabay_video",
+        "attribution": "NickyPe on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-192687/"
+      },
+      {
+        "scene": 79,
+        "provider": "pixabay_video",
+        "attribution": "Hassas_Arts on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-50622/"
+      },
+      {
+        "scene": 80,
+        "provider": "pixabay_image_motion",
+        "attribution": "lin2015 on Pixabay",
+        "page_url": "https://pixabay.com/photos/city-cityscape-building-skyscraper-4712386/"
+      },
+      {
+        "scene": 81,
+        "provider": "pixabay_video",
+        "attribution": "Life-Of-Vids on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-2335/"
+      },
+      {
+        "scene": 82,
+        "provider": "pixabay_video",
+        "attribution": "TheMarcKnight on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-28231/"
+      },
+      {
+        "scene": 83,
+        "provider": "pixabay_video",
+        "attribution": "MabelAmber on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-28001/"
+      },
+      {
+        "scene": 84,
+        "provider": "pixabay_video",
+        "attribution": "MabelAmber on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-28287/"
+      },
+      {
+        "scene": 85,
+        "provider": "pixabay_video",
+        "attribution": "Media_Hopper_Studio on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-379878/"
+      },
+      {
+        "scene": 86,
+        "provider": "pixabay_video",
+        "attribution": "siebeckdotcom on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-46782/"
+      },
+      {
+        "scene": 87,
+        "provider": "pixabay_video",
+        "attribution": "Coverr-Free-Footage on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-3161/"
+      },
+      {
+        "scene": 88,
+        "provider": "pixabay_video",
+        "attribution": "choxyltd on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-204803/"
+      },
+      {
+        "scene": 89,
+        "provider": "pixabay_video",
+        "attribution": "Coverr-Free-Footage on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-1044/"
+      },
+      {
+        "scene": 90,
+        "provider": "pixabay_video",
+        "attribution": "Life-Of-Vids on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-6410/"
+      },
+      {
+        "scene": 91,
+        "provider": "pixabay_image_motion",
+        "attribution": "Pexels on Pixabay",
+        "page_url": "https://pixabay.com/photos/concept-man-papers-person-plan-1868728/"
+      },
+      {
+        "scene": 92,
+        "provider": "pixabay_video",
+        "attribution": "Coverr-Free-Footage on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-2303/"
+      },
+      {
+        "scene": 93,
+        "provider": "pixabay_video",
+        "attribution": "JustYøu on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-66810/"
+      },
+      {
+        "scene": 94,
+        "provider": "pixabay_video",
+        "attribution": "zillurrahman1 on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-133077/"
+      },
+      {
+        "scene": 95,
+        "provider": "pixabay_video",
+        "attribution": "TheMarcKnight on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-27138/"
+      },
+      {
+        "scene": 96,
+        "provider": "pixabay_image_motion",
+        "attribution": "PIRO4D on Pixabay",
+        "page_url": "https://pixabay.com/photos/lightbulb-pear-water-drops-energy-2631841/"
+      },
+      {
+        "scene": 97,
+        "provider": "pixabay_video",
+        "attribution": "azadazahari on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-48137/"
+      },
+      {
+        "scene": 98,
+        "provider": "pixabay_video",
+        "attribution": "WN79 on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-167088/"
+      },
+      {
+        "scene": 99,
+        "provider": "pixabay_video",
+        "attribution": "Matthias_Groeneveld on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-230248/"
+      },
+      {
+        "scene": 100,
+        "provider": "pixabay_video",
+        "attribution": "motion5 on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-4936/"
+      },
+      {
+        "scene": 101,
+        "provider": "pixabay_video",
+        "attribution": "Kanenori on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-327388/"
+      },
+      {
+        "scene": 102,
+        "provider": "pixabay_video",
+        "attribution": "Jesehab on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-131012/"
+      },
+      {
+        "scene": 103,
+        "provider": "pixabay_video",
+        "attribution": "Life-Of-Vids on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-3145/"
+      },
+      {
+        "scene": 104,
+        "provider": "pixabay_video",
+        "attribution": "Matias_Luge on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-134054/"
+      },
+      {
+        "scene": 105,
+        "provider": "pixabay_image_motion",
+        "attribution": "mtnerd on Pixabay",
+        "page_url": "https://pixabay.com/photos/judith-gap-montana-windmill-4027187/"
+      },
+      {
+        "scene": 106,
+        "provider": "pixabay_video",
+        "attribution": "StuieStu on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-327922/"
+      },
+      {
+        "scene": 107,
+        "provider": "openverse",
+        "attribution": "\"888 = August 8, 2008, 8-8-8, 8/8/8, 8.8.8, 08.08.08, 08082008 or 080808 - morning, Chicago Loop - HDR - flickr888 Day or\" by doug.siefken, CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/), via Openverse / flickr",
+        "page_url": "https://www.flickr.com/photos/21936447@N04/2744217176"
+      },
+      {
+        "scene": 108,
+        "provider": "pixabay_video",
+        "attribution": "AlexKopeykin on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-38918/"
+      },
+      {
+        "scene": 109,
+        "provider": "pixabay_video",
+        "attribution": "conte_public on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-204527/"
+      },
+      {
+        "scene": 110,
+        "provider": "pixabay_video",
+        "attribution": "riverbanksmedia on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-28453/"
+      },
+      {
+        "scene": 111,
+        "provider": "pixabay_video",
+        "attribution": "TRIZ85 on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-150592/"
+      },
+      {
+        "scene": 112,
+        "provider": "pixabay_video",
+        "attribution": "CycleZyklusCiclo on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-39292/"
+      },
+      {
+        "scene": 113,
+        "provider": "pixabay_video",
+        "attribution": "deeanaarts on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-47551/"
+      },
+      {
+        "scene": 114,
+        "provider": "pixabay_video",
+        "attribution": "ChristianBodhi on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-71476/"
+      },
+      {
+        "scene": 115,
+        "provider": "pixabay_video",
+        "attribution": "Amorn_mimi on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-229071/"
+      },
+      {
+        "scene": 116,
+        "provider": "pixabay_video",
+        "attribution": "Coverr-Free-Footage on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-8256/"
+      },
+      {
+        "scene": 117,
+        "provider": "pixabay_video",
+        "attribution": "CLEARSTREAMFILM on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-30222/"
+      },
+      {
+        "scene": 118,
+        "provider": "pixabay_video",
+        "attribution": "daniloriba on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-137210/"
+      },
+      {
+        "scene": 119,
+        "provider": "pixabay_video",
+        "attribution": "Media_Hopper_Studio on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-376756/"
+      },
+      {
+        "scene": 120,
+        "provider": "pixabay_video",
+        "attribution": "NickyPe on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-188778/"
+      },
+      {
+        "scene": 121,
+        "provider": "pixabay_video",
+        "attribution": "Kaffeesüchtig on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-277364/"
+      },
+      {
+        "scene": 122,
+        "provider": "pixabay_video",
+        "attribution": "AVISOtaON on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-296241/"
+      }
+    ]
+  },
+  "footage_mix": {
+    "scenes": 123,
+    "counts": {
+      "video": 107,
+      "photo_motion": 16,
+      "generated_card": 0
+    },
+    "share": {
+      "video": 0.87,
+      "photo_motion": 0.13,
+      "generated_card": 0.0
+    },
+    "statistic_cards": 0,
+    "statistic_overlays": 2,
+    "adaptive_threshold_clips": 0,
+    "vlm_judged_clips": 0,
+    "vlm_mean_score": null,
+    "share_without_statistic_cards": {
+      "video": 0.87,
+      "photo_motion": 0.13,
+      "generated_card": 0.0
+    }
+  },
+  "ai_generated": {
+    "narration": false,
+    "visuals": true,
+    "generated_cards": 0,
+    "note": "generated cards are drawn by FFmpeg (gradient + text), not by an AI model"
+  },
+  "qa": {
+    "16:9": {
+      "video_seconds": 587.038,
+      "audio_seconds": 587.008,
+      "drift_seconds": 0.03,
+      "codec": "h264",
+      "pix_fmt": "yuv420p",
+      "fps": 29.998,
+      "audio_codec": "aac",
+      "audio_sample_rate": "48000",
+      "problems": []
+    }
+  },
+  "outputs": [
+    {
+      "aspect_ratio": "16:9",
+      "file": "video_16x9.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 587.038
+    }
+  ]
+}

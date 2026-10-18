@@ -1,0 +1,2115 @@
+{
+  "job_id": "5f6a40965ca646e5953fcd7844365041",
+  "input_type": "script",
+  "duration": 30.175,
+  "language": "en",
+  "scenes": [
+    {
+      "index": 0,
+      "text": "We sat on the bank of the river and watched the water flow past.",
+      "start": 0.0,
+      "end": 3.79,
+      "duration": 3.79,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "people sitting by riverbank",
+      "queries": [
+        "people sitting by riverbank",
+        "river winding like road",
+        "riverbank with trees",
+        "person gazing at river",
+        "peaceful sunrise over river"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "1049",
+      "page_url": "https://pixabay.com/videos/id-1049/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Coverr-Free-Footage on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.285 >= 0.22 for query 'people sitting by riverbank' (best of 6 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.279); logo check ok (logo prob 0.11); 3 clip frame(s) passed the logo check (max logo prob 0.22); video scored >= 0.25: photo sources not searched",
+      "relevance_score": 0.2853,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2853,
+        "thumbnail_score": 0.2785,
+        "frame_scores": [
+          0.2785,
+          0.2886,
+          0.2888
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.3253,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_000.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.1148,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 1.69,
+            "logo_prob": 0.2214,
+            "scene_score": 0.2911,
+            "result": "ok"
+          },
+          {
+            "time": 5.06,
+            "logo_prob": 0.1846,
+            "scene_score": 0.2828,
+            "result": "ok"
+          },
+          {
+            "time": 8.43,
+            "logo_prob": 0.2072,
+            "scene_score": 0.2925,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:1049",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2015/10/16/1049-142623920_medium.mp4",
+        "final_score": 0.3253,
+        "width": 1280,
+        "height": 720,
+        "duration": 10.0
+      },
+      "understanding": {
+        "queries": [
+          "people sitting by riverbank",
+          "river winding like road",
+          "riverbank with trees",
+          "person gazing at river",
+          "peaceful sunrise over river"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows the literal scene of watching a river flow and the calm mood.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "sat bank",
+        "card": {
+          "headline": "SAT BANK",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "8dd475f9a7d41d1e"
+      },
+      "safety": {
+        "queries": [
+          "people sitting by riverbank",
+          "river winding like road",
+          "riverbank with trees",
+          "person gazing at river",
+          "peaceful sunrise over river"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_000_45897762b2dc144d.mp4",
+          "cache_key": "45897762b2dc144d",
+          "frames": 114,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "We",
+          "start": 0.05,
+          "end": 0.51
+        },
+        {
+          "text": "sat",
+          "start": 0.51,
+          "end": 0.75
+        },
+        {
+          "text": "on",
+          "start": 0.75,
+          "end": 0.87
+        },
+        {
+          "text": "the",
+          "start": 0.87,
+          "end": 0.97
+        },
+        {
+          "text": "bank",
+          "start": 0.97,
+          "end": 1.17
+        },
+        {
+          "text": "of",
+          "start": 1.17,
+          "end": 1.33
+        },
+        {
+          "text": "the",
+          "start": 1.33,
+          "end": 1.43
+        },
+        {
+          "text": "river",
+          "start": 1.43,
+          "end": 1.65
+        },
+        {
+          "text": "and",
+          "start": 1.65,
+          "end": 1.87
+        },
+        {
+          "text": "watched",
+          "start": 1.87,
+          "end": 2.19
+        },
+        {
+          "text": "the",
+          "start": 2.19,
+          "end": 2.37
+        },
+        {
+          "text": "water",
+          "start": 2.37,
+          "end": 2.67
+        },
+        {
+          "text": "flow",
+          "start": 2.67,
+          "end": 3.01
+        },
+        {
+          "text": "past.",
+          "start": 3.01,
+          "end": 3.49
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "text": "Later that day, I went to the bank to deposit my salary.",
+      "start": 3.79,
+      "end": 7.21,
+      "duration": 3.42,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "interior of a bank",
+      "queries": [
+        "person entering bank lobby",
+        "coins dropping into safe",
+        "interior of a bank",
+        "teller receiving cash deposit",
+        "calm financial transaction atmosphere"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "20857",
+      "page_url": "https://pixabay.com/videos/id-20857/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "RoyBuri on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.270 >= 0.22 for query 'interior of a bank' (best of 6 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.260); logo check ok (logo prob 0.03); 3 clip frame(s) passed the logo check (max logo prob 0.26); video scored >= 0.25: photo sources not searched",
+      "relevance_score": 0.2699,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2699,
+        "thumbnail_score": 0.2603,
+        "frame_scores": [
+          0.2603,
+          0.2754,
+          0.2739
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0025,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.3099,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_001.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0291,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 3.91,
+            "logo_prob": 0.1402,
+            "scene_score": 0.2718,
+            "result": "ok"
+          },
+          {
+            "time": 11.72,
+            "logo_prob": 0.2608,
+            "scene_score": 0.2601,
+            "result": "ok"
+          },
+          {
+            "time": 19.54,
+            "logo_prob": 0.0634,
+            "scene_score": 0.1999,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:20857",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2019/01/20/20857-312437286_medium.mp4",
+        "final_score": 0.3099,
+        "width": 2560,
+        "height": 1440,
+        "duration": 23.0
+      },
+      "understanding": {
+        "queries": [
+          "person entering bank lobby",
+          "coins dropping into safe",
+          "interior of a bank",
+          "teller receiving cash deposit",
+          "calm financial transaction atmosphere"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Depicts a bank deposit action and its orderly setting.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "later day",
+        "card": {
+          "headline": "LATER DAY",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "b233ad6baa1866f6"
+      },
+      "safety": {
+        "queries": [
+          "person entering bank lobby",
+          "coins dropping into safe",
+          "interior of a bank",
+          "teller receiving cash deposit",
+          "calm financial transaction atmosphere"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_001_35959411f93c9dc5.mp4",
+          "cache_key": "35959411f93c9dc5",
+          "frames": 102,
+          "look": "eq=brightness=-0.097:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Later",
+          "start": 4.09,
+          "end": 4.29
+        },
+        {
+          "text": "that",
+          "start": 4.29,
+          "end": 4.51
+        },
+        {
+          "text": "day,",
+          "start": 4.51,
+          "end": 4.79
+        },
+        {
+          "text": "I",
+          "start": 4.97,
+          "end": 5.07
+        },
+        {
+          "text": "went",
+          "start": 5.07,
+          "end": 5.21
+        },
+        {
+          "text": "to",
+          "start": 5.21,
+          "end": 5.33
+        },
+        {
+          "text": "the",
+          "start": 5.33,
+          "end": 5.41
+        },
+        {
+          "text": "bank",
+          "start": 5.41,
+          "end": 5.63
+        },
+        {
+          "text": "to",
+          "start": 5.63,
+          "end": 5.81
+        },
+        {
+          "text": "deposit",
+          "start": 5.81,
+          "end": 6.25
+        },
+        {
+          "text": "my",
+          "start": 6.25,
+          "end": 6.47
+        },
+        {
+          "text": "salary.",
+          "start": 6.47,
+          "end": 6.91
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "text": "Dark clouds gathered over the hills just before the rain.",
+      "start": 7.21,
+      "end": 10.59,
+      "duration": 3.38,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "clouds rolling like waves",
+      "queries": [
+        "dark clouds over hills",
+        "clouds rolling like waves",
+        "hilly landscape under sky",
+        "wind blowing through trees",
+        "ominous atmosphere before rain"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "16160",
+      "page_url": "https://pixabay.com/videos/id-16160/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Macb3t on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.309 >= 0.22 for query 'clouds rolling like waves' (best of 6 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.321); logo check ok (logo prob 0.02); 3 clip frame(s) passed the logo check (max logo prob 0.04); video scored >= 0.25: photo sources not searched",
+      "relevance_score": 0.3089,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.3089,
+        "thumbnail_score": 0.3212,
+        "frame_scores": [
+          0.3212,
+          0.2998,
+          0.3056
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0002,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.3489,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_002.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0194,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 6.66,
+            "logo_prob": 0.0167,
+            "scene_score": 0.3093,
+            "result": "ok"
+          },
+          {
+            "time": 19.98,
+            "logo_prob": 0.0371,
+            "scene_score": 0.3176,
+            "result": "ok"
+          },
+          {
+            "time": 33.3,
+            "logo_prob": 0.0101,
+            "scene_score": 0.2991,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:16160",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2018/05/11/16160-269534741_medium.mp4",
+        "final_score": 0.3489,
+        "width": 1280,
+        "height": 720,
+        "duration": 40.0
+      },
+      "understanding": {
+        "queries": [
+          "dark clouds over hills",
+          "clouds rolling like waves",
+          "hilly landscape under sky",
+          "wind blowing through trees",
+          "ominous atmosphere before rain"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Conveys the gathering storm and the foreboding mood.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "dark clouds",
+        "card": {
+          "headline": "DARK CLOUDS",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "1e6f8e7d4db45982"
+      },
+      "safety": {
+        "queries": [
+          "dark clouds over hills",
+          "clouds rolling like waves",
+          "hilly landscape under sky",
+          "wind blowing through trees",
+          "ominous atmosphere before rain"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_002_a627c25b0bfce1b2.mp4",
+          "cache_key": "a627c25b0bfce1b2",
+          "frames": 102,
+          "look": "eq=brightness=0.120:saturation=0.914",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Dark",
+          "start": 7.51,
+          "end": 7.69
+        },
+        {
+          "text": "clouds",
+          "start": 7.69,
+          "end": 8.19
+        },
+        {
+          "text": "gathered",
+          "start": 8.19,
+          "end": 8.55
+        },
+        {
+          "text": "over",
+          "start": 8.55,
+          "end": 8.85
+        },
+        {
+          "text": "the",
+          "start": 8.85,
+          "end": 8.99
+        },
+        {
+          "text": "hills",
+          "start": 8.99,
+          "end": 9.23
+        },
+        {
+          "text": "just",
+          "start": 9.23,
+          "end": 9.51
+        },
+        {
+          "text": "before",
+          "start": 9.51,
+          "end": 9.81
+        },
+        {
+          "text": "the",
+          "start": 9.81,
+          "end": 10.05
+        },
+        {
+          "text": "rain.",
+          "start": 10.05,
+          "end": 10.31
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "text": "Last year, our company moved all of its files to the cloud.",
+      "start": 10.59,
+      "end": 14.06,
+      "duration": 3.47,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "files floating like balloons",
+      "queries": [
+        "data being uploaded to cloud",
+        "files floating like balloons",
+        "modern office with servers",
+        "hands moving virtual files",
+        "optimistic tech transition vibe"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "5954",
+      "page_url": "https://pixabay.com/videos/id-5954/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Gepibg on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.249 >= 0.22 for query 'files floating like balloons' (best of 15 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.248); logo check ok (logo prob 0.06); 3 clip frame(s) passed the logo check (max logo prob 0.12); video preferred over photo-motion (pixabay_image_motion best 0.295 is not more than 0.03 above 0.289)",
+      "relevance_score": 0.2486,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2486,
+        "thumbnail_score": 0.2476,
+        "frame_scores": [
+          0.2476,
+          0.2457,
+          0.2524
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0016,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.2886,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_003.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0567,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 4.14,
+            "logo_prob": 0.1239,
+            "scene_score": 0.2401,
+            "result": "ok"
+          },
+          {
+            "time": 12.43,
+            "logo_prob": 0.1065,
+            "scene_score": 0.2295,
+            "result": "ok"
+          },
+          {
+            "time": 20.71,
+            "logo_prob": 0.061,
+            "scene_score": 0.2325,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:5954",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2016/10/14/5954-187641505_medium.mp4",
+        "final_score": 0.2886,
+        "width": 1280,
+        "height": 720,
+        "duration": 25.0
+      },
+      "understanding": {
+        "queries": [
+          "data being uploaded to cloud",
+          "files floating like balloons",
+          "modern office with servers",
+          "hands moving virtual files",
+          "optimistic tech transition vibe"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Illustrates moving files to cloud storage with a positive tech feel.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "last year",
+        "card": {
+          "headline": "LAST YEAR",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "8ed190bb4b635f4c"
+      },
+      "safety": {
+        "queries": [
+          "data being uploaded to cloud",
+          "files floating like balloons",
+          "modern office with servers",
+          "hands moving virtual files",
+          "optimistic tech transition vibe"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_003_fdeeb43f6fe7fbf6.mp4",
+          "cache_key": "fdeeb43f6fe7fbf6",
+          "frames": 104,
+          "look": "eq=brightness=-0.092:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Last",
+          "start": 10.87,
+          "end": 11.13
+        },
+        {
+          "text": "year,",
+          "start": 11.13,
+          "end": 11.43
+        },
+        {
+          "text": "our",
+          "start": 11.49,
+          "end": 11.57
+        },
+        {
+          "text": "company",
+          "start": 11.57,
+          "end": 11.87
+        },
+        {
+          "text": "moved",
+          "start": 11.87,
+          "end": 12.23
+        },
+        {
+          "text": "all",
+          "start": 12.23,
+          "end": 12.53
+        },
+        {
+          "text": "of",
+          "start": 12.53,
+          "end": 12.67
+        },
+        {
+          "text": "its",
+          "start": 12.67,
+          "end": 12.81
+        },
+        {
+          "text": "files",
+          "start": 12.81,
+          "end": 13.17
+        },
+        {
+          "text": "to",
+          "start": 13.17,
+          "end": 13.39
+        },
+        {
+          "text": "the",
+          "start": 13.39,
+          "end": 13.49
+        },
+        {
+          "text": "cloud.",
+          "start": 13.49,
+          "end": 13.81
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "text": "A tiny mouse ran across the kitchen floor.",
+      "start": 14.06,
+      "end": 16.82,
+      "duration": 2.76,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "mouse like tiny explorer",
+      "queries": [
+        "small mouse scurrying kitchen",
+        "mouse like tiny explorer",
+        "kitchen floor with tiles",
+        "mouse darting across floor",
+        "curious playful animal vibe"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "139660",
+      "page_url": "https://pixabay.com/videos/id-139660/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "federicomaderno on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.283 >= 0.22 for query 'mouse like tiny explorer' (best of 12 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.276); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.00); video scored >= 0.25: photo sources not searched",
+      "relevance_score": 0.2832,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2832,
+        "thumbnail_score": 0.2757,
+        "frame_scores": [
+          0.2757,
+          0.2734,
+          0.3005
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.3232,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_004.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 4.65,
+            "logo_prob": 0.0001,
+            "scene_score": 0.2781,
+            "result": "ok"
+          },
+          {
+            "time": 13.94,
+            "logo_prob": 0.0008,
+            "scene_score": 0.2937,
+            "result": "ok"
+          },
+          {
+            "time": 23.23,
+            "logo_prob": 0.0013,
+            "scene_score": 0.2862,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:139660",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2022/11/19/139660-773418010_medium.mp4",
+        "final_score": 0.3232,
+        "width": 1280,
+        "height": 720,
+        "duration": 27.0
+      },
+      "understanding": {
+        "queries": [
+          "small mouse scurrying kitchen",
+          "mouse like tiny explorer",
+          "kitchen floor with tiles",
+          "mouse darting across floor",
+          "curious playful animal vibe"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows a tiny mouse moving across a kitchen floor.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "tiny mouse",
+        "card": {
+          "headline": "TINY MOUSE",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "2f739002b57119cc"
+      },
+      "safety": {
+        "queries": [
+          "small mouse scurrying kitchen",
+          "mouse like tiny explorer",
+          "kitchen floor with tiles",
+          "mouse darting across floor",
+          "curious playful animal vibe"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_004_4da4420e6dfc1e5a.mp4",
+          "cache_key": "4da4420e6dfc1e5a",
+          "frames": 83,
+          "look": "eq=brightness=-0.027:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "A",
+          "start": 14.31,
+          "end": 14.47
+        },
+        {
+          "text": "tiny",
+          "start": 14.47,
+          "end": 14.77
+        },
+        {
+          "text": "mouse",
+          "start": 14.77,
+          "end": 15.11
+        },
+        {
+          "text": "ran",
+          "start": 15.11,
+          "end": 15.43
+        },
+        {
+          "text": "across",
+          "start": 15.43,
+          "end": 15.67
+        },
+        {
+          "text": "the",
+          "start": 15.67,
+          "end": 15.95
+        },
+        {
+          "text": "kitchen",
+          "start": 15.95,
+          "end": 16.15
+        },
+        {
+          "text": "floor.",
+          "start": 16.15,
+          "end": 16.57
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "text": "Click the left mouse button to open the file.",
+      "start": 16.82,
+      "end": 19.42,
+      "duration": 2.6,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "hand clicking computer mouse",
+      "queries": [
+        "hand clicking computer mouse",
+        "mouse click opening digital door",
+        "close-up of computer desk",
+        "cursor opening file icon",
+        "focused tech tutorial atmosphere"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "154373",
+      "page_url": "https://pixabay.com/videos/id-154373/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "berctk on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.297 >= 0.22 for query 'hand clicking computer mouse' (best of 6 candidates, order bonus +0.02); score over 3 frames (thumbnail 0.295); logo check ok (logo prob 0.03); 3 clip frame(s) passed the logo check (max logo prob 0.03); video scored >= 0.25: photo sources not searched",
+      "relevance_score": 0.2968,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2968,
+        "thumbnail_score": 0.2952,
+        "frame_scores": [
+          0.2952,
+          0.2792,
+          0.3161
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.02,
+        "logo_penalty": 0.0,
+        "order_score": 0.3168,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_005.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0303,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 1.0,
+            "logo_prob": 0.0348,
+            "scene_score": 0.3135,
+            "result": "ok"
+          },
+          {
+            "time": 3.0,
+            "logo_prob": 0.01,
+            "scene_score": 0.3092,
+            "result": "ok"
+          },
+          {
+            "time": 5.0,
+            "logo_prob": 0.0129,
+            "scene_score": 0.3005,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:154373",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2023/03/12/154373-807354080_medium.mp4",
+        "final_score": 0.3168,
+        "width": 720,
+        "height": 1280,
+        "duration": 6.0
+      },
+      "understanding": {
+        "queries": [
+          "hand clicking computer mouse",
+          "mouse click opening digital door",
+          "close-up of computer desk",
+          "cursor opening file icon",
+          "focused tech tutorial atmosphere"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Visualizes the instruction to click the mouse button to open a file.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "click left",
+        "card": {
+          "headline": "CLICK LEFT",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "fb737783ff95c344"
+      },
+      "safety": {
+        "queries": [
+          "hand clicking computer mouse",
+          "mouse click opening digital door",
+          "close-up of computer desk",
+          "cursor opening file icon",
+          "focused tech tutorial atmosphere"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_005_2c8b812c54021f56.mp4",
+          "cache_key": "2c8b812c54021f56",
+          "frames": 78,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "y",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2603,
+            "windows": {
+              "salient": {
+                "start": 0.198,
+                "score": 0.2698
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2786
+              },
+              "top": {
+                "start": 0.0,
+                "score": 0.2259
+              },
+              "bottom": {
+                "start": 0.6836,
+                "score": 0.2603
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "subject_span": [
+              0.4371,
+              0.5571
+            ],
+            "windows_cutting_subject": [
+              "salient"
+            ],
+            "reason": "window 'centre' chosen (0.279; best window 0.279; whole frame 0.260; near-ties within 0.03 go to salient / centre); 'salient' was a near-tie but its edge falls inside the subject (0.44-0.56), so 'centre' keeps it whole"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Click",
+          "start": 17.07,
+          "end": 17.23
+        },
+        {
+          "text": "the",
+          "start": 17.23,
+          "end": 17.45
+        },
+        {
+          "text": "left",
+          "start": 17.45,
+          "end": 17.65
+        },
+        {
+          "text": "mouse",
+          "start": 17.65,
+          "end": 17.89
+        },
+        {
+          "text": "button",
+          "start": 17.89,
+          "end": 18.23
+        },
+        {
+          "text": "to",
+          "start": 18.23,
+          "end": 18.39
+        },
+        {
+          "text": "open",
+          "start": 18.39,
+          "end": 18.65
+        },
+        {
+          "text": "the",
+          "start": 18.65,
+          "end": 18.81
+        },
+        {
+          "text": "file.",
+          "start": 18.81,
+          "end": 19.17
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "text": "At the zoo, a python lay curled around a thick branch.",
+      "start": 19.42,
+      "end": 23.27,
+      "duration": 3.85,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "python snake coiled on branch",
+      "queries": [
+        "python snake coiled on branch",
+        "rope twisted around pole",
+        "zoo reptile exhibit",
+        "zookeeper gently handling snake",
+        "soft lighting on reptile"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "220923",
+      "page_url": "https://pixabay.com/videos/id-220923/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "DavidClode on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.298 >= 0.22 for query 'python snake coiled on branch' (best of 6 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.294); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.11); video scored >= 0.25: photo sources not searched",
+      "relevance_score": 0.298,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.298,
+        "thumbnail_score": 0.2938,
+        "frame_scores": [
+          0.2938,
+          0.3052,
+          0.2951
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.338,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_006.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0003,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 4.67,
+            "logo_prob": 0.1081,
+            "scene_score": 0.3101,
+            "result": "ok"
+          },
+          {
+            "time": 14.02,
+            "logo_prob": 0.0032,
+            "scene_score": 0.3119,
+            "result": "ok"
+          },
+          {
+            "time": 23.37,
+            "logo_prob": 0.0002,
+            "scene_score": 0.3192,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:220923",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2024/07/13/220923_medium.mp4",
+        "final_score": 0.338,
+        "width": 1280,
+        "height": 720,
+        "duration": 28.0
+      },
+      "understanding": {
+        "queries": [
+          "python snake coiled on branch",
+          "rope twisted around pole",
+          "zoo reptile exhibit",
+          "zookeeper gently handling snake",
+          "soft lighting on reptile"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows a python snake coiled on a branch in a zoo, matching the line's literal scene.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "zoo python",
+        "card": {
+          "headline": "ZOO PYTHON",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "1331a046f43068c7"
+      },
+      "safety": {
+        "queries": [
+          "python snake coiled on branch",
+          "rope twisted around pole",
+          "zoo reptile exhibit",
+          "zookeeper gently handling snake",
+          "soft lighting on reptile"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_006_4e2274d823066f60.mp4",
+          "cache_key": "4e2274d823066f60",
+          "frames": 115,
+          "look": "eq=brightness=0.092:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "At",
+          "start": 19.67,
+          "end": 19.85
+        },
+        {
+          "text": "the",
+          "start": 19.85,
+          "end": 19.97
+        },
+        {
+          "text": "zoo,",
+          "start": 19.97,
+          "end": 20.25
+        },
+        {
+          "text": "a",
+          "start": 20.61,
+          "end": 20.69
+        },
+        {
+          "text": "python",
+          "start": 20.69,
+          "end": 21.05
+        },
+        {
+          "text": "lay",
+          "start": 21.05,
+          "end": 21.41
+        },
+        {
+          "text": "curled",
+          "start": 21.41,
+          "end": 21.95
+        },
+        {
+          "text": "around",
+          "start": 21.95,
+          "end": 22.19
+        },
+        {
+          "text": "a",
+          "start": 22.19,
+          "end": 22.37
+        },
+        {
+          "text": "thick",
+          "start": 22.37,
+          "end": 22.59
+        },
+        {
+          "text": "branch.",
+          "start": 22.59,
+          "end": 22.99
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "text": "Python is a popular language for writing software.",
+      "start": 23.27,
+      "end": 26.53,
+      "duration": 3.26,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "programmer writing code on laptop",
+      "queries": [
+        "programmer writing code on laptop",
+        "snake winding around keyboard",
+        "modern tech office workspace",
+        "developer typing software commands",
+        "focused innovative atmosphere"
+      ],
+      "flags": {
+        "abstract": true,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "117",
+      "page_url": "https://pixabay.com/videos/id-117/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Coverr-Free-Footage on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.301 >= 0.22 for query 'programmer writing code on laptop' (best of 6 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.301); logo check ok (logo prob 0.32); 3 clip frame(s) passed the logo check (max logo prob 0.44); video scored >= 0.25: photo sources not searched",
+      "relevance_score": 0.3014,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.3014,
+        "thumbnail_score": 0.3012,
+        "frame_scores": [
+          0.3012,
+          0.2949,
+          0.308
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0003,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.3414,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_007.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.3237,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.18,
+            "logo_prob": 0.1778,
+            "scene_score": 0.2993,
+            "result": "ok"
+          },
+          {
+            "time": 6.54,
+            "logo_prob": 0.3532,
+            "scene_score": 0.3097,
+            "result": "ok"
+          },
+          {
+            "time": 10.9,
+            "logo_prob": 0.4383,
+            "scene_score": 0.2954,
+            "result": "penalised"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:117",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2015/08/08/117-135736418_medium.mp4",
+        "final_score": 0.3414,
+        "width": 1280,
+        "height": 720,
+        "duration": 13.0
+      },
+      "understanding": {
+        "queries": [
+          "programmer writing code on laptop",
+          "snake winding around keyboard",
+          "modern tech office workspace",
+          "developer typing software commands",
+          "focused innovative atmosphere"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": true,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Visualizes Python programming with a snake metaphor and people coding, conveying the language's popularity.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "python popular",
+        "card": {
+          "headline": "PYTHON POPULAR",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "4352a128fcdb1287"
+      },
+      "safety": {
+        "queries": [
+          "programmer writing code on laptop",
+          "snake winding around keyboard",
+          "modern tech office workspace",
+          "developer typing software commands",
+          "focused innovative atmosphere"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_007_a043f02987abae4d.mp4",
+          "cache_key": "a043f02987abae4d",
+          "frames": 98,
+          "look": "eq=brightness=0.105:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Python",
+          "start": 23.55,
+          "end": 23.99
+        },
+        {
+          "text": "is",
+          "start": 23.99,
+          "end": 24.35
+        },
+        {
+          "text": "a",
+          "start": 24.35,
+          "end": 24.47
+        },
+        {
+          "text": "popular",
+          "start": 24.47,
+          "end": 24.81
+        },
+        {
+          "text": "language",
+          "start": 24.81,
+          "end": 25.35
+        },
+        {
+          "text": "for",
+          "start": 25.35,
+          "end": 25.63
+        },
+        {
+          "text": "writing",
+          "start": 25.63,
+          "end": 25.91
+        },
+        {
+          "text": "software.",
+          "start": 25.91,
+          "end": 26.53
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "text": "Good friends add real value to your life.",
+      "start": 26.53,
+      "end": 30.175,
+      "duration": 3.645,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "hands exchanging glowing heart",
+      "queries": [
+        "close friends laughing together",
+        "hands exchanging glowing heart",
+        "cozy living room gathering",
+        "friends sharing a meal",
+        "warm joyful ambience"
+      ],
+      "flags": {
+        "abstract": true,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_image_motion",
+      "clip_id": "1846428",
+      "page_url": "https://pixabay.com/photos/hands-heart-red-paint-heart-shape-1846428/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Pexels on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_image_motion: score 0.224 >= 0.22 for query 'hands exchanging glowing heart' (best of 9 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 1 clip frame(s) passed the logo check (max logo prob 0.00); earlier: pixabay_video: best score 0.201 < 0.22; pixabay_image_motion:1838940 download failed (HTTP 429); pixabay_image_motion:9099218 download failed (HTTP 429); borderline (best 0.238 < BORDERLINE_SCORE 0.25): also searched the rewritten query 'friends walking side by side' (groq), +8 candidates scored on the original queries",
+      "relevance_score": 0.2239,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2239,
+        "thumbnail_score": 0.2239,
+        "frame_scores": null,
+        "frames_scored": 1,
+        "text_prob": 0.0,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.2639
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_008.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.0001,
+            "scene_score": 0.2171,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_image_motion:1846428",
+        "kind": "image",
+        "title": "",
+        "source_url": "https://pixabay.com/get/g983eb479dec10c00c74c601e09abc40047a906fcbb7671233468a56aa3c5bbbfa0d50eb978c4595c69a5a7576216c628dc13d87237c7ba4b455834a3855124df_1280.jpg",
+        "final_score": 0.2639,
+        "width": 1280,
+        "height": 853,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "close friends laughing together",
+          "hands exchanging glowing heart",
+          "cozy living room gathering",
+          "friends sharing a meal",
+          "warm joyful ambience"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": true,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Depicts the value of friendship through warm, shared moments.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "good friends",
+        "card": {
+          "headline": "GOOD FRIENDS",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "753011f3a0292e85"
+      },
+      "safety": {
+        "queries": [
+          "close friends laughing together",
+          "hands exchanging glowing heart",
+          "cozy living room gathering",
+          "friends sharing a meal",
+          "warm joyful ambience"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_008_eb8181a567615c9d.mp4",
+          "cache_key": "eb8181a567615c9d",
+          "frames": 109,
+          "look": "eq=brightness=0.120:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "subject crop (bottom)",
+          "crop": {
+            "method": "clip",
+            "choice": "bottom",
+            "axis": "y",
+            "window_fraction": 0.8441,
+            "full_frame_score": 0.2225,
+            "windows": {
+              "centre": {
+                "start": 0.078,
+                "score": 0.2143
+              },
+              "top": {
+                "start": 0.0,
+                "score": 0.2287
+              },
+              "bottom": {
+                "start": 0.1559,
+                "score": 0.2215
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "subject_span": [
+              0.3701,
+              1.0
+            ],
+            "windows_cutting_subject": [
+              "centre",
+              "top"
+            ],
+            "reason": "window 'bottom' chosen (0.222; best window 0.229; whole frame 0.223; near-ties within 0.03 go to salient / centre); 'centre' was a near-tie but its edge falls inside the subject (0.37-1.00), so 'bottom' keeps it whole"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Good",
+          "start": 26.53,
+          "end": 27.31
+        },
+        {
+          "text": "friends",
+          "start": 27.31,
+          "end": 27.67
+        },
+        {
+          "text": "add",
+          "start": 27.67,
+          "end": 28.03
+        },
+        {
+          "text": "real",
+          "start": 28.03,
+          "end": 28.35
+        },
+        {
+          "text": "value",
+          "start": 28.35,
+          "end": 28.83
+        },
+        {
+          "text": "to",
+          "start": 28.83,
+          "end": 29.03
+        },
+        {
+          "text": "your",
+          "start": 29.03,
+          "end": 29.15
+        },
+        {
+          "text": "life.",
+          "start": 29.15,
+          "end": 29.45
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "aspect_ratio": "16:9",
+      "file": "video_16x9.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 30.168
+    }
+  ]
+}

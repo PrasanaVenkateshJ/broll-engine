@@ -22,3 +22,5 @@ tools/bin/
 # My own voice recordings (privacy): kept on my PC only, never committed
 testpack/inputs/*_myvoice.*
 testpack/inputs/my_voice/
+# Live-run videos stay local
+testpack/live/**/*.mp4
