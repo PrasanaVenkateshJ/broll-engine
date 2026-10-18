@@ -4,7 +4,7 @@ It does NOT import our app code on purpose: this step runs BEFORE the code is co
 Modal can cache it. Changing app code then does not download ~1.5 GB of models again on every deploy.
 The model names come from env vars set by modal_app.py (the same values the running app gets).
 
-Step 2 (after the code is copied) runs deploy/hf-space/preload_models.py with HF_HUB_OFFLINE=1: it loads
+Step 2 (after the code is copied) runs deploy/modal/preload_models.py with HF_HUB_OFFLINE=1: it loads
 every model the way the app does WITHOUT network, so a file missing here fails the build, not a job.
 """
 import os

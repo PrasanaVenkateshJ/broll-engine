@@ -30,10 +30,10 @@
 | Pillow | 12.3.0 | opens preview images for CLIP | MIT-CMU (HPND) |
 | FFmpeg (Debian package) | distro | audio/video processing, called as a separate program | LGPL/GPL (separate binary) |
 | espeak-ng (Debian package) | distro | phonemes for Kokoro, separate program | GPL-3.0, used only as a separate unmodified program called by the phonemizer at runtime; not linked or distributed with this repo |
-| MinIO server (`pgsty/minio` image) | RELEASE.2026-08-04 | S3 storage service in docker compose, and the same unmodified binary copied into the Hugging Face Space image (internal storage only) | AGPL-3.0 (allowed only as the storage service) |
+| MinIO server (`pgsty/minio` image) | RELEASE.2026-08-04 | S3 storage service in docker compose | AGPL-3.0 (allowed only as the storage service) |
 | python:3.11-slim image | 3.11 | container base | PSF + Debian licences |
 | git, curl (Debian packages, Space image only) | distro | clone the code at build time; health checks in start.sh | GPL-2.0 / curl licence (separate programs) |
-| huggingface_hub | 2.2.0 (installed with faster-whisper / Kokoro) | model downloads; `tools/deploy_hf.py` uploads the Space folder | Apache-2.0 |
+| huggingface_hub | 2.2.0 (installed with faster-whisper / Kokoro) | model downloads | Apache-2.0 |
 | modal (Python client, NOT in requirements.txt; only on the deploying PC) | 1.6.2 | deploys the live demo (`deploy/modal/modal_app.py`) | Apache-2.0 |
 | debian_slim image (Modal) | Python 3.11 | base of the Modal demo image | PSF + Debian licences |
 | cloudflared (downloaded on demand by `scripts/tunnel.ps1`, not committed) | latest release | fallback demo: Cloudflare quick tunnel | Apache-2.0 |
@@ -58,6 +58,4 @@
 | Name | Used for | Terms |
 |---|---|---|
 | Modal (see above) | the live demo that is actually used | Per-second billing against the account's free monthly credit; see `testpack/notes/cost_modal.md`. |
-| Hugging Face Spaces (Docker) | **not used**: Docker Spaces became paid in July 2026; `deploy/hf-space/` stays in the repo unchanged | Hugging Face Terms of Service. |
 | Microsoft Azure | **not used**: evaluated for hosting and rejected | - |
-| GitHub Actions (`keepalive.yml`) | no schedule any more; refuses `*.modal.run` URLs (a ping would start a paid container) | GitHub Terms |

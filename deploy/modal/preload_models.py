@@ -1,4 +1,4 @@
-"""Download every AI model at BUILD time, so a cold start of the Space downloads nothing.
+"""Download every AI model at BUILD time, so a cold start of the live demo downloads nothing.
 
 It loads each model exactly the way the app does (same classes, same settings), so the files land in
 the same cache folders (HF_HOME, TORCH_HOME) that the running app will read:
@@ -9,7 +9,7 @@ the same cache folders (HF_HOME, TORCH_HOME) that the running app will read:
 - spaCy en_core_web_sm (installed by requirements-ml.txt; loaded here to prove it is there).
 Any failure stops the Docker build with an error, so a broken image is never deployed.
 
-Run (inside the image build): python /home/user/preload_models.py
+Run (inside the Modal image build, offline): python deploy/modal/preload_models.py
 """
 import tempfile
 import time

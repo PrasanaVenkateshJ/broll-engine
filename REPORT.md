@@ -55,12 +55,12 @@ worker: intake -> TTS (Kokoro) -> transcribe (faster-whisper) -> scenes -> under
 
 ## 4. Hosting story
 
-1. **Hugging Face Docker Space** was built first (`deploy/hf-space/`), but Hugging Face made Docker Spaces paid in
+1. **Hugging Face Docker Space** was built first (its folder is removed now), but Hugging Face made Docker Spaces paid in
    July 2026, so it is not used.
 2. **Azure** was evaluated and rejected.
 3. **Modal** (free monthly credit, about $1 on this account) hosts the live demo: one container (2 cores, 5 GiB request /
-   8 GiB limit), scale to zero, models baked into the image, SQLite + outputs on a Volume, cost guards (12 jobs/day,
-   35/month, 300 s narration, rate limits). A Cloudflare tunnel script is the no-account fallback.
+   8 GiB limit), scale to zero, models baked into the image, SQLite + outputs on a Volume, cost guards (20 jobs/day,
+   50/month, 600 s narration, rate limits). A Cloudflare tunnel script is the no-account fallback.
    Measured on Modal after the 2026-10-18 redeploy [`testpack/live/live_check_2026-10-18.txt`,
    `live_check_2026-10-18_cold.txt`]: the first `/health` after idle took **6.3 s** (cold start; `/ready` 6.9 s in a second
    cold test), a full job (23 words, 8.75 s of narration, 2 scenes, 16:9 + 9:16) **succeeded in 59.99 s with 0 warnings**

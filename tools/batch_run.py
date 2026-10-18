@@ -17,7 +17,7 @@ Polite polling: the pause between status checks grows from --poll up to --max-po
 At the end: --out/summary.csv and --out/summary.md.
 
     python tools/batch_run.py testpack/inputs --out testpack/outputs/run1
-    python tools/batch_run.py inputs.jsonl --out out --api https://my-space.hf.space --token XYZ --ratios 16:9,9:16
+    python tools/batch_run.py inputs.jsonl --out out --api https://<workspace>--broll-studio.modal.run --token XYZ --ratios 16:9,9:16
     python tools/batch_run.py testpack/inputs --out testpack/outputs/run1 --ratios 16:9,9:16 --keep-input-ratios
       (--keep-input-ratios: a .json input with its own "aspect_ratios" keeps them; the rest get --ratios)
 """

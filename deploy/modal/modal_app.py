@@ -89,7 +89,7 @@ image = (
     .add_local_dir(REPO, CODE, copy=True, ignore=IGNORE)
     .workdir(CODE)
     .env({"PYTHONPATH": CODE, "PYTHONDONTWRITEBYTECODE": "1", "PYTHONUNBUFFERED": "1"})
-    .run_commands(f"HF_HUB_OFFLINE=1 python {CODE}/deploy/hf-space/preload_models.py", env=MODELS)
+    .run_commands(f"HF_HUB_OFFLINE=1 python {CODE}/deploy/modal/preload_models.py", env=MODELS)
     # At run time the models are only READ from the image: a cold start downloads nothing.
     .env({"HF_HUB_OFFLINE": "1"})
 )
@@ -123,9 +123,9 @@ DEMO_ENV = {
     "OMP_NUM_THREADS": "2",
     "MKL_NUM_THREADS": "2",
     # Cost guards (sized for about $1/month of credit, see testpack/notes/cost_modal.md).
-    "DEMO_MAX_JOBS_PER_DAY": knob("DEMO_MAX_JOBS_PER_DAY", "12"),
-    "DEMO_MAX_JOBS_PER_MONTH": knob("DEMO_MAX_JOBS_PER_MONTH", "35"),
-    "MAX_AUDIO_SECONDS": knob("DEMO_MAX_AUDIO_SECONDS", "300"),
+    "DEMO_MAX_JOBS_PER_DAY": knob("DEMO_MAX_JOBS_PER_DAY", "20"),
+    "DEMO_MAX_JOBS_PER_MONTH": knob("DEMO_MAX_JOBS_PER_MONTH", "50"),
+    "MAX_AUDIO_SECONDS": knob("DEMO_MAX_AUDIO_SECONDS", "600"),
     "RATE_LIMIT_POST_PER_MINUTE": knob("DEMO_RATE_LIMIT_POST_PER_MINUTE", "4"),
     "RATE_LIMIT_GET_PER_MINUTE": knob("DEMO_RATE_LIMIT_GET_PER_MINUTE", "300"),
     # Safety: user URLs may never reach internal addresses.
@@ -190,7 +190,7 @@ def commit_with_db_locked(vol, engine) -> None:
     min_containers=0,
     max_containers=1,
     scaledown_window=SCALEDOWN_SECONDS,
-    timeout=600,
+    timeout=10800,  # 3 h: a 10-minute narration needs roughly 1-1.5 h on 2 cores (estimate, see cost_modal.md)
     startup_timeout=300,
 )
 @modal.concurrent(max_inputs=32)

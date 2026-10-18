@@ -220,16 +220,15 @@ the public API above, so everything it shows comes from the job, `timeline.json`
   polling it, and every poll keeps the container up. If a container still stops mid-job, the job is queued again
   when the next container starts (see "Jobs are never silently lost" below).
 - **Cost guards** (the account has about $1/month of credit; estimate in
-  [testpack/notes/cost_modal.md](testpack/notes/cost_modal.md)): at most `DEMO_MAX_JOBS_PER_DAY=12` and
-  `DEMO_MAX_JOBS_PER_MONTH=35` new jobs + swaps for all tokens together (then `429 DAILY_LIMIT_REACHED` with
+  [testpack/notes/cost_modal.md](testpack/notes/cost_modal.md)): at most `DEMO_MAX_JOBS_PER_DAY=20` and
+  `DEMO_MAX_JOBS_PER_MONTH=50` new jobs + swaps for all tokens together (then `429 DAILY_LIMIT_REACHED` with
   `Retry-After` until midnight UTC, or `429 MONTHLY_LIMIT_REACHED` with `Retry-After` until the 1st of next month
-  UTC; both retryable); narration at most 300 s (`DEMO_MAX_AUDIO_SECONDS` -> `MAX_AUDIO_SECONDS`; the product
-  limit is 10 min); `RATE_LIMIT_POST_PER_MINUTE=4` and `RATE_LIMIT_GET_PER_MINUTE=300` per token. All are
+  UTC; both retryable); narration at most 600 s (`DEMO_MAX_AUDIO_SECONDS` -> `MAX_AUDIO_SECONDS`, the product
+  limit of 10 min; the Modal function timeout is 3 h); `RATE_LIMIT_POST_PER_MINUTE=4` and `RATE_LIMIT_GET_PER_MINUTE=300` per token. All are
   deploy-time knobs (see the top of `modal_app.py`). Estimate (not measured on Modal): one cold visit with one
-  job is about $0.012, so even 35 jobs in 35 separate visits is about $0.41 of the $1 monthly credit.
-- **No keepalive:** `.github/workflows/keepalive.yml` has no schedule any more and refuses `*.modal.run` URLs. On
-  Modal a ping does not "keep it awake for free": every ping starts a paid container for 180 s, and a container is
-  started on the first real request anyway.
+  short job is about $0.012, so 50 short jobs in 50 separate visits is about $0.58 of the $1 monthly credit. The
+  caps count jobs, not minutes: a 10-minute narration is estimated at about $0.18, so many long jobs would use
+  the credit up sooner (see section 9 of the cost notes).
 - **Storage (differs from docker compose):** on Modal the SQLite database and the output files live on the Modal
   Volume `broll-data` (`STORAGE_BACKEND=local`, `/data`), with `SQLITE_JOURNAL_MODE=DELETE`. docker compose keeps
   MinIO (S3) as required by the brief; the API, signed links and Range downloads behave the same. The Volume is
@@ -244,9 +243,8 @@ the public API above, so everything it shows comes from the job, `timeline.json`
   tunnel (cloudflared is downloaded on demand into the git-ignored `toolsin\`, and its code signature is checked),
   then prints a public `https://<words>.trycloudflare.com` URL. It refuses `dev-token` (set a long random
   `API_TOKENS` in `.env` first), uses the same cost guards, and lives only while the window is open.
-- **Hugging Face Space: not used.** [deploy/hf-space/](deploy/hf-space/) and `tools/deploy_hf.py` stay in the repo
-  unchanged, but Hugging Face made Docker Spaces paid in July 2026, so the demo moved to Modal. The Modal image
-  reuses `deploy/hf-space/preload_models.py` to check, offline, that every model loads.
+- **Models:** the Modal image runs `deploy/modal/preload_models.py` offline at build time to check that every model
+  loads, so a cold start downloads nothing.
 
 ## Tests
 
@@ -297,7 +295,7 @@ comments in [.env.example](.env.example). "Code default" is used when the variab
 | `RATE_LIMIT_GET_PER_MINUTE` | `600` | `600` | Max GET requests (job status + file downloads) per token per minute (0 = no limit). Same 429 rule. File downloads count against the job owner's GET limit. |
 | `JOBS_LIST_MAX` | `100` | `100` | Most jobs `GET /api/v1/jobs` may return in one answer (`?limit=1..this`). |
 | `DEMO_MAX_JOBS_PER_DAY` | `0` | `0` | Cost guard for a paid live demo: at most this many NEW jobs (incl. clip swaps) per UTC day, all tokens together; then 429 DAILY_LIMIT_REACHED until midnight UTC. An idempotent replay is still answered. 0 = no cap (the Modal demo uses 12). |
-| `DEMO_MAX_JOBS_PER_MONTH` | `0` | `0` | Same cost guard per UTC calendar month; then 429 MONTHLY_LIMIT_REACHED until the 1st of next month (UTC). 0 = no cap (the Modal demo uses 35). |
+| `DEMO_MAX_JOBS_PER_MONTH` | `0` | `0` | Same cost guard per UTC calendar month; then 429 MONTHLY_LIMIT_REACHED until the 1st of next month (UTC). 0 = no cap (the Modal demo uses 50). |
 | **Studio (web UI)** | | | |
 | `STUDIO_ENABLED` | `true` | `true` | true = serve the B-roll Studio web page at `GET /` (its files under `/studio/`). false = API only. |
 | `STUDIO_DIR` | *(empty)* | *(empty)* | Folder with the Studio files. Empty = `app/studio` next to the code. |
@@ -538,8 +536,6 @@ Every error has the same shape: `{"error": {"code", "message", "retryable", "det
 - [deploy/modal/](deploy/modal/) - the live demo on Modal (modal_app.py, download_models.py);
   [tools/live_check.py](tools/live_check.py) checks the live URL; [scripts/tunnel.ps1](scripts/tunnel.ps1) is the
   no-account fallback; [testpack/notes/cost_modal.md](testpack/notes/cost_modal.md) is the cost estimate.
-- [deploy/hf-space/](deploy/hf-space/) - the Hugging Face Space (not used any more; see Live demo) and
-  [tools/deploy_hf.py](tools/deploy_hf.py).
 - [tests/](tests/) - unit, integration and e2e tests (mock adapters).
 - [REPORT.md](REPORT.md) - the 2-4 page report: problem, design, hosting story, measured results, limits.
 - [testpack/INDEX.md](testpack/INDEX.md) - every Submission Form row with its evidence files.

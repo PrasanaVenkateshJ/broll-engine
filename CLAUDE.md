@@ -58,9 +58,7 @@ app/
     swap.py          clip swap: re-render only one scene's segment
   studio/            B-roll Studio web UI (plain HTML + CSS + JS, served at GET /)
 deploy/modal/        LIVE DEMO: Modal app (API + worker thread in one container, Volume, cost guards)
-deploy/hf-space/     Hugging Face Docker Space - NOT USED (Docker Spaces became paid, July 2026)
 tools/batch_run.py   CLI batch runner
-tools/deploy_hf.py   upload deploy/hf-space/ to the Space
 tools/live_check.py  health / ready / one job / turnaround against a live URL
 scripts/tunnel.ps1   fallback demo: local API + worker behind a Cloudflare quick tunnel
 tests/               unit/, integration/, e2e/ (all run with mocks, no keys)

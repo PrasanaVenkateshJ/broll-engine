@@ -23,7 +23,7 @@ so the estimate below uses $1. The page does not say whether image builds are bi
 
 - `cpu=2` (cores), `memory=(3072, 6144)` = 3 GiB request, 6 GiB hard limit.
 - `min_containers=0`, `max_containers=1`, `scaledown_window=180` s (was 600 s; lowered so the $1 lasts a month).
-- Cost guards: `DEMO_MAX_JOBS_PER_DAY=12`, `DEMO_MAX_JOBS_PER_MONTH=35` (new jobs + clip swaps, all tokens).
+- Cost guards: see section 9 (now `DEMO_MAX_JOBS_PER_DAY=20`, `DEMO_MAX_JOBS_PER_MONTH=50`, narration up to 600 s).
 
 **Why 3 GiB and not 6 GiB** (measured, not on Modal): one real job on my Windows PC (Kokoro + Whisper small +
 CLIP ViT-B-32, rules understanding, Wikimedia + generated cards, 37-word script, 16:9 + 9:16 + 1:1, `WORKER_CONCURRENCY=1`,
@@ -135,3 +135,26 @@ job on the old code took 44 s); keeping the earlier assumption of 120 s for a ty
 (with the measured 60 s: $0.0092); 35 such visits (the monthly cap) = **$0.40** of the ~$1 credit.
 Cost per narration minute at the median 365 s per minute measured on this PC: 365 x 0.0000373 = **$0.0136** (estimate; a
 2-core Modal container may be slower than this 16-thread PC).
+
+## 9. Update 2026-10-18: limits so a reviewer can run 40+ jobs, and a 10-minute narration (estimate)
+
+New guards: `DEMO_MAX_JOBS_PER_DAY=20` (was 12; one hard-case battery is 10 jobs), `DEMO_MAX_JOBS_PER_MONTH=50` (was 35),
+`DEMO_MAX_AUDIO_SECONDS=600` (was 300; the product limit), Modal function `timeout=10800` s (was 600).
+
+Cost model at $0.0000373 per second (section 8). Assumptions, all **estimates**: a short job costs $0.0115 per cold visit
+(section 8); Modal is about 1.3 times slower than this PC (from one 8.75 s job: 59.99 s on Modal vs about 46 s here), so
+a narration minute costs about 365 s x 1.3 = 475 s = $0.018.
+
+| Case | Container time | Cost |
+|---|---|---|
+| 40 short jobs, each a cold visit | 40 x 307 s | 40 x $0.0115 = **$0.46** |
+| 50 short jobs (the monthly cap), each a cold visit | 50 x 307 s | **$0.57** |
+| One 9.8-minute narration (hard09_ten_minute) | about 4,650 s (about 78 min) | about **$0.17** |
+| One 5-minute narration (hard06) | about 2,300 s | about **$0.09** |
+| The hard-case battery (10 jobs: 10 min, 5 min, silent, music, 2 refused, brand, double meanings, 2 at once) | about 7,300 s | about **$0.27** |
+
+So 40 short jobs plus the battery is about $0.73 of the ~$1 credit: it fits, with little room. The caps count jobs, not
+minutes, so a few more 10-minute jobs (about $0.17 each) would use the rest; keep the 10-minute tests to one or two.
+The 3 h timeout is about twice the estimated time of the longest allowed job; if a job were cut off, the container is
+restarted and the job is queued once more, then fails with `JOB_INTERRUPTED` (section 4).
+

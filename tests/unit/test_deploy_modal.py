@@ -1,5 +1,5 @@
-"""The Modal demo (deploy/modal/), the disabled keepalive and the tunnel fallback keep the rules the live demo
-depends on: no secrets in the repo, one container, scale to zero, cost guards on, no scheduled pings.
+"""The Modal demo (deploy/modal/), and the tunnel fallback keep the rules the live demo
+depends on: no secrets in the repo, one container, scale to zero, cost guards on.
 Most checks read the files as text, so they also run where the modal package is not installed (Docker/CI)."""
 import importlib.util
 import re
@@ -14,7 +14,6 @@ from app.db import get_engine
 ROOT = Path(__file__).resolve().parents[2]
 MODAL_DIR = ROOT / "deploy" / "modal"
 MODAL_APP = (MODAL_DIR / "modal_app.py").read_text(encoding="utf-8")
-KEEPALIVE = (ROOT / ".github" / "workflows" / "keepalive.yml").read_text(encoding="utf-8")
 TUNNEL = (ROOT / "scripts" / "tunnel.ps1").read_text(encoding="utf-8")
 
 
@@ -44,9 +43,9 @@ def test_one_container_scale_to_zero_and_the_volume():
 
 
 def test_cost_guard_defaults():
-    assert 'knob("DEMO_MAX_JOBS_PER_DAY", "12")' in MODAL_APP
-    assert 'knob("DEMO_MAX_JOBS_PER_MONTH", "35")' in MODAL_APP
-    assert 'knob("DEMO_MAX_AUDIO_SECONDS", "300")' in MODAL_APP
+    assert 'knob("DEMO_MAX_JOBS_PER_DAY", "20")' in MODAL_APP
+    assert 'knob("DEMO_MAX_JOBS_PER_MONTH", "50")' in MODAL_APP
+    assert 'knob("DEMO_MAX_AUDIO_SECONDS", "600")' in MODAL_APP
     assert 'knob("MODAL_SCALEDOWN_SECONDS", "180")' in MODAL_APP
     assert "scaledown_window=SCALEDOWN_SECONDS" in MODAL_APP
 
@@ -115,11 +114,6 @@ def test_force_https_marks_requests_as_https():
     asyncio.run(wrapped({"type": "lifespan"}, None, None))
     assert seen == ["https", "lifespan"]
 
-
-def test_keepalive_never_runs_on_a_schedule_or_against_modal():
-    triggers = yaml.safe_load(KEEPALIVE)[True]  # YAML 1.1 reads the key "on" as True
-    assert set(triggers) == {"workflow_dispatch"}  # manual only, no "schedule"
-    assert "*modal.run*" in KEEPALIVE
 
 
 def test_tunnel_script_rules():
