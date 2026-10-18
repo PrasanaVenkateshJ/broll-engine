@@ -129,8 +129,9 @@ Total                            = $0.0000373  / s   = $0.1343 / hour      ($1 =
 ```
 
 Estimate per cold one-job visit = cold start + job + idle tail. Cold start **measured on Modal 2026-10-18: `/ready` answered
-after 6.9 s** (`testpack/live/live_check_2026-10-18_cold.txt`; the models are baked into the image). The job time on Modal is
-**not measured with this code** (the last real Modal job, 2026-10-16 with the old code, was 44 s for 8.75 s of narration);
-assuming 120 s: (7 + 120 + 180) s x 0.0000373 = **$0.0115**; 35 such visits (the monthly cap) = **$0.40** of the ~$1 credit.
+after 6.9 s** (`testpack/live/live_check_2026-10-18_cold.txt`; the models are baked into the image). The job time on Modal
+**measured once with this code: 59.99 s for 8.75 s of narration** (`testpack/live/live_check_2026-10-18.txt`; the 2026-10-16
+job on the old code took 44 s); keeping the earlier assumption of 120 s for a typical job: (7 + 120 + 180) s x 0.0000373 = **$0.0115**
+(with the measured 60 s: $0.0092); 35 such visits (the monthly cap) = **$0.40** of the ~$1 credit.
 Cost per narration minute at the median 365 s per minute measured on this PC: 365 x 0.0000373 = **$0.0136** (estimate; a
 2-core Modal container may be slower than this 16-thread PC).

@@ -13,3 +13,5 @@ NOTE (written by Claude Code, not by the tool): the cold start (6.9 s, container
 `broll-secrets` is not the one in the local .env (the secret values cannot be read from here). The job + download + Range
 checks therefore still have to be run once with the demo token:  $env:BROLL_API_TOKEN = Read-Host "token"; then
 .venv\Scripts\python tools\live_check.py --url https://prasanavenkateshj--broll-studio.us-east.modal.run
+
+UPDATE: superseded by testpack/live/live_check_2026-10-18.txt (run by me with the demo token): the full job succeeded in 59.99 s, Range 206, ALL CHECKS PASSED.

@@ -61,10 +61,12 @@ worker: intake -> TTS (Kokoro) -> transcribe (faster-whisper) -> scenes -> under
 3. **Modal** (free monthly credit, about $1 on this account) hosts the live demo: one container (2 cores, 5 GiB request /
    8 GiB limit), scale to zero, models baked into the image, SQLite + outputs on a Volume, cost guards (12 jobs/day,
    35/month, 300 s narration, rate limits). A Cloudflare tunnel script is the no-account fallback.
-   Measured on Modal on 2026-10-18: `/ready` answered **6.9 s** after a start from zero, `/health` 424 ms
-   [`testpack/live/live_check_2026-10-18_cold.txt`]. A full job on the redeployed code still has to be run once
-   with the demo token (see that file); the last complete Modal job was 44 s for 8.75 s of narration on 2026-10-16
-   [`testpack/live/live_check_2026-10-16.txt`].
+   Measured on Modal after the 2026-10-18 redeploy [`testpack/live/live_check_2026-10-18.txt`,
+   `live_check_2026-10-18_cold.txt`]: the first `/health` after idle took **6.3 s** (cold start; `/ready` 6.9 s in a second
+   cold test), a full job (23 words, 8.75 s of narration, 2 scenes, 16:9 + 9:16) **succeeded in 59.99 s with 0 warnings**
+   (TTS 17.3, transcribe 5.7, understand 2.2, footage 15.1, render 15.2 s), all 7 output files downloaded, and a Range
+   request returned **HTTP 206** (`Content-Range bytes 0-1023/2727960`). All checks passed. One short job on 2 cores
+   only; the 2026-10-16 job on the old code took 44 s [`live_check_2026-10-16.txt`].
 
 ## 5. Measured results (this PC: i7-13620H, 16 GB, CPU only)
 
@@ -117,15 +119,15 @@ and about $0.0115 per cold one-job visit [`testpack/notes/cost_modal.md` section
 - Tamil is still below English; one Tamil scene failed because Whisper misheard the speech itself.
 - The judge is a Groq *preview* model with a small free quota, so it rates only a few uncertain scenes per job.
 - Story moments ("a storm rolled in") and lines naming specific items stay hard for stock footage.
-- A 60 s job takes about 5.5 minutes on this PC; on Modal's 2 cores it is probably slower (not measured with this code).
+- A 60 s job takes about 5.5 minutes on this PC; on Modal's 2 cores it is probably slower (only an 8.75 s job was
+  measured there: 59.99 s).
 - Docker Compose and the MinIO test were not re-run in the last sessions; clip swap was not re-timed in the test pack
   (earlier real run: full render 108.9 s vs swap 23.5 s); the sailboat crop fix is tested but was not re-rendered.
-- The Modal live check of a full job on the redeployed code is pending the demo token (section 4).
 
 ## 7. Next steps
 
 1. Implement the planned fix above (action-sized scenes, action-first queries) and re-test on new unseen scripts.
 2. Get the reviewers' scores; re-run the judge-vs-human comparison on far more than 7 scenes.
-3. Run the full job on Modal and replace the cost estimate with measured Modal times.
+3. Time a 60 s narration on Modal (only the 8.75 s check exists) and replace the cost estimate with measured Modal times.
 4. Reduce turnaround (footage and render are about 80% of it) before raising the Modal job limits.
 5. More Tamil / Hindi voices to check "as well as English".
