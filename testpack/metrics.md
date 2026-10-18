@@ -156,3 +156,34 @@ these as a first signal, not a final score.
 Scenes I rated 1 or 2: 25 of 80. In short: all 8 generated cards; 11 of the 17 stock clips scored only
 0.22-0.25 (just over the 0.22 line); 4 of the 6 Tamil scenes had a wrong or misaligned English translation for
 search; run2 hard04's "calm" queries found generic footage (warehouse, boat, candles).
+
+## 8. Before vs after the rating fixes (`run3`, 2026-10-18)
+
+My ratings of `run3` (the 8 inputs behind the 10 earlier rated jobs, re-run after: per-scene translation, best
+usable footage instead of plain cards, no "calm" query prefix, one rewritten query for borderline scenes).
+Generated sections for run3: `testpack/metrics_run3.md` (`tools/evaluate.py --ratings
+testpack/ratings/ratings_run3.csv --runs testpack/outputs/run1 testpack/outputs/run3`); the comparison below is
+added by hand from `ratings_before.csv`, `ratings_run3.csv` and the timelines. Before = sections 1, 2 and 7 above.
+
+| Metric | Before (run1 + run2, 80 scenes) | After (run3, 66 scenes) |
+|---|---|---|
+| Average relevance (1-5) | 3.35 | 3.92 |
+| Scenes rated 4-5 | 48.8% | 72.7% |
+| Coverage (rated narration time with a clip rated >= 3) | 69.4% | 84.1% |
+| English average (scenes) | 3.34 (65) | 3.94 (53) |
+| Hindi average (scenes) | 4.22 (9) | 4.38 (8) |
+| Tamil average (scenes) | 2.17 (6) | 3.00 (5) |
+| Plain cards among rated scenes (their average) | 8 (1.88) | 0 |
+| Rating counts 1/2/3/4/5 | 4 / 21 / 16 / 21 / 18 | 4 / 6 / 8 / 21 / 27 |
+| Spearman CLIP score vs my rating | 0.289 (n = 72) | 0.127 (n = 66) |
+| VLM judge vs my rating (scenes with both) | n = 5, Spearman 0.89 | n = 7, Spearman 0.18 |
+
+Same scripts (identical scene texts): hard01 run1 2.50 / run2 3.00 / run3 4.33; hard04 run1 3.50 / run2 2.33 /
+run3 4.33. The two sets are not the same scenes (core03 / core13 split into fewer scenes in run3), so this is a
+before / after on the same inputs, not on identical scenes.
+
+Scenes rated 1 or 2 in run3: 10 of 66. Pattern: 4 are story moments from core07 (storm rolling in, power out,
+ship in the rain, captain waving) that stock footage rarely shows; 3 are instruction lines with specific items
+(tomatoes / chilies / spinach / mint, soil + compost + drain holes, two solar-cell layers) where the clip stayed
+generic; 2 are Tamil (scene 0's Whisper transcript itself is wrong); 1 is hard04's charity line. Early exit is not
+the cause: scenes chosen after scoring only 6 candidates average 3.91 vs 3.94 for the others (33 scenes each).
