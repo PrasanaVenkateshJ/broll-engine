@@ -2,7 +2,7 @@
 
 The rule (must-have 5): a card never shows a number or claim that is not in the narration.
 - find_figures(): every number in a line, read by plain code (no LLM): "40%", "40 percent",
-  "three out of four", "twelve kilometres", Hindi "दस प्रतिशत", Tamil "பத்து சதவீதம்",
+  "three out of four", "one in five", "twelve kilometres", Hindi "दस प्रतिशत", Tamil "பத்து சதவீதம்",
   "forty percent", "$1.2 million", "Rs 500", "3x", "three times", "2 million", "2025" ...
 - main_figure(): the one to show. A percentage beats money, money beats "3x", "3x" beats a
   plain number, and a year comes last ("In 2025, savings grew by 40%" -> 40%).
@@ -50,9 +50,9 @@ PATTERNS = [  # (kind, regex) - tried in this order; a later match may not overl
     ("percent", re.compile(rf"\b{_NUM}\s*(?:%|\bper\s?cent\b)", re.I)),
     ("money", re.compile(rf"(?<![A-Za-z])(?P<cur>{_CURRENCY})\s?{_NUM}{_SCALE_PART}", re.I)),
     ("money", re.compile(rf"\b{_NUM}{_SCALE_PART}\s+(?P<curword>{_CURRENCY_WORDS})\b", re.I)),
-    # "three out of four buyers" -> "3 out of 4"
-    ("ratio", re.compile(rf"\b(?P<num>{_DIGITS}|{_WORD_NUMBER})\s+out\s+of\s+(?P<den>{_DIGITS}|{_WORD_NUMBER})\b",
-                         re.I)),
+    # "three out of four buyers" -> "3 out of 4"; "one in five people" -> "1 in 5"
+    ("ratio", re.compile(rf"\b(?P<num>{_DIGITS}|{_WORD_NUMBER})\s+(?P<sep>out\s+of|in)\s+"
+                         rf"(?P<den>{_DIGITS}|{_WORD_NUMBER})\b", re.I)),
     ("multiplier", re.compile(rf"\b{_NUM}\s*(?:x\b|times\b)", re.I)),
     ("scaled", re.compile(rf"\b(?P<num>{_DIGITS}|{_WORD_NUMBER})\s*(?P<scale>thousand|million|billion|trillion|"
                           rf"lakh|crore)\b", re.I)),
@@ -259,9 +259,10 @@ def find_figures(text: str) -> list[Figure]:
             groups = m.groupdict()
             if kind == "ratio":
                 den = _parse_number(groups["den"])
-                if not den or raw > den:
-                    continue
-                found.append(Figure("ratio", m.group(0).strip(), f"{_plain(raw)} out of {_plain(den)}", raw / den,
+                sep = "in" if groups["sep"].lower() == "in" else "out of"
+                if not den or raw > den or (sep == "in" and groups["den"].isdigit() and 1900 <= den <= 2100):
+                    continue  # "2 in 2025" is a year, not a ratio
+                found.append(Figure("ratio", m.group(0).strip(), f"{_plain(raw)} {sep} {_plain(den)}", raw / den,
                                     raw, m.start()))
                 taken.append((m.start(), m.end()))
                 continue
@@ -356,7 +357,7 @@ _FILLER_START = {"and", "but", "so", "then", "also", "that", "which", "while", "
 MAX_SUBTITLE_WORDS = 5
 # Part of every stored understanding's fingerprint: change it when these rules change, so an
 # answer saved in an old timeline.json (with an old card) is not reused.
-CARD_RULES_VERSION = "3"
+CARD_RULES_VERSION = "4"
 MAX_SUBTITLE_CHARS = 40
 
 

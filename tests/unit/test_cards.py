@@ -9,7 +9,7 @@ import re
 import pytest
 
 from app.config import get_settings
-from app.pipeline.cards import build_card, find_figures, unverified_numbers
+from app.pipeline.cards import build_card, check_card, find_figures, unverified_numbers
 from app.pipeline.outputs import card_facts
 from app.pipeline.providers.generated import GeneratedProvider
 from app.pipeline.rank import Selection, SelectionContext, _card, get_scorer, select_clip
@@ -68,6 +68,8 @@ def test_number_words_without_a_unit_are_not_numbers():
     ("The trail is twelve kilometres long.", "12 km"),
     ("It took forty minutes to get there.", "40 minutes"),
     ("Today, three out of four buyers read reviews.", "3 out of 4"),
+    ("Last year, one in five people received a fake bank message.", "1 in 5"),
+    ("1 in 5 people never check the sender.", "1 in 5"),
     ("Nearly forty percent of families save nothing.", "40%"),
     ("हमारी बचत दस प्रतिशत बढ़ी।", "10%"),                   # Hindi: "our savings grew ten percent"
     ("किसानों ने 10 प्रतिशत ज़्यादा पानी बचाया।", "10%"),        # digits + the Hindi word for percent
@@ -201,3 +203,10 @@ def test_stock_scenes_have_no_card_text():
     cand = GeneratedProvider().card(0, "x")
     cand.generated = False
     assert card_facts(Selection(0, cand, None, 0.3, 0.3, "stock"))["card_text"] is None
+
+
+def test_x_in_y_ratio_never_reads_a_year_and_is_checked_like_out_of():
+    assert [(f.kind, f.display) for f in find_figures("We moved 2 in 2025.")] == [("number", "2"), ("year", "2025")]
+    assert find_figures("Call us at one in the morning.") == []
+    line = "Last year, one in five people received a fake bank message."
+    assert check_card("1 in 5", "", line) == [] and check_card("1 in 4", "", line) == ["1 in 4"]

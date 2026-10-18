@@ -1,6 +1,6 @@
 {
-  "job_id": "9c771612c87947a5bb76ddee92932a58",
-  "created_at": "2026-10-18T14:11:34.993495+00:00",
+  "job_id": "81365c66e9874f4083418eb58207a0b0",
+  "created_at": "2026-10-18T14:27:52.452411+00:00",
   "app": {
     "name": "broll-engine",
     "version": "0.2.0"
@@ -21,7 +21,7 @@
       "version": "0.9.4",
       "licence": "Apache-2.0",
       "voice": "en-US-female",
-      "from_cache": false
+      "from_cache": true
     },
     "transcribe": {
       "provider": "faster-whisper",
@@ -37,7 +37,7 @@
       "temperature": 0.0,
       "seed": 1234,
       "prompt_version": "4d1a71db9d",
-      "tokens_used": 2557,
+      "tokens_used": 2597,
       "batch_size": 6,
       "calls": 1,
       "rate_limited_answers": 0,
@@ -66,12 +66,20 @@
       "footage_workers": 4,
       "early_exit_rankings": 2,
       "borderline": {
-        "borderline_scenes": 0
+        "borderline_scenes": 1,
+        "rewritten": 1,
+        "rewrite_llm": {
+          "provider": "groq",
+          "model": "openai/gpt-oss-120b",
+          "calls": 1,
+          "tokens_used": 614,
+          "errors": []
+        }
       },
-      "pass1_search_score_seconds": 38.197,
-      "pass1_5_vlm_seconds": 1.285,
-      "pass2_select_download_seconds": 0.008,
-      "candidates_scored": 42
+      "pass1_search_score_seconds": 29.311,
+      "pass1_5_vlm_seconds": 1.179,
+      "pass2_select_download_seconds": 5.436,
+      "candidates_scored": 76
     },
     "vlm_judge": {
       "provider": "groq",
@@ -82,13 +90,13 @@
       "top_k": 3,
       "panel_width": 256,
       "calls": 1,
-      "tokens_used": 1531,
+      "tokens_used": 1534,
       "rate_limited_answers": 0,
       "seconds_waited_for_rate_limit": 0.0,
       "model_licence": "Apache-2.0 (Qwen weights); Groq marks this model as a preview",
       "scenes_wanting_a_rating": 1,
       "scenes_judged": 1,
-      "seconds": 1.284
+      "seconds": 1.179
     },
     "ffmpeg": "ffmpeg version 9.0.2-full_build-www.gyan.dev"
   },
@@ -201,17 +209,17 @@
   },
   "timings_seconds": {
     "intake": 0.0,
-    "tts": 7.144,
-    "transcribe": 4.54,
-    "scenes": 0.002,
-    "understand": 4.585,
-    "footage": 39.515,
-    "render": 27.067
+    "tts": 0.146,
+    "transcribe": 5.398,
+    "scenes": 0.001,
+    "understand": 4.596,
+    "footage": 35.952,
+    "render": 21.427
   },
   "timings_note": "seconds per stage, measured up to the moment this file was written (upload not included)",
   "cost_estimate": {
     "total_usd": 0.0,
-    "llm_tokens": 4088,
+    "llm_tokens": 4131,
     "method": "0 USD: every service used here is free - Groq free tier for the LLM (tokens counted in llm_tokens; the optional VLM judge too), Pixabay, Wikimedia Commons and Openverse APIs are free, and Kokoro, Whisper, open_clip and FFmpeg run locally on the CPU. On paid plans: cost = llm_tokens x the LLM price per token + compute time (timings_seconds) x the server price."
   },
   "warnings": [],
@@ -226,20 +234,20 @@
       {
         "scene": 0,
         "provider": "pixabay_video",
-        "attribution": "Life-Of-Vids on Pixabay",
-        "page_url": "https://pixabay.com/videos/id-197/"
+        "attribution": "Vimeo-Free-Videos on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-1196/"
       },
       {
         "scene": 1,
         "provider": "pixabay_video",
-        "attribution": "u_etjkkdz15b on Pixabay",
-        "page_url": "https://pixabay.com/videos/id-142641/"
+        "attribution": "Natures_Embrace on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-202987/"
       },
       {
         "scene": 2,
         "provider": "pixabay_video",
-        "attribution": "Coverr-Free-Footage on Pixabay",
-        "page_url": "https://pixabay.com/videos/id-150/"
+        "attribution": "conte_public on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-204526/"
       }
     ]
   },
@@ -256,10 +264,10 @@
       "generated_card": 0.0
     },
     "statistic_cards": 0,
-    "statistic_overlays": 0,
+    "statistic_overlays": 1,
     "adaptive_threshold_clips": 0,
     "vlm_judged_clips": 1,
-    "vlm_mean_score": 3.0,
+    "vlm_mean_score": 4.0,
     "share_without_statistic_cards": {
       "video": 1.0,
       "photo_motion": 0.0,

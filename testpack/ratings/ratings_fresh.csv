@@ -1,0 +1,10 @@
+﻿job,scene,text,provider,clip_id,clip_score,my_rating,note
+fresh/fresh01_masala_chai,0,"Every morning, Priya makes masala chai.",pixabay_video,267,0.2647,4,
+fresh/fresh01_masala_chai,1,"She boils water with crushed ginger and cardamom, adds tea leaves and milk, then strains it into two cups.",pixabay_video,143163,0.2703,1,
+fresh/fresh01_masala_chai,2,Her grandfather says it tastes just like the chai his mother made.,pixabay_image_motion,3188288,0.2748,4,
+fresh/fresh02_rain_cycle,0,Rain begins in the ocean. The sun heats the water and turns it into vapor.,pixabay_video,345445,0.3155,2,
+fresh/fresh02_rain_cycle,1,"High in the sky, the vapor cools and forms clouds.",pixabay_video,123536,0.2762,4,
+fresh/fresh02_rain_cycle,2,"When the drops become heavy, they fall back to the earth as rain, filling rivers and lakes.",pixabay_video,33581,0.2678,1,
+fresh/fresh03_cyber_fraud,0,Cyber fraud is rising fast.,pixabay_video,197,0.2756,1,
+fresh/fresh03_cyber_fraud,1,"Last year, one in five people received a fake bank message.",pixabay_video,142641,0.2569,3,
+fresh/fresh03_cyber_fraud,2,"Never share your OTP, check the sender carefully, and report suspicious calls to the helpline immediately.",pixabay_video,150,0.2369,4,

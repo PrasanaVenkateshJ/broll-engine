@@ -187,3 +187,35 @@ ship in the rain, captain waving) that stock footage rarely shows; 3 are instruc
 (tomatoes / chilies / spinach / mint, soil + compost + drain holes, two solar-cell layers) where the clip stayed
 generic; 2 are Tamil (scene 0's Whisper transcript itself is wrong); 1 is hard04's charity line. Early exit is not
 the cause: scenes chosen after scoring only 6 candidates average 3.91 vs 3.94 for the others (33 scenes each).
+
+## 9. Fresh unseen scripts (`fresh`, 2026-10-18)
+
+3 new scripts the app had never seen (`testpack/fresh/inputs/`: masala chai, the rain cycle, cyber fraud), English
+TTS, `QUALITY_MODE=balanced`, no code changes before the run. My ratings: `testpack/ratings/ratings_fresh.csv`
+(9 scenes); generated sections: `testpack/metrics_fresh.md`. The rated fresh03 video is kept in
+`testpack/outputs/fresh_rated_v1/` (fresh03 was re-run after the ratio fix below; the new one was not re-rated).
+
+| Metric | Value |
+|---|---|
+| Average relevance (1-5) | 2.67 (run3: 3.92) |
+| Scenes rated 4-5 | 44.4% (4 of 9) |
+| Coverage (rated narration time with a clip rated >= 3) | 51.6% |
+| Rating counts 1/2/3/4/5 | 3 / 1 / 1 / 4 / 0 |
+| Plain cards | 0 |
+
+Scenes rated 1 or 2 (and why they were picked):
+
+| Video | Scene | Text | Rating | Picked because |
+|---|---|---|---|---|
+| fresh01_masala_chai | 1 | She boils water with crushed ginger and cardamom, adds tea leaves and milk, then strains it into two cups. | 1 | video for "stovetop kettle on kitchen counter", score 0.270 |
+| fresh02_rain_cycle | 0 | Rain begins in the ocean. The sun heats the water and turns it into vapor. | 2 | video for "wide ocean horizon", score 0.316 |
+| fresh02_rain_cycle | 2 | When the drops become heavy, they fall back to the earth as rain, filling rivers and lakes. | 1 | video for "water droplets like pearls", score 0.268 |
+| fresh03_cyber_fraud | 0 | Cyber fraud is rising fast. | 1 | video for "home office laptop screen", score 0.276 |
+
+Pattern: every low clip passed CLIP comfortably (0.27-0.32) but shows a generic setting or a metaphor ("kitchen
+counter", "ocean horizon", "droplets like pearls", "laptop screen") instead of the line's main action (making chai,
+evaporation, rain falling, fraud). Each script became only 3 long scenes, so one clip has to cover two or three
+actions. The much lower average than run3 means the run3 gains do not fully carry over to new scripts.
+
+Fix after this test: `cards.py` now also reads "X in Y" ratios ("one in five", "1 in 5"), not only "X out of Y";
+re-run fresh03 scene 1 now shows the "1 in 5" badge on real footage (`outputs/fresh/fresh03_cyber_fraud`).

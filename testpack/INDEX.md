@@ -90,6 +90,19 @@ honest answer: **Yes** = evidence in this repo; **Partial** = some evidence, the
 | Logs, memory samples | `testpack/logs/` |
 | Ratings, metrics | `testpack/ratings/rate.html`, `testpack/ratings/ratings_before.csv` (my 80 ratings of run1 + run2), `testpack/ratings/ratings_run3.csv` (my 66 ratings of run3), `testpack/metrics.md`, `testpack/metrics_run3.md` |
 
+## Fresh unseen scripts
+
+3 new scripts (`testpack/fresh/inputs/`), normal pipeline, no code changes before the run: `testpack/outputs/fresh/`,
+rating page `testpack/ratings/rate_fresh.html`, my ratings `testpack/ratings/ratings_fresh.csv`, details in
+`testpack/metrics.md` section 9 (+ `testpack/metrics_fresh.md`).
+
+- Average relevance **2.67** (run3 on the tuned inputs: 3.92); **44.4%** rated 4-5 (4 of 9); coverage 51.6%; 0 plain cards.
+- Rated 1-2: fresh01 scene 1 (chai making -> "stovetop kettle on kitchen counter"), fresh02 scene 0 (evaporation ->
+  "wide ocean horizon"), fresh02 scene 2 (rain falling -> "water droplets like pearls"), fresh03 scene 0 (cyber fraud ->
+  "home office laptop screen"): generic setting / metaphor clips instead of the line's main action.
+- "one in five" got no badge; fixed in `cards.py` ("X in Y" ratios) and fresh03 re-run: the "1 in 5" badge now shows.
+  The rated fresh03 video is kept in `testpack/outputs/fresh_rated_v1/`.
+
 ## Run 1 vs run 2 (the 4 re-run inputs)
 | Input | Turnaround s run1 -> run2 | Footage stage s | Candidates scored | Plain cards (number + keyword) | video / photo-motion | Number badges | Judge rated / mean | Groq fallback scenes | Mode |
 |---|---|---|---|---|---|---|---|---|---|

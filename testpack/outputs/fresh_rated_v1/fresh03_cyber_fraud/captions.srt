@@ -1,0 +1,17 @@
+1
+00:00:00,000 --> 00:00:02,320
+Cyber fraud is rising fast.
+
+2
+00:00:02,640 --> 00:00:06,100
+Last year, one in five people
+received a fake bank message.
+
+3
+00:00:06,400 --> 00:00:11,440
+Never share your OTP, check the sender
+carefully, and report suspicious calls to
+
+4
+00:00:11,440 --> 00:00:12,760
+the helpline immediately.

@@ -1,5 +1,5 @@
 {
-  "job_id": "9c771612c87947a5bb76ddee92932a58",
+  "job_id": "81365c66e9874f4083418eb58207a0b0",
   "input_type": "script",
   "duration": 13.225,
   "language": "en",
@@ -12,13 +12,13 @@
       "duration": 2.32,
       "visual_hint": null,
       "search_text": null,
-      "query": "home office laptop screen",
+      "query": "hands typing on laptop keyboard",
       "queries": [
-        "multiple phishing emails inbox",
-        "balloon inflating with warnings",
-        "home office laptop screen",
-        "person typing worried on laptop",
-        "dark cyber threat atmosphere"
+        "people receiving phishing emails",
+        "dominoes toppling rapidly",
+        "cybersecurity monitoring room",
+        "hands typing on laptop keyboard",
+        "red warning lights flashing"
       ],
       "flags": {
         "abstract": false,
@@ -28,35 +28,44 @@
         "sensitive": false
       },
       "provider": "pixabay_video",
-      "clip_id": "197",
-      "page_url": "https://pixabay.com/videos/id-197/",
+      "clip_id": "1196",
+      "page_url": "https://pixabay.com/videos/id-1196/",
       "licence": "Pixabay Content License",
       "licence_url": "https://pixabay.com/service/license-summary/",
-      "attribution": "Life-Of-Vids on Pixabay",
+      "attribution": "Vimeo-Free-Videos on Pixabay",
       "commercial_use": true,
       "watermark": false,
       "ai_generated": false,
       "generated": false,
-      "reason": "pixabay_video: score 0.276 >= 0.22 for query 'home office laptop screen' (best of 6 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.266); logo check ok (logo prob 0.13); 3 clip frame(s) passed the logo check (max logo prob 0.11); video scored >= 0.25: photo sources not searched",
-      "relevance_score": 0.2756,
+      "reason": "pixabay_video: score 0.243 >= 0.22 for query 'hands typing on laptop keyboard' (best of 12 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.263); logo check ok (logo prob 0.12); 3 clip frame(s) passed the logo check (max logo prob 0.18); VLM judge 4/5 (judged 2 candidates, higher rating first); video preferred over photo-motion (pixabay_image_motion best 0.297 is not more than 0.03 above 0.283)",
+      "relevance_score": 0.2432,
       "overlay": false,
       "overlay_card": null,
-      "vlm_score": null,
-      "vlm": null,
+      "vlm_score": 4,
+      "vlm": {
+        "score": 4,
+        "judged": {
+          "pixabay_video:1196": 4,
+          "pixabay_video:26537": 2
+        },
+        "why": "A shows hands typing on a keyboard, a common visual for online activity and cyber threats, while B shows a person using a laptop in a social setting, which is less directly related to fraud.",
+        "priority": "close call",
+        "model": "qwen/qwen3.8-27b"
+      },
       "score_details": {
-        "score": 0.2756,
-        "thumbnail_score": 0.266,
+        "score": 0.2432,
+        "thumbnail_score": 0.2634,
         "frame_scores": [
-          0.266,
-          0.2791,
-          0.2817
+          0.2634,
+          0.2418,
+          0.2244
         ],
         "frames_scored": 3,
         "text_prob": 0.0,
         "text_penalty": 0.0,
         "fit_bonus": 0.04,
         "logo_penalty": 0.0,
-        "order_score": 0.3156,
+        "order_score": 0.2832,
         "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
       },
       "story_sensitive": false,
@@ -74,7 +83,7 @@
       "thumbnail": "thumb_000.jpg",
       "logo_check": {
         "thumbnail": {
-          "logo_prob": 0.1302,
+          "logo_prob": 0.1228,
           "result": "ok",
           "reject_prob": 0.6,
           "penalty_prob": 0.4,
@@ -82,43 +91,43 @@
         },
         "frames": [
           {
-            "time": 5.99,
-            "logo_prob": 0.1092,
-            "scene_score": 0.2571,
+            "time": 1.24,
+            "logo_prob": 0.1768,
+            "scene_score": 0.2545,
             "result": "ok"
           },
           {
-            "time": 17.98,
-            "logo_prob": 0.1114,
-            "scene_score": 0.2662,
+            "time": 3.72,
+            "logo_prob": 0.0323,
+            "scene_score": 0.2606,
             "result": "ok"
           },
           {
-            "time": 29.97,
-            "logo_prob": 0.0757,
-            "scene_score": 0.2681,
+            "time": 6.2,
+            "logo_prob": 0.0794,
+            "scene_score": 0.2296,
             "result": "ok"
           }
         ],
         "result": "ok"
       },
       "clip_details": {
-        "uid": "pixabay_video:197",
+        "uid": "pixabay_video:1196",
         "kind": "video",
         "title": "",
-        "source_url": "https://cdn.pixabay.com/video/2015/08/10/197-135846412_medium.mp4",
-        "final_score": 0.3156,
+        "source_url": "https://cdn.pixabay.com/video/2015/10/27/1196-143842675_medium.mp4",
+        "final_score": 0.2832,
         "width": 1280,
         "height": 720,
-        "duration": 36.0
+        "duration": 7.0
       },
       "understanding": {
         "queries": [
-          "multiple phishing emails inbox",
-          "balloon inflating with warnings",
-          "home office laptop screen",
-          "person typing worried on laptop",
-          "dark cyber threat atmosphere"
+          "people receiving phishing emails",
+          "dominoes toppling rapidly",
+          "cybersecurity monitoring room",
+          "hands typing on laptop keyboard",
+          "red warning lights flashing"
         ],
         "query_roles": [
           "meaning",
@@ -134,7 +143,7 @@
           "brand": false,
           "sensitive": false
         },
-        "reason": "groq: Shows the growing threat of online scams through inbox alerts and tense atmosphere",
+        "reason": "groq: Shows the rapid increase of cyber fraud through visual cues of attacks and urgency.",
         "source": "groq",
         "names": [],
         "number": null,
@@ -148,15 +157,15 @@
           "numbers_shown": []
         },
         "story_sensitive": false,
-        "fingerprint": "6ec683237cf85246"
+        "fingerprint": "6a6dea8e44f5946d"
       },
       "safety": {
         "queries": [
-          "multiple phishing emails inbox",
-          "balloon inflating with warnings",
-          "home office laptop screen",
-          "person typing worried on laptop",
-          "dark cyber threat atmosphere"
+          "people receiving phishing emails",
+          "dominoes toppling rapidly",
+          "cybersecurity monitoring room",
+          "hands typing on laptop keyboard",
+          "red warning lights flashing"
         ],
         "exclude_terms": [],
         "no_faces": false,
@@ -164,10 +173,10 @@
       },
       "segments": {
         "16:9": {
-          "file": "seg_000_38b63acd96aee8ea.mp4",
-          "cache_key": "38b63acd96aee8ea",
+          "file": "seg_000_ff74090a0a2c73a4.mp4",
+          "cache_key": "ff74090a0a2c73a4",
           "frames": 70,
-          "look": "eq=brightness=-0.120:saturation=1.200",
+          "look": "eq=brightness=-0.055",
           "caption_font": "Arial",
           "framing": "fit",
           "crop": {
@@ -178,10 +187,10 @@
           "qa_problems": []
         },
         "9:16": {
-          "file": "seg_000_448caa34b249b1fa.mp4",
-          "cache_key": "448caa34b249b1fa",
+          "file": "seg_000_75ca05ed297df092.mp4",
+          "cache_key": "75ca05ed297df092",
           "frames": 70,
-          "look": "eq=brightness=-0.120:saturation=1.200",
+          "look": "eq=brightness=-0.055",
           "caption_font": "Arial",
           "framing": "subject crop (centre)",
           "crop": {
@@ -189,33 +198,34 @@
             "choice": "centre",
             "axis": "x",
             "window_fraction": 0.3164,
-            "full_frame_score": 0.2036,
+            "full_frame_score": 0.2254,
             "windows": {
               "centre": {
                 "start": 0.3418,
-                "score": 0.2209
+                "score": 0.2307
               },
               "left": {
                 "start": 0.0,
-                "score": 0.1087
+                "score": 0.2176
               },
               "right": {
                 "start": 0.6836,
-                "score": 0.2122
+                "score": 0.1993
               }
             },
             "blur_margin": 0.02,
             "tie_margin": 0.03,
             "frames": 3,
             "subject_span": [
-              0.3927,
-              1.0
+              0.267,
+              0.9948
             ],
             "windows_cutting_subject": [
               "centre",
+              "left",
               "right"
             ],
-            "reason": "window 'centre' chosen (0.221; best window 0.221; whole frame 0.204; near-ties within 0.03 go to salient / centre)"
+            "reason": "window 'centre' chosen (0.231; best window 0.231; whole frame 0.225; near-ties within 0.03 go to salient / centre)"
           },
           "timing": "trimmed",
           "qa_problems": []
@@ -257,13 +267,13 @@
       "duration": 3.78,
       "visual_hint": null,
       "search_text": null,
-      "query": "kitchen table smartphone",
+      "query": "kitchen table with smartphone",
       "queries": [
-        "person reading fake bank SMS",
-        "masked envelope",
-        "kitchen table smartphone",
-        "hand holding scam text",
-        "tense red overlay"
+        "people reading fake bank messages",
+        "hand holding deceptive envelope",
+        "kitchen table with smartphone",
+        "hands scrolling phone frowning",
+        "phone screen casting blue light"
       ],
       "flags": {
         "abstract": false,
@@ -273,35 +283,44 @@
         "sensitive": false
       },
       "provider": "pixabay_video",
-      "clip_id": "142641",
-      "page_url": "https://pixabay.com/videos/id-142641/",
+      "clip_id": "202987",
+      "page_url": "https://pixabay.com/videos/id-202987/",
       "licence": "Pixabay Content License",
       "licence_url": "https://pixabay.com/service/license-summary/",
-      "attribution": "u_etjkkdz15b on Pixabay",
+      "attribution": "Natures_Embrace on Pixabay",
       "commercial_use": true,
       "watermark": false,
       "ai_generated": false,
       "generated": false,
-      "reason": "pixabay_video: score 0.257 >= 0.22 for query 'kitchen table smartphone' (best of 15 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.246); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.07); video scored >= 0.25: photo sources not searched",
-      "relevance_score": 0.2569,
-      "overlay": false,
-      "overlay_card": null,
+      "reason": "statistic line on real footage: number badge '1 in 5' from the narration drawn over the clip (STATISTIC_OVERLAY=true); pixabay_video: score 0.304 >= 0.22 for query 'kitchen table with smartphone' (best of 6 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.287); logo check ok (logo prob 0.22); 3 clip frame(s) passed the logo check (max logo prob 0.20); video scored >= 0.25: photo sources not searched",
+      "relevance_score": 0.3043,
+      "overlay": true,
+      "overlay_card": {
+        "headline": "1 in 5",
+        "subtitle": "people received a fake bank",
+        "kind": "ratio",
+        "source": "narration",
+        "numbers_shown": [
+          "1 in 5"
+        ],
+        "style": "badge (lower third, fades in)"
+      },
       "vlm_score": null,
       "vlm": null,
       "score_details": {
-        "score": 0.2569,
-        "thumbnail_score": 0.2465,
+        "score": 0.3043,
+        "thumbnail_score": 0.2866,
         "frame_scores": [
-          0.2465,
-          0.26,
-          0.2643
+          0.2866,
+          0.3151,
+          0.3111
         ],
         "frames_scored": 3,
         "text_prob": 0.0,
         "text_penalty": 0.0,
         "fit_bonus": 0.04,
         "logo_penalty": 0.0,
-        "order_score": 0.2969,
+        "order_score": 0.3443,
         "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
       },
       "story_sensitive": false,
@@ -319,7 +338,7 @@
       "thumbnail": "thumb_001.jpg",
       "logo_check": {
         "thumbnail": {
-          "logo_prob": 0.0024,
+          "logo_prob": 0.2234,
           "result": "ok",
           "reject_prob": 0.6,
           "penalty_prob": 0.4,
@@ -327,43 +346,43 @@
         },
         "frames": [
           {
-            "time": 1.46,
-            "logo_prob": 0.073,
-            "scene_score": 0.2537,
+            "time": 2.51,
+            "logo_prob": 0.1186,
+            "scene_score": 0.2936,
             "result": "ok"
           },
           {
-            "time": 4.39,
-            "logo_prob": 0.0348,
-            "scene_score": 0.2545,
+            "time": 7.53,
+            "logo_prob": 0.2032,
+            "scene_score": 0.2827,
             "result": "ok"
           },
           {
-            "time": 7.32,
-            "logo_prob": 0.0349,
-            "scene_score": 0.2446,
+            "time": 12.55,
+            "logo_prob": 0.1738,
+            "scene_score": 0.2968,
             "result": "ok"
           }
         ],
         "result": "ok"
       },
       "clip_details": {
-        "uid": "pixabay_video:142641",
+        "uid": "pixabay_video:202987",
         "kind": "video",
         "title": "",
-        "source_url": "https://cdn.pixabay.com/video/2022/12/12/142641-780599369_medium.mp4",
-        "final_score": 0.2969,
+        "source_url": "https://cdn.pixabay.com/video/2024/03/04/202987-919379330_medium.mp4",
+        "final_score": 0.3443,
         "width": 2560,
         "height": 1440,
-        "duration": 8.0
+        "duration": 15.0
       },
       "understanding": {
         "queries": [
-          "person reading fake bank SMS",
-          "masked envelope",
-          "kitchen table smartphone",
-          "hand holding scam text",
-          "tense red overlay"
+          "people reading fake bank messages",
+          "hand holding deceptive envelope",
+          "kitchen table with smartphone",
+          "hands scrolling phone frowning",
+          "phone screen casting blue light"
         ],
         "query_roles": [
           "meaning",
@@ -379,29 +398,31 @@
           "brand": false,
           "sensitive": false
         },
-        "reason": "groq: Visualizes the statistic of fake bank messages with a person seeing a scam text",
+        "reason": "groq: Illustrates the statistic of fake bank messages with relatable people and a deceptive visual metaphor.",
         "source": "groq",
         "names": [],
-        "number": null,
-        "keyword": "last year",
+        "number": "1 in 5",
+        "keyword": "last year five people received fake bank",
         "card": {
-          "headline": "LAST YEAR",
-          "subtitle": "",
-          "number": null,
-          "kind": "keyword",
+          "headline": "1 in 5",
+          "subtitle": "people received a fake bank",
+          "number": "1 in 5",
+          "kind": "ratio",
           "source": "narration",
-          "numbers_shown": []
+          "numbers_shown": [
+            "1 in 5"
+          ]
         },
         "story_sensitive": false,
-        "fingerprint": "b0b20e6fc8302955"
+        "fingerprint": "c81ea72d261b400e"
       },
       "safety": {
         "queries": [
-          "person reading fake bank SMS",
-          "masked envelope",
-          "kitchen table smartphone",
-          "hand holding scam text",
-          "tense red overlay"
+          "people reading fake bank messages",
+          "hand holding deceptive envelope",
+          "kitchen table with smartphone",
+          "hands scrolling phone frowning",
+          "phone screen casting blue light"
         ],
         "exclude_terms": [],
         "no_faces": false,
@@ -409,10 +430,15 @@
       },
       "segments": {
         "16:9": {
-          "file": "seg_001_5d91cb7e1def5b25.mp4",
-          "cache_key": "5d91cb7e1def5b25",
+          "file": "seg_001_4c341746f1f1d7aa.mp4",
+          "cache_key": "4c341746f1f1d7aa",
           "frames": 113,
-          "look": "eq=brightness=0.060:saturation=1.200",
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "overlay": {
+            "headline": "1 in 5",
+            "subtitle": "people received a fake bank",
+            "source": "narration"
+          },
           "caption_font": "Arial",
           "framing": "fit",
           "crop": {
@@ -423,47 +449,54 @@
           "qa_problems": []
         },
         "9:16": {
-          "file": "seg_001_4e3cc3dc954940bd.mp4",
-          "cache_key": "4e3cc3dc954940bd",
+          "file": "seg_001_35429a9dc0316a00.mp4",
+          "cache_key": "35429a9dc0316a00",
           "frames": 113,
-          "look": "eq=brightness=0.060:saturation=1.200",
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "overlay": {
+            "headline": "1 in 5",
+            "subtitle": "people received a fake bank",
+            "source": "narration"
+          },
           "caption_font": "Arial",
-          "framing": "subject crop (centre)",
+          "framing": "subject crop (salient)",
           "crop": {
             "method": "clip",
-            "choice": "centre",
+            "choice": "salient",
             "axis": "x",
             "window_fraction": 0.3164,
-            "full_frame_score": 0.2362,
+            "full_frame_score": 0.2907,
             "windows": {
               "salient": {
-                "start": 0.5089,
-                "score": 0.215
+                "start": 0.2988,
+                "score": 0.2945
               },
               "centre": {
                 "start": 0.3418,
-                "score": 0.2768
+                "score": 0.3011
               },
               "left": {
                 "start": 0.0,
-                "score": 0.2231
+                "score": 0.2223
               },
               "right": {
                 "start": 0.6836,
-                "score": 0.1824
+                "score": 0.2378
               }
             },
             "blur_margin": 0.02,
             "tie_margin": 0.03,
             "frames": 3,
             "subject_span": [
-              0.3508,
-              0.6597
+              0.5735,
+              0.7173
             ],
             "windows_cutting_subject": [
+              "centre",
+              "right",
               "salient"
             ],
-            "reason": "window 'centre' chosen (0.277; best window 0.277; whole frame 0.236; near-ties within 0.03 go to salient / centre)"
+            "reason": "window 'salient' chosen (0.294; best window 0.301; whole frame 0.291; near-ties within 0.03 go to salient / centre)"
           },
           "timing": "trimmed",
           "qa_problems": []
@@ -535,13 +568,13 @@
       "duration": 7.125,
       "visual_hint": null,
       "search_text": null,
-      "query": "locked safe with numbers",
+      "query": "person reviewing text message",
       "queries": [
-        "person entering OTP code",
-        "locked safe with numbers",
-        "call center helpline desk",
-        "hand dialing emergency helpline",
-        "serious cautionary lighting"
+        "close-up of OTP code on phone",
+        "hand closing combination lock",
+        "home office desk with phone",
+        "hands dialing helpline number",
+        "warm light on workspace"
       ],
       "flags": {
         "abstract": false,
@@ -551,44 +584,35 @@
         "sensitive": false
       },
       "provider": "pixabay_video",
-      "clip_id": "150",
-      "page_url": "https://pixabay.com/videos/id-150/",
+      "clip_id": "204526",
+      "page_url": "https://pixabay.com/videos/id-204526/",
       "licence": "Pixabay Content License",
       "licence_url": "https://pixabay.com/service/license-summary/",
-      "attribution": "Coverr-Free-Footage on Pixabay",
+      "attribution": "conte_public on Pixabay",
       "commercial_use": true,
       "watermark": false,
       "ai_generated": false,
       "generated": false,
-      "reason": "pixabay_video: score 0.237 >= 0.22 for query 'locked safe with numbers' (best of 15 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.240); logo check ok (logo prob 0.01); 3 clip frame(s) passed the logo check (max logo prob 0.07); VLM judge 3/5 (judged 2 candidates, higher rating first); video preferred over photo-motion (pixabay_image_motion best 0.293 is not more than 0.03 above 0.277)",
-      "relevance_score": 0.2369,
+      "reason": "pixabay_video: score 0.254 >= 0.22 for query 'person reviewing text message' (best of 23 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.256); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.05); video scored >= 0.25: photo sources not searched; borderline (best 0.242 < BORDERLINE_SCORE 0.25): also searched the rewritten query 'person reviewing text message' (groq), +16 candidates scored on the original queries",
+      "relevance_score": 0.2535,
       "overlay": false,
       "overlay_card": null,
-      "vlm_score": 3,
-      "vlm": {
-        "score": 3,
-        "judged": {
-          "pixabay_video:150": 3,
-          "pixabay_video:232538": 3
-        },
-        "why": "Both show generic keyboard typing, which is only loosely related to the specific advice about OTPs and reporting calls.",
-        "priority": "close call",
-        "model": "qwen/qwen3.8-27b"
-      },
+      "vlm_score": null,
+      "vlm": null,
       "score_details": {
-        "score": 0.2369,
-        "thumbnail_score": 0.2404,
+        "score": 0.2535,
+        "thumbnail_score": 0.2557,
         "frame_scores": [
-          0.2404,
-          0.233,
-          0.2372
+          0.2557,
+          0.2592,
+          0.2455
         ],
         "frames_scored": 3,
         "text_prob": 0.0,
         "text_penalty": 0.0,
         "fit_bonus": 0.04,
         "logo_penalty": 0.0,
-        "order_score": 0.2769,
+        "order_score": 0.2935,
         "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
       },
       "story_sensitive": false,
@@ -606,7 +630,7 @@
       "thumbnail": "thumb_002.jpg",
       "logo_check": {
         "thumbnail": {
-          "logo_prob": 0.0081,
+          "logo_prob": 0.0009,
           "result": "ok",
           "reject_prob": 0.6,
           "penalty_prob": 0.4,
@@ -614,43 +638,43 @@
         },
         "frames": [
           {
-            "time": 1.51,
-            "logo_prob": 0.0671,
-            "scene_score": 0.2279,
+            "time": 1.67,
+            "logo_prob": 0.0525,
+            "scene_score": 0.2368,
             "result": "ok"
           },
           {
-            "time": 4.54,
-            "logo_prob": 0.0309,
-            "scene_score": 0.2322,
+            "time": 5.01,
+            "logo_prob": 0.0353,
+            "scene_score": 0.2497,
             "result": "ok"
           },
           {
-            "time": 7.57,
-            "logo_prob": 0.0048,
-            "scene_score": 0.2403,
+            "time": 8.36,
+            "logo_prob": 0.0525,
+            "scene_score": 0.2344,
             "result": "ok"
           }
         ],
         "result": "ok"
       },
       "clip_details": {
-        "uid": "pixabay_video:150",
+        "uid": "pixabay_video:204526",
         "kind": "video",
         "title": "",
-        "source_url": "https://cdn.pixabay.com/video/2015/08/08/150-135737445_medium.mp4",
-        "final_score": 0.2769,
-        "width": 1280,
-        "height": 720,
+        "source_url": "https://cdn.pixabay.com/video/2024/03/17/204526-924780709_medium.mp4",
+        "final_score": 0.2935,
+        "width": 2560,
+        "height": 1440,
         "duration": 9.0
       },
       "understanding": {
         "queries": [
-          "person entering OTP code",
-          "locked safe with numbers",
-          "call center helpline desk",
-          "hand dialing emergency helpline",
-          "serious cautionary lighting"
+          "close-up of OTP code on phone",
+          "hand closing combination lock",
+          "home office desk with phone",
+          "hands dialing helpline number",
+          "warm light on workspace"
         ],
         "query_roles": [
           "meaning",
@@ -666,7 +690,7 @@
           "brand": false,
           "sensitive": false
         },
-        "reason": "groq: Illustrates the advice to protect OTPs and report suspicious calls",
+        "reason": "groq: Depicts the advice to protect OTPs and report scams using clear, reassuring visuals.",
         "source": "groq",
         "names": [],
         "number": null,
@@ -680,15 +704,15 @@
           "numbers_shown": []
         },
         "story_sensitive": false,
-        "fingerprint": "ee0fccb769b3fd39"
+        "fingerprint": "cafe46956cd2cf3d"
       },
       "safety": {
         "queries": [
-          "person entering OTP code",
-          "locked safe with numbers",
-          "call center helpline desk",
-          "hand dialing emergency helpline",
-          "serious cautionary lighting"
+          "close-up of OTP code on phone",
+          "hand closing combination lock",
+          "home office desk with phone",
+          "hands dialing helpline number",
+          "warm light on workspace"
         ],
         "exclude_terms": [],
         "no_faces": false,
@@ -696,10 +720,10 @@
       },
       "segments": {
         "16:9": {
-          "file": "seg_002_8da90f4034d31304.mp4",
-          "cache_key": "8da90f4034d31304",
+          "file": "seg_002_9f5b7b5d31cb952b.mp4",
+          "cache_key": "9f5b7b5d31cb952b",
           "frames": 214,
-          "look": "eq=brightness=0.093:saturation=1.200",
+          "look": "eq=brightness=0.120:saturation=1.200",
           "caption_font": "Arial",
           "framing": "fit",
           "crop": {
@@ -710,10 +734,10 @@
           "qa_problems": []
         },
         "9:16": {
-          "file": "seg_002_1b7bd7c67c661a86.mp4",
-          "cache_key": "1b7bd7c67c661a86",
+          "file": "seg_002_c5f64a5833a55dca.mp4",
+          "cache_key": "c5f64a5833a55dca",
           "frames": 214,
-          "look": "eq=brightness=0.093:saturation=1.200",
+          "look": "eq=brightness=0.120:saturation=1.200",
           "caption_font": "Arial",
           "framing": "subject crop (centre)",
           "crop": {
@@ -721,36 +745,36 @@
             "choice": "centre",
             "axis": "x",
             "window_fraction": 0.3164,
-            "full_frame_score": 0.2419,
+            "full_frame_score": 0.2526,
             "windows": {
               "salient": {
-                "start": 0.5057,
-                "score": 0.2265
+                "start": 0.2956,
+                "score": 0.25
               },
               "centre": {
                 "start": 0.3418,
-                "score": 0.2222
+                "score": 0.27
               },
               "left": {
                 "start": 0.0,
-                "score": 0.2212
+                "score": 0.236
               },
               "right": {
                 "start": 0.6836,
-                "score": 0.2257
+                "score": 0.2061
               }
             },
             "blur_margin": 0.02,
             "tie_margin": 0.03,
             "frames": 3,
             "subject_span": [
-              0.6963,
-              1.0
+              0.1232,
+              0.3037
             ],
             "windows_cutting_subject": [
               "salient"
             ],
-            "reason": "window 'centre' chosen (0.222; best window 0.227; whole frame 0.242; near-ties within 0.03 go to salient / centre); 'salient' was a near-tie but its edge falls inside the subject (0.70-1.00), so 'centre' keeps it whole"
+            "reason": "window 'centre' chosen (0.270; best window 0.270; whole frame 0.253; near-ties within 0.03 go to salient / centre); 'salient' was a near-tie but its edge falls inside the subject (0.12-0.30), so 'centre' keeps it whole"
           },
           "timing": "trimmed",
           "qa_problems": []
