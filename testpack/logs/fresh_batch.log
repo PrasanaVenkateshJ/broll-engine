@@ -1,0 +1,5 @@
+3 input(s) -> http://localhost:8000 (concurrency 1)
+fresh01_masala_chai            succeeded                              83.75 s  job 2914042338644317b84c64cb81b685bf
+fresh02_rain_cycle             succeeded                              98.79 s  job cafe772d67224476a5a2366c47fa5e62
+fresh03_cyber_fraud            succeeded                              98.78 s  job 9c771612c87947a5bb76ddee92932a58
+summary: testpack\outputs\fresh\summary.csv and testpack\outputs\fresh\summary.md

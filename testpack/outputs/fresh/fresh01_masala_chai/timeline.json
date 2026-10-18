@@ -1,0 +1,883 @@
+{
+  "job_id": "2914042338644317b84c64cb81b685bf",
+  "input_type": "script",
+  "duration": 13.7,
+  "language": "en",
+  "scenes": [
+    {
+      "index": 0,
+      "text": "Every morning, Priya makes masala chai.",
+      "start": 0.0,
+      "end": 2.76,
+      "duration": 2.76,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "steam rising like sunrise",
+      "queries": [
+        "hands preparing masala chai",
+        "steam rising like sunrise",
+        "cozy kitchen morning light",
+        "pouring tea into two cups",
+        "soft warm sunlight glow"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "267",
+      "page_url": "https://pixabay.com/videos/id-267/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Life-Of-Vids on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.265 >= 0.22 for query 'steam rising like sunrise' (best of 6 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.261); logo check ok (logo prob 0.01); 3 clip frame(s) passed the logo check (max logo prob 0.03); video scored >= 0.25: photo sources not searched",
+      "relevance_score": 0.2647,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2647,
+        "thumbnail_score": 0.2609,
+        "frame_scores": [
+          0.2609,
+          0.2661,
+          0.2672
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0001,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.3047,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_000.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0057,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 4.22,
+            "logo_prob": 0.0256,
+            "scene_score": 0.2734,
+            "result": "ok"
+          },
+          {
+            "time": 12.67,
+            "logo_prob": 0.0275,
+            "scene_score": 0.2788,
+            "result": "ok"
+          },
+          {
+            "time": 21.12,
+            "logo_prob": 0.0201,
+            "scene_score": 0.2751,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:267",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2015/08/10/267-135875613_medium.mp4",
+        "final_score": 0.3047,
+        "width": 1280,
+        "height": 720,
+        "duration": 25.0
+      },
+      "understanding": {
+        "queries": [
+          "hands preparing masala chai",
+          "steam rising like sunrise",
+          "cozy kitchen morning light",
+          "pouring tea into two cups",
+          "soft warm sunlight glow"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows the daily ritual of making spiced tea in a warm kitchen.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "morning priya",
+        "card": {
+          "headline": "MORNING PRIYA",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "aa1e186c231f16b3"
+      },
+      "safety": {
+        "queries": [
+          "hands preparing masala chai",
+          "steam rising like sunrise",
+          "cozy kitchen morning light",
+          "pouring tea into two cups",
+          "soft warm sunlight glow"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_000_4c1a8986ac9ba7c5.mp4",
+          "cache_key": "4c1a8986ac9ba7c5",
+          "frames": 83,
+          "look": "eq=brightness=-0.099:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_000_5096dbfb52d67da3.mp4",
+          "cache_key": "5096dbfb52d67da3",
+          "frames": 83,
+          "look": "eq=brightness=-0.099:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2359,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2482
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.239
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2139
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "subject_span": [
+              0.0157,
+              0.1385
+            ],
+            "windows_cutting_subject": [],
+            "reason": "window 'centre' chosen (0.248; best window 0.248; whole frame 0.236; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Every",
+          "start": 0.0,
+          "end": 0.48
+        },
+        {
+          "text": "morning,",
+          "start": 0.48,
+          "end": 0.88
+        },
+        {
+          "text": "Priya",
+          "start": 1.18,
+          "end": 1.44
+        },
+        {
+          "text": "makes",
+          "start": 1.44,
+          "end": 1.7
+        },
+        {
+          "text": "masala",
+          "start": 1.7,
+          "end": 2.04
+        },
+        {
+          "text": "chai.",
+          "start": 2.04,
+          "end": 2.48
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "text": "She boils water with crushed ginger and cardamom, adds tea leaves and milk, then strains it into two cups.",
+      "start": 2.76,
+      "end": 9.57,
+      "duration": 6.81,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "stovetop kettle on kitchen counter",
+      "queries": [
+        "spices added to boiling water",
+        "colorful spices swirling in pot",
+        "stovetop kettle on kitchen counter",
+        "hand straining tea into cups",
+        "rich amber liquid glistening"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "143163",
+      "page_url": "https://pixabay.com/videos/id-143163/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "muhammedguv on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.270 >= 0.22 for query 'stovetop kettle on kitchen counter' (best of 14 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.277); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.05); earlier: pixabay_video: best score 0.193 < 0.22; pixabay_video: early exit had stopped after 6 candidates; scored the other 9",
+      "relevance_score": 0.2703,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2703,
+        "thumbnail_score": 0.2768,
+        "frame_scores": [
+          0.2768,
+          0.266,
+          0.2681
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.3103,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_001.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0043,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 1.86,
+            "logo_prob": 0.0496,
+            "scene_score": 0.2739,
+            "result": "ok"
+          },
+          {
+            "time": 5.57,
+            "logo_prob": 0.0108,
+            "scene_score": 0.2608,
+            "result": "ok"
+          },
+          {
+            "time": 9.28,
+            "logo_prob": 0.0356,
+            "scene_score": 0.2806,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:143163",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2022/12/16/143163-781991202_medium.mp4",
+        "final_score": 0.3103,
+        "width": 1280,
+        "height": 720,
+        "duration": 11.0
+      },
+      "understanding": {
+        "queries": [
+          "spices added to boiling water",
+          "colorful spices swirling in pot",
+          "stovetop kettle on kitchen counter",
+          "hand straining tea into cups",
+          "rich amber liquid glistening"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Depicts the brewing process with ginger, cardamom, tea leaves, and milk.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "boils water",
+        "card": {
+          "headline": "BOILS WATER",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "3069e219cf6e3e48"
+      },
+      "safety": {
+        "queries": [
+          "spices added to boiling water",
+          "colorful spices swirling in pot",
+          "stovetop kettle on kitchen counter",
+          "hand straining tea into cups",
+          "rich amber liquid glistening"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_001_24d6b635d3434b4f.mp4",
+          "cache_key": "24d6b635d3434b4f",
+          "frames": 204,
+          "look": "eq=brightness=0.101:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_001_be26186a55e88d5f.mp4",
+          "cache_key": "be26186a55e88d5f",
+          "frames": 204,
+          "look": "eq=brightness=0.101:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2662,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2602
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2193
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2333
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "subject_span": [
+              0.3798,
+              0.4998
+            ],
+            "windows_cutting_subject": [],
+            "reason": "window 'centre' chosen (0.260; best window 0.260; whole frame 0.266; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "She",
+          "start": 3.04,
+          "end": 3.16
+        },
+        {
+          "text": "boils",
+          "start": 3.16,
+          "end": 3.4
+        },
+        {
+          "text": "water",
+          "start": 3.4,
+          "end": 3.8
+        },
+        {
+          "text": "with",
+          "start": 3.8,
+          "end": 4.08
+        },
+        {
+          "text": "crushed",
+          "start": 4.08,
+          "end": 4.4
+        },
+        {
+          "text": "ginger",
+          "start": 4.4,
+          "end": 4.78
+        },
+        {
+          "text": "and",
+          "start": 4.78,
+          "end": 5.02
+        },
+        {
+          "text": "cardamom,",
+          "start": 5.02,
+          "end": 5.6
+        },
+        {
+          "text": "adds",
+          "start": 5.94,
+          "end": 6.18
+        },
+        {
+          "text": "tea",
+          "start": 6.18,
+          "end": 6.5
+        },
+        {
+          "text": "leaves",
+          "start": 6.5,
+          "end": 6.92
+        },
+        {
+          "text": "and",
+          "start": 6.92,
+          "end": 7.14
+        },
+        {
+          "text": "milk,",
+          "start": 7.14,
+          "end": 7.42
+        },
+        {
+          "text": "then",
+          "start": 7.84,
+          "end": 8.0
+        },
+        {
+          "text": "strains",
+          "start": 8.0,
+          "end": 8.32
+        },
+        {
+          "text": "it",
+          "start": 8.32,
+          "end": 8.58
+        },
+        {
+          "text": "into",
+          "start": 8.58,
+          "end": 8.72
+        },
+        {
+          "text": "two",
+          "start": 8.72,
+          "end": 8.96
+        },
+        {
+          "text": "cups.",
+          "start": 8.96,
+          "end": 9.22
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "text": "Her grandfather says it tastes just like the chai his mother made.",
+      "start": 9.57,
+      "end": 13.7,
+      "duration": 4.13,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "elderly hands holding tea cup",
+      "queries": [
+        "elderly hands holding tea cup",
+        "vintage family photo on table",
+        "traditional kitchen with wooden table",
+        "hand lifting cup to taste",
+        "warm nostalgic atmosphere"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_image_motion",
+      "clip_id": "3188288",
+      "page_url": "https://pixabay.com/photos/hand-human-woman-grown-up-hands-3188288/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "sabinevanerp on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_image_motion: score 0.275 >= 0.22 for query 'elderly hands holding tea cup' (best of 6 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 1 clip frame(s) passed the logo check (max logo prob 0.01); photo-motion preferred: order score 0.315 > best video 0.275 + PREFER_VIDEO_MARGIN 0.03",
+      "relevance_score": 0.2748,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": {
+        "score": null,
+        "judged": {
+          "pixabay_video:233024": 2
+        },
+        "why": "The image shows a person with a pie and a cup, but it does not depict chai, a grandfather, or the act of tasting, making it only loosely related to the specific narration.",
+        "priority": "close call",
+        "model": "qwen/qwen3.8-27b"
+      },
+      "score_details": {
+        "score": 0.2748,
+        "thumbnail_score": 0.2748,
+        "frame_scores": null,
+        "frames_scored": 1,
+        "text_prob": 0.0,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.3148
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_002.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0028,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.0111,
+            "scene_score": 0.2733,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_image_motion:3188288",
+        "kind": "image",
+        "title": "",
+        "source_url": "https://pixabay.com/get/gc6f1cb2aa40e9614dcbd08d488f2e963eda4debb36c0e5ff5133984c9d6ca6c6ab75b96eea3d6223069206bf870df9333cde373a8640da2b4c02c26c1cd732a0_1280.jpg",
+        "final_score": 0.3148,
+        "width": 1280,
+        "height": 853,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "elderly hands holding tea cup",
+          "vintage family photo on table",
+          "traditional kitchen with wooden table",
+          "hand lifting cup to taste",
+          "warm nostalgic atmosphere"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Conveys the grandfather’s nostalgic memory of his mother’s chai.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "grandfather says",
+        "card": {
+          "headline": "GRANDFATHER SAYS",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "11b426d6a626b8d9"
+      },
+      "safety": {
+        "queries": [
+          "elderly hands holding tea cup",
+          "vintage family photo on table",
+          "traditional kitchen with wooden table",
+          "hand lifting cup to taste",
+          "warm nostalgic atmosphere"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_002_ff225226a8582bb9.mp4",
+          "cache_key": "ff225226a8582bb9",
+          "frames": 124,
+          "look": "eq=brightness=-0.039:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "y",
+            "window_fraction": 0.8441,
+            "full_frame_score": 0.2782,
+            "windows": {
+              "salient": {
+                "start": 0.1172,
+                "score": 0.2748
+              },
+              "centre": {
+                "start": 0.078,
+                "score": 0.2745
+              },
+              "top": {
+                "start": 0.0,
+                "score": 0.28
+              },
+              "bottom": {
+                "start": 0.1559,
+                "score": 0.2771
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "subject_span": [
+              0.2313,
+              0.7795
+            ],
+            "windows_cutting_subject": [],
+            "reason": "window 'salient' chosen (0.275; best window 0.280; whole frame 0.278; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_002_ae030715b3a40619.mp4",
+          "cache_key": "ae030715b3a40619",
+          "frames": 124,
+          "look": "eq=brightness=-0.039:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3749,
+            "full_frame_score": 0.2782,
+            "windows": {
+              "centre": {
+                "start": 0.3126,
+                "score": 0.29
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2109
+              },
+              "right": {
+                "start": 0.6251,
+                "score": 0.2996
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "subject_span": [
+              0.6992,
+              0.8429
+            ],
+            "windows_cutting_subject": [],
+            "reason": "window 'centre' chosen (0.290; best window 0.300; whole frame 0.278; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Her",
+          "start": 9.92,
+          "end": 10.04
+        },
+        {
+          "text": "grandfather",
+          "start": 10.04,
+          "end": 10.42
+        },
+        {
+          "text": "says",
+          "start": 10.42,
+          "end": 10.76
+        },
+        {
+          "text": "it",
+          "start": 10.76,
+          "end": 10.94
+        },
+        {
+          "text": "tastes",
+          "start": 10.94,
+          "end": 11.28
+        },
+        {
+          "text": "just",
+          "start": 11.28,
+          "end": 11.66
+        },
+        {
+          "text": "like",
+          "start": 11.66,
+          "end": 11.88
+        },
+        {
+          "text": "the",
+          "start": 11.88,
+          "end": 12.0
+        },
+        {
+          "text": "chai",
+          "start": 12.0,
+          "end": 12.34
+        },
+        {
+          "text": "his",
+          "start": 12.34,
+          "end": 12.52
+        },
+        {
+          "text": "mother",
+          "start": 12.52,
+          "end": 12.76
+        },
+        {
+          "text": "made.",
+          "start": 12.76,
+          "end": 13.12
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "aspect_ratio": "16:9",
+      "file": "video_16x9.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 13.7
+    },
+    {
+      "aspect_ratio": "9:16",
+      "file": "video_9x16.mp4",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "duration": 13.699
+    }
+  ]
+}

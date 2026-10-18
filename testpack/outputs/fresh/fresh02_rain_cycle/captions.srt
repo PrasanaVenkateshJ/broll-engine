@@ -1,0 +1,22 @@
+1
+00:00:00,000 --> 00:00:02,020
+Rain begins in the ocean.
+
+2
+00:00:02,320 --> 00:00:04,910
+The sun heats the water
+and turns it into vapor.
+
+3
+00:00:05,240 --> 00:00:08,270
+High in the sky, the vapor
+cools and forms clouds.
+
+4
+00:00:08,620 --> 00:00:12,820
+When the drops become heavy, they fall
+back to the earth as rain, filling rivers
+
+5
+00:00:12,820 --> 00:00:13,860
+and lakes.

@@ -1,0 +1,907 @@
+{
+  "job_id": "cafe772d67224476a5a2366c47fa5e62",
+  "input_type": "script",
+  "duration": 14.1,
+  "language": "en",
+  "scenes": [
+    {
+      "index": 0,
+      "text": "Rain begins in the ocean. The sun heats the water and turns it into vapor.",
+      "start": 0.0,
+      "end": 4.91,
+      "duration": 4.91,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "wide ocean horizon",
+      "queries": [
+        "sun heating ocean water",
+        "steam rising from pot",
+        "wide ocean horizon",
+        "waves shimmering under sun",
+        "soft golden sunrise"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "345445",
+      "page_url": "https://pixabay.com/videos/id-345445/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Mario_Krimer on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.316 >= 0.22 for query 'wide ocean horizon' (best of 6 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.317); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.00); video scored >= 0.25: photo sources not searched",
+      "relevance_score": 0.3155,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.3155,
+        "thumbnail_score": 0.3169,
+        "frame_scores": [
+          0.3169,
+          0.3028,
+          0.3269
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0001,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.3555,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_000.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0001,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 1.93,
+            "logo_prob": 0.0001,
+            "scene_score": 0.3233,
+            "result": "ok"
+          },
+          {
+            "time": 5.79,
+            "logo_prob": 0.0001,
+            "scene_score": 0.3127,
+            "result": "ok"
+          },
+          {
+            "time": 9.65,
+            "logo_prob": 0.0004,
+            "scene_score": 0.3293,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:345445",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2026/04/09/345445_medium.mp4",
+        "final_score": 0.3555,
+        "width": 1280,
+        "height": 720,
+        "duration": 11.0
+      },
+      "understanding": {
+        "queries": [
+          "sun heating ocean water",
+          "steam rising from pot",
+          "wide ocean horizon",
+          "waves shimmering under sun",
+          "soft golden sunrise"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows the ocean water being warmed and turning into vapor, using a kettle steam metaphor, a beach setting, shimmering waves, and a warm sunrise mood.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "rain begins",
+        "card": {
+          "headline": "RAIN BEGINS",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "341a1fabf8316fef"
+      },
+      "safety": {
+        "queries": [
+          "sun heating ocean water",
+          "steam rising from pot",
+          "wide ocean horizon",
+          "waves shimmering under sun",
+          "soft golden sunrise"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_000_58868205bb41b28a.mp4",
+          "cache_key": "58868205bb41b28a",
+          "frames": 147,
+          "look": "eq=brightness=-0.015:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_000_148e577a388f8b8b.mp4",
+          "cache_key": "148e577a388f8b8b",
+          "frames": 147,
+          "look": "eq=brightness=-0.015:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2781,
+            "windows": {
+              "salient": {
+                "start": 0.6231,
+                "score": 0.2984
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.294
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2549
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2829
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "subject_span": [
+              0.534,
+              0.8586
+            ],
+            "windows_cutting_subject": [
+              "centre",
+              "right",
+              "salient"
+            ],
+            "reason": "window 'salient' chosen (0.298; best window 0.298; whole frame 0.278; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Rain",
+          "start": 0.0,
+          "end": 0.54
+        },
+        {
+          "text": "begins",
+          "start": 0.54,
+          "end": 0.96
+        },
+        {
+          "text": "in",
+          "start": 0.96,
+          "end": 1.24
+        },
+        {
+          "text": "the",
+          "start": 1.24,
+          "end": 1.34
+        },
+        {
+          "text": "ocean.",
+          "start": 1.34,
+          "end": 1.62
+        },
+        {
+          "text": "The",
+          "start": 2.32,
+          "end": 2.36
+        },
+        {
+          "text": "sun",
+          "start": 2.36,
+          "end": 2.62
+        },
+        {
+          "text": "heats",
+          "start": 2.62,
+          "end": 2.9
+        },
+        {
+          "text": "the",
+          "start": 2.9,
+          "end": 3.1
+        },
+        {
+          "text": "water",
+          "start": 3.1,
+          "end": 3.38
+        },
+        {
+          "text": "and",
+          "start": 3.38,
+          "end": 3.7
+        },
+        {
+          "text": "turns",
+          "start": 3.7,
+          "end": 3.96
+        },
+        {
+          "text": "it",
+          "start": 3.96,
+          "end": 4.1
+        },
+        {
+          "text": "into",
+          "start": 4.1,
+          "end": 4.28
+        },
+        {
+          "text": "vapor.",
+          "start": 4.28,
+          "end": 4.58
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "text": "High in the sky, the vapor cools and forms clouds.",
+      "start": 4.91,
+      "end": 8.27,
+      "duration": 3.36,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "vapor condensing into clouds",
+      "queries": [
+        "vapor condensing into clouds",
+        "cotton balls forming",
+        "high altitude sky",
+        "clouds gathering over horizon",
+        "tranquil blue sky"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "123536",
+      "page_url": "https://pixabay.com/videos/id-123536/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "adege on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.276 >= 0.22 for query 'vapor condensing into clouds' (best of 6 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.276); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.16); video scored >= 0.25: photo sources not searched",
+      "relevance_score": 0.2762,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2762,
+        "thumbnail_score": 0.2756,
+        "frame_scores": [
+          0.2756,
+          0.2694,
+          0.2836
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.3162,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_001.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.003,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 5.32,
+            "logo_prob": 0.1518,
+            "scene_score": 0.261,
+            "result": "ok"
+          },
+          {
+            "time": 15.95,
+            "logo_prob": 0.0783,
+            "scene_score": 0.276,
+            "result": "ok"
+          },
+          {
+            "time": 26.59,
+            "logo_prob": 0.1556,
+            "scene_score": 0.25,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:123536",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2022/07/08/123536-728283034_medium.mp4",
+        "final_score": 0.3162,
+        "width": 2560,
+        "height": 1440,
+        "duration": 31.0
+      },
+      "understanding": {
+        "queries": [
+          "vapor condensing into clouds",
+          "cotton balls forming",
+          "high altitude sky",
+          "clouds gathering over horizon",
+          "tranquil blue sky"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Depicts vapor cooling and becoming clouds, with a cotton-ball visual metaphor, a lofty sky setting, clouds assembling, and a calm blue‑sky mood.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "high sky",
+        "card": {
+          "headline": "HIGH SKY",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "181f9da0b52e0b4a"
+      },
+      "safety": {
+        "queries": [
+          "vapor condensing into clouds",
+          "cotton balls forming",
+          "high altitude sky",
+          "clouds gathering over horizon",
+          "tranquil blue sky"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_001_10efcd88f93cd88e.mp4",
+          "cache_key": "10efcd88f93cd88e",
+          "frames": 101,
+          "look": "eq=brightness=-0.079:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_001_d29d23ad72fe3f14.mp4",
+          "cache_key": "d29d23ad72fe3f14",
+          "frames": 101,
+          "look": "eq=brightness=-0.079:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "subject crop (left)",
+          "crop": {
+            "method": "clip",
+            "choice": "left",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.286,
+            "windows": {
+              "salient": {
+                "start": 0.4519,
+                "score": 0.2955
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.3054
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.3308
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.3081
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "subject_span": [
+              0.5916,
+              1.0
+            ],
+            "windows_cutting_subject": [
+              "centre",
+              "right",
+              "salient"
+            ],
+            "reason": "window 'left' chosen (0.331; best window 0.331; whole frame 0.286; near-ties within 0.03 go to salient / centre); 'centre' was a near-tie but its edge falls inside the subject (0.59-1.00), so 'left' keeps it whole"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "High",
+          "start": 5.24,
+          "end": 5.5
+        },
+        {
+          "text": "in",
+          "start": 5.5,
+          "end": 5.66
+        },
+        {
+          "text": "the",
+          "start": 5.66,
+          "end": 5.76
+        },
+        {
+          "text": "sky,",
+          "start": 5.76,
+          "end": 5.98
+        },
+        {
+          "text": "the",
+          "start": 6.14,
+          "end": 6.2
+        },
+        {
+          "text": "vapor",
+          "start": 6.2,
+          "end": 6.46
+        },
+        {
+          "text": "cools",
+          "start": 6.46,
+          "end": 6.92
+        },
+        {
+          "text": "and",
+          "start": 6.92,
+          "end": 7.18
+        },
+        {
+          "text": "forms",
+          "start": 7.18,
+          "end": 7.52
+        },
+        {
+          "text": "clouds.",
+          "start": 7.52,
+          "end": 7.92
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "text": "When the drops become heavy, they fall back to the earth as rain, filling rivers and lakes.",
+      "start": 8.27,
+      "end": 14.1,
+      "duration": 5.83,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "water droplets like pearls",
+      "queries": [
+        "rain filling rivers",
+        "water droplets like pearls",
+        "mountain valley landscape",
+        "rainwater rushing into lake",
+        "peaceful rainy atmosphere"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "33581",
+      "page_url": "https://pixabay.com/videos/id-33581/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "a_m_o_u_t_o_n on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.268 >= 0.22 for query 'water droplets like pearls' (best of 6 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.272); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.04); video scored >= 0.25: photo sources not searched",
+      "relevance_score": 0.2678,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2678,
+        "thumbnail_score": 0.2724,
+        "frame_scores": [
+          0.2724,
+          0.2581,
+          0.2729
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.3078,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_002.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0005,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 1.49,
+            "logo_prob": 0.0316,
+            "scene_score": 0.2563,
+            "result": "ok"
+          },
+          {
+            "time": 4.46,
+            "logo_prob": 0.0275,
+            "scene_score": 0.2765,
+            "result": "ok"
+          },
+          {
+            "time": 7.43,
+            "logo_prob": 0.043,
+            "scene_score": 0.2649,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:33581",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2020/03/12/33581-397860811_medium.mp4",
+        "final_score": 0.3078,
+        "width": 1280,
+        "height": 720,
+        "duration": 9.0
+      },
+      "understanding": {
+        "queries": [
+          "rain filling rivers",
+          "water droplets like pearls",
+          "mountain valley landscape",
+          "rainwater rushing into lake",
+          "peaceful rainy atmosphere"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Illustrates heavy rain returning to earth, using pearl droplets as a metaphor, a valley setting, rain flowing into water bodies, and a serene rainy mood.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "drops become",
+        "card": {
+          "headline": "DROPS BECOME",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "712349424835410b"
+      },
+      "safety": {
+        "queries": [
+          "rain filling rivers",
+          "water droplets like pearls",
+          "mountain valley landscape",
+          "rainwater rushing into lake",
+          "peaceful rainy atmosphere"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_002_8ec54c0336ed9082.mp4",
+          "cache_key": "8ec54c0336ed9082",
+          "frames": 175,
+          "look": "eq=brightness=-0.028:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_002_29dcc20f2a8c9e6e.mp4",
+          "cache_key": "29dcc20f2a8c9e6e",
+          "frames": 175,
+          "look": "eq=brightness=-0.028:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2593,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2821
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2982
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2745
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "subject_span": [
+              0.0052,
+              1.0
+            ],
+            "windows_cutting_subject": [
+              "centre",
+              "left",
+              "right"
+            ],
+            "reason": "window 'centre' chosen (0.282; best window 0.298; whole frame 0.259; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "When",
+          "start": 8.62,
+          "end": 8.76
+        },
+        {
+          "text": "the",
+          "start": 8.76,
+          "end": 8.86
+        },
+        {
+          "text": "drops",
+          "start": 8.86,
+          "end": 9.12
+        },
+        {
+          "text": "become",
+          "start": 9.12,
+          "end": 9.46
+        },
+        {
+          "text": "heavy,",
+          "start": 9.46,
+          "end": 9.8
+        },
+        {
+          "text": "they",
+          "start": 10.22,
+          "end": 10.32
+        },
+        {
+          "text": "fall",
+          "start": 10.32,
+          "end": 10.54
+        },
+        {
+          "text": "back",
+          "start": 10.54,
+          "end": 10.8
+        },
+        {
+          "text": "to",
+          "start": 10.8,
+          "end": 10.98
+        },
+        {
+          "text": "the",
+          "start": 10.98,
+          "end": 11.08
+        },
+        {
+          "text": "earth",
+          "start": 11.08,
+          "end": 11.3
+        },
+        {
+          "text": "as",
+          "start": 11.3,
+          "end": 11.5
+        },
+        {
+          "text": "rain,",
+          "start": 11.5,
+          "end": 11.84
+        },
+        {
+          "text": "filling",
+          "start": 12.2,
+          "end": 12.46
+        },
+        {
+          "text": "rivers",
+          "start": 12.46,
+          "end": 12.82
+        },
+        {
+          "text": "and",
+          "start": 12.82,
+          "end": 13.2
+        },
+        {
+          "text": "lakes.",
+          "start": 13.2,
+          "end": 13.46
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "aspect_ratio": "16:9",
+      "file": "video_16x9.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 14.1
+    },
+    {
+      "aspect_ratio": "9:16",
+      "file": "video_9x16.mp4",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "duration": 14.1
+    }
+  ]
+}

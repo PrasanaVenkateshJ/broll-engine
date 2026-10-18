@@ -1,0 +1,17 @@
+1
+00:00:00,000 --> 00:00:02,760
+Every morning, Priya makes masala chai.
+
+2
+00:00:03,040 --> 00:00:08,000
+She boils water with crushed ginger and
+cardamom, adds tea leaves and milk, then
+
+3
+00:00:08,000 --> 00:00:09,570
+strains it into two cups.
+
+4
+00:00:09,920 --> 00:00:13,520
+Her grandfather says it tastes
+just like the chai his mother made.

@@ -1,0 +1,28 @@
+{
+  "job_id": "cafe772d67224476a5a2366c47fa5e62",
+  "status": "succeeded",
+  "progress": 100,
+  "stage": "done",
+  "input_type": "script",
+  "parent_job_id": null,
+  "warnings": [],
+  "error": null,
+  "result": {
+    "files": {
+      "video_16x9.mp4": "http://localhost:8000/api/v1/jobs/cafe772d67224476a5a2366c47fa5e62/files/video_16x9.mp4?expires=1792336211&sig=ccc9782f395bf42512f2e3c01bd5342fd0b52e27565b4577b22cb042027d461e",
+      "video_9x16.mp4": "http://localhost:8000/api/v1/jobs/cafe772d67224476a5a2366c47fa5e62/files/video_9x16.mp4?expires=1792336211&sig=7f1d83bd6389d6e4a64e6e71315f09f516f854602dd27a52609fb1846a745c7e",
+      "captions.srt": "http://localhost:8000/api/v1/jobs/cafe772d67224476a5a2366c47fa5e62/files/captions.srt?expires=1792336211&sig=27d7cdf820e8963e7c747492ac46fd4d89ed98cd51d1ae3216915a1523d0f793",
+      "timeline.json": "http://localhost:8000/api/v1/jobs/cafe772d67224476a5a2366c47fa5e62/files/timeline.json?expires=1792336211&sig=a93cdcfc37e4f03622278066bae442487c94f034f21c29b1bf332138e1955166",
+      "manifest.json": "http://localhost:8000/api/v1/jobs/cafe772d67224476a5a2366c47fa5e62/files/manifest.json?expires=1792336211&sig=80e72dfd337c0c0b071a318ef333b347bf19c5663a1311ccf6eee4a18c1ea2ac",
+      "thumb_000.jpg": "http://localhost:8000/api/v1/jobs/cafe772d67224476a5a2366c47fa5e62/files/thumb_000.jpg?expires=1792336211&sig=8fe60127dc815240173c9ce82a066e82be3091e16697a6002ecf03edac194346",
+      "thumb_001.jpg": "http://localhost:8000/api/v1/jobs/cafe772d67224476a5a2366c47fa5e62/files/thumb_001.jpg?expires=1792336211&sig=aa24780939285fa1492068166cd67a9fea6fd6b49d5171df5ebed8397b81cd43",
+      "thumb_002.jpg": "http://localhost:8000/api/v1/jobs/cafe772d67224476a5a2366c47fa5e62/files/thumb_002.jpg?expires=1792336211&sig=ac8c2549872ffcc657144669e6ee703075fc1da7f753842be86f19abb8e9d6b6"
+    }
+  },
+  "created_at": "2026-10-18T14:08:33.115821+00:00",
+  "started_at": "2026-10-18T14:08:33.685004+00:00",
+  "finished_at": "2026-10-18T14:10:04.886363+00:00",
+  "links": {
+    "self": "http://localhost:8000/api/v1/jobs/cafe772d67224476a5a2366c47fa5e62"
+  }
+}

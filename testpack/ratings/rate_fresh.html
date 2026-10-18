@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rate the B-roll</title>
+<style>
+:root { --bg:#f6f5f2; --card:#ffffff; --ink:#1d1d1f; --muted:#5f6368; --line:#dedbd4; --accent:#2f5d8a;
+  --accent-ink:#ffffff; --good:#2e7d4f; --warn:#a15c00; --chip:#eceae4; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#16171a; --card:#202226; --ink:#ececec;
+  --muted:#a3a7ad; --line:#34373d; --accent:#7fb0e0; --accent-ink:#0d1620; --good:#6fcf97; --warn:#f2b25c;
+  --chip:#2b2e33; } }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 system-ui, "Segoe UI", "Noto Sans",
+  "Nirmala UI", sans-serif; }
+header { position:sticky; top:0; z-index:5; background:var(--bg); border-bottom:1px solid var(--line);
+  padding:12px 16px; }
+.bar { display:flex; flex-wrap:wrap; gap:10px 16px; align-items:center; max-width:1100px; margin:0 auto; }
+h1 { font-size:18px; margin:0; }
+.progress { flex:1 1 200px; min-width:160px; }
+.track { height:8px; background:var(--chip); border-radius:4px; overflow:hidden; }
+.fill { height:100%; background:var(--good); width:0; }
+.small { font-size:13px; color:var(--muted); }
+button, select { font:inherit; border:1px solid var(--line); background:var(--card); color:var(--ink);
+  border-radius:6px; padding:5px 10px; cursor:pointer; }
+button.primary { background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+main { max-width:1100px; margin:0 auto; padding:16px; }
+.guide { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:12px 16px; margin-bottom:18px; }
+.guide ul { margin:6px 0 0; padding-left:0; list-style:none; }
+.job { margin:26px 0 10px; display:flex; flex-wrap:wrap; gap:6px 14px; align-items:baseline; }
+.job h2 { font-size:16px; margin:0; word-break:break-all; }
+.scene { display:grid; grid-template-columns:minmax(0,340px) minmax(0,1fr); gap:14px; background:var(--card);
+  border:1px solid var(--line); border-radius:8px; padding:12px; margin-bottom:10px; }
+.scene.rated { border-left:4px solid var(--good); }
+video { width:100%; aspect-ratio:16/9; background:#000; border-radius:6px; display:block; }
+.text { font-size:16px; margin:0 0 6px; }
+.english { font-size:15px; margin:0 0 6px; padding-left:8px; border-left:3px solid var(--accent); }
+.meta { font-size:13px; color:var(--muted); margin:2px 0; word-break:break-word; }
+.chip { display:inline-block; background:var(--chip); border-radius:10px; padding:0 8px; margin-right:4px;
+  font-size:12px; color:var(--ink); }
+.chip.warn { color:var(--warn); }
+.rate { display:flex; gap:6px; margin:8px 0 6px; flex-wrap:wrap; }
+.rate button { width:40px; height:36px; font-weight:600; }
+.rate button.on { background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+textarea { width:100%; min-height:36px; font:inherit; font-size:13px; border:1px solid var(--line);
+  border-radius:6px; background:var(--bg); color:var(--ink); padding:6px; resize:vertical; }
+a { color:var(--accent); }
+.hidden { display:none !important; }
+@media (max-width:720px) { .scene { grid-template-columns:minmax(0,1fr); } }
+</style>
+</head>
+<body>
+<header><div class="bar">
+  <h1>Rate the B-roll</h1>
+  <div class="progress"><div class="track"><div class="fill" id="fill"></div></div>
+    <div class="small" id="count"></div></div>
+  <label class="small">Show <select id="filter"><option value="all">all scenes</option>
+    <option value="unrated">unrated only</option></select></label>
+  <label class="small">Language <select id="lang"><option value="">all</option></select></label>
+  <button class="primary" id="export">Export CSV</button>
+  <label class="small"><button id="importBtn" type="button">Import CSV</button>
+    <input type="file" id="import" accept=".csv,text/csv" class="hidden"></label>
+</div></header>
+<main>
+<section class="guide">
+  <strong>How to rate.</strong> Play each scene (only that part of the video plays) and ask: does the picture
+  fit what the narration <em>means</em> at that moment?
+  <ul>
+    <li><strong>5</strong> = clearly matches the meaning &nbsp;·&nbsp; <strong>4</strong> = good match</li>
+    <li><strong>3</strong> = acceptable (related, a viewer would not mind)</li>
+    <li><strong>2</strong> = weak (only loosely related) &nbsp;·&nbsp; <strong>1</strong> = wrong or nonsense</li>
+  </ul>
+  <p class="small">Rate the footage, not the captions or the voice. A generated number card counts as a match
+  if it shows the number the line says. Progress is saved in this browser; use <em>Export CSV</em> and save the
+  file as <code>testpack/ratings/ratings.csv</code>, then run <code>tools/evaluate.py</code>.</p>
+</section>
+<div id="list"></div>
+</main>
+<script type="application/json" id="data">{"jobs": [{"job": "fresh/fresh01_masala_chai", "job_id": "2914042338644317b84c64cb81b685bf", "language": "en", "duration": 13.7, "video": "../outputs/fresh/fresh01_masala_chai/video_16x9.mp4", "scenes": 3}, {"job": "fresh/fresh02_rain_cycle", "job_id": "cafe772d67224476a5a2366c47fa5e62", "language": "en", "duration": 14.1, "video": "../outputs/fresh/fresh02_rain_cycle/video_16x9.mp4", "scenes": 3}, {"job": "fresh/fresh03_cyber_fraud", "job_id": "9c771612c87947a5bb76ddee92932a58", "language": "en", "duration": 13.225, "video": "../outputs/fresh/fresh03_cyber_fraud/video_16x9.mp4", "scenes": 3}], "scenes": [{"job": "fresh/fresh01_masala_chai", "scene": 0, "language": "en", "start": 0.0, "end": 2.76, "text": "Every morning, Priya makes masala chai.", "search_text": null, "query": "steam rising like sunrise", "queries": ["hands preparing masala chai", "steam rising like sunrise", "cozy kitchen morning light", "pouring tea into two cups", "soft warm sunlight glow"], "provider": "pixabay_video", "clip_id": "267", "clip_score": 0.2647, "generated": false, "card_text": null, "licence": "Pixabay Content License", "licence_url": "https://pixabay.com/service/license-summary/", "attribution": "Life-Of-Vids on Pixabay", "page_url": "https://pixabay.com/videos/id-267/", "visual_hint": null, "flags": [], "video": "../outputs/fresh/fresh01_masala_chai/video_16x9.mp4", "thumb": "../outputs/fresh/fresh01_masala_chai/thumb_000.jpg"}, {"job": "fresh/fresh01_masala_chai", "scene": 1, "language": "en", "start": 2.76, "end": 9.57, "text": "She boils water with crushed ginger and cardamom, adds tea leaves and milk, then strains it into two cups.", "search_text": null, "query": "stovetop kettle on kitchen counter", "queries": ["spices added to boiling water", "colorful spices swirling in pot", "stovetop kettle on kitchen counter", "hand straining tea into cups", "rich amber liquid glistening"], "provider": "pixabay_video", "clip_id": "143163", "clip_score": 0.2703, "generated": false, "card_text": null, "licence": "Pixabay Content License", "licence_url": "https://pixabay.com/service/license-summary/", "attribution": "muhammedguv on Pixabay", "page_url": "https://pixabay.com/videos/id-143163/", "visual_hint": null, "flags": [], "video": "../outputs/fresh/fresh01_masala_chai/video_16x9.mp4", "thumb": "../outputs/fresh/fresh01_masala_chai/thumb_001.jpg"}, {"job": "fresh/fresh01_masala_chai", "scene": 2, "language": "en", "start": 9.57, "end": 13.7, "text": "Her grandfather says it tastes just like the chai his mother made.", "search_text": null, "query": "elderly hands holding tea cup", "queries": ["elderly hands holding tea cup", "vintage family photo on table", "traditional kitchen with wooden table", "hand lifting cup to taste", "warm nostalgic atmosphere"], "provider": "pixabay_image_motion", "clip_id": "3188288", "clip_score": 0.2748, "generated": false, "card_text": null, "licence": "Pixabay Content License", "licence_url": "https://pixabay.com/service/license-summary/", "attribution": "sabinevanerp on Pixabay", "page_url": "https://pixabay.com/photos/hand-human-woman-grown-up-hands-3188288/", "visual_hint": null, "flags": [], "video": "../outputs/fresh/fresh01_masala_chai/video_16x9.mp4", "thumb": "../outputs/fresh/fresh01_masala_chai/thumb_002.jpg"}, {"job": "fresh/fresh02_rain_cycle", "scene": 0, "language": "en", "start": 0.0, "end": 4.91, "text": "Rain begins in the ocean. The sun heats the water and turns it into vapor.", "search_text": null, "query": "wide ocean horizon", "queries": ["sun heating ocean water", "steam rising from pot", "wide ocean horizon", "waves shimmering under sun", "soft golden sunrise"], "provider": "pixabay_video", "clip_id": "345445", "clip_score": 0.3155, "generated": false, "card_text": null, "licence": "Pixabay Content License", "licence_url": "https://pixabay.com/service/license-summary/", "attribution": "Mario_Krimer on Pixabay", "page_url": "https://pixabay.com/videos/id-345445/", "visual_hint": null, "flags": [], "video": "../outputs/fresh/fresh02_rain_cycle/video_16x9.mp4", "thumb": "../outputs/fresh/fresh02_rain_cycle/thumb_000.jpg"}, {"job": "fresh/fresh02_rain_cycle", "scene": 1, "language": "en", "start": 4.91, "end": 8.27, "text": "High in the sky, the vapor cools and forms clouds.", "search_text": null, "query": "vapor condensing into clouds", "queries": ["vapor condensing into clouds", "cotton balls forming", "high altitude sky", "clouds gathering over horizon", "tranquil blue sky"], "provider": "pixabay_video", "clip_id": "123536", "clip_score": 0.2762, "generated": false, "card_text": null, "licence": "Pixabay Content License", "licence_url": "https://pixabay.com/service/license-summary/", "attribution": "adege on Pixabay", "page_url": "https://pixabay.com/videos/id-123536/", "visual_hint": null, "flags": [], "video": "../outputs/fresh/fresh02_rain_cycle/video_16x9.mp4", "thumb": "../outputs/fresh/fresh02_rain_cycle/thumb_001.jpg"}, {"job": "fresh/fresh02_rain_cycle", "scene": 2, "language": "en", "start": 8.27, "end": 14.1, "text": "When the drops become heavy, they fall back to the earth as rain, filling rivers and lakes.", "search_text": null, "query": "water droplets like pearls", "queries": ["rain filling rivers", "water droplets like pearls", "mountain valley landscape", "rainwater rushing into lake", "peaceful rainy atmosphere"], "provider": "pixabay_video", "clip_id": "33581", "clip_score": 0.2678, "generated": false, "card_text": null, "licence": "Pixabay Content License", "licence_url": "https://pixabay.com/service/license-summary/", "attribution": "a_m_o_u_t_o_n on Pixabay", "page_url": "https://pixabay.com/videos/id-33581/", "visual_hint": null, "flags": [], "video": "../outputs/fresh/fresh02_rain_cycle/video_16x9.mp4", "thumb": "../outputs/fresh/fresh02_rain_cycle/thumb_002.jpg"}, {"job": "fresh/fresh03_cyber_fraud", "scene": 0, "language": "en", "start": 0.0, "end": 2.32, "text": "Cyber fraud is rising fast.", "search_text": null, "query": "home office laptop screen", "queries": ["multiple phishing emails inbox", "balloon inflating with warnings", "home office laptop screen", "person typing worried on laptop", "dark cyber threat atmosphere"], "provider": "pixabay_video", "clip_id": "197", "clip_score": 0.2756, "generated": false, "card_text": null, "licence": "Pixabay Content License", "licence_url": "https://pixabay.com/service/license-summary/", "attribution": "Life-Of-Vids on Pixabay", "page_url": "https://pixabay.com/videos/id-197/", "visual_hint": null, "flags": [], "video": "../outputs/fresh/fresh03_cyber_fraud/video_16x9.mp4", "thumb": "../outputs/fresh/fresh03_cyber_fraud/thumb_000.jpg"}, {"job": "fresh/fresh03_cyber_fraud", "scene": 1, "language": "en", "start": 2.32, "end": 6.1, "text": "Last year, one in five people received a fake bank message.", "search_text": null, "query": "kitchen table smartphone", "queries": ["person reading fake bank SMS", "masked envelope", "kitchen table smartphone", "hand holding scam text", "tense red overlay"], "provider": "pixabay_video", "clip_id": "142641", "clip_score": 0.2569, "generated": false, "card_text": null, "licence": "Pixabay Content License", "licence_url": "https://pixabay.com/service/license-summary/", "attribution": "u_etjkkdz15b on Pixabay", "page_url": "https://pixabay.com/videos/id-142641/", "visual_hint": null, "flags": ["statistic"], "video": "../outputs/fresh/fresh03_cyber_fraud/video_16x9.mp4", "thumb": "../outputs/fresh/fresh03_cyber_fraud/thumb_001.jpg"}, {"job": "fresh/fresh03_cyber_fraud", "scene": 2, "language": "en", "start": 6.1, "end": 13.225, "text": "Never share your OTP, check the sender carefully, and report suspicious calls to the helpline immediately.", "search_text": null, "query": "locked safe with numbers", "queries": ["person entering OTP code", "locked safe with numbers", "call center helpline desk", "hand dialing emergency helpline", "serious cautionary lighting"], "provider": "pixabay_video", "clip_id": "150", "clip_score": 0.2369, "generated": false, "card_text": null, "licence": "Pixabay Content License", "licence_url": "https://pixabay.com/service/license-summary/", "attribution": "Coverr-Free-Footage on Pixabay", "page_url": "https://pixabay.com/videos/id-150/", "visual_hint": null, "flags": [], "video": "../outputs/fresh/fresh03_cyber_fraud/video_16x9.mp4", "thumb": "../outputs/fresh/fresh03_cyber_fraud/thumb_002.jpg"}]}</script>
+<script>
+(function () {
+  "use strict";
+  var DATA = JSON.parse(document.getElementById("data").textContent);
+  var KEY = "broll-ratings-v1";
+  var store = {};
+  try { store = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { store = {}; }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(store)); } catch (e) { /* private window */ } }
+  function id(s) { return s.job + "#" + s.scene; }
+  function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls;
+    if (text !== undefined && text !== null) n.textContent = text; return n; }
+
+  var list = document.getElementById("list");
+  var cards = [];
+  var byJob = {};
+  DATA.jobs.forEach(function (j) { byJob[j.job] = j; });
+  var langs = {};
+  var lastJob = null;
+  DATA.scenes.forEach(function (s) {
+    langs[s.language || "?"] = true;
+    if (s.job !== lastJob) {
+      lastJob = s.job;
+      var j = byJob[s.job], head = el("div", "job");
+      head.dataset.job = s.job;
+      head.appendChild(el("h2", null, s.job));
+      head.appendChild(el("span", "small", "language " + (j.language || "?") + " · " + j.duration + " s · " +
+        j.scenes + " scenes"));
+      var full = el("a", "small", "open full video"); full.href = j.video; full.target = "_blank";
+      head.appendChild(full);
+      list.appendChild(head);
+    }
+    var card = el("article", "scene");
+    card.dataset.id = id(s); card.dataset.lang = s.language || "?"; card.dataset.job = s.job;
+    var left = el("div");
+    var v = el("video"); v.controls = true; v.preload = "none"; v.playsInline = true;
+    if (s.thumb) v.poster = s.thumb;
+    v.src = s.video + "#t=" + s.start.toFixed(2) + "," + s.end.toFixed(2);
+    left.appendChild(v);
+    left.appendChild(el("div", "meta", "scene " + s.scene + " · " + s.start.toFixed(2) + "–" + s.end.toFixed(2) + " s"));
+    var right = el("div");
+    right.appendChild(el("p", "text", s.text));
+    if (s.search_text && (s.language === "hi" || s.language === "ta")) {
+      right.appendChild(el("p", "english", "English meaning: " + s.search_text));  // the pipeline's own translation
+    } else if (s.search_text) {
+      right.appendChild(el("p", "meta", "English used for search: " + s.search_text));
+    }
+    if (s.visual_hint) right.appendChild(el("p", "meta", "visual hint: " + s.visual_hint));
+    right.appendChild(el("p", "meta", "query: " + (s.query || "") + (s.queries.length ? "  (all: " + s.queries.join(" | ") + ")" : "")));
+    var src = el("p", "meta");
+    src.appendChild(el("span", "chip", s.provider + (s.clip_id ? ":" + s.clip_id : "")));
+    if (s.clip_score !== null && s.clip_score !== undefined) src.appendChild(el("span", "chip", "CLIP " + s.clip_score));
+    if (s.generated) src.appendChild(el("span", "chip", "generated card" + (s.card_text ? " “" + s.card_text + "”" : "")));
+    s.flags.forEach(function (f) { src.appendChild(el("span", "chip warn", f)); });
+    right.appendChild(src);
+    var lic = el("p", "meta");
+    if (s.licence_url) { var a = el("a", null, s.licence || "licence"); a.href = s.licence_url; a.target = "_blank"; lic.appendChild(a); }
+    else lic.appendChild(document.createTextNode(s.licence || ""));
+    if (s.attribution) lic.appendChild(document.createTextNode(" · " + s.attribution));
+    if (s.page_url) { lic.appendChild(document.createTextNode(" · ")); var p = el("a", null, "source page");
+      p.href = s.page_url; p.target = "_blank"; lic.appendChild(p); }
+    right.appendChild(lic);
+    var rate = el("div", "rate");
+    for (var r = 1; r <= 5; r++) {
+      var b = el("button", null, String(r)); b.type = "button"; b.dataset.r = r;
+      b.title = ["", "wrong or nonsense", "weak", "acceptable", "good match", "clearly matches"][r];
+      rate.appendChild(b);
+    }
+    right.appendChild(rate);
+    var note = el("textarea"); note.placeholder = "optional note"; note.rows = 1;
+    right.appendChild(note);
+    card.appendChild(left); card.appendChild(right);
+    list.appendChild(card);
+    cards.push({ s: s, card: card, rate: rate, note: note });
+
+    rate.addEventListener("click", function (ev) {
+      var btn = ev.target.closest("button"); if (!btn) return;
+      var key = id(s); var entry = store[key] || {};
+      entry.rating = Number(btn.dataset.r); store[key] = entry; save(); paint();
+    });
+    var timer = null;
+    note.addEventListener("input", function () {
+      clearTimeout(timer);
+      timer = setTimeout(function () { var key = id(s); var entry = store[key] || {};
+        entry.note = note.value; store[key] = entry; save(); }, 300);
+    });
+  });
+  var langSel = document.getElementById("lang");
+  Object.keys(langs).sort().forEach(function (l) { var o = el("option", null, l); o.value = l; langSel.appendChild(o); });
+
+  function paint() {
+    var done = 0, filter = document.getElementById("filter").value, lang = langSel.value, visibleJobs = {};
+    cards.forEach(function (c) {
+      var entry = store[id(c.s)] || {};
+      var rated = !!entry.rating; if (rated) done++;
+      c.card.classList.toggle("rated", rated);
+      Array.prototype.forEach.call(c.rate.children, function (b) { b.classList.toggle("on", Number(b.dataset.r) === entry.rating); });
+      if (document.activeElement !== c.note) c.note.value = entry.note || "";
+      var show = (filter === "all" || !rated) && (!lang || c.card.dataset.lang === lang);
+      c.card.classList.toggle("hidden", !show);
+      if (show) visibleJobs[c.s.job] = true;
+    });
+    Array.prototype.forEach.call(document.querySelectorAll(".job"), function (h) {
+      h.classList.toggle("hidden", !visibleJobs[h.dataset.job]); });
+    document.getElementById("count").textContent = done + " of " + cards.length + " scenes rated";
+    document.getElementById("fill").style.width = (cards.length ? 100 * done / cards.length : 0) + "%";
+  }
+  document.getElementById("filter").addEventListener("change", paint);
+  langSel.addEventListener("change", paint);
+
+  function csvCell(v) { v = v === null || v === undefined ? "" : String(v);
+    return /[",\r\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; }
+  document.getElementById("export").addEventListener("click", function () {
+    var rows = [["job", "scene", "text", "provider", "clip_id", "clip_score", "my_rating", "note"]];
+    cards.forEach(function (c) { var e = store[id(c.s)] || {};
+      rows.push([c.s.job, c.s.scene, c.s.text, c.s.provider, c.s.clip_id, c.s.clip_score,
+                 e.rating || "", e.note || ""]); });
+    var text = "﻿" + rows.map(function (r) { return r.map(csvCell).join(","); }).join("\r\n") + "\r\n";
+    var blob = new Blob([text], { type: "text/csv;charset=utf-8" });
+    var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "ratings.csv";
+    document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  });
+
+  function parseCsv(text) {
+    var rows = [], row = [], cell = "", q = false;
+    text = text.replace(/^﻿/, "");
+    for (var i = 0; i < text.length; i++) {
+      var ch = text[i];
+      if (q) { if (ch === '"') { if (text[i + 1] === '"') { cell += '"'; i++; } else q = false; } else cell += ch; }
+      else if (ch === '"') q = true;
+      else if (ch === ",") { row.push(cell); cell = ""; }
+      else if (ch === "\n" || ch === "\r") { if (ch === "\r" && text[i + 1] === "\n") i++;
+        row.push(cell); rows.push(row); row = []; cell = ""; }
+      else cell += ch;
+    }
+    if (cell !== "" || row.length) { row.push(cell); rows.push(row); }
+    return rows;
+  }
+  document.getElementById("importBtn").addEventListener("click", function () { document.getElementById("import").click(); });
+  document.getElementById("import").addEventListener("change", function (ev) {
+    var f = ev.target.files[0]; if (!f) return;
+    f.text().then(function (text) {
+      var rows = parseCsv(text), head = rows.shift() || [], n = 0;
+      var ji = head.indexOf("job"), si = head.indexOf("scene"), ri = head.indexOf("my_rating"), ni = head.indexOf("note");
+      rows.forEach(function (r) { if (!r[ji]) return; var key = r[ji] + "#" + r[si];
+        var rating = Number(r[ri]); var entry = store[key] || {};
+        if (rating >= 1 && rating <= 5) { entry.rating = rating; n++; }
+        if (ni >= 0 && r[ni]) entry.note = r[ni];
+        store[key] = entry; });
+      save(); paint(); alert("Imported " + n + " ratings.");
+    });
+  });
+  paint();
+})();
+</script>
+</body>
+</html>
