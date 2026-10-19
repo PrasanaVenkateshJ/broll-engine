@@ -70,3 +70,29 @@ def make_subjects_at_both_edges(path: Path, seconds: float = 3.0) -> Path:
             "-filter_complex", "[1]split[l][r];[0][l]overlay=10:80[a];[a][r]overlay=520:80",
             "-c:v", "libx264", "-preset", "ultrafast", "-pix_fmt", "yuv420p", str(path))
     return path
+
+
+def make_subject_at(path: Path, x: int, seconds: float = 3.0) -> Path:
+    """A grey 640x360 video with ONE busy 110x200 pattern whose left edge is at pixel x (10 = far left, 520 = far
+    right): the "subject" of the crop tests."""
+    _ffmpeg("-f", "lavfi", "-i", f"color=c=gray:s=640x360:r=30:d={seconds}",
+            "-f", "lavfi", "-i", f"testsrc2=s=110x200:r=30:d={seconds}",
+            "-filter_complex", f"[0][1]overlay={x}:80", "-c:v", "libx264", "-preset", "ultrafast",
+            "-pix_fmt", "yuv420p", str(path))
+    return path
+
+
+def make_moving_subject(path: Path, seconds: float = 3.0) -> Path:
+    """Like make_subject_at, but the pattern slides from the far left (x=10) to the far right (x=520)."""
+    _ffmpeg("-f", "lavfi", "-i", f"color=c=gray:s=640x360:r=30:d={seconds}",
+            "-f", "lavfi", "-i", f"testsrc2=s=110x200:r=30:d={seconds}",
+            "-filter_complex", f"[0][1]overlay=x='10+510*t/{seconds}':y=80", "-c:v", "libx264", "-preset", "ultrafast",
+            "-pix_fmt", "yuv420p", str(path))
+    return path
+
+
+def make_plain_video(path: Path, seconds: float = 3.0) -> Path:
+    """A plain grey 640x360 video: nothing to find."""
+    _ffmpeg("-f", "lavfi", "-i", f"color=c=gray:s=640x360:r=30:d={seconds}", "-c:v", "libx264", "-preset", "ultrafast",
+            "-pix_fmt", "yuv420p", str(path))
+    return path

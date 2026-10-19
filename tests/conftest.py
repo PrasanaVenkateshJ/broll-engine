@@ -98,7 +98,6 @@ def test_env(tmp_path, monkeypatch):
         "LOGO_FRAME_COUNT": "3",
         "CROP_SAMPLE_FRAMES": "3",
         "CROP_BLUR_MARGIN": "0.02",
-        "CROP_TIE_MARGIN": "0.03",
         # Tests use small local web servers (127.0.0.1); the SSRF test switches this back off.
         "ALLOW_PRIVATE_URLS": "true",
     }

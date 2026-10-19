@@ -7,16 +7,14 @@ For every scene and every aspect ratio we render ONE segment (a short mp4):
    - much too short    -> slow down 25 % and play it forward-then-backward in a loop
                           ("ping-pong": no jump, and never a frozen frame).
 2. Fit the frame: scale + crop to 1920x1080 / 1080x1920 / 1080x1080.
-   Subject-aware crop (when the scorer can look at pictures, i.e. RANK_SCORER=clip):
-   sample CROP_SAMPLE_FRAMES colour frames, cut out several candidate windows (left /
-   centre / right, plus the "salient" window from edge + motion energy), score each window
-   with CLIP against the scene meaning and keep the best. If even the best window scores
-   CROP_BLUR_MARGIN below the WHOLE frame, no window keeps the subject -> we show the whole
-   clip on a blurred copy of itself ("blurred fit").
-   Without CLIP (mock scorer, tests) the saliency window alone decides, and a subject wider
+   Subject-aware crop (when the scorer can look at pictures, i.e. RANK_SCORER=clip), see _clip_crop():
+   CROP_STRIPS narrow strips across each of CROP_SAMPLE_FRAMES colour frames are scored with CLIP against the
+   scene meaning; the strongest run of strips is the subject. The window is placed to hold the WHOLE subject
+   (anywhere, not only left / centre / right) and pans smoothly if the subject moves. No clear subject -> centre
+   crop + a warning. If the window still scores CROP_BLUR_MARGIN below the WHOLE frame, it loses the subject
+   -> we show the whole clip on a blurred copy of itself ("blurred fit").
+   Without CLIP (mock scorer, tests) the edge + motion energy decides (choose_window), and a subject wider
    than the crop (e.g. two people at both edges) also gives the blurred fit.
-   Near-ties (within CROP_TIE_MARGIN): a window whose edge falls INSIDE the subject (where detail is
-   localised, e.g. a boat on a calm sea) loses to one that keeps it whole (subject_span()).
    The choice and its scores are recorded per segment ("crop" in timeline.json).
 3. Look: measure mean brightness (YAVG) + colour (SATAVG) with signalstats, then pull them
    toward TARGET_LUMA / TARGET_SATURATION with the eq filter, so clips match each other.
@@ -230,8 +228,6 @@ class SourceInfo:
     start: float = 0.0            # where we start reading the clip (seconds)
     col_energy: np.ndarray | None = None   # "how interesting" each column is (left -> right)
     row_energy: np.ndarray | None = None   # same for rows (top -> bottom)
-    col_local: np.ndarray | None = None    # how LOCALISED the detail of each column is (an object vs texture)
-    row_local: np.ndarray | None = None    # same for rows
     overlay: dict | None = None            # number badge of a statistic line (rank.overlay_card)
     luma: float | None = None     # mean brightness 0-255 (signalstats YAVG)
     saturation: float | None = None  # mean colour strength (signalstats SATAVG)
@@ -295,48 +291,6 @@ def energy_profiles(frames: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
     return energy.sum(axis=0), energy.sum(axis=1)
 
 
-def localised_profiles(frames: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
-    """How LOCALISED the detail is, per column and per row: the busiest 5% of a row's pixels minus the row's
-    median (and the same down each column). A small object on a calm background (a boat on the sea, a
-    lighthouse against the sky) scores high; texture that is busy everywhere (waves, grass, crowds) scores low."""
-    dx = np.abs(np.diff(frames, axis=2))[:, :-1, :]
-    dy = np.abs(np.diff(frames, axis=1))[:, :, :-1]
-    energy = (dx + dy).mean(axis=0)
-
-    def local(e: np.ndarray) -> np.ndarray:
-        k = max(1, e.shape[1] // 20)
-        return np.sort(e, axis=1)[:, -k:].mean(axis=1) - np.median(e, axis=1)
-
-    return local(energy.T), local(energy)
-
-
-def subject_span(profile: np.ndarray | None, level: float, pad: float) -> tuple[float, float] | None:
-    """(start, end) of the subject as fractions of the profile (a localised-detail profile), or None.
-    = the smoothed peak +- pad, widened to where the profile stays >= level x the peak."""
-    if profile is None or len(profile) < 8:
-        return None
-    profile = np.asarray(profile, dtype=np.float64)
-    n = len(profile)
-    smooth = np.convolve(np.clip(profile, 0, None), np.ones(5) / 5, mode="same")
-    peak = int(smooth.argmax())
-    if smooth[peak] <= 0:
-        return None
-    lo = hi = peak
-    while lo > 0 and smooth[lo - 1] >= level * smooth[peak]:
-        lo -= 1
-    while hi < n - 1 and smooth[hi + 1] >= level * smooth[peak]:
-        hi += 1
-    return max(0.0, min(lo / n, peak / n - pad)), min(1.0, max((hi + 1) / n, peak / n + pad))
-
-
-def cuts_subject(start: float, frac: float, span: tuple[float, float] | None, tolerance: float = 0.005) -> bool:
-    """Does a window [start, start + frac] start or end strictly inside the subject span?"""
-    if span is None:
-        return False
-    lo, hi = span
-    return any(lo + tolerance < edge < hi - tolerance for edge in (start, start + frac))
-
-
 def _signal_stats(info: SourceInfo, seconds: float) -> tuple[float | None, float | None]:
     """Mean YAVG (brightness) and SATAVG (colour) measured by FFmpeg's signalstats filter."""
     if info.kind == "image":
@@ -369,7 +323,6 @@ def analyse_source(selection: Selection, seconds: float, texts: list[str] | None
     try:
         frames = _sample_frames(info, seconds)
         info.col_energy, info.row_energy = energy_profiles(frames)
-        info.col_local, info.row_local = localised_profiles(frames)
     except media.MediaError as e:
         log.warning("saliency analysis failed for %s: %s", c.uid, e)
     if texts and scorer is not None and getattr(scorer, "needs_images", False):
@@ -409,7 +362,10 @@ def choose_window(profile: np.ndarray | None, fraction: float) -> tuple[float, f
     centre = float((np.arange(n) * excess).sum() / excess.sum()) / n
     if (hi - lo + 1) / n > fraction * 1.25:
         return (1 - fraction) / 2, centre, "blur"
-    start = min(max(centre - fraction / 2, 0.0), 1.0 - fraction)
+    start = centre - fraction / 2
+    if (hi + 1 - lo) / n <= fraction:  # the subject fits: hold all of it, even at the far edge
+        start = min(max(start, (hi + 1) / n - fraction), lo / n)
+    start = min(max(start, 0.0), 1.0 - fraction)
     return start, centre, "salient"
 
 
@@ -423,22 +379,7 @@ class Framing:
     focus_x: float = 0.5  # subject centre inside the cropped picture (for Ken Burns)
     focus_y: float = 0.5
     crop: dict | None = None  # how the crop was chosen (for timeline.json)
-
-
-def pick_crop(window_scores: dict[str, float], full_frame_score: float, blur_margin: float,
-              tie_margin: float = 0.0, cut: set[str] | None = None) -> str:
-    """The best-scoring window's name, or "blur" when even the best window scores more than
-    blur_margin below the whole frame (= every window cuts the subject away).
-    Near-ties (within tie_margin of the best) go to the window listed FIRST (salient, then centre):
-    the crop only moves to an edge when CLIP clearly prefers it. cut = windows that slice the subject
-    (cuts_subject): among the near-ties, one that keeps the subject whole wins; if all of them cut it,
-    the first listed one is kept."""
-    top = max(window_scores.values())
-    if top < full_frame_score - blur_margin:
-        return "blur"
-    near = [name for name, score in window_scores.items() if score >= top - tie_margin]
-    whole = [name for name in near if name not in (cut or set())]
-    return (whole or near)[0]
+    end: float | None = None  # following a moving subject: the window start (x or y) at the LAST frame
 
 
 def _pad_square(picture: np.ndarray) -> np.ndarray:
@@ -453,29 +394,90 @@ def _pad_square(picture: np.ndarray) -> np.ndarray:
     return out
 
 
-def _clip_crop(info: SourceInfo, axis: str, frac: float, salient_start: float | None):
-    """Score each candidate window (and the whole frame) with CLIP against the scene meaning.
-    Returns (choice, window start, facts) or None if scoring was not possible."""
+def _cut(frame: np.ndarray, axis: str, start: float, frac: float) -> np.ndarray:
+    """The part of `frame` from `start` to `start + frac` (fractions) along the crop axis."""
+    length = frame.shape[1] if axis == "x" else frame.shape[0]
+    size = max(1, round(length * frac))
+    a = min(max(0, round(start * length)), length - size)
+    return frame[:, a:a + size] if axis == "x" else frame[a:a + size, :]
+
+
+def _smooth(row: np.ndarray) -> np.ndarray:
+    """Light smoothing (1/4, 1/2, 1/4): removes single-strip CLIP noise but keeps a narrow subject's peak."""
+    padded = np.pad(np.asarray(row, dtype=np.float64), 1, mode="edge")
+    return 0.25 * padded[:-2] + 0.5 * padded[1:-1] + 0.25 * padded[2:]
+
+
+def _strongest_run(row: np.ndarray, centres: np.ndarray, strip: float) -> list[float]:
+    """[centre, contrast, span start, span end] of the strongest run of strips in one (smoothed) profile:
+    the peak and its neighbours that stay at least halfway between the median and the peak; centre = their
+    contrast-weighted centre; span = the run widened by half a strip on each side."""
+    r = _smooth(row)
+    med, p = float(np.median(r)), int(r.argmax())
+    contrast = float(r[p]) - med
+    a = b = p
+    while a > 0 and r[a - 1] >= med + contrast / 2:
+        a -= 1
+    while b < len(r) - 1 and r[b + 1] >= med + contrast / 2:
+        b += 1
+    w = r[a:b + 1] - med
+    centre = float((centres[a:b + 1] * w).sum() / w.sum()) if w.sum() > 0 else float(centres[p])
+    return [round(centre, 4), round(contrast, 4), round(max(0.0, float(centres[a]) - strip / 2), 4),
+            round(min(1.0, float(centres[b]) + strip / 2), 4)]
+
+
+def locate_subject(profiles: np.ndarray, centres: np.ndarray, strip: float, min_contrast: float) -> dict:
+    """Where is the line's subject along the crop axis?
+
+    profiles = CLIP scores of narrow strips, one row per sampled frame; centres = each strip's centre (0-1).
+    The subject = the strongest run of strips clearly above the typical (median) strip (_strongest_run), found when
+    its peak is at least min_contrast above the median: on the frames' AVERAGE (a subject that stays put), or in
+    EVERY frame on its own (a subject that moves: on the average it is smeared out). Also per frame:
+    [centre, contrast, span start, span end], to follow a moving subject."""
+    per_frame = [_strongest_run(row, centres, strip) for row in profiles]
+    centre, contrast, lo, hi = _strongest_run(profiles.mean(axis=0), centres, strip)
+    if contrast < min_contrast:
+        if len(per_frame) < 2 or min(f[1] for f in per_frame) < min_contrast:
+            return {"found": False, "contrast": contrast}
+        # Clear in every frame but smeared on the average: it moves. Span = all its positions together.
+        centre = round(float(np.mean([f[0] for f in per_frame])), 4)
+        lo, hi = min(f[2] for f in per_frame), max(f[3] for f in per_frame)
+        contrast = min(f[1] for f in per_frame)
+    return {"found": True, "contrast": contrast, "centre": centre, "span": [lo, hi], "per_frame": per_frame}
+
+
+def place_window(span: tuple[float, float], centre: float, frac: float) -> float:
+    """Start of a window of size `frac` centred on the subject, moved just enough to hold the WHOLE span when the
+    span fits (a subject at the far edge stays fully inside), always inside the frame."""
+    lo, hi = span
+    start = centre - frac / 2
+    if hi - lo <= frac:
+        start = min(max(start, hi - frac), lo)
+    return round(min(max(start, 0.0), 1.0 - frac), 4)
+
+
+def _clip_crop(info: SourceInfo, axis: str, frac: float):
+    """CLIP-guided crop. Returns (choice, start, end, facts) or None if scoring was not possible.
+
+    1. Locate: CROP_STRIPS narrow strips (CROP_STRIP_FRACTION of the window wide) across EVERY sampled frame are
+       scored with CLIP against the scene meaning -> locate_subject().
+    2. Place: the window holds the whole subject (place_window). If the subject's centre moves by at least
+       CROP_FOLLOW_MIN_SHIFT between the first and last sampled frame, the window pans smoothly from where it
+       is at the start to where it is at the end ("follow").
+    3. No clear subject (flat strip scores, e.g. a wide landscape): centre crop + a warning.
+    4. Check: if the chosen window scores more than CROP_BLUR_MARGIN below the whole frame, it loses the subject
+       (e.g. two people at both edges) -> blurred fit (the whole frame on a blurred copy of itself)."""
     s = get_settings()
-    first, middle, last = ("left", "centre", "right") if axis == "x" else ("top", "centre", "bottom")
-    windows: dict[str, float] = {}
-    if salient_start is not None:
-        windows["salient"] = salient_start
-    for name, start in ((middle, (1 - frac) / 2), (first, 0.0), (last, 1 - frac)):
-        if all(abs(start - other) > 0.02 for other in windows.values()):  # skip near-duplicates
-            windows[name] = start
-    pictures, owners = [], []
-    for frame in info.crop_frames or []:
-        pictures.append(_pad_square(frame))
-        owners.append("whole frame")
-        length = frame.shape[1] if axis == "x" else frame.shape[0]
-        size = max(1, round(length * frac))
-        for name, start in windows.items():
-            a = min(round(start * length), length - size)
-            pictures.append(_pad_square(frame[:, a:a + size] if axis == "x" else frame[a:a + size, :]))
-            owners.append(name)
-    if not pictures:
+    frames = info.crop_frames or []
+    if not frames:
         return None
+    strip = min(1.0, frac * s.CROP_STRIP_FRACTION)
+    count = max(3, s.CROP_STRIPS)
+    centres = np.linspace(0.0, 1.0 - strip, count) + strip / 2
+    pictures = []
+    for frame in frames:
+        pictures.append(_pad_square(frame))
+        pictures += [_pad_square(_cut(frame, axis, c - strip / 2, strip)) for c in centres]
     try:
         scores = info.scorer.score_images(pictures, info.crop_texts)
     except Exception as e:  # a crop check problem must never fail the render
@@ -483,31 +485,60 @@ def _clip_crop(info: SourceInfo, axis: str, frac: float, salient_start: float | 
         return None
     if not scores:
         return None  # this scorer cannot look at pictures
-    average = {name: round(float(np.mean([sc for o, sc in zip(owners, scores) if o == name])), 4)
-               for name in ["whole frame", *windows]}
-    full = average.pop("whole frame")
-    local = info.col_local if axis == "x" else info.row_local
-    span = subject_span(local, s.CROP_SUBJECT_LEVEL, s.CROP_SUBJECT_PAD)
-    cut = {name for name, start in windows.items() if cuts_subject(start, frac, span)}
-    choice = pick_crop(average, full, s.CROP_BLUR_MARGIN, s.CROP_TIE_MARGIN, cut)
-    plain = pick_crop(average, full, s.CROP_BLUR_MARGIN, s.CROP_TIE_MARGIN)  # what the old rule would take
-    best = max(average, key=average.get)
-    if choice == "blur":
-        reason = (f"best window '{best}' {average[best]:.3f} is more than {s.CROP_BLUR_MARGIN:g} below the whole "
-                  f"frame {full:.3f}: every window cuts the subject -> blurred fit")
+    table = np.asarray(scores, dtype=np.float64).reshape(len(frames), count + 1)
+    full = round(float(table[:, 0].mean()), 4)
+    subject = locate_subject(table[:, 1:], centres, strip, s.CROP_SUBJECT_MIN_CONTRAST)
+    warning = None
+    if not subject["found"]:
+        start = end = round((1 - frac) / 2, 4)
+        choice = "centre"
+        warning = (f"no clear subject found (CLIP strip contrast {subject['contrast']:.3f} < "
+                   f"CROP_SUBJECT_MIN_CONTRAST {s.CROP_SUBJECT_MIN_CONTRAST:g}): centre crop")
+        reason = warning
     else:
-        reason = (f"window '{choice}' chosen ({average[choice]:.3f}; best window {average[best]:.3f}; whole "
-                  f"frame {full:.3f}; near-ties within {s.CROP_TIE_MARGIN:g} go to salient / centre)")
-        if choice != plain:
-            reason += (f"; '{plain}' was a near-tie but its edge falls inside the subject "
-                       f"({span[0]:.2f}-{span[1]:.2f}), so '{choice}' keeps it whole")
+        lo, hi = subject["span"]
+        start = end = place_window((lo, hi), subject["centre"], frac)
+        choice = "subject"
+        per_frame = subject["per_frame"]
+        path = [f[0] for f in per_frame]
+        steps_moved = np.diff(path)
+        one_way = bool(len(steps_moved)) and (bool((steps_moved >= 0).all()) or bool((steps_moved <= 0).all()))
+        if (len(frames) > 1 and one_way and abs(path[-1] - path[0]) >= s.CROP_FOLLOW_MIN_SHIFT
+                and min(f[1] for f in per_frame) >= s.CROP_SUBJECT_MIN_CONTRAST):
+            # Each end of the pan holds that frame's own subject. The frames were sampled at i/count of the clip
+            # part we use (i = 0 .. count-1), so the pan is stretched to reach the segment's last frame.
+            first = place_window(per_frame[0][2:4], path[0], frac)
+            last = place_window(per_frame[-1][2:4], path[-1], frac)
+            count_f = len(frames)
+            start = first
+            end = round(min(max(first + (last - first) * count_f / (count_f - 1), 0.0), 1.0 - frac), 4)
+            choice = "follow" if abs(end - start) > 1e-4 else "subject"
+        inside = start <= lo + 1e-4 and hi <= start + frac + 1e-4
+        reason = (f"subject at {lo:.2f}-{hi:.2f} (centre {subject['centre']:.2f}, CLIP strip contrast "
+                  f"{subject['contrast']:.3f}) -> window {start:.2f}-{start + frac:.2f}"
+                  + (f", panning to {end:.2f}-{end + frac:.2f} as it moves" if choice == "follow" else "")
+                  + (" (whole subject inside)" if inside and choice != "follow" else ""))
+    # The window where each sampled frame will see it (frame i was sampled at i / count of the clip part used).
+    window_pictures = [_pad_square(_cut(f, axis, start + (end - start) * i / len(frames), frac))
+                       for i, f in enumerate(frames)]
+    try:
+        window = round(float(np.mean(info.scorer.score_images(window_pictures, info.crop_texts))), 4)
+    except Exception as e:  # keep the crop; only the blur check is skipped
+        log.warning("crop window scoring failed for %s: %s", info.uid, e)
+        window = full
+    if window < full - s.CROP_BLUR_MARGIN:
+        choice = "blur"
+        reason = (f"the chosen window scores {window:.3f}, more than {s.CROP_BLUR_MARGIN:g} below the whole frame "
+                  f"{full:.3f}: every window cuts the subject -> blurred fit")
     facts = {"method": "clip", "choice": "blurred fit" if choice == "blur" else choice, "axis": axis,
-             "window_fraction": round(frac, 4), "full_frame_score": full,
-             "windows": {name: {"start": round(start, 4), "score": average[name]} for name, start in windows.items()},
-             "blur_margin": s.CROP_BLUR_MARGIN, "tie_margin": s.CROP_TIE_MARGIN, "frames": len(info.crop_frames or []),
-             "subject_span": [round(span[0], 4), round(span[1], 4)] if span else None,
-             "windows_cutting_subject": sorted(cut), "reason": reason}
-    return choice, windows.get(choice, (1 - frac) / 2), facts
+             "window_fraction": round(frac, 4), "start": start, "end": end, "window_score": window,
+             "full_frame_score": full, "frames": len(frames), "strips": count, "strip_fraction": round(strip, 4),
+             "subject": ({k: subject[k] for k in ("span", "centre", "contrast", "per_frame")} if subject["found"]
+                         else None),
+             "contrast": subject["contrast"], "blur_margin": s.CROP_BLUR_MARGIN, "reason": reason}
+    if warning and choice != "blur":
+        facts["warning"] = warning
+    return choice, start, end, facts
 
 
 def plan_framing(info: SourceInfo, width: int, height: int) -> Framing:
@@ -521,23 +552,29 @@ def plan_framing(info: SourceInfo, width: int, height: int) -> Framing:
     profile, other = (info.col_energy, info.row_energy) if axis == "x" else (info.row_energy, info.col_energy)
     start, centre, mode = choose_window(profile, frac)
     _, other_centre, _ = choose_window(other, 1.0)
-    clip = _clip_crop(info, axis, frac, start if mode == "salient" else None) if info.scorer else None
+    end = None
+    clip = _clip_crop(info, axis, frac) if info.scorer else None
     if clip:
-        choice, start, facts = clip
+        choice, start, end, facts = clip
         if choice == "blur":
             return Framing("blur", crop=facts)
         mode = "subject"
-        if not start <= centre <= start + frac:  # the energy centre is outside the chosen window
-            centre = start + frac / 2
+        centre = (facts["subject"] or {}).get("centre", start + frac / 2)
+        if end == start:
+            end = None
     else:
         facts = {"method": "saliency", "choice": {"blur": "blurred fit"}.get(mode, mode),
                  "window_fraction": round(frac, 4), "start": round(start, 4)}
+        if mode == "center":
+            facts["warning"] = "no clear subject found (edge + motion energy is even): centre crop"
         if mode == "blur":
             return Framing("blur", crop=facts)
     focus = min(max((centre - start) / frac, 0.0), 1.0)
     if axis == "x":
-        return Framing(mode, x=round(start, 4), w=round(frac, 4), focus_x=focus, focus_y=other_centre, crop=facts)
-    return Framing(mode, y=round(start, 4), h=round(frac, 4), focus_x=other_centre, focus_y=focus, crop=facts)
+        return Framing(mode, x=round(start, 4), w=round(frac, 4), focus_x=focus, focus_y=other_centre, crop=facts,
+                       end=end)
+    return Framing(mode, y=round(start, 4), h=round(frac, 4), focus_x=other_centre, focus_y=focus, crop=facts,
+                   end=end)
 
 
 # ---------- Look (brightness / colour) ----------
@@ -575,7 +612,7 @@ def segment_key(info: SourceInfo, scene: Scene, ratio: str, cues: list[Cue], bur
             s.TARGET_LUMA, s.TARGET_SATURATION, s.KEN_BURNS_ZOOM, s.MAX_SLOWDOWN, font, font_scale(font),
             # The crop depends on the scene meaning and on whether CLIP looked at it.
             info.crop_texts, getattr(info.scorer, "name", None), s.CROP_SAMPLE_FRAMES, s.CROP_BLUR_MARGIN,
-            s.CROP_TIE_MARGIN, s.CROP_SUBJECT_LEVEL, s.CROP_SUBJECT_PAD, info.overlay]
+            s.CROP_STRIPS, s.CROP_STRIP_FRACTION, s.CROP_SUBJECT_MIN_CONTRAST, s.CROP_FOLLOW_MIN_SHIFT, info.overlay]
     return hashlib.sha1(json.dumps(data, default=str).encode()).hexdigest()[:16]
 
 
@@ -610,15 +647,21 @@ def time_plan(duration: float, seconds: float, max_slowdown: float) -> tuple[str
     return "loop", round(1 + max_slowdown, 4)
 
 
-def _frame_chain(framing: Framing, width: int, height: int) -> tuple[str, str]:
-    """(filter graph from [t] to [f], description). [t] = time-fitted frames, [f] = output size."""
+def _frame_chain(framing: Framing, width: int, height: int, frames: int = 1) -> tuple[str, str]:
+    """(filter graph from [t] to [f], description). [t] = time-fitted frames, [f] = output size.
+    A following crop moves its window linearly from framing.x / y (first frame) to framing.end (last frame)."""
     if framing.mode == "blur":
         sw, sh = width // 4, height // 4
         return (f"[t]split[a][b];[a]scale={sw}:{sh}:force_original_aspect_ratio=increase,crop={sw}:{sh},"
                 f"boxblur=8:2,scale={width}:{height}[bg];[b]scale={width}:{height}:force_original_aspect_ratio="
                 f"decrease[fg];[bg][fg]overlay=(W-w)/2:(H-h)/2[f]", "blurred fit")
-    crop = "" if framing.mode == "fit" else \
-        f"crop=w=iw*{framing.w}:h=ih*{framing.h}:x=iw*{framing.x}:y=ih*{framing.y},"
+    x, y = f"iw*{framing.x}", f"ih*{framing.y}"
+    if framing.end is not None and frames > 1:  # n = output frame number (0 .. frames - 1), after the fps filter
+        if framing.w < 1:
+            x = f"'iw*({framing.x}+{framing.end - framing.x:.4f}*n/{frames - 1})'"
+        else:
+            y = f"'ih*({framing.y}+{framing.end - framing.y:.4f}*n/{frames - 1})'"
+    crop = "" if framing.mode == "fit" else f"crop=w=iw*{framing.w}:h=ih*{framing.h}:x={x}:y={y},"
     described = f"subject crop ({framing.crop['choice']})" if framing.mode == "subject" else framing.mode
     return f"[t]{crop}scale={width}:{height}:flags=lanczos[f]", described
 
@@ -682,7 +725,7 @@ def render_segment(info: SourceInfo, scene: Scene, ratio: str, cues: list[Cue], 
     else:
         mode, factor = time_plan(info.duration or 0.0, seconds, s.MAX_SLOWDOWN)
         framing = plan_framing(info, width, height)
-        frame_graph, facts["framing"] = _frame_chain(framing, width, height)
+        frame_graph, facts["framing"] = _frame_chain(framing, width, height, frames)
         facts["crop"] = framing.crop
         if mode == "loop":
             inputs = ["-stream_loop", "-1", "-i", str(_pingpong(info, folder).resolve())]

@@ -351,6 +351,9 @@ def _render_segments(run: Run, scenes, cues, ratios, selections, meanings, plans
             selections[i] = select_clip(scene, meanings[i], plans[i], ctx)  # the failed clip is in ctx.used
             rendered, problems = attempt(i)
         segments[scene.index] = rendered
+        for ratio, facts in rendered.items():  # e.g. "no clear subject found ... centre crop" (render.plan_framing)
+            if (warning := (facts.get("crop") or {}).get("warning")):
+                run.warn(f"Scene {scene.index} ({ratio}): {warning}")
         if retry_with_next:  # a swap reports its own progress
             set_progress(run.job_id, 70 + round(20 * (i + 1) / len(scenes)), "render")
     return segments

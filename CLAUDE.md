@@ -131,7 +131,8 @@ RANGE_NOT_SATISFIABLE (download Range starts past the end of the file)
 ## Video rules
 - 30 fps, yuv420p, H.264 (libx264), AAC 48 kHz. 16:9=1920x1080, 9:16=1080x1920, 1:1=1080x1080.
 - Clips shorter than their scene: slow slightly or loop smoothly, never freeze.
-- 9:16 from a 16:9 clip: crop around the most salient region (not blindly the center).
+- 9:16 from a 16:9 clip: crop around the subject (CLIP strip scores over several frames), keep the WHOLE
+  subject inside, pan if it moves; no clear subject -> centre crop + warning (not blindly the center).
 - Normalise brightness/colour across clips.
 - Render each scene as its own segment (captions burned per segment) so a clip swap
   re-renders only one segment, then concat with stream copy.

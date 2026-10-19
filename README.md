@@ -475,11 +475,12 @@ comments in [.env.example](.env.example). "Code default" is used when the variab
 | `MAX_SLOWDOWN` | `0.25` | `0.25` | A short clip may be slowed by up to this fraction (0.25 = 25 %), then it loops forward/backward. |
 | `KEN_BURNS_ZOOM` | `1.12` | `1.12` | Ken Burns zoom on still images (1.12 = 12 % closer by the end of the scene). |
 | `SALIENCY_SAMPLE_FRAMES` | `5` | `5` | Frames sampled per clip to find the most interesting region for cropping. |
-| `CROP_SAMPLE_FRAMES` | `3` | `3` | Subject-aware crop (RANK_SCORER=clip): colour frames sampled per clip; each crop window (left / centre / right / salient) is scored with CLIP against the scene meaning. |
+| `CROP_SAMPLE_FRAMES` | `3` | `3` | Subject-aware crop (RANK_SCORER=clip): colour frames sampled per clip; on each, `CROP_STRIPS` strips are scored with CLIP to locate the subject. |
 | `CROP_BLUR_MARGIN` | `0.02` | `0.02` | Best window this much (or more) BELOW the whole frame -&gt; no window keeps the subject -&gt; blurred fit. |
-| `CROP_TIE_MARGIN` | `0.03` | `0.03` | Leave the salient / centre window only if another window scores more than this above it. |
-| `CROP_SUBJECT_LEVEL` | `0.5` | `0.5` | Subject span = where localised detail stays >= this x its peak (crop near-tie rule). |
-| `CROP_SUBJECT_PAD` | `0.06` | `0.06` | ...at least the peak +- this fraction of the frame. A near-tie window whose edge falls inside it loses. |
+| `CROP_STRIPS` | `13` | `13` | Narrow strips per sampled frame scored with CLIP to find where the subject is (crop). |
+| `CROP_STRIP_FRACTION` | `0.5` | `0.5` | Width of one strip as a fraction of the crop window. |
+| `CROP_SUBJECT_MIN_CONTRAST` | `0.02` | `0.02` | A subject is found when the best strip beats the median strip by at least this (on the frames' average, or in every frame for a moving subject); else centre crop + a warning. The window then holds the WHOLE subject. |
+| `CROP_FOLLOW_MIN_SHIFT` | `0.15` | `0.15` | The crop pans smoothly with the subject when its centre moves at least this fraction of the frame (one way) across the sampled frames. |
 | `TARGET_LUMA` | `110.0` | `110` | Brightness / colour normalisation: target mean luma (0-255), max brightness shift, target saturation. (Measured on real Pixabay clips in my first real run: YAVG 102-107, SATAVG 15-17.) |
 | `MAX_BRIGHTNESS_SHIFT` | `0.12` | `0.12` | Brightness / colour normalisation: target mean luma (0-255), max brightness shift, target saturation. (Measured on real Pixabay clips in my first real run: YAVG 102-107, SATAVG 15-17.) |
 | `TARGET_SATURATION` | `18.0` | `18` | Brightness / colour normalisation: target mean luma (0-255), max brightness shift, target saturation. (Measured on real Pixabay clips in my first real run: YAVG 102-107, SATAVG 15-17.) |

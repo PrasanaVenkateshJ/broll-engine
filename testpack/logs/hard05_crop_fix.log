@@ -1,0 +1,3 @@
+1 input(s) -> http://localhost:8000 (concurrency 1)
+hard05_crop_subject_at_edge_9x16 succeeded                             152.05 s  job 5df61e6e4b694c40958bb6be1accb2d9
+summary: testpack\outputs\hard05_crop_fix\summary.csv and testpack\outputs\hard05_crop_fix\summary.md

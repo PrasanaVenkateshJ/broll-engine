@@ -6,12 +6,10 @@
 - the VLM judge re-ranks / drops candidates (mock judge + a fake Groq server)
 - text-heavy penalty, extra frames per candidate
 - Openverse: strict licence filter; Pixabay: one bigger request, isAiGenerated, rate limit + cooldown
-- crop near-tie: the real run-1 sailboat case keeps the boat whole
 """
 import base64
 import json
 import time
-from pathlib import Path
 
 import pytest
 from PIL import Image
@@ -25,7 +23,7 @@ from app.pipeline.providers.mock import MockProvider
 from app.pipeline.providers.openverse import check_licence, parse_results
 from app.pipeline.rank import (MockScorer, Row, SelectionContext, _multi_frame, adaptive_floor, get_scorer,
                                select_clip, select_clips)
-from app.pipeline.render import cuts_subject, pick_crop, render_segment, analyse_source, subject_span, write_badge_ass
+from app.pipeline.render import render_segment, analyse_source, write_badge_ass
 from app.pipeline.safety import plan_search
 from app.pipeline.scenes import Scene
 from app.pipeline.transcribe import Word
@@ -33,8 +31,6 @@ from app.pipeline.tts import MockTTS, synthesize_cached
 from app.pipeline.understand import MockUnderstander
 from tests.fake_api import FakeAPI
 from tests.media_helpers import make_video
-
-FIXTURES = Path(__file__).resolve().parents[1] / "fixtures"
 
 
 def setenv(monkeypatch, **values):
@@ -395,27 +391,6 @@ def test_a_long_rate_limit_pauses_the_judge_without_failing(tmp_path, monkeypatc
     finally:
         server.close()
     assert len(server.calls) == 1 and vlm.disabled_for() > 3000
-
-
-# ---------- Crop near-tie: the run-1 sailboat ----------
-
-def test_the_sailboat_near_tie_keeps_the_boat_whole():
-    data = json.loads((FIXTURES / "sailboat_360429_crop.json").read_text(encoding="utf-8"))
-    crop, s = data["crop"], get_settings()
-    windows = {name: w["start"] for name, w in crop["windows"].items()}
-    scores = {name: w["score"] for name, w in crop["windows"].items()}
-    span = subject_span(data["row_local"], s.CROP_SUBJECT_LEVEL, s.CROP_SUBJECT_PAD)
-    assert 0.44 < span[0] < 0.50 and 0.56 < span[1] < 0.62   # the boat: mast top ~0.44, hull ~0.56 (frame check)
-    cut = {name for name, start in windows.items() if cuts_subject(start, crop["window_fraction"], span)}
-    assert cut == {"salient"}                                # 0.529 starts inside the boat
-    old = pick_crop(scores, crop["full_frame_score"], s.CROP_BLUR_MARGIN, s.CROP_TIE_MARGIN)
-    new = pick_crop(scores, crop["full_frame_score"], s.CROP_BLUR_MARGIN, s.CROP_TIE_MARGIN, cut)
-    assert (old, new) == ("salient", "centre")               # run 1 cut the boat; now the centre keeps it
-
-
-def test_a_clear_winner_is_still_taken_even_if_it_cuts():
-    assert pick_crop({"salient": 0.30, "centre": 0.20}, 0.29, 0.02, 0.03, cut={"salient"}) == "salient"
-    assert pick_crop({"salient": 0.30, "centre": 0.29}, 0.29, 0.02, 0.03, cut={"salient", "centre"}) == "salient"
 
 
 # ---------- TTS cache ----------

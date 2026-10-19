@@ -387,22 +387,19 @@ class Settings(BaseSettings):
     KEN_BURNS_ZOOM: float = 1.12
     # Frames sampled per clip to find the most interesting region for cropping.
     SALIENCY_SAMPLE_FRAMES: int = 5
-    # Subject-aware crop (only with RANK_SCORER=clip): CROP_SAMPLE_FRAMES colour frames, each
-    # candidate crop window (left / centre / right / salient) is scored with CLIP against the
-    # scene meaning. If the best window scores CROP_BLUR_MARGIN or more BELOW the whole frame,
-    # no window keeps the subject -> blurred-background fit instead of a crop.
+    # Subject-aware crop (only with RANK_SCORER=clip), on CROP_SAMPLE_FRAMES colour frames of the clip. If the
+    # chosen window scores CROP_BLUR_MARGIN or more BELOW the whole frame, it loses the subject -> blurred fit.
+    # (Real case, live 2026-10-19: fixed left / centre / right windows cropped a sailboat out of a 9:16 frame.)
     CROP_SAMPLE_FRAMES: int = 3
     CROP_BLUR_MARGIN: float = 0.02
-    # Leave the salient / centre window only if another window scores more than this above it.
-    # (Real run 2026-10-16: an edge window beat the correct centred subject by 0.024 - CLIP noise.)
-    CROP_TIE_MARGIN: float = 0.03
-    # Near-tie windows that start or end INSIDE the subject lose to a near-tie window that keeps it whole.
-    # Subject = where detail is LOCALISED (a few columns of a row much busier than the rest of that row: a
-    # boat on a calm sea; waves or grass are busy everywhere and do not count). Its span = the peak
-    # +- CROP_SUBJECT_PAD (fraction of the frame), widened to where localised detail stays >= CROP_SUBJECT_LEVEL
-    # x the peak. (Real case, run 1: a 9:16 sailboat clip cut at the hull by a near-tie window.)
-    CROP_SUBJECT_LEVEL: float = 0.5
-    CROP_SUBJECT_PAD: float = 0.06
+    # Where is the subject? CROP_STRIPS narrow strips (CROP_STRIP_FRACTION of the crop window wide) across every
+    # sampled frame are scored with CLIP; a subject is found when the best strip beats the median strip by at least
+    # CROP_SUBJECT_MIN_CONTRAST (else: centre crop + warning). The window pans with the subject when its centre moves
+    # by at least CROP_FOLLOW_MIN_SHIFT (fraction of the frame) between the first and last sampled frame, all one way.
+    CROP_STRIPS: int = 13
+    CROP_STRIP_FRACTION: float = 0.5
+    CROP_SUBJECT_MIN_CONTRAST: float = 0.02
+    CROP_FOLLOW_MIN_SHIFT: float = 0.15
     # Brightness / colour normalisation targets (signalstats YAVG 0-255, SATAVG) and limits.
     # Real Pixabay clips measured YAVG 102-107 and SATAVG 15-17 in the first real run.
     TARGET_LUMA: float = 110.0

@@ -9,11 +9,12 @@ from app.pipeline import media, qa
 from app.pipeline.providers.base import Candidate
 from app.pipeline.providers.generated import GeneratedProvider
 from app.pipeline.rank import Selection
-from app.pipeline.render import (SourceInfo, analyse_source, choose_window, look_filter, pick_crop,
-                                 plan_framing, render_segment, time_plan)
+from app.pipeline.render import (SourceInfo, analyse_source, choose_window, locate_subject, look_filter,
+                                 place_window, plan_framing, render_segment, time_plan)
 from app.pipeline.scenes import Scene
 from app.pipeline.transcribe import Word
-from tests.media_helpers import make_image, make_subject_on_right, make_subjects_at_both_edges, make_video
+from tests.media_helpers import (make_image, make_moving_subject, make_plain_video, make_subject_at,
+                                 make_subject_on_right, make_subjects_at_both_edges, make_video)
 
 
 def selection_for(path, kind="video", width=640, height=360, uid="t"):
@@ -155,17 +156,6 @@ class SubjectPixelScorer:
         return out
 
 
-def test_pick_crop_rule():
-    assert pick_crop({"salient": 0.30, "centre": 0.25}, 0.29, 0.02) == "salient"
-    assert pick_crop({"left": 0.24, "right": 0.27}, 0.28, 0.02) == "right"   # 0.01 below the frame: still crop
-    assert pick_crop({"left": 0.20, "right": 0.21}, 0.28, 0.02) == "blur"    # every window loses the subject
-    assert pick_crop({"salient": 0.25, "right": 0.25}, 0.25, 0.02) == "salient"  # tie: first listed wins
-    # Real run: the centred hand-with-coins scored 0.223, an edge window 0.247 (CLIP noise) -> keep salient.
-    assert pick_crop({"salient": 0.2231, "left": 0.2468, "right": 0.2439}, 0.2296, 0.02, tie_margin=0.03) == "salient"
-    # A subject really at the edge wins clearly (real run: 0.236 vs 0.181 the other way round).
-    assert pick_crop({"centre": 0.181, "right": 0.236}, 0.232, 0.02, tie_margin=0.03) == "right"
-
-
 def test_9x16_subject_aware_crop_keeps_the_subject_at_the_edge(tmp_path):
     clip = make_subject_on_right(tmp_path / "subject.mp4", 3.0)
     scorer = SubjectPixelScorer()
@@ -173,9 +163,8 @@ def test_9x16_subject_aware_crop_keeps_the_subject_at_the_edge(tmp_path):
     framing = plan_framing(info, 1080, 1920)
     assert framing.mode == "subject" and framing.x > 0.5          # window moved right, onto the subject
     crop = framing.crop
-    assert crop["method"] == "clip" and crop["choice"] in ("salient", "right")
-    assert crop["windows"][crop["choice"]]["score"] > crop["windows"]["centre"]["score"]
-    assert crop["frames"] == get_settings().CROP_SAMPLE_FRAMES and f"window '{crop['choice']}' chosen" in crop["reason"]
+    assert crop["method"] == "clip" and crop["choice"] == "subject" and "whole subject inside" in crop["reason"]
+    assert crop["frames"] == get_settings().CROP_SAMPLE_FRAMES and crop["strips"] == get_settings().CROP_STRIPS
     # The choice is written into the segment facts (-> timeline.json), also for a cached segment.
     path, facts = render_segment(info, scene(2.0), "9:16", [], tmp_path, 60, burn_captions=False)
     assert facts["crop"] == crop and facts["framing"].startswith("subject crop")
@@ -189,8 +178,7 @@ def test_crop_falls_back_to_blurred_fit_when_no_window_keeps_the_subject(tmp_pat
     framing = plan_framing(info, 1080, 1920)
     assert framing.mode == "blur"
     assert framing.crop["choice"] == "blurred fit" and "every window cuts the subject" in framing.crop["reason"]
-    best = max(w["score"] for w in framing.crop["windows"].values())
-    assert best < framing.crop["full_frame_score"] - get_settings().CROP_BLUR_MARGIN
+    assert framing.crop["window_score"] < framing.crop["full_frame_score"] - get_settings().CROP_BLUR_MARGIN
 
 
 def test_without_a_picture_scorer_the_saliency_crop_is_used_and_recorded(tmp_path):
@@ -199,3 +187,59 @@ def test_without_a_picture_scorer_the_saliency_crop_is_used_and_recorded(tmp_pat
     framing = plan_framing(info, 1080, 1920)
     assert framing.mode == "salient" and framing.crop["method"] == "saliency"
     assert plan_framing(info, 1920, 1080).crop == {"method": "none", "choice": "fit (same shape)"}
+
+
+# ---------- Subject at the far edges, moving, or missing (hard case 5) ----------
+
+def subject_inside(framing, left_px, right_px, width=640):
+    """Is the subject (pixels left_px..right_px of a 640-wide frame) fully inside the crop window?"""
+    return framing.x <= left_px / width + 1e-3 and right_px / width <= framing.x + framing.w + 1e-3
+
+
+@pytest.mark.parametrize("x", [10, 520])  # far left / far right
+def test_clip_crop_keeps_a_subject_at_the_far_edge_whole(tmp_path, x):
+    clip = make_subject_at(tmp_path / f"edge_{x}.mp4", x)
+    info = analyse_source(selection_for(clip), 2.0, ["a busy test pattern"], SubjectPixelScorer())
+    framing = plan_framing(info, 1080, 1920)
+    assert framing.mode == "subject" and framing.crop["choice"] == "subject" and framing.end is None
+    assert subject_inside(framing, x, x + 110), (framing.x, framing.w)
+    assert "whole subject inside" in framing.crop["reason"] and "warning" not in framing.crop
+
+
+@pytest.mark.parametrize("x", [10, 520])
+def test_saliency_crop_keeps_a_subject_at_the_far_edge_whole(tmp_path, x):
+    clip = make_subject_at(tmp_path / f"edge_{x}.mp4", x)
+    info = analyse_source(selection_for(clip), 2.0, ["a busy test pattern"], scorer=None)
+    framing = plan_framing(info, 1080, 1920)
+    assert framing.mode == "salient" and subject_inside(framing, x, x + 110), (framing.x, framing.w)
+
+
+def test_the_crop_follows_a_moving_subject_smoothly(tmp_path):
+    clip = make_moving_subject(tmp_path / "moving.mp4", 3.0)
+    info = analyse_source(selection_for(clip), 2.0, ["a busy test pattern"], SubjectPixelScorer())
+    framing = plan_framing(info, 1080, 1920)
+    assert framing.crop["choice"] == "follow" and framing.end - framing.x > 0.3   # pans left -> right with it
+    path, facts = render_segment(info, scene(2.0), "9:16", [], tmp_path, 60, burn_captions=False)
+    assert video_facts(path)[2:4] == (1080, 1920) and video_facts(path)[-1] == 60
+    assert facts["crop"]["choice"] == "follow" and qa.check_segment(path, 60) == []
+
+
+def test_no_subject_falls_back_to_the_centre_with_a_warning(tmp_path):
+    clip = make_plain_video(tmp_path / "plain.mp4", 3.0)
+    info = analyse_source(selection_for(clip), 2.0, ["a busy test pattern"], SubjectPixelScorer())
+    framing = plan_framing(info, 1080, 1920)
+    assert framing.crop["choice"] == "centre" and abs(framing.x - (1 - framing.w) / 2) < 1e-3
+    assert "no clear subject found" in framing.crop["warning"]
+
+
+def test_locate_subject_and_place_window():
+    centres = np.linspace(0.0, 0.84, 13) + 0.08
+    flat = np.full((2, 13), 0.25)
+    assert locate_subject(flat, centres, 0.16, 0.02)["found"] is False
+    edge = flat.copy()
+    edge[:, -2:] = 0.30                                   # subject at the far right edge
+    found = locate_subject(edge, centres, 0.16, 0.02)
+    assert found["found"] and found["span"][1] == 1.0
+    start = place_window(found["span"], found["centre"], 0.316)
+    assert start == round(1 - 0.316, 4) and start <= found["span"][0]   # window flush right, subject inside
+    assert place_window((0.0, 0.1), 0.05, 0.316) == 0.0                 # far left: flush left
