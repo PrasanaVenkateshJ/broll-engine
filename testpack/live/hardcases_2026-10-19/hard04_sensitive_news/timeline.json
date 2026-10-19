@@ -1,0 +1,1752 @@
+{
+  "job_id": "cd1261a756e44161a977689a316b55ec",
+  "input_type": "script",
+  "duration": 26.15,
+  "language": "en",
+  "scenes": [
+    {
+      "index": 0,
+      "text": "Heavy floods this week forced thousands of families to leave their homes.",
+      "start": 0.0,
+      "end": 3.63,
+      "duration": 3.63,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "flooded neighborhood with empty homes",
+      "queries": [
+        "flooded neighborhood with empty homes",
+        "water wall engulfing street",
+        "submerged houses along riverbank",
+        "family loading belongings onto boat",
+        "somber cloudy sky over flood"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": true
+      },
+      "provider": "pixabay_video",
+      "clip_id": "274231",
+      "page_url": "https://pixabay.com/videos/id-274231/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "AVISOtaON on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.235 >= 0.22 for query 'flooded neighborhood with empty homes' (best of 20 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.232); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.01); video preferred over photo-motion (pixabay_image_motion best 0.296 is not more than 0.03 above 0.275); borderline (best 0.236 < BORDERLINE_SCORE 0.25): also searched the rewritten query 'families evacuating floodwaters' (groq), +13 candidates scored on the original queries",
+      "relevance_score": 0.2348,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2348,
+        "thumbnail_score": 0.2322,
+        "frame_scores": [
+          0.2322,
+          0.2296,
+          0.2426
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0001,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.2748,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": true,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_000.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0031,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 4.32,
+            "logo_prob": 0.0098,
+            "scene_score": 0.2359,
+            "result": "ok"
+          },
+          {
+            "time": 12.95,
+            "logo_prob": 0.0069,
+            "scene_score": 0.2416,
+            "result": "ok"
+          },
+          {
+            "time": 21.58,
+            "logo_prob": 0.0081,
+            "scene_score": 0.2534,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:274231",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2025/04/24/274231_medium.mp4",
+        "final_score": 0.2748,
+        "width": 2560,
+        "height": 1440,
+        "duration": 25.0
+      },
+      "understanding": {
+        "queries": [
+          "flooded neighborhood with empty homes",
+          "water wall engulfing street",
+          "submerged houses along riverbank",
+          "family loading belongings onto boat",
+          "somber cloudy sky over flood"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": true
+        },
+        "reason": "groq: Shows the forced evacuation and devastation of homes caused by the floods.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "heavy floods",
+        "card": {
+          "headline": "HEAVY FLOODS",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": true,
+        "fingerprint": "44335dcf5365ebb3"
+      },
+      "safety": {
+        "queries": [
+          "flooded neighborhood with empty homes",
+          "water wall engulfing street",
+          "submerged houses along riverbank",
+          "family loading belongings onto boat",
+          "somber cloudy sky over flood"
+        ],
+        "exclude_terms": [
+          "blood",
+          "bloody",
+          "gore",
+          "corpse",
+          "dead body",
+          "injury",
+          "wound",
+          "wounded",
+          "weapon",
+          "gun",
+          "guns",
+          "knife",
+          "explosion",
+          "violence",
+          "violent",
+          "fight",
+          "riot",
+          "crash",
+          "victim",
+          "war zone",
+          "party",
+          "parties",
+          "celebration",
+          "celebrating",
+          "celebrate",
+          "fireworks",
+          "confetti",
+          "dancing",
+          "disco",
+          "carnival",
+          "birthday"
+        ],
+        "no_faces": false,
+        "notes": [
+          "sensitive topic: graphic content excluded",
+          "sensitive story: festive footage excluded"
+        ]
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_000_402948da1cf6513d.mp4",
+          "cache_key": "402948da1cf6513d",
+          "frames": 109,
+          "look": "eq=brightness=-0.038:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Heavy",
+          "start": 0.0,
+          "end": 0.46
+        },
+        {
+          "text": "floods",
+          "start": 0.46,
+          "end": 0.72
+        },
+        {
+          "text": "this",
+          "start": 0.72,
+          "end": 0.98
+        },
+        {
+          "text": "week",
+          "start": 0.98,
+          "end": 1.18
+        },
+        {
+          "text": "forced",
+          "start": 1.18,
+          "end": 1.4
+        },
+        {
+          "text": "thousands",
+          "start": 1.4,
+          "end": 1.84
+        },
+        {
+          "text": "of",
+          "start": 1.84,
+          "end": 2.04
+        },
+        {
+          "text": "families",
+          "start": 2.04,
+          "end": 2.36
+        },
+        {
+          "text": "to",
+          "start": 2.36,
+          "end": 2.62
+        },
+        {
+          "text": "leave",
+          "start": 2.62,
+          "end": 2.78
+        },
+        {
+          "text": "their",
+          "start": 2.78,
+          "end": 3.0
+        },
+        {
+          "text": "homes.",
+          "start": 3.0,
+          "end": 3.34
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "text": "Rescue teams are still reaching some villages, and officials have confirmed that several people lost their lives.",
+      "start": 3.63,
+      "end": 9.3,
+      "duration": 5.67,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "rescue workers arriving in village",
+      "queries": [
+        "rescue workers arriving in village",
+        "lifeline rope across water",
+        "remote village with damaged roads",
+        "rescuers loading people onto boat",
+        "grim aftermath with smoke"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": true
+      },
+      "provider": "wikimedia",
+      "clip_id": "8231789",
+      "page_url": "https://commons.wikimedia.org/wiki/File:US_Navy_060222-N-4772B-144_Philippine_Army_and_Turkish_rescue_workers_unload_a_vehicle_filled_with_relief_supplies_during_rescue_efforts_following_a_devastating_landslide_that_struck_southern_Leyte_on_Feb._17,_2006.jpg",
+      "licence": "Public domain",
+      "licence_url": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "attribution": "U.S. Navy photo by Journalist 2nd Class Brian P. Biller, via Wikimedia Commons, Public domain",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "wikimedia: score 0.259 >= 0.22 for query 'rescue workers arriving in village' (best of 6 candidates, order bonus +0.04); logo check ok (logo prob 0.02); 1 clip frame(s) passed the logo check (max logo prob 0.04); earlier: pixabay_video: best score 0.214 < 0.22; pixabay_image_motion: best score 0.195 < 0.22",
+      "relevance_score": 0.2591,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2591,
+        "thumbnail_score": 0.2591,
+        "frame_scores": null,
+        "frames_scored": 1,
+        "text_prob": 0.0004,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.2991
+      },
+      "story_sensitive": true,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_001.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0199,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.0363,
+            "scene_score": 0.2642,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "wikimedia:8231789",
+        "kind": "image",
+        "title": "US Navy 060222-N-4772B-144 Philippine Army and Turkish rescue workers unload a vehicle filled with relief supplies during rescue efforts following a devastating landslide that struck southern Leyte on Feb. 17, 2006",
+        "source_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/US_Navy_060222-N-4772B-144_Philippine_Army_and_Turkish_rescue_workers_unload_a_vehicle_filled_with_relief_supplies_during_rescue_efforts_following_a_devastating_landslide_that_struck_southern_Leyte_on_Feb._17%2C_2006.jpg/1920px-thumbnail.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "final_score": 0.2991,
+        "width": 1920,
+        "height": 1285,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "rescue workers arriving in village",
+          "lifeline rope across water",
+          "remote village with damaged roads",
+          "rescuers loading people onto boat",
+          "grim aftermath with smoke"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": true
+        },
+        "reason": "groq: Depicts rescue teams reaching isolated villages and the tragic loss of life.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "rescue teams",
+        "card": {
+          "headline": "RESCUE TEAMS",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": true,
+        "fingerprint": "dbf179499ca65004"
+      },
+      "safety": {
+        "queries": [
+          "rescue workers arriving in village",
+          "lifeline rope across water",
+          "remote village with damaged roads",
+          "rescuers loading people onto boat",
+          "grim aftermath with smoke"
+        ],
+        "exclude_terms": [
+          "blood",
+          "bloody",
+          "gore",
+          "corpse",
+          "dead body",
+          "injury",
+          "wound",
+          "wounded",
+          "weapon",
+          "gun",
+          "guns",
+          "knife",
+          "explosion",
+          "violence",
+          "violent",
+          "fight",
+          "riot",
+          "crash",
+          "victim",
+          "war zone",
+          "party",
+          "parties",
+          "celebration",
+          "celebrating",
+          "celebrate",
+          "fireworks",
+          "confetti",
+          "dancing",
+          "disco",
+          "carnival",
+          "birthday"
+        ],
+        "no_faces": false,
+        "notes": [
+          "sensitive topic: graphic content excluded",
+          "sensitive story: festive footage excluded"
+        ]
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_001_845d93e770e18649.mp4",
+          "cache_key": "845d93e770e18649",
+          "frames": 170,
+          "look": "eq=brightness=-0.077:saturation=1.114",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "y",
+            "window_fraction": 0.8405,
+            "full_frame_score": 0.2435,
+            "windows": {
+              "salient": {
+                "start": 0.1373,
+                "score": 0.2103
+              },
+              "centre": {
+                "start": 0.0798,
+                "score": 0.2337
+              },
+              "top": {
+                "start": 0.0,
+                "score": 0.2454
+              },
+              "bottom": {
+                "start": 0.1595,
+                "score": 0.2295
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "subject_span": [
+              0.1969,
+              0.8268
+            ],
+            "windows_cutting_subject": [],
+            "reason": "window 'centre' chosen (0.234; best window 0.245; whole frame 0.243; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Rescue",
+          "start": 3.92,
+          "end": 4.22
+        },
+        {
+          "text": "teams",
+          "start": 4.22,
+          "end": 4.54
+        },
+        {
+          "text": "are",
+          "start": 4.54,
+          "end": 4.72
+        },
+        {
+          "text": "still",
+          "start": 4.72,
+          "end": 4.88
+        },
+        {
+          "text": "reaching",
+          "start": 4.88,
+          "end": 5.2
+        },
+        {
+          "text": "some",
+          "start": 5.2,
+          "end": 5.52
+        },
+        {
+          "text": "villages,",
+          "start": 5.52,
+          "end": 5.88
+        },
+        {
+          "text": "and",
+          "start": 6.34,
+          "end": 6.48
+        },
+        {
+          "text": "officials",
+          "start": 6.48,
+          "end": 6.78
+        },
+        {
+          "text": "have",
+          "start": 6.78,
+          "end": 6.98
+        },
+        {
+          "text": "confirmed",
+          "start": 6.98,
+          "end": 7.38
+        },
+        {
+          "text": "that",
+          "start": 7.38,
+          "end": 7.58
+        },
+        {
+          "text": "several",
+          "start": 7.58,
+          "end": 7.9
+        },
+        {
+          "text": "people",
+          "start": 7.9,
+          "end": 8.2
+        },
+        {
+          "text": "lost",
+          "start": 8.2,
+          "end": 8.46
+        },
+        {
+          "text": "their",
+          "start": 8.46,
+          "end": 8.66
+        },
+        {
+          "text": "lives.",
+          "start": 8.66,
+          "end": 9.02
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "text": "Schools and community halls have been opened as shelters, where volunteers are serving hot food and clean water.",
+      "start": 9.3,
+      "end": 14.99,
+      "duration": 5.69,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "community hall with rows of tables",
+      "queries": [
+        "temporary shelter inside school gym",
+        "safe harbor in storm",
+        "community hall with rows of tables",
+        "volunteers handing out meals",
+        "hopeful caring atmosphere"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": true
+      },
+      "provider": "pixabay_image_motion",
+      "clip_id": "8246151",
+      "page_url": "https://pixabay.com/photos/building-door-architecture-entrance-8246151/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Michael_Pointner on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "best available footage (no plain card while usable footage exists): nothing passed 0.22; pixabay_image_motion pixabay_image_motion:8246151 scored 0.212 >= BEST_EFFORT_MIN_SCORE 0.17 for query 'community hall with rows of tables'; text badge 'SCHOOLS COMMUNITY' from the narration; 1 clip frame(s) passed the logo check (max logo prob 0.57); earlier: pixabay_video: best score 0.218 < 0.22; pixabay_image_motion: best score 0.212 < 0.22; wikimedia: best score 0.186 < 0.22; openverse: best score 0.197 < 0.22; adaptive pass off: 7 candidate(s) scored 0.194-0.22 but there is no independent judge (VLM_PROVIDER=none); pixabay_video:43731 rejected by the frame logo check (at 32.6 s, logo prob 0.62); borderline (best 0.218 < BORDERLINE_SCORE 0.25): also searched the rewritten query 'volunteers distributing meals' (groq), +12 candidates scored on the original queries",
+      "relevance_score": 0.2123,
+      "overlay": true,
+      "overlay_card": {
+        "headline": "SCHOOLS COMMUNITY",
+        "subtitle": "",
+        "kind": "keyword",
+        "source": "narration",
+        "numbers_shown": [],
+        "style": "badge (lower third, fades in)"
+      },
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2123,
+        "thumbnail_score": 0.2123,
+        "frame_scores": null,
+        "frames_scored": 1,
+        "text_prob": 0.0001,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.2523,
+        "best_effort": true,
+        "best_effort_min_score": 0.17
+      },
+      "story_sensitive": true,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_002.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.1487,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.5657,
+            "scene_score": 0.214,
+            "result": "penalised"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_image_motion:8246151",
+        "kind": "image",
+        "title": "",
+        "source_url": "https://pixabay.com/get/g29cda8c679a161277c3c3bb7ef5b98eb45f2f56d8836fbadd727d7ad9c2ab456f15da6c470be0d8dbac4ee6c3e33a3c5818584b3bed85a4e7799ddf4397419e5_1280.jpg",
+        "final_score": 0.2523,
+        "width": 1280,
+        "height": 853,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "temporary shelter inside school gym",
+          "safe harbor in storm",
+          "community hall with rows of tables",
+          "volunteers handing out meals",
+          "hopeful caring atmosphere"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": true
+        },
+        "reason": "groq: Illustrates schools and halls turned into shelters where volunteers provide food and water.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "schools community",
+        "card": {
+          "headline": "SCHOOLS COMMUNITY",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": true,
+        "fingerprint": "c48831ffb6cdf6f4"
+      },
+      "safety": {
+        "queries": [
+          "temporary shelter inside school gym",
+          "safe harbor in storm",
+          "community hall with rows of tables",
+          "volunteers handing out meals",
+          "hopeful caring atmosphere"
+        ],
+        "exclude_terms": [
+          "blood",
+          "bloody",
+          "gore",
+          "corpse",
+          "dead body",
+          "injury",
+          "wound",
+          "wounded",
+          "weapon",
+          "gun",
+          "guns",
+          "knife",
+          "explosion",
+          "violence",
+          "violent",
+          "fight",
+          "riot",
+          "crash",
+          "victim",
+          "war zone",
+          "party",
+          "parties",
+          "celebration",
+          "celebrating",
+          "celebrate",
+          "fireworks",
+          "confetti",
+          "dancing",
+          "disco",
+          "carnival",
+          "birthday"
+        ],
+        "no_faces": false,
+        "notes": [
+          "sensitive topic: graphic content excluded",
+          "sensitive story: festive footage excluded"
+        ]
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_002_f7c0eb6259f383ea.mp4",
+          "cache_key": "f7c0eb6259f383ea",
+          "frames": 171,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "overlay": {
+            "headline": "SCHOOLS COMMUNITY",
+            "subtitle": "",
+            "source": "narration"
+          },
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "y",
+            "window_fraction": 0.8441,
+            "full_frame_score": 0.19,
+            "windows": {
+              "salient": {
+                "start": 0.0,
+                "score": 0.1937
+              },
+              "centre": {
+                "start": 0.078,
+                "score": 0.1954
+              },
+              "bottom": {
+                "start": 0.1559,
+                "score": 0.1955
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "subject_span": [
+              0.1732,
+              0.8425
+            ],
+            "windows_cutting_subject": [],
+            "reason": "window 'salient' chosen (0.194; best window 0.196; whole frame 0.190; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Schools",
+          "start": 9.58,
+          "end": 9.84
+        },
+        {
+          "text": "and",
+          "start": 9.84,
+          "end": 10.1
+        },
+        {
+          "text": "community",
+          "start": 10.1,
+          "end": 10.38
+        },
+        {
+          "text": "halls",
+          "start": 10.38,
+          "end": 10.84
+        },
+        {
+          "text": "have",
+          "start": 10.84,
+          "end": 11.02
+        },
+        {
+          "text": "been",
+          "start": 11.02,
+          "end": 11.12
+        },
+        {
+          "text": "opened",
+          "start": 11.12,
+          "end": 11.4
+        },
+        {
+          "text": "as",
+          "start": 11.4,
+          "end": 11.58
+        },
+        {
+          "text": "shelters,",
+          "start": 11.58,
+          "end": 11.92
+        },
+        {
+          "text": "where",
+          "start": 12.34,
+          "end": 12.46
+        },
+        {
+          "text": "volunteers",
+          "start": 12.46,
+          "end": 12.88
+        },
+        {
+          "text": "are",
+          "start": 12.88,
+          "end": 13.12
+        },
+        {
+          "text": "serving",
+          "start": 13.12,
+          "end": 13.4
+        },
+        {
+          "text": "hot",
+          "start": 13.4,
+          "end": 13.68
+        },
+        {
+          "text": "food",
+          "start": 13.68,
+          "end": 13.94
+        },
+        {
+          "text": "and",
+          "start": 13.94,
+          "end": 14.1
+        },
+        {
+          "text": "clean",
+          "start": 14.1,
+          "end": 14.34
+        },
+        {
+          "text": "water.",
+          "start": 14.34,
+          "end": 14.68
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "text": "Doctors are visiting the camps to check on children and older people.",
+      "start": 14.99,
+      "end": 18.43,
+      "duration": 3.44,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "doctor examining child",
+      "queries": [
+        "medical checkup tent in camp",
+        "healing hands",
+        "camp medical station",
+        "doctor examining child",
+        "reassuring calm"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": true
+      },
+      "provider": "pixabay_video",
+      "clip_id": "49808",
+      "page_url": "https://pixabay.com/videos/id-49808/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Hassas_Arts on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.256 >= 0.22 for query 'doctor examining child' (best of 6 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.251); logo check ok (logo prob 0.05); 3 clip frame(s) passed the logo check (max logo prob 0.35); video scored >= 0.25: photo sources not searched",
+      "relevance_score": 0.256,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.256,
+        "thumbnail_score": 0.2513,
+        "frame_scores": [
+          0.2513,
+          0.2552,
+          0.2614
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0005,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.296,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": true,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_003.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0463,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.25,
+            "logo_prob": 0.3539,
+            "scene_score": 0.2512,
+            "result": "ok"
+          },
+          {
+            "time": 6.76,
+            "logo_prob": 0.1488,
+            "scene_score": 0.2423,
+            "result": "ok"
+          },
+          {
+            "time": 11.26,
+            "logo_prob": 0.0095,
+            "scene_score": 0.2401,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:49808",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2020/09/13/49808-458438856_medium.mp4",
+        "final_score": 0.296,
+        "width": 1280,
+        "height": 720,
+        "duration": 14.0
+      },
+      "understanding": {
+        "queries": [
+          "medical checkup tent in camp",
+          "healing hands",
+          "camp medical station",
+          "doctor examining child",
+          "reassuring calm"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": true
+        },
+        "reason": "groq: Shows doctors providing health checks for children and elders in the camps.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "doctors visiting",
+        "card": {
+          "headline": "DOCTORS VISITING",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": true,
+        "fingerprint": "109a3825eb058baf"
+      },
+      "safety": {
+        "queries": [
+          "medical checkup tent in camp",
+          "healing hands",
+          "camp medical station",
+          "doctor examining child",
+          "reassuring calm"
+        ],
+        "exclude_terms": [
+          "blood",
+          "bloody",
+          "gore",
+          "corpse",
+          "dead body",
+          "injury",
+          "wound",
+          "wounded",
+          "weapon",
+          "gun",
+          "guns",
+          "knife",
+          "explosion",
+          "violence",
+          "violent",
+          "fight",
+          "riot",
+          "crash",
+          "victim",
+          "war zone",
+          "party",
+          "parties",
+          "celebration",
+          "celebrating",
+          "celebrate",
+          "fireworks",
+          "confetti",
+          "dancing",
+          "disco",
+          "carnival",
+          "birthday"
+        ],
+        "no_faces": false,
+        "notes": [
+          "sensitive topic: graphic content excluded",
+          "sensitive story: festive footage excluded"
+        ]
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_003_d5b3764196d28042.mp4",
+          "cache_key": "d5b3764196d28042",
+          "frames": 103,
+          "look": "eq=brightness=-0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Doctors",
+          "start": 15.3,
+          "end": 15.52
+        },
+        {
+          "text": "are",
+          "start": 15.52,
+          "end": 15.74
+        },
+        {
+          "text": "visiting",
+          "start": 15.74,
+          "end": 15.94
+        },
+        {
+          "text": "the",
+          "start": 15.94,
+          "end": 16.18
+        },
+        {
+          "text": "camps",
+          "start": 16.18,
+          "end": 16.42
+        },
+        {
+          "text": "to",
+          "start": 16.42,
+          "end": 16.64
+        },
+        {
+          "text": "check",
+          "start": 16.64,
+          "end": 16.82
+        },
+        {
+          "text": "on",
+          "start": 16.82,
+          "end": 17.0
+        },
+        {
+          "text": "children",
+          "start": 17.0,
+          "end": 17.36
+        },
+        {
+          "text": "and",
+          "start": 17.36,
+          "end": 17.58
+        },
+        {
+          "text": "older",
+          "start": 17.58,
+          "end": 17.8
+        },
+        {
+          "text": "people.",
+          "start": 17.8,
+          "end": 18.16
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "text": "If you would like to help, local charities are collecting blankets and dry food.",
+      "start": 18.43,
+      "end": 22.5,
+      "duration": 4.07,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "volunteers sorting supplies",
+      "queries": [
+        "charity collection point with blankets",
+        "warmth gathering",
+        "community center donation table",
+        "volunteers sorting supplies",
+        "uplifting supportive environment"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": true
+      },
+      "provider": "pixabay_image_motion",
+      "clip_id": "4529717",
+      "page_url": "https://pixabay.com/photos/team-friendship-group-hands-4529717/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "ua_Bob_Dmyt_ua on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_image_motion: score 0.222 >= 0.22 for query 'volunteers sorting supplies' (best of 19 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 1 clip frame(s) passed the logo check (max logo prob 0.00); earlier: pixabay_video: logo check rejected 1, best: pixabay_video:41869 (logo prob 0.75, scene 0.245) (2 checked); pixabay_video:139400 rejected by the frame logo check (at 1.7 s, logo prob 0.64); pixabay_video: no passing candidate could be downloaded; borderline (best 0.222 < BORDERLINE_SCORE 0.25): also searched the rewritten query 'charity blanket donation bin' (groq), +8 candidates scored on the original queries",
+      "relevance_score": 0.2216,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2216,
+        "thumbnail_score": 0.2216,
+        "frame_scores": null,
+        "frames_scored": 1,
+        "text_prob": 0.0,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.2616
+      },
+      "story_sensitive": true,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_004.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0009,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.0006,
+            "scene_score": 0.2175,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_image_motion:4529717",
+        "kind": "image",
+        "title": "",
+        "source_url": "https://pixabay.com/get/gb5c1e82c389386b668fd214fe13c9807dd4664181bbc44409e00767546e14115f3f020e4b24ea20c537b7528ed7282f75f6f84b50cc900b1eb23475a57083a8e_1280.jpg",
+        "final_score": 0.2616,
+        "width": 1280,
+        "height": 853,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "charity collection point with blankets",
+          "warmth gathering",
+          "community center donation table",
+          "volunteers sorting supplies",
+          "uplifting supportive environment"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": true
+        },
+        "reason": "groq: Encourages help by showing charities gathering blankets and dry food.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "like help",
+        "card": {
+          "headline": "LIKE HELP",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": true,
+        "fingerprint": "2b5d99cd802cc6ea"
+      },
+      "safety": {
+        "queries": [
+          "charity collection point with blankets",
+          "warmth gathering",
+          "community center donation table",
+          "volunteers sorting supplies",
+          "uplifting supportive environment"
+        ],
+        "exclude_terms": [
+          "blood",
+          "bloody",
+          "gore",
+          "corpse",
+          "dead body",
+          "injury",
+          "wound",
+          "wounded",
+          "weapon",
+          "gun",
+          "guns",
+          "knife",
+          "explosion",
+          "violence",
+          "violent",
+          "fight",
+          "riot",
+          "crash",
+          "victim",
+          "war zone",
+          "party",
+          "parties",
+          "celebration",
+          "celebrating",
+          "celebrate",
+          "fireworks",
+          "confetti",
+          "dancing",
+          "disco",
+          "carnival",
+          "birthday"
+        ],
+        "no_faces": false,
+        "notes": [
+          "sensitive topic: graphic content excluded",
+          "sensitive story: festive footage excluded"
+        ]
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_004_450ec8b56bcb6e00.mp4",
+          "cache_key": "450ec8b56bcb6e00",
+          "frames": 122,
+          "look": "eq=brightness=0.120:saturation=1.121",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "y",
+            "window_fraction": 0.8441,
+            "full_frame_score": 0.24,
+            "windows": {
+              "salient": {
+                "start": 0.0,
+                "score": 0.236
+              },
+              "centre": {
+                "start": 0.078,
+                "score": 0.2392
+              },
+              "bottom": {
+                "start": 0.1559,
+                "score": 0.2369
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "subject_span": [
+              0.126,
+              0.8031
+            ],
+            "windows_cutting_subject": [
+              "bottom"
+            ],
+            "reason": "window 'salient' chosen (0.236; best window 0.239; whole frame 0.240; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "If",
+          "start": 18.7,
+          "end": 18.84
+        },
+        {
+          "text": "you",
+          "start": 18.84,
+          "end": 18.94
+        },
+        {
+          "text": "would",
+          "start": 18.94,
+          "end": 19.04
+        },
+        {
+          "text": "like",
+          "start": 19.04,
+          "end": 19.18
+        },
+        {
+          "text": "to",
+          "start": 19.18,
+          "end": 19.36
+        },
+        {
+          "text": "help,",
+          "start": 19.36,
+          "end": 19.6
+        },
+        {
+          "text": "local",
+          "start": 19.88,
+          "end": 20.08
+        },
+        {
+          "text": "charities",
+          "start": 20.08,
+          "end": 20.6
+        },
+        {
+          "text": "are",
+          "start": 20.6,
+          "end": 20.8
+        },
+        {
+          "text": "collecting",
+          "start": 20.8,
+          "end": 21.14
+        },
+        {
+          "text": "blankets",
+          "start": 21.14,
+          "end": 21.58
+        },
+        {
+          "text": "and",
+          "start": 21.58,
+          "end": 21.88
+        },
+        {
+          "text": "dry",
+          "start": 21.88,
+          "end": 22.12
+        },
+        {
+          "text": "food.",
+          "start": 22.12,
+          "end": 22.5
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "text": "Our thoughts are with every family who has lost someone.",
+      "start": 22.5,
+      "end": 26.15,
+      "duration": 3.65,
+      "visual_hint": null,
+      "search_text": null,
+      "query": "candles lit in memory",
+      "queries": [
+        "candles lit in memory",
+        "light in darkness",
+        "quiet room with photos",
+        "hands holding a photo",
+        "solemn respectful tone"
+      ],
+      "flags": {
+        "abstract": false,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": true
+      },
+      "provider": "pixabay_video",
+      "clip_id": "143419",
+      "page_url": "https://pixabay.com/videos/id-143419/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "NickyPe on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.263 >= 0.22 for query 'candles lit in memory' (best of 15 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.242); logo check ok (logo prob 0.18); 3 clip frame(s) passed the logo check (max logo prob 0.33); video scored >= 0.25: photo sources not searched",
+      "relevance_score": 0.2626,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2626,
+        "thumbnail_score": 0.2423,
+        "frame_scores": [
+          0.2423,
+          0.2719,
+          0.2735
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.3026,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": true,
+      "query_roles": [
+        "meaning",
+        "metaphor",
+        "setting",
+        "action",
+        "mood"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_005.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.1834,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 5.16,
+            "logo_prob": 0.3071,
+            "scene_score": 0.2612,
+            "result": "ok"
+          },
+          {
+            "time": 15.49,
+            "logo_prob": 0.2371,
+            "scene_score": 0.2579,
+            "result": "ok"
+          },
+          {
+            "time": 25.81,
+            "logo_prob": 0.334,
+            "scene_score": 0.2607,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:143419",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2022/12/18/143419-782363231_medium.mp4",
+        "final_score": 0.3026,
+        "width": 2560,
+        "height": 1440,
+        "duration": 30.0
+      },
+      "understanding": {
+        "queries": [
+          "candles lit in memory",
+          "light in darkness",
+          "quiet room with photos",
+          "hands holding a photo",
+          "solemn respectful tone"
+        ],
+        "query_roles": [
+          "meaning",
+          "metaphor",
+          "setting",
+          "action",
+          "mood"
+        ],
+        "flags": {
+          "abstract": false,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": true
+        },
+        "reason": "groq: Conveys sympathy and remembrance for families who have lost loved ones.",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "thoughts family",
+        "card": {
+          "headline": "THOUGHTS FAMILY",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": true,
+        "fingerprint": "fd12bf848b466512"
+      },
+      "safety": {
+        "queries": [
+          "candles lit in memory",
+          "light in darkness",
+          "quiet room with photos",
+          "hands holding a photo",
+          "solemn respectful tone"
+        ],
+        "exclude_terms": [
+          "blood",
+          "bloody",
+          "gore",
+          "corpse",
+          "dead body",
+          "injury",
+          "wound",
+          "wounded",
+          "weapon",
+          "gun",
+          "guns",
+          "knife",
+          "explosion",
+          "violence",
+          "violent",
+          "fight",
+          "riot",
+          "crash",
+          "victim",
+          "war zone",
+          "party",
+          "parties",
+          "celebration",
+          "celebrating",
+          "celebrate",
+          "fireworks",
+          "confetti",
+          "dancing",
+          "disco",
+          "carnival",
+          "birthday"
+        ],
+        "no_faces": false,
+        "notes": [
+          "sensitive topic: graphic content excluded",
+          "sensitive story: festive footage excluded"
+        ]
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_005_5ddb5f10845755cd.mp4",
+          "cache_key": "5ddb5f10845755cd",
+          "frames": 109,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Our",
+          "start": 22.5,
+          "end": 23.26
+        },
+        {
+          "text": "thoughts",
+          "start": 23.26,
+          "end": 23.52
+        },
+        {
+          "text": "are",
+          "start": 23.52,
+          "end": 23.74
+        },
+        {
+          "text": "with",
+          "start": 23.74,
+          "end": 23.86
+        },
+        {
+          "text": "every",
+          "start": 23.86,
+          "end": 24.06
+        },
+        {
+          "text": "family",
+          "start": 24.06,
+          "end": 24.44
+        },
+        {
+          "text": "who",
+          "start": 24.44,
+          "end": 24.68
+        },
+        {
+          "text": "has",
+          "start": 24.68,
+          "end": 24.78
+        },
+        {
+          "text": "lost",
+          "start": 24.78,
+          "end": 24.96
+        },
+        {
+          "text": "someone.",
+          "start": 24.96,
+          "end": 25.3
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "aspect_ratio": "16:9",
+      "file": "video_16x9.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 26.135
+    }
+  ]
+}

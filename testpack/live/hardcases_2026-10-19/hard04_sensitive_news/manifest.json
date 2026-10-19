@@ -1,0 +1,318 @@
+{
+  "job_id": "cd1261a756e44161a977689a316b55ec",
+  "created_at": "2026-10-19T06:57:41.808618+00:00",
+  "app": {
+    "name": "broll-engine",
+    "version": "0.2.0"
+  },
+  "input": {
+    "type": "script",
+    "source_kind": "wav",
+    "source_codec": "pcm_s16le",
+    "duration": 26.15,
+    "voice": "en-GB-female",
+    "style": null,
+    "avoid": []
+  },
+  "models": {
+    "tts": {
+      "provider": "kokoro",
+      "model": "hexgrad/Kokoro-82M",
+      "version": "0.9.4",
+      "licence": "Apache-2.0",
+      "voice": "en-GB-female",
+      "from_cache": false
+    },
+    "transcribe": {
+      "provider": "faster-whisper",
+      "model": "small",
+      "version": "1.2.1",
+      "compute_type": "int8",
+      "licence": "MIT"
+    },
+    "understand": {
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "endpoint": "https://api.groq.com/openai/v1",
+      "temperature": 0.0,
+      "seed": 1234,
+      "prompt_version": "4d1a71db9d",
+      "tokens_used": 3001,
+      "batch_size": 6,
+      "calls": 1,
+      "rate_limited_answers": 0,
+      "seconds_waited_for_rate_limit": 0.0,
+      "fallback_scenes": [],
+      "story_sensitive": true,
+      "story_sensitive_reason": "6 of 6 scenes are sensitive (>= 2)"
+    },
+    "ranker": {
+      "scorer": "clip",
+      "library": "open_clip_torch",
+      "version": "3.3.0",
+      "model": "ViT-B-32",
+      "pretrained": "laion2b_s34b_b79k",
+      "prompts": [
+        "a stock video of {q}",
+        "a photo of {q}",
+        "{q}"
+      ],
+      "score": "mean of the best 3 query similarities (prompt-ensembled)",
+      "multi_frame_top_k": 2,
+      "multi_frame_positions": [
+        0.3,
+        0.7
+      ],
+      "quality_mode": "balanced",
+      "footage_workers": 2,
+      "early_exit_rankings": 2,
+      "borderline": {
+        "borderline_scenes": 3,
+        "rewritten": 3,
+        "rewrite_llm": {
+          "provider": "groq",
+          "model": "openai/gpt-oss-120b",
+          "calls": 1,
+          "tokens_used": 831,
+          "errors": []
+        }
+      },
+      "pass1_search_score_seconds": 56.971,
+      "pass1_5_vlm_seconds": 0.0,
+      "pass2_select_download_seconds": 15.413,
+      "candidates_scored": 199
+    },
+    "ffmpeg": "ffmpeg version 5.1.9-0+deb12u1"
+  },
+  "providers": {
+    "pixabay_video": {
+      "name": "pixabay_video",
+      "api": "Pixabay Videos API (pixabay.com/api/videos)",
+      "status": "on",
+      "scenes_used": 3
+    },
+    "pixabay_image_motion": {
+      "name": "pixabay_image_motion",
+      "api": "Pixabay Images API (pixabay.com/api) + FFmpeg Ken Burns motion",
+      "status": "on",
+      "scenes_used": 2
+    },
+    "wikimedia": {
+      "name": "wikimedia",
+      "api": "Wikimedia Commons API (commons.wikimedia.org/w/api.php) + FFmpeg Ken Burns motion",
+      "status": "on",
+      "scenes_used": 1
+    },
+    "openverse": {
+      "name": "openverse",
+      "api": "Openverse API (api.openverse.org/v1/images, anonymous) + FFmpeg Ken Burns motion",
+      "status": "on",
+      "scenes_used": 0
+    },
+    "generated": {
+      "name": "generated",
+      "api": "FFmpeg gradients + libass text (made locally)",
+      "status": "on",
+      "scenes_used": 0
+    }
+  },
+  "quality_mode": "balanced",
+  "settings": {
+    "QUALITY_MODE": "balanced",
+    "SEED": 1234,
+    "MIN_SCENE_SECONDS": 2.0,
+    "MAX_SCENE_SECONDS": 8.0,
+    "PAUSE_SECONDS": 0.35,
+    "UNDERSTAND_PROVIDER": "groq",
+    "LLM_MODEL": "openai/gpt-oss-120b",
+    "PROVIDER_ORDER": "pixabay_video,pixabay_image_motion,wikimedia,openverse,generated",
+    "PROVIDERS_DISABLED": "",
+    "RANK_SCORER": "clip",
+    "CLIP_MODEL": "ViT-B-32",
+    "CLIP_PRETRAINED": "laion2b_s34b_b79k",
+    "STOCK_MIN_SCORE": 0.22,
+    "DURATION_BONUS": 0.02,
+    "ORIENTATION_BONUS": 0.02,
+    "GENERATED_FOR_STATISTICS": true,
+    "MAX_SLOWDOWN": 0.25,
+    "KEN_BURNS_ZOOM": 1.12,
+    "TARGET_LUMA": 110.0,
+    "TARGET_SATURATION": 18.0,
+    "QA_BLACK_SECONDS": 0.5,
+    "QA_FREEZE_SECONDS": 2.0,
+    "QA_MAX_DRIFT_SECONDS": 0.1,
+    "QA_RETRIES": 1,
+    "RENDER_FPS": 30,
+    "VIDEO_PRESET": "veryfast",
+    "VIDEO_CRF": 23,
+    "AUDIO_SAMPLE_RATE": 48000,
+    "AUDIO_BITRATE": "192k",
+    "CAPTION_MAX_CHARS_PER_LINE": 42,
+    "CAPTION_MAX_LINES": 2,
+    "LOGO_CHECK": true,
+    "LOGO_CROP_GRID": 3,
+    "LOGO_REJECT_PROB": 0.6,
+    "LOGO_PENALTY_PROB": 0.4,
+    "LOGO_PENALTY": 0.03,
+    "LOGO_FRAME_COUNT": 3,
+    "STATISTIC_OVERLAY": true,
+    "QUERIES_PER_SCENE": 5,
+    "PROVIDER_RESULTS_PER_QUERY": 8,
+    "PROVIDER_PAGES": 1,
+    "MAX_CANDIDATES_PER_SOURCE": 15,
+    "EARLY_EXIT": true,
+    "EARLY_EXIT_STEP": 6,
+    "PROVIDER_MAX_QUERIES": "wikimedia=3,openverse=2",
+    "CLIP_PROMPTS": "a stock video of {q}|a photo of {q}|{q}",
+    "SCORE_TOP_QUERIES": 3,
+    "MULTI_FRAME_TOP_K": 2,
+    "MULTI_FRAME_POSITIONS": "0.3,0.7",
+    "TEXT_PENALTY_PROB": 0.5,
+    "TEXT_PENALTY": 0.03,
+    "PREFER_VIDEO_MARGIN": 0.03,
+    "RELATIVE_MARGIN": 0.12,
+    "BORDERLINE_SCORE": 0.25,
+    "BEST_EFFORT_MIN_SCORE": 0.17,
+    "VLM_PROVIDER": "none",
+    "VLM_MODEL": "qwen/qwen3.8-27b",
+    "VLM_TOP_K": 3,
+    "VLM_MAX_SCENES_PER_JOB": 3,
+    "VLM_JUDGE_CONFIDENT": false,
+    "VLM_REJECT_SCORE": 1,
+    "VLM_ACCEPT_SCORE": 4,
+    "LLM_BATCH_SIZE": 6,
+    "STORY_SENSITIVE_MIN_SCENES": 2,
+    "STORY_SENSITIVE_MIN_SHARE": 0.3,
+    "CROP_TIE_MARGIN": 0.03,
+    "CROP_SUBJECT_LEVEL": 0.5,
+    "CROP_SUBJECT_PAD": 0.06,
+    "RENDER_WORKERS": 1
+  },
+  "seed": 1234,
+  "speech_check": {
+    "max_volume_db": -3.8,
+    "sound_seconds": 23.711,
+    "words": 83,
+    "no_speech_prob": 0.096,
+    "language": "en",
+    "language_probability": 1
+  },
+  "timings_seconds": {
+    "intake": 0.0,
+    "tts": 20.08,
+    "transcribe": 8.019,
+    "scenes": 0.001,
+    "understand": 4.444,
+    "footage": 72.389,
+    "render": 28.183
+  },
+  "timings_note": "seconds per stage, measured up to the moment this file was written (upload not included)",
+  "cost_estimate": {
+    "total_usd": 0.0,
+    "llm_tokens": 3001,
+    "method": "0 USD: every service used here is free - Groq free tier for the LLM (tokens counted in llm_tokens; the optional VLM judge too), Pixabay, Wikimedia Commons and Openverse APIs are free, and Kokoro, Whisper, open_clip and FFmpeg run locally on the CPU. On paid plans: cost = llm_tokens x the LLM price per token + compute time (timings_seconds) x the server price."
+  },
+  "warnings": [
+    "Scene 2: clip pixabay_video:43731 shows a logo at 32.6 s of the downloaded clip (logo prob 0.62 > 0.60); tried the next candidate",
+    "Scene 4: clip pixabay_video:139400 shows a logo at 1.7 s of the downloaded clip (logo prob 0.64 > 0.60); tried the next candidate"
+  ],
+  "rights": {
+    "licences": {
+      "Pixabay Content License": 5,
+      "Public domain": 1
+    },
+    "all_commercial_use": true,
+    "any_watermark": false,
+    "attribution_required": [],
+    "credits": [
+      {
+        "scene": 0,
+        "provider": "pixabay_video",
+        "attribution": "AVISOtaON on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-274231/"
+      },
+      {
+        "scene": 1,
+        "provider": "wikimedia",
+        "attribution": "U.S. Navy photo by Journalist 2nd Class Brian P. Biller, via Wikimedia Commons, Public domain",
+        "page_url": "https://commons.wikimedia.org/wiki/File:US_Navy_060222-N-4772B-144_Philippine_Army_and_Turkish_rescue_workers_unload_a_vehicle_filled_with_relief_supplies_during_rescue_efforts_following_a_devastating_landslide_that_struck_southern_Leyte_on_Feb._17,_2006.jpg"
+      },
+      {
+        "scene": 2,
+        "provider": "pixabay_image_motion",
+        "attribution": "Michael_Pointner on Pixabay",
+        "page_url": "https://pixabay.com/photos/building-door-architecture-entrance-8246151/"
+      },
+      {
+        "scene": 3,
+        "provider": "pixabay_video",
+        "attribution": "Hassas_Arts on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-49808/"
+      },
+      {
+        "scene": 4,
+        "provider": "pixabay_image_motion",
+        "attribution": "ua_Bob_Dmyt_ua on Pixabay",
+        "page_url": "https://pixabay.com/photos/team-friendship-group-hands-4529717/"
+      },
+      {
+        "scene": 5,
+        "provider": "pixabay_video",
+        "attribution": "NickyPe on Pixabay",
+        "page_url": "https://pixabay.com/videos/id-143419/"
+      }
+    ]
+  },
+  "footage_mix": {
+    "scenes": 6,
+    "counts": {
+      "video": 3,
+      "photo_motion": 3,
+      "generated_card": 0
+    },
+    "share": {
+      "video": 0.5,
+      "photo_motion": 0.5,
+      "generated_card": 0.0
+    },
+    "statistic_cards": 0,
+    "statistic_overlays": 1,
+    "adaptive_threshold_clips": 0,
+    "vlm_judged_clips": 0,
+    "vlm_mean_score": null,
+    "share_without_statistic_cards": {
+      "video": 0.5,
+      "photo_motion": 0.5,
+      "generated_card": 0.0
+    }
+  },
+  "ai_generated": {
+    "narration": true,
+    "visuals": false,
+    "generated_cards": 0,
+    "note": "generated cards are drawn by FFmpeg (gradient + text), not by an AI model"
+  },
+  "qa": {
+    "16:9": {
+      "video_seconds": 26.135,
+      "audio_seconds": 26.15,
+      "drift_seconds": 0.015,
+      "codec": "h264",
+      "pix_fmt": "yuv420p",
+      "fps": 29.998,
+      "audio_codec": "aac",
+      "audio_sample_rate": "48000",
+      "problems": []
+    }
+  },
+  "outputs": [
+    {
+      "aspect_ratio": "16:9",
+      "file": "video_16x9.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 26.135
+    }
+  ]
+}

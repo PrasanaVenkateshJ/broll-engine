@@ -1,0 +1,1137 @@
+{
+  "job_id": "97c5ce6d11474907a9412f2af8cf7dc9",
+  "input_type": "scenes",
+  "duration": 15.575,
+  "language": "en",
+  "scenes": [
+    {
+      "index": 0,
+      "text": "Sometimes the best ideas come when you give yourself space.",
+      "start": 0.0,
+      "end": 4.1,
+      "duration": 4.1,
+      "visual_hint": "lone tree on the left side of a wide empty field",
+      "search_text": null,
+      "query": "lone tree on the left side of a wide empty field",
+      "queries": [
+        "lone tree on the left side of a wide empty field",
+        "person thinking in open field",
+        "seed sprouting in soil",
+        "wide empty meadow",
+        "someone sketching on notebook outdoors"
+      ],
+      "flags": {
+        "abstract": true,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "168881",
+      "page_url": "https://pixabay.com/videos/id-168881/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "NickyPe on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.259 >= 0.22 for query 'lone tree on the left side of a wide empty field' (best of 6 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.258); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.00); video scored >= 0.25: photo sources not searched",
+      "relevance_score": 0.2594,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2594,
+        "thumbnail_score": 0.2583,
+        "frame_scores": [
+          0.2583,
+          0.2657,
+          0.2542
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.2994,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "visual_hint",
+        "meaning",
+        "metaphor",
+        "setting",
+        "action"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_000.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.49,
+            "logo_prob": 0.0002,
+            "scene_score": 0.2457,
+            "result": "ok"
+          },
+          {
+            "time": 7.47,
+            "logo_prob": 0.0005,
+            "scene_score": 0.2461,
+            "result": "ok"
+          },
+          {
+            "time": 12.44,
+            "logo_prob": 0.0002,
+            "scene_score": 0.2396,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:168881",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2023/06/26/168881-839807937_medium.mp4",
+        "final_score": 0.2994,
+        "width": 2560,
+        "height": 1440,
+        "duration": 14.0
+      },
+      "understanding": {
+        "queries": [
+          "lone tree on the left side of a wide empty field",
+          "person thinking in open field",
+          "seed sprouting in soil",
+          "wide empty meadow",
+          "someone sketching on notebook outdoors"
+        ],
+        "query_roles": [
+          "visual_hint",
+          "meaning",
+          "metaphor",
+          "setting",
+          "action"
+        ],
+        "flags": {
+          "abstract": true,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Shows solitude and open space inspiring ideas, using a field, seed metaphor, and calm mood. (visual_hint used as the first query)",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "ideas",
+        "card": {
+          "headline": "IDEAS",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "0e717ddd90a86ec1"
+      },
+      "safety": {
+        "queries": [
+          "lone tree on the left side of a wide empty field",
+          "person thinking in open field",
+          "seed sprouting in soil",
+          "wide empty meadow",
+          "someone sketching on notebook outdoors"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_000_aa60053af009710c.mp4",
+          "cache_key": "aa60053af009710c",
+          "frames": 123,
+          "look": "eq=brightness=0.072:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_000_31e11a10c100e7e8.mp4",
+          "cache_key": "31e11a10c100e7e8",
+          "frames": 123,
+          "look": "eq=brightness=0.072:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2594,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2632
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2657
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2644
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "subject_span": [
+              0.0052,
+              0.9948
+            ],
+            "windows_cutting_subject": [
+              "centre",
+              "left",
+              "right"
+            ],
+            "reason": "window 'centre' chosen (0.263; best window 0.266; whole frame 0.259; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Sometimes",
+          "start": 0.0,
+          "end": 0.66
+        },
+        {
+          "text": "the",
+          "start": 0.66,
+          "end": 0.98
+        },
+        {
+          "text": "best",
+          "start": 0.98,
+          "end": 1.18
+        },
+        {
+          "text": "ideas",
+          "start": 1.18,
+          "end": 1.56
+        },
+        {
+          "text": "come",
+          "start": 1.56,
+          "end": 1.94
+        },
+        {
+          "text": "when",
+          "start": 1.94,
+          "end": 2.28
+        },
+        {
+          "text": "you",
+          "start": 2.28,
+          "end": 2.38
+        },
+        {
+          "text": "give",
+          "start": 2.38,
+          "end": 2.5
+        },
+        {
+          "text": "yourself",
+          "start": 2.5,
+          "end": 2.8
+        },
+        {
+          "text": "space.",
+          "start": 2.8,
+          "end": 3.16
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "text": "A single light can guide you home through the dark.",
+      "start": 4.1,
+      "end": 7.425,
+      "duration": 3.325,
+      "visual_hint": "lighthouse at the right edge of a wide rocky coastline",
+      "search_text": null,
+      "query": "rocky coastline at dusk",
+      "queries": [
+        "lighthouse at the right edge of a wide rocky coastline",
+        "light guiding traveler at night",
+        "lighthouse beacon shining",
+        "rocky coastline at dusk",
+        "light beam sweeping over sea"
+      ],
+      "flags": {
+        "abstract": true,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "353078",
+      "page_url": "https://pixabay.com/videos/id-353078/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Mario_Krimer on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.260 >= 0.22 for query 'rocky coastline at dusk' (best of 6 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.257); logo check ok (logo prob 0.00); 3 clip frame(s) passed the logo check (max logo prob 0.00); video scored >= 0.25: photo sources not searched",
+      "relevance_score": 0.2599,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2599,
+        "thumbnail_score": 0.2574,
+        "frame_scores": [
+          0.2574,
+          0.2737,
+          0.2487
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.2999,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "visual_hint",
+        "meaning",
+        "metaphor",
+        "setting",
+        "action"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_001.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0001,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 2.83,
+            "logo_prob": 0.0004,
+            "scene_score": 0.2613,
+            "result": "ok"
+          },
+          {
+            "time": 8.48,
+            "logo_prob": 0.0001,
+            "scene_score": 0.255,
+            "result": "ok"
+          },
+          {
+            "time": 14.13,
+            "logo_prob": 0.0006,
+            "scene_score": 0.2458,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:353078",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2026/05/16/353078_medium.mp4",
+        "final_score": 0.2999,
+        "width": 1280,
+        "height": 720,
+        "duration": 16.0
+      },
+      "understanding": {
+        "queries": [
+          "lighthouse at the right edge of a wide rocky coastline",
+          "light guiding traveler at night",
+          "lighthouse beacon shining",
+          "rocky coastline at dusk",
+          "light beam sweeping over sea"
+        ],
+        "query_roles": [
+          "visual_hint",
+          "meaning",
+          "metaphor",
+          "setting",
+          "action"
+        ],
+        "flags": {
+          "abstract": true,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Visualizes guidance and hope with a lighthouse, night setting, sweeping beam and tranquil atmosphere. (visual_hint used as the first query)",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "single light",
+        "card": {
+          "headline": "SINGLE LIGHT",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "a0f7fcc6f45f0f5e"
+      },
+      "safety": {
+        "queries": [
+          "lighthouse at the right edge of a wide rocky coastline",
+          "light guiding traveler at night",
+          "lighthouse beacon shining",
+          "rocky coastline at dusk",
+          "light beam sweeping over sea"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_001_338ae7737f55170e.mp4",
+          "cache_key": "338ae7737f55170e",
+          "frames": 100,
+          "look": "eq=brightness=-0.075:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_001_1d088329c98977c5.mp4",
+          "cache_key": "1d088329c98977c5",
+          "frames": 100,
+          "look": "eq=brightness=-0.075:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2552,
+            "windows": {
+              "centre": {
+                "start": 0.3418,
+                "score": 0.2798
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2536
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.2794
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "subject_span": [
+              0.0942,
+              0.9948
+            ],
+            "windows_cutting_subject": [
+              "centre",
+              "left",
+              "right"
+            ],
+            "reason": "window 'centre' chosen (0.280; best window 0.280; whole frame 0.255; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "A",
+          "start": 4.34,
+          "end": 4.48
+        },
+        {
+          "text": "single",
+          "start": 4.48,
+          "end": 4.74
+        },
+        {
+          "text": "light",
+          "start": 4.74,
+          "end": 5.06
+        },
+        {
+          "text": "can",
+          "start": 5.06,
+          "end": 5.4
+        },
+        {
+          "text": "guide",
+          "start": 5.4,
+          "end": 5.62
+        },
+        {
+          "text": "you",
+          "start": 5.62,
+          "end": 5.8
+        },
+        {
+          "text": "home",
+          "start": 5.8,
+          "end": 5.98
+        },
+        {
+          "text": "through",
+          "start": 5.98,
+          "end": 6.16
+        },
+        {
+          "text": "the",
+          "start": 6.16,
+          "end": 6.3
+        },
+        {
+          "text": "dark.",
+          "start": 6.3,
+          "end": 6.6
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "text": "Leave room on the page for the things you have not imagined yet.",
+      "start": 7.425,
+      "end": 11.825,
+      "duration": 4.4,
+      "visual_hint": "small sailboat far on the left of a wide calm sea",
+      "search_text": null,
+      "query": "calm sea with distant sailboat",
+      "queries": [
+        "small sailboat far on the left of a wide calm sea",
+        "blank page with empty margin",
+        "open canvas awaiting paint",
+        "calm sea with distant sailboat",
+        "hand placing pen beside empty space"
+      ],
+      "flags": {
+        "abstract": true,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_image_motion",
+      "clip_id": "1819696",
+      "page_url": "https://pixabay.com/photos/boat-haze-ship-alone-marine-water-1819696/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "Engin_Akyurt on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_image_motion: score 0.282 >= 0.22 for query 'calm sea with distant sailboat' (best of 6 candidates, order bonus +0.04); logo check ok (logo prob 0.00); 1 clip frame(s) passed the logo check (max logo prob 0.00); photo-motion preferred: order score 0.322 > best video 0.285 + PREFER_VIDEO_MARGIN 0.03",
+      "relevance_score": 0.2819,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2819,
+        "thumbnail_score": 0.2819,
+        "frame_scores": null,
+        "frames_scored": 1,
+        "text_prob": 0.0,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.3219
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "visual_hint",
+        "meaning",
+        "metaphor",
+        "setting",
+        "action"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_002.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0004,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": null,
+            "logo_prob": 0.0011,
+            "scene_score": 0.2913,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_image_motion:1819696",
+        "kind": "image",
+        "title": "",
+        "source_url": "https://pixabay.com/get/gaa4eda95f2ffd85aa0a3a1d3f9fef1df63dd9650a32ea33bbf071fc8bc95fdc61316985138c37f258e70c5e28720b507713c496a43828320a0d9f55f35b245f4_1280.jpg",
+        "final_score": 0.3219,
+        "width": 1280,
+        "height": 853,
+        "duration": null
+      },
+      "understanding": {
+        "queries": [
+          "small sailboat far on the left of a wide calm sea",
+          "blank page with empty margin",
+          "open canvas awaiting paint",
+          "calm sea with distant sailboat",
+          "hand placing pen beside empty space"
+        ],
+        "query_roles": [
+          "visual_hint",
+          "meaning",
+          "metaphor",
+          "setting",
+          "action"
+        ],
+        "flags": {
+          "abstract": true,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Represents openness for future ideas using empty page, canvas metaphor, calm sea setting, and hopeful sunrise mood. (visual_hint used as the first query)",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "leave room",
+        "card": {
+          "headline": "LEAVE ROOM",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "9fd2c9e335ca7af5"
+      },
+      "safety": {
+        "queries": [
+          "small sailboat far on the left of a wide calm sea",
+          "blank page with empty margin",
+          "open canvas awaiting paint",
+          "calm sea with distant sailboat",
+          "hand placing pen beside empty space"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_002_477aa464e938c9f0.mp4",
+          "cache_key": "477aa464e938c9f0",
+          "frames": 132,
+          "look": "eq=brightness=-0.120:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "subject crop (salient)",
+          "crop": {
+            "method": "clip",
+            "choice": "salient",
+            "axis": "y",
+            "window_fraction": 0.8441,
+            "full_frame_score": 0.2866,
+            "windows": {
+              "salient": {
+                "start": 0.1559,
+                "score": 0.2926
+              },
+              "centre": {
+                "start": 0.078,
+                "score": 0.3008
+              },
+              "top": {
+                "start": 0.0,
+                "score": 0.3136
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "subject_span": [
+              0.7668,
+              0.8868
+            ],
+            "windows_cutting_subject": [
+              "top"
+            ],
+            "reason": "window 'salient' chosen (0.293; best window 0.314; whole frame 0.287; near-ties within 0.03 go to salient / centre)"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_002_2cae5834dd8049e0.mp4",
+          "cache_key": "2cae5834dd8049e0",
+          "frames": 132,
+          "look": "eq=brightness=-0.120:saturation=0.850",
+          "caption_font": "Arial",
+          "framing": "subject crop (left)",
+          "crop": {
+            "method": "clip",
+            "choice": "left",
+            "axis": "x",
+            "window_fraction": 0.3749,
+            "full_frame_score": 0.2866,
+            "windows": {
+              "centre": {
+                "start": 0.3126,
+                "score": 0.2925
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.2831
+              },
+              "right": {
+                "start": 0.6251,
+                "score": 0.2449
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 1,
+            "subject_span": [
+              0.5997,
+              0.7197
+            ],
+            "windows_cutting_subject": [
+              "centre",
+              "right"
+            ],
+            "reason": "window 'left' chosen (0.283; best window 0.292; whole frame 0.287; near-ties within 0.03 go to salient / centre); 'centre' was a near-tie but its edge falls inside the subject (0.60-0.72), so 'left' keeps it whole"
+          },
+          "timing": "ken burns zoom to 1.12x",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "Leave",
+          "start": 7.38,
+          "end": 7.92
+        },
+        {
+          "text": "room",
+          "start": 7.92,
+          "end": 8.2
+        },
+        {
+          "text": "on",
+          "start": 8.2,
+          "end": 8.36
+        },
+        {
+          "text": "the",
+          "start": 8.36,
+          "end": 8.44
+        },
+        {
+          "text": "page",
+          "start": 8.44,
+          "end": 8.86
+        },
+        {
+          "text": "for",
+          "start": 8.86,
+          "end": 9.28
+        },
+        {
+          "text": "the",
+          "start": 9.28,
+          "end": 9.38
+        },
+        {
+          "text": "things",
+          "start": 9.38,
+          "end": 9.64
+        },
+        {
+          "text": "you",
+          "start": 9.64,
+          "end": 9.8
+        },
+        {
+          "text": "have",
+          "start": 9.8,
+          "end": 9.96
+        },
+        {
+          "text": "not",
+          "start": 9.96,
+          "end": 10.16
+        },
+        {
+          "text": "imagined",
+          "start": 10.16,
+          "end": 10.62
+        },
+        {
+          "text": "yet.",
+          "start": 10.62,
+          "end": 10.94
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "text": "And keep moving, even when the road ahead looks long.",
+      "start": 11.825,
+      "end": 15.575,
+      "duration": 3.75,
+      "visual_hint": "cyclist riding along the right edge of a long empty road",
+      "search_text": null,
+      "query": "cyclist riding along the right edge of a long empty road",
+      "queries": [
+        "cyclist riding along the right edge of a long empty road",
+        "person persisting on long road",
+        "endless road stretching forward",
+        "long empty highway at sunrise",
+        "cyclist riding steadily forward"
+      ],
+      "flags": {
+        "abstract": true,
+        "statistic": false,
+        "named_person": false,
+        "brand": false,
+        "sensitive": false
+      },
+      "provider": "pixabay_video",
+      "clip_id": "39183",
+      "page_url": "https://pixabay.com/videos/id-39183/",
+      "licence": "Pixabay Content License",
+      "licence_url": "https://pixabay.com/service/license-summary/",
+      "attribution": "movadspro on Pixabay",
+      "commercial_use": true,
+      "watermark": false,
+      "ai_generated": false,
+      "generated": false,
+      "reason": "pixabay_video: score 0.260 >= 0.22 for query 'cyclist riding along the right edge of a long empty road' (best of 6 candidates, order bonus +0.04); score over 3 frames (thumbnail 0.261); logo check ok (logo prob 0.01); 3 clip frame(s) passed the logo check (max logo prob 0.10); video scored >= 0.25: photo sources not searched",
+      "relevance_score": 0.2601,
+      "overlay": false,
+      "overlay_card": null,
+      "vlm_score": null,
+      "vlm": null,
+      "score_details": {
+        "score": 0.2601,
+        "thumbnail_score": 0.2613,
+        "frame_scores": [
+          0.2613,
+          0.2536,
+          0.2654
+        ],
+        "frames_scored": 3,
+        "text_prob": 0.0,
+        "text_penalty": 0.0,
+        "fit_bonus": 0.04,
+        "logo_penalty": 0.0,
+        "order_score": 0.3001,
+        "frames_note": "score = mean of the thumbnail and 2 frame(s) at 30%, 70% of the clip"
+      },
+      "story_sensitive": false,
+      "query_roles": [
+        "visual_hint",
+        "meaning",
+        "metaphor",
+        "setting",
+        "action"
+      ],
+      "card_text": null,
+      "card_subtitle": null,
+      "card_source": null,
+      "card_numbers": null,
+      "thumbnail": "thumb_003.jpg",
+      "logo_check": {
+        "thumbnail": {
+          "logo_prob": 0.0097,
+          "result": "ok",
+          "reject_prob": 0.6,
+          "penalty_prob": 0.4,
+          "penalty": 0.0
+        },
+        "frames": [
+          {
+            "time": 0.94,
+            "logo_prob": 0.0512,
+            "scene_score": 0.2628,
+            "result": "ok"
+          },
+          {
+            "time": 2.81,
+            "logo_prob": 0.1001,
+            "scene_score": 0.2505,
+            "result": "ok"
+          },
+          {
+            "time": 4.69,
+            "logo_prob": 0.0785,
+            "scene_score": 0.2626,
+            "result": "ok"
+          }
+        ],
+        "result": "ok"
+      },
+      "clip_details": {
+        "uid": "pixabay_video:39183",
+        "kind": "video",
+        "title": "",
+        "source_url": "https://cdn.pixabay.com/video/2020/05/15/39183-421020269_medium.mp4",
+        "final_score": 0.3001,
+        "width": 1280,
+        "height": 720,
+        "duration": 6.0
+      },
+      "understanding": {
+        "queries": [
+          "cyclist riding along the right edge of a long empty road",
+          "person persisting on long road",
+          "endless road stretching forward",
+          "long empty highway at sunrise",
+          "cyclist riding steadily forward"
+        ],
+        "query_roles": [
+          "visual_hint",
+          "meaning",
+          "metaphor",
+          "setting",
+          "action"
+        ],
+        "flags": {
+          "abstract": true,
+          "statistic": false,
+          "named_person": false,
+          "brand": false,
+          "sensitive": false
+        },
+        "reason": "groq: Conveys perseverance on a long journey with a cyclist, endless road visual, and uplifting sunrise mood. (visual_hint used as the first query)",
+        "source": "groq",
+        "names": [],
+        "number": null,
+        "keyword": "keep moving",
+        "card": {
+          "headline": "KEEP MOVING",
+          "subtitle": "",
+          "number": null,
+          "kind": "keyword",
+          "source": "narration",
+          "numbers_shown": []
+        },
+        "story_sensitive": false,
+        "fingerprint": "75b04df81e238a58"
+      },
+      "safety": {
+        "queries": [
+          "cyclist riding along the right edge of a long empty road",
+          "person persisting on long road",
+          "endless road stretching forward",
+          "long empty highway at sunrise",
+          "cyclist riding steadily forward"
+        ],
+        "exclude_terms": [],
+        "no_faces": false,
+        "notes": []
+      },
+      "segments": {
+        "16:9": {
+          "file": "seg_003_0ad9b99c94c25b66.mp4",
+          "cache_key": "0ad9b99c94c25b66",
+          "frames": 112,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "fit",
+          "crop": {
+            "method": "none",
+            "choice": "fit (same shape)"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        },
+        "9:16": {
+          "file": "seg_003_2bb79b9b29742428.mp4",
+          "cache_key": "2bb79b9b29742428",
+          "frames": 112,
+          "look": "eq=brightness=0.120:saturation=1.200",
+          "caption_font": "Arial",
+          "framing": "subject crop (centre)",
+          "crop": {
+            "method": "clip",
+            "choice": "centre",
+            "axis": "x",
+            "window_fraction": 0.3164,
+            "full_frame_score": 0.2671,
+            "windows": {
+              "salient": {
+                "start": 0.0383,
+                "score": 0.2495
+              },
+              "centre": {
+                "start": 0.3418,
+                "score": 0.243
+              },
+              "left": {
+                "start": 0.0,
+                "score": 0.249
+              },
+              "right": {
+                "start": 0.6836,
+                "score": 0.1987
+              }
+            },
+            "blur_margin": 0.02,
+            "tie_margin": 0.03,
+            "frames": 3,
+            "subject_span": [
+              0.0052,
+              0.2642
+            ],
+            "windows_cutting_subject": [
+              "salient"
+            ],
+            "reason": "window 'centre' chosen (0.243; best window 0.249; whole frame 0.267; near-ties within 0.03 go to salient / centre); 'salient' was a near-tie but its edge falls inside the subject (0.01-0.26), so 'centre' keeps it whole"
+          },
+          "timing": "trimmed",
+          "qa_problems": []
+        }
+      },
+      "words": [
+        {
+          "text": "And",
+          "start": 12.06,
+          "end": 12.24
+        },
+        {
+          "text": "keep",
+          "start": 12.24,
+          "end": 12.44
+        },
+        {
+          "text": "moving,",
+          "start": 12.44,
+          "end": 12.8
+        },
+        {
+          "text": "even",
+          "start": 13.18,
+          "end": 13.42
+        },
+        {
+          "text": "when",
+          "start": 13.42,
+          "end": 13.58
+        },
+        {
+          "text": "the",
+          "start": 13.58,
+          "end": 13.68
+        },
+        {
+          "text": "road",
+          "start": 13.68,
+          "end": 13.86
+        },
+        {
+          "text": "ahead",
+          "start": 13.86,
+          "end": 14.04
+        },
+        {
+          "text": "looks",
+          "start": 14.04,
+          "end": 14.34
+        },
+        {
+          "text": "long.",
+          "start": 14.34,
+          "end": 14.68
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "aspect_ratio": "16:9",
+      "file": "video_16x9.mp4",
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration": 15.567
+    },
+    {
+      "aspect_ratio": "9:16",
+      "file": "video_9x16.mp4",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "duration": 15.567
+    }
+  ]
+}
