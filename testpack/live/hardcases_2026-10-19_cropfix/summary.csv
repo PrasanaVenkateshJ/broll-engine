@@ -1,0 +1,2 @@
+input,job_id,status,error_code,narration_seconds,turnaround_seconds,scenes,warnings_count
+hard05_crop_subject_at_edge_9x16,304fb3b41de84094a0d0ae4a822aa1b1,succeeded,,15.575,111.45,4,5

@@ -122,7 +122,7 @@ and about $0.0115 per cold one-job visit [`testpack/notes/cost_modal.md` section
 - A 60 s job takes about 5.5 minutes on this PC; on Modal's 2 cores a 587 s narration took 1,747.57 s (3.0x real time) and an 8.75 s one 59.99 s
   [`testpack/live/hardcases_2026-10-18/`]; in that long job Groq's rate limit forced the offline rules for 81 of 123 scenes.
 - Docker Compose and the MinIO test were not re-run in the last sessions; clip swap was not re-timed in the test pack
-  (earlier real run: full render 108.9 s vs swap 23.5 s); the 9:16 crop that cut a sailboat out on the live demo was fixed on 2026-10-19 (CLIP strip search for the subject, window holds it whole) and checked frame by frame locally, but is not yet deployed.
+  (earlier real run: full render 108.9 s vs swap 23.5 s); the 9:16 crop that cut a sailboat out on the live demo was fixed on 2026-10-19 (CLIP strip search for the subject, window holds it whole) and checked frame by frame locally; deployed and re-run live (all scenes rendered, QA ok), but a subject wider than the 9:16 window (two hands at a keyboard) is still cut [`testpack/live/hardcases_2026-10-19_cropfix/`].
 
 ## 7. Next steps
 
